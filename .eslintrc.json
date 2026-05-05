@@ -46,7 +46,6 @@
                     }
                 ],
                 "no-use-before-define": "off",
-                "import/no-unresolved": "off",
                 "@typescript-eslint/no-use-before-define": "error",
                 "@typescript-eslint/no-unused-vars": [
                     "error",
@@ -78,6 +77,7 @@
             "error",
             "ignorePackages"
         ],
+        "import/no-unresolved": "off",
         "linebreak-style": "off"
     },
     "settings": {
