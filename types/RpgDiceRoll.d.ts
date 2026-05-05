@@ -4,6 +4,27 @@ export interface RpgDiceRollOptions {
     maxDice?: number;
     maxRolls?: number;
 }
+export type RpgDiceRollErrorCode = 'DICE_NOTATION_REQUIRED' | 'TOO_MANY_ROLLS' | 'TOO_MANY_DICE';
+export interface RpgDiceRollErrorDetails {
+    [key: string]: unknown;
+}
+export interface RpgDiceRollErrorOptions {
+    code: RpgDiceRollErrorCode;
+    input?: string;
+    notation?: string;
+    normalizedNotation?: string;
+    limit?: number;
+    details?: RpgDiceRollErrorDetails;
+}
+export declare class RpgDiceRollError extends Error {
+    code: RpgDiceRollErrorCode;
+    input?: string;
+    notation?: string;
+    normalizedNotation?: string;
+    limit?: number;
+    details: RpgDiceRollErrorDetails;
+    constructor(message: string, options: RpgDiceRollErrorOptions);
+}
 export interface RpgDiceInput {
     input: string;
     comment: string;
@@ -20,17 +41,25 @@ export interface RpgDiceGroup {
     notation: string;
 }
 export interface RpgDiceDetail {
+    id: string;
     index: number;
     rollIndex: number;
     rollDieIndex: number;
     groupIndex: number | null;
     group: RpgDiceGroup | null;
+    sides: number | 'F' | null;
+    groupNotation: string | null;
     value: number;
     initialValue: number;
     calculationValue: number;
     modifierFlags: string;
     modifiers: string[];
     useInTotal: boolean;
+    wasDropped: boolean;
+    wasExploded: boolean;
+    wasRerolled: boolean;
+    wasCriticalSuccess: boolean;
+    wasCriticalFailure: boolean;
 }
 export interface RpgDiceRollSnapshot {
     notation: string;

@@ -1,3 +1,15 @@
+import type { ModifierContext, ModifierDefaults, ModifierResult } from './types.js';
+
+type ModifierConstructor = typeof Modifier & {
+  order: number;
+};
+
+export interface ModifierJson {
+  name: string;
+  notation: string;
+  type: 'modifier';
+}
+
 /**
  * A `Modifier` is the base modifier class that all others extend from.
  *
@@ -11,12 +23,16 @@ class Modifier {
    */
   static order = 999;
 
+  order: number;
+
+  [key: string]: unknown;
+
   /**
    * Create a `Modifier` instance.
    */
   constructor() {
     // set the modifier's sort order
-    this.order = this.constructor.order;
+    this.order = (this.constructor as ModifierConstructor).order;
   }
 
   /* eslint-disable class-methods-use-this */
@@ -58,7 +74,7 @@ class Modifier {
    *
    * @returns {object}
    */
-  defaults(_context) {
+  defaults(_context: ModifierContext): ModifierDefaults {
     return {};
   }
   /* eslint-enable class-methods-use-this */
@@ -70,7 +86,7 @@ class Modifier {
    *
    * @returns {void}
    */
-  useDefaultsIfNeeded(_context) {
+  useDefaultsIfNeeded(_context: ModifierContext): void {
     Object.entries(this.defaults(_context)).forEach(([field, value]) => {
       if (typeof this[field] === 'undefined') {
         this[field] = value;
@@ -87,7 +103,7 @@ class Modifier {
    *
    * @returns {RollResults} The modified results
    */
-  run(results, _context) {
+  run(results: ModifierResult, _context: ModifierContext): ModifierResult {
     this.useDefaultsIfNeeded(_context);
     return results;
   }
@@ -100,7 +116,7 @@ class Modifier {
    *
    * @returns {{notation: string, name: string, type: string}}
    */
-  toJSON() {
+  toJSON(): ModifierJson {
     const { notation, name } = this;
 
     return {
@@ -119,7 +135,7 @@ class Modifier {
    *
    * @returns {string}
    */
-  toString() {
+  toString(): string {
     return this.notation;
   }
 }

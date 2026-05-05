@@ -1,4 +1,9 @@
-export default Modifier;
+import type { ModifierContext, ModifierDefaults, ModifierResult } from './types.js';
+export interface ModifierJson {
+    name: string;
+    notation: string;
+    type: 'modifier';
+}
 /**
  * A `Modifier` is the base modifier class that all others extend from.
  *
@@ -11,7 +16,12 @@ declare class Modifier {
      * @type {number}
      */
     static order: number;
-    order: any;
+    order: number;
+    [key: string]: unknown;
+    /**
+     * Create a `Modifier` instance.
+     */
+    constructor();
     /**
      * The name of the modifier.
      *
@@ -37,7 +47,7 @@ declare class Modifier {
      *
      * @returns {object}
      */
-    defaults(_context: StandardDice | RollGroup): object;
+    defaults(_context: ModifierContext): ModifierDefaults;
     /**
      * Processing default values definitions
      *
@@ -45,7 +55,7 @@ declare class Modifier {
      *
      * @returns {void}
      */
-    useDefaultsIfNeeded(_context: StandardDice | RollGroup): void;
+    useDefaultsIfNeeded(_context: ModifierContext): void;
     /**
      * Run the modifier on the results.
      *
@@ -54,7 +64,7 @@ declare class Modifier {
      *
      * @returns {RollResults} The modified results
      */
-    run(results: RollResults, _context: StandardDice | RollGroup): RollResults;
+    run(results: ModifierResult, _context: ModifierContext): ModifierResult;
     /**
      * Return an object for JSON serialising.
      *
@@ -62,11 +72,7 @@ declare class Modifier {
      *
      * @returns {{notation: string, name: string, type: string}}
      */
-    toJSON(): {
-        notation: string;
-        name: string;
-        type: string;
-    };
+    toJSON(): ModifierJson;
     /**
      * Return the String representation of the object.
      *
@@ -78,3 +84,4 @@ declare class Modifier {
      */
     toString(): string;
 }
+export default Modifier;

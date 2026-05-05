@@ -1,7 +1,17 @@
 import Modifier from './Modifier.js';
 import ComparePoint from '../ComparePoint.js';
+import type { ModifierContext, ModifierDefaults } from './types.js';
 
 const comparePointSymbol = Symbol('compare-point');
+
+type ComparePointConfig = [string, number];
+
+export interface ComparisonModifierJson {
+  notation: string;
+  name: string;
+  type: 'modifier';
+  comparePoint?: ComparePoint;
+}
 
 /**
  * A `ComparisonModifier` is the base modifier class for comparing values.
@@ -17,6 +27,8 @@ const comparePointSymbol = Symbol('compare-point');
  * @see {@link TargetModifier}
  */
 class ComparisonModifier extends Modifier {
+  private [comparePointSymbol]?: ComparePoint;
+
   /**
    * Create a `ComparisonModifier` instance.
    *
@@ -24,7 +36,7 @@ class ComparisonModifier extends Modifier {
    *
    * @throws {TypeError} `comparePoint` must be an instance of `ComparePoint` or `undefined`
    */
-  constructor(comparePoint) {
+  constructor(comparePoint?: ComparePoint | null) {
     super();
 
     if (comparePoint) {
@@ -37,7 +49,7 @@ class ComparisonModifier extends Modifier {
    *
    * @returns {ComparePoint|undefined}
    */
-  get comparePoint() {
+  get comparePoint(): ComparePoint | undefined {
     return this[comparePointSymbol];
   }
 
@@ -48,7 +60,7 @@ class ComparisonModifier extends Modifier {
    *
    * @throws {TypeError} value must be an instance of `ComparePoint`
    */
-  set comparePoint(comparePoint) {
+  set comparePoint(comparePoint: ComparePoint | undefined) {
     if (!(comparePoint instanceof ComparePoint)) {
       throw new TypeError('comparePoint must be instance of ComparePoint');
     }
@@ -84,7 +96,7 @@ class ComparisonModifier extends Modifier {
    *
    * @returns {null}
    */
-  defaultComparePoint(_context) {
+  defaultComparePoint(_context: ModifierContext): ComparePointConfig | Record<string, never> {
     return {};
   }
   /* eslint-enable class-methods-use-this */
@@ -96,10 +108,10 @@ class ComparisonModifier extends Modifier {
    *
    * @returns {object}
    */
-  defaults(_context) {
+  defaults(_context: ModifierContext): ModifierDefaults {
     const comparePointConfig = this.defaultComparePoint(_context);
 
-    if (typeof comparePointConfig === 'object' && comparePointConfig.length === 2) {
+    if (Array.isArray(comparePointConfig) && comparePointConfig.length === 2) {
       return { comparePoint: new ComparePoint(...comparePointConfig) };
     }
 
@@ -113,7 +125,7 @@ class ComparisonModifier extends Modifier {
    *
    * @returns {boolean} `true` if the value matches, `false` otherwise
    */
-  isComparePoint(value) {
+  isComparePoint(value: number): boolean {
     if (!this.comparePoint) {
       return false;
     }
@@ -133,7 +145,7 @@ class ComparisonModifier extends Modifier {
    *  comparePoint: (ComparePoint|undefined)
    * }}
    */
-  toJSON() {
+  toJSON(): ComparisonModifierJson {
     const { comparePoint } = this;
 
     return Object.assign(

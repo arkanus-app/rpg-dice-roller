@@ -1,9 +1,21 @@
 import { DieActionValueError } from '../exceptions/index.js';
 import { sumArray } from '../utilities/math.js';
 import ComparisonModifier from './ComparisonModifier.js';
+import ComparePoint from '../ComparePoint.js';
+import type { ModifierContext } from './types.js';
+import type RollResults from '../results/RollResults.js';
 
 const compoundSymbol = Symbol('compound');
 const penetrateSymbol = Symbol('penetrate');
+
+export interface ExplodeModifierJson {
+  notation: string;
+  name: string;
+  type: 'modifier';
+  comparePoint?: ComparePoint;
+  compound: boolean;
+  penetrate: boolean;
+}
 
 /**
  * An `ExplodeModifier` re-rolls dice that match a given test, and adds them to the results.
@@ -13,6 +25,10 @@ const penetrateSymbol = Symbol('penetrate');
  * @extends ComparisonModifier
  */
 class ExplodeModifier extends ComparisonModifier {
+  private [compoundSymbol]: boolean;
+
+  private [penetrateSymbol]: boolean;
+
   /**
    * The default modifier execution order.
    *
@@ -29,7 +45,7 @@ class ExplodeModifier extends ComparisonModifier {
    *
    * @throws {TypeError} comparePoint must be a `ComparePoint` object
    */
-  constructor(comparePoint = null, compound = false, penetrate = false) {
+  constructor(comparePoint: ComparePoint | null = null, compound = false, penetrate = false) {
     super(comparePoint);
 
     this[compoundSymbol] = !!compound;
@@ -41,7 +57,7 @@ class ExplodeModifier extends ComparisonModifier {
    *
    * @returns {boolean} `true` if it should compound, `false` otherwise
    */
-  get compound() {
+  get compound(): boolean {
     return this[compoundSymbol];
   }
 
@@ -70,7 +86,7 @@ class ExplodeModifier extends ComparisonModifier {
    *
    * @returns {boolean} `true` if it should penetrate, `false` otherwise
    */
-  get penetrate() {
+  get penetrate(): boolean {
     return this[penetrateSymbol];
   }
 
@@ -82,7 +98,7 @@ class ExplodeModifier extends ComparisonModifier {
    *
    * @returns {array}
    */
-  defaultComparePoint(_context) {
+  defaultComparePoint(_context: ModifierContext): [string, number] {
     return ['=', _context.max];
   }
   /* eslint-enable class-methods-use-this */
@@ -95,7 +111,7 @@ class ExplodeModifier extends ComparisonModifier {
    *
    * @returns {RollResults} The modified results
    */
-  run(results, _context) {
+  run(results: RollResults, _context: ModifierContext): RollResults {
     super.run(results, _context);
 
     // ensure that the dice can explode without going into an infinite loop
@@ -117,7 +133,7 @@ class ExplodeModifier extends ComparisonModifier {
           const rollResult = _context.rollOnce();
 
           // update the value to check against
-          compareValue = rollResult.value;
+          compareValue = Number(rollResult.value);
 
           // add the explode modifier flag
           prevRoll.modifiers.add('explode');
@@ -125,7 +141,7 @@ class ExplodeModifier extends ComparisonModifier {
           // add the penetrate modifier flag and decrement the value
           if (this.penetrate) {
             prevRoll.modifiers.add('penetrate');
-            rollResult.value -= 1;
+            rollResult.value = Number(rollResult.value) - 1;
           }
 
           // add the rolls to the list
@@ -171,7 +187,7 @@ class ExplodeModifier extends ComparisonModifier {
    *  penetrate: boolean
    * }}
    */
-  toJSON() {
+  toJSON(): ExplodeModifierJson {
     const { compound, penetrate } = this;
 
     return Object.assign(

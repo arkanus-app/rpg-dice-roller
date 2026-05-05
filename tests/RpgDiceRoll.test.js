@@ -6,6 +6,7 @@ import {
   extractRpgDiceGroups,
   normalizeRpgDiceNotation,
   parseRpgDiceInput,
+  RpgDiceRollError,
   rollRpgDice,
   verifyRpgDiceNotation,
 } from '../src/RpgDiceRoll.ts';
@@ -152,19 +153,71 @@ describe('RPG dice facade', () => {
     });
 
     test('enforces shared roll and dice limits', () => {
+      expect(() => rollRpgDice('')).toThrow('Dice notation is required');
       expect(() => rollRpgDice('101#1d6')).toThrow('Too many rolls');
       expect(() => rollRpgDice('10000d6')).toThrow('Too many dice');
       expect(() => rollRpgDice('3#2d6', { maxRolls: 2 })).toThrow('Too many rolls');
       expect(() => rollRpgDice('3#2d6', { maxDice: 5 })).toThrow('Too many dice');
+
+      try {
+        rollRpgDice('101#1d6');
+      } catch (error) {
+        expect(error).toBeInstanceOf(RpgDiceRollError);
+        expect(error).toMatchObject({
+          code: 'TOO_MANY_ROLLS',
+          limit: 100,
+          message: 'Too many rolls',
+          notation: '1d6',
+          normalizedNotation: '101#1d6',
+        });
+      }
     });
 
-    test('validates notation through the pure facade', () => {
-      jest.spyOn(StandardDice.prototype, 'rollOnce')
-        .mockImplementationOnce(() => 8);
+    test('rejects explosive notation whose worst case exceeds the dice budget before rolling', () => {
+      const rollSpy = jest.spyOn(StandardDice.prototype, 'rollOnce');
+
+      expect(() => rollRpgDice('1d6!', { maxDice: 1000 })).toThrow('Too many dice');
+      expect(rollSpy).not.toHaveBeenCalled();
+    });
+
+    test('validates notation through the pure facade without rolling', () => {
+      const rollSpy = jest.spyOn(StandardDice.prototype, 'rollOnce');
 
       expect(verifyRpgDiceNotation('1d20')).toBe(true);
       expect(verifyRpgDiceNotation('1d')).toBe(true);
       expect(verifyRpgDiceNotation('abc')).toBe(false);
+      expect(rollSpy).not.toHaveBeenCalled();
+    });
+
+    test('exposes stable UI and 3D dice metadata on each die result', () => {
+      jest.spyOn(StandardDice.prototype, 'rollOnce')
+        .mockImplementationOnce(() => 1)
+        .mockImplementationOnce(() => 6);
+
+      const result = rollRpgDice('2d6cs=6cf=1');
+
+      expect(result.dice).toEqual([
+        expect.objectContaining({
+          id: 'roll-1-die-1',
+          sides: 6,
+          groupNotation: '2d6',
+          wasCriticalFailure: true,
+          wasCriticalSuccess: false,
+          wasDropped: false,
+          wasExploded: false,
+          wasRerolled: false,
+        }),
+        expect.objectContaining({
+          id: 'roll-1-die-2',
+          sides: 6,
+          groupNotation: '2d6',
+          wasCriticalFailure: false,
+          wasCriticalSuccess: true,
+          wasDropped: false,
+          wasExploded: false,
+          wasRerolled: false,
+        }),
+      ]);
     });
   });
 });

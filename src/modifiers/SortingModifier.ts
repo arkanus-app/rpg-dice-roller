@@ -1,8 +1,18 @@
 import Modifier from './Modifier.js';
 import ResultGroup from '../results/ResultGroup.js';
 import RollResults from '../results/RollResults.js';
+import type { ModifierContext, RollLike } from './types.js';
 
 const directionSymbol = Symbol('direction');
+
+type SortDirection = 'a' | 'd';
+
+export interface SortingModifierJson {
+  notation: string;
+  name: string;
+  type: 'modifier';
+  direction: SortDirection;
+}
 
 /**
  * A `SortingModifier` sorts roll results by their value, either ascending or descending.
@@ -10,6 +20,8 @@ const directionSymbol = Symbol('direction');
  * @extends ComparisonModifier
  */
 class SortingModifier extends Modifier {
+  private [directionSymbol]!: SortDirection;
+
   /**
    * The default modifier execution order.
    *
@@ -24,7 +36,7 @@ class SortingModifier extends Modifier {
    *
    * @throws {RangeError} Direction must be 'a' or 'd'
    */
-  constructor(direction = 'a') {
+  constructor(direction: SortDirection = 'a') {
     super();
 
     this.direction = direction;
@@ -35,7 +47,7 @@ class SortingModifier extends Modifier {
    *
    * @returns {string} Either 'a' or 'd'
    */
-  get direction() {
+  get direction(): SortDirection {
     return this[directionSymbol];
   }
 
@@ -46,7 +58,7 @@ class SortingModifier extends Modifier {
    *
    * @throws {RangeError} Direction must be 'a' or 'd'
    */
-  set direction(value) {
+  set direction(value: SortDirection) {
     if ((value !== 'a') && (value !== 'd')) {
       throw new RangeError('Direction must be "a" (Ascending) or "d" (Descending)');
     }
@@ -82,8 +94,9 @@ class SortingModifier extends Modifier {
    *
    * @returns {RollResults} The modified results
    */
-  run(results, _context) {
-    let resultsKey;
+  run(results: ResultGroup | RollResults, _context: ModifierContext): ResultGroup | RollResults {
+    let resultsKey: 'results' | 'rolls';
+    const mutableResults = results as unknown as Record<'results' | 'rolls', unknown[]>;
 
     if (results instanceof ResultGroup) {
       resultsKey = 'results';
@@ -92,17 +105,20 @@ class SortingModifier extends Modifier {
     }
 
     /* eslint-disable no-param-reassign */
-    results[resultsKey] = results[resultsKey].sort((a, b) => {
+    mutableResults[resultsKey] = mutableResults[resultsKey].sort((a, b) => {
+      const left = a as RollLike;
+      const right = b as RollLike;
+
       if (this.direction === 'd') {
-        return b.value - a.value;
+        return right.value - left.value;
       }
 
-      return a.value - b.value;
+      return left.value - right.value;
     });
 
     // if result group, we also need to sort any die rolls in th sub-rolls
     if (results instanceof ResultGroup) {
-      results[resultsKey] = results[resultsKey].map((subRoll) => {
+      mutableResults[resultsKey] = mutableResults[resultsKey].map((subRoll: unknown) => {
         if ((subRoll instanceof ResultGroup) || (subRoll instanceof RollResults)) {
           return this.run(subRoll, _context);
         }
@@ -122,7 +138,7 @@ class SortingModifier extends Modifier {
    *
    * @returns {{notation: string, name: string, type: string, direction: string}}
    */
-  toJSON() {
+  toJSON(): SortingModifierJson {
     const { direction } = this;
 
     return Object.assign(

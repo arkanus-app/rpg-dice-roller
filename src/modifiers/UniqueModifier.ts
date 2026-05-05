@@ -1,13 +1,30 @@
 import { DieActionValueError } from '../exceptions/index.js';
 import ComparisonModifier from './ComparisonModifier.js';
+import ComparePoint from '../ComparePoint.js';
+import type { ModifierContext } from './types.js';
+import type RollResult from '../results/RollResult.js';
+import type RollResults from '../results/RollResults.js';
 
 const onceSymbol = Symbol('once');
 
-const isDuplicate = (value, index, collection, notFirst = false) => {
+const isDuplicate = (
+  value: RollResult,
+  index: number,
+  collection: RollResult[],
+  notFirst = false,
+): boolean => {
   const i = collection.map((e) => e.value).indexOf(value.value);
 
   return notFirst ? i < index : i !== index;
 };
+
+export interface UniqueModifierJson {
+  notation: string;
+  name: string;
+  type: 'modifier';
+  comparePoint?: ComparePoint;
+  once: boolean;
+}
 
 /**
  * A `UniqueModifier` re-rolls any non-unique dice values and, optionally that match a given test.
@@ -15,6 +32,8 @@ const isDuplicate = (value, index, collection, notFirst = false) => {
  * @extends ComparisonModifier
  */
 class UniqueModifier extends ComparisonModifier {
+  private [onceSymbol] = false;
+
   /**
    * The default modifier execution order.
    *
@@ -28,7 +47,7 @@ class UniqueModifier extends ComparisonModifier {
    * @param {boolean} [once=false] Whether to only re-roll once or not
    * @param {ComparePoint} [comparePoint=null] The comparison object
    */
-  constructor(once = false, comparePoint = null) {
+  constructor(once = false, comparePoint: ComparePoint | null = null) {
     super(comparePoint);
 
     this.once = !!once;
@@ -59,7 +78,7 @@ class UniqueModifier extends ComparisonModifier {
    *
    * @returns {boolean} `true` if it should re-roll once, `false` otherwise
    */
-  get once() {
+  get once(): boolean {
     return !!this[onceSymbol];
   }
 
@@ -68,7 +87,7 @@ class UniqueModifier extends ComparisonModifier {
    *
    * @param {boolean} value
    */
-  set once(value) {
+  set once(value: boolean) {
     this[onceSymbol] = !!value;
   }
 
@@ -80,7 +99,7 @@ class UniqueModifier extends ComparisonModifier {
    *
    * @returns {RollResults} The modified results
    */
-  run(results, _context) {
+  run(results: RollResults, _context: ModifierContext): RollResults {
     // ensure that the dice can re-roll without going into an infinite loop
     if (_context.min === _context.max) {
       throw new DieActionValueError(_context, 're-roll');
@@ -133,7 +152,7 @@ class UniqueModifier extends ComparisonModifier {
    *  once: boolean
    * }}
    */
-  toJSON() {
+  toJSON(): UniqueModifierJson {
     const { once } = this;
 
     return Object.assign(

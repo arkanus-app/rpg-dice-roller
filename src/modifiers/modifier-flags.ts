@@ -1,6 +1,6 @@
 import Modifier from './Modifier.js';
 
-const flags = {
+const flags: Record<string, string> = {
   compound: '!',
   explode: '!',
   'critical-failure': '__',
@@ -24,9 +24,9 @@ const flags = {
  *
  * @returns {string}
  */
-const getModifierFlags = (...modifiers) => (
+const getModifierFlags = (...modifiers: Array<Modifier | string>): string => (
   // @todo need a better way of mapping modifiers to symbols
-  [...modifiers].reduce((acc, modifier) => {
+  [...modifiers].reduce<string>((acc, modifier) => {
     let name;
 
     if (modifier instanceof Modifier) {

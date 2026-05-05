@@ -1,31 +1,34 @@
 /* eslint-disable no-useless-constructor */
 import ComparisonModifier from './ComparisonModifier.js';
+import ComparePoint from '../ComparePoint.js';
+import type { ModifierContext } from './types.js';
+import type RollResults from '../results/RollResults.js';
 
 /**
- * A `CriticalFailureModifier` modifier flags values that match a comparison.
+ * A `CriticalSuccessModifier` modifier flags values that match a comparison.
  *
  * Unlike most other modifiers, it doesn't affect the roll value, it simply "flags" matching rolls.
  *
- * @see {@link CriticalSuccessModifier} for the opposite of this modifier
+ * @see {@link CriticalFailureModifier} for the opposite of this modifier
  *
  * @extends ComparisonModifier
  */
-class CriticalFailureModifier extends ComparisonModifier {
+class CriticalSuccessModifier extends ComparisonModifier {
   /**
    * The default modifier execution order.
    *
    * @type {number}
    */
-  static order = 10;
+  static order = 9;
 
   /**
-   * Create a `CriticalFailureModifier` instance.
+   * Create a `CriticalSuccessModifier` instance.
    *
-   * @param {ComparePoint} [comparePoint] The comparison object
+   * @param {ComparePoint} comparePoint The comparison object
    *
    * @throws {TypeError} comparePoint must be a `ComparePoint` object
    */
-  constructor(comparePoint) {
+  constructor(comparePoint?: ComparePoint | null) {
     super(comparePoint);
   }
 
@@ -33,10 +36,10 @@ class CriticalFailureModifier extends ComparisonModifier {
   /**
    * The name of the modifier.
    *
-   * @returns {string} 'critical-failure'
+   * @returns {string} 'critical-success'
    */
   get name() {
-    return 'critical-failure';
+    return 'critical-success';
   }
   /* eslint-enable class-methods-use-this */
 
@@ -46,7 +49,7 @@ class CriticalFailureModifier extends ComparisonModifier {
    * @returns {string}
    */
   get notation() {
-    return `cf${super.notation}`;
+    return `cs${super.notation}`;
   }
 
   /* eslint-disable class-methods-use-this */
@@ -57,27 +60,28 @@ class CriticalFailureModifier extends ComparisonModifier {
    *
    * @returns {array}
    */
-  defaultComparePoint(_context) {
-    return ['=', _context.min];
+  defaultComparePoint(_context: ModifierContext): [string, number] {
+    return ['=', _context.max];
   }
   /* eslint-enable class-methods-use-this */
 
   /**
-   * Run the modifier on the results.
+   * Runs the modifier on the rolls.
    *
    * @param {RollResults} results The results to run the modifier against
    * @param {StandardDice|RollGroup} _context The object that the modifier is attached to
    *
-   * @returns {RollResults} The modified results
+   * @returns {RollResults}
    */
-  run(results, _context) {
+  run(results: RollResults, _context: ModifierContext): RollResults {
     super.run(results, _context);
 
+    // loop through each roll and see if it's a critical success
     results.rolls
       .forEach((roll) => {
         // add the modifier flag
         if (this.isComparePoint(roll.value)) {
-          roll.modifiers.add('critical-failure');
+          roll.modifiers.add('critical-success');
         }
 
         return roll;
@@ -87,4 +91,4 @@ class CriticalFailureModifier extends ComparisonModifier {
   }
 }
 
-export default CriticalFailureModifier;
+export default CriticalSuccessModifier;

@@ -1,7 +1,18 @@
 import { DieActionValueError } from '../exceptions/index.js';
 import ComparisonModifier from './ComparisonModifier.js';
+import ComparePoint from '../ComparePoint.js';
+import type { ModifierContext } from './types.js';
+import type RollResults from '../results/RollResults.js';
 
 const onceSymbol = Symbol('once');
+
+export interface ReRollModifierJson {
+  notation: string;
+  name: string;
+  type: 'modifier';
+  comparePoint?: ComparePoint;
+  once: boolean;
+}
 
 /**
  * A `ReRollModifier` re-rolls dice that match a given test, and replaces the new value with the old
@@ -12,6 +23,8 @@ const onceSymbol = Symbol('once');
  * @extends ComparisonModifier
  */
 class ReRollModifier extends ComparisonModifier {
+  private [onceSymbol] = false;
+
   /**
    * The default modifier execution order.
    *
@@ -25,7 +38,7 @@ class ReRollModifier extends ComparisonModifier {
    * @param {boolean} [once=false] Whether to only re-roll once or not
    * @param {ComparePoint} [comparePoint=null] The comparison object
    */
-  constructor(once = false, comparePoint = null) {
+  constructor(once = false, comparePoint: ComparePoint | null = null) {
     super(comparePoint);
 
     this.once = !!once;
@@ -56,7 +69,7 @@ class ReRollModifier extends ComparisonModifier {
    *
    * @returns {boolean} `true` if it should re-roll once, `false` otherwise
    */
-  get once() {
+  get once(): boolean {
     return !!this[onceSymbol];
   }
 
@@ -65,7 +78,7 @@ class ReRollModifier extends ComparisonModifier {
    *
    * @param {boolean} value
    */
-  set once(value) {
+  set once(value: boolean) {
     this[onceSymbol] = !!value;
   }
 
@@ -77,7 +90,7 @@ class ReRollModifier extends ComparisonModifier {
    *
    * @returns {array}
    */
-  defaultComparePoint(_context) {
+  defaultComparePoint(_context: ModifierContext): [string, number] {
     return ['=', _context.min];
   }
   /* eslint-enable class-methods-use-this */
@@ -90,7 +103,7 @@ class ReRollModifier extends ComparisonModifier {
    *
    * @returns {RollResults} The modified results
    */
-  run(results, _context) {
+  run(results: RollResults, _context: ModifierContext): RollResults {
     super.run(results, _context);
 
     // ensure that the dice can explode without going into an infinite loop
@@ -138,7 +151,7 @@ class ReRollModifier extends ComparisonModifier {
    *  once: boolean
    * }}
    */
-  toJSON() {
+  toJSON(): ReRollModifierJson {
     const { once } = this;
 
     return Object.assign(

@@ -2,9 +2,20 @@ import { isNumeric } from '../utilities/math.js';
 import Modifier from './Modifier.js';
 import ResultGroup from '../results/ResultGroup.js';
 import RollResults from '../results/RollResults.js';
+import type { ModifierContext, RollIndexEntry, RollLike } from './types.js';
 
 const endSymbol = Symbol('end');
 const qtySymbol = Symbol('qty');
+
+type KeepEnd = 'h' | 'l';
+
+export interface KeepModifierJson {
+  notation: string;
+  name: string;
+  type: 'modifier';
+  end: KeepEnd;
+  qty: number;
+}
 
 /**
  * A `KeepModifier` will "keep" dice from a roll, dropping (Remove from total calculations) all
@@ -15,6 +26,10 @@ const qtySymbol = Symbol('qty');
  * @extends Modifier
  */
 class KeepModifier extends Modifier {
+  private [endSymbol]!: KeepEnd;
+
+  private [qtySymbol]!: number;
+
   /**
    * The default modifier execution order.
    *
@@ -31,7 +46,7 @@ class KeepModifier extends Modifier {
    * @throws {RangeError} End must be one of 'h' or 'l'
    * @throws {TypeError} qty must be a positive integer
    */
-  constructor(end = 'h', qty = 1) {
+  constructor(end: KeepEnd = 'h', qty: number | string = 1) {
     super();
 
     this.end = end;
@@ -43,7 +58,7 @@ class KeepModifier extends Modifier {
    *
    * @returns {string} 'h' or 'l'
    */
-  get end() {
+  get end(): KeepEnd {
     return this[endSymbol];
   }
 
@@ -54,7 +69,7 @@ class KeepModifier extends Modifier {
    *
    * @throws {RangeError} End must be one of 'h' or 'l'
    */
-  set end(value) {
+  set end(value: KeepEnd) {
     if ((value !== 'h') && (value !== 'l')) {
       throw new RangeError('End must be "h" or "l"');
     }
@@ -85,7 +100,7 @@ class KeepModifier extends Modifier {
    *
    * @returns {number}
    */
-  get qty() {
+  get qty(): number {
     return this[qtySymbol];
   }
 
@@ -96,7 +111,7 @@ class KeepModifier extends Modifier {
    *
    * @throws {TypeError} qty must be a positive finite integer
    */
-  set qty(value) {
+  set qty(value: number | string) {
     if (value === Infinity) {
       throw new RangeError('qty must be a finite number');
     }
@@ -104,7 +119,7 @@ class KeepModifier extends Modifier {
       throw new TypeError('qty must be a positive finite integer');
     }
 
-    this[qtySymbol] = Math.floor(value);
+    this[qtySymbol] = Math.floor(Number(value));
   }
 
   /**
@@ -114,7 +129,7 @@ class KeepModifier extends Modifier {
    *
    * @returns {number[]} The min / max range to drop
    */
-  rangeToDrop(_results) {
+  rangeToDrop(_results: RollIndexEntry[]): [number, number] {
     // we're keeping, so we want to drop all dice that are outside of the qty range
     if (this.end === 'h') {
       return [0, _results.length - this.qty];
@@ -131,30 +146,33 @@ class KeepModifier extends Modifier {
    *
    * @returns {ResultGroup|RollResults} The modified results
    */
-  run(results, _context) {
-    let modifiedRolls;
-    let rollIndexes;
+  run(results: ResultGroup | RollResults, _context: ModifierContext): ResultGroup | RollResults {
+    let modifiedRolls: unknown[];
+    let rollIndexes: RollIndexEntry[];
 
     if (results instanceof ResultGroup) {
       modifiedRolls = results.results;
 
       if ((modifiedRolls.length === 1) && (modifiedRolls[0] instanceof ResultGroup)) {
         // single sub-roll - get all the dice rolled and their 2d indexes
-        rollIndexes = modifiedRolls[0].results.map((result, index) => {
+        rollIndexes = modifiedRolls[0].results.map((result: unknown, index: number) => {
           if (result instanceof RollResults) {
-            return result.rolls.map((subResult, subIndex) => ({
+            return result.rolls.map((subResult, subIndex): RollIndexEntry => ({
               value: subResult.value,
               index: [index, subIndex],
             }));
           }
 
           return null;
-        }).flat().filter(Boolean);
+        }).flat()
+          .filter((rollIndex: RollIndexEntry | null): rollIndex is RollIndexEntry => (
+            Boolean(rollIndex)
+          ));
       } else {
         rollIndexes = [...modifiedRolls]
           // get a list of objects with roll values and original index
-          .map((roll, index) => ({
-            value: roll.value,
+          .map((roll: unknown, index: number) => ({
+            value: (roll as RollLike).value,
             index,
           }));
       }
@@ -164,13 +182,13 @@ class KeepModifier extends Modifier {
       rollIndexes = [...modifiedRolls]
         // get a list of objects with roll values and original index
         .map((roll, index) => ({
-          value: roll.value,
+          value: (roll as RollLike).value,
           index,
         }));
     }
 
     // determine the indexes that need to be dropped
-    rollIndexes = rollIndexes
+    const droppedRollIndexes = rollIndexes
       // sort the list ascending by value
       .sort((a, b) => a.value - b.value)
       .map((rollIndex) => rollIndex.index)
@@ -178,18 +196,20 @@ class KeepModifier extends Modifier {
       .slice(...this.rangeToDrop(rollIndexes));
 
     // loop through all of our dice to drop and flag them as such
-    rollIndexes.forEach((rollIndex) => {
+    droppedRollIndexes.forEach((rollIndex) => {
       let roll;
 
       if (Array.isArray(rollIndex)) {
         // array of indexes (e.g. single sub-roll in a group roll)
-        roll = modifiedRolls[0].results[rollIndex[0]].rolls[rollIndex[1]];
+        roll = (
+          modifiedRolls[0] as { results: Array<{ rolls: RollLike[] }> }
+        ).results[rollIndex[0]].rolls[rollIndex[1]];
       } else {
         roll = modifiedRolls[rollIndex];
       }
 
-      roll.modifiers.add('drop');
-      roll.useInTotal = false;
+      (roll as RollLike).modifiers.add('drop');
+      (roll as RollLike).useInTotal = false;
     });
 
     return results;
@@ -202,7 +222,7 @@ class KeepModifier extends Modifier {
    *
    * @returns {{notation: string, name: string, type: string, qty: number, end: string}}
    */
-  toJSON() {
+  toJSON(): KeepModifierJson {
     const { end, qty } = this;
 
     return Object.assign(

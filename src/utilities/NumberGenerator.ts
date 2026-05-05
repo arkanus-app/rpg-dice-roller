@@ -1,5 +1,5 @@
 import {
-  browserCrypto, nodeCrypto, MersenneTwister19937, nativeMath, Random, type Engine,
+  browserCrypto, MersenneTwister19937, nativeMath, Random, type Engine,
 } from 'random-js';
 
 export type NumberGeneratorEngine = Engine & {
@@ -78,6 +78,21 @@ const minEngine: Engine = {
   },
 };
 
+const nodeCryptoEngine: Engine = {
+  next(): number {
+    const cryptoApi = globalThis.crypto;
+
+    if (typeof cryptoApi?.getRandomValues !== 'function') {
+      throw new Error('nodeCrypto requires crypto.getRandomValues');
+    }
+
+    const values = new Int32Array(1);
+    cryptoApi.getRandomValues(values);
+
+    return values[0];
+  },
+};
+
 /**
  * List of built-in number generator engines.
  *
@@ -104,7 +119,7 @@ const engines: {
   nativeMath: Engine;
 } = {
   browserCrypto,
-  nodeCrypto,
+  nodeCrypto: nodeCryptoEngine,
   MersenneTwister19937,
   nativeMath,
   min: minEngine,

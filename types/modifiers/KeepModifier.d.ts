@@ -1,4 +1,17 @@
-export default KeepModifier;
+import Modifier from './Modifier.js';
+import ResultGroup from '../results/ResultGroup.js';
+import RollResults from '../results/RollResults.js';
+import type { ModifierContext, RollIndexEntry } from './types.js';
+declare const endSymbol: unique symbol;
+declare const qtySymbol: unique symbol;
+type KeepEnd = 'h' | 'l';
+export interface KeepModifierJson {
+    notation: string;
+    name: string;
+    type: 'modifier';
+    end: KeepEnd;
+    qty: number;
+}
 /**
  * A `KeepModifier` will "keep" dice from a roll, dropping (Remove from total calculations) all
  * others.
@@ -8,6 +21,14 @@ export default KeepModifier;
  * @extends Modifier
  */
 declare class KeepModifier extends Modifier {
+    private [endSymbol];
+    private [qtySymbol];
+    /**
+     * The default modifier execution order.
+     *
+     * @type {number}
+     */
+    static order: number;
     /**
      * Create a `KeepModifier` instance
      *
@@ -17,7 +38,13 @@ declare class KeepModifier extends Modifier {
      * @throws {RangeError} End must be one of 'h' or 'l'
      * @throws {TypeError} qty must be a positive integer
      */
-    constructor(end?: string | undefined, qty?: number | undefined);
+    constructor(end?: KeepEnd, qty?: number | string);
+    /**
+     * Which end the rolls should be kept ("h" = High, "l" = Low).
+     *
+     * @returns {string} 'h' or 'l'
+     */
+    get end(): KeepEnd;
     /**
      * Set which end the rolls should be kept ("h" = High, "l" = Low).
      *
@@ -25,21 +52,19 @@ declare class KeepModifier extends Modifier {
      *
      * @throws {RangeError} End must be one of 'h' or 'l'
      */
-    set end(arg: string);
+    set end(value: KeepEnd);
     /**
-     * Which end the rolls should be kept ("h" = High, "l" = Low).
+     * The name of the modifier.
      *
-     * @returns {string} 'h' or 'l'
+     * @returns {string} 'keep-l' or 'keep-h'
      */
-    get end(): string;
+    get name(): string;
     /**
-     * Set the quantity of dice that should be kept.
+     * The modifier's notation.
      *
-     * @param {number} value
-     *
-     * @throws {TypeError} qty must be a positive finite integer
+     * @returns {string}
      */
-    set qty(arg: number);
+    get notation(): string;
     /**
      * The quantity of dice that should be kept.
      *
@@ -47,13 +72,21 @@ declare class KeepModifier extends Modifier {
      */
     get qty(): number;
     /**
+     * Set the quantity of dice that should be kept.
+     *
+     * @param {number} value
+     *
+     * @throws {TypeError} qty must be a positive finite integer
+     */
+    set qty(value: number | string);
+    /**
      * Determine the start and end (end exclusive) range of rolls to drop.
      *
      * @param {RollResults} _results The results to drop from
      *
      * @returns {number[]} The min / max range to drop
      */
-    rangeToDrop(_results: RollResults): number[];
+    rangeToDrop(_results: RollIndexEntry[]): [number, number];
     /**
      * Run the modifier on the results.
      *
@@ -62,7 +95,7 @@ declare class KeepModifier extends Modifier {
      *
      * @returns {ResultGroup|RollResults} The modified results
      */
-    run(results: ResultGroup | RollResults, _context: StandardDice | RollGroup): ResultGroup | RollResults;
+    run(results: ResultGroup | RollResults, _context: ModifierContext): ResultGroup | RollResults;
     /**
      * Return an object for JSON serialising.
      *
@@ -70,18 +103,6 @@ declare class KeepModifier extends Modifier {
      *
      * @returns {{notation: string, name: string, type: string, qty: number, end: string}}
      */
-    toJSON(): {
-        notation: string;
-        name: string;
-        type: string;
-        qty: number;
-        end: string;
-    };
-    [endSymbol]: string | undefined;
-    [qtySymbol]: number | undefined;
+    toJSON(): KeepModifierJson;
 }
-import Modifier from "./Modifier.js";
-import RollResults from "../results/RollResults.js";
-import ResultGroup from "../results/ResultGroup.js";
-declare const endSymbol: unique symbol;
-declare const qtySymbol: unique symbol;
+export default KeepModifier;

@@ -1,8 +1,18 @@
 import ComparisonModifier from './ComparisonModifier.js';
 import ComparePoint from '../ComparePoint.js';
 import ResultGroup from '../results/ResultGroup.js';
+import type { ModifierContext, RollLike } from './types.js';
+import type RollResults from '../results/RollResults.js';
 
 const failureCPSymbol = Symbol('failure-cp');
+
+export interface TargetModifierJson {
+  notation: string;
+  name: string;
+  type: 'modifier';
+  failureComparePoint: ComparePoint | null;
+  successComparePoint: ComparePoint | undefined;
+}
 
 /**
  * A `TargetModifier` determines whether rolls are classed as a success, failure, or neutral.
@@ -14,6 +24,8 @@ const failureCPSymbol = Symbol('failure-cp');
  * @extends ComparisonModifier
  */
 class TargetModifier extends ComparisonModifier {
+  private [failureCPSymbol]: ComparePoint | null = null;
+
   /**
    * The default modifier execution order.
    *
@@ -29,7 +41,7 @@ class TargetModifier extends ComparisonModifier {
    *
    * @throws {TypeError} failure comparePoint must be instance of ComparePoint or null
    */
-  constructor(successCP, failureCP = null) {
+  constructor(successCP: ComparePoint, failureCP: ComparePoint | null = null) {
     super(successCP);
 
     // set the failure compare point
@@ -41,7 +53,7 @@ class TargetModifier extends ComparisonModifier {
    *
    * @returns {ComparePoint|null}
    */
-  get failureComparePoint() {
+  get failureComparePoint(): ComparePoint | null {
     return this[failureCPSymbol];
   }
 
@@ -52,7 +64,7 @@ class TargetModifier extends ComparisonModifier {
    *
    * @throws {TypeError} failure comparePoint must be instance of ComparePoint or null
    */
-  set failureComparePoint(comparePoint) {
+  set failureComparePoint(comparePoint: ComparePoint | null) {
     if (comparePoint && !(comparePoint instanceof ComparePoint)) {
       throw new TypeError('failure comparePoint must be instance of ComparePoint or null');
     }
@@ -85,7 +97,7 @@ class TargetModifier extends ComparisonModifier {
    *
    * @returns {ComparePoint}
    */
-  get successComparePoint() {
+  get successComparePoint(): ComparePoint | undefined {
     return this.comparePoint;
   }
 
@@ -94,7 +106,7 @@ class TargetModifier extends ComparisonModifier {
    *
    * @param {ComparePoint} value
    */
-  set successComparePoint(value) {
+  set successComparePoint(value: ComparePoint | undefined) {
     super.comparePoint = value;
   }
 
@@ -105,7 +117,7 @@ class TargetModifier extends ComparisonModifier {
    *
    * @returns {number} success = `1`, failure = `-1`, neutral = `0`
    */
-  getStateValue(value) {
+  getStateValue(value: number): number {
     if (this.isSuccess(value)) {
       return 1;
     }
@@ -128,7 +140,7 @@ class TargetModifier extends ComparisonModifier {
    *
    * @returns {boolean}
    */
-  isFailure(value) {
+  isFailure(value: number): boolean {
     return this.failureComparePoint ? this.failureComparePoint.isMatch(value) : false;
   }
 
@@ -139,7 +151,7 @@ class TargetModifier extends ComparisonModifier {
    *
    * @returns {boolean} `true` if the value doesn't match the success and failure compare points
    */
-  isNeutral(value) {
+  isNeutral(value: number): boolean {
     return !this.isSuccess(value) && !this.isFailure(value);
   }
 
@@ -154,7 +166,7 @@ class TargetModifier extends ComparisonModifier {
    *
    * @returns {boolean}
    */
-  isSuccess(value) {
+  isSuccess(value: number): boolean {
     return this.isComparePoint(value);
   }
 
@@ -166,8 +178,8 @@ class TargetModifier extends ComparisonModifier {
    *
    * @returns {RollResults} The modified results
    */
-  run(results, _context) {
-    let rolls;
+  run(results: ResultGroup | RollResults, _context: ModifierContext): ResultGroup | RollResults {
+    let rolls: unknown[];
 
     if (results instanceof ResultGroup) {
       rolls = results.results;
@@ -178,16 +190,18 @@ class TargetModifier extends ComparisonModifier {
     // loop through each roll and see if it matches the target
     rolls
       .forEach((roll) => {
+        const parsedRoll = roll as RollLike;
+
         // add the modifier flag
-        if (this.isSuccess(roll.value)) {
-          roll.modifiers.add('target-success');
-        } else if (this.isFailure(roll.value)) {
-          roll.modifiers.add('target-failure');
+        if (this.isSuccess(parsedRoll.value)) {
+          parsedRoll.modifiers.add('target-success');
+        } else if (this.isFailure(parsedRoll.value)) {
+          parsedRoll.modifiers.add('target-failure');
         }
 
         // set the value to the success state value
         // eslint-disable-next-line no-param-reassign
-        roll.calculationValue = this.getStateValue(roll.value);
+        parsedRoll.calculationValue = this.getStateValue(parsedRoll.value);
       });
 
     return results;
@@ -207,7 +221,7 @@ class TargetModifier extends ComparisonModifier {
    *  successComparePoint: ComparePoint
    * }}
    */
-  toJSON() {
+  toJSON(): TargetModifierJson {
     const { failureComparePoint, successComparePoint } = this;
 
     // get the inherited object, but remove the comparePoint property

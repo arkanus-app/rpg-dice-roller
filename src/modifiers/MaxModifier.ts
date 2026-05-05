@@ -1,7 +1,16 @@
 import { isNumeric } from '../utilities/math.js';
 import Modifier from './Modifier.js';
+import type { ModifierContext } from './types.js';
+import type RollResults from '../results/RollResults.js';
 
 const maxSymbol = Symbol('max');
+
+export interface MaxModifierJson {
+  notation: string;
+  name: string;
+  type: 'modifier';
+  max: number;
+}
 
 /**
  * A `MaxModifier` causes die rolls over a maximum value to be treated as the maximum value.
@@ -13,6 +22,8 @@ const maxSymbol = Symbol('max');
  * @extends {Modifier}
  */
 class MaxModifier extends Modifier {
+  private [maxSymbol]!: number;
+
   /**
    * The default modifier execution order.
    *
@@ -27,7 +38,7 @@ class MaxModifier extends Modifier {
    *
    * @throws {TypeError} max must be a number
    */
-  constructor(max) {
+  constructor(max: number | string) {
     super();
 
     this.max = max;
@@ -38,7 +49,7 @@ class MaxModifier extends Modifier {
    *
    * @returns {Number}
    */
-  get max() {
+  get max(): number {
     return this[maxSymbol];
   }
 
@@ -49,7 +60,7 @@ class MaxModifier extends Modifier {
    *
    * @throws {TypeError} max must be a number
    */
-  set max(value) {
+  set max(value: number | string) {
     if (!isNumeric(value)) {
       throw new TypeError('max must be a number');
     }
@@ -85,7 +96,7 @@ class MaxModifier extends Modifier {
    *
    * @returns {RollResults} The modified results
    */
-  run(results, _context) {
+  run(results: RollResults, _context: ModifierContext): RollResults {
     const parsedResults = results;
 
     parsedResults.rolls = results.rolls.map((roll) => {
@@ -109,7 +120,7 @@ class MaxModifier extends Modifier {
    *
    * @returns {{notation: string, name: string, type: string, max: Number}}
    */
-  toJSON() {
+  toJSON(): MaxModifierJson {
     const { max } = this;
 
     return Object.assign(

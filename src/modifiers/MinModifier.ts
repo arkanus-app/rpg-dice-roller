@@ -1,7 +1,16 @@
 import { isNumeric } from '../utilities/math.js';
 import Modifier from './Modifier.js';
+import type { ModifierContext } from './types.js';
+import type RollResults from '../results/RollResults.js';
 
 const minSymbol = Symbol('min');
+
+export interface MinModifierJson {
+  notation: string;
+  name: string;
+  type: 'modifier';
+  min: number;
+}
 
 /**
  * A `MinModifier` causes die rolls under a minimum value to be treated as the minimum value.
@@ -13,6 +22,8 @@ const minSymbol = Symbol('min');
  * @extends {Modifier}
  */
 class MinModifier extends Modifier {
+  private [minSymbol]!: number;
+
   /**
    * The default modifier execution order.
    *
@@ -27,7 +38,7 @@ class MinModifier extends Modifier {
    *
    * @throws {TypeError} min must be a number
    */
-  constructor(min) {
+  constructor(min: number | string) {
     super();
 
     this.min = min;
@@ -38,7 +49,7 @@ class MinModifier extends Modifier {
    *
    * @returns {Number}
    */
-  get min() {
+  get min(): number {
     return this[minSymbol];
   }
 
@@ -49,7 +60,7 @@ class MinModifier extends Modifier {
    *
    * @throws {TypeError} min must be a number
    */
-  set min(value) {
+  set min(value: number | string) {
     if (!isNumeric(value)) {
       throw new TypeError('min must be a number');
     }
@@ -85,7 +96,7 @@ class MinModifier extends Modifier {
    *
    * @returns {RollResults} The modified results
    */
-  run(results, _context) {
+  run(results: RollResults, _context: ModifierContext): RollResults {
     const parsedResults = results;
 
     parsedResults.rolls = results.rolls.map((roll) => {
@@ -109,7 +120,7 @@ class MinModifier extends Modifier {
    *
    * @returns {{notation: string, name: string, type: string, min: Number}}
    */
-  toJSON() {
+  toJSON(): MinModifierJson {
     const { min } = this;
 
     return Object.assign(

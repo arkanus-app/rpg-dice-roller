@@ -1,4 +1,4 @@
-export default getModifierFlags;
+import Modifier from './Modifier.js';
 /**
  * Return the flags for the given list of modifiers
  *
@@ -6,5 +6,5 @@ export default getModifierFlags;
  *
  * @returns {string}
  */
-declare function getModifierFlags(...modifiers: (Modifier | string)[]): string;
-import Modifier from "./Modifier.js";
+declare const getModifierFlags: (...modifiers: Array<Modifier | string>) => string;
+export default getModifierFlags;

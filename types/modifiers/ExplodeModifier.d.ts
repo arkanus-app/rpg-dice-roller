@@ -1,4 +1,17 @@
-export default ExplodeModifier;
+import ComparisonModifier from './ComparisonModifier.js';
+import ComparePoint from '../ComparePoint.js';
+import type { ModifierContext } from './types.js';
+import type RollResults from '../results/RollResults.js';
+declare const compoundSymbol: unique symbol;
+declare const penetrateSymbol: unique symbol;
+export interface ExplodeModifierJson {
+    notation: string;
+    name: string;
+    type: 'modifier';
+    comparePoint?: ComparePoint;
+    compound: boolean;
+    penetrate: boolean;
+}
 /**
  * An `ExplodeModifier` re-rolls dice that match a given test, and adds them to the results.
  *
@@ -7,6 +20,14 @@ export default ExplodeModifier;
  * @extends ComparisonModifier
  */
 declare class ExplodeModifier extends ComparisonModifier {
+    private [compoundSymbol];
+    private [penetrateSymbol];
+    /**
+     * The default modifier execution order.
+     *
+     * @type {number}
+     */
+    static order: number;
     /**
      * Create an `ExplodeModifier` instance
      *
@@ -16,13 +37,25 @@ declare class ExplodeModifier extends ComparisonModifier {
      *
      * @throws {TypeError} comparePoint must be a `ComparePoint` object
      */
-    constructor(comparePoint?: any, compound?: boolean | undefined, penetrate?: boolean | undefined);
+    constructor(comparePoint?: ComparePoint | null, compound?: boolean, penetrate?: boolean);
     /**
      * Whether the modifier should compound the results or not.
      *
      * @returns {boolean} `true` if it should compound, `false` otherwise
      */
     get compound(): boolean;
+    /**
+     * The name of the modifier.
+     *
+     * @returns {string} 'explode'
+     */
+    get name(): string;
+    /**
+     * The modifier's notation.
+     *
+     * @returns {string}
+     */
+    get notation(): string;
     /**
      * Whether the modifier should penetrate the results or not.
      *
@@ -36,7 +69,16 @@ declare class ExplodeModifier extends ComparisonModifier {
      *
      * @returns {array}
      */
-    defaultComparePoint(_context: StandardDice | RollGroup): array;
+    defaultComparePoint(_context: ModifierContext): [string, number];
+    /**
+     * Run the modifier on the results.
+     *
+     * @param {RollResults} results The results to run the modifier against
+     * @param {StandardDice|RollGroup} _context The object that the modifier is attached to
+     *
+     * @returns {RollResults} The modified results
+     */
+    run(results: RollResults, _context: ModifierContext): RollResults;
     /**
      * Return an object for JSON serialising.
      *
@@ -51,17 +93,6 @@ declare class ExplodeModifier extends ComparisonModifier {
      *  penetrate: boolean
      * }}
      */
-    toJSON(): {
-        notation: string;
-        name: string;
-        type: string;
-        comparePoint: (ComparePoint | undefined);
-        compound: boolean;
-        penetrate: boolean;
-    };
-    [compoundSymbol]: boolean;
-    [penetrateSymbol]: boolean;
+    toJSON(): ExplodeModifierJson;
 }
-import ComparisonModifier from "./ComparisonModifier.js";
-declare const compoundSymbol: unique symbol;
-declare const penetrateSymbol: unique symbol;
+export default ExplodeModifier;

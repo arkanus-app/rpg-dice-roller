@@ -1,4 +1,7 @@
-export default CriticalSuccessModifier;
+import ComparisonModifier from './ComparisonModifier.js';
+import ComparePoint from '../ComparePoint.js';
+import type { ModifierContext } from './types.js';
+import type RollResults from '../results/RollResults.js';
 /**
  * A `CriticalSuccessModifier` modifier flags values that match a comparison.
  *
@@ -10,13 +13,31 @@ export default CriticalSuccessModifier;
  */
 declare class CriticalSuccessModifier extends ComparisonModifier {
     /**
+     * The default modifier execution order.
+     *
+     * @type {number}
+     */
+    static order: number;
+    /**
      * Create a `CriticalSuccessModifier` instance.
      *
      * @param {ComparePoint} comparePoint The comparison object
      *
      * @throws {TypeError} comparePoint must be a `ComparePoint` object
      */
-    constructor(comparePoint: ComparePoint);
+    constructor(comparePoint?: ComparePoint | null);
+    /**
+     * The name of the modifier.
+     *
+     * @returns {string} 'critical-success'
+     */
+    get name(): string;
+    /**
+     * The modifier's notation.
+     *
+     * @returns {string}
+     */
+    get notation(): string;
     /**
      * The default compare point definition
      *
@@ -24,6 +45,15 @@ declare class CriticalSuccessModifier extends ComparisonModifier {
      *
      * @returns {array}
      */
-    defaultComparePoint(_context: StandardDice | RollGroup): array;
+    defaultComparePoint(_context: ModifierContext): [string, number];
+    /**
+     * Runs the modifier on the rolls.
+     *
+     * @param {RollResults} results The results to run the modifier against
+     * @param {StandardDice|RollGroup} _context The object that the modifier is attached to
+     *
+     * @returns {RollResults}
+     */
+    run(results: RollResults, _context: ModifierContext): RollResults;
 }
-import ComparisonModifier from "./ComparisonModifier.js";
+export default CriticalSuccessModifier;

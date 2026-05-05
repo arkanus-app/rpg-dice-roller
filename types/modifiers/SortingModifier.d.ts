@@ -1,10 +1,22 @@
-export default SortingModifier;
+import Modifier from './Modifier.js';
+import ResultGroup from '../results/ResultGroup.js';
+import RollResults from '../results/RollResults.js';
+import type { ModifierContext } from './types.js';
+declare const directionSymbol: unique symbol;
+type SortDirection = 'a' | 'd';
+export interface SortingModifierJson {
+    notation: string;
+    name: string;
+    type: 'modifier';
+    direction: SortDirection;
+}
 /**
  * A `SortingModifier` sorts roll results by their value, either ascending or descending.
  *
  * @extends ComparisonModifier
  */
-declare class SortingModifier {
+declare class SortingModifier extends Modifier {
+    private [directionSymbol];
     /**
      * The default modifier execution order.
      *
@@ -18,7 +30,13 @@ declare class SortingModifier {
      *
      * @throws {RangeError} Direction must be 'a' or 'd'
      */
-    constructor(direction?: string | undefined);
+    constructor(direction?: SortDirection);
+    /**
+     * The sort direction.
+     *
+     * @returns {string} Either 'a' or 'd'
+     */
+    get direction(): SortDirection;
     /**
      * Set the sort direction.
      *
@@ -26,13 +44,7 @@ declare class SortingModifier {
      *
      * @throws {RangeError} Direction must be 'a' or 'd'
      */
-    set direction(arg: string);
-    /**
-     * The sort direction.
-     *
-     * @returns {string} Either 'a' or 'd'
-     */
-    get direction(): string;
+    set direction(value: SortDirection);
     /**
      * The name of the modifier.
      *
@@ -53,7 +65,7 @@ declare class SortingModifier {
      *
      * @returns {RollResults} The modified results
      */
-    run(results: RollResults, _context: StandardDice | RollGroup): RollResults;
+    run(results: ResultGroup | RollResults, _context: ModifierContext): ResultGroup | RollResults;
     /**
      * Return an object for JSON serialising.
      *
@@ -61,13 +73,6 @@ declare class SortingModifier {
      *
      * @returns {{notation: string, name: string, type: string, direction: string}}
      */
-    toJSON(): {
-        notation: string;
-        name: string;
-        type: string;
-        direction: string;
-    };
-    [directionSymbol]: string | undefined;
+    toJSON(): SortingModifierJson;
 }
-import RollResults from "../results/RollResults.js";
-declare const directionSymbol: unique symbol;
+export default SortingModifier;
