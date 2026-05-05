@@ -1,25 +1,31 @@
-export default Description;
+declare const textSymbol: unique symbol;
+declare const typeSymbol: unique symbol;
+declare const descriptionTypes: Readonly<{
+    MULTILINE: "multiline";
+    INLINE: "inline";
+}>;
+export type DescriptionType = (typeof descriptionTypes)[keyof typeof descriptionTypes];
+export interface DescriptionJSON {
+    text: string;
+    type: string;
+}
 /**
  * Represents a Roll / Roll group description.
  */
 declare class Description {
-    static types: {
-        MULTILINE: string;
-        INLINE: string;
-    };
+    static types: Readonly<{
+        MULTILINE: "multiline";
+        INLINE: "inline";
+    }>;
+    private [textSymbol];
+    private [typeSymbol];
     /**
      * Create a `Description` instance.
      *
      * @param {string} text
      * @param {string} [type=inline]
      */
-    constructor(text: string, type?: string | undefined);
-    /**
-     * Set the description text.
-     *
-     * @param {string|number} text
-     */
-    set text(arg: string);
+    constructor(text: string | number, type?: string);
     /**
      * The description text.
      *
@@ -27,11 +33,11 @@ declare class Description {
      */
     get text(): string;
     /**
-     * Set the description type.
+     * Set the description text.
      *
-     * @param {string} type
+     * @param {string|number} text
      */
-    set type(arg: string);
+    set text(text: string | number);
     /**
      * The description type.
      *
@@ -39,16 +45,19 @@ declare class Description {
      */
     get type(): string;
     /**
+     * Set the description type.
+     *
+     * @param {string} type
+     */
+    set type(type: string);
+    /**
      * Return an object for JSON serialising.
      *
      * This is called automatically when JSON encoding the object.
      *
      * @return {{text: string, type: string}}
      */
-    toJSON(): {
-        text: string;
-        type: string;
-    };
+    toJSON(): DescriptionJSON;
     /**
      * Return the String representation of the object.
      *
@@ -59,8 +68,5 @@ declare class Description {
      * @returns {string}
      */
     toString(): string;
-    [textSymbol]: string | undefined;
-    [typeSymbol]: string | undefined;
 }
-declare const textSymbol: unique symbol;
-declare const typeSymbol: unique symbol;
+export default Description;

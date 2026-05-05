@@ -1,3 +1,26 @@
+import { MersenneTwister19937, type Engine } from 'random-js';
+export type NumberGeneratorEngine = Engine & {
+    range?: number[];
+};
+interface RangeEngine extends Engine {
+    range: number[];
+}
+/**
+ * The engine
+ *
+ * @type {symbol}
+ *
+ * @private
+ */
+declare const engineSymbol: unique symbol;
+/**
+ * The random object
+ *
+ * @type {symbol}
+ *
+ * @private
+ */
+declare const randomSymbol: unique symbol;
 /**
  * List of built-in number generator engines.
  *
@@ -15,24 +38,14 @@
  *  nativeMath: Engine
  * }}
  */
-export const engines: {
-    min: {
-        next(): number;
-    };
-    max: {
-        next(): number;
-        range: number[];
-    };
+declare const engines: {
+    min: Engine;
+    max: RangeEngine;
     browserCrypto: Engine;
     nodeCrypto: Engine;
-    MersenneTwister19937: MersenneTwister19937;
+    MersenneTwister19937: typeof MersenneTwister19937;
     nativeMath: Engine;
 };
-export const generator: NumberGenerator;
-import { browserCrypto } from "random-js/dist/engine/browserCrypto";
-import { nodeCrypto } from "random-js/dist/engine/nodeCrypto";
-import { MersenneTwister19937 } from "random-js/dist/engine/MersenneTwister19937";
-import { nativeMath } from "random-js/dist/engine/nativeMath";
 /**
  * The `NumberGenerator` is capable of generating random numbers.
  *
@@ -42,6 +55,8 @@ import { nativeMath } from "random-js/dist/engine/nativeMath";
  * For details of the engines, check the [documentation](https://github.com/ckknight/random-js#engines).
  */
 declare class NumberGenerator {
+    private [engineSymbol];
+    private [randomSymbol];
     /**
      * Create a `NumberGenerator` instance.
      *
@@ -61,9 +76,13 @@ declare class NumberGenerator {
      *
      * @throws {TypeError} engine must have function `next()`
      */
-    constructor(engine?: Engine | {
-        next(): number;
-    });
+    constructor(engine?: NumberGeneratorEngine);
+    /**
+     * The current engine.
+     *
+     * @returns {Engine|{next(): number}}
+     */
+    get engine(): NumberGeneratorEngine;
     /**
      * Set the engine.
      *
@@ -85,13 +104,7 @@ declare class NumberGenerator {
      *
      * @throws {TypeError} engine must have function `next()`
      */
-    set engine(arg: any);
-    /**
-     * The current engine.
-     *
-     * @returns {Engine|{next(): number}}
-     */
-    get engine(): any;
+    set engine(engine: NumberGeneratorEngine);
     /**
      * Generate a random integer within the inclusive range `[min, max]`.
      *
@@ -110,6 +123,7 @@ declare class NumberGenerator {
      *
      * @returns {number} The random floating-point value
      */
-    real(min: number, max: number, inclusive?: boolean | undefined): number;
+    real(min: number, max: number, inclusive?: boolean): number;
 }
-export {};
+declare const generator: NumberGenerator;
+export { engines, generator, };

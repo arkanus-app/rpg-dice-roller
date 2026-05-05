@@ -21,10 +21,10 @@ import { evaluate as mathEval } from 'mathjs';
  *
  * @returns {boolean} `true` if the comparison matches, `false` otherwise
  */
-const compareNumbers = (a, b, operator) => {
+const compareNumbers = (a: number | string, b: number | string, operator: string): boolean => {
   const aNum = Number(a);
   const bNum = Number(b);
-  let result;
+  let result: boolean;
 
   if (Number.isNaN(aNum) || Number.isNaN(bNum)) {
     return false;
@@ -70,7 +70,7 @@ const compareNumbers = (a, b, operator) => {
  *
  * @returns {number} The result of the equation
  */
-const evaluate = (equation) => mathEval(equation);
+const evaluate = (equation: string): number => mathEval(equation) as number;
 
 /**
  * Check if the given value is a valid finite number.
@@ -79,7 +79,7 @@ const evaluate = (equation) => mathEval(equation);
  *
  * @returns {boolean} `true` if it is a finite number, `false` otherwise
  */
-const isNumeric = (val) => {
+const isNumeric = (val: unknown): boolean => {
   if ((typeof val !== 'number') && (typeof val !== 'string')) {
     return false;
   }
@@ -97,7 +97,7 @@ const isNumeric = (val) => {
  *
  * @returns {boolean} `true` if the value is a "safe" number, `false` otherwise
  */
-const isSafeNumber = (val) => {
+const isSafeNumber = (val: unknown): boolean => {
   if (!isNumeric(val)) {
     return false;
   }
@@ -114,7 +114,7 @@ const isSafeNumber = (val) => {
  *
  * @returns {number} The summed value
  */
-const sumArray = (numbers) => (
+const sumArray = (numbers: unknown): number => (
   !Array.isArray(numbers) ? 0 : numbers.reduce((prev, current) => (
     prev + (isNumeric(current) ? parseFloat(`${current}`) : 0)
   ), 0)
@@ -134,7 +134,7 @@ const sumArray = (numbers) => (
  *
  * @returns {number}
  */
-const toFixed = (num, precision = 0) => (
+const toFixed = (num: number, precision = 0): number => (
   // round to precision, then cast to a number to remove trailing zeroes after the decimal point
   parseFloat(parseFloat(`${num}`).toFixed(precision || 0))
 );

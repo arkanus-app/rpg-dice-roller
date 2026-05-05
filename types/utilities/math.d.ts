@@ -19,7 +19,7 @@
  *
  * @returns {boolean} `true` if the comparison matches, `false` otherwise
  */
-export function compareNumbers(a: number, b: number, operator: string): boolean;
+declare const compareNumbers: (a: number | string, b: number | string, operator: string) => boolean;
 /**
  * Evaluate mathematical strings.
  *
@@ -30,7 +30,7 @@ export function compareNumbers(a: number, b: number, operator: string): boolean;
  *
  * @returns {number} The result of the equation
  */
-export function evaluate(equation: string): number;
+declare const evaluate: (equation: string) => number;
 /**
  * Check if the given value is a valid finite number.
  *
@@ -38,7 +38,7 @@ export function evaluate(equation: string): number;
  *
  * @returns {boolean} `true` if it is a finite number, `false` otherwise
  */
-export function isNumeric(val: any): boolean;
+declare const isNumeric: (val: unknown) => boolean;
 /**
  * Check if the given value is a "safe" number.
  *
@@ -49,7 +49,7 @@ export function isNumeric(val: any): boolean;
  *
  * @returns {boolean} `true` if the value is a "safe" number, `false` otherwise
  */
-export function isSafeNumber(val: any): boolean;
+declare const isSafeNumber: (val: unknown) => boolean;
 /**
  * Take an array of numbers and add the values together.
  *
@@ -57,7 +57,7 @@ export function isSafeNumber(val: any): boolean;
  *
  * @returns {number} The summed value
  */
-export function sumArray(numbers: number[]): number;
+declare const sumArray: (numbers: unknown) => number;
 /**
  * Round a number to the given amount of digits after the decimal point, removing any trailing
  * zeros after the decimal point.
@@ -72,4 +72,5 @@ export function sumArray(numbers: number[]): number;
  *
  * @returns {number}
  */
-export function toFixed(num: number, precision?: number | undefined): number;
+declare const toFixed: (num: number, precision?: number) => number;
+export { compareNumbers, evaluate, isNumeric, isSafeNumber, sumArray, toFixed, };

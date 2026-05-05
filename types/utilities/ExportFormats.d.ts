@@ -1,4 +1,3 @@
-export default exportFormats;
 /**
  * Allowed formats for exporting dice data
  *
@@ -11,7 +10,9 @@ export default exportFormats;
  * @property {number} OBJECT
  */
 declare const exportFormats: Readonly<{
-    BASE_64: number;
-    JSON: number;
-    OBJECT: number;
+    BASE_64: 1;
+    JSON: 0;
+    OBJECT: 2;
 }>;
+export type ExportFormats = typeof exportFormats;
+export default exportFormats;

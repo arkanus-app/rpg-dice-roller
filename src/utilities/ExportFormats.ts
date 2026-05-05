@@ -15,4 +15,6 @@ const exportFormats = Object.freeze({
   OBJECT: 2,
 });
 
+export type ExportFormats = typeof exportFormats;
+
 export default exportFormats;

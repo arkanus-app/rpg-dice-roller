@@ -1,17 +1,16 @@
-export default HasDescription;
+import Description from '../Description.js';
+declare const descriptionSymbol: unique symbol;
+export interface HasDescriptionJSON {
+    description: Description | null;
+}
 /**
  * A base class for description functionality.
  *
  * @abstract
  */
 declare class HasDescription {
-    constructor(text?: null);
-    /**
-     * Set the description on the group.
-     *
-     * @param {Description|string|null} description
-     */
-    set description(arg: Description | null);
+    private [descriptionSymbol];
+    constructor(text?: unknown);
     /**
      * The description for the group.
      *
@@ -19,15 +18,19 @@ declare class HasDescription {
      */
     get description(): Description | null;
     /**
+     * Set the description on the group.
+     *
+     * @param {Description|string|null} description
+     */
+    set description(description: unknown);
+    /**
      * Return an object for JSON serialising.
      *
      * This is called automatically when JSON encoding the object.
      *
      * @returns {{description: (Description|null)}}
      */
-    toJSON(): {
-        description: (Description | null);
-    };
+    toJSON(): HasDescriptionJSON;
     /**
      * Return the String representation of the object.
      *
@@ -38,7 +41,5 @@ declare class HasDescription {
      * @returns {string}
      */
     toString(): string;
-    [descriptionSymbol]: any;
 }
-import Description from "../Description.js";
-declare const descriptionSymbol: unique symbol;
+export default HasDescription;

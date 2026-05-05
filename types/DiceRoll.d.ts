@@ -129,9 +129,9 @@ declare class DiceRoll {
      * @throws {TypeError} Invalid export format
      */
     export(format?: Readonly<{
-        BASE_64: number;
-        JSON: number;
-        OBJECT: number;
+        BASE_64: 1;
+        JSON: 0;
+        OBJECT: 2;
     }> | undefined): string | null;
     /**
      * Check whether the DiceRoll has expressions or not.

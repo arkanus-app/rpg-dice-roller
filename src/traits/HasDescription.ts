@@ -1,6 +1,10 @@
 import Description from '../Description.js';
 
-const descriptionSymbol = Symbol('description');
+const descriptionSymbol: unique symbol = Symbol('description');
+
+export interface HasDescriptionJSON {
+  description: Description | null;
+}
 
 /**
  * A base class for description functionality.
@@ -8,7 +12,9 @@ const descriptionSymbol = Symbol('description');
  * @abstract
  */
 class HasDescription {
-  constructor(text = null) {
+  private [descriptionSymbol]!: Description | null;
+
+  constructor(text: unknown = null) {
     this.description = text;
   }
 
@@ -17,7 +23,7 @@ class HasDescription {
    *
    * @return {Description|null}
    */
-  get description() {
+  get description(): Description | null {
     return this[descriptionSymbol] || null;
   }
 
@@ -26,7 +32,7 @@ class HasDescription {
    *
    * @param {Description|string|null} description
    */
-  set description(description) {
+  set description(description: unknown) {
     if (!description && (description !== 0)) {
       this[descriptionSymbol] = null;
     } else if (description instanceof Description) {
@@ -45,7 +51,7 @@ class HasDescription {
    *
    * @returns {{description: (Description|null)}}
    */
-  toJSON() {
+  toJSON(): HasDescriptionJSON {
     const { description } = this;
 
     return {
@@ -62,7 +68,7 @@ class HasDescription {
    *
    * @returns {string}
    */
-  toString() {
+  toString(): string {
     if (this.description) {
       return `${this.description}`;
     }

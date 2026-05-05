@@ -1,17 +1,31 @@
-export default ComparePoint;
+/**
+ * The operator
+ *
+ * @type {symbol}
+ *
+ * @private
+ */
+declare const operatorSymbol: unique symbol;
+/**
+ * The value
+ *
+ * @type {symbol}
+ *
+ * @private
+ */
+declare const valueSymbol: unique symbol;
+export interface ComparePointJSON {
+    operator: string;
+    type: 'compare-point';
+    value: number;
+}
 /**
  * A `ComparePoint` object compares numbers against each other.
  * For example, _is 6 greater than 3_, or _is 8 equal to 10_.
  */
 declare class ComparePoint {
-    /**
-     * Check if the operator is valid.
-     *
-     * @param {string} operator
-     *
-     * @returns {boolean} `true` if the operator is valid, `false` otherwise
-     */
-    static isValidOperator(operator: string): boolean;
+    private [operatorSymbol];
+    private [valueSymbol];
     /**
      * Create a `ComparePoint` instance.
      *
@@ -22,7 +36,15 @@ declare class ComparePoint {
      * @throws {RequiredArgumentError} operator and value are required
      * @throws {TypeError} value must be numeric
      */
-    constructor(operator: string, value: number);
+    constructor(operator: string, value: number | string);
+    /**
+     * Check if the operator is valid.
+     *
+     * @param {string} operator
+     *
+     * @returns {boolean} `true` if the operator is valid, `false` otherwise
+     */
+    static isValidOperator(operator: string): boolean;
     /**
      * Set the comparison operator.
      *
@@ -30,7 +52,7 @@ declare class ComparePoint {
      *
      * @throws CompareOperatorError operator is invalid
      */
-    set operator(arg: string);
+    set operator(operator: string);
     /**
      * The comparison operator.
      *
@@ -44,7 +66,7 @@ declare class ComparePoint {
      *
      * @throws {TypeError} value must be numeric
      */
-    set value(arg: number);
+    set value(value: number | string);
     /**
      * The comparison value
      *
@@ -58,7 +80,7 @@ declare class ComparePoint {
      *
      * @returns {boolean} `true` if it is a match, `false` otherwise
      */
-    isMatch(value: number): boolean;
+    isMatch(value: number | string): boolean;
     /**
      * Return an object for JSON serialising.
      *
@@ -66,11 +88,7 @@ declare class ComparePoint {
      *
      * @returns {{type: string, value: number, operator: string}}
      */
-    toJSON(): {
-        type: string;
-        value: number;
-        operator: string;
-    };
+    toJSON(): ComparePointJSON;
     /**
      * Return the String representation of the object.
      *
@@ -80,3 +98,4 @@ declare class ComparePoint {
      */
     toString(): string;
 }
+export default ComparePoint;

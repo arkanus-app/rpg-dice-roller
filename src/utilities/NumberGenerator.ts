@@ -1,6 +1,14 @@
 import {
-  browserCrypto, nodeCrypto, MersenneTwister19937, nativeMath, Random,
+  browserCrypto, nodeCrypto, MersenneTwister19937, nativeMath, Random, type Engine,
 } from 'random-js';
+
+export type NumberGeneratorEngine = Engine & {
+  range?: number[];
+};
+
+interface RangeEngine extends Engine {
+  range: number[];
+}
 
 /**
  * The engine
@@ -9,7 +17,7 @@ import {
  *
  * @private
  */
-const engineSymbol = Symbol('engine');
+const engineSymbol: unique symbol = Symbol('engine');
 
 /**
  * The random object
@@ -18,7 +26,7 @@ const engineSymbol = Symbol('engine');
  *
  * @private
  */
-const randomSymbol = Symbol('random');
+const randomSymbol: unique symbol = Symbol('random');
 
 /**
  * Engine that always returns the maximum value.
@@ -28,7 +36,7 @@ const randomSymbol = Symbol('random');
  *
  * @type {{next(): number, range: number[]}}
  */
-const maxEngine = {
+const maxEngine: RangeEngine = {
   /**
    * The min / max number range (e.g. `[1, 10]`).
    *
@@ -45,7 +53,7 @@ const maxEngine = {
    *
    * @returns {number}
    */
-  next() {
+  next(): number {
     // calculate the index of the max number
     return this.range[1] - this.range[0];
   },
@@ -59,13 +67,13 @@ const maxEngine = {
  *
  * @type {{next(): number}}
  */
-const minEngine = {
+const minEngine: Engine = {
   /**
    * Returns the minimum number index, `0`
    *
    * @returns {number}
    */
-  next() {
+  next(): number {
     return 0;
   },
 };
@@ -87,7 +95,14 @@ const minEngine = {
  *  nativeMath: Engine
  * }}
  */
-const engines = {
+const engines: {
+  min: Engine;
+  max: RangeEngine;
+  browserCrypto: Engine;
+  nodeCrypto: Engine;
+  MersenneTwister19937: typeof MersenneTwister19937;
+  nativeMath: Engine;
+} = {
   browserCrypto,
   nodeCrypto,
   MersenneTwister19937,
@@ -105,6 +120,10 @@ const engines = {
  * For details of the engines, check the [documentation](https://github.com/ckknight/random-js#engines).
  */
 class NumberGenerator {
+  private [engineSymbol]!: NumberGeneratorEngine;
+
+  private [randomSymbol]!: Random;
+
   /**
    * Create a `NumberGenerator` instance.
    *
@@ -124,7 +143,7 @@ class NumberGenerator {
    *
    * @throws {TypeError} engine must have function `next()`
    */
-  constructor(engine = nativeMath) {
+  constructor(engine: NumberGeneratorEngine = nativeMath) {
     this.engine = engine || nativeMath;
   }
 
@@ -133,7 +152,7 @@ class NumberGenerator {
    *
    * @returns {Engine|{next(): number}}
    */
-  get engine() {
+  get engine(): NumberGeneratorEngine {
     return this[engineSymbol];
   }
 
@@ -158,7 +177,7 @@ class NumberGenerator {
    *
    * @throws {TypeError} engine must have function `next()`
    */
-  set engine(engine) {
+  set engine(engine: NumberGeneratorEngine) {
     if (engine && (typeof engine.next !== 'function')) {
       throw new TypeError('engine must have function `next()`');
     }
@@ -176,7 +195,7 @@ class NumberGenerator {
    *
    * @returns {number} The random integer
    */
-  integer(min, max) {
+  integer(min: number, max: number): number {
     this[engineSymbol].range = [min, max];
 
     return this[randomSymbol].integer(min, max);
@@ -191,7 +210,7 @@ class NumberGenerator {
    *
    * @returns {number} The random floating-point value
    */
-  real(min, max, inclusive = false) {
+  real(min: number, max: number, inclusive = false): number {
     this[engineSymbol].range = [min, max];
 
     return this[randomSymbol].real(min, max, inclusive);

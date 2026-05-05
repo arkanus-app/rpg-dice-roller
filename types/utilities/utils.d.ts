@@ -5,7 +5,7 @@
  *
  * @returns {boolean} `true` if it is valid base64 encoded, `false` otherwise
  */
-export function isBase64(val: string): boolean;
+declare const isBase64: (val: string) => boolean;
 /**
  * Check if the value is a valid JSON encoded string.
  *
@@ -13,4 +13,5 @@ export function isBase64(val: string): boolean;
  *
  * @returns {boolean} `true` if the value is valid JSON, `false` otherwise
  */
-export function isJson(val: string): boolean;
+declare const isJson: (val: string) => boolean;
+export { isBase64, isJson, };

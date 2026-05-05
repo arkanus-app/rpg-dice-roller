@@ -82,9 +82,9 @@ declare class DiceRoller {
      * @throws {TypeError} Invalid export format
      */
     export(format?: Readonly<{
-        BASE_64: number;
-        JSON: number;
-        OBJECT: number;
+        BASE_64: 1;
+        JSON: 0;
+        OBJECT: 2;
     }> | undefined): string | null;
     /**
      * Add the data to the existing [roll log]{@link DiceRoller#log}.

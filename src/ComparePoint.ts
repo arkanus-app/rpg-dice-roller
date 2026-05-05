@@ -8,7 +8,7 @@ import { compareNumbers, isNumeric } from './utilities/math.js';
  *
  * @private
  */
-const operatorSymbol = Symbol('operator');
+const operatorSymbol: unique symbol = Symbol('operator');
 
 /**
  * The value
@@ -17,13 +17,23 @@ const operatorSymbol = Symbol('operator');
  *
  * @private
  */
-const valueSymbol = Symbol('value');
+const valueSymbol: unique symbol = Symbol('value');
+
+export interface ComparePointJSON {
+  operator: string;
+  type: 'compare-point';
+  value: number;
+}
 
 /**
  * A `ComparePoint` object compares numbers against each other.
  * For example, _is 6 greater than 3_, or _is 8 equal to 10_.
  */
 class ComparePoint {
+  private [operatorSymbol]!: string;
+
+  private [valueSymbol]!: number;
+
   /**
    * Create a `ComparePoint` instance.
    *
@@ -34,7 +44,7 @@ class ComparePoint {
    * @throws {RequiredArgumentError} operator and value are required
    * @throws {TypeError} value must be numeric
    */
-  constructor(operator, value) {
+  constructor(operator: string, value: number | string) {
     if (!operator) {
       throw new RequiredArgumentError('operator');
     } else if (!value && (value !== 0)) {
@@ -52,7 +62,7 @@ class ComparePoint {
    *
    * @returns {boolean} `true` if the operator is valid, `false` otherwise
    */
-  static isValidOperator(operator) {
+  static isValidOperator(operator: string): boolean {
     return (typeof operator === 'string') && /^(?:[<>!]?=|[<>]|<>)$/.test(operator);
   }
 
@@ -63,8 +73,8 @@ class ComparePoint {
    *
    * @throws CompareOperatorError operator is invalid
    */
-  set operator(operator) {
-    if (!this.constructor.isValidOperator(operator)) {
+  set operator(operator: string) {
+    if (!(this.constructor as typeof ComparePoint).isValidOperator(operator)) {
       throw new CompareOperatorError(operator);
     }
 
@@ -76,7 +86,7 @@ class ComparePoint {
    *
    * @returns {string}
    */
-  get operator() {
+  get operator(): string {
     return this[operatorSymbol];
   }
 
@@ -87,7 +97,7 @@ class ComparePoint {
    *
    * @throws {TypeError} value must be numeric
    */
-  set value(value) {
+  set value(value: number | string) {
     if (!isNumeric(value)) {
       throw new TypeError('value must be a finite number');
     }
@@ -100,7 +110,7 @@ class ComparePoint {
    *
    * @returns {number}
    */
-  get value() {
+  get value(): number {
     return this[valueSymbol];
   }
 
@@ -111,7 +121,7 @@ class ComparePoint {
    *
    * @returns {boolean} `true` if it is a match, `false` otherwise
    */
-  isMatch(value) {
+  isMatch(value: number | string): boolean {
     return compareNumbers(value, this.value, this.operator);
   }
 
@@ -122,7 +132,7 @@ class ComparePoint {
    *
    * @returns {{type: string, value: number, operator: string}}
    */
-  toJSON() {
+  toJSON(): ComparePointJSON {
     const { operator, value } = this;
 
     return {
@@ -139,7 +149,7 @@ class ComparePoint {
    *
    * @returns {string}
    */
-  toString() {
+  toString(): string {
     return `${this.operator}${this.value}`;
   }
 }

@@ -1,14 +1,27 @@
-const textSymbol = Symbol('text');
-const typeSymbol = Symbol('type');
+const textSymbol: unique symbol = Symbol('text');
+const typeSymbol: unique symbol = Symbol('type');
+
+const descriptionTypes = Object.freeze({
+  MULTILINE: 'multiline',
+  INLINE: 'inline',
+});
+
+export type DescriptionType = (typeof descriptionTypes)[keyof typeof descriptionTypes];
+
+export interface DescriptionJSON {
+  text: string;
+  type: string;
+}
 
 /**
  * Represents a Roll / Roll group description.
  */
 class Description {
-  static types = {
-    MULTILINE: 'multiline',
-    INLINE: 'inline',
-  };
+  static types = descriptionTypes;
+
+  private [textSymbol]!: string;
+
+  private [typeSymbol]!: string;
 
   /**
    * Create a `Description` instance.
@@ -16,7 +29,7 @@ class Description {
    * @param {string} text
    * @param {string} [type=inline]
    */
-  constructor(text, type = this.constructor.types.INLINE) {
+  constructor(text: string | number, type: string = descriptionTypes.INLINE) {
     this.text = text;
     this.type = type;
   }
@@ -26,7 +39,7 @@ class Description {
    *
    * @return {string}
    */
-  get text() {
+  get text(): string {
     return this[textSymbol];
   }
 
@@ -35,7 +48,7 @@ class Description {
    *
    * @param {string|number} text
    */
-  set text(text) {
+  set text(text: string | number) {
     if (typeof text === 'object') {
       throw new TypeError('Description text is invalid');
     } else if ((!text && (text !== 0)) || (`${text}`.trim() === '')) {
@@ -50,7 +63,7 @@ class Description {
    *
    * @return {string} "inline" or "multiline"
    */
-  get type() {
+  get type(): string {
     return this[typeSymbol];
   }
 
@@ -59,12 +72,12 @@ class Description {
    *
    * @param {string} type
    */
-  set type(type) {
-    const types = Object.values(this.constructor.types);
+  set type(type: string) {
+    const types = Object.values((this.constructor as typeof Description).types);
 
     if (typeof type !== 'string') {
       throw new TypeError('Description type must be a string');
-    } else if (!types.includes(type)) {
+    } else if (!types.includes(type as DescriptionType)) {
       throw new RangeError(`Description type must be one of; ${types.join(', ')}`);
     }
 
@@ -78,7 +91,7 @@ class Description {
    *
    * @return {{text: string, type: string}}
    */
-  toJSON() {
+  toJSON(): DescriptionJSON {
     const { text, type } = this;
 
     return {
@@ -96,8 +109,8 @@ class Description {
    *
    * @returns {string}
    */
-  toString() {
-    if (this.type === this.constructor.types.INLINE) {
+  toString(): string {
+    if (this.type === (this.constructor as typeof Description).types.INLINE) {
       return `# ${this.text}`;
     }
 
