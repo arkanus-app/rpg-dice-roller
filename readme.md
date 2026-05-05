@@ -1,48 +1,105 @@
-<p align="center">
-    <img src="https://dice-roller.github.io/documentation/dice-roller-logo.png" alt="RPG Dice Roller" style="max-width: 100%;" width="200"/>
-</p>
+# @erpg/dicecore
 
-# RPG Dice Roller
+ERPG Dice Core is the platform-neutral dice resolution library used by ERPG projects.
+It owns parsing, normalization, safety limits, deterministic replay, grouped rolls, and structured result data for UI, automation, chat, and 3D dice display layers.
 
-[![npm (scoped)](https://img.shields.io/npm/v/@dice-roller/rpg-dice-roller?label=version)](https://www.npmjs.com/package/@dice-roller/rpg-dice-roller)
-[![Build Status](https://github.com/dice-roller/rpg-dice-roller/actions/workflows/build.yml/badge.svg)](https://github.com/dice-roller/rpg-dice-roller/actions/workflows/build.yml)
-[![Coverage Status](https://coveralls.io/repos/github/dice-roller/rpg-dice-roller/badge.svg?branch=main)](https://coveralls.io/github/dice-roller/rpg-dice-roller?branch=main)
-![npm type definitions](https://img.shields.io/npm/types/@dice-roller/rpg-dice-roller)
-[![License](https://img.shields.io/npm/l/@dice-roller/rpg-dice-roller)](./licence.txt)
-[![npm downloads](https://img.shields.io/npm/dm/@dice-roller/rpg-dice-roller)](https://www.npmjs.com/package/@dice-roller/rpg-dice-roller)
-
-A JS based dice roller that can roll various types of dice and modifiers, along with mathematical equations.
-
+It intentionally does not format Discord messages, embeds, ANSI output, skins, or chat-specific text.
+Consumers decide presentation; this package resolves dice.
 
 ## Install
 
 ```bash
-npm install @dice-roller/rpg-dice-roller
+npm install @erpg/dicecore
 ```
 
-## Documentation
+For ERPG internal projects the package can also be consumed from Git:
 
-Check out the documentation at https://dice-roller.github.io/documentation
+```json
+{
+  "@erpg/dicecore": "git+https://github.com/arkanus-app/rpg-dice-roller.git"
+}
+```
 
+## Main API
 
-## Usage in the wild
+```ts
+import {
+  inspectRpgDiceNotation,
+  normalizeRpgDiceNotation,
+  rollRpgDice,
+  verifyRpgDiceNotation,
+} from '@erpg/dicecore';
 
-### Official
+const result = rollRpgDice('2#1d20+5', {
+  maxDice: 9999,
+  maxRolls: 100,
+  seed: 'encounter-42',
+});
 
-* [Vue components](https://github.com/dice-roller/vue) - For Tailwind, Bootstrap, basic HTML, and renderless
-* [Vuepress plugin](https://github.com/dice-roller/vuepress-plugin) - Dice roller plugin used in this documentation
-* [CLI](https://github.com/dice-roller/cli) - Command Line Interface for rolling dice
+console.log(result.total);
+console.log(result.rolls);
+console.log(result.dice);
+console.log(result.events);
 
+const inspection = inspectRpgDiceNotation('4d6kh3');
+console.log(inspection.isValid, inspection.cost);
+```
 
-## Contributing
+## ERPG notation helpers
 
-We're always happy for community contributions. You can find our contributing guide in the docs: https://dice-roller.github.io/documentation/contributing
+The facade keeps common table-writing shortcuts ergonomic before handing the formula to the parser:
 
+- `d` -> `d20`
+- `2d` -> `2d20`
+- `f` -> `4dF`
+- `2f` -> `2dF`
+- `df` -> `dF`
+- `ei6` -> `!>=6`
+- `km` -> `kl`
+- `k`, `kh`, `kl` without number -> `k1`, `kh1`, `kl1`
+- simple operator cleanup such as `+-`, `-+`, `++`, `--`
+- `N#formula` for independent grouped rolls
 
-## Licence
+Native math functions such as `floor(...)`, `ceil(...)`, `round(...)`, `min(...)`, and `max(...)` stay as parser notation, not facade options.
 
-This dice roller has been released under the MIT licence, meaning you can do pretty much anything you like with it, so long as the original copyright remains in place.
+## Public helpers
 
-You **can** use it in commercial products.
+- `rollRpgDice(input, options)`
+- `inspectRpgDiceNotation(input, options)`
+- `normalizeRpgDiceNotation(input)`
+- `parseRpgDiceInput(input)`
+- `extractRpgDiceGroups(input)`
+- `countRpgDiceInNotation(input)`
+- `verifyRpgDiceNotation(input, options)`
 
-If the licence terminology in the licence.txt is confusing, check out this: https://www.tldrlegal.com/license/mit-license
+`options` currently supports:
+
+- `maxDice?: number`
+- `maxRolls?: number`
+- `seed?: string | number`
+
+## Result data
+
+`rollRpgDice` returns structured data for repeated rolls, UI, and 3D display:
+
+- `total`
+- `rolls[]`
+- `dice[]`
+- `events[]`
+- `notation`
+- `normalizedNotation`
+- `comment`
+
+Each `dice[]` entry includes final value, initial value, calculation value, group metadata, modifier flags, and booleans for dropped, exploded, rerolled, critical success, and critical failure states.
+
+## Attribution
+
+This package is an ERPG-owned derivative of the open-source `@dice-roller/rpg-dice-roller` project by GreenImp.
+The original parser and dice engine provided the foundation; ERPG has since added a proprietary facade, normalization layer, structured UI/3D output, deterministic seed support, execution safety checks, browser compatibility work, and an incremental TypeScript migration.
+
+The original project remains credited in `licence.txt`.
+This package keeps the MIT license and preserves the upstream copyright notice.
+
+## License
+
+MIT.
