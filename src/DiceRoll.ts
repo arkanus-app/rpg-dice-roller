@@ -1,9 +1,9 @@
 import { StandardDice } from './dice/index.js';
 import { DataFormatError, NotationError, RequiredArgumentError } from './exceptions/index.js';
 import { toFixed } from './utilities/math.js';
-import { engines, generator } from './utilities/NumberGenerator.js';
+import { engines, generator, type NumberGeneratorEngine } from './utilities/NumberGenerator.js';
 import { isBase64, isJson } from './utilities/utils.js';
-import Parser from './parser/Parser.js';
+import Parser, { type ParserExpression } from './parser/Parser.js';
 import RollGroup from './RollGroup.js';
 import RollResults from './results/RollResults.js';
 import ResultGroup from './results/ResultGroup.js';
@@ -16,7 +16,7 @@ import exportFormats from './utilities/ExportFormats.js';
  *
  * @private
  */
-const notationSymbol = Symbol('notation');
+const notationSymbol: unique symbol = Symbol('notation');
 
 /**
  * The maximum possible roll total
@@ -25,7 +25,7 @@ const notationSymbol = Symbol('notation');
  *
  * @private
  */
-const maxTotalSymbol = Symbol('maxTotal');
+const maxTotalSymbol: unique symbol = Symbol('maxTotal');
 
 /**
  * The minimum possible roll total
@@ -34,7 +34,7 @@ const maxTotalSymbol = Symbol('maxTotal');
  *
  * @private
  */
-const minTotalSymbol = Symbol('minTotal');
+const minTotalSymbol: unique symbol = Symbol('minTotal');
 
 /**
  * List of expressions to roll
@@ -43,7 +43,7 @@ const minTotalSymbol = Symbol('minTotal');
  *
  * @private
  */
-const expressionsSymbol = Symbol('expressions');
+const expressionsSymbol: unique symbol = Symbol('expressions');
 
 /**
  * Method for rolling dice
@@ -52,7 +52,7 @@ const expressionsSymbol = Symbol('expressions');
  *
  * @private
  */
-const rollMethodSymbol = Symbol('roll-method');
+const rollMethodSymbol: unique symbol = Symbol('roll-method');
 
 /**
  * List of rolls
@@ -61,7 +61,7 @@ const rollMethodSymbol = Symbol('roll-method');
  *
  * @private
  */
-const rollsSymbol = Symbol('rolls');
+const rollsSymbol: unique symbol = Symbol('rolls');
 
 /**
  * Set the rolls
@@ -70,7 +70,7 @@ const rollsSymbol = Symbol('rolls');
  *
  * @type {symbol}
  */
-const setRollsSymbol = Symbol('set-rolls');
+const setRollsSymbol: unique symbol = Symbol('set-rolls');
 
 /**
  * The roll total
@@ -79,7 +79,32 @@ const setRollsSymbol = Symbol('set-rolls');
  *
  * @private
  */
-const totalSymbol = Symbol('total');
+const totalSymbol: unique symbol = Symbol('total');
+
+export type DiceRollImportRoll =
+  | ResultGroup
+  | RollResults
+  | string
+  | number
+  | RollResults[]
+  | ResultGroup[]
+  | unknown[];
+
+export interface DiceRollImportData {
+  notation: string;
+  rolls?: ResultGroup | RollResults | DiceRollImportRoll[];
+}
+
+export interface DiceRollJson {
+  averageTotal: number;
+  maxTotal: number;
+  minTotal: number;
+  notation: string;
+  output: string;
+  rolls: Array<ResultGroup | RollResults | string | number>;
+  total: number;
+  type: 'dice-roll';
+}
 
 /**
  * Calculate the total of all the results, fixed to a max of 2 digits after the decimal point.
@@ -90,7 +115,7 @@ const totalSymbol = Symbol('total');
  *
  * @returns {Number} the results total
  */
-const calculateTotal = (results) => toFixed(results.calculationValue, 2);
+const calculateTotal = (results: ResultGroup): number => toFixed(results.calculationValue, 2);
 
 /**
  * A `DiceRoll` handles rolling of a single dice notation and storing the result.
@@ -98,6 +123,18 @@ const calculateTotal = (results) => toFixed(results.calculationValue, 2);
  * @see {@link DiceRoller} if you need to keep a history of rolls
  */
 class DiceRoll {
+  private [notationSymbol]!: string;
+
+  private [maxTotalSymbol]: number | null = null;
+
+  private [minTotalSymbol]: number | null = null;
+
+  private [expressionsSymbol]: ParserExpression[] = [];
+
+  private [rollsSymbol]: ResultGroup | null = null;
+
+  private [totalSymbol]: number | null = null;
+
   /* eslint-disable max-len */
   /**
    * Create a DiceRoll, parse the notation and roll the dice.
@@ -123,7 +160,7 @@ class DiceRoll {
    * @throws {RequiredArgumentError} notation is required
    * @throws {TypeError} Rolls must be a valid result object, or an array
    */
-  constructor(notation) {
+  constructor(notation: string | DiceRollImportData) {
     if (!notation) {
       throw new RequiredArgumentError('notation');
     }
@@ -177,7 +214,7 @@ class DiceRoll {
    *
    * @returns {number}
    */
-  get averageTotal() {
+  get averageTotal(): number {
     return (this.maxTotal + this.minTotal) / 2;
   }
 
@@ -188,7 +225,7 @@ class DiceRoll {
    *
    * @returns {number}
    */
-  get maxTotal() {
+  get maxTotal(): number {
     if (!this.hasExpressions()) {
       return 0;
     }
@@ -213,7 +250,7 @@ class DiceRoll {
    *
    * @returns {number}
    */
-  get minTotal() {
+  get minTotal(): number {
     if (!this.hasExpressions()) {
       return 0;
     }
@@ -236,7 +273,7 @@ class DiceRoll {
    *
    * @returns {string}
    */
-  get notation() {
+  get notation(): string {
     return this[notationSymbol];
   }
 
@@ -248,7 +285,7 @@ class DiceRoll {
    *
    * @returns {string}
    */
-  get output() {
+  get output(): string {
     let output = `${this.notation}: `;
 
     if (this.hasRolls()) {
@@ -265,7 +302,7 @@ class DiceRoll {
    *
    * @returns {Array.<ResultGroup|RollResults|string|number>}
    */
-  get rolls() {
+  get rolls(): Array<ResultGroup | RollResults | string | number> {
     return this[rollsSymbol] ? this[rollsSymbol].results : [];
   }
 
@@ -274,9 +311,9 @@ class DiceRoll {
    *
    * @returns {number}
    */
-  get total() {
+  get total(): number {
     // only calculate the total if it has not already been done
-    if (!this[totalSymbol] && this.hasRolls()) {
+    if (!this[totalSymbol] && this.hasRolls() && this[rollsSymbol]) {
       this[totalSymbol] = calculateTotal(this[rollsSymbol]);
     }
 
@@ -296,15 +333,15 @@ class DiceRoll {
    *
    * @throws {TypeError} Invalid export format
    */
-  export(format = exportFormats.JSON) {
+  export(format: number = exportFormats.JSON): string | DiceRollJson {
     switch (format) {
       case exportFormats.BASE_64:
         // JSON encode then base64, else it exports the string representation of the roll output
-        return btoa(this.export(exportFormats.JSON));
+        return btoa(this.export(exportFormats.JSON) as string);
       case exportFormats.JSON:
         return JSON.stringify(this);
       case exportFormats.OBJECT:
-        return JSON.parse(this.export(exportFormats.JSON));
+        return JSON.parse(this.export(exportFormats.JSON) as string) as DiceRollJson;
       default:
         throw new TypeError(`Invalid export format "${format}"`);
     }
@@ -315,7 +352,7 @@ class DiceRoll {
    *
    * @returns {boolean} `true` if the object has expressions, `false` otherwise
    */
-  hasExpressions() {
+  hasExpressions(): boolean {
     return this[expressionsSymbol] && (this[expressionsSymbol].length > 0);
   }
 
@@ -324,7 +361,7 @@ class DiceRoll {
    *
    * @returns {boolean} `true` if the object has rolls, `false` otherwise
    */
-  hasRolls() {
+  hasRolls(): boolean {
     return this.hasExpressions() && (this.rolls.length > 0);
   }
 
@@ -336,7 +373,7 @@ class DiceRoll {
    *
    * @returns {RollResults[]} The results of the rolls
    */
-  roll() {
+  roll(): Array<ResultGroup | RollResults | string | number> {
     // reset the cached total
     this[totalSymbol] = 0;
 
@@ -362,7 +399,7 @@ class DiceRoll {
    *  type: string
    * }}
    */
-  toJSON() {
+  toJSON(): DiceRollJson {
     const {
       averageTotal, maxTotal, minTotal, notation, output, rolls, total,
     } = this;
@@ -388,7 +425,7 @@ class DiceRoll {
    *
    * @see {@link DiceRoll#output}
    */
-  toString() {
+  toString(): string {
     return this.output;
   }
 
@@ -420,18 +457,18 @@ class DiceRoll {
    *
    * @throws {DataFormatError} data format is invalid
    */
-  static import(data) {
+  static import(data: unknown): DiceRoll {
     if (!data) {
       throw new RequiredArgumentError('data');
-    } else if (isJson(data)) {
+    } else if ((typeof data === 'string') && isJson(data)) {
       // data is JSON format - parse and import
-      return DiceRoll.import(JSON.parse(data));
-    } else if (isBase64(data)) {
+      return DiceRoll.import(JSON.parse(data as string));
+    } else if ((typeof data === 'string') && isBase64(data)) {
       // data is base64 encoded - decode and import
-      return DiceRoll.import(atob(data));
+      return DiceRoll.import(atob(data as string));
     } else if (typeof data === 'object') {
       // if data is a `DiceRoll` return it, otherwise build it
-      return new DiceRoll(data);
+      return new DiceRoll(data as DiceRollImportData);
     } else {
       throw new DataFormatError(data);
     }
@@ -451,8 +488,8 @@ class DiceRoll {
    *
    * @throws {TypeError} engine must have function `next()`
    */
-  [rollMethodSymbol](engine) {
-    let oEngine;
+  [rollMethodSymbol](engine?: NumberGeneratorEngine): ResultGroup {
+    let oEngine: NumberGeneratorEngine | null = null;
     if (engine) {
       // use the selected engine
       oEngine = generator.engine;
@@ -461,7 +498,7 @@ class DiceRoll {
 
     // roll the dice
     const results = new ResultGroup(this[expressionsSymbol]
-      .map((expression) => {
+      .map((expression: ParserExpression) => {
         if ((expression instanceof StandardDice) || (expression instanceof RollGroup)) {
           // roll the object and return the value
           return expression.roll();
@@ -470,9 +507,9 @@ class DiceRoll {
         return expression;
       })
       // filter out empty values (e.g. whitespace)
-      .filter((value) => !!value || (value === 0)));
+      .filter((value: unknown) => !!value || (value === 0)));
 
-    if (engine) {
+    if (engine && oEngine) {
       // reset the engine
       generator.engine = oEngine;
     }
@@ -490,13 +527,13 @@ class DiceRoll {
    *
    * @throws {TypeError} Rolls must be a valid result object, or an array
    */
-  [setRollsSymbol](rolls) {
+  [setRollsSymbol](rolls: unknown): void {
     if (rolls instanceof ResultGroup) {
       this[rollsSymbol] = rolls;
     } else if (rolls instanceof RollResults) {
       this[rollsSymbol] = new ResultGroup([rolls]);
     } else if (Array.isArray(rolls)) {
-      this[rollsSymbol] = new ResultGroup(rolls.map((roll) => {
+      this[rollsSymbol] = new ResultGroup(rolls.map((roll: unknown) => {
         if ((roll instanceof ResultGroup) || (roll instanceof RollResults)) {
           // already a RollResults object
           return roll;
@@ -510,17 +547,24 @@ class DiceRoll {
 
         if (typeof roll === 'object') {
           // a result group
-          if (Array.isArray(roll.results)) {
+          const maybeGroup = roll as {
+            results?: unknown[];
+            modifiers?: unknown;
+            isRollGroup?: unknown;
+            useInTotal?: unknown;
+            rolls?: unknown[];
+          };
+          if (Array.isArray(maybeGroup.results)) {
             return new ResultGroup(
-              roll.results,
-              roll.modifiers || [],
-              roll.isRollGroup || false,
-              (typeof roll.useInTotal === 'boolean') ? roll.useInTotal : true,
+              maybeGroup.results,
+              maybeGroup.modifiers || [],
+              maybeGroup.isRollGroup || false,
+              (typeof maybeGroup.useInTotal === 'boolean') ? maybeGroup.useInTotal : true,
             );
           }
           // roll results
-          if (Array.isArray(roll.rolls)) {
-            return new RollResults(roll.rolls);
+          if (Array.isArray(maybeGroup.rolls)) {
+            return new RollResults(maybeGroup.rolls);
           }
         }
 

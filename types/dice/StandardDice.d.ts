@@ -1,8 +1,37 @@
-export default StandardDice;
+import HasDescription from '../traits/HasDescription.js';
+import Modifier from '../modifiers/Modifier.js';
+import RollResult from '../results/RollResult.js';
+import RollResults from '../results/RollResults.js';
+import type Description from '../Description.js';
+declare const modifiersSymbol: unique symbol;
+declare const qtySymbol: unique symbol;
+declare const sidesSymbol: unique symbol;
+declare const minSymbol: unique symbol;
+declare const maxSymbol: unique symbol;
+export type DiceSides = number | string;
+export type DiceModifierMap = Map<string, Modifier>;
+export type DiceModifierInput = DiceModifierMap | Modifier[] | Record<string, Modifier> | null;
+export interface StandardDiceJson {
+    average: number;
+    description: Description | null;
+    max: number;
+    min: number;
+    modifiers: DiceModifierMap | null;
+    name: string;
+    notation: string;
+    qty: number;
+    sides: DiceSides;
+    type: 'die';
+}
 /**
  * Represents a standard numerical die.
  */
 declare class StandardDice extends HasDescription {
+    private [modifiersSymbol];
+    private [qtySymbol];
+    private [sidesSymbol];
+    private [minSymbol];
+    private [maxSymbol];
     /**
      * Create a `StandardDice` instance.
      *
@@ -16,7 +45,19 @@ declare class StandardDice extends HasDescription {
      * @throws {RequiredArgumentError} sides is required
      * @throws {TypeError} qty must be a positive integer, and modifiers must be valid
      */
-    constructor(sides: number, qty?: number | undefined, modifiers?: {} | Map<string, Modifier> | Modifier[] | null | undefined, min?: number | null | undefined, max?: number | null | undefined, description?: Description | string | null);
+    constructor(sides: DiceSides, qty?: number, modifiers?: DiceModifierInput, min?: number | null, max?: number | null, description?: unknown);
+    /**
+     * The average value that the die can roll (Excluding modifiers).
+     *
+     * @returns {number}
+     */
+    get average(): number;
+    /**
+     * The modifiers that affect this die roll.
+     *
+     * @returns {Map<string, Modifier>|null}
+     */
+    get modifiers(): DiceModifierMap | null;
     /**
      * Set the modifiers that affect this roll.
      *
@@ -24,19 +65,7 @@ declare class StandardDice extends HasDescription {
      *
      * @throws {TypeError} Modifiers should be a Map, array of Modifiers, or an Object
      */
-    set modifiers(arg: Map<string, Modifier> | null);
-    /**
-     * The modifiers that affect this die roll.
-     *
-     * @returns {Map<string, Modifier>|null}
-     */
-    get modifiers(): Map<string, Modifier> | null;
-    /**
-     * The average value that the die can roll (Excluding modifiers).
-     *
-     * @returns {number}
-     */
-    get average(): number;
+    set modifiers(value: DiceModifierInput);
     /**
      * The maximum value that can be rolled on the die, excluding modifiers.
      *
@@ -72,7 +101,7 @@ declare class StandardDice extends HasDescription {
      *
      * @returns {number}
      */
-    get sides(): number;
+    get sides(): DiceSides;
     /**
      * Roll the dice for the specified quantity and apply any modifiers.
      *
@@ -102,29 +131,16 @@ declare class StandardDice extends HasDescription {
      *  type: string
      * }}
      */
-    toJSON(): {
-        average: number;
-        min: number;
-        max: number;
-        notation: string;
-        qty: number;
-        name: string;
-        sides: number;
-        modifiers: (Map<string, Modifier> | null);
-        type: string;
-    };
-    [qtySymbol]: number;
-    [sidesSymbol]: number;
-    [minSymbol]: number;
-    [maxSymbol]: number;
-    [modifiersSymbol]: Map<any, any> | undefined;
+    toJSON(): StandardDiceJson;
+    /**
+     * Return the String representation of the object.
+     *
+     * This is called automatically when casting the object to a string.
+     *
+     * @see {@link StandardDice#notation}
+     *
+     * @returns {string}
+     */
+    toString(): string;
 }
-import HasDescription from "../traits/HasDescription.js";
-import Modifier from "../modifiers/Modifier.js";
-import RollResults from "../results/RollResults.js";
-import RollResult from "../results/RollResult.js";
-declare const qtySymbol: unique symbol;
-declare const sidesSymbol: unique symbol;
-declare const minSymbol: unique symbol;
-declare const maxSymbol: unique symbol;
-declare const modifiersSymbol: unique symbol;
+export default StandardDice;

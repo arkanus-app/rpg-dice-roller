@@ -1,10 +1,19 @@
 import DiceRoll from './DiceRoll.js';
 import Parser from './parser/Parser.js';
+import { engines, generator, type NumberGeneratorEngine } from './utilities/NumberGenerator.js';
+import {
+  cleanRpgDiceNotation,
+  extractRpgDiceComment,
+  normalizeRpgDiceNotation,
+} from './rpg/normalization.js';
+import {
+  RpgDiceRollError,
+  type RpgDiceRollErrorCode,
+  type RpgDiceRollErrorDetails,
+  type RpgDiceRollErrorOptions,
+} from './rpg/errors.js';
 
-const blockCommentPattern = /\/\*([\s\S]*?)\*\//g;
-const lineCommentPattern = /\/\/([^\n\r]*)/g;
 const multiRollPattern = /^(\d+)#/;
-const whitespacePattern = /\s+/g;
 const diceGroupPattern = /(\d*)d(\d+|%|F)/gi;
 
 export const DEFAULT_MAX_TOTAL_DICE = 9999;
@@ -13,47 +22,16 @@ export const DEFAULT_MAX_MULTI_ROLLS = 100;
 export interface RpgDiceRollOptions {
   maxDice?: number;
   maxRolls?: number;
+  seed?: number | string;
 }
 
-export type RpgDiceRollErrorCode = 'DICE_NOTATION_REQUIRED' | 'TOO_MANY_ROLLS' | 'TOO_MANY_DICE';
-
-export interface RpgDiceRollErrorDetails {
-  [key: string]: unknown;
-}
-
-export interface RpgDiceRollErrorOptions {
-  code: RpgDiceRollErrorCode;
-  input?: string;
-  notation?: string;
-  normalizedNotation?: string;
-  limit?: number;
-  details?: RpgDiceRollErrorDetails;
-}
-
-export class RpgDiceRollError extends Error {
-  code: RpgDiceRollErrorCode;
-
-  input?: string;
-
-  notation?: string;
-
-  normalizedNotation?: string;
-
-  limit?: number;
-
-  details: RpgDiceRollErrorDetails;
-
-  constructor(message: string, options: RpgDiceRollErrorOptions) {
-    super(message);
-    this.name = 'RpgDiceRollError';
-    this.code = options.code;
-    this.input = options.input;
-    this.notation = options.notation;
-    this.normalizedNotation = options.normalizedNotation;
-    this.limit = options.limit;
-    this.details = options.details ?? {};
-  }
-}
+export {
+  cleanRpgDiceNotation,
+  extractRpgDiceComment,
+  normalizeRpgDiceNotation,
+  RpgDiceRollError,
+};
+export type { RpgDiceRollErrorCode, RpgDiceRollErrorDetails, RpgDiceRollErrorOptions };
 
 export interface RpgDiceInput {
   input: string;
@@ -78,6 +56,8 @@ export interface RpgDiceDetail {
   rollIndex: number;
   rollDieIndex: number;
   groupIndex: number | null;
+  groupPath: number[];
+  groupRollIndex: number | null;
   group: RpgDiceGroup | null;
   sides: number | 'F' | null;
   groupNotation: string | null;
@@ -92,6 +72,54 @@ export interface RpgDiceDetail {
   wasRerolled: boolean;
   wasCriticalSuccess: boolean;
   wasCriticalFailure: boolean;
+  sourceId: string | null;
+  modifierReasons: string[];
+}
+
+export type RpgDiceRollEventType =
+  | 'roll'
+  | 'explode'
+  | 'reroll'
+  | 'drop'
+  | 'critical-success'
+  | 'critical-failure';
+
+export interface RpgDiceRollEvent {
+  id: string;
+  type: RpgDiceRollEventType;
+  rollIndex: number;
+  dieIndex: number;
+  rollDieIndex: number;
+  groupIndex: number | null;
+  groupPath: number[];
+  value: number;
+  initialValue: number;
+  useInTotal: boolean;
+  modifiers: string[];
+  reason: string | null;
+}
+
+export interface RpgDiceInspectionCost {
+  staticDiceCount: number;
+  worstCaseDiceCount: number;
+  worstCaseRollAttempts: number;
+  totalStaticDice: number;
+  totalWorstCaseDice: number;
+  totalWorstCaseRollAttempts: number;
+}
+
+export interface RpgDiceNotationInspection {
+  type: 'rpg-dice-inspection';
+  input: string;
+  comment: string;
+  notation: string;
+  normalizedNotation: string;
+  isMultiRoll: boolean;
+  rollCount: number;
+  groups: RpgDiceGroup[];
+  cost: RpgDiceInspectionCost;
+  isValid: boolean;
+  error: RpgDiceRollError | null;
 }
 
 export interface RpgDiceRollSnapshot {
@@ -107,6 +135,7 @@ export interface RpgDiceRollEntry {
   total: number;
   output: string;
   dice: RpgDiceDetail[];
+  events: RpgDiceRollEvent[];
   roll: RpgDiceRollSnapshot;
 }
 
@@ -121,6 +150,7 @@ export interface RpgDiceRollResult {
   isMultiRoll: boolean;
   rollCount: number;
   dice: RpgDiceDetail[];
+  events: RpgDiceRollEvent[];
   rolls: RpgDiceRollEntry[];
 }
 
@@ -138,225 +168,6 @@ interface RollResultLike {
   modifierFlags?: string;
   modifiers?: unknown;
   useInTotal?: boolean;
-}
-
-interface NormalizationRule {
-  name: string;
-  apply: (notation: string) => string;
-}
-
-function isDigit(value: string): boolean {
-  return /^\d$/.test(value);
-}
-
-function isAlpha(value: string): boolean {
-  return /^[a-z]$/i.test(value);
-}
-
-function isIdentifierBoundary(value: string | undefined): boolean {
-  return !value || !/[a-z0-9_]/i.test(value);
-}
-
-function readWhile(
-  source: string,
-  start: number,
-  matcher: (value: string) => boolean,
-): [string, number] {
-  let cursor = start;
-
-  while (cursor < source.length && matcher(source[cursor])) {
-    cursor += 1;
-  }
-
-  return [source.slice(start, cursor), cursor];
-}
-
-function readDiceSides(source: string, start: number): [string, number] {
-  const current = source[start];
-
-  if (current === '%') {
-    return ['%', start + 1];
-  }
-
-  if (current && current.toUpperCase() === 'F') {
-    return ['F', start + 1];
-  }
-
-  if (current && isDigit(current)) {
-    return readWhile(source, start, isDigit);
-  }
-
-  return ['20', start];
-}
-
-function normalizeAlphaToken(token: string, next: string | undefined): string {
-  const lowerToken = token.toLowerCase();
-
-  if (lowerToken === 'f' && isIdentifierBoundary(next)) {
-    return '4dF';
-  }
-
-  if (
-    (lowerToken === 'ei')
-    && (isDigit(next ?? '') || ['<', '>', '=', '!', undefined].includes(next))
-  ) {
-    return isDigit(next ?? '') ? '!>=' : '!';
-  }
-
-  if (lowerToken === 'km') {
-    return isDigit(next ?? '') ? 'kl' : 'kl1';
-  }
-
-  if ((lowerToken === 'kh') || (lowerToken === 'kl')) {
-    return isDigit(next ?? '') ? lowerToken : `${lowerToken}1`;
-  }
-
-  if (lowerToken === 'k') {
-    return isDigit(next ?? '') ? 'k' : 'k1';
-  }
-
-  return token;
-}
-
-/* eslint-disable no-continue */
-function normalizeFriendlyTokens(notation: string): string {
-  let output = '';
-  let cursor = 0;
-
-  while (cursor < notation.length) {
-    const char = notation[cursor];
-
-    if (isDigit(char)) {
-      const [quantity, afterQuantity] = readWhile(notation, cursor, isDigit);
-      const marker = notation[afterQuantity];
-
-      if (marker && marker.toLowerCase() === 'd') {
-        const [sides, afterSides] = readDiceSides(notation, afterQuantity + 1);
-        output += (Number(quantity) === 0) ? '0' : `${quantity}d${sides}`;
-        cursor = afterSides;
-        continue;
-      }
-
-      if (
-        marker
-        && marker.toLowerCase() === 'f'
-        && isIdentifierBoundary(notation[afterQuantity + 1])
-      ) {
-        output += `${quantity}dF`;
-        cursor = afterQuantity + 1;
-        continue;
-      }
-
-      output += quantity;
-      cursor = afterQuantity;
-      continue;
-    }
-
-    if (char.toLowerCase() === 'd') {
-      const next = notation[cursor + 1];
-
-      if (next && next.toLowerCase() === 'f') {
-        output += 'dF';
-        cursor += 2;
-        continue;
-      }
-
-      if (
-        !next
-        || isIdentifierBoundary(next)
-        || isDigit(next)
-        || next === '%'
-        || next.toLowerCase() === 'f'
-      ) {
-        const [sides, afterSides] = readDiceSides(notation, cursor + 1);
-        output += `d${sides}`;
-        cursor = afterSides;
-        continue;
-      }
-    }
-
-    if (isAlpha(char)) {
-      const [token, afterToken] = readWhile(notation, cursor, isAlpha);
-      output += normalizeAlphaToken(token, notation[afterToken]);
-      cursor = afterToken;
-      continue;
-    }
-
-    output += char;
-    cursor += 1;
-  }
-
-  return output;
-}
-/* eslint-enable no-continue */
-
-function normalizeSimpleOperators(notation: string): string {
-  let normalized = notation;
-  let previous: string;
-
-  do {
-    previous = normalized;
-    normalized = normalized
-      .replace(/\+-/g, '-')
-      .replace(/-\+/g, '-')
-      .replace(/\+\+/g, '+')
-      .replace(/--/g, '+');
-  } while (normalized !== previous);
-
-  return normalized.replace(/[+-]{3,}/g, '+').replace(/^[+-]/, '');
-}
-
-const notationNormalizationRules: NormalizationRule[] = [
-  {
-    name: 'friendly-token-scanner',
-    apply: normalizeFriendlyTokens,
-  },
-  {
-    name: 'simple-operators',
-    apply: normalizeSimpleOperators,
-  },
-];
-
-/**
- * Extracts user-facing comments without coupling the dice engine to a chat platform.
- */
-export function extractRpgDiceComment(input: string): string {
-  const source = String(input ?? '');
-  const comments: string[] = [];
-
-  source.replace(blockCommentPattern, (_match, comment: string) => {
-    comments.push(comment.trim());
-    return _match;
-  });
-
-  source.replace(lineCommentPattern, (_match, comment: string) => {
-    comments.push(comment.trim());
-    return _match;
-  });
-
-  return comments
-    .filter(Boolean)
-    .join(' ')
-    .replace(/\{[^}]+\}/g, '')
-    .trim();
-}
-
-/**
- * Removes comments and whitespace from notation while preserving dice semantics.
- */
-export function cleanRpgDiceNotation(input: string): string {
-  return String(input ?? '')
-    .replace(blockCommentPattern, '')
-    .replace(lineCommentPattern, '')
-    .replace(whitespacePattern, '');
-}
-
-/**
- * Applies ERPG/Kraken-friendly notation aliases before handing the formula to the parser.
- */
-export function normalizeRpgDiceNotation(input: string): string {
-  return notationNormalizationRules
-    .reduce((notation, rule) => rule.apply(notation), cleanRpgDiceNotation(input));
 }
 
 /**
@@ -465,39 +276,107 @@ function getModifierMaxIterations(modifier: unknown): number {
   return maxIterations ?? 0;
 }
 
-function countWorstCaseDiceExpressions(expressions: unknown[]): number {
-  return expressions.reduce<number>((total, expression) => {
+function isExecutionModifier(modifierName: string): boolean {
+  return ['explode', 're-roll', 'unique'].includes(modifierName);
+}
+
+function addCosts(
+  left: RpgDiceInspectionCost,
+  right: RpgDiceInspectionCost,
+): RpgDiceInspectionCost {
+  return {
+    staticDiceCount: left.staticDiceCount + right.staticDiceCount,
+    worstCaseDiceCount: left.worstCaseDiceCount + right.worstCaseDiceCount,
+    worstCaseRollAttempts: left.worstCaseRollAttempts + right.worstCaseRollAttempts,
+    totalStaticDice: left.totalStaticDice + right.totalStaticDice,
+    totalWorstCaseDice: left.totalWorstCaseDice + right.totalWorstCaseDice,
+    totalWorstCaseRollAttempts: left.totalWorstCaseRollAttempts + right.totalWorstCaseRollAttempts,
+  };
+}
+
+function emptyCost(): RpgDiceInspectionCost {
+  return {
+    staticDiceCount: 0,
+    worstCaseDiceCount: 0,
+    worstCaseRollAttempts: 0,
+    totalStaticDice: 0,
+    totalWorstCaseDice: 0,
+    totalWorstCaseRollAttempts: 0,
+  };
+}
+
+function countParsedExpressionCost(expressions: unknown[]): RpgDiceInspectionCost {
+  return expressions.reduce<RpgDiceInspectionCost>((total, expression) => {
     if (Array.isArray(expression)) {
-      return total + countWorstCaseDiceExpressions(expression);
+      return addCosts(total, countParsedExpressionCost(expression));
     }
 
     const quantity = getObjectNumber(expression, 'qty');
     if (quantity !== null) {
-      const explodeModifier = getObjectModifiers(expression)
+      const modifiers = getObjectModifiers(expression);
+      const explodeModifier = modifiers
         .find((modifier) => getModifierName(modifier) === 'explode');
       const explodeMultiplier = explodeModifier ? 1 + getModifierMaxIterations(explodeModifier) : 1;
+      const executionMultiplier = modifiers
+        .filter((modifier) => isExecutionModifier(getModifierName(modifier)))
+        .reduce<number>(
+          (multiplier, modifier) => multiplier + getModifierMaxIterations(modifier),
+          1,
+        );
+      const safeQuantity = Math.max(0, quantity);
 
-      return total + (Math.max(0, quantity) * explodeMultiplier);
+      return addCosts(total, {
+        ...emptyCost(),
+        staticDiceCount: safeQuantity,
+        worstCaseDiceCount: safeQuantity * explodeMultiplier,
+        worstCaseRollAttempts: safeQuantity * executionMultiplier,
+      });
     }
 
     if (isRecord(expression) && Array.isArray(expression.expressions)) {
-      return total + countWorstCaseDiceExpressions(expression.expressions);
+      return addCosts(total, countParsedExpressionCost(expression.expressions));
     }
 
     return total;
-  }, 0);
+  }, emptyCost());
+}
+
+function multiplyCost(cost: RpgDiceInspectionCost, rollCount: number): RpgDiceInspectionCost {
+  return {
+    staticDiceCount: cost.staticDiceCount,
+    worstCaseDiceCount: cost.worstCaseDiceCount,
+    worstCaseRollAttempts: cost.worstCaseRollAttempts,
+    totalStaticDice: cost.staticDiceCount * rollCount,
+    totalWorstCaseDice: cost.worstCaseDiceCount * rollCount,
+    totalWorstCaseRollAttempts: cost.worstCaseRollAttempts * rollCount,
+  };
 }
 
 function parseNotationForValidation(notation: string): unknown[] {
   return Parser.parse(notation) as unknown[];
 }
 
-function ensureRpgDiceInputLimits(
+function createInvalidNotationError(parsedInput: RpgDiceInput, error: unknown): RpgDiceRollError {
+  return new RpgDiceRollError('Invalid notation', {
+    code: 'INVALID_NOTATION',
+    input: parsedInput.input,
+    notation: parsedInput.notation,
+    normalizedNotation: parsedInput.normalizedNotation,
+    details: {
+      cause: error instanceof Error ? error.message : String(error),
+    },
+  });
+}
+
+function inspectParsedInput(
   parsedInput: RpgDiceInput,
   options: RpgDiceRollOptions,
-): void {
+): RpgDiceNotationInspection {
   const maxDice = resolveLimit(options.maxDice, DEFAULT_MAX_TOTAL_DICE);
   const maxRolls = resolveLimit(options.maxRolls, DEFAULT_MAX_MULTI_ROLLS);
+  const groups = extractRpgDiceGroups(parsedInput.notation);
+
+  let cost = multiplyCost(emptyCost(), parsedInput.rollCount);
 
   if (!parsedInput.notation) {
     throw new RpgDiceRollError('Dice notation is required', {
@@ -523,6 +402,11 @@ function ensureRpgDiceInputLimits(
 
   const staticDiceCount = countRpgDiceInNotation(parsedInput.notation);
   const totalStaticDice = staticDiceCount * parsedInput.rollCount;
+  cost = {
+    ...cost,
+    staticDiceCount,
+    totalStaticDice,
+  };
 
   if (totalStaticDice > maxDice) {
     throw new RpgDiceRollError('Too many dice', {
@@ -539,11 +423,16 @@ function ensureRpgDiceInputLimits(
     });
   }
 
-  const parsedExpressions = parseNotationForValidation(parsedInput.notation);
-  const worstCaseDiceCount = countWorstCaseDiceExpressions(parsedExpressions);
-  const totalWorstCaseDice = worstCaseDiceCount * parsedInput.rollCount;
+  let parsedExpressions: unknown[];
+  try {
+    parsedExpressions = parseNotationForValidation(parsedInput.notation);
+  } catch (error) {
+    throw createInvalidNotationError(parsedInput, error);
+  }
 
-  if (totalWorstCaseDice > maxDice) {
+  cost = multiplyCost(countParsedExpressionCost(parsedExpressions), parsedInput.rollCount);
+
+  if (cost.totalWorstCaseDice > maxDice) {
     throw new RpgDiceRollError('Too many dice', {
       code: 'TOO_MANY_DICE',
       input: parsedInput.input,
@@ -552,12 +441,73 @@ function ensureRpgDiceInputLimits(
       limit: maxDice,
       details: {
         rollCount: parsedInput.rollCount,
-        staticDiceCount,
-        worstCaseDiceCount,
-        totalStaticDice,
-        totalWorstCaseDice,
+        ...cost,
       },
     });
+  }
+
+  if (cost.totalWorstCaseRollAttempts > maxDice) {
+    throw new RpgDiceRollError('Roll execution limit exceeded', {
+      code: 'ROLL_EXECUTION_LIMIT',
+      input: parsedInput.input,
+      notation: parsedInput.notation,
+      normalizedNotation: parsedInput.normalizedNotation,
+      limit: maxDice,
+      details: {
+        rollCount: parsedInput.rollCount,
+        ...cost,
+      },
+    });
+  }
+
+  return {
+    type: 'rpg-dice-inspection',
+    input: parsedInput.input,
+    comment: parsedInput.comment,
+    notation: parsedInput.notation,
+    normalizedNotation: parsedInput.normalizedNotation,
+    isMultiRoll: parsedInput.isMultiRoll,
+    rollCount: parsedInput.rollCount,
+    groups,
+    cost,
+    isValid: true,
+    error: null,
+  };
+}
+
+function ensureRpgDiceInputLimits(
+  parsedInput: RpgDiceInput,
+  options: RpgDiceRollOptions,
+): RpgDiceNotationInspection {
+  return inspectParsedInput(parsedInput, options);
+}
+
+export function inspectRpgDiceNotation(
+  input: string,
+  options: RpgDiceRollOptions = {},
+): RpgDiceNotationInspection {
+  const parsedInput = parseRpgDiceInput(input);
+
+  try {
+    return inspectParsedInput(parsedInput, options);
+  } catch (error) {
+    const inspectionError = error instanceof RpgDiceRollError
+      ? error
+      : createInvalidNotationError(parsedInput, error);
+
+    return {
+      type: 'rpg-dice-inspection',
+      input: parsedInput.input,
+      comment: parsedInput.comment,
+      notation: parsedInput.notation,
+      normalizedNotation: parsedInput.normalizedNotation,
+      isMultiRoll: parsedInput.isMultiRoll,
+      rollCount: parsedInput.rollCount,
+      groups: extractRpgDiceGroups(parsedInput.notation),
+      cost: multiplyCost(emptyCost(), parsedInput.rollCount),
+      isValid: false,
+      error: inspectionError,
+    };
   }
 }
 
@@ -615,9 +565,9 @@ function flattenRollDiceDetails(
   const dice: RpgDiceDetail[] = [];
   let nextGroupIndex = 0;
 
-  const visit = (node: unknown, groupIndex: number | null): void => {
+  const visit = (node: unknown, groupIndex: number | null, groupPath: number[]): void => {
     if (Array.isArray(node)) {
-      node.forEach((child) => visit(child, groupIndex));
+      node.forEach((child, childIndex) => visit(child, groupIndex, [...groupPath, childIndex]));
       return;
     }
 
@@ -629,7 +579,9 @@ function flattenRollDiceDetails(
         nextGroupIndex += 1;
       }
 
-      children.forEach((child) => visit(child, childGroupIndex));
+      children.forEach((child, childIndex) => {
+        visit(child, childGroupIndex, [...groupPath, childIndex]);
+      });
       return;
     }
 
@@ -645,6 +597,8 @@ function flattenRollDiceDetails(
         rollIndex,
         rollDieIndex,
         groupIndex,
+        groupPath,
+        groupRollIndex: groupIndex,
         group,
         sides: group?.sides ?? null,
         groupNotation: group?.notation ?? null,
@@ -659,12 +613,83 @@ function flattenRollDiceDetails(
         wasRerolled: hasAnyModifier(modifiers, ['re-roll', 're-roll-once', 'unique', 'unique-once']),
         wasCriticalSuccess: hasModifier(modifiers, 'critical-success'),
         wasCriticalFailure: hasModifier(modifiers, 'critical-failure'),
+        sourceId: null,
+        modifierReasons: modifiers,
       });
     }
   };
 
-  visit(source, null);
+  visit(source, null, []);
   return dice;
+}
+
+function buildRollEvents(dice: RpgDiceDetail[]): RpgDiceRollEvent[] {
+  return dice.flatMap((detail) => {
+    const base = {
+      rollIndex: detail.rollIndex,
+      dieIndex: detail.index,
+      rollDieIndex: detail.rollDieIndex,
+      groupIndex: detail.groupIndex,
+      groupPath: detail.groupPath,
+      value: detail.value,
+      initialValue: detail.initialValue,
+      useInTotal: detail.useInTotal,
+      modifiers: detail.modifiers,
+    };
+    const events: RpgDiceRollEvent[] = [{
+      id: `${detail.id}-roll`,
+      type: 'roll',
+      ...base,
+      reason: null,
+    }];
+
+    if (detail.wasExploded) {
+      events.push({
+        id: `${detail.id}-explode`,
+        type: 'explode',
+        ...base,
+        reason: 'explode',
+      });
+    }
+
+    if (detail.wasRerolled) {
+      events.push({
+        id: `${detail.id}-reroll`,
+        type: 'reroll',
+        ...base,
+        reason: detail.modifiers.find((modifier) => ['re-roll', 're-roll-once', 'unique', 'unique-once'].includes(modifier)) ?? 'reroll',
+      });
+    }
+
+    if (detail.wasDropped) {
+      events.push({
+        id: `${detail.id}-drop`,
+        type: 'drop',
+        ...base,
+        reason: detail.useInTotal ? 'drop' : 'excluded-from-total',
+      });
+    }
+
+    if (detail.wasCriticalSuccess) {
+      events.push({
+        id: `${detail.id}-critical-success`,
+        type: 'critical-success',
+        ...base,
+        reason: 'critical-success',
+      });
+    }
+
+    if (detail.wasCriticalFailure) {
+      events.push({
+        id: `${detail.id}-critical-failure`,
+        type: 'critical-failure',
+        ...base,
+        reason: 'critical-failure',
+      });
+    }
+
+    return events;
+  });
 }
 
 function formatRollOutput(roll: DiceRollInstance, total: number): string {
@@ -682,6 +707,45 @@ function formatAggregateOutput(rolls: RpgDiceRollEntry[], total: number): string
   return lines.join('\n');
 }
 
+function hashSeed(seed: string): number {
+  let hash = 17;
+
+  for (let index = 0; index < seed.length; index += 1) {
+    hash = ((hash * 31) + seed.charCodeAt(index)) % 2147483647;
+  }
+
+  return hash;
+}
+
+function createSeededEngine(seed: string | number | undefined): NumberGeneratorEngine | null {
+  if (typeof seed === 'undefined') {
+    return null;
+  }
+
+  const numericSeed = (typeof seed === 'number')
+    ? Math.trunc(seed)
+    : hashSeed(seed);
+
+  return engines.MersenneTwister19937.seed(numericSeed) as NumberGeneratorEngine;
+}
+
+function runWithOptionalSeed<T>(seed: string | number | undefined, callback: () => T): T {
+  const engine = createSeededEngine(seed);
+
+  if (!engine) {
+    return callback();
+  }
+
+  const previousEngine = generator.engine;
+  generator.engine = engine;
+
+  try {
+    return callback();
+  } finally {
+    generator.engine = previousEngine;
+  }
+}
+
 /**
  * Rolls an RPG dice notation with ERPG/Kraken aliases and a platform-neutral result shape.
  */
@@ -689,58 +753,60 @@ export function rollRpgDice(input: string, options: RpgDiceRollOptions = {}): Rp
   const parsedInput = parseRpgDiceInput(input);
   ensureRpgDiceInputLimits(parsedInput, options);
 
-  const groups = extractRpgDiceGroups(parsedInput.notation);
-  const rolls: RpgDiceRollEntry[] = [];
-  const dice: RpgDiceDetail[] = [];
-  let total = 0;
+  return runWithOptionalSeed(options.seed, () => {
+    const groups = extractRpgDiceGroups(parsedInput.notation);
+    const rolls: RpgDiceRollEntry[] = [];
+    const dice: RpgDiceDetail[] = [];
+    const events: RpgDiceRollEvent[] = [];
+    let total = 0;
 
-  for (let index = 0; index < parsedInput.rollCount; index += 1) {
-    const roll = new DiceRoll(parsedInput.notation) as DiceRollInstance;
-    const rollTotal = roll.total;
-    const rollIndex = index + 1;
-    const rollDice = flattenRollDiceDetails(roll.rolls, groups, rollIndex, dice.length + 1);
+    for (let index = 0; index < parsedInput.rollCount; index += 1) {
+      const roll = new DiceRoll(parsedInput.notation) as DiceRollInstance;
+      const rollTotal = roll.total;
+      const rollIndex = index + 1;
+      const rollDice = flattenRollDiceDetails(roll.rolls, groups, rollIndex, dice.length + 1);
+      const rollEvents = buildRollEvents(rollDice);
 
-    total += rollTotal;
-    dice.push(...rollDice);
+      total += rollTotal;
+      dice.push(...rollDice);
+      events.push(...rollEvents);
 
-    rolls.push({
-      index: rollIndex,
-      notation: roll.notation,
-      total: rollTotal,
-      output: formatRollOutput(roll, rollTotal),
-      dice: rollDice,
-      roll: {
+      rolls.push({
+        index: rollIndex,
         notation: roll.notation,
-        output: formatRollOutput(roll, rollTotal),
-        rolls: roll.rolls,
         total: rollTotal,
-      },
-    });
-  }
+        output: formatRollOutput(roll, rollTotal),
+        dice: rollDice,
+        events: rollEvents,
+        roll: {
+          notation: roll.notation,
+          output: formatRollOutput(roll, rollTotal),
+          rolls: roll.rolls,
+          total: rollTotal,
+        },
+      });
+    }
 
-  return {
-    type: 'rpg-dice-roll',
-    input: parsedInput.input,
-    comment: parsedInput.comment,
-    notation: parsedInput.notation,
-    normalizedNotation: parsedInput.normalizedNotation,
-    total,
-    output: formatAggregateOutput(rolls, total),
-    isMultiRoll: parsedInput.isMultiRoll,
-    rollCount: parsedInput.rollCount,
-    dice,
-    rolls,
-  };
+    return {
+      type: 'rpg-dice-roll',
+      input: parsedInput.input,
+      comment: parsedInput.comment,
+      notation: parsedInput.notation,
+      normalizedNotation: parsedInput.normalizedNotation,
+      total,
+      output: formatAggregateOutput(rolls, total),
+      isMultiRoll: parsedInput.isMultiRoll,
+      rollCount: parsedInput.rollCount,
+      dice,
+      events,
+      rolls,
+    };
+  });
 }
 
 /**
  * Checks whether an input can be resolved by the RPG dice facade.
  */
 export function verifyRpgDiceNotation(input: string, options: RpgDiceRollOptions = {}): boolean {
-  try {
-    ensureRpgDiceInputLimits(parseRpgDiceInput(input), options);
-    return true;
-  } catch {
-    return false;
-  }
+  return inspectRpgDiceNotation(input, options).isValid;
 }

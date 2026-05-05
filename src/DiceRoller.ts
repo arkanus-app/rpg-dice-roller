@@ -10,7 +10,18 @@ import exportFormats from './utilities/ExportFormats.js';
  *
  * @private
  */
-const logSymbol = Symbol('log');
+const logSymbol: unique symbol = Symbol('log');
+
+export interface DiceRollerImportData {
+  log?: unknown[];
+}
+
+export interface DiceRollerJson {
+  log: DiceRoll[];
+  output: string;
+  total: number;
+  type: 'dice-roller';
+}
 
 /**
  * A `DiceRoller` handles dice rolling functionality, keeps a history of rolls and can output logs
@@ -19,6 +30,8 @@ const logSymbol = Symbol('log');
  * @see {@link DiceRoll} if you don't need to keep a log history of rolls
  */
 class DiceRoller {
+  private [logSymbol]: DiceRoll[] = [];
+
   /**
    * Create a DiceRoller.
    *
@@ -30,7 +43,7 @@ class DiceRoller {
    *
    * @throws {TypeError} if data is an object, it must have a `log[]` property
    */
-  constructor(data) {
+  constructor(data?: DiceRollerImportData | DiceRoll[] | string) {
     this[logSymbol] = [];
 
     if (data) {
@@ -43,7 +56,7 @@ class DiceRoller {
    *
    * @returns {DiceRoll[]}
    */
-  get log() {
+  get log(): DiceRoll[] {
     return this[logSymbol] || [];
   }
 
@@ -55,7 +68,7 @@ class DiceRoller {
    *
    * @returns {string}
    */
-  get output() {
+  get output(): string {
     return this.log.join('; ');
   }
 
@@ -66,7 +79,7 @@ class DiceRoller {
    *
    * @returns {number}
    */
-  get total() {
+  get total(): number {
     return this.log.reduce((prev, current) => prev + current.total, 0);
   }
 
@@ -91,15 +104,15 @@ class DiceRoller {
    *
    * @throws {TypeError} Invalid export format
    */
-  export(format = exportFormats.JSON) {
+  export(format: number = exportFormats.JSON): string | DiceRollerJson {
     switch (format) {
       case exportFormats.BASE_64:
         // JSON encode, then base64
-        return btoa(this.export(exportFormats.JSON));
+        return btoa(this.export(exportFormats.JSON) as string);
       case exportFormats.JSON:
         return JSON.stringify(this);
       case exportFormats.OBJECT:
-        return JSON.parse(this.export(exportFormats.JSON));
+        return JSON.parse(this.export(exportFormats.JSON) as string) as DiceRollerJson;
       default:
         throw new TypeError(`Invalid export format "${format}"`);
     }
@@ -122,19 +135,20 @@ class DiceRoller {
    * @throws {RequiredArgumentError} data is required
    * @throws {TypeError} log must be an array
    */
-  import(data) {
+  import(data: unknown): DiceRoll[] {
     if (!data) {
       throw new RequiredArgumentError('data');
-    } else if (isJson(data)) {
+    } else if ((typeof data === 'string') && isJson(data)) {
       // data is JSON - parse and import
-      return this.import(JSON.parse(data));
-    } else if (isBase64(data)) {
+      return this.import(JSON.parse(data as string));
+    } else if ((typeof data === 'string') && isBase64(data)) {
       // data is base64 encoded - decode an import
-      return this.import(atob(data));
+      return this.import(atob(data as string));
     } else if (typeof data === 'object') {
-      let log = data.log || null;
+      const dataObject = data as DiceRollerImportData;
+      let log = dataObject.log || null;
 
-      if (!data.log && Array.isArray(data) && data.length) {
+      if (!dataObject.log && Array.isArray(data) && data.length) {
         // if `log` is not defined, but data is an array, use it as the list of logs
         log = data;
       }
@@ -173,7 +187,7 @@ class DiceRoller {
    * @throws {NotationError} notation is invalid
    * @throws {RequiredArgumentError} notation is required
    */
-  roll(...notations) {
+  roll(...notations: string[]): DiceRoll | DiceRoll[] {
     const filteredNotations = notations.filter(Boolean);
 
     if (filteredNotations.length === 0) {
@@ -200,7 +214,7 @@ class DiceRoller {
    *
    * @returns {{output: string, total: number, log: DiceRoll[], type: string}}
    */
-  toJSON() {
+  toJSON(): DiceRollerJson {
     const { log, output, total } = this;
 
     return {
@@ -220,7 +234,7 @@ class DiceRoller {
    *
    * @see {@link DiceRoller#output}
    */
-  toString() {
+  toString(): string {
     return this.output;
   }
 
@@ -241,7 +255,7 @@ class DiceRoller {
    * @throws {RequiredArgumentError} data is required
    * @throws {TypeError} log must be an array
    */
-  static import(data) {
+  static import(data: unknown): DiceRoller {
     // create a new DiceRoller object
     const diceRoller = new DiceRoller();
 

@@ -1,4 +1,4 @@
-import StandardDice from './StandardDice.js';
+import StandardDice, { type DiceModifierInput } from './StandardDice.js';
 
 /**
  * Represents a percentile die.
@@ -6,6 +6,8 @@ import StandardDice from './StandardDice.js';
  * @extends StandardDice
  */
 class PercentileDice extends StandardDice {
+  sidesAsNumber: boolean;
+
   /**
    * Create a `PercentileDice` instance.
    *
@@ -16,7 +18,12 @@ class PercentileDice extends StandardDice {
    *
    * @throws {TypeError} qty must be a positive integer, and modifiers must be valid
    */
-  constructor(qty = 1, modifiers = null, sidesAsNumber = false, description = null) {
+  constructor(
+    qty: number = 1,
+    modifiers: DiceModifierInput = null,
+    sidesAsNumber = false,
+    description: unknown = null,
+  ) {
     super(100, qty, modifiers, null, null, description);
 
     this.sidesAsNumber = !!sidesAsNumber;
@@ -28,7 +35,7 @@ class PercentileDice extends StandardDice {
    *
    * @returns {string} 'percentile'
    */
-  get name() {
+  get name(): string {
     return 'percentile';
   }
   /* eslint-enable class-methods-use-this */
@@ -38,7 +45,7 @@ class PercentileDice extends StandardDice {
    *
    * @returns {number|string} `%` if `sidesAsNumber == false`, or `100` otherwise
    */
-  get sides() {
+  get sides(): number | string {
     return this.sidesAsNumber ? super.sides : '%';
   }
 }

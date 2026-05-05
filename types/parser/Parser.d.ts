@@ -1,4 +1,6 @@
-export default Parser;
+import type StandardDice from '../dice/StandardDice.js';
+import type RollGroup from '../RollGroup.js';
+export type ParserExpression = StandardDice | RollGroup | string | number;
 /**
  * The `Parser` takes a notation string and parses it into objects.
  *
@@ -20,5 +22,6 @@ declare class Parser {
      * @throws {SyntaxError} The notation syntax is invalid
      * @throws {TypeError} Notation must be a string
      */
-    static parse(notation: string): any[];
+    static parse(notation: unknown): ParserExpression[];
 }
+export default Parser;

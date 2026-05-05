@@ -1,4 +1,5 @@
-export default FudgeDice;
+import RollResult from '../results/RollResult.js';
+import StandardDice, { type DiceModifierInput } from './StandardDice.js';
 /**
  * Represents a Fudge / Fate type die.
  *
@@ -16,7 +17,13 @@ declare class FudgeDice extends StandardDice {
      * @throws {RangeError} nonBlanks must be 1 or 2
      * @throws {TypeError} modifiers must be valid
      */
-    constructor(nonBlanks?: number | undefined, qty?: number | undefined, modifiers?: {} | Map<string, Modifier> | Modifier[] | null | undefined, description?: Description | string | null);
+    constructor(nonBlanks?: number, qty?: number, modifiers?: DiceModifierInput, description?: unknown);
+    /**
+     * The name of the die.
+     *
+     * @returns {string} 'fudge'
+     */
+    get name(): string;
     /**
      * The number of sides that each symbol (+, -) covers.
      *
@@ -29,5 +36,11 @@ declare class FudgeDice extends StandardDice {
      * @returns {string} 'F.2' or 'F.1'
      */
     get sides(): string;
+    /**
+     * Roll a single die and return the value.
+     *
+     * @returns {RollResult} The value rolled
+     */
+    rollOnce(): RollResult;
 }
-import StandardDice from "./StandardDice.js";
+export default FudgeDice;

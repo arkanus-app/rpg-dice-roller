@@ -5,17 +5,45 @@ import HasDescription from '../traits/HasDescription.js';
 import Modifier from '../modifiers/Modifier.js';
 import RollResult from '../results/RollResult.js';
 import RollResults from '../results/RollResults.js';
+import type Description from '../Description.js';
 
-const modifiersSymbol = Symbol('modifiers');
-const qtySymbol = Symbol('qty');
-const sidesSymbol = Symbol('sides');
-const minSymbol = Symbol('min-value');
-const maxSymbol = Symbol('max-value');
+const modifiersSymbol: unique symbol = Symbol('modifiers');
+const qtySymbol: unique symbol = Symbol('qty');
+const sidesSymbol: unique symbol = Symbol('sides');
+const minSymbol: unique symbol = Symbol('min-value');
+const maxSymbol: unique symbol = Symbol('max-value');
+
+export type DiceSides = number | string;
+export type DiceModifierMap = Map<string, Modifier>;
+export type DiceModifierInput = DiceModifierMap | Modifier[] | Record<string, Modifier> | null;
+
+export interface StandardDiceJson {
+  average: number;
+  description: Description | null;
+  max: number;
+  min: number;
+  modifiers: DiceModifierMap | null;
+  name: string;
+  notation: string;
+  qty: number;
+  sides: DiceSides;
+  type: 'die';
+}
 
 /**
  * Represents a standard numerical die.
  */
 class StandardDice extends HasDescription {
+  private [modifiersSymbol]: DiceModifierMap | null = null;
+
+  private [qtySymbol]!: number;
+
+  private [sidesSymbol]!: DiceSides;
+
+  private [minSymbol]!: number;
+
+  private [maxSymbol]!: number;
+
   /**
    * Create a `StandardDice` instance.
    *
@@ -29,7 +57,14 @@ class StandardDice extends HasDescription {
    * @throws {RequiredArgumentError} sides is required
    * @throws {TypeError} qty must be a positive integer, and modifiers must be valid
    */
-  constructor(sides, qty = 1, modifiers = null, min = 1, max = null, description = null) {
+  constructor(
+    sides: DiceSides,
+    qty: number = 1,
+    modifiers: DiceModifierInput = null,
+    min: number | null = 1,
+    max: number | null = null,
+    description: unknown = null,
+  ) {
     super(description);
 
     if (!sides && (sides !== 0)) {
@@ -72,9 +107,9 @@ class StandardDice extends HasDescription {
       this.modifiers = modifiers;
     }
 
-    this[minSymbol] = parseInt(minVal, 10);
+    this[minSymbol] = parseInt(`${minVal}`, 10);
 
-    this[maxSymbol] = max ? parseInt(`${max}`, 10) : sides;
+    this[maxSymbol] = max ? parseInt(`${max}`, 10) : parseInt(`${sides}`, 10);
   }
 
   /**
@@ -91,7 +126,7 @@ class StandardDice extends HasDescription {
    *
    * @returns {Map<string, Modifier>|null}
    */
-  get modifiers() {
+  get modifiers(): DiceModifierMap | null {
     if (this[modifiersSymbol]) {
       // ensure modifiers are ordered correctly
       return new Map([...this[modifiersSymbol]].sort((a, b) => a[1].order - b[1].order));
@@ -107,15 +142,17 @@ class StandardDice extends HasDescription {
    *
    * @throws {TypeError} Modifiers should be a Map, array of Modifiers, or an Object
    */
-  set modifiers(value) {
-    let modifiers;
+  set modifiers(value: DiceModifierInput) {
+    let modifiers: DiceModifierMap;
     if (value instanceof Map) {
       modifiers = value;
     } else if (Array.isArray(value)) {
       // loop through and get the modifier name of each item and use it as the map key
       modifiers = new Map(value.map((modifier) => [modifier.name, modifier]));
-    } else if (typeof value === 'object') {
+    } else if (value && (typeof value === 'object')) {
       modifiers = new Map(Object.entries(value));
+    } else if (!value) {
+      modifiers = new Map();
     } else {
       throw new TypeError('modifiers should be a Map, array, or an Object containing Modifiers');
     }
@@ -135,7 +172,7 @@ class StandardDice extends HasDescription {
    *
    * @returns {number}
    */
-  get max() {
+  get max(): number {
     return this[maxSymbol];
   }
 
@@ -144,7 +181,7 @@ class StandardDice extends HasDescription {
    *
    * @returns {number}
    */
-  get min() {
+  get min(): number {
     return this[minSymbol];
   }
 
@@ -154,7 +191,7 @@ class StandardDice extends HasDescription {
    *
    * @returns {string} 'standard'
    */
-  get name() {
+  get name(): string {
     return 'standard';
   }
   /* eslint-enable class-methods-use-this */
@@ -164,7 +201,7 @@ class StandardDice extends HasDescription {
    *
    * @returns {string}
    */
-  get notation() {
+  get notation(): string {
     let notation = `${this.qty}d${this.sides}`;
 
     if (this.modifiers && this.modifiers.size) {
@@ -179,7 +216,7 @@ class StandardDice extends HasDescription {
    *
    * @returns {number}
    */
-  get qty() {
+  get qty(): number {
     return this[qtySymbol];
   }
 
@@ -188,7 +225,7 @@ class StandardDice extends HasDescription {
    *
    * @returns {number}
    */
-  get sides() {
+  get sides(): DiceSides {
     return this[sidesSymbol];
   }
 
@@ -197,7 +234,7 @@ class StandardDice extends HasDescription {
    *
    * @returns {RollResults} The result of the roll
    */
-  roll() {
+  roll(): RollResults {
     // create a result object to hold the rolls
     const rollResult = new RollResults();
 
@@ -220,7 +257,7 @@ class StandardDice extends HasDescription {
    *
    * @returns {RollResult} The value rolled
    */
-  rollOnce() {
+  rollOnce(): RollResult {
     return new RollResult(generator.integer(this.min, this.max));
   }
 
@@ -241,25 +278,23 @@ class StandardDice extends HasDescription {
    *  type: string
    * }}
    */
-  toJSON() {
+  toJSON(): StandardDiceJson {
     const {
       average, max, min, modifiers, name, notation, qty, sides,
     } = this;
 
-    return Object.assign(
-      super.toJSON(),
-      {
-        average,
-        max,
-        min,
-        modifiers,
-        name,
-        notation,
-        qty,
-        sides,
-        type: 'die',
-      },
-    );
+    return {
+      ...super.toJSON(),
+      average,
+      max,
+      min,
+      modifiers,
+      name,
+      notation,
+      qty,
+      sides,
+      type: 'die',
+    };
   }
 
   /**
@@ -271,7 +306,7 @@ class StandardDice extends HasDescription {
    *
    * @returns {string}
    */
-  toString() {
+  toString(): string {
     return `${this.notation}${this.description ? ` ${this.description}` : ''}`;
   }
 }

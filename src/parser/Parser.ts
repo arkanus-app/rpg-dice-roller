@@ -1,5 +1,9 @@
 import { RequiredArgumentError } from '../exceptions/index.js';
 import * as parser from './grammars/grammar.js';
+import type StandardDice from '../dice/StandardDice.js';
+import type RollGroup from '../RollGroup.js';
+
+export type ParserExpression = StandardDice | RollGroup | string | number;
 
 /**
  * The `Parser` takes a notation string and parses it into objects.
@@ -22,7 +26,7 @@ class Parser {
    * @throws {SyntaxError} The notation syntax is invalid
    * @throws {TypeError} Notation must be a string
    */
-  static parse(notation) {
+  static parse(notation: unknown): ParserExpression[] {
     if (!notation) {
       throw new RequiredArgumentError('notation');
     }
@@ -32,7 +36,7 @@ class Parser {
     }
 
     // parse the notation
-    return parser.parse(notation);
+    return parser.parse(notation) as ParserExpression[];
   }
 }
 

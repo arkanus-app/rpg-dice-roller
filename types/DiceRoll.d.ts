@@ -1,42 +1,97 @@
-export default DiceRoll;
+import { type NumberGeneratorEngine } from './utilities/NumberGenerator.js';
+import RollResults from './results/RollResults.js';
+import ResultGroup from './results/ResultGroup.js';
+/**
+ * The notation
+ *
+ * @type {symbol}
+ *
+ * @private
+ */
+declare const notationSymbol: unique symbol;
+/**
+ * The maximum possible roll total
+ *
+ * @type {symbol}
+ *
+ * @private
+ */
+declare const maxTotalSymbol: unique symbol;
+/**
+ * The minimum possible roll total
+ *
+ * @type {symbol}
+ *
+ * @private
+ */
+declare const minTotalSymbol: unique symbol;
+/**
+ * List of expressions to roll
+ *
+ * @type {symbol}
+ *
+ * @private
+ */
+declare const expressionsSymbol: unique symbol;
+/**
+ * Method for rolling dice
+ *
+ * @type {symbol}
+ *
+ * @private
+ */
+declare const rollMethodSymbol: unique symbol;
+/**
+ * List of rolls
+ *
+ * @type {symbol}
+ *
+ * @private
+ */
+declare const rollsSymbol: unique symbol;
+/**
+ * Set the rolls
+ *
+ * @private
+ *
+ * @type {symbol}
+ */
+declare const setRollsSymbol: unique symbol;
+/**
+ * The roll total
+ *
+ * @type {symbol}
+ *
+ * @private
+ */
+declare const totalSymbol: unique symbol;
+export type DiceRollImportRoll = ResultGroup | RollResults | string | number | RollResults[] | ResultGroup[] | unknown[];
+export interface DiceRollImportData {
+    notation: string;
+    rolls?: ResultGroup | RollResults | DiceRollImportRoll[];
+}
+export interface DiceRollJson {
+    averageTotal: number;
+    maxTotal: number;
+    minTotal: number;
+    notation: string;
+    output: string;
+    rolls: Array<ResultGroup | RollResults | string | number>;
+    total: number;
+    type: 'dice-roll';
+}
 /**
  * A `DiceRoll` handles rolling of a single dice notation and storing the result.
  *
  * @see {@link DiceRoller} if you need to keep a history of rolls
  */
 declare class DiceRoll {
-    /**
-     * Create a new `DiceRoll` instance with the given data.
-     *
-     * `data` can be an object of data, a JSON / base64 encoded string of such data.
-     *
-     * The object must contain a `notation` property that defines the notation and, optionally, an
-     * array of RollResults, in the `rolls` property.
-     *
-     * @example <caption>Object</caption>
-     * DiceRoll.import({
-     *   notation: '4d6',
-     *   rolls: ..., // ResultGroup object or array of roll results
-     * });
-     *
-     * @example <caption>JSON</caption>
-     * DiceRoll.import('{"notation":"4d6","rolls":[...]}');
-     *
-     * @example <caption>Base64</caption>
-     * DiceRoll.import('eyJub3RhdGlvbiI6IjRkNiIsInJvbGxzIjpbXX0=');
-     *
-     * @param {{notation: string, rolls: RollResults[]}|string} data The data to import
-     * @param {string} data.notation If `notation` is an object; the notation to import
-     * @param {RollResults[]} [data.rolls] If `notation` is an object; the rolls to import
-     *
-     * @returns {DiceRoll} The new `DiceRoll` instance
-     *
-     * @throws {DataFormatError} data format is invalid
-     */
-    static import(data: {
-        notation: string;
-        rolls: RollResults[];
-    } | string): DiceRoll;
+    private [notationSymbol];
+    private [maxTotalSymbol];
+    private [minTotalSymbol];
+    private [expressionsSymbol];
+    private [rollsSymbol];
+    private [totalSymbol];
     /**
      * Create a DiceRoll, parse the notation and roll the dice.
      *
@@ -61,10 +116,7 @@ declare class DiceRoll {
      * @throws {RequiredArgumentError} notation is required
      * @throws {TypeError} Rolls must be a valid result object, or an array
      */
-    constructor(notation: string | {
-        notation: string;
-        rolls: ResultGroup | Array<ResultGroup | RollResults | string | number>;
-    });
+    constructor(notation: string | DiceRollImportData);
     /**
      * The average possible total for the notation.
      *
@@ -109,7 +161,7 @@ declare class DiceRoll {
      *
      * @returns {Array.<ResultGroup|RollResults|string|number>}
      */
-    get rolls(): (string | number | RollResults | ResultGroup)[];
+    get rolls(): Array<ResultGroup | RollResults | string | number>;
     /**
      * The roll total
      *
@@ -128,11 +180,7 @@ declare class DiceRoll {
      *
      * @throws {TypeError} Invalid export format
      */
-    export(format?: Readonly<{
-        BASE_64: 1;
-        JSON: 0;
-        OBJECT: 2;
-    }> | undefined): string | null;
+    export(format?: number): string | DiceRollJson;
     /**
      * Check whether the DiceRoll has expressions or not.
      *
@@ -153,7 +201,7 @@ declare class DiceRoll {
      *
      * @returns {RollResults[]} The results of the rolls
      */
-    roll(): RollResults[];
+    roll(): Array<ResultGroup | RollResults | string | number>;
     /**
      * Return an object for JSON serialising.
      *
@@ -169,15 +217,7 @@ declare class DiceRoll {
      *  type: string
      * }}
      */
-    toJSON(): {
-        output: string;
-        total: number;
-        minTotal: number;
-        maxTotal: number;
-        notation: string;
-        rolls: RollResults[];
-        type: string;
-    };
+    toJSON(): DiceRollJson;
     /**
      * Return the String representation of the object.
      *
@@ -188,6 +228,59 @@ declare class DiceRoll {
      * @see {@link DiceRoll#output}
      */
     toString(): string;
+    /**
+     * Create a new `DiceRoll` instance with the given data.
+     *
+     * `data` can be an object of data, a JSON / base64 encoded string of such data.
+     *
+     * The object must contain a `notation` property that defines the notation and, optionally, an
+     * array of RollResults, in the `rolls` property.
+     *
+     * @example <caption>Object</caption>
+     * DiceRoll.import({
+     *   notation: '4d6',
+     *   rolls: ..., // ResultGroup object or array of roll results
+     * });
+     *
+     * @example <caption>JSON</caption>
+     * DiceRoll.import('{"notation":"4d6","rolls":[...]}');
+     *
+     * @example <caption>Base64</caption>
+     * DiceRoll.import('eyJub3RhdGlvbiI6IjRkNiIsInJvbGxzIjpbXX0=');
+     *
+     * @param {{notation: string, rolls: RollResults[]}|string} data The data to import
+     * @param {string} data.notation If `notation` is an object; the notation to import
+     * @param {RollResults[]} [data.rolls] If `notation` is an object; the rolls to import
+     *
+     * @returns {DiceRoll} The new `DiceRoll` instance
+     *
+     * @throws {DataFormatError} data format is invalid
+     */
+    static import(data: unknown): DiceRoll;
+    /**
+     * Roll the dice and return the result.
+     *
+     * If the engine is passed, it will be used for the number generation for **this roll only**.
+     * The engine will be reset after use.
+     *
+     * @private
+     *
+     * @param {{next(): number}} [engine] The RNG engine to use for die rolls
+     *
+     * @returns {ResultGroup} The result of the rolls
+     *
+     * @throws {TypeError} engine must have function `next()`
+     */
+    [rollMethodSymbol](engine?: NumberGeneratorEngine): ResultGroup;
+    /**
+     * Set the rolls.
+     *
+     * @private
+     *
+     * @param {ResultGroup|Array.<ResultGroup|RollResults|string|number|{}|Array.<RollResult|number>>} rolls
+     *
+     * @throws {TypeError} Rolls must be a valid result object, or an array
+     */
+    [setRollsSymbol](rolls: unknown): void;
 }
-import RollResults from "./results/RollResults.js";
-import ResultGroup from "./results/ResultGroup.js";
+export default DiceRoll;

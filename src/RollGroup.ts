@@ -3,9 +3,28 @@ import HasDescription from './traits/HasDescription.js';
 import Modifier from './modifiers/Modifier.js';
 import ResultGroup from './results/ResultGroup.js';
 import StandardDice from './dice/StandardDice.js';
+import type Description from './Description.js';
+import type { ModifierContext } from './modifiers/types.js';
 
-const expressionsSymbol = Symbol('expressions');
-const modifiersSymbol = Symbol('modifiers');
+const expressionsSymbol: unique symbol = Symbol('expressions');
+const modifiersSymbol: unique symbol = Symbol('modifiers');
+
+export type RollGroupExpressionItem = StandardDice | string | number;
+export type RollGroupExpression = RollGroupExpressionItem[];
+export type RollGroupModifierMap = Map<string, Modifier>;
+export type RollGroupModifierInput =
+  | RollGroupModifierMap
+  | Modifier[]
+  | Record<string, Modifier>
+  | null;
+
+export interface RollGroupJson {
+  description: Description | null;
+  expressions: RollGroupExpression[];
+  modifiers: RollGroupModifierMap | null;
+  notation: string;
+  type: 'group';
+}
 
 /**
  * A `RollGroup` is a group of one or more "sub-rolls".
@@ -35,6 +54,10 @@ const modifiersSymbol = Symbol('modifiers');
  * @since 4.5.0
  */
 class RollGroup extends HasDescription {
+  private [expressionsSymbol]: RollGroupExpression[] = [];
+
+  private [modifiersSymbol]: RollGroupModifierMap | null = null;
+
   /**
    * Create a `RollGroup` instance.
    *
@@ -43,7 +66,11 @@ class RollGroup extends HasDescription {
    * group
    * @param {Description|string|null} [description=null] The roll description.
    */
-  constructor(expressions = [], modifiers = [], description = null) {
+  constructor(
+    expressions: RollGroupExpression[] = [],
+    modifiers: RollGroupModifierInput = [],
+    description: unknown = null,
+  ) {
     super(description);
 
     this.expressions = expressions;
@@ -55,7 +82,7 @@ class RollGroup extends HasDescription {
    *
    * @returns {Array.<Array.<StandardDice|string|number>>}
    */
-  get expressions() {
+  get expressions(): RollGroupExpression[] {
     return [...(this[expressionsSymbol] || [])];
   }
 
@@ -68,7 +95,7 @@ class RollGroup extends HasDescription {
    * @throws {TypeError} Sub expressions cannot be empty
    * @throws {TypeError} Sub expression items must be Dice, numbers, or strings
    */
-  set expressions(expressions) {
+  set expressions(expressions: RollGroupExpression[]) {
     if (!expressions) {
       throw new RequiredArgumentError('expressions');
     }
@@ -101,7 +128,7 @@ class RollGroup extends HasDescription {
    *
    * @returns {Map<string, Modifier>|null}
    */
-  get modifiers() {
+  get modifiers(): RollGroupModifierMap | null {
     if (this[modifiersSymbol]) {
       // ensure modifiers are ordered correctly
       return new Map([...this[modifiersSymbol]].sort((a, b) => a[1].order - b[1].order));
@@ -117,15 +144,17 @@ class RollGroup extends HasDescription {
    *
    * @throws {TypeError} Modifiers should be a Map, array of Modifiers, or an Object
    */
-  set modifiers(value) {
-    let modifiers;
+  set modifiers(value: RollGroupModifierInput) {
+    let modifiers: RollGroupModifierMap;
     if (value instanceof Map) {
       modifiers = value;
     } else if (Array.isArray(value)) {
       // loop through and get the modifier name of each item and use it as the map key
       modifiers = new Map(value.map((modifier) => [modifier.name, modifier]));
-    } else if (typeof value === 'object') {
+    } else if (value && (typeof value === 'object')) {
       modifiers = new Map(Object.entries(value));
+    } else if (!value) {
+      modifiers = new Map();
     } else {
       throw new TypeError('modifiers should be a Map, array, or an Object containing Modifiers');
     }
@@ -145,9 +174,9 @@ class RollGroup extends HasDescription {
    *
    * @returns {string}
    */
-  get notation() {
+  get notation(): string {
     let notation = this.expressions
-      .map((expression) => expression.reduce((acc, e) => acc + e, ''))
+      .map((expression) => expression.reduce<string>((acc, e) => acc + e.toString(), ''))
       .join(', ');
 
     notation = `{${notation}}`;
@@ -218,7 +247,7 @@ class RollGroup extends HasDescription {
    *
    * @returns {ResultGroup} The results of the sub-rolls
    */
-  roll() {
+  roll(): ResultGroup {
     // loop through each sub-roll expression and roll it
     // adding the results to a single RollResults object
     const rollResults = new ResultGroup(this.expressions.map((subRoll) => {
@@ -240,7 +269,7 @@ class RollGroup extends HasDescription {
 
     // loop through each modifier and carry out its actions
     (this.modifiers || []).forEach((modifier) => {
-      modifier.run(rollResults, this);
+      modifier.run(rollResults, this as unknown as ModifierContext);
     });
 
     return rollResults;
@@ -258,18 +287,16 @@ class RollGroup extends HasDescription {
    *  expressions: Array.<Array.<StandardDice|string|number>>
    * }}
    */
-  toJSON() {
+  toJSON(): RollGroupJson {
     const { modifiers, notation, expressions } = this;
 
-    return Object.assign(
-      super.toJSON(),
-      {
-        expressions,
-        modifiers,
-        notation,
-        type: 'group',
-      },
-    );
+    return {
+      ...super.toJSON(),
+      expressions,
+      modifiers,
+      notation,
+      type: 'group',
+    };
   }
 
   /**
@@ -281,7 +308,7 @@ class RollGroup extends HasDescription {
    *
    * @returns {string}
    */
-  toString() {
+  toString(): string {
     return `${this.notation}${this.description ? ` ${this.description}` : ''}`;
   }
 }

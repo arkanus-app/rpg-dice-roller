@@ -1,4 +1,21 @@
-export default DiceRoller;
+import DiceRoll from './DiceRoll.js';
+/**
+ * history of log rolls
+ *
+ * @type {symbol}
+ *
+ * @private
+ */
+declare const logSymbol: unique symbol;
+export interface DiceRollerImportData {
+    log?: unknown[];
+}
+export interface DiceRollerJson {
+    log: DiceRoll[];
+    output: string;
+    total: number;
+    type: 'dice-roller';
+}
 /**
  * A `DiceRoller` handles dice rolling functionality, keeps a history of rolls and can output logs
  * etc.
@@ -6,26 +23,7 @@ export default DiceRoller;
  * @see {@link DiceRoll} if you don't need to keep a log history of rolls
  */
 declare class DiceRoller {
-    /**
-     * Create a new `DiceRoller` instance with the given data.
-     *
-     * `data` can be an array of `DiceRoll` objects, an object with a `log` property that contains the
-     * `DiceRoll` objects, or a JSON / base64 encoded representation of either.
-     *
-     * @see instance method {@link DiceRoller#import}
-     *
-     * @param {string|{log: DiceRoll[]}|DiceRoll[]} data The data to import
-     * @param {DiceRoll[]} [data.log] If `data` is an object, it must contain an array of `DiceRoll`s
-     *
-     * @returns {DiceRoller} The new `DiceRoller` instance
-     *
-     * @throws {DataFormatError} data format invalid
-     * @throws {RequiredArgumentError} data is required
-     * @throws {TypeError} log must be an array
-     */
-    static import(data: string | {
-        log: DiceRoll[];
-    } | DiceRoll[]): DiceRoller;
+    private [logSymbol];
     /**
      * Create a DiceRoller.
      *
@@ -37,9 +35,7 @@ declare class DiceRoller {
      *
      * @throws {TypeError} if data is an object, it must have a `log[]` property
      */
-    constructor(data?: DiceRoll[] | {
-        log: DiceRoll[];
-    } | undefined);
+    constructor(data?: DiceRollerImportData | DiceRoll[] | string);
     /**
      * The list of roll logs.
      *
@@ -81,11 +77,7 @@ declare class DiceRoller {
      *
      * @throws {TypeError} Invalid export format
      */
-    export(format?: Readonly<{
-        BASE_64: 1;
-        JSON: 0;
-        OBJECT: 2;
-    }> | undefined): string | null;
+    export(format?: number): string | DiceRollerJson;
     /**
      * Add the data to the existing [roll log]{@link DiceRoller#log}.
      *
@@ -103,9 +95,7 @@ declare class DiceRoller {
      * @throws {RequiredArgumentError} data is required
      * @throws {TypeError} log must be an array
      */
-    import(data: string | {
-        log: DiceRoll[];
-    } | DiceRoll[]): DiceRoll[];
+    import(data: unknown): DiceRoll[];
     /**
      * Roll the given dice notation(s) and return the corresponding `DiceRoll` objects.
      *
@@ -133,12 +123,7 @@ declare class DiceRoller {
      *
      * @returns {{output: string, total: number, log: DiceRoll[], type: string}}
      */
-    toJSON(): {
-        output: string;
-        total: number;
-        log: DiceRoll[];
-        type: string;
-    };
+    toJSON(): DiceRollerJson;
     /**
      * Return the String representation of the object.
      *
@@ -149,5 +134,23 @@ declare class DiceRoller {
      * @see {@link DiceRoller#output}
      */
     toString(): string;
+    /**
+     * Create a new `DiceRoller` instance with the given data.
+     *
+     * `data` can be an array of `DiceRoll` objects, an object with a `log` property that contains the
+     * `DiceRoll` objects, or a JSON / base64 encoded representation of either.
+     *
+     * @see instance method {@link DiceRoller#import}
+     *
+     * @param {string|{log: DiceRoll[]}|DiceRoll[]} data The data to import
+     * @param {DiceRoll[]} [data.log] If `data` is an object, it must contain an array of `DiceRoll`s
+     *
+     * @returns {DiceRoller} The new `DiceRoller` instance
+     *
+     * @throws {DataFormatError} data format invalid
+     * @throws {RequiredArgumentError} data is required
+     * @throws {TypeError} log must be an array
+     */
+    static import(data: unknown): DiceRoller;
 }
-import DiceRoll from "./DiceRoll.js";
+export default DiceRoller;

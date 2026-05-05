@@ -1,10 +1,11 @@
-export default PercentileDice;
+import StandardDice, { type DiceModifierInput } from './StandardDice.js';
 /**
  * Represents a percentile die.
  *
  * @extends StandardDice
  */
 declare class PercentileDice extends StandardDice {
+    sidesAsNumber: boolean;
     /**
      * Create a `PercentileDice` instance.
      *
@@ -15,13 +16,18 @@ declare class PercentileDice extends StandardDice {
      *
      * @throws {TypeError} qty must be a positive integer, and modifiers must be valid
      */
-    constructor(qty?: number | undefined, modifiers?: {} | Map<string, Modifier> | Modifier[] | null | undefined, sidesAsNumber?: boolean | undefined, description?: Description | string | null);
-    sidesAsNumber: boolean;
+    constructor(qty?: number, modifiers?: DiceModifierInput, sidesAsNumber?: boolean, description?: unknown);
+    /**
+     * The name of the die.
+     *
+     * @returns {string} 'percentile'
+     */
+    get name(): string;
     /**
      * The number of sides the die has
      *
      * @returns {number|string} `%` if `sidesAsNumber == false`, or `100` otherwise
      */
-    get sides(): string | number;
+    get sides(): number | string;
 }
-import StandardDice from "./StandardDice.js";
+export default PercentileDice;

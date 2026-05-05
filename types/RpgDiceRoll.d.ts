@@ -1,30 +1,14 @@
+import { cleanRpgDiceNotation, extractRpgDiceComment, normalizeRpgDiceNotation } from './rpg/normalization.js';
+import { RpgDiceRollError, type RpgDiceRollErrorCode, type RpgDiceRollErrorDetails, type RpgDiceRollErrorOptions } from './rpg/errors.js';
 export declare const DEFAULT_MAX_TOTAL_DICE = 9999;
 export declare const DEFAULT_MAX_MULTI_ROLLS = 100;
 export interface RpgDiceRollOptions {
     maxDice?: number;
     maxRolls?: number;
+    seed?: number | string;
 }
-export type RpgDiceRollErrorCode = 'DICE_NOTATION_REQUIRED' | 'TOO_MANY_ROLLS' | 'TOO_MANY_DICE';
-export interface RpgDiceRollErrorDetails {
-    [key: string]: unknown;
-}
-export interface RpgDiceRollErrorOptions {
-    code: RpgDiceRollErrorCode;
-    input?: string;
-    notation?: string;
-    normalizedNotation?: string;
-    limit?: number;
-    details?: RpgDiceRollErrorDetails;
-}
-export declare class RpgDiceRollError extends Error {
-    code: RpgDiceRollErrorCode;
-    input?: string;
-    notation?: string;
-    normalizedNotation?: string;
-    limit?: number;
-    details: RpgDiceRollErrorDetails;
-    constructor(message: string, options: RpgDiceRollErrorOptions);
-}
+export { cleanRpgDiceNotation, extractRpgDiceComment, normalizeRpgDiceNotation, RpgDiceRollError, };
+export type { RpgDiceRollErrorCode, RpgDiceRollErrorDetails, RpgDiceRollErrorOptions };
 export interface RpgDiceInput {
     input: string;
     comment: string;
@@ -46,6 +30,8 @@ export interface RpgDiceDetail {
     rollIndex: number;
     rollDieIndex: number;
     groupIndex: number | null;
+    groupPath: number[];
+    groupRollIndex: number | null;
     group: RpgDiceGroup | null;
     sides: number | 'F' | null;
     groupNotation: string | null;
@@ -60,6 +46,44 @@ export interface RpgDiceDetail {
     wasRerolled: boolean;
     wasCriticalSuccess: boolean;
     wasCriticalFailure: boolean;
+    sourceId: string | null;
+    modifierReasons: string[];
+}
+export type RpgDiceRollEventType = 'roll' | 'explode' | 'reroll' | 'drop' | 'critical-success' | 'critical-failure';
+export interface RpgDiceRollEvent {
+    id: string;
+    type: RpgDiceRollEventType;
+    rollIndex: number;
+    dieIndex: number;
+    rollDieIndex: number;
+    groupIndex: number | null;
+    groupPath: number[];
+    value: number;
+    initialValue: number;
+    useInTotal: boolean;
+    modifiers: string[];
+    reason: string | null;
+}
+export interface RpgDiceInspectionCost {
+    staticDiceCount: number;
+    worstCaseDiceCount: number;
+    worstCaseRollAttempts: number;
+    totalStaticDice: number;
+    totalWorstCaseDice: number;
+    totalWorstCaseRollAttempts: number;
+}
+export interface RpgDiceNotationInspection {
+    type: 'rpg-dice-inspection';
+    input: string;
+    comment: string;
+    notation: string;
+    normalizedNotation: string;
+    isMultiRoll: boolean;
+    rollCount: number;
+    groups: RpgDiceGroup[];
+    cost: RpgDiceInspectionCost;
+    isValid: boolean;
+    error: RpgDiceRollError | null;
 }
 export interface RpgDiceRollSnapshot {
     notation: string;
@@ -73,6 +97,7 @@ export interface RpgDiceRollEntry {
     total: number;
     output: string;
     dice: RpgDiceDetail[];
+    events: RpgDiceRollEvent[];
     roll: RpgDiceRollSnapshot;
 }
 export interface RpgDiceRollResult {
@@ -86,20 +111,9 @@ export interface RpgDiceRollResult {
     isMultiRoll: boolean;
     rollCount: number;
     dice: RpgDiceDetail[];
+    events: RpgDiceRollEvent[];
     rolls: RpgDiceRollEntry[];
 }
-/**
- * Extracts user-facing comments without coupling the dice engine to a chat platform.
- */
-export declare function extractRpgDiceComment(input: string): string;
-/**
- * Removes comments and whitespace from notation while preserving dice semantics.
- */
-export declare function cleanRpgDiceNotation(input: string): string;
-/**
- * Applies ERPG/Kraken-friendly notation aliases before handing the formula to the parser.
- */
-export declare function normalizeRpgDiceNotation(input: string): string;
 /**
  * Parses raw RPG dice input into normalized notation and platform-neutral metadata.
  */
@@ -112,6 +126,7 @@ export declare function extractRpgDiceGroups(notation: string): RpgDiceGroup[];
  * Counts static dice in a notation string.
  */
 export declare function countRpgDiceInNotation(notation: string): number;
+export declare function inspectRpgDiceNotation(input: string, options?: RpgDiceRollOptions): RpgDiceNotationInspection;
 /**
  * Rolls an RPG dice notation with ERPG/Kraken aliases and a platform-neutral result shape.
  */

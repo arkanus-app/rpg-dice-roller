@@ -1,6 +1,6 @@
 import { generator } from '../utilities/NumberGenerator.js';
 import RollResult from '../results/RollResult.js';
-import StandardDice from './StandardDice.js';
+import StandardDice, { type DiceModifierInput } from './StandardDice.js';
 
 /**
  * Represents a Fudge / Fate type die.
@@ -19,7 +19,12 @@ class FudgeDice extends StandardDice {
    * @throws {RangeError} nonBlanks must be 1 or 2
    * @throws {TypeError} modifiers must be valid
    */
-  constructor(nonBlanks = 2, qty = 1, modifiers = null, description = null) {
+  constructor(
+    nonBlanks: number = 2,
+    qty: number = 1,
+    modifiers: DiceModifierInput = null,
+    description: unknown = null,
+  ) {
     let numNonBlanks = nonBlanks;
 
     if (!numNonBlanks && (numNonBlanks !== 0)) {
@@ -37,7 +42,7 @@ class FudgeDice extends StandardDice {
    *
    * @returns {string} 'fudge'
    */
-  get name() {
+  get name(): string {
     return 'fudge';
   }
   /* eslint-enable class-methods-use-this */
@@ -47,8 +52,8 @@ class FudgeDice extends StandardDice {
    *
    * @returns {number} `1` or `2`
    */
-  get nonBlanks() {
-    return super.sides;
+  get nonBlanks(): number {
+    return Number(super.sides);
   }
 
   /**
@@ -56,7 +61,7 @@ class FudgeDice extends StandardDice {
    *
    * @returns {string} 'F.2' or 'F.1'
    */
-  get sides() {
+  get sides(): string {
     return `F.${this.nonBlanks}`;
   }
 
@@ -65,7 +70,7 @@ class FudgeDice extends StandardDice {
    *
    * @returns {RollResult} The value rolled
    */
-  rollOnce() {
+  rollOnce(): RollResult {
     let total = 0;
 
     if (this.nonBlanks === 2) {

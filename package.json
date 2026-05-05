@@ -1,8 +1,8 @@
 {
   "name": "@dice-roller/rpg-dice-roller",
-  "description": "An advanced JS based dice roller that can roll various types of dice and modifiers, along with mathematical equations.",
-  "author": "GreenImp Media <info@greenimp.co.uk> (https://greenimp.co.uk)",
-  "version": "5.5.2",
+  "description": "Arkanus proprietary RPG dice roller with ergonomic RPG notation, grouped rolls, structured UI data, and deterministic replay support.",
+  "author": "Arkanus",
+  "version": "5.5.3",
   "license": "MIT",
   "type": "module",
   "main": "./lib/esm/bundle.js",
@@ -30,16 +30,12 @@
   "types": "./types/index.d.ts",
   "repository": {
     "type": "git",
-    "url": "https://github.com/dice-roller/rpg-dice-roller.git"
+    "url": "https://github.com/arkanus-app/rpg-dice-roller.git"
   },
   "bugs": {
-    "url": "https://github.com/dice-roller/rpg-dice-roller/issues"
+    "url": "https://github.com/arkanus-app/rpg-dice-roller/issues"
   },
-  "homepage": "https://dice-roller.github.io/documentation",
-  "funding": [
-    "https://github.com/sponsors/dice-roller",
-    "https://github.com/sponsors/GreenImp"
-  ],
+  "homepage": "https://github.com/arkanus-app/rpg-dice-roller",
   "keywords": [
     "dice",
     "roller",

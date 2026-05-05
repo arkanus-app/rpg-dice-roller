@@ -4,6 +4,7 @@ import {
   countRpgDiceInNotation,
   extractRpgDiceComment,
   extractRpgDiceGroups,
+  inspectRpgDiceNotation,
   normalizeRpgDiceNotation,
   parseRpgDiceInput,
   RpgDiceRollError,
@@ -180,6 +181,14 @@ describe('RPG dice facade', () => {
       expect(rollSpy).not.toHaveBeenCalled();
     });
 
+    test('rejects reroll and unique execution cost before rolling', () => {
+      const rollSpy = jest.spyOn(StandardDice.prototype, 'rollOnce');
+
+      expect(() => rollRpgDice('1d6r=1', { maxDice: 1000 })).toThrow('Roll execution limit exceeded');
+      expect(() => rollRpgDice('2d6u', { maxDice: 1000 })).toThrow('Roll execution limit exceeded');
+      expect(rollSpy).not.toHaveBeenCalled();
+    });
+
     test('validates notation through the pure facade without rolling', () => {
       const rollSpy = jest.spyOn(StandardDice.prototype, 'rollOnce');
 
@@ -187,6 +196,42 @@ describe('RPG dice facade', () => {
       expect(verifyRpgDiceNotation('1d')).toBe(true);
       expect(verifyRpgDiceNotation('abc')).toBe(false);
       expect(rollSpy).not.toHaveBeenCalled();
+    });
+
+    test('inspects notation without rolling and returns structured errors', () => {
+      const rollSpy = jest.spyOn(StandardDice.prototype, 'rollOnce');
+      const valid = inspectRpgDiceNotation('2#1d6!');
+      const invalid = inspectRpgDiceNotation('abc');
+
+      expect(valid).toMatchObject({
+        isValid: true,
+        notation: '1d6!',
+        rollCount: 2,
+        cost: {
+          staticDiceCount: 1,
+          totalStaticDice: 2,
+          worstCaseDiceCount: 1001,
+          totalWorstCaseDice: 2002,
+        },
+      });
+      expect(invalid).toMatchObject({
+        isValid: false,
+        error: expect.objectContaining({
+          code: 'INVALID_NOTATION',
+          message: 'Invalid notation',
+        }),
+      });
+      expect(rollSpy).not.toHaveBeenCalled();
+    });
+
+    test('supports deterministic replay with a seed', () => {
+      const first = rollRpgDice('2#2d6', { seed: 'combat-42' });
+      const second = rollRpgDice('2#2d6', { seed: 'combat-42' });
+      const third = rollRpgDice('2#2d6', { seed: 'combat-43' });
+
+      expect(first.dice.map((die) => die.value)).toEqual(second.dice.map((die) => die.value));
+      expect(first.total).toBe(second.total);
+      expect(first.dice.map((die) => die.value)).not.toEqual(third.dice.map((die) => die.value));
     });
 
     test('exposes stable UI and 3D dice metadata on each die result', () => {
@@ -206,6 +251,9 @@ describe('RPG dice facade', () => {
           wasDropped: false,
           wasExploded: false,
           wasRerolled: false,
+          groupPath: expect.any(Array),
+          groupRollIndex: 0,
+          modifierReasons: expect.any(Array),
         }),
         expect.objectContaining({
           id: 'roll-1-die-2',
@@ -216,8 +264,26 @@ describe('RPG dice facade', () => {
           wasDropped: false,
           wasExploded: false,
           wasRerolled: false,
+          groupPath: expect.any(Array),
+          groupRollIndex: 0,
+          modifierReasons: expect.any(Array),
         }),
       ]);
+      expect(result.events).toEqual(expect.arrayContaining([
+        expect.objectContaining({
+          type: 'roll',
+          dieIndex: 1,
+          rollIndex: 1,
+        }),
+        expect.objectContaining({
+          type: 'critical-failure',
+          reason: 'critical-failure',
+        }),
+        expect.objectContaining({
+          type: 'critical-success',
+          reason: 'critical-success',
+        }),
+      ]));
     });
   });
 });

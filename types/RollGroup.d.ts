@@ -1,4 +1,21 @@
-export default RollGroup;
+import HasDescription from './traits/HasDescription.js';
+import Modifier from './modifiers/Modifier.js';
+import ResultGroup from './results/ResultGroup.js';
+import StandardDice from './dice/StandardDice.js';
+import type Description from './Description.js';
+declare const expressionsSymbol: unique symbol;
+declare const modifiersSymbol: unique symbol;
+export type RollGroupExpressionItem = StandardDice | string | number;
+export type RollGroupExpression = RollGroupExpressionItem[];
+export type RollGroupModifierMap = Map<string, Modifier>;
+export type RollGroupModifierInput = RollGroupModifierMap | Modifier[] | Record<string, Modifier> | null;
+export interface RollGroupJson {
+    description: Description | null;
+    expressions: RollGroupExpression[];
+    modifiers: RollGroupModifierMap | null;
+    notation: string;
+    type: 'group';
+}
 /**
  * A `RollGroup` is a group of one or more "sub-rolls".
  *
@@ -27,6 +44,8 @@ export default RollGroup;
  * @since 4.5.0
  */
 declare class RollGroup extends HasDescription {
+    private [expressionsSymbol];
+    private [modifiersSymbol];
     /**
      * Create a `RollGroup` instance.
      *
@@ -35,7 +54,13 @@ declare class RollGroup extends HasDescription {
      * group
      * @param {Description|string|null} [description=null] The roll description.
      */
-    constructor(expressions?: (string | number | StandardDice)[][] | undefined, modifiers?: {} | Map<string, Modifier> | Modifier[] | null | undefined, description?: Description | string | null);
+    constructor(expressions?: RollGroupExpression[], modifiers?: RollGroupModifierInput, description?: unknown);
+    /**
+     * The sub-roll expressions in the group.
+     *
+     * @returns {Array.<Array.<StandardDice|string|number>>}
+     */
+    get expressions(): RollGroupExpression[];
     /**
      * Set the sub-roll expressions in the group.
      *
@@ -45,13 +70,13 @@ declare class RollGroup extends HasDescription {
      * @throws {TypeError} Sub expressions cannot be empty
      * @throws {TypeError} Sub expression items must be Dice, numbers, or strings
      */
-    set expressions(arg: (string | number | StandardDice)[][]);
+    set expressions(expressions: RollGroupExpression[]);
     /**
-     * The sub-roll expressions in the group.
+     * The modifiers that affect the object.
      *
-     * @returns {Array.<Array.<StandardDice|string|number>>}
+     * @returns {Map<string, Modifier>|null}
      */
-    get expressions(): (string | number | StandardDice)[][];
+    get modifiers(): RollGroupModifierMap | null;
     /**
      * Set the modifiers that affect this group.
      *
@@ -59,13 +84,7 @@ declare class RollGroup extends HasDescription {
      *
      * @throws {TypeError} Modifiers should be a Map, array of Modifiers, or an Object
      */
-    set modifiers(arg: Map<string, Modifier> | null);
-    /**
-     * The modifiers that affect the object.
-     *
-     * @returns {Map<string, Modifier>|null}
-     */
-    get modifiers(): Map<string, Modifier> | null;
+    set modifiers(value: RollGroupModifierInput);
     /**
      * The group notation. e.g. `{4d6, 2d10+3}k1`.
      *
@@ -144,18 +163,16 @@ declare class RollGroup extends HasDescription {
      *  expressions: Array.<Array.<StandardDice|string|number>>
      * }}
      */
-    toJSON(): {
-        notation: string;
-        modifiers: (Map<string, Modifier> | null);
-        type: string;
-        expressions: Array<Array<StandardDice | string | number>>;
-    };
-    [expressionsSymbol]: any[] | undefined;
-    [modifiersSymbol]: Map<any, any> | undefined;
+    toJSON(): RollGroupJson;
+    /**
+     * Return the String representation of the object.
+     *
+     * This is called automatically when casting the object to a string.
+     *
+     * @see {@link RollGroup#notation}
+     *
+     * @returns {string}
+     */
+    toString(): string;
 }
-import HasDescription from "./traits/HasDescription.js";
-import StandardDice from "./dice/StandardDice.js";
-import Modifier from "./modifiers/Modifier.js";
-import ResultGroup from "./results/ResultGroup.js";
-declare const expressionsSymbol: unique symbol;
-declare const modifiersSymbol: unique symbol;
+export default RollGroup;
