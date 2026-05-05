@@ -2,13 +2,13 @@
 *
 
 # Except for these
-!/lib/*.js
-!/lib/**/*.js
-!/lib/*.map
-!/lib/**/*.map
-!/types/*.d.ts
+!/lib/esm/*.js
+!/lib/cjs/*.cjs
 !/types/index.d.cts
-!/types/**/*.d.ts
+!/types/index.d.ts
+!/types/RpgDiceRoll.d.ts
+!/types/rpg/
+!/types/rpg/*.d.ts
 !CONTRIBUTING.md
 !licence.txt
 !package.json

@@ -13,7 +13,6 @@
     "noEmit": false,
     "declaration": false,
     "emitDeclarationOnly": false,
-    "sourceMap": false,
-    "outDir": "./.rollup-typescript"
+    "sourceMap": false
   }
 }

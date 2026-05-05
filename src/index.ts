@@ -1,12 +1,3 @@
-import * as Dice from './dice/index.js';
-import * as Exceptions from './exceptions/index.js';
-import * as Modifiers from './modifiers/index.js';
-import * as Results from './results/index.js';
-import * as NumberGenerator from './utilities/NumberGenerator.js';
-import DiceRoll from './DiceRoll.js';
-import DiceRoller from './DiceRoller.js';
-import ComparePoint from './ComparePoint.js';
-import Parser from './parser/Parser.js';
 import {
   cleanRpgDiceNotation,
   countRpgDiceInNotation,
@@ -27,29 +18,19 @@ import type {
   RpgDiceInput,
   RpgDiceInspectionCost,
   RpgDiceNotationInspection,
-  RpgDiceRollEvent,
-  RpgDiceRollEventType,
+  RpgDicePoolSummary,
+  RpgDiceRollEntry,
   RpgDiceRollErrorCode,
   RpgDiceRollErrorDetails,
   RpgDiceRollErrorOptions,
-  RpgDiceRollEntry,
+  RpgDiceRollEvent,
+  RpgDiceRollEventType,
   RpgDiceRollOptions,
   RpgDiceRollResult,
   RpgDiceRollSnapshot,
 } from './RpgDiceRoll.js';
-import RollGroup from './RollGroup.js';
-import exportFormats from './utilities/ExportFormats.js';
 
 export {
-  ComparePoint,
-  Dice,
-  DiceRoll,
-  DiceRoller,
-  Exceptions,
-  exportFormats,
-  Modifiers,
-  NumberGenerator,
-  Parser,
   cleanRpgDiceNotation,
   countRpgDiceInNotation,
   DEFAULT_MAX_MULTI_ROLLS,
@@ -62,8 +43,6 @@ export {
   RpgDiceRollError,
   rollRpgDice,
   verifyRpgDiceNotation,
-  Results,
-  RollGroup,
 };
 
 export type {
@@ -72,12 +51,13 @@ export type {
   RpgDiceInput,
   RpgDiceInspectionCost,
   RpgDiceNotationInspection,
-  RpgDiceRollEvent,
-  RpgDiceRollEventType,
+  RpgDicePoolSummary,
+  RpgDiceRollEntry,
   RpgDiceRollErrorCode,
   RpgDiceRollErrorDetails,
   RpgDiceRollErrorOptions,
-  RpgDiceRollEntry,
+  RpgDiceRollEvent,
+  RpgDiceRollEventType,
   RpgDiceRollOptions,
   RpgDiceRollResult,
   RpgDiceRollSnapshot,

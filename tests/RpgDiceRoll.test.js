@@ -1,4 +1,5 @@
 import { StandardDice } from '../src/dice/index.js';
+import * as DiceCore from '../src/index.ts';
 import {
   cleanRpgDiceNotation,
   countRpgDiceInNotation,
@@ -40,6 +41,10 @@ describe('RPG dice facade', () => {
     test('does not corrupt native math functions while normalizing aliases', () => {
       expect(normalizeRpgDiceNotation('floor(1d6/2)+ceil(1d6/2)+round(1d6/2)+min(1d6,2)+max(1d6,2)'))
         .toBe('floor(1d6/2)+ceil(1d6/2)+round(1d6/2)+min(1d6,2)+max(1d6,2)');
+    });
+
+    test('does not corrupt target failure compare points while normalizing aliases', () => {
+      expect(normalizeRpgDiceNotation('5d10>=8f=1')).toBe('5d10>=8f=1');
     });
 
     test('extracts comments separately from cleaned notation', () => {
@@ -248,6 +253,9 @@ describe('RPG dice facade', () => {
           groupNotation: '2d6',
           wasCriticalFailure: true,
           wasCriticalSuccess: false,
+          wasTargetFailure: false,
+          wasTargetNeutral: false,
+          wasTargetSuccess: false,
           wasDropped: false,
           wasExploded: false,
           wasRerolled: false,
@@ -261,6 +269,9 @@ describe('RPG dice facade', () => {
           groupNotation: '2d6',
           wasCriticalFailure: false,
           wasCriticalSuccess: true,
+          wasTargetFailure: false,
+          wasTargetNeutral: false,
+          wasTargetSuccess: false,
           wasDropped: false,
           wasExploded: false,
           wasRerolled: false,
@@ -284,6 +295,131 @@ describe('RPG dice facade', () => {
           reason: 'critical-success',
         }),
       ]));
+    });
+
+    test('summarizes target dice pools for success-based systems', () => {
+      jest.spyOn(StandardDice.prototype, 'rollOnce')
+        .mockImplementationOnce(() => 1)
+        .mockImplementationOnce(() => 8)
+        .mockImplementationOnce(() => 7)
+        .mockImplementationOnce(() => 10)
+        .mockImplementationOnce(() => 1);
+
+      const result = rollRpgDice('5d10>=8f=1');
+
+      expect(result.pool).toEqual({
+        failures: 2,
+        hasTarget: true,
+        netSuccesses: 0,
+        successes: 2,
+      });
+      expect(result.rolls[0].pool).toEqual(result.pool);
+      expect(result.dice.map((die) => ({
+        value: die.value,
+        success: die.wasTargetSuccess,
+        failure: die.wasTargetFailure,
+        neutral: die.wasTargetNeutral,
+      }))).toEqual([
+        {
+          failure: true,
+          neutral: false,
+          success: false,
+          value: 1,
+        },
+        {
+          failure: false,
+          neutral: false,
+          success: true,
+          value: 8,
+        },
+        {
+          failure: false,
+          neutral: true,
+          success: false,
+          value: 7,
+        },
+        {
+          failure: false,
+          neutral: false,
+          success: true,
+          value: 10,
+        },
+        {
+          failure: true,
+          neutral: false,
+          success: false,
+          value: 1,
+        },
+      ]);
+    });
+
+    test('aggregates target pool summaries across multi-roll notation', () => {
+      jest.spyOn(StandardDice.prototype, 'rollOnce')
+        .mockImplementationOnce(() => 6)
+        .mockImplementationOnce(() => 4)
+        .mockImplementationOnce(() => 6)
+        .mockImplementationOnce(() => 1);
+
+      const result = rollRpgDice('2#2d6=6');
+
+      expect(result.pool).toEqual({
+        failures: 0,
+        hasTarget: true,
+        netSuccesses: 2,
+        successes: 2,
+      });
+      expect(result.rolls.map((roll) => roll.pool)).toEqual([
+        {
+          failures: 0,
+          hasTarget: true,
+          netSuccesses: 1,
+          successes: 1,
+        },
+        {
+          failures: 0,
+          hasTarget: true,
+          netSuccesses: 1,
+          successes: 1,
+        },
+      ]);
+    });
+
+    test('returns an empty pool summary for non-target notation', () => {
+      jest.spyOn(StandardDice.prototype, 'rollOnce')
+        .mockImplementationOnce(() => 3)
+        .mockImplementationOnce(() => 4);
+
+      const result = rollRpgDice('2d6');
+
+      expect(result.pool).toEqual({
+        failures: 0,
+        hasTarget: false,
+        netSuccesses: 0,
+        successes: 0,
+      });
+      expect(result.dice.every((die) => !die.wasTargetNeutral)).toBe(true);
+    });
+  });
+
+  describe('public package entry', () => {
+    test('exports only the ERPG dice facade contract', () => {
+      expect(Object.keys(DiceCore).sort()).toEqual([
+        'DEFAULT_MAX_MULTI_ROLLS',
+        'DEFAULT_MAX_TOTAL_DICE',
+        'RpgDiceRollError',
+        'cleanRpgDiceNotation',
+        'countRpgDiceInNotation',
+        'extractRpgDiceComment',
+        'extractRpgDiceGroups',
+        'inspectRpgDiceNotation',
+        'normalizeRpgDiceNotation',
+        'parseRpgDiceInput',
+        'rollRpgDice',
+        'verifyRpgDiceNotation',
+      ].sort());
+      expect(DiceCore.DiceRoll).toBeUndefined();
+      expect(DiceCore.DiceRoller).toBeUndefined();
+      expect(DiceCore.Parser).toBeUndefined();
     });
   });
 });

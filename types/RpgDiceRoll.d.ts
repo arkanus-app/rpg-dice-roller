@@ -46,6 +46,9 @@ export interface RpgDiceDetail {
     wasRerolled: boolean;
     wasCriticalSuccess: boolean;
     wasCriticalFailure: boolean;
+    wasTargetSuccess: boolean;
+    wasTargetFailure: boolean;
+    wasTargetNeutral: boolean;
     sourceId: string | null;
     modifierReasons: string[];
 }
@@ -71,6 +74,12 @@ export interface RpgDiceInspectionCost {
     totalStaticDice: number;
     totalWorstCaseDice: number;
     totalWorstCaseRollAttempts: number;
+}
+export interface RpgDicePoolSummary {
+    successes: number;
+    failures: number;
+    netSuccesses: number;
+    hasTarget: boolean;
 }
 export interface RpgDiceNotationInspection {
     type: 'rpg-dice-inspection';
@@ -98,6 +107,7 @@ export interface RpgDiceRollEntry {
     output: string;
     dice: RpgDiceDetail[];
     events: RpgDiceRollEvent[];
+    pool: RpgDicePoolSummary;
     roll: RpgDiceRollSnapshot;
 }
 export interface RpgDiceRollResult {
@@ -112,6 +122,7 @@ export interface RpgDiceRollResult {
     rollCount: number;
     dice: RpgDiceDetail[];
     events: RpgDiceRollEvent[];
+    pool: RpgDicePoolSummary;
     rolls: RpgDiceRollEntry[];
 }
 /**

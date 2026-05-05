@@ -53,6 +53,8 @@ module.exports = {
     '^\\.\\./\\.\\./RollGroup\\.js$': '<rootDir>/src/RollGroup.ts',
     '^\\.\\./src/RollGroup\\.js$': '<rootDir>/src/RollGroup.ts',
     '^\\.\\./\\.\\./src/RollGroup\\.js$': '<rootDir>/src/RollGroup.ts',
+    '^\\./RpgDiceRoll\\.js$': '<rootDir>/src/RpgDiceRoll.ts',
+    '^\\.\\./src/RpgDiceRoll\\.js$': '<rootDir>/src/RpgDiceRoll.ts',
     '^\\./parser/Parser\\.js$': '<rootDir>/src/parser/Parser.ts',
     '^\\.\\./parser/Parser\\.js$': '<rootDir>/src/parser/Parser.ts',
     '^\\.\\./src/parser/Parser\\.js$': '<rootDir>/src/parser/Parser.ts',

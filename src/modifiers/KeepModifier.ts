@@ -115,11 +115,13 @@ class KeepModifier extends Modifier {
     if (value === Infinity) {
       throw new RangeError('qty must be a finite number');
     }
-    if (!isNumeric(value) || (value < 1)) {
+    const numericValue = Number(value);
+
+    if (!isNumeric(value) || (numericValue < 1)) {
       throw new TypeError('qty must be a positive finite integer');
     }
 
-    this[qtySymbol] = Math.floor(Number(value));
+    this[qtySymbol] = Math.floor(numericValue);
   }
 
   /**

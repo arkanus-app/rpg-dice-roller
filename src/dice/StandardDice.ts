@@ -72,7 +72,9 @@ class StandardDice extends HasDescription {
     } else if (sides === Infinity) {
       throw new RangeError('numerical sides must be finite number');
     } else if (isNumeric(sides)) {
-      if ((sides < 1) || !isSafeNumber(sides)) {
+      const numericSides = Number(sides);
+
+      if ((numericSides < 1) || !isSafeNumber(numericSides)) {
         throw new RangeError('numerical sides must be a positive finite number');
       }
     } else if (typeof sides !== 'string') {

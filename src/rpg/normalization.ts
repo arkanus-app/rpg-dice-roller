@@ -54,7 +54,11 @@ function readDiceSides(source: string, start: number): [string, number] {
 function normalizeAlphaToken(token: string, next: string | undefined): string {
   const lowerToken = token.toLowerCase();
 
-  if (lowerToken === 'f' && isIdentifierBoundary(next)) {
+  if (
+    lowerToken === 'f'
+    && isIdentifierBoundary(next)
+    && !['<', '>', '=', '!'].includes(next ?? '')
+  ) {
     return '4dF';
   }
 
@@ -103,6 +107,7 @@ function normalizeFriendlyTokens(notation: string): string {
         marker
         && marker.toLowerCase() === 'f'
         && isIdentifierBoundary(notation[afterQuantity + 1])
+        && !['<', '>', '=', '!'].includes(notation[afterQuantity + 1] ?? '')
       ) {
         output += `${quantity}dF`;
         cursor = afterQuantity + 1;
@@ -179,6 +184,26 @@ const notationNormalizationRules: NormalizationRule[] = [
   },
 ];
 
+const NORMALIZATION_CACHE_LIMIT = 200;
+const normalizationCache = new Map<string, string>();
+
+function cacheSet(key: string, value: string): string {
+  if (normalizationCache.has(key)) {
+    normalizationCache.delete(key);
+  }
+
+  normalizationCache.set(key, value);
+
+  if (normalizationCache.size > NORMALIZATION_CACHE_LIMIT) {
+    const [oldestKey] = normalizationCache.keys();
+    if (typeof oldestKey === 'string') {
+      normalizationCache.delete(oldestKey);
+    }
+  }
+
+  return value;
+}
+
 export function extractRpgDiceComment(input: string): string {
   const source = String(input ?? '');
   const comments: string[] = [];
@@ -208,6 +233,18 @@ export function cleanRpgDiceNotation(input: string): string {
 }
 
 export function normalizeRpgDiceNotation(input: string): string {
-  return notationNormalizationRules
-    .reduce((notation, rule) => rule.apply(notation), cleanRpgDiceNotation(input));
+  const source = String(input ?? '');
+  const cached = normalizationCache.get(source);
+
+  if (typeof cached === 'string') {
+    normalizationCache.delete(source);
+    normalizationCache.set(source, cached);
+    return cached;
+  }
+
+  return cacheSet(
+    source,
+    notationNormalizationRules
+      .reduce((notation, rule) => rule.apply(notation), cleanRpgDiceNotation(source)),
+  );
 }

@@ -15,6 +15,8 @@ import {
 
 const multiRollPattern = /^(\d+)#/;
 const diceGroupPattern = /(\d*)d(\d+|%|F)/gi;
+const INSPECTION_CACHE_LIMIT = 200;
+const inspectionCache = new Map<string, RpgDiceNotationInspection>();
 
 export const DEFAULT_MAX_TOTAL_DICE = 9999;
 export const DEFAULT_MAX_MULTI_ROLLS = 100;
@@ -72,6 +74,9 @@ export interface RpgDiceDetail {
   wasRerolled: boolean;
   wasCriticalSuccess: boolean;
   wasCriticalFailure: boolean;
+  wasTargetSuccess: boolean;
+  wasTargetFailure: boolean;
+  wasTargetNeutral: boolean;
   sourceId: string | null;
   modifierReasons: string[];
 }
@@ -108,6 +113,13 @@ export interface RpgDiceInspectionCost {
   totalWorstCaseRollAttempts: number;
 }
 
+export interface RpgDicePoolSummary {
+  successes: number;
+  failures: number;
+  netSuccesses: number;
+  hasTarget: boolean;
+}
+
 export interface RpgDiceNotationInspection {
   type: 'rpg-dice-inspection';
   input: string;
@@ -136,6 +148,7 @@ export interface RpgDiceRollEntry {
   output: string;
   dice: RpgDiceDetail[];
   events: RpgDiceRollEvent[];
+  pool: RpgDicePoolSummary;
   roll: RpgDiceRollSnapshot;
 }
 
@@ -151,6 +164,7 @@ export interface RpgDiceRollResult {
   rollCount: number;
   dice: RpgDiceDetail[];
   events: RpgDiceRollEvent[];
+  pool: RpgDicePoolSummary;
   rolls: RpgDiceRollEntry[];
 }
 
@@ -250,6 +264,68 @@ function resolveLimit(value: number | undefined, fallback: number): number {
   return Math.floor(numericValue);
 }
 
+function getInspectionCacheKey(input: string, options: RpgDiceRollOptions): string {
+  return JSON.stringify({
+    input: String(input ?? ''),
+    maxDice: resolveLimit(options.maxDice, DEFAULT_MAX_TOTAL_DICE),
+    maxRolls: resolveLimit(options.maxRolls, DEFAULT_MAX_MULTI_ROLLS),
+  });
+}
+
+function cloneRpgDiceRollError(error: RpgDiceRollError): RpgDiceRollError {
+  return new RpgDiceRollError(error.message, {
+    code: error.code,
+    input: error.input,
+    notation: error.notation,
+    normalizedNotation: error.normalizedNotation,
+    limit: error.limit,
+    details: { ...error.details },
+  });
+}
+
+function cloneInspection(inspection: RpgDiceNotationInspection): RpgDiceNotationInspection {
+  return {
+    ...inspection,
+    groups: inspection.groups.map((group) => ({ ...group })),
+    cost: { ...inspection.cost },
+    error: inspection.error ? cloneRpgDiceRollError(inspection.error) : null,
+  };
+}
+
+function getCachedInspection(key: string): RpgDiceNotationInspection | null {
+  const cached = inspectionCache.get(key);
+
+  if (!cached) {
+    return null;
+  }
+
+  inspectionCache.delete(key);
+  inspectionCache.set(key, cached);
+
+  return cloneInspection(cached);
+}
+
+function cacheInspection(
+  key: string,
+  inspection: RpgDiceNotationInspection,
+): RpgDiceNotationInspection {
+  if (inspectionCache.has(key)) {
+    inspectionCache.delete(key);
+  }
+
+  inspectionCache.set(key, cloneInspection(inspection));
+
+  if (inspectionCache.size > INSPECTION_CACHE_LIMIT) {
+    const [oldestKey] = inspectionCache.keys();
+
+    if (typeof oldestKey === 'string') {
+      inspectionCache.delete(oldestKey);
+    }
+  }
+
+  return inspection;
+}
+
 function getObjectNumber(value: unknown, property: string): number | null {
   if (!isRecord(value)) {
     return null;
@@ -274,6 +350,10 @@ function getModifierName(modifier: unknown): string {
 function getModifierMaxIterations(modifier: unknown): number {
   const maxIterations = getObjectNumber(modifier, 'maxIterations');
   return maxIterations ?? 0;
+}
+
+function isTargetModifier(modifier: unknown): boolean {
+  return getModifierName(modifier) === 'target';
 }
 
 function isExecutionModifier(modifierName: string): boolean {
@@ -341,6 +421,38 @@ function countParsedExpressionCost(expressions: unknown[]): RpgDiceInspectionCos
   }, emptyCost());
 }
 
+function collectTargetGroupIndexes(expressions: unknown[]): Set<number> {
+  const targetGroupIndexes = new Set<number>();
+  let groupIndex = 0;
+
+  const visit = (expression: unknown): void => {
+    if (Array.isArray(expression)) {
+      expression.forEach(visit);
+      return;
+    }
+
+    const quantity = getObjectNumber(expression, 'qty');
+    if (quantity !== null) {
+      const modifiers = getObjectModifiers(expression);
+
+      if (modifiers.some(isTargetModifier)) {
+        targetGroupIndexes.add(groupIndex);
+      }
+
+      groupIndex += 1;
+      return;
+    }
+
+    if (isRecord(expression) && Array.isArray(expression.expressions)) {
+      visit(expression.expressions);
+    }
+  };
+
+  expressions.forEach(visit);
+
+  return targetGroupIndexes;
+}
+
 function multiplyCost(cost: RpgDiceInspectionCost, rollCount: number): RpgDiceInspectionCost {
   return {
     staticDiceCount: cost.staticDiceCount,
@@ -354,6 +466,10 @@ function multiplyCost(cost: RpgDiceInspectionCost, rollCount: number): RpgDiceIn
 
 function parseNotationForValidation(notation: string): unknown[] {
   return Parser.parse(notation) as unknown[];
+}
+
+function parseNotationTargetGroupIndexes(notation: string): Set<number> {
+  return collectTargetGroupIndexes(parseNotationForValidation(notation));
 }
 
 function createInvalidNotationError(parsedInput: RpgDiceInput, error: unknown): RpgDiceRollError {
@@ -486,16 +602,23 @@ export function inspectRpgDiceNotation(
   input: string,
   options: RpgDiceRollOptions = {},
 ): RpgDiceNotationInspection {
+  const cacheKey = getInspectionCacheKey(input, options);
+  const cached = getCachedInspection(cacheKey);
+
+  if (cached) {
+    return cached;
+  }
+
   const parsedInput = parseRpgDiceInput(input);
 
   try {
-    return inspectParsedInput(parsedInput, options);
+    return cacheInspection(cacheKey, inspectParsedInput(parsedInput, options));
   } catch (error) {
     const inspectionError = error instanceof RpgDiceRollError
       ? error
       : createInvalidNotationError(parsedInput, error);
 
-    return {
+    return cacheInspection(cacheKey, {
       type: 'rpg-dice-inspection',
       input: parsedInput.input,
       comment: parsedInput.comment,
@@ -507,7 +630,7 @@ export function inspectRpgDiceNotation(
       cost: multiplyCost(emptyCost(), parsedInput.rollCount),
       isValid: false,
       error: inspectionError,
-    };
+    });
   }
 }
 
@@ -559,6 +682,7 @@ function hasAnyModifier(modifiers: string[], modifierNames: string[]): boolean {
 function flattenRollDiceDetails(
   source: unknown,
   groups: RpgDiceGroup[],
+  targetGroupIndexes: Set<number>,
   rollIndex: number,
   firstDieIndex: number,
 ): RpgDiceDetail[] {
@@ -590,6 +714,9 @@ function flattenRollDiceDetails(
       const modifiers = getModifierList(node.modifiers);
       const rollDieIndex = dice.length + 1;
       const useInTotal = Boolean(node.useInTotal);
+      const isTargetGroup = (groupIndex !== null) && targetGroupIndexes.has(groupIndex);
+      const wasTargetSuccess = hasModifier(modifiers, 'target-success');
+      const wasTargetFailure = hasModifier(modifiers, 'target-failure');
 
       dice.push({
         id: `roll-${rollIndex}-die-${rollDieIndex}`,
@@ -613,6 +740,9 @@ function flattenRollDiceDetails(
         wasRerolled: hasAnyModifier(modifiers, ['re-roll', 're-roll-once', 'unique', 'unique-once']),
         wasCriticalSuccess: hasModifier(modifiers, 'critical-success'),
         wasCriticalFailure: hasModifier(modifiers, 'critical-failure'),
+        wasTargetSuccess,
+        wasTargetFailure,
+        wasTargetNeutral: isTargetGroup && !wasTargetSuccess && !wasTargetFailure,
         sourceId: null,
         modifierReasons: modifiers,
       });
@@ -621,6 +751,26 @@ function flattenRollDiceDetails(
 
   visit(source, null, []);
   return dice;
+}
+
+function buildPoolSummary(dice: RpgDiceDetail[]): RpgDicePoolSummary {
+  const successes = dice
+    .filter((detail) => detail.useInTotal && detail.wasTargetSuccess)
+    .length;
+  const failures = dice
+    .filter((detail) => detail.useInTotal && detail.wasTargetFailure)
+    .length;
+
+  return {
+    successes,
+    failures,
+    netSuccesses: successes - failures,
+    hasTarget: dice.some((detail) => (
+      detail.wasTargetSuccess
+      || detail.wasTargetFailure
+      || detail.wasTargetNeutral
+    )),
+  };
 }
 
 function buildRollEvents(dice: RpgDiceDetail[]): RpgDiceRollEvent[] {
@@ -751,10 +901,11 @@ function runWithOptionalSeed<T>(seed: string | number | undefined, callback: () 
  */
 export function rollRpgDice(input: string, options: RpgDiceRollOptions = {}): RpgDiceRollResult {
   const parsedInput = parseRpgDiceInput(input);
-  ensureRpgDiceInputLimits(parsedInput, options);
+  const inspection = ensureRpgDiceInputLimits(parsedInput, options);
 
   return runWithOptionalSeed(options.seed, () => {
-    const groups = extractRpgDiceGroups(parsedInput.notation);
+    const { groups } = inspection;
+    const targetGroupIndexes = parseNotationTargetGroupIndexes(parsedInput.notation);
     const rolls: RpgDiceRollEntry[] = [];
     const dice: RpgDiceDetail[] = [];
     const events: RpgDiceRollEvent[] = [];
@@ -764,8 +915,15 @@ export function rollRpgDice(input: string, options: RpgDiceRollOptions = {}): Rp
       const roll = new DiceRoll(parsedInput.notation) as DiceRollInstance;
       const rollTotal = roll.total;
       const rollIndex = index + 1;
-      const rollDice = flattenRollDiceDetails(roll.rolls, groups, rollIndex, dice.length + 1);
+      const rollDice = flattenRollDiceDetails(
+        roll.rolls,
+        groups,
+        targetGroupIndexes,
+        rollIndex,
+        dice.length + 1,
+      );
       const rollEvents = buildRollEvents(rollDice);
+      const rollPool = buildPoolSummary(rollDice);
 
       total += rollTotal;
       dice.push(...rollDice);
@@ -778,6 +936,7 @@ export function rollRpgDice(input: string, options: RpgDiceRollOptions = {}): Rp
         output: formatRollOutput(roll, rollTotal),
         dice: rollDice,
         events: rollEvents,
+        pool: rollPool,
         roll: {
           notation: roll.notation,
           output: formatRollOutput(roll, rollTotal),
@@ -799,6 +958,7 @@ export function rollRpgDice(input: string, options: RpgDiceRollOptions = {}): Rp
       rollCount: parsedInput.rollCount,
       dice,
       events,
+      pool: buildPoolSummary(dice),
       rolls,
     };
   });
