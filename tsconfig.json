@@ -1,26 +1,30 @@
 {
-	"files": [
-	  "src/index.js"
-	],
-	"include": [
-	  "tests/**/*.js",
-	  "tests/**/*.ts"
-	],
-	"compilerOptions": {
-	  /* Basic Options */
-	  "target": "ES2016",
-	  "module": "commonjs",
-	  "allowJs": true,
-	  "resolveJsonModule": true,
-	  "noEmit": true,
-	  "maxNodeModuleJsDepth": 3,
-  
-	  /* Strict Type-Checking Options */
-	  "strict": true,
-	  "noImplicitAny": true,
-	  "strictNullChecks": true,
-  
-	  /* Additional Checks */
-	  "noUnusedLocals": true
-	}
+  "include": [
+    "src/**/*.js",
+    "src/**/*.ts",
+    "tests/**/*.js",
+    "tests/**/*.ts"
+  ],
+  "exclude": [
+    "lib",
+    "types",
+    "node_modules"
+  ],
+  "compilerOptions": {
+    "target": "ES2018",
+    "module": "ESNext",
+    "moduleResolution": "node",
+    "allowJs": true,
+    "checkJs": false,
+    "resolveJsonModule": true,
+    "noEmit": true,
+    "maxNodeModuleJsDepth": 3,
+    "strict": true,
+    "noImplicitAny": true,
+    "strictNullChecks": true,
+    "noUnusedLocals": true,
+    "allowSyntheticDefaultImports": true,
+    "esModuleInterop": true,
+    "skipLibCheck": true
+  }
 }

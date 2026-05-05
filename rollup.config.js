@@ -1,6 +1,7 @@
 import commonjs from '@rollup/plugin-commonjs';
 import { nodeResolve } from '@rollup/plugin-node-resolve';
 import { babel } from '@rollup/plugin-babel';
+import typescript from '@rollup/plugin-typescript';
 import banner from 'rollup-plugin-banner';
 // import eslint from '@rollup/plugin-eslint';
 
@@ -9,7 +10,7 @@ const path = require('path');
 
 const production = !process.env.BUILD || (process.env.BUILD === 'prod');
 
-const inputPath = 'src/index.js';
+const inputPath = 'src/index.ts';
 const outputPath = (format, minify = false) => `lib/${format}/bundle${minify ? '.min' : ''}.js`;
 const packageName = 'rpgDiceRoller';
 const globals = {
@@ -29,6 +30,10 @@ const plugins = (isUmd = false, isProduction = false) => [
   // eslint(),
   // resolve third party library imports
   nodeResolve(),
+  // compile the gradually migrated TypeScript sources
+  typescript({
+    tsconfig: './tsconfig.build.json',
+  }),
   // handle commonJS modules
   commonjs(),
   // only use babel if we're compiling to UMD

@@ -1,0 +1,170 @@
+import { StandardDice } from '../src/dice/index.js';
+import {
+  cleanRpgDiceNotation,
+  countRpgDiceInNotation,
+  extractRpgDiceComment,
+  extractRpgDiceGroups,
+  normalizeRpgDiceNotation,
+  parseRpgDiceInput,
+  rollRpgDice,
+  verifyRpgDiceNotation,
+} from '../src/RpgDiceRoll.ts';
+
+describe('RPG dice facade', () => {
+  afterEach(() => {
+    jest.restoreAllMocks();
+  });
+
+  describe('input normalization', () => {
+    test('normalizes Kraken aliases without message formatting concerns', () => {
+      expect(normalizeRpgDiceNotation(' d + 2d + f + 2f + df + 2d6ei6 + 4d6km + 4d6kh + 4d6k '))
+        .toBe('d20+2d20+4dF+2dF+dF+2d6!>=6+4d6kl1+4d6kh1+4d6k1');
+    });
+
+    test('normalizes each supported friendly alias explicitly', () => {
+      expect(normalizeRpgDiceNotation('d')).toBe('d20');
+      expect(normalizeRpgDiceNotation('2d')).toBe('2d20');
+      expect(normalizeRpgDiceNotation('f')).toBe('4dF');
+      expect(normalizeRpgDiceNotation('2f')).toBe('2dF');
+      expect(normalizeRpgDiceNotation('df')).toBe('dF');
+      expect(normalizeRpgDiceNotation('1d6ei6')).toBe('1d6!>=6');
+      expect(normalizeRpgDiceNotation('4d6km')).toBe('4d6kl1');
+      expect(normalizeRpgDiceNotation('4d6kl')).toBe('4d6kl1');
+      expect(normalizeRpgDiceNotation('4d6kh')).toBe('4d6kh1');
+      expect(normalizeRpgDiceNotation('4d6k')).toBe('4d6k1');
+      expect(normalizeRpgDiceNotation('1d20+-2--1++3')).toBe('1d20-2+1+3');
+    });
+
+    test('does not corrupt native math functions while normalizing aliases', () => {
+      expect(normalizeRpgDiceNotation('floor(1d6/2)+ceil(1d6/2)+round(1d6/2)+min(1d6,2)+max(1d6,2)'))
+        .toBe('floor(1d6/2)+ceil(1d6/2)+round(1d6/2)+min(1d6,2)+max(1d6,2)');
+    });
+
+    test('extracts comments separately from cleaned notation', () => {
+      const input = '2d6 + 3 // ataque furtivo';
+
+      expect(extractRpgDiceComment(input)).toBe('ataque furtivo');
+      expect(cleanRpgDiceNotation(input)).toBe('2d6+3');
+      expect(parseRpgDiceInput(input)).toMatchObject({
+        comment: 'ataque furtivo',
+        cleanedNotation: '2d6+3',
+        notation: '2d6+3',
+        normalizedNotation: '2d6+3',
+      });
+    });
+
+    test('reports dice groups and static dice count', () => {
+      expect(extractRpgDiceGroups('2d6+1d%+4dF')).toEqual([
+        {
+          index: 0,
+          notation: '2d6',
+          qty: 2,
+          sides: 6,
+        },
+        {
+          index: 1,
+          notation: '1d%',
+          qty: 1,
+          sides: 100,
+        },
+        {
+          index: 2,
+          notation: '4dF',
+          qty: 4,
+          sides: 'F',
+        },
+      ]);
+      expect(countRpgDiceInNotation('2d6+1d%+4dF')).toBe(7);
+    });
+  });
+
+  describe('rolling', () => {
+    test('rolls multi-roll notation as structured plain data', () => {
+      jest.spyOn(StandardDice.prototype, 'rollOnce')
+        .mockImplementationOnce(() => 3)
+        .mockImplementationOnce(() => 4)
+        .mockImplementationOnce(() => 5);
+
+      const result = rollRpgDice('3#1d6 // vantagem');
+
+      expect(result).toMatchObject({
+        comment: 'vantagem',
+        isMultiRoll: true,
+        notation: '1d6',
+        normalizedNotation: '3#1d6',
+        rollCount: 3,
+        total: 12,
+        type: 'rpg-dice-roll',
+      });
+      expect(result.dice).toHaveLength(3);
+      expect(result.dice.map((die) => die.rollIndex)).toEqual([1, 2, 3]);
+      expect(result.dice.map((die) => die.index)).toEqual([1, 2, 3]);
+      expect(result.output).toBe([
+        '1. 1d6: [3] = 3',
+        '2. 1d6: [4] = 4',
+        '3. 1d6: [5] = 5',
+        'Total: 12',
+      ].join('\n'));
+      expect(result.output).not.toContain(String.fromCharCode(27));
+      expect(result.output).not.toMatch(/```|<@|discord/i);
+      expect(result.rolls.map((roll) => roll.dice[0].group?.sides)).toEqual([6, 6, 6]);
+    });
+
+    test('rolls grouped formulas with # as independent entries', () => {
+      jest.spyOn(StandardDice.prototype, 'rollOnce')
+        .mockImplementationOnce(() => 2)
+        .mockImplementationOnce(() => 3)
+        .mockImplementationOnce(() => 4)
+        .mockImplementationOnce(() => 5);
+
+      const result = rollRpgDice('2#2d6+3');
+
+      expect(result).toMatchObject({
+        isMultiRoll: true,
+        notation: '2d6+3',
+        normalizedNotation: '2#2d6+3',
+        rollCount: 2,
+        total: 20,
+      });
+      expect(result.rolls.map((roll) => roll.total)).toEqual([8, 12]);
+      expect(result.dice.map((die) => die.rollIndex)).toEqual([1, 1, 2, 2]);
+      expect(result.output).toBe([
+        '1. 2d6+3: [2, 3]+3 = 8',
+        '2. 2d6+3: [4, 5]+3 = 12',
+        'Total: 20',
+      ].join('\n'));
+    });
+
+    test('keeps floor and ceil as normal dice notation instead of facade options', () => {
+      jest.spyOn(StandardDice.prototype, 'rollOnce')
+        .mockImplementationOnce(() => 5)
+        .mockImplementationOnce(() => 5);
+
+      const ceilResult = rollRpgDice('ceil(1d6/2)');
+      const floorResult = rollRpgDice('floor(1d6/2)');
+
+      expect(ceilResult.notation).toBe('ceil(1d6/2)');
+      expect(ceilResult.total).toBe(3);
+      expect(ceilResult.output).toBe('ceil(1d6/2): ceil([5]/2) = 3');
+      expect(floorResult.notation).toBe('floor(1d6/2)');
+      expect(floorResult.total).toBe(2);
+      expect(floorResult.output).toBe('floor(1d6/2): floor([5]/2) = 2');
+    });
+
+    test('enforces shared roll and dice limits', () => {
+      expect(() => rollRpgDice('101#1d6')).toThrow('Too many rolls');
+      expect(() => rollRpgDice('10000d6')).toThrow('Too many dice');
+      expect(() => rollRpgDice('3#2d6', { maxRolls: 2 })).toThrow('Too many rolls');
+      expect(() => rollRpgDice('3#2d6', { maxDice: 5 })).toThrow('Too many dice');
+    });
+
+    test('validates notation through the pure facade', () => {
+      jest.spyOn(StandardDice.prototype, 'rollOnce')
+        .mockImplementationOnce(() => 8);
+
+      expect(verifyRpgDiceNotation('1d20')).toBe(true);
+      expect(verifyRpgDiceNotation('1d')).toBe(true);
+      expect(verifyRpgDiceNotation('abc')).toBe(false);
+    });
+  });
+});

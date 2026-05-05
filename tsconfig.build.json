@@ -1,0 +1,20 @@
+{
+  "extends": "./tsconfig.json",
+  "include": [
+    "src/**/*.js",
+    "src/**/*.ts"
+  ],
+  "exclude": [
+    "tests",
+    "lib",
+    "types",
+    "node_modules"
+  ],
+  "compilerOptions": {
+    "noEmit": false,
+    "declaration": false,
+    "emitDeclarationOnly": false,
+    "sourceMap": false,
+    "outDir": "./.rollup-typescript"
+  }
+}

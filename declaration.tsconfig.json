@@ -1,13 +1,16 @@
 {
-	"extends": "./tsconfig",
-	"exclude": [
-	  "tests/**/*.js",
-	  "tests/**/*.ts"
-	],
-	"compilerOptions": {
-	  "declaration": true,
-	  "noEmit": false,
-	  "emitDeclarationOnly": true,
-	  "declarationDir": "types"
-	}
+  "extends": "./tsconfig",
+  "exclude": [
+    "tests/**/*.js",
+    "tests/**/*.ts",
+    "lib",
+    "types",
+    "node_modules"
+  ],
+  "compilerOptions": {
+    "declaration": true,
+    "noEmit": false,
+    "emitDeclarationOnly": true,
+    "declarationDir": "types"
+  }
 }
