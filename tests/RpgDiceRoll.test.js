@@ -194,6 +194,24 @@ describe('RPG dice facade', () => {
       expect(rollSpy).not.toHaveBeenCalled();
     });
 
+    test('allows common reroll expressions with the default execution budget', () => {
+      const inspection = inspectRpgDiceNotation('6d12r<3+6d12r<3');
+      const result = rollRpgDice('6d12r<3+6d12r<3', { seed: 'reroll-budget-default' });
+
+      expect(inspection).toMatchObject({
+        isValid: true,
+        cost: expect.objectContaining({
+          totalWorstCaseRollAttempts: 12012,
+        }),
+      });
+      expect(result).toMatchObject({
+        notation: '6d12r<3+6d12r<3',
+        normalizedNotation: '6d12r<3+6d12r<3',
+        rollCount: 1,
+      });
+      expect(result.dice).toHaveLength(12);
+    });
+
     test('validates notation through the pure facade without rolling', () => {
       const rollSpy = jest.spyOn(StandardDice.prototype, 'rollOnce');
 

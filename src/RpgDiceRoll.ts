@@ -20,6 +20,7 @@ const inspectionCache = new Map<string, RpgDiceNotationInspection>();
 
 export const DEFAULT_MAX_TOTAL_DICE = 9999;
 export const DEFAULT_MAX_MULTI_ROLLS = 100;
+const DEFAULT_MAX_TOTAL_ROLL_ATTEMPTS = 100000;
 
 export interface RpgDiceRollOptions {
   maxDice?: number;
@@ -264,6 +265,12 @@ function resolveLimit(value: number | undefined, fallback: number): number {
   return Math.floor(numericValue);
 }
 
+function resolveExecutionLimit(options: RpgDiceRollOptions, maxDice: number): number {
+  return Object.prototype.hasOwnProperty.call(options, 'maxDice')
+    ? maxDice
+    : DEFAULT_MAX_TOTAL_ROLL_ATTEMPTS;
+}
+
 function getInspectionCacheKey(input: string, options: RpgDiceRollOptions): string {
   return JSON.stringify({
     input: String(input ?? ''),
@@ -490,6 +497,7 @@ function inspectParsedInput(
 ): RpgDiceNotationInspection {
   const maxDice = resolveLimit(options.maxDice, DEFAULT_MAX_TOTAL_DICE);
   const maxRolls = resolveLimit(options.maxRolls, DEFAULT_MAX_MULTI_ROLLS);
+  const maxRollAttempts = resolveExecutionLimit(options, maxDice);
   const groups = extractRpgDiceGroups(parsedInput.notation);
 
   let cost = multiplyCost(emptyCost(), parsedInput.rollCount);
@@ -562,13 +570,13 @@ function inspectParsedInput(
     });
   }
 
-  if (cost.totalWorstCaseRollAttempts > maxDice) {
+  if (cost.totalWorstCaseRollAttempts > maxRollAttempts) {
     throw new RpgDiceRollError('Roll execution limit exceeded', {
       code: 'ROLL_EXECUTION_LIMIT',
       input: parsedInput.input,
       notation: parsedInput.notation,
       normalizedNotation: parsedInput.normalizedNotation,
-      limit: maxDice,
+      limit: maxRollAttempts,
       details: {
         rollCount: parsedInput.rollCount,
         ...cost,
