@@ -56,7 +56,6 @@
     "typescript": "^5.9.3"
   },
   "dependencies": {
-    "mathjs": "^15.2.0",
     "random-js": "^2.1.0"
   },
   "engines": {
