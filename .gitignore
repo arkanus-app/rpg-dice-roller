@@ -41,10 +41,12 @@ bower_components
 
 # Project specific
 
-## Compiled package artifacts are committed so Git dependencies work without a registry publish.
+## Generated package artifacts are created by prepare/publish and never committed.
+/dist/
 
 ## Testing
 /coverage
+/.artifacts
 
 ## Docs
 /docs/api

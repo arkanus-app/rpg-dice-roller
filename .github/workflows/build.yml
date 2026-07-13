@@ -1,4 +1,5 @@
 name: build
+
 on:
   push:
     branches:
@@ -10,40 +11,113 @@ on:
       - main
       - develop
       - 'releases/**'
+
 jobs:
-  test:
-    runs-on: ubuntu-latest
+  validate:
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest, windows-latest]
+        node: [22, 24]
+    runs-on: ${{ matrix.os }}
     steps:
       - name: Checkout
         uses: actions/checkout@v4
 
-      - name: Setup Node.js environment
+      - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: 'lts/*'
+          node-version: ${{ matrix.node }}
+          cache: npm
 
       - name: Install dependencies
         run: npm ci
 
-      - name: Run tests
-        run: npm run test:coverage
+      - name: Test
+        run: npm test
 
-      - name: Generate coverage
-        uses: coverallsapp/github-action@master
-        with:
-          github-token: ${{ secrets.github_token }}
-          parallel: true
+      - name: Build package
+        run: npm run build
 
-  build-package:
+      - name: Verify build leaves tracked sources unchanged
+        run: git diff --exit-code -- .
+
+  coverage:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
         uses: actions/checkout@v4
 
-      - name: Setup Node.js environment
+      - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: 'lts/*'
+          node-version: 22
+          cache: npm
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Generate coverage
+        run: npm run test:coverage
+
+      - name: Upload coverage
+        uses: coverallsapp/github-action@v2
+        with:
+          github-token: ${{ secrets.github_token }}
+
+  package:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Verify package
+        run: npm run package:check
+
+      - name: Verify package checks leave tracked sources unchanged
+        run: git diff --exit-code -- .
+
+  benchmark:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Run performance and complexity gates
+        run: npm run benchmark:check
+
+      - name: Verify benchmark leaves tracked sources unchanged
+        run: git diff --exit-code -- .
+
+  replay-reference:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
 
       - name: Install dependencies
         run: npm ci
@@ -51,32 +125,71 @@ jobs:
       - name: Build package
         run: npm run build
 
-      - name: Verify package tarball
-        run: npm pack --dry-run
+      - name: Create Node 22 replay reference
+        run: npm exec -- tsx ./scripts/replay-fixture.ts --write ./dist/replay-reference.json
 
-  build-api-docs:
+      - name: Upload replay reference
+        uses: actions/upload-artifact@v4
+        with:
+          name: replay-reference-node-22
+          path: dist/replay-reference.json
+          if-no-files-found: error
+
+  replay-node-24:
+    needs: replay-reference
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
         uses: actions/checkout@v4
 
-      - name: Setup Node.js environment
+      - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: 'lts/*'
+          node-version: 24
+          cache: npm
 
       - name: Install dependencies
         run: npm ci
 
-      - name: Build API docs
-        run: npm run docs:build
+      - name: Build package
+        run: npm run build
 
-  finish:
-    needs: test
+      - name: Download Node 22 replay reference
+        uses: actions/download-artifact@v4
+        with:
+          name: replay-reference-node-22
+          path: dist
+
+      - name: Verify byte-identical Node 24 replay
+        run: npm exec -- tsx ./scripts/replay-fixture.ts --check ./dist/replay-reference.json
+
+  replay-browsers:
+    needs: replay-reference
     runs-on: ubuntu-latest
     steps:
-      - name: Coverage Finished
-        uses: coverallsapp/github-action@master
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
         with:
-          github-token: ${{ secrets.github_token }}
-          parallel-finished: true
+          node-version: 22
+          cache: npm
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Build package
+        run: npm run build
+
+      - name: Download Node 22 replay reference
+        uses: actions/download-artifact@v4
+        with:
+          name: replay-reference-node-22
+          path: dist
+
+      - name: Install Chromium, Firefox, and WebKit
+        run: npx playwright install --with-deps chromium firefox webkit
+
+      - name: Verify browser replay
+        run: npm run test:browser

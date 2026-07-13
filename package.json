@@ -2,23 +2,34 @@
   "name": "@erpg/dicecore",
   "description": "ERPG dice core with ergonomic RPG notation, grouped rolls, structured UI data, deterministic replay, and safe parse-only inspection.",
   "author": "Arkanus",
-  "version": "2.0.0",
+  "version": "3.0.0",
   "license": "MIT",
   "type": "module",
-  "main": "./lib/cjs/index.cjs",
-  "module": "./lib/esm/index.js",
+  "sideEffects": false,
+  "files": [
+    "dist",
+    "licence.txt",
+    "readme.md"
+  ],
+  "main": "./dist/index.cjs",
+  "module": "./dist/index.js",
   "exports": {
     ".": {
-      "types": "./types/index.d.ts",
-      "import": "./lib/esm/index.js",
-      "require": "./lib/cjs/index.cjs"
+      "import": {
+        "types": "./dist/index.d.ts",
+        "default": "./dist/index.js"
+      },
+      "require": {
+        "types": "./dist/index.d.cts",
+        "default": "./dist/index.cjs"
+      }
     },
     "./package.json": "./package.json"
   },
-  "types": "./types/index.d.ts",
+  "types": "./dist/index.d.ts",
   "repository": {
     "type": "git",
-    "url": "https://github.com/arkanus-app/rpg-dice-roller.git"
+    "url": "git+https://github.com/arkanus-app/rpg-dice-roller.git"
   },
   "bugs": {
     "url": "https://github.com/arkanus-app/rpg-dice-roller/issues"
@@ -38,44 +49,56 @@
     "notation"
   ],
   "devDependencies": {
-    "@babel/core": "^7.29.0",
-    "@babel/preset-env": "^7.29.3",
-    "@babel/preset-typescript": "^7.28.5",
-    "@rollup/plugin-commonjs": "^29.0.2",
-    "@rollup/plugin-node-resolve": "^16.0.3",
+    "@arethetypeswrong/cli": "^0.18.5",
+    "@eslint/js": "^9.39.2",
+    "@rollup/plugin-terser": "^1.0.0",
     "@rollup/plugin-typescript": "^12.3.0",
-    "@typescript-eslint/eslint-plugin": "^8.59.2",
-    "@typescript-eslint/parser": "^8.59.2",
-    "eslint": "^8.57.1",
-    "eslint-config-airbnb-base": "^15.0.0",
-    "eslint-plugin-import": "^2.32.0",
-    "jest": "^29.7.0",
-    "peggy": "^5.1.0",
+    "@types/node": "^24.0.0",
+    "@vitest/browser-playwright": "^4.1.10",
+    "@vitest/coverage-v8": "^4.1.10",
+    "eslint": "^9.39.2",
+    "fast-check": "^4.0.0",
+    "globals": "^16.0.0",
+    "jiti": "^2.0.0",
+    "publint": "^0.3.0",
+    "playwright": "^1.61.1",
+    "random-js": "^2.1.0",
     "rollup": "^4.60.3",
     "tslib": "^2.8.1",
-    "typescript": "^5.9.3"
+    "tsx": "^4.20.0",
+    "typescript": "^5.9.3",
+    "typescript-eslint": "^8.63.0",
+    "vitest": "^4.1.10"
   },
-  "dependencies": {
-    "random-js": "^2.1.0"
-  },
+  "dependencies": {},
   "engines": {
-    "node": ">=18.0"
+    "node": ">=22.0"
   },
   "scripts": {
-    "build": "npm run build:prepare && npm run build:bundle && npm run build:declaration",
-    "build:prepare": "npm run build:grammars && npm run lint",
-    "build:declaration": "node ./scripts/build-declarations.cjs",
-    "build:bundle": "rollup --config",
-    "build:grammars": "peggy -c ./peggy.config.cjs ./src/parser/grammars/grammar.pegjs",
-    "benchmark": "node ./scripts/benchmark.mjs",
-    "watch": "rollup --config --watch",
-    "lint": "eslint \"src/**/*.{js,ts}\" \"tests/**/*.{js,ts}\"",
-    "lint:fix": "eslint --fix \"src/**/*.{js,ts}\" \"tests/**/*.{js,ts}\"",
+    "build": "npm run build:clean && npm run build:prepare && npm run build:bundle && npm run build:declaration",
+    "build:clean": "tsx ./scripts/clean.ts",
+    "build:prepare": "npm run typecheck && npm run lint",
+    "build:declaration": "tsx ./scripts/build-declarations.ts",
+    "build:bundle": "rollup --config=./rollup.config.ts --config-plugin=typescript",
+    "benchmark": "node --expose-gc --import tsx ./scripts/benchmark.ts",
+    "benchmark:check": "npm run build && npm run benchmark -- --check --json",
+    "watch": "rollup --config=./rollup.config.ts --config-plugin=typescript --watch",
+    "typecheck": "npm run typecheck:legacy && npm run typecheck:v3 && npm run typecheck:public-api && npm run typecheck:tooling",
+    "typecheck:legacy": "tsc -p tsconfig.json --pretty false",
+    "typecheck:v3": "tsc -p tsconfig.v3.json --pretty false",
+    "typecheck:public-api": "tsc -p tsconfig.type-tests.json --pretty false",
+    "typecheck:tooling": "tsc -p tsconfig.tools.json --pretty false",
+    "lint": "eslint . --max-warnings=0",
+    "lint:fix": "eslint . --fix --max-warnings=0",
     "pretest": "npm run build:prepare",
-    "test": "jest",
-    "test:coverage": "npm test -- --coverage",
-    "test:watch": "npm test -- --watchAll",
+    "test": "vitest run",
+    "pretest:coverage": "npm run build:prepare",
+    "test:coverage": "vitest run --coverage",
+    "test:browser": "vitest run --config ./vitest.browser.config.ts",
+    "test:watch": "vitest",
+    "package:check": "npm run build && publint run . --strict && tsx ./scripts/check-package.ts",
+    "check": "npm run test:coverage && npm run package:check",
     "prepare": "npm run build",
-    "prepublishOnly": "npm test && npm run build"
+    "prepublishOnly": "npm run check"
   }
 }

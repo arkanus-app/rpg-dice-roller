@@ -1,15 +1,20 @@
 {
   "include": [
-    "src/**/*.ts",
-    "tests/**/*.ts"
+    "src/**/*.ts"
   ],
   "exclude": [
+    "src/v3",
+    "tests",
     "lib",
     "types",
     "node_modules"
   ],
   "compilerOptions": {
-    "target": "ES2018",
+    "target": "ES2022",
+    "lib": [
+      "DOM",
+      "ES2022"
+    ],
     "module": "ESNext",
     "moduleResolution": "node",
     "allowJs": false,

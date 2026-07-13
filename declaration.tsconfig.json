@@ -1,16 +1,18 @@
 {
   "extends": "./tsconfig",
+  "include": [
+    "src/index.ts",
+    "src/v3/**/*.ts"
+  ],
   "exclude": [
-    "tests/**/*.js",
-    "tests/**/*.ts",
-    "lib",
-    "types",
+    "src/**/*.test.ts",
+    "dist",
     "node_modules"
   ],
   "compilerOptions": {
     "declaration": true,
     "noEmit": false,
     "emitDeclarationOnly": true,
-    "declarationDir": "types"
+    "declarationDir": "dist"
   }
 }

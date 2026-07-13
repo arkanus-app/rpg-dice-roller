@@ -1,12 +1,12 @@
 {
   "extends": "./tsconfig.json",
   "include": [
-    "src/**/*.ts"
+    "src/index.ts",
+    "src/v3/**/*.ts"
   ],
   "exclude": [
     "tests",
-    "lib",
-    "types",
+    "dist",
     "node_modules"
   ],
   "compilerOptions": {

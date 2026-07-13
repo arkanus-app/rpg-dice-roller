@@ -1,0 +1,29 @@
+{
+  "schemaVersion": 1,
+  "platform": "linux",
+  "nodeMajor": 22,
+  "tolerancePercent": 15,
+  "benchmarks": {
+    "cold-compile": {
+      "referenceMedianOpsPerSecond": 12000
+    },
+    "hot-plan-mt19937": {
+      "referenceMedianOpsPerSecond": 30000
+    },
+    "hot-string-mt19937": {
+      "referenceMedianOpsPerSecond": 35000
+    },
+    "full-simple-mt19937": {
+      "referenceMedianOpsPerSecond": 50000
+    },
+    "summary-simple-mt19937": {
+      "referenceMedianOpsPerSecond": 55000
+    },
+    "full-modifiers": {
+      "referenceMedianOpsPerSecond": 4000
+    },
+    "early-failure": {
+      "referenceMedianOpsPerSecond": 14000
+    }
+  }
+}
