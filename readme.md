@@ -157,7 +157,7 @@ interface DiceRollResult {
 - `rolls` separa cada execução de `N#formula` por ranges contíguos (`diceRange`, `groupRange`, `eventRange`); o `total` raiz é a soma de seus totais;
 - `groups` resolve dados, expressões, funções e grupos com IDs e `SourceSpan` estáveis;
 - `dice` separa face inicial (`rawValue`), valor final (`value`), contribuição e inclusão;
-- `events` registra rolls, rerolls, explosões, transformações, inclusão, exclusão e classificação de dados e grupos em ordem causal;
+- `events` registra rolls, rerolls, explosões, transformações, inclusão, exclusão e classificação de dados e grupos na ordem do executor. Consumidores visuais devem reconstruir dependências por ID: o `roll` de um filho explosivo é registrado antes do evento `explode` que o liga ao pai;
 - `pool` é `null` sem target e agrega sucessos/falhas quando a notação usa um target.
 
 Veja o contrato completo em [docs/API_V3.md](docs/API_V3.md) e a atualização de consumidores em [docs/MIGRATION_V3.md](docs/MIGRATION_V3.md).
@@ -212,20 +212,24 @@ rollRpgDice('ceil(1d6/2)+pow(2,3)');
 
 ## Integração com dice3dview
 
-O `dicecore` decide o resultado; o `dice3dview` apenas o apresenta. Use `events` para uma animação cronológica e `dice` para o estado final:
+O `dicecore` decide o resultado; o `dice3dview` apenas o apresenta. A API de timeline recebe definições visuais e o journal resolvido sem interpretar a notação novamente:
 
 ```ts
 const result = rollRpgDice('2d6!kh2', { seed: 'cena-9' });
-const byId = new Map(result.dice.map((die) => [die.id, die]));
+const supportedSides = new Set([2, 4, 6, 8, 10, 12, 20, 100]);
+const visualDice = result.dice.filter(
+  (die) => typeof die.sides === 'number' && supportedSides.has(die.sides),
+);
+const visualIds = new Set(visualDice.map((die) => die.id));
 
-for (const event of result.events) {
-  if (event.type === 'roll') {
-    const die = byId.get(event.dieId);
-    if (die) dice3dview.roll({ id: die.id, sides: die.sides, value: event.value });
-  } else if (event.type === 'reroll') {
-    dice3dview.reroll({ id: event.dieId, value: event.to });
-  }
-}
+await dice3dview.displayTimeline({
+  id: 'cena-9',
+  seed: 'cena-9',
+  dice: visualDice.map((die) => ({ id: die.id, sides: die.sides })),
+  events: result.events.filter(
+    (event) => event.subject === 'die' && visualIds.has(event.dieId),
+  ),
+});
 
 const scoring = result.dice.map((die) => ({
   id: die.id,
@@ -236,7 +240,7 @@ const scoring = result.dice.map((die) => ({
 }));
 ```
 
-O exemplo usa nomes ilustrativos do adaptador do ERPG; adapte as chamadas à versão concreta do `dice3dview`. Dados excluídos ainda podem ser animados, mas `included` e `contribution` devem governar a pontuação. `parentDieId` liga uma explosão ao dado que a originou.
+O viewer pré-compila o journal inteiro porque o `roll` de um filho aparece antes do `explode` correspondente. Dados excluídos ainda podem ser animados, mas `included` e `contribution` governam a pontuação. `parentDieId` liga uma explosão ao dado que a originou. `transform` representa valor semântico: compound pode ultrapassar o número de faces e penetrate pode chegar a zero, portanto esses valores nunca devem ser usados como face física.
 
 ## Desenvolvimento da V3
 

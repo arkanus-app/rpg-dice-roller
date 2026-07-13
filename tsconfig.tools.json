@@ -31,7 +31,6 @@
   },
   "include": [
     "eslint.config.ts",
-    "rollup.config.ts",
     "scripts/**/*.ts",
     "vitest.config.ts",
     "vitest.browser.config.ts"

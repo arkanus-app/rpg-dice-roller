@@ -149,6 +149,8 @@ Em `N#formula`, o total raiz permanece a soma dos rolls independentes. `pool` é
 
 `ResolvedDie` separa `rawValue`, `value`, `contribution`, `included`, `states`, `sides`, `id` e `parentDieId`. `ResolvedGroup` expõe `value`, `contribution`, `included`, estados, filhos e source span. Eventos discriminam `subject: 'die' | 'group'` e registram rolls, rerolls, explosões, transformações, inclusão, exclusão e classificação em sequência causal global.
 
+O journal segue a ordem em que o executor materializa os fatos. Em uma explosão, o evento `roll` do filho (identificado por `parentDieId`) é registrado antes do `explode` que contém `childDieId`; em penetrate, o `transform` do filho também antecede esse vínculo. Adaptadores cronológicos devem indexar o journal completo e montar dependências por IDs, não reproduzir o array cegamente evento por evento.
+
 ## Summary e estatísticas
 
 ```ts

@@ -113,7 +113,7 @@ const result = dice.roll(input, {
 | `pool` sempre presente | `pool: PoolSummary | null` |
 | arrays mutáveis | arrays e DTOs `readonly` |
 
-`N#formula` continua executando entradas independentes e o `total` raiz continua sendo a soma. Cada `ResolvedRoll` tem seus próprios `dice`, `groups`, `events` e `pool`; os campos equivalentes na raiz são agregados.
+`N#formula` continua executando entradas independentes e o `total` raiz continua sendo a soma. `dice`, `groups` e `events` existem apenas nos arrays raiz; cada `ResolvedRoll` aponta para intervalos contíguos por `diceRange`, `groupRange` e `eventRange`, além de possuir seu próprio `pool`.
 
 ### Snapshot e objetos internos
 
@@ -257,26 +257,25 @@ Quando aliases avançados apontarem para um trecho estático, associe-os aos `Ro
 
 ## Frontend: dice3dview
 
-O adaptador 3D deve receber resultados resolvidos, sem decidir regra ou recalcular modificadores:
+O adaptador 3D deve receber resultados resolvidos, sem decidir regra ou recalcular modificadores. Passe o journal inteiro para uma API que pré-compile as dependências; não chame o renderer uma vez por evento:
 
 ```ts
-const diceById = new Map(result.dice.map((die) => [die.id, die]));
+const supportedSides = new Set([2, 4, 6, 8, 10, 12, 20, 100]);
+const visualDice = result.dice.filter(
+  (die) => typeof die.sides === 'number' && supportedSides.has(die.sides),
+);
+const visualIds = new Set(visualDice.map((die) => die.id));
 
-for (const event of result.events) {
-  if (event.type === 'roll') {
-    const die = diceById.get(event.dieId);
-    if (die) {
-      dice3dview.roll({ id: die.id, sides: die.sides, value: event.value });
-    }
-  }
-
-  if (event.type === 'reroll') {
-    dice3dview.reroll({ id: event.dieId, value: event.to });
-  }
-}
+await dice3dview.displayTimeline({
+  id: crypto.randomUUID(),
+  dice: visualDice.map((die) => ({ id: die.id, sides: die.sides })),
+  events: result.events.filter(
+    (event) => event.subject === 'die' && visualIds.has(event.dieId),
+  ),
+});
 ```
 
-Depois da animação, estilize dados mantidos/descartados usando `included`, contabilize `contribution` e conecte explosões usando `parentDieId`. O contrato `DiceSides` é `number | 'F'`; o adaptador deve mapear `'F'` para o modelo Fudge do renderer.
+O executor registra o `roll` de um filho explosivo antes do evento `explode`; por isso a timeline precisa indexar `childDieId`/`parentDieId` antes de animar. Depois da animação, estilize dados mantidos/descartados usando `included`, contabilize `contribution` e conecte explosões usando `parentDieId`. O contrato `DiceSides` é `number | 'F'`; o adaptador deve filtrar ou mapear tipos que o renderer não suporta.
 
 ## Seed e replay
 
