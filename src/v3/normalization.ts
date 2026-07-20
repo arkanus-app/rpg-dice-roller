@@ -1,3 +1,5 @@
+import { resolveRollCountExpression } from './roll-count-expression.js';
+
 export interface NormalizedDiceInput {
   readonly input: string;
   readonly comment: string;
@@ -38,6 +40,19 @@ function readWhile(
   return [source.slice(start, cursor), cursor];
 }
 
+function isValidComputedRollCount(expression: string): boolean {
+  const value = resolveRollCountExpression(expression);
+  return value !== null && Number.isSafeInteger(value) && value >= 0;
+}
+
+function nextNonWhitespaceCharacter(source: string, start: number): string {
+  let cursor = start;
+  while (cursor < source.length && /\s/u.test(source.charAt(cursor))) {
+    cursor += 1;
+  }
+  return source.charAt(cursor);
+}
+
 function cleanInput(input: string): CleanedInput {
   const comments: string[] = [];
   let notation = '';
@@ -76,6 +91,16 @@ function cleanInput(input: string): CleanedInput {
     if (current === '[') {
       const end = input.indexOf(']', cursor + 1);
       const commentEnd = end < 0 ? input.length : end;
+      const bracketedPrefix = input.slice(cursor, commentEnd + 1);
+      const isBracketedRollCount = notation.length === 0
+        && end >= 0
+        && nextNonWhitespaceCharacter(input, end + 1) === '#'
+        && isValidComputedRollCount(bracketedPrefix);
+      if (isBracketedRollCount) {
+        notation += bracketedPrefix;
+        cursor = end + 1;
+        continue;
+      }
       pushComment(input.slice(cursor + 1, commentEnd));
       cursor = end < 0 ? input.length : end + 1;
       continue;
@@ -83,9 +108,20 @@ function cleanInput(input: string): CleanedInput {
 
     if (current === '#') {
       const compactPrefix = notation.replace(/\s+/gu, '');
-      const isMultiRollMarker = !retainedMultiRollMarker && /^\d+$/u.test(compactPrefix);
+      const hasLiteralRollCount = /^\d+$/u.test(compactPrefix);
+      const computedRollCount = hasLiteralRollCount
+        ? null
+        : resolveRollCountExpression(compactPrefix);
+      const hasComputedRollCount = computedRollCount !== null
+        && Number.isSafeInteger(computedRollCount)
+        && computedRollCount >= 0;
+      const isMultiRollMarker = !retainedMultiRollMarker
+        && (hasLiteralRollCount || hasComputedRollCount);
 
       if (isMultiRollMarker) {
+        if (hasComputedRollCount) {
+          notation = String(computedRollCount);
+        }
         notation += current;
         retainedMultiRollMarker = true;
         cursor += 1;

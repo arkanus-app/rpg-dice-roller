@@ -20,11 +20,37 @@ describe('V3 notation normalization', () => {
     });
   });
 
+  test.each(['3-1#1d6', '(3-1)#1d6', '{3-1}#1d6', '[3-1]#1d6'])(
+    'resolves the computed multi-roll count in %s',
+    (input) => {
+      expect(parseNormalizedDiceInput(input)).toMatchObject({
+        input,
+        notation: '1d6',
+        normalizedNotation: '2#1d6',
+        rollCount: 2,
+        isMultiRoll: true,
+      });
+    },
+  );
+
+  test('supports deterministic functions in a computed multi-roll count', () => {
+    expect(parseNormalizedDiceInput('ceil(3/2)#1d6')).toMatchObject({
+      notation: '1d6',
+      normalizedNotation: '2#1d6',
+      rollCount: 2,
+      isMultiRoll: true,
+    });
+  });
+
   test('treats a non-prefix hash as an inline description', () => {
     expect(parseNormalizedDiceInput('1d20 # iniciativa')).toMatchObject({
       comment: 'iniciativa',
       notation: '1d20',
       rollCount: 1,
+    });
+    expect(parseNormalizedDiceInput('[ataque] # iniciativa')).toMatchObject({
+      comment: 'ataque iniciativa',
+      isMultiRoll: false,
     });
   });
 

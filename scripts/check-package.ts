@@ -27,7 +27,8 @@ const ignoredJavaScriptDirectories = new Set([
   'dist',
   'node_modules',
 ]);
-const generatedJavaScriptFiles = new Set([
+const allowedJavaScriptFiles = new Set([
+  resolve(root, 'rollup.config.mjs'),
   resolve(root, 'src/parser/grammars/grammar.js'),
 ]);
 const javaScriptExtensions = ['.cjs', '.js', '.mjs'] as const;
@@ -109,7 +110,7 @@ const findAuthoredJavaScript = (directory: string): readonly string[] => readdir
   if (
     entry.isFile()
     && javaScriptExtensions.some((extension) => entry.name.endsWith(extension))
-    && !generatedJavaScriptFiles.has(path)
+    && !allowedJavaScriptFiles.has(path)
   ) {
     return [path];
   }

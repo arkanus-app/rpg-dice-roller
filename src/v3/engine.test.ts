@@ -44,6 +44,15 @@ describe('V3 dice engine', () => {
     expect(result.output).toContain('Total: 18');
   });
 
+  test('rolls a computed number of independent entries', () => {
+    const result = rollRpgDice('(3-1)#1d1');
+
+    expect(result.normalizedNotation).toBe('2#1d1');
+    expect(result.rolls.map((roll) => roll.total)).toEqual([1, 1]);
+    expect(result.dice.map((die) => die.rollIndex)).toEqual([1, 2]);
+    expect(result.total).toBe(2);
+  });
+
   test('resolves keep, drop, min, max, critical, and sorting modifiers', () => {
     const kept = rollRpgDice('4d6kh3', { seed: 'test' });
     expect(kept.dice.filter((die) => !die.included)).toHaveLength(1);

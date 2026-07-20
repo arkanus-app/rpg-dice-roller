@@ -2,6 +2,16 @@
 
 As mudanças relevantes do `@erpg/dicecore` são registradas neste arquivo.
 
+## 3.1.0 — 2026-07-19
+
+### Adicionado
+
+- O contador de `N#formula` passa a aceitar expressões matemáticas determinísticas, com agrupamento por `()`, `{}` ou `[]`.
+
+### Corrigido
+
+- A verificação do pacote reconhece `rollup.config.mjs` como configuração autorizada sem liberar outros arquivos JavaScript fora do build.
+
 ## 3.0.0 — não publicado
 
 A versão está implementada no repositório, mas esta entrada não declara publicação no npm nem criação de tag.

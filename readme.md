@@ -197,7 +197,7 @@ A normalização preserva atalhos comuns:
 - `ei6` → `!>=6`;
 - `km` → `kl`, e `k`, `kh` ou `kl` sem quantidade recebem `1`;
 - combinações simples como `+-`, `-+`, `++` e `--` são limpas;
-- `N#formula` executa rolagens independentes;
+- `N#formula` executa rolagens independentes; `N` também pode ser uma expressão matemática determinística, como `(3-1)#1d20` (com `()`, `{}` ou `[]` para agrupamento);
 - comentários podem usar `[texto]`, `//`, `#` ou `/* ... */` conforme o contexto.
 
 A sintaxe inclui dados padrão, percentuais e Fudge; aritmética e funções; grupos; keep/drop; reroll/unique; explode/compound/penetrate; min/max; critical; sort; e targets de sucesso/falha.

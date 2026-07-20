@@ -35,6 +35,19 @@ describe('V3 compiler', () => {
     expect(Object.isFrozen(plan)).toBe(true);
   });
 
+  test.each(['3-1#1d6', '(3-1)#1d6', '{3-1}#1d6', '[3-1]#1d6'])(
+    'compiles computed multi-roll count %s',
+    (input) => {
+      expect(compileDicePlan(input, DEFAULT_DICE_LIMITS)).toMatchObject({
+        notation: '1d6',
+        normalizedNotation: '2#1d6',
+        isMultiRoll: true,
+        rollCount: 2,
+        cost: { staticDice: 1, totalStaticDice: 2 },
+      });
+    },
+  );
+
   test('validates roll, AST, and initial-dice limits', () => {
     expect(() => compileDicePlan('0#1d6', DEFAULT_DICE_LIMITS))
       .toThrow(expect.objectContaining({ code: 'INVALID_NOTATION' }));
