@@ -11,7 +11,7 @@ import { dirname, join, resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { gzipSync } from 'node:zlib';
 
-const maximumPackedSize = 70 * 1024;
+const maximumPackedSize = 80 * 1024;
 const maximumUnpackedSize = 350 * 1024;
 const maximumEsmGzipSize = 25 * 1024;
 const root = resolve(dirname(fileURLToPath(import.meta.url)), '..');
@@ -164,15 +164,15 @@ try {
   );
   writeFileSync(
     join(temporaryDirectory, 'smoke.mjs'),
-    "import { rollRpgDice, rollRpgDiceSummary } from '@erpg/dicecore';\nif (typeof rollRpgDice !== 'function' || typeof rollRpgDiceSummary !== 'function') throw new TypeError('Missing ESM export');\n",
+    "import { evaluateAssimilationSelection, rollAssimilation, rollFateDice, rollMixedDice, rollRpgDice, rollRpgDiceSummary, rollVampireV5 } from '@erpg/dicecore';\nif ([evaluateAssimilationSelection, rollAssimilation, rollFateDice, rollMixedDice, rollRpgDice, rollRpgDiceSummary, rollVampireV5].some((value) => typeof value !== 'function')) throw new TypeError('Missing ESM export');\n",
   );
   writeFileSync(
     join(temporaryDirectory, 'smoke.cjs'),
-    "const { rollRpgDice, rollRpgDiceSummary } = require('@erpg/dicecore');\nif (typeof rollRpgDice !== 'function' || typeof rollRpgDiceSummary !== 'function') throw new TypeError('Missing CJS export');\n",
+    "const { evaluateAssimilationSelection, rollAssimilation, rollFateDice, rollMixedDice, rollRpgDice, rollRpgDiceSummary, rollVampireV5 } = require('@erpg/dicecore');\nif ([evaluateAssimilationSelection, rollAssimilation, rollFateDice, rollMixedDice, rollRpgDice, rollRpgDiceSummary, rollVampireV5].some((value) => typeof value !== 'function')) throw new TypeError('Missing CJS export');\n",
   );
   writeFileSync(
     join(temporaryDirectory, 'smoke.mts'),
-    "import { rollRpgDice, rollRpgDiceSummary, type DiceRollResult, type DiceRollSummary } from '@erpg/dicecore';\nconst result: DiceRollResult = rollRpgDice('1d6', { seed: 'package-check-esm' });\nconst summary: DiceRollSummary = rollRpgDiceSummary('1d6', { seed: 'package-check-summary' });\nvoid result;\nvoid summary;\n",
+    "import { evaluateAssimilationSelection, rollAssimilation, rollFateDice, rollMixedDice, rollRpgDice, rollRpgDiceSummary, rollVampireV5, type AssimilationRollResult, type DiceRollResult, type DiceRollSummary, type FateRollResult, type MixedRollResult, type VampireV5RollResult } from '@erpg/dicecore';\nconst result: DiceRollResult = rollRpgDice('1d6', { seed: 'package-check-esm' });\nconst summary: DiceRollSummary = rollRpgDiceSummary('1d6', { seed: 'package-check-summary' });\nconst vampire: VampireV5RollResult = rollVampireV5({ pool: 2, hunger: 1 }, { seed: 'package-check-vampire' });\nconst assimilation: AssimilationRollResult = rollAssimilation({ d6: 1 }, { seed: 'package-check-assimilation' });\nconst fate: FateRollResult = rollFateDice(undefined, { seed: 'package-check-fate' });\nconst mixed: MixedRollResult = rollMixedDice('1d6; fate(1)', { seed: 'package-check-mixed' });\nevaluateAssimilationSelection(assimilation, [assimilation.dice[0]!.id]);\nvoid result;\nvoid summary;\nvoid vampire;\nvoid fate;\nvoid mixed;\n",
   );
   writeFileSync(
     join(temporaryDirectory, 'smoke.cts'),

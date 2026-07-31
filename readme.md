@@ -1,8 +1,8 @@
-# @erpg/dicecore 3.0.0
+# @erpg/dicecore 3.4.0
 
 Núcleo de dados do ERPG para compilar, inspecionar e resolver notações de dados. A V3 é escrita em TypeScript estrito, não mantém estado global de RNG e entrega resultados `readonly`, JSON-safe e próprios para frontend, backend, automações e visualização 3D.
 
-> A versão `3.0.0` está implementada neste repositório, mas este documento não indica que a publicação no npm ou a criação da tag já tenham ocorrido.
+> A versão `3.4.0` está implementada neste repositório, mas este documento não indica que a publicação no npm ou a criação da tag já tenham ocorrido.
 
 ## Requisitos e formatos
 
@@ -36,12 +36,17 @@ Imports profundos, global UMD e as classes internas da V2 não fazem parte da AP
 import {
   compileRpgDice,
   createDiceEngine,
+  evaluateAssimilationSelection,
   inspectRpgDiceNotation,
   isDiceRollError,
   isDiceRollErrorData,
   normalizeRpgDiceNotation,
+  rollAssimilation,
+  rollFateDice,
+  rollMixedDice,
   rollRpgDice,
   rollRpgDiceSummary,
+  rollVampireV5,
   verifyRpgDiceNotation,
 } from '@erpg/dicecore';
 
@@ -72,6 +77,11 @@ As funções públicas são:
 - `inspectRpgDiceNotation(input, options?)`: valida sem rolar e retorna plano, grupos e estimativa de custo;
 - `rollRpgDice(inputOrPlan, options?)`: resolve a fórmula e sempre inclui um descritor de replay;
 - `rollRpgDiceSummary(inputOrPlan, options?)`: resolve total, rolls, pool, replay e stats sem materializar dados, grupos, eventos ou output;
+- `rollVampireV5(input, options?)`: rola e avalia um pool de Vampiro V5 com dados normais e de Fome;
+- `rollAssimilation(input, options?)`: rola os dados especiais de Assimilação sem escolher faces automaticamente;
+- `evaluateAssimilationSelection(roll, selectedIds)`: seleciona até `keep` IDs únicos e agrega seus símbolos;
+- `rollFateDice(input?, options?)`: rola quatro dados Fate por padrão, preserva as faces físicas e soma `-1`, `0` e `+1`;
+- `rollMixedDice(notation, options?)`: executa fórmulas genéricas e sistemas diferentes em um único lote 2D/3D;
 - `verifyRpgDiceNotation(input, options?)`: atalho booleano de validação;
 - `normalizeRpgDiceNotation(input)`: aplica os atalhos de escrita do ERPG;
 - `isDiceRollError(error)`: type guard para os erros estruturados da V3.
@@ -103,6 +113,138 @@ const result = dice.roll(plan, {
 ```
 
 Limites informados em uma chamada podem apenas reduzir os tetos do engine. O plano original reutiliza a representação compilada; cópias via JSON ou spread são validadas e recompiladas pelo engine de destino antes da execução.
+
+## Notação mista para 2D e 3D
+
+Use `;` para separar rolagens independentes que devem acontecer e aparecer
+juntas. O `+` continua sendo aritmética dentro de uma fórmula:
+
+```ts
+const mixed = rollMixedDice(
+  '2d20+5; '
+    + 'v5(pool=7,hunger=3,difficulty=4); '
+    + 'fate(4); '
+    + 'assim(d6=2,d10=1,d12=1,keep=1)',
+  { seed: 'sessao-42' },
+);
+
+console.log(mixed.rolls);  // resultados completos de cada sistema
+console.log(mixed.dice);   // lista plana para UI 2D/3D
+console.log(mixed.output); // resumo legível do lote
+```
+
+Chamadas aceitas:
+
+| Sistema | Posicional | Nomeada |
+| --- | --- | --- |
+| Vampiro V5 | `v5(7,3,4)` | `v5(pool=7,hunger=3,difficulty=4)` |
+| Fate | `fate(4)` ou `fate()` | `fate(dice=4)` |
+| Assimilação | `AS(2,1,1,1)` ou `assim(2,1,1,1)` | `AS(d6=2,d10=1,d12=1,keep=1)` |
+
+Também são reconhecidos `AS`, `vampiro`, `vampire`, `fatedice`, `assimilacao` e
+`assimilation`. Cada trecho genérico aceita a notação V3 completa, inclusive
+modificadores, pools, funções e multi-roll.
+
+O lote não possui um `total` geral: sucessos de Vampiro, valor Fate, símbolos
+de Assimilação e totais numéricos não são grandezas equivalentes. Cada valor
+permanece em `mixed.rolls`; `mixed.dice` contém IDs únicos, `physicalValue` e
+os perfis necessários para desenhar todos os dados juntos. O replay do lote
+restaura todos os sub-resultados:
+
+```ts
+const replayed = rollMixedDice(mixed.input, { replay: mixed.replay });
+```
+
+## Sistemas com faces simbólicas
+
+As APIs de sistema usam o mesmo RNG, limites e replay da V3, mas projetam cada
+`ResolvedDie` num `SystemDieResult`. O core entrega apenas IDs semânticos; SVGs,
+texturas e materiais continuam sob responsabilidade do visualizador 3D.
+
+```ts
+const fate = rollFateDice(undefined, { seed: 'fate-42' });
+
+console.log(fate.total);
+console.log(fate.dice.map(({ rawValue, faceKey, fateValue }) => ({
+  rawValue,
+  faceKey,
+  fateValue,
+})));
+```
+
+Fate usa o perfil `fate-df`. O core rola d6 físicos para manter `rawValue` e
+`value` entre 1 e 6: faces 1–2 são `minus`, 3–4 são `blank` e 5–6 são `plus`.
+`fateValue` contém `-1`, `0` ou `1`; `total` soma esses valores. A rolagem
+genérica `dF` continua disponível, mas sua face física já é convertida para
+`-1`, `0` ou `1`, por isso a API semântica usa `d6` no `baseRoll`.
+
+```ts
+const vampire = rollVampireV5(
+  { pool: 7, hunger: 3, difficulty: 4 },
+  { seed: 'sessao-12' },
+);
+
+console.log(vampire.successes, vampire.outcome);
+console.log(vampire.dice.map(({ id, sourceDieId, profileId, faceKey }) => ({
+  id,
+  sourceDieId,
+  profileId,
+  faceKey,
+})));
+```
+
+Vampiro V5 usa os perfis `vampire-v5-normal-d10` e
+`vampire-v5-hunger-d10`. Dados 6–9 valem um sucesso; cada 10 também vale um,
+e cada par de 10 acrescenta dois sucessos. Sem `difficulty`, o desfecho é
+`pending`. Com dificuldade, o resultado distingue sucesso, sucesso crítico,
+crítico bagunçado, falha e falha bestial.
+
+```ts
+const assimilation = rollAssimilation(
+  { d6: 2, d10: 1, d12: 1, keep: 2 },
+  { seed: 'teste-isolado' },
+);
+
+// A rolagem nunca escolhe dados automaticamente.
+const chosen = evaluateAssimilationSelection(
+  assimilation,
+  [assimilation.dice[3].id, assimilation.dice[1].id],
+);
+
+console.log(chosen.success, chosen.adaptation, chosen.pressure);
+```
+
+Assimilação usa `assimilation-d6`, `assimilation-d10` e `assimilation-d12`.
+Cada dado semântico inclui `id`, `sourceDieId`, `sides`, `value`, `rawValue`,
+`profileId`, `dieKind`, `faceKey` e `symbols`. `sourceDieId` referencia
+diretamente um item de `baseRoll.dice`; `id` é a chave estável que deve ser
+usada na seleção e no visualizador.
+
+O `@erpg/dice3dview` reconhece os perfis de Vampiro V5 e Assimilação a partir
+da versão 2.3.0 e o perfil Fate a partir da 2.4.0, sem depender do core em
+runtime:
+
+```ts
+import { createSystemDisplayRequest } from '@erpg/dice3dview';
+
+await viewer.display(createSystemDisplayRequest({
+  id: 'resultado-42',
+  dice: assimilation.dice,
+  keptIds: chosen.selectedIds,
+}));
+```
+
+Lotes mistos usam `@erpg/dice3dview` 2.5.0 ou posterior:
+
+```ts
+import { createMixedDisplayRequest } from '@erpg/dice3dview';
+
+await viewer.display(createMixedDisplayRequest({
+  id: 'misto-42',
+  seed: 'misto-42',
+  dice: mixed.dice,
+}));
+```
 
 ## Limites de segurança
 

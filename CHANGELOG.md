@@ -2,6 +2,49 @@
 
 As mudanças relevantes do `@erpg/dicecore` são registradas neste arquivo.
 
+## 3.4.0 — 2026-07-31
+
+### Adicionado
+
+- `rollMixedDice()` e a notação de lote `;` para combinar fórmulas genéricas,
+  Vampiro V5, Fate e Assimilação em uma única chamada.
+- Formas posicionais e nomeadas como `v5(7,3,4)`, `fate(4)` e
+  `assim(d6=2,d10=1,d12=1,keep=1)`.
+- `MixedRollResult` com resultados discriminados, dados achatados com IDs
+  únicos e `physicalValue` próprio para apresentação 2D/3D.
+- replay versionado do lote com streams independentes por sub-rolagem.
+
+### Segurança e compatibilidade
+
+- `rollRpgDice()` e toda a gramática genérica permanecem inalterados;
+- limites de rolls, dados, RNG, eventos, resultados e output são aplicados ao
+  lote agregado, impedindo contornar os tetos com múltiplos segmentos.
+- o lote não fabrica um total entre sistemas semanticamente incompatíveis.
+
+## 3.3.0 — 2026-07-31
+
+### Adicionado
+
+- `rollFateDice` com quatro dados por padrão, perfil `fate-df`, total semântico
+  e faces físicas d6 preservadas de forma determinística no replay.
+- Tipos `FateRollResult` e `FateDieResult`, incluindo `fateValue: -1 | 0 | 1`
+  para separar pontuação Fate da face física 1–6.
+
+## 3.2.0 — 2026-07-31
+
+### Adicionado
+
+- `rollVampireV5` com pools normais/de Fome, sucessos, pares de críticos,
+  dificuldade, crítico bagunçado e falha bestial sobre o replay V3.
+- `rollAssimilation` para pools mistos de d6, d10 e d12 com os mapas oficiais
+  de símbolos, sem seleção automática.
+- `evaluateAssimilationSelection` para selecionar IDs únicos até `keep`,
+  preservar a ordem escolhida e agregar sucesso, adaptação e pressão.
+- `SystemDieResult` e perfis semânticos estáveis para integração com
+  renderizadores 3D sem embutir assets no core.
+- Código estruturado `INVALID_SYSTEM_INPUT` para entradas e seleções de
+  sistema inválidas.
+
 ## 3.1.0 — 2026-07-19
 
 ### Adicionado

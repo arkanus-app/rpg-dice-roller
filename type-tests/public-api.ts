@@ -1,19 +1,39 @@
 import {
+  ASSIMILATION_D6_PROFILE,
+  ASSIMILATION_D10_PROFILE,
+  ASSIMILATION_D12_PROFILE,
   DEFAULT_DICE_LIMITS,
   DiceRollError,
+  FATE_DF_PROFILE,
+  VAMPIRE_V5_HUNGER_D10_PROFILE,
+  VAMPIRE_V5_NORMAL_D10_PROFILE,
   compileRpgDice,
   createDiceEngine,
+  evaluateAssimilationSelection,
   inspectRpgDiceNotation,
   isDiceRollError,
   isDiceRollErrorData,
   normalizeRpgDiceNotation,
+  rollAssimilation,
+  rollFateDice,
+  rollMixedDice,
   rollRpgDice,
   rollRpgDiceSummary,
+  rollVampireV5,
   verifyRpgDiceNotation,
 } from '../src/index.js';
 import type {
+  AssimilationDieKind,
+  AssimilationDieResult,
+  AssimilationFaceKey,
+  AssimilationProfileId,
+  AssimilationRollInput,
+  AssimilationRollResult,
+  AssimilationSelectionResult,
+  AssimilationSymbol,
   ClassifyDiceEvent,
   CompileOptions,
+  DiceSystemId,
   DiceEngine,
   DiceEngineOptions,
   DiceCacheStats,
@@ -30,11 +50,26 @@ import type {
   ExecutionStats,
   ExcludeDiceEvent,
   ExplodeDiceEvent,
+  FateDieKind,
+  FateDieResult,
+  FateFaceKey,
+  FateRollInput,
+  FateRollResult,
+  FateSymbol,
+  FateValue,
   FreezeResultsMode,
   IncludeDiceEvent,
   JsonObject,
   JsonPrimitive,
   JsonValue,
+  MixedGenericDieResult,
+  MixedRollDieResult,
+  MixedRollItem,
+  MixedRollKind,
+  MixedRollOptions,
+  MixedRollReplayDescriptor,
+  MixedRollResult,
+  MixedSystemDieResult,
   PoolSummary,
   ReplayDescriptor,
   RerollDiceEvent,
@@ -48,6 +83,14 @@ import type {
   SeedInput,
   SeedOrigin,
   SourceSpan,
+  SystemDieResult,
+  VampireV5DieKind,
+  VampireV5DieResult,
+  VampireV5FaceKey,
+  VampireV5Outcome,
+  VampireV5RollInput,
+  VampireV5RollResult,
+  VampireV5Symbol,
 } from '../src/index.js';
 
 function expectType<T>(_value: T): void {}
@@ -334,6 +377,102 @@ export function publicApiContracts(): void {
   expectType<DiceNotationInspection>(inspectRpgDiceNotation('d20', compileOptions));
   expectType<DiceNotationInspection>(engine.inspect('d20', compileOptions));
 
+  const systemId: DiceSystemId = 'vampire-v5';
+  const vampireInput: VampireV5RollInput = {
+    pool: 5,
+    hunger: 2,
+    difficulty: 3,
+  };
+  const vampireResult: VampireV5RollResult = rollVampireV5(
+    vampireInput,
+    { seed: 'vampire-public-api' },
+  );
+  const vampireDie: VampireV5DieResult = vampireResult.dice[0]!;
+  const vampireKind: VampireV5DieKind = vampireDie.dieKind;
+  const vampireFace: VampireV5FaceKey = vampireDie.faceKey;
+  const vampireSymbol: VampireV5Symbol = 'success';
+  const vampireOutcome: VampireV5Outcome = vampireResult.outcome;
+
+  expectType<DiceSystemId>(systemId);
+  expectType<'vampire-v5-normal-d10'>(VAMPIRE_V5_NORMAL_D10_PROFILE);
+  expectType<'vampire-v5-hunger-d10'>(VAMPIRE_V5_HUNGER_D10_PROFILE);
+  expectType<VampireV5DieKind>(vampireKind);
+  expectType<VampireV5FaceKey>(vampireFace);
+  expectType<VampireV5Symbol>(vampireSymbol);
+  expectType<VampireV5Outcome>(vampireOutcome);
+  expectType<SystemDieResult>(vampireDie);
+  expectType<DiceRollResult>(vampireResult.baseRoll);
+
+  const assimilationProfile: AssimilationProfileId = ASSIMILATION_D12_PROFILE;
+  const assimilationInput: AssimilationRollInput = {
+    d6: 1,
+    d10: 1,
+    d12: 1,
+    keep: 2,
+  };
+  const assimilationResult: AssimilationRollResult = rollAssimilation(
+    assimilationInput,
+    { seed: 'assimilation-public-api' },
+  );
+  const assimilationDie: AssimilationDieResult = assimilationResult.dice[0]!;
+  const assimilationKind: AssimilationDieKind = assimilationDie.dieKind;
+  const assimilationFace: AssimilationFaceKey = assimilationDie.faceKey;
+  const assimilationSymbol: AssimilationSymbol = 'adaptation';
+  const assimilationSelection: AssimilationSelectionResult = evaluateAssimilationSelection(
+    assimilationResult,
+    [assimilationDie.id],
+  );
+
+  expectType<AssimilationProfileId>(assimilationProfile);
+  expectType<'assimilation-d6'>(ASSIMILATION_D6_PROFILE);
+  expectType<'assimilation-d10'>(ASSIMILATION_D10_PROFILE);
+  expectType<AssimilationDieKind>(assimilationKind);
+  expectType<AssimilationFaceKey>(assimilationFace);
+  expectType<AssimilationSymbol>(assimilationSymbol);
+  expectType<SystemDieResult>(assimilationDie);
+  expectType<AssimilationSelectionResult>(assimilationSelection);
+  expectType<DiceRollResult>(assimilationResult.baseRoll);
+
+  const fateInput: FateRollInput = { dice: 4 };
+  const fateResult: FateRollResult = rollFateDice(
+    fateInput,
+    { seed: 'fate-public-api' },
+  );
+  const fateDie: FateDieResult = fateResult.dice[0]!;
+  const fateKind: FateDieKind = fateDie.dieKind;
+  const fateFace: FateFaceKey = fateDie.faceKey;
+  const fateSymbol: FateSymbol = 'plus';
+  const fateValue: FateValue = fateDie.fateValue;
+
+  expectType<'fate-df'>(FATE_DF_PROFILE);
+  expectType<FateDieKind>(fateKind);
+  expectType<FateFaceKey>(fateFace);
+  expectType<FateSymbol>(fateSymbol);
+  expectType<FateValue>(fateValue);
+  expectType<SystemDieResult>(fateDie);
+  expectType<DiceRollResult>(fateResult.baseRoll);
+
+  const mixedOptions: MixedRollOptions = { seed: 'mixed-public-api' };
+  const mixedResult: MixedRollResult = rollMixedDice(
+    '1d20; v5(5,2,3); fate(4); assim(1,1,1,2)',
+    mixedOptions,
+  );
+  const mixedReplay: MixedRollReplayDescriptor = mixedResult.replay;
+  const mixedKind: MixedRollKind = mixedResult.rolls[0]!.kind;
+  const mixedItem: MixedRollItem = mixedResult.rolls[0]!;
+  const mixedDie: MixedRollDieResult = mixedResult.dice[0]!;
+
+  expectType<MixedRollResult>(mixedResult);
+  expectType<MixedRollReplayDescriptor>(mixedReplay);
+  expectType<MixedRollKind>(mixedKind);
+  expectType<MixedRollItem>(mixedItem);
+  expectType<MixedRollDieResult>(mixedDie);
+  if ('profileId' in mixedDie) {
+    expectType<MixedSystemDieResult>(mixedDie);
+  } else {
+    expectType<MixedGenericDieResult>(mixedDie);
+  }
+
   // @ts-expect-error Compile input must be RPG notation text.
   compileRpgDice(20);
   // @ts-expect-error Unknown engine options are not part of the public contract.
@@ -352,6 +491,20 @@ export function publicApiContracts(): void {
   });
   // @ts-expect-error Default limits are exposed as readonly values.
   DEFAULT_DICE_LIMITS.maxRolls = 10;
+  // @ts-expect-error Vampire pools are numeric.
+  rollVampireV5({ pool: 'five', hunger: 2 });
+  // @ts-expect-error Assimilation only accepts d6, d10, and d12 pool fields.
+  rollAssimilation({ d20: 1 });
+  // @ts-expect-error Fate dice counts are numeric.
+  rollFateDice({ dice: 'four' });
+  // @ts-expect-error Mixed dice notation is text.
+  rollMixedDice(20);
+  // @ts-expect-error Mixed replay and new seeds are mutually exclusive.
+  rollMixedDice('1d6', { seed: 'new', replay: mixedReplay });
+  // @ts-expect-error Assimilation selections use semantic die IDs.
+  evaluateAssimilationSelection(assimilationResult, [1]);
+  // @ts-expect-error Semantic symbol collections are readonly.
+  assimilationDie.symbols.push('success');
 
   // @ts-expect-error Error codes are a closed string union.
   const invalidErrorCode: DiceRollErrorCode = 'UNKNOWN_ERROR';

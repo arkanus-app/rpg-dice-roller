@@ -423,16 +423,27 @@ describe('RPG dice facade', () => {
   describe('public package entry', () => {
     test('exports only the ERPG dice V3 facade contract', () => {
       expect(Object.keys(DiceCore).sort()).toEqual([
+        'ASSIMILATION_D10_PROFILE',
+        'ASSIMILATION_D12_PROFILE',
+        'ASSIMILATION_D6_PROFILE',
         'DEFAULT_DICE_LIMITS',
         'DiceRollError',
+        'FATE_DF_PROFILE',
+        'VAMPIRE_V5_HUNGER_D10_PROFILE',
+        'VAMPIRE_V5_NORMAL_D10_PROFILE',
         'compileRpgDice',
         'createDiceEngine',
+        'evaluateAssimilationSelection',
         'inspectRpgDiceNotation',
         'isDiceRollError',
         'isDiceRollErrorData',
         'normalizeRpgDiceNotation',
+        'rollAssimilation',
+        'rollFateDice',
+        'rollMixedDice',
         'rollRpgDice',
         'rollRpgDiceSummary',
+        'rollVampireV5',
         'verifyRpgDiceNotation',
       ].sort());
       expect(DiceCore.DiceRoll).toBeUndefined();

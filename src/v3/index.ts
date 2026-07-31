@@ -13,6 +13,7 @@ export {
 } from './errors.js';
 export { normalizeRpgDiceNotation } from './normalization.js';
 export { DEFAULT_DICE_LIMITS } from './runtime/limits.js';
+export * from './systems/index.js';
 
 export type {
   DiceErrorData,

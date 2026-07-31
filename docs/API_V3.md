@@ -9,6 +9,11 @@ createDiceEngine(options?): DiceEngine
 compileRpgDice(input, options?): RollPlan
 rollRpgDice(inputOrPlan, options?): DiceRollResult
 rollRpgDiceSummary(inputOrPlan, options?): DiceRollSummary
+rollMixedDice(notation, options?): MixedRollResult
+rollFateDice(input?, options?): FateRollResult
+rollVampireV5(input, options?): VampireV5RollResult
+rollAssimilation(input, options?): AssimilationRollResult
+evaluateAssimilationSelection(roll, selectedIds): AssimilationSelectionResult
 inspectRpgDiceNotation(input, options?): DiceNotationInspection
 verifyRpgDiceNotation(input, options?): boolean
 normalizeRpgDiceNotation(input): string
@@ -17,6 +22,216 @@ isDiceRollErrorData(value): value is DiceErrorData
 ```
 
 `DiceRollError.fromJSON(data)` restaura erros validados recebidos de workers, outros realms ou transporte JSON.
+
+## Notação mista
+
+`rollMixedDice()` separa rolagens de nível superior por `;`. Cada segmento
+genérico continua usando a gramática V3 completa; chamadas de sistema usam:
+
+```text
+v5(pool=7,hunger=3,difficulty=4)
+fate(dice=4)
+assim(d6=2,d10=1,d12=1,keep=1)
+```
+
+As formas posicionais equivalentes são `v5(7,3,4)`, `fate(4)` e
+`assim(2,1,1,1)`. Exemplo completo:
+
+```ts
+const result = rollMixedDice(
+  '2d20+5; v5(7,3,4); fate(4); assim(2,1,1,1)',
+  { seed: 'misto-42' },
+)
+```
+
+```ts
+interface MixedRollResult {
+  readonly type: 'mixed-roll'
+  readonly schemaVersion: 1
+  readonly input: string
+  readonly notation: string
+  readonly rolls: readonly MixedRollItem[]
+  readonly dice: readonly MixedRollDieResult[]
+  readonly output: string
+  readonly replay: MixedRollReplayDescriptor
+  readonly stats: ExecutionStats
+}
+```
+
+`rolls` preserva o resultado completo e discriminado de cada segmento.
+`dice` achata todos os dados em ordem, prefixa IDs para evitar colisões e
+inclui `physicalValue`, que representa a última face realmente rolada antes
+de transforms como `min`, `max` e compound. Dados de sistema mantêm
+`profileId`, `faceKey` e `symbols`.
+
+Não existe `total` no lote porque totais genéricos, sucessos de Vampiro,
+resultado Fate e símbolos de Assimilação não devem ser somados. O replay é
+restaurado com:
+
+```ts
+rollMixedDice(result.input, { replay: result.replay })
+```
+
+Os limites são avaliados sobre o lote agregado. A seed informada gera streams
+independentes por segmento; sem seed, cada segmento usa entropia criptográfica
+e todos os descritores necessários permanecem em `result.replay`.
+
+## Dados de sistema
+
+As rolagens de sistema são aditivas: não alteram a gramática, `ResolvedDie` ou
+o schema do resultado genérico. Todas contêm `baseRoll: DiceRollResult` e uma
+projeção semântica em `dice`.
+
+```ts
+interface SystemDieResult<
+  ProfileId extends string = string,
+  DieKind extends string = string,
+  FaceKey extends string = string,
+  SymbolId extends string = string,
+> {
+  readonly id: string
+  readonly sourceDieId: string
+  readonly sides: number
+  readonly value: number
+  readonly rawValue: number
+  readonly profileId: ProfileId
+  readonly dieKind: DieKind
+  readonly faceKey: FaceKey
+  readonly symbols: readonly SymbolId[]
+}
+```
+
+`sourceDieId` referencia `baseRoll.dice[].id`. O `id` semântico é
+`${profileId}:${sourceDieId}` e deve ser usado por seleção e renderização.
+Assets não fazem parte deste pacote.
+
+### Fate/Fudge
+
+```ts
+interface FateRollInput {
+  readonly dice?: number // padrão 4; inteiro >= 1
+}
+
+interface FateRollResult {
+  readonly type: 'fate-roll'
+  readonly schemaVersion: 1
+  readonly system: 'fate'
+  readonly rulesVersion: 1
+  readonly diceCount: number
+  readonly total: number
+  readonly dice: readonly FateDieResult[]
+  readonly baseRoll: DiceRollResult
+}
+```
+
+O perfil é `fate-df`. Cada dado semântico tem `sides: 6`, a face física em
+`rawValue`/`value` e `fateValue: -1 | 0 | 1`. Faces 1–2 são `minus`, 3–4
+`blank` e 5–6 `plus`; `total` soma `fateValue`. O `baseRoll` usa `Nd6` para
+preservar a face física no replay, pois a notação genérica `dF` expõe somente
+o valor Fate já convertido.
+
+### Vampiro V5
+
+```ts
+interface VampireV5RollInput {
+  readonly pool: number       // inteiro >= 1
+  readonly hunger: number     // inteiro de 0 a 5
+  readonly difficulty?: number
+}
+
+interface VampireV5RollResult {
+  readonly type: 'vampire-v5-roll'
+  readonly schemaVersion: 1
+  readonly system: 'vampire-v5'
+  readonly rulesVersion: 1
+  readonly pool: number
+  readonly hunger: number
+  readonly difficulty: number | null
+  readonly normalDice: number
+  readonly hungerDice: number
+  readonly successes: number
+  readonly criticalPairs: number
+  readonly outcome:
+    | 'pending'
+    | 'success'
+    | 'critical-success'
+    | 'messy-critical'
+    | 'failure'
+    | 'bestial-failure'
+  readonly dice: readonly VampireV5DieResult[]
+  readonly baseRoll: DiceRollResult
+}
+```
+
+`hungerDice` é `min(pool, hunger)` e o restante é normal. Os perfis são:
+
+- `vampire-v5-normal-d10`: 1–5 `blank`, 6–9 `success`, 10 `critical`;
+- `vampire-v5-hunger-d10`: 1 `bestial-failure`, 2–5 `blank`, 6–9
+  `success`, 10 `messy-critical`.
+
+Cada 6–10 vale um sucesso e cada par de 10 acrescenta dois. Um crítico
+vitorioso com ao menos um 10 de Fome é `messy-critical`; uma falha com ao
+menos um 1 de Fome é `bestial-failure`. Sem dificuldade, `outcome` é
+`pending`.
+
+### Assimilação
+
+```ts
+interface AssimilationRollInput {
+  readonly d6?: number
+  readonly d10?: number
+  readonly d12?: number
+  readonly keep?: number // padrão 1; no máximo o total do pool
+}
+
+interface AssimilationRollResult {
+  readonly type: 'assimilation-roll'
+  readonly schemaVersion: 1
+  readonly system: 'assimilation'
+  readonly rulesVersion: 1
+  readonly d6: number
+  readonly d10: number
+  readonly d12: number
+  readonly totalDice: number
+  readonly keep: number
+  readonly dice: readonly AssimilationDieResult[]
+  readonly baseRoll: DiceRollResult
+}
+```
+
+Os perfis são `assimilation-d6`, `assimilation-d10` e `assimilation-d12`.
+As faces usam esta tabela:
+
+| Face | Símbolos |
+| --- | --- |
+| 1–2 | nenhum |
+| 3–4 | `pressure` |
+| 5 | `adaptation`, `pressure` |
+| 6 | `success` |
+| 7 | `success`, `success` |
+| 8 | `success`, `adaptation` |
+| 9 | `success`, `adaptation`, `pressure` |
+| 10 | `success`, `success`, `pressure` |
+| 11 | `success`, `adaptation`, `adaptation`, `pressure` |
+| 12 | `pressure`, `pressure` |
+
+d6 usa as faces 1–6, d10 usa 1–10 e d12 usa 1–12. A rolagem não escolhe
+resultado automaticamente. A seleção explícita preserva a ordem recebida:
+
+```ts
+const roll = rollAssimilation({ d6: 1, d10: 1, d12: 1, keep: 2 })
+const result = evaluateAssimilationSelection(
+  roll,
+  [roll.dice[2].id, roll.dice[0].id],
+)
+
+result.success
+result.adaptation
+result.pressure
+```
+
+IDs duplicados, desconhecidos ou uma seleção maior que `keep` geram
+`INVALID_SYSTEM_INPUT`.
 
 ## Engine, cache e opções
 
