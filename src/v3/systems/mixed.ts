@@ -885,8 +885,15 @@ function formatItem(item: MixedRollItem): string {
   switch (item.kind) {
     case 'generic':
       return item.result.output;
-    case 'vampire-v5':
-      return `${item.notation}: ${item.result.successes} successes (${item.result.outcome})`;
+    case 'vampire-v5': {
+      const successCount = item.result.successes;
+      const successSummary = `${successCount} ${
+        successCount === 1 ? 'success' : 'successes'
+      }`;
+      return item.result.outcome === 'pending'
+        ? `${item.notation}: ${successSummary}`
+        : `${item.notation}: ${successSummary} (${item.result.outcome})`;
+    }
     case 'fate':
       return `${item.notation}: [${
         item.result.dice.map((die) => (

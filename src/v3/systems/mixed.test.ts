@@ -87,6 +87,28 @@ describe('mixed dice notation', () => {
     expect(shortNamed.rolls[0]?.kind).toBe('assimilation');
   });
 
+  test('omits the pending V5 outcome and pluralizes the success count', () => {
+    const pending = rollMixedDice('v5(pool=2,hunger=1)', {
+      seed: 'mixed-v5-pending-output',
+    });
+    const pendingRoll = pending.rolls[0];
+    expect(pendingRoll?.kind).toBe('vampire-v5');
+    if (pendingRoll?.kind !== 'vampire-v5') {
+      throw new Error('Expected a Vampire V5 roll');
+    }
+
+    const successWord = pendingRoll.result.successes === 1 ? 'success' : 'successes';
+    expect(pending.output).toBe(
+      `${pendingRoll.notation}: ${pendingRoll.result.successes} ${successWord}`,
+    );
+    expect(pending.output).not.toContain('(pending)');
+
+    const evaluated = rollMixedDice('v5(pool=1,hunger=0,difficulty=0)', {
+      seed: 'mixed-v5-evaluated-output',
+    });
+    expect(evaluated.output).toMatch(/ \((?:success|critical-success)\)$/u);
+  });
+
   test('keeps ordinary functions and grouped generic notation intact', () => {
     const result = rollMixedDice(
       'ceil(1d6/2); {1d6,1d8}kh1; max(2,3)',
