@@ -7,10 +7,10 @@ const unsafeRoll = rollMixedDice as (
 ) => unknown;
 
 describe('mixed dice notation', () => {
-  test('rolls generic, Vampire V5, Fate, and Assimilation dice together', () => {
+  test('rolls generic, Vampire V5, Fate, Assimilation, and Daggerheart dice together', () => {
     const result = rollMixedDice(
       '2d6+1; v5(pool=5,hunger=2,difficulty=3); fate(4); '
-        + 'assim(d6=1,d10=1,d12=1,keep=2)',
+        + 'assim(d6=1,d10=1,d12=1,keep=2); daggerheart(modifier=-1,difficulty=12)',
       { seed: 'mixed-all-systems' },
     );
 
@@ -18,17 +18,19 @@ describe('mixed dice notation', () => {
       type: 'mixed-roll',
       schemaVersion: 1,
       notation: '2d6+1; v5(pool=5,hunger=2,difficulty=3); '
-        + 'fate(dice=4); assim(d6=1,d10=1,d12=1,keep=2)',
+        + 'fate(dice=4); assim(d6=1,d10=1,d12=1,keep=2); '
+        + 'daggerheart(modifier=-1,difficulty=12)',
     });
     expect(result.rolls.map((roll) => roll.kind)).toEqual([
       'generic',
       'vampire-v5',
       'fate',
       'assimilation',
+      'daggerheart',
     ]);
-    expect(result.dice).toHaveLength(14);
-    expect(new Set(result.dice.map((die) => die.id)).size).toBe(14);
-    expect(result.stats.initialDice).toBe(14);
+    expect(result.dice).toHaveLength(16);
+    expect(new Set(result.dice.map((die) => die.id)).size).toBe(16);
+    expect(result.stats.initialDice).toBe(16);
 
     const profileIds = result.dice.flatMap((die) => (
       'profileId' in die ? [die.profileId] : []
@@ -46,10 +48,13 @@ describe('mixed dice notation', () => {
       'assimilation-d6',
       'assimilation-d10',
       'assimilation-d12',
+      'daggerheart-hope-d12',
+      'daggerheart-fear-d12',
     ]);
     expect(result.output).toContain('successes');
     expect(result.output).toContain('fate(dice=4)');
     expect(result.output).toContain('keep 2');
+    expect(result.output).toMatch(/(?:success|failure)-with-(?:hope|fear)|critical-success/u);
   });
 
   test('supports concise positional calls and Portuguese aliases', () => {
@@ -85,6 +90,16 @@ describe('mixed dice notation', () => {
       'assim(d6=2,d10=1,d12=1,keep=2)',
     );
     expect(shortNamed.rolls[0]?.kind).toBe('assimilation');
+
+    const daggerheart = rollMixedDice(
+      'dh(-1,12); daggerheart(mod=2,dc=15); dagger(modifier=0,dificuldade=10)',
+      { seed: 'mixed-daggerheart-aliases' },
+    );
+    expect(daggerheart.notation).toBe(
+      'daggerheart(modifier=-1,difficulty=12); daggerheart(modifier=2,difficulty=15); '
+        + 'daggerheart(modifier=0,difficulty=10)',
+    );
+    expect(daggerheart.rolls.every((roll) => roll.kind === 'daggerheart')).toBe(true);
   });
 
   test('omits the pending V5 outcome and pluralizes the success count', () => {
@@ -172,6 +187,8 @@ describe('mixed dice notation', () => {
       'v5(pool=5,2)',
       'v5(pool=5,hunger=1,fome=2)',
       'fate(1,2)',
+      'daggerheart(1,2,3)',
+      'daggerheart(difficulty=-1)',
       'assim()',
       'assim(d20=1)',
     ]) {

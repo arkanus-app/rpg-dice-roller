@@ -14,6 +14,11 @@ export {
   FATE_DF_PROFILE,
   rollFateDice,
 } from './fate.js';
+export {
+  DAGGERHEART_FEAR_D12_PROFILE,
+  DAGGERHEART_HOPE_D12_PROFILE,
+  rollDaggerheart,
+} from './daggerheart.js';
 export { rollMixedDice } from './mixed.js';
 
 export type {
@@ -40,7 +45,21 @@ export type {
   FateValue,
 } from './fate.js';
 export type {
+  DaggerheartDieKind,
+  DaggerheartDieResult,
+  DaggerheartDuality,
+  DaggerheartFaceKey,
+  DaggerheartFearDieResult,
+  DaggerheartHopeDieResult,
+  DaggerheartOutcome,
+  DaggerheartProfileId,
+  DaggerheartRollInput,
+  DaggerheartRollResult,
+  DaggerheartSymbol,
+} from './daggerheart.js';
+export type {
   MixedAssimilationRollItem,
+  MixedDaggerheartRollItem,
   MixedFateRollItem,
   MixedGenericDieResult,
   MixedGenericRollItem,

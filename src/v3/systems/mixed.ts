@@ -23,6 +23,12 @@ import {
   type AssimilationRollResult,
 } from './assimilation.js';
 import {
+  rollDaggerheart,
+  type DaggerheartDieResult,
+  type DaggerheartRollInput,
+  type DaggerheartRollResult,
+} from './daggerheart.js';
+import {
   rollFateDice,
   type FateDieResult,
   type FateRollInput,
@@ -35,7 +41,12 @@ import {
   type VampireV5RollResult,
 } from './vampire-v5.js';
 
-export type MixedRollKind = 'generic' | 'vampire-v5' | 'fate' | 'assimilation';
+export type MixedRollKind =
+  | 'generic'
+  | 'vampire-v5'
+  | 'fate'
+  | 'assimilation'
+  | 'daggerheart';
 
 export interface MixedRollReplayEntry {
   readonly kind: MixedRollKind;
@@ -97,11 +108,17 @@ export type MixedAssimilationRollItem = MixedRollItemBase<
   AssimilationRollResult
 >;
 
+export type MixedDaggerheartRollItem = MixedRollItemBase<
+  'daggerheart',
+  DaggerheartRollResult
+>;
+
 export type MixedRollItem =
   | MixedGenericRollItem
   | MixedVampireV5RollItem
   | MixedFateRollItem
-  | MixedAssimilationRollItem;
+  | MixedAssimilationRollItem
+  | MixedDaggerheartRollItem;
 
 export interface MixedGenericDieResult extends ResolvedDie {
   readonly mixedRollId: string;
@@ -114,7 +131,8 @@ export interface MixedGenericDieResult extends ResolvedDie {
 type MixedSourceSystemDieResult =
   | VampireV5DieResult
   | FateDieResult
-  | AssimilationDieResult;
+  | AssimilationDieResult
+  | DaggerheartDieResult;
 
 export type MixedSystemDieResult = MixedSourceSystemDieResult & {
   readonly mixedRollId: string;
@@ -170,11 +188,20 @@ interface ParsedAssimilationRoll {
   readonly rollCount: 1;
 }
 
+interface ParsedDaggerheartRoll {
+  readonly kind: 'daggerheart';
+  readonly notation: string;
+  readonly input: DaggerheartRollInput;
+  readonly initialDice: 2;
+  readonly rollCount: 1;
+}
+
 type ParsedMixedRoll =
   | ParsedGenericRoll
   | ParsedVampireV5Roll
   | ParsedFateRoll
-  | ParsedAssimilationRoll;
+  | ParsedAssimilationRoll
+  | ParsedDaggerheartRoll;
 
 type NamedArguments = Readonly<Record<string, number>>;
 
@@ -184,6 +211,9 @@ const SYSTEM_ALIASES: Readonly<Record<string, Exclude<MixedRollKind, 'generic'>>
     assim: 'assimilation',
     assimilacao: 'assimilation',
     assimilation: 'assimilation',
+    dagger: 'daggerheart',
+    daggerheart: 'daggerheart',
+    dh: 'daggerheart',
     fate: 'fate',
     fatedice: 'fate',
     v5: 'vampire-v5',
@@ -287,15 +317,15 @@ function splitMixedNotation(input: string): readonly string[] {
   return Object.freeze(segments);
 }
 
-function parseUnsignedInteger(
+function parseIntegerLiteral(
   input: string,
   originalInput: string,
   segment: number,
 ): number {
-  if (!/^\d+$/u.test(input)) {
+  if (!/^-?\d+$/u.test(input)) {
     throw mixedNotationError(
       originalInput,
-      `Mixed roll ${segment} arguments must be non-negative integer literals`,
+      `Mixed roll ${segment} arguments must be integer literals`,
       segment,
     );
   }
@@ -331,7 +361,7 @@ function parseArguments(
   const named = parts.some((part) => part.includes('='));
   if (!named) {
     return Object.freeze(parts.map((part) => (
-      parseUnsignedInteger(part, originalInput, segment)
+      parseIntegerLiteral(part, originalInput, segment)
     )));
   }
   if (parts.some((part) => !part.includes('='))) {
@@ -355,7 +385,7 @@ function parseArguments(
         segment,
       );
     }
-    result[name] = parseUnsignedInteger(rawValue, originalInput, segment);
+    result[name] = parseIntegerLiteral(rawValue, originalInput, segment);
   }
   return Object.freeze(result);
 }
@@ -501,6 +531,58 @@ function parseFate(
   });
 }
 
+function parseDaggerheart(
+  args: readonly number[] | NamedArguments,
+  originalInput: string,
+  segment: number,
+): ParsedDaggerheartRoll {
+  let modifier: number | undefined;
+  let difficulty: number | undefined;
+
+  if (isNamedArguments(args)) {
+    const modifierAliases = ['modifier', 'mod', 'bonus'];
+    const difficultyAliases = ['difficulty', 'dificuldade', 'dc'];
+    assertNamedArguments(
+      args,
+      [...modifierAliases, ...difficultyAliases],
+      originalInput,
+      segment,
+    );
+    modifier = readNamedArgument(args, modifierAliases, originalInput, segment, 'modifier');
+    difficulty = readNamedArgument(
+      args,
+      difficultyAliases,
+      originalInput,
+      segment,
+      'difficulty',
+    );
+  } else {
+    if (args.length > 2) {
+      throw mixedNotationError(
+        originalInput,
+        `Mixed roll ${segment} daggerheart() expects optional modifier and difficulty`,
+        segment,
+      );
+    }
+    [modifier, difficulty] = args;
+  }
+
+  const resolvedModifier = modifier ?? 0;
+  const input: DaggerheartRollInput = {
+    modifier: resolvedModifier,
+    ...(difficulty === undefined ? {} : { difficulty }),
+  };
+  return Object.freeze({
+    kind: 'daggerheart',
+    notation: `daggerheart(modifier=${resolvedModifier}${
+      difficulty === undefined ? '' : `,difficulty=${difficulty}`
+    })`,
+    input,
+    initialDice: 2,
+    rollCount: 1,
+  });
+}
+
 function parseAssimilation(
   args: readonly number[] | NamedArguments,
   originalInput: string,
@@ -564,6 +646,8 @@ function parseMixedRoll(
           return parseFate(args, originalInput, segment);
         case 'assimilation':
           return parseAssimilation(args, originalInput, segment);
+        case 'daggerheart':
+          return parseDaggerheart(args, originalInput, segment);
       }
     }
   }
@@ -818,6 +902,14 @@ function createMixedItem(
         notation: parsed.notation,
         result: rollAssimilation(parsed.input, options),
       });
+    case 'daggerheart':
+      return Object.freeze({
+        id,
+        index,
+        kind: parsed.kind,
+        notation: parsed.notation,
+        result: rollDaggerheart(parsed.input, options),
+      });
   }
 }
 
@@ -852,7 +944,11 @@ function flattenGenericDice(item: MixedGenericRollItem): readonly MixedGenericDi
 }
 
 function flattenSystemDice(
-  item: MixedVampireV5RollItem | MixedFateRollItem | MixedAssimilationRollItem,
+  item:
+    | MixedVampireV5RollItem
+    | MixedFateRollItem
+    | MixedAssimilationRollItem
+    | MixedDaggerheartRollItem,
 ): readonly MixedSystemDieResult[] {
   return item.result.dice.map((die) => Object.freeze({
     ...die,
@@ -906,6 +1002,10 @@ function formatItem(item: MixedRollItem): string {
           die.symbols.length === 0 ? 'blank' : die.symbols.join('+')
         )).join(' | ')
       }] (keep ${item.result.keep})`;
+    case 'daggerheart':
+      return `${item.notation}: Hope ${item.result.hopeDie.rawValue}, Fear ${
+        item.result.fearDie.rawValue
+      } = ${item.result.total} (${item.result.outcome})`;
   }
 }
 

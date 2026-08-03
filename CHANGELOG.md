@@ -1,5 +1,17 @@
 # Changelog
 
+## Nao publicado
+
+### Adicionado
+
+- `rollDaggerheart()` para a rolagem de acao com os dois d12 de Duality Dice,
+  incluindo modificador, Dificuldade opcional, replay e resultado de
+  Esperanca/Medo ou sucesso critico.
+- Notacao mista `daggerheart()`, `dagger()` e `dh()`, com argumentos
+  posicionais ou nomeados (`modifier`, `difficulty`, `mod`, `dc`).
+- Perfis semanticos `daggerheart-hope-d12` e `daggerheart-fear-d12` para a
+  apresentacao 2D/3D sem recalcular a rolagem.
+
 As mudanças relevantes do `@erpg/dicecore` são registradas neste arquivo.
 
 ## 3.4.0 — 2026-07-31
