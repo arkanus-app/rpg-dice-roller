@@ -1,7 +1,7 @@
 import { DiceRollError } from '../errors.js';
 import type { ResolvedDie } from '../types.js';
 
-export type DiceSystemId = 'assimilation' | 'fate' | 'vampire-v5';
+export type DiceSystemId = 'assimilation' | 'daggerheart' | 'fate' | 'vampire-v5';
 
 /**
  * A semantic projection of one numeric die produced by the V3 executor.

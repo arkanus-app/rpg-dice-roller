@@ -42,6 +42,7 @@ import {
   isDiceRollErrorData,
   normalizeRpgDiceNotation,
   rollAssimilation,
+  rollDaggerheart,
   rollFateDice,
   rollMixedDice,
   rollRpgDice,
@@ -81,6 +82,7 @@ As funções públicas são:
 - `rollAssimilation(input, options?)`: rola os dados especiais de Assimilação sem escolher faces automaticamente;
 - `evaluateAssimilationSelection(roll, selectedIds)`: seleciona até `keep` IDs únicos e agrega seus símbolos;
 - `rollFateDice(input?, options?)`: rola quatro dados Fate por padrão, preserva as faces físicas e soma `-1`, `0` e `+1`;
+- `rollDaggerheart(input?, options?)`: rola os dois d12 de Duality Dice, aplica modificador e resolve Esperança/Medo, sucesso, falha ou crítico;
 - `rollMixedDice(notation, options?)`: executa fórmulas genéricas e sistemas diferentes em um único lote 2D/3D;
 - `verifyRpgDiceNotation(input, options?)`: atalho booleano de validação;
 - `normalizeRpgDiceNotation(input)`: aplica os atalhos de escrita do ERPG;
@@ -124,7 +126,8 @@ const mixed = rollMixedDice(
   '2d20+5; '
     + 'v5(pool=7,hunger=3,difficulty=4); '
     + 'fate(4); '
-    + 'assim(d6=2,d10=1,d12=1,keep=1)',
+    + 'assim(d6=2,d10=1,d12=1,keep=1); '
+    + 'daggerheart(modifier=2,difficulty=15)',
   { seed: 'sessao-42' },
 );
 
@@ -140,6 +143,7 @@ Chamadas aceitas:
 | Vampiro V5 | `v5(7,3,4)` | `v5(pool=7,hunger=3,difficulty=4)` |
 | Fate | `fate(4)` ou `fate()` | `fate(dice=4)` |
 | Assimilação | `AS(2,1,1,1)` ou `assim(2,1,1,1)` | `AS(d6=2,d10=1,d12=1,keep=1)` |
+| Daggerheart | `dh()` ou `dagger(2,15)` | `daggerheart(modifier=2,difficulty=15)` |
 
 Também são reconhecidos `AS`, `vampiro`, `vampire`, `fatedice`, `assimilacao` e
 `assimilation`. Cada trecho genérico aceita a notação V3 completa, inclusive
@@ -245,6 +249,31 @@ await viewer.display(createMixedDisplayRequest({
   dice: mixed.dice,
 }));
 ```
+
+### Daggerheart
+
+```ts
+const daggerheart = rollDaggerheart(
+  { modifier: 2, difficulty: 15 },
+  { seed: 'duality-42' },
+);
+
+console.log(daggerheart.hopeDie.rawValue, daggerheart.fearDie.rawValue);
+console.log(daggerheart.total, daggerheart.outcome);
+```
+
+`rollDaggerheart()` sempre produz um d12 de Esperança com perfil
+`daggerheart-hope-d12` e um d12 de Medo com perfil `daggerheart-fear-d12`.
+O total é a soma das duas faces e do modificador. Se os valores forem iguais,
+o resultado é `critical-success`; caso contrário, a face maior define se a
+ação foi feita com Esperança ou Medo. Sem `difficulty`, o resultado fica
+pendente para Dificuldades secretas.
+
+### Apresentação 3D de Daggerheart
+
+O `@erpg/dice3dview` com estes perfis reconhece os dois resultados como d12
+`default-v2`. A aplicação pode passar `themeColor` por dado para usar a cor da
+skin em Esperança e a inversa RGB em Medo, sem alterar os valores autoritativos.
 
 ## Limites de segurança
 

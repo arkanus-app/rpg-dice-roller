@@ -2,6 +2,8 @@ import {
   ASSIMILATION_D6_PROFILE,
   ASSIMILATION_D10_PROFILE,
   ASSIMILATION_D12_PROFILE,
+  DAGGERHEART_FEAR_D12_PROFILE,
+  DAGGERHEART_HOPE_D12_PROFILE,
   DEFAULT_DICE_LIMITS,
   DiceRollError,
   FATE_DF_PROFILE,
@@ -15,6 +17,7 @@ import {
   isDiceRollErrorData,
   normalizeRpgDiceNotation,
   rollAssimilation,
+  rollDaggerheart,
   rollFateDice,
   rollMixedDice,
   rollRpgDice,
@@ -47,6 +50,15 @@ import type {
   DiceRollSummary,
   DiceSides,
   DiceState,
+  DaggerheartDieKind,
+  DaggerheartDieResult,
+  DaggerheartDuality,
+  DaggerheartFaceKey,
+  DaggerheartOutcome,
+  DaggerheartProfileId,
+  DaggerheartRollInput,
+  DaggerheartRollResult,
+  DaggerheartSymbol,
   ExecutionStats,
   ExcludeDiceEvent,
   ExplodeDiceEvent,
@@ -452,6 +464,32 @@ export function publicApiContracts(): void {
   expectType<SystemDieResult>(fateDie);
   expectType<DiceRollResult>(fateResult.baseRoll);
 
+  const daggerheartSystemId: DiceSystemId = 'daggerheart';
+  const daggerheartInput: DaggerheartRollInput = { modifier: -1, difficulty: 13 };
+  const daggerheartResult: DaggerheartRollResult = rollDaggerheart(
+    daggerheartInput,
+    { seed: 'daggerheart-public-api' },
+  );
+  const daggerheartDie: DaggerheartDieResult = daggerheartResult.dice[0];
+  const daggerheartKind: DaggerheartDieKind = daggerheartDie.dieKind;
+  const daggerheartFace: DaggerheartFaceKey = daggerheartDie.faceKey;
+  const daggerheartSymbol: DaggerheartSymbol = 'hope';
+  const daggerheartProfile: DaggerheartProfileId = DAGGERHEART_HOPE_D12_PROFILE;
+  const daggerheartDuality: DaggerheartDuality = daggerheartResult.duality;
+  const daggerheartOutcome: DaggerheartOutcome = daggerheartResult.outcome;
+
+  expectType<DiceSystemId>(daggerheartSystemId);
+  expectType<'daggerheart-hope-d12'>(DAGGERHEART_HOPE_D12_PROFILE);
+  expectType<'daggerheart-fear-d12'>(DAGGERHEART_FEAR_D12_PROFILE);
+  expectType<DaggerheartDieKind>(daggerheartKind);
+  expectType<DaggerheartFaceKey>(daggerheartFace);
+  expectType<DaggerheartSymbol>(daggerheartSymbol);
+  expectType<DaggerheartProfileId>(daggerheartProfile);
+  expectType<DaggerheartDuality>(daggerheartDuality);
+  expectType<DaggerheartOutcome>(daggerheartOutcome);
+  expectType<SystemDieResult>(daggerheartDie);
+  expectType<DiceRollResult>(daggerheartResult.baseRoll);
+
   const mixedOptions: MixedRollOptions = { seed: 'mixed-public-api' };
   const mixedResult: MixedRollResult = rollMixedDice(
     '1d20; v5(5,2,3); fate(4); assim(1,1,1,2)',
@@ -497,6 +535,8 @@ export function publicApiContracts(): void {
   rollAssimilation({ d20: 1 });
   // @ts-expect-error Fate dice counts are numeric.
   rollFateDice({ dice: 'four' });
+  // @ts-expect-error Daggerheart modifiers are numeric.
+  rollDaggerheart({ modifier: 'one' });
   // @ts-expect-error Mixed dice notation is text.
   rollMixedDice(20);
   // @ts-expect-error Mixed replay and new seeds are mutually exclusive.
