@@ -1,11 +1,17 @@
-import { rollRpgDice } from '../engine.js';
-import type { DiceRollResult, ResolvedDie, RollOptions } from '../types.js';
+import { defaultDiceEngine } from '../engine.js';
+import type { DiceEngine, ResolvedDie } from '../types.js';
 import {
   createSystemDieResult,
+  executeSystemRoll,
   invalidSystemInput,
   readOptionalSystemInteger,
   readSystemInput,
   type SystemDieResult,
+  type CompactSystemRollOptions,
+  type FullSystemRollOptions,
+  type SystemBaseRoll,
+  type SystemRollDetail,
+  type SystemRollOptions,
 } from './common.js';
 
 export const ASSIMILATION_D6_PROFILE = 'assimilation-d6' as const;
@@ -47,7 +53,7 @@ export interface AssimilationRollInput {
   readonly keep?: number;
 }
 
-export interface AssimilationRollResult {
+export interface AssimilationRollResult<Detail extends SystemRollDetail = 'full'> {
   readonly type: 'assimilation-roll';
   readonly schemaVersion: 1;
   readonly system: 'assimilation';
@@ -58,7 +64,7 @@ export interface AssimilationRollResult {
   readonly totalDice: number;
   readonly keep: number;
   readonly dice: readonly AssimilationDieResult[];
-  readonly baseRoll: DiceRollResult;
+  readonly baseRoll: SystemBaseRoll<Detail>;
 }
 
 export interface AssimilationSelectionResult {
@@ -193,8 +199,24 @@ function assimilationNotation(d6: number, d10: number, d12: number): string {
 /** Rolls an Assimilation pool without choosing any result automatically. */
 export function rollAssimilation(
   input: AssimilationRollInput,
-  options: RollOptions = {},
-): AssimilationRollResult {
+  options: CompactSystemRollOptions,
+): AssimilationRollResult<'compact'>;
+export function rollAssimilation(
+  input: AssimilationRollInput,
+  options?: FullSystemRollOptions,
+): AssimilationRollResult;
+export function rollAssimilation(
+  input: AssimilationRollInput,
+  options: SystemRollOptions = {},
+): AssimilationRollResult<SystemRollDetail> {
+  return rollAssimilationWithEngine(defaultDiceEngine, input, options);
+}
+
+export function rollAssimilationWithEngine(
+  engine: DiceEngine,
+  input: AssimilationRollInput,
+  options: SystemRollOptions = {},
+): AssimilationRollResult<SystemRollDetail> {
   const source = readSystemInput(input, 'assimilation');
   const d6 = readOptionalSystemInteger(source, 'assimilation', 'd6', 0) ?? 0;
   const d10 = readOptionalSystemInteger(source, 'assimilation', 'd10', 0) ?? 0;
@@ -214,8 +236,12 @@ export function rollAssimilation(
     throw invalidSystemInput('assimilation', 'keep', 'cannot exceed the dice pool');
   }
 
-  const baseRoll = rollRpgDice(assimilationNotation(d6, d10, d12), options);
-  const dice = baseRoll.dice.map(toAssimilationDie);
+  const { resolved, baseRoll } = executeSystemRoll(
+    engine,
+    assimilationNotation(d6, d10, d12),
+    options,
+  );
+  const dice = resolved.dice.map(toAssimilationDie);
 
   return {
     type: 'assimilation-roll',

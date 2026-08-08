@@ -6,8 +6,10 @@ A V3 publica DTOs `readonly` e JSON-safe. AST, IR, classes do parser e estado in
 
 ```ts
 createDiceEngine(options?): DiceEngine
+createSystemRoller(engine): SystemRoller
 compileRpgDice(input, options?): RollPlan
 rollRpgDice(inputOrPlan, options?): DiceRollResult
+rollRpgDiceDetails(inputOrPlan, options?): DiceRollDetails
 rollRpgDiceSummary(inputOrPlan, options?): DiceRollSummary
 rollMixedDice(notation, options?): MixedRollResult
 rollFateDice(input?, options?): FateRollResult
@@ -20,6 +22,18 @@ normalizeRpgDiceNotation(input): string
 isDiceRollError(error): error is DiceRollError
 isDiceRollErrorData(value): value is DiceErrorData
 ```
+
+Entrypoints suportados:
+
+```ts
+import { createDiceEngine } from '@erpg/dicecore/core'
+import { createSystemRoller } from '@erpg/dicecore/systems'
+import { rollFateDice } from '@erpg/dicecore/systems/fate'
+```
+
+Os demais sistemas estão em `systems/assimilation`, `systems/daggerheart`,
+`systems/mixed` e `systems/vampire-v5`. O entrypoint raiz continua exportando
+toda a API por compatibilidade.
 
 `DiceRollError.fromJSON(data)` restaura erros validados recebidos de workers, outros realms ou transporte JSON.
 
@@ -40,7 +54,7 @@ As formas posicionais equivalentes são `v5(7,3,4)`, `fate(4)` e
 ```ts
 const result = rollMixedDice(
   '2d20+5; v5(7,3,4); fate(4); assim(2,1,1,1)',
-  { seed: 'misto-42' },
+  { seed: 'misto-42', detail: 'compact' },
 )
 ```
 
@@ -76,11 +90,17 @@ Os limites são avaliados sobre o lote agregado. A seed informada gera streams
 independentes por segmento; sem seed, cada segmento usa entropia criptográfica
 e todos os descritores necessários permanecem em `result.replay`.
 
+Com `detail: 'compact'`, segmentos de sistema usam `DiceRollSummary` em
+`baseRoll`; segmentos genéricos permanecem completos porque seus eventos e
+faces físicas são a única representação visual. O padrão compatível é
+`detail: 'full'`.
+
 ## Dados de sistema
 
 As rolagens de sistema são aditivas: não alteram a gramática, `ResolvedDie` ou
-o schema do resultado genérico. Todas contêm `baseRoll: DiceRollResult` e uma
-projeção semântica em `dice`.
+o schema do resultado genérico. Todas contêm uma projeção semântica em `dice`.
+Por padrão, `baseRoll` é um `DiceRollResult`; com `{ detail: 'compact' }`, é um
+`DiceRollSummary` sem a cópia de dados, grupos, eventos e output.
 
 ```ts
 interface SystemDieResult<
@@ -257,6 +277,7 @@ interface DiceEngine {
   inspect(input: string, options?): DiceNotationInspection
   normalize(input: string): string
   roll(inputOrPlan: string | RollPlan, options?): DiceRollResult
+  rollDetails(inputOrPlan: string | RollPlan, options?): DiceRollDetails
   rollSummary(inputOrPlan: string | RollPlan, options?): DiceRollSummary
   verify(input: string, options?): boolean
 }
@@ -267,6 +288,11 @@ O cache de entrada preserva envelopes, comentários e multi-roll. O cache de pro
 `freezeResults` usa `never` por padrão. `development` congela somente quando o ambiente declara explicitamente `NODE_ENV=development`. Planos públicos são sempre imutáveis.
 
 MT19937 é o algoritmo padrão. `xoshiro128ss` é opt-in por engine ou rolagem. Um replay sempre define o algoritmo e não aceita override.
+
+`createSystemRoller(engine)` produz as mesmas funções de sistema e
+`rollMixedDice`, mas garante que todas usem os limites e o algoritmo desse
+engine. Isso evita que uma chamada de sistema contorne acidentalmente a política
+da aplicação.
 
 ## Limites
 
@@ -288,6 +314,10 @@ const DEFAULT_DICE_LIMITS = {
   maxOutputLength: 1_000_000,
 } as const
 ```
+
+`DICE_LIMIT_PRESETS` contém `browser`, `trustedServer` e `untrustedServer`.
+Todos são objetos congelados e podem ser usados diretamente em
+`createDiceEngine({ limits: ... })`.
 
 Todos são inteiros positivos. Os limites do engine são tetos imutáveis; uma chamada pode apenas reduzi-los. Profundidade e nós são cobrados durante o parsing. Dados, grupos, eventos e itens do resultado são cobrados antes da inserção. Loops dinâmicos de modificadores consomem `maxModifierSteps`.
 
@@ -366,7 +396,7 @@ Em `N#formula`, o total raiz permanece a soma dos rolls independentes. `pool` é
 
 O journal segue a ordem em que o executor materializa os fatos. Em uma explosão, o evento `roll` do filho (identificado por `parentDieId`) é registrado antes do `explode` que contém `childDieId`; em penetrate, o `transform` do filho também antecede esse vínculo. Adaptadores cronológicos devem indexar o journal completo e montar dependências por IDs, não reproduzir o array cegamente evento por evento.
 
-## Summary e estatísticas
+## Details, summary e estatísticas
 
 ```ts
 interface ExecutionStats {
@@ -394,6 +424,11 @@ interface DiceRollSummary {
   readonly pool: PoolSummary | null
 }
 ```
+
+`DiceRollDetails` preserva os mesmos campos comuns, usa
+`type: 'dice-roll-details'` e acrescenta `dice`, mas omite `groups`, `events` e
+`output`. É a projeção indicada para regras que precisam mapear faces sem
+transportar o journal completo.
 
 Summary não materializa DTOs de dados, grupos, eventos ou output. Com o mesmo replay, full e summary têm totais, pools e estatísticas lógicas idênticas.
 

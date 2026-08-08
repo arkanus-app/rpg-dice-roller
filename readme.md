@@ -1,8 +1,6 @@
-# @erpg/dicecore 3.4.0
+# @erpg/dicecore 3.5.0
 
 Núcleo de dados do ERPG para compilar, inspecionar e resolver notações de dados. A V3 é escrita em TypeScript estrito, não mantém estado global de RNG e entrega resultados `readonly`, JSON-safe e próprios para frontend, backend, automações e visualização 3D.
-
-> A versão `3.4.0` está implementada neste repositório, mas este documento não indica que a publicação no npm ou a criação da tag já tenham ocorrido.
 
 ## Requisitos e formatos
 
@@ -28,7 +26,18 @@ const { rollRpgDice } = require('@erpg/dicecore');
 const result = rollRpgDice('1d20+5', { seed: 'ataque-1' });
 ```
 
-Imports profundos, global UMD e as classes internas da V2 não fazem parte da API pública.
+Para reduzir o código carregado, use um entrypoint suportado em vez do pacote
+completo:
+
+```ts
+import { createDiceEngine, rollRpgDice } from '@erpg/dicecore/core';
+import { rollFateDice } from '@erpg/dicecore/systems/fate';
+```
+
+Também estão disponíveis `@erpg/dicecore/systems`,
+`@erpg/dicecore/systems/assimilation`, `/daggerheart`, `/mixed` e
+`/vampire-v5`. Outros imports profundos, global UMD e as classes internas da V2
+não fazem parte da API pública.
 
 ## API pública
 
@@ -36,15 +45,19 @@ Imports profundos, global UMD e as classes internas da V2 não fazem parte da AP
 import {
   compileRpgDice,
   createDiceEngine,
+  createSystemRoller,
+  DICE_LIMIT_PRESETS,
   evaluateAssimilationSelection,
   inspectRpgDiceNotation,
   isDiceRollError,
   isDiceRollErrorData,
   normalizeRpgDiceNotation,
   rollAssimilation,
+  rollDaggerheart,
   rollFateDice,
   rollMixedDice,
   rollRpgDice,
+  rollRpgDiceDetails,
   rollRpgDiceSummary,
   rollVampireV5,
   verifyRpgDiceNotation,
@@ -76,12 +89,15 @@ As funções públicas são:
 - `createDiceEngine(options?)`: cria limites, cache de planos e política de congelamento isolados;
 - `inspectRpgDiceNotation(input, options?)`: valida sem rolar e retorna plano, grupos e estimativa de custo;
 - `rollRpgDice(inputOrPlan, options?)`: resolve a fórmula e sempre inclui um descritor de replay;
+- `rollRpgDiceDetails(inputOrPlan, options?)`: preserva rolls e dados resolvidos sem materializar grupos, eventos ou output;
 - `rollRpgDiceSummary(inputOrPlan, options?)`: resolve total, rolls, pool, replay e stats sem materializar dados, grupos, eventos ou output;
 - `rollVampireV5(input, options?)`: rola e avalia um pool de Vampiro V5 com dados normais e de Fome;
 - `rollAssimilation(input, options?)`: rola os dados especiais de Assimilação sem escolher faces automaticamente;
 - `evaluateAssimilationSelection(roll, selectedIds)`: seleciona até `keep` IDs únicos e agrega seus símbolos;
 - `rollFateDice(input?, options?)`: rola quatro dados Fate por padrão, preserva as faces físicas e soma `-1`, `0` e `+1`;
+- `rollDaggerheart(input?, options?)`: rola os dois d12 de Duality Dice, aplica modificador e resolve Esperança/Medo, sucesso, falha ou crítico;
 - `rollMixedDice(notation, options?)`: executa fórmulas genéricas e sistemas diferentes em um único lote 2D/3D;
+- `createSystemRoller(engine)`: vincula todas as APIs de sistema ao engine configurado;
 - `verifyRpgDiceNotation(input, options?)`: atalho booleano de validação;
 - `normalizeRpgDiceNotation(input)`: aplica os atalhos de escrita do ERPG;
 - `isDiceRollError(error)`: type guard para os erros estruturados da V3.
@@ -91,18 +107,20 @@ Um engine é indicado quando a aplicação precisa definir tetos próprios ou re
 
 ```ts
 const dice = createDiceEngine({
-  limits: {
-    maxRolls: 20,
-    maxInitialDice: 500,
-    maxGeneratedDice: 1_000,
-  },
+  limits: DICE_LIMIT_PRESETS.untrustedServer,
   cache: {
     maxInputEntries: 300,
     maxProgramEntries: 100,
     maxProgramNodes: 50_000,
   },
-  randomAlgorithm: 'mt19937',
+  randomAlgorithm: 'xoshiro128ss',
   freezeResults: 'development',
+});
+
+const systems = createSystemRoller(dice);
+const fate = systems.rollFateDice(undefined, {
+  seed: 'combate-17:fate',
+  detail: 'compact',
 });
 
 const plan = dice.compile('3#2d20kh1+5');
@@ -112,7 +130,7 @@ const result = dice.roll(plan, {
 });
 ```
 
-Limites informados em uma chamada podem apenas reduzir os tetos do engine. O plano original reutiliza a representação compilada; cópias via JSON ou spread são validadas e recompiladas pelo engine de destino antes da execução.
+Limites informados em uma chamada podem apenas reduzir os tetos do engine. O plano original reutiliza a representação compilada; cópias via JSON ou spread são validadas e recompiladas pelo engine de destino antes da execução. `DICE_LIMIT_PRESETS` oferece políticas para browser, servidor confiável e entrada não confiável; copie e sobrescreva somente os tetos que sua aplicação precisa reduzir.
 
 ## Notação mista para 2D e 3D
 
@@ -124,14 +142,20 @@ const mixed = rollMixedDice(
   '2d20+5; '
     + 'v5(pool=7,hunger=3,difficulty=4); '
     + 'fate(4); '
-    + 'assim(d6=2,d10=1,d12=1,keep=1)',
-  { seed: 'sessao-42' },
+    + 'assim(d6=2,d10=1,d12=1,keep=1); '
+    + 'daggerheart(modifier=2,difficulty=15)',
+  { seed: 'sessao-42', detail: 'compact', randomAlgorithm: 'xoshiro128ss' },
 );
 
 console.log(mixed.rolls);  // resultados completos de cada sistema
 console.log(mixed.dice);   // lista plana para UI 2D/3D
 console.log(mixed.output); // resumo legível do lote
 ```
+
+No modo `compact`, apenas os segmentos de sistema substituem o `baseRoll`
+completo por um `DiceRollSummary`; os dados semânticos e os segmentos genéricos
+continuam completos para animação. Use `detail: 'full'` quando a UI realmente
+precisar dos grupos, eventos e output internos de cada sistema.
 
 Chamadas aceitas:
 
@@ -140,6 +164,7 @@ Chamadas aceitas:
 | Vampiro V5 | `v5(7,3,4)` | `v5(pool=7,hunger=3,difficulty=4)` |
 | Fate | `fate(4)` ou `fate()` | `fate(dice=4)` |
 | Assimilação | `AS(2,1,1,1)` ou `assim(2,1,1,1)` | `AS(d6=2,d10=1,d12=1,keep=1)` |
+| Daggerheart | `dh()` ou `dagger(2,15)` | `daggerheart(modifier=2,difficulty=15)` |
 
 Também são reconhecidos `AS`, `vampiro`, `vampire`, `fatedice`, `assimilacao` e
 `assimilation`. Cada trecho genérico aceita a notação V3 completa, inclusive
@@ -246,6 +271,31 @@ await viewer.display(createMixedDisplayRequest({
 }));
 ```
 
+### Daggerheart
+
+```ts
+const daggerheart = rollDaggerheart(
+  { modifier: 2, difficulty: 15 },
+  { seed: 'duality-42' },
+);
+
+console.log(daggerheart.hopeDie.rawValue, daggerheart.fearDie.rawValue);
+console.log(daggerheart.total, daggerheart.outcome);
+```
+
+`rollDaggerheart()` sempre produz um d12 de Esperança com perfil
+`daggerheart-hope-d12` e um d12 de Medo com perfil `daggerheart-fear-d12`.
+O total é a soma das duas faces e do modificador. Se os valores forem iguais,
+o resultado é `critical-success`; caso contrário, a face maior define se a
+ação foi feita com Esperança ou Medo. Sem `difficulty`, o resultado fica
+pendente para Dificuldades secretas.
+
+### Apresentação 3D de Daggerheart
+
+O `@erpg/dice3dview` com estes perfis reconhece os dois resultados como d12
+`default-v2`. A aplicação pode passar `themeColor` por dado para usar a cor da
+skin em Esperança e a inversa RGB em Medo, sem alterar os valores autoritativos.
+
 ## Limites de segurança
 
 As opções usam `limits`, tanto no engine quanto por chamada:
@@ -272,7 +322,9 @@ const result = rollRpgDice('3#2d6!', {
 });
 ```
 
-Os padrões completos estão em `DEFAULT_DICE_LIMITS`. A inspeção calcula custo estático e pior caso; parser e executor também aplicam orçamentos duros durante a construção e a execução.
+Os padrões completos estão em `DEFAULT_DICE_LIMITS`; políticas prontas estão em
+`DICE_LIMIT_PRESETS`. A inspeção calcula custo estático e pior caso; parser e
+executor também aplicam orçamentos duros durante a construção e a execução.
 
 ## Resultado V3
 

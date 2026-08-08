@@ -17,12 +17,15 @@ interface BenchmarkEngine {
   clearCache(): void;
   compile(input: string): object;
   roll(input: string | object, options?: object): BenchmarkRollResult;
+  rollDetails(input: string | object, options?: object): BenchmarkRollResult;
   rollSummary(input: string | object, options?: object): BenchmarkRollResult;
 }
 
 interface BenchmarkApi {
   createDiceEngine(options?: object): BenchmarkEngine;
   rollRpgDice(input: string | object, options?: object): BenchmarkRollResult;
+  rollFateDice(input?: object, options?: object): Readonly<Record<string, unknown>>;
+  rollMixedDice(input: string, options?: object): Readonly<Record<string, unknown>>;
   rollRpgDiceSummary(input: string | object, options?: object): BenchmarkRollResult;
 }
 
@@ -75,6 +78,8 @@ function loadApi(value: unknown): BenchmarkApi {
     !isObject(value)
     || !isFunction(value['createDiceEngine'])
     || !isFunction(value['rollRpgDice'])
+    || !isFunction(value['rollFateDice'])
+    || !isFunction(value['rollMixedDice'])
     || !isFunction(value['rollRpgDiceSummary'])
   ) {
     throw new TypeError('dist does not expose the V3 benchmark API');
@@ -82,6 +87,8 @@ function loadApi(value: unknown): BenchmarkApi {
 
   const createDiceEngine = value['createDiceEngine'];
   const rollRpgDice = value['rollRpgDice'];
+  const rollFateDice = value['rollFateDice'];
+  const rollMixedDice = value['rollMixedDice'];
   const rollRpgDiceSummary = value['rollRpgDiceSummary'];
 
   return {
@@ -92,6 +99,7 @@ function loadApi(value: unknown): BenchmarkApi {
         || !isFunction(engine['clearCache'])
         || !isFunction(engine['compile'])
         || !isFunction(engine['roll'])
+        || !isFunction(engine['rollDetails'])
         || !isFunction(engine['rollSummary'])
       ) {
         throw new TypeError('createDiceEngine returned an invalid V3 engine');
@@ -99,6 +107,7 @@ function loadApi(value: unknown): BenchmarkApi {
       const clearCache = engine['clearCache'];
       const compile = engine['compile'];
       const roll = engine['roll'];
+      const rollDetails = engine['rollDetails'];
       const rollSummary = engine['rollSummary'];
       return {
         clearCache: () => {
@@ -112,12 +121,17 @@ function loadApi(value: unknown): BenchmarkApi {
           return plan;
         },
         roll: (input, options) => readRollResult(roll.call(engine, input, options)),
+        rollDetails: (input, options) => readRollResult(
+          rollDetails.call(engine, input, options),
+        ),
         rollSummary: (input, options) => readRollResult(
           rollSummary.call(engine, input, options),
         ),
       };
     },
     rollRpgDice: (input, options) => readRollResult(rollRpgDice(input, options)),
+    rollFateDice: (input, options) => readObjectResult(rollFateDice(input, options)),
+    rollMixedDice: (input, options) => readObjectResult(rollMixedDice(input, options)),
     rollRpgDiceSummary: (input, options) => readRollResult(
       rollRpgDiceSummary(input, options),
     ),
@@ -131,6 +145,13 @@ function isBenchmarkRollResult(value: unknown): value is BenchmarkRollResult {
 function readRollResult(value: unknown): BenchmarkRollResult {
   if (!isBenchmarkRollResult(value)) {
     throw new TypeError('roll returned an invalid result');
+  }
+  return value;
+}
+
+function readObjectResult(value: unknown): Readonly<Record<string, unknown>> {
+  if (!isObject(value)) {
+    throw new TypeError('operation returned an invalid result');
   }
   return value;
 }
@@ -318,6 +339,7 @@ const api = loadApi(distModule);
 const coldEngine = api.createDiceEngine();
 const hotEngine = api.createDiceEngine();
 const hotPlan = hotEngine.compile('2d6+3');
+const simplePlan = hotEngine.compile('1d20');
 let mtSeedSequence = 0;
 let xoshiroSeedSequence = 0;
 
@@ -357,6 +379,42 @@ const cases: readonly BenchmarkCase[] = [
     name: 'summary-simple-mt19937',
     iterations: 20_000,
     run: () => api.rollRpgDiceSummary('1d20', { seed: 123_456 }),
+  },
+  {
+    name: 'details-simple-mt19937',
+    iterations: 20_000,
+    run: () => hotEngine.rollDetails(simplePlan, { seed: 123_456 }),
+  },
+  {
+    name: 'summary-crypto-mt19937',
+    iterations: 10_000,
+    run: () => hotEngine.rollSummary(simplePlan),
+  },
+  {
+    name: 'summary-crypto-xoshiro128ss',
+    iterations: 10_000,
+    run: () => hotEngine.rollSummary(simplePlan, { randomAlgorithm: 'xoshiro128ss' }),
+  },
+  {
+    name: 'fate-100-full',
+    iterations: 500,
+    run: () => api.rollFateDice({ dice: 100 }, { seed: 123_456 }),
+  },
+  {
+    name: 'fate-100-compact',
+    iterations: 500,
+    run: () => api.rollFateDice(
+      { dice: 100 },
+      { detail: 'compact', seed: 123_456 },
+    ),
+  },
+  {
+    name: 'mixed-systems-compact',
+    iterations: 500,
+    run: () => api.rollMixedDice(
+      'fate(20); v5(20,5,3); assim(d6=5,d10=5,d12=5,keep=3); dh(2,12)',
+      { detail: 'compact', seed: 123_456 },
+    ),
   },
   {
     name: 'rng-summary-10-mt19937',
@@ -449,11 +507,23 @@ const unique400To200 = measureRelativeDuration(
   requiredCase('unique-400'),
   requiredCase('unique-200'),
 );
+const cryptoMtToXoshiro = measureRelativeDuration(
+  'crypto-mt19937-to-xoshiro128ss',
+  requiredCase('summary-crypto-mt19937'),
+  requiredCase('summary-crypto-xoshiro128ss'),
+);
+const compactToFullFate = measureRelativeDuration(
+  'fate-100-compact-to-full',
+  requiredCase('fate-100-compact'),
+  requiredCase('fate-100-full'),
+);
 const comparisons: readonly RelativeMeasurement[] = [
   planToString,
   mtToXoshiro,
   multiToFlat,
   unique400To200,
+  cryptoMtToXoshiro,
+  compactToFullFate,
 ];
 
 const mtResult = requiredResult('full-simple-mt19937');
@@ -464,6 +534,39 @@ assertAtMost(
   1.1,
   'Known RollPlan cost relative to a cached string',
 );
+assertAtLeast(
+  cryptoMtToXoshiro.medianDurationRatio,
+  1.3,
+  'xoshiro128ss speedup when crypto creates replay seed material',
+);
+assertAtMost(
+  compactToFullFate.medianDurationRatio,
+  1.1,
+  'Compact Fate execution cost relative to the full result',
+);
+
+function measureEsmClosure(entry: string): number {
+  const pending = [resolve(root, entry)];
+  const visited = new Set<string>();
+  const sources: string[] = [];
+  const importPattern = /(?:\bfrom\s*|\bimport\s*)(?:\(\s*)?['"](\.[^'"]+)['"]/gu;
+  while (pending.length > 0) {
+    const path = pending.pop();
+    if (path === undefined || visited.has(path)) {
+      continue;
+    }
+    visited.add(path);
+    const source = readFileSync(path, 'utf8');
+    sources.push(source);
+    for (const match of source.matchAll(importPattern)) {
+      const specifier = match[1];
+      if (specifier !== undefined) {
+        pending.push(resolve(dirname(path), specifier));
+      }
+    }
+  }
+  return gzipSync(sources.join('\n')).byteLength;
+}
 assertAtLeast(
   mtToXoshiro.medianDurationRatio,
   1.3,
@@ -484,11 +587,21 @@ const fullLargeResult = api.rollRpgDice('10000d20', { seed: 123_456 });
 const summaryLargeResult = api.rollRpgDiceSummary('10000d20', { seed: 123_456 });
 const fullJsonBytes = Buffer.byteLength(JSON.stringify(fullLargeResult));
 const summaryJsonBytes = Buffer.byteLength(JSON.stringify(summaryLargeResult));
-const esmGzipBytes = gzipSync(readFileSync(resolve(root, 'dist/index.js'))).byteLength;
+const fateFullResult = api.rollFateDice({ dice: 100 }, { seed: 123_456 });
+const fateCompactResult = api.rollFateDice(
+  { dice: 100 },
+  { detail: 'compact', seed: 123_456 },
+);
+const fateFullJsonBytes = Buffer.byteLength(JSON.stringify(fateFullResult));
+const fateCompactJsonBytes = Buffer.byteLength(JSON.stringify(fateCompactResult));
+const rootEsmGzipBytes = measureEsmClosure('dist/index.js');
+const coreEsmGzipBytes = measureEsmClosure('dist/core.js');
 
 assertAtMost(fullJsonBytes, 5.5 * 1024 * 1024, 'Full 10,000-die JSON size');
 assertAtMost(summaryJsonBytes, 50 * 1024, 'Summary 10,000-die JSON size');
-assertAtMost(esmGzipBytes, 25 * 1024, 'ESM gzip size');
+assertAtMost(fateCompactJsonBytes / fateFullJsonBytes, 0.5, 'Compact Fate JSON ratio');
+assertAtMost(rootEsmGzipBytes, 28 * 1024, 'Root ESM graph gzip size');
+assertAtMost(coreEsmGzipBytes, 21 * 1024, 'Core ESM graph gzip size');
 
 const nodeMajor = Number.parseInt(process.versions.node.split('.')[0] ?? '', 10);
 const shouldCompareBaseline = process.argv.includes('--check')
@@ -518,8 +631,11 @@ const report = {
   comparisons,
   results,
   sizes: {
-    esmGzipBytes,
+    coreEsmGzipBytes,
+    fateCompactJsonBytes,
+    fateFullJsonBytes,
     full10000DiceJsonBytes: fullJsonBytes,
+    rootEsmGzipBytes,
     summary10000DiceJsonBytes: summaryJsonBytes,
   },
   gateFailures,

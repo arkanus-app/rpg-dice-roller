@@ -11,9 +11,10 @@ import { dirname, join, resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { gzipSync } from 'node:zlib';
 
-const maximumPackedSize = 80 * 1024;
-const maximumUnpackedSize = 350 * 1024;
-const maximumEsmGzipSize = 25 * 1024;
+const maximumPackedSize = 90 * 1024;
+const maximumUnpackedSize = 375 * 1024;
+const maximumRootEsmGzipSize = 28 * 1024;
+const maximumCoreEsmGzipSize = 21 * 1024;
 const root = resolve(dirname(fileURLToPath(import.meta.url)), '..');
 const tscExecutable = resolve(root, 'node_modules/typescript/bin/tsc');
 const npmExecutable = process.env['npm_execpath'];
@@ -124,10 +125,41 @@ if (authoredJavaScript.length > 0) {
   throw new Error(`Authored JavaScript found outside build output:\n${authoredJavaScript.join('\n')}`);
 }
 
-const esmGzipSize = gzipSync(readFileSync(resolve(root, 'dist/index.js'))).byteLength;
-if (esmGzipSize > maximumEsmGzipSize) {
+const measureEsmClosure = (entry: string): number => {
+  const pending = [resolve(root, entry)];
+  const visited = new Set<string>();
+  const sources: string[] = [];
+  const importPattern = /(?:\bfrom\s*|\bimport\s*)(?:\(\s*)?['"](\.[^'"]+)['"]/gu;
+
+  while (pending.length > 0) {
+    const path = pending.pop();
+    if (path === undefined || visited.has(path)) {
+      continue;
+    }
+    visited.add(path);
+    const source = readFileSync(path, 'utf8');
+    sources.push(source);
+    for (const match of source.matchAll(importPattern)) {
+      const specifier = match[1];
+      if (specifier !== undefined) {
+        pending.push(resolve(dirname(path), specifier));
+      }
+    }
+  }
+
+  return gzipSync(sources.join('\n')).byteLength;
+};
+
+const rootEsmGzipSize = measureEsmClosure('dist/index.js');
+const coreEsmGzipSize = measureEsmClosure('dist/core.js');
+if (rootEsmGzipSize > maximumRootEsmGzipSize) {
   throw new Error(
-    `ESM bundle is ${esmGzipSize} bytes gzip; limit is ${maximumEsmGzipSize}`,
+    `Root ESM graph is ${rootEsmGzipSize} bytes gzip; limit is ${maximumRootEsmGzipSize}`,
+  );
+}
+if (coreEsmGzipSize > maximumCoreEsmGzipSize) {
+  throw new Error(
+    `Core ESM graph is ${coreEsmGzipSize} bytes gzip; limit is ${maximumCoreEsmGzipSize}`,
   );
 }
 
@@ -156,7 +188,9 @@ try {
 
   const tarballPath = join(temporaryDirectory, packResult.filename);
 
-  runNpm(['exec', '--', 'attw', tarballPath]);
+  // The package requires Node.js 22. Node 10 cannot resolve package-export
+  // subpaths by design, so require the modern Node/CJS/ESM and bundler matrix.
+  runNpm(['exec', '--', 'attw', tarballPath, '--profile', 'node16']);
 
   writeFileSync(
     join(temporaryDirectory, 'package.json'),
@@ -164,15 +198,15 @@ try {
   );
   writeFileSync(
     join(temporaryDirectory, 'smoke.mjs'),
-    "import { evaluateAssimilationSelection, rollAssimilation, rollFateDice, rollMixedDice, rollRpgDice, rollRpgDiceSummary, rollVampireV5 } from '@erpg/dicecore';\nif ([evaluateAssimilationSelection, rollAssimilation, rollFateDice, rollMixedDice, rollRpgDice, rollRpgDiceSummary, rollVampireV5].some((value) => typeof value !== 'function')) throw new TypeError('Missing ESM export');\n",
+    "import { createSystemRoller, evaluateAssimilationSelection, rollAssimilation, rollDaggerheart, rollFateDice, rollMixedDice, rollRpgDice, rollRpgDiceDetails, rollRpgDiceSummary, rollVampireV5 } from '@erpg/dicecore';\nimport { createDiceEngine } from '@erpg/dicecore/core';\nimport { rollFateDice as rollFateSubpath } from '@erpg/dicecore/systems/fate';\nimport { rollMixedDice as rollMixedSubpath } from '@erpg/dicecore/systems/mixed';\nif ([createDiceEngine, createSystemRoller, evaluateAssimilationSelection, rollAssimilation, rollDaggerheart, rollFateDice, rollFateSubpath, rollMixedDice, rollMixedSubpath, rollRpgDice, rollRpgDiceDetails, rollRpgDiceSummary, rollVampireV5].some((value) => typeof value !== 'function')) throw new TypeError('Missing ESM export');\n",
   );
   writeFileSync(
     join(temporaryDirectory, 'smoke.cjs'),
-    "const { evaluateAssimilationSelection, rollAssimilation, rollFateDice, rollMixedDice, rollRpgDice, rollRpgDiceSummary, rollVampireV5 } = require('@erpg/dicecore');\nif ([evaluateAssimilationSelection, rollAssimilation, rollFateDice, rollMixedDice, rollRpgDice, rollRpgDiceSummary, rollVampireV5].some((value) => typeof value !== 'function')) throw new TypeError('Missing CJS export');\n",
+    "const { createSystemRoller, evaluateAssimilationSelection, rollAssimilation, rollDaggerheart, rollFateDice, rollMixedDice, rollRpgDice, rollRpgDiceDetails, rollRpgDiceSummary, rollVampireV5 } = require('@erpg/dicecore');\nconst { createDiceEngine } = require('@erpg/dicecore/core');\nconst { rollFateDice: rollFateSubpath } = require('@erpg/dicecore/systems/fate');\nif ([createDiceEngine, createSystemRoller, evaluateAssimilationSelection, rollAssimilation, rollDaggerheart, rollFateDice, rollFateSubpath, rollMixedDice, rollRpgDice, rollRpgDiceDetails, rollRpgDiceSummary, rollVampireV5].some((value) => typeof value !== 'function')) throw new TypeError('Missing CJS export');\n",
   );
   writeFileSync(
     join(temporaryDirectory, 'smoke.mts'),
-    "import { evaluateAssimilationSelection, rollAssimilation, rollFateDice, rollMixedDice, rollRpgDice, rollRpgDiceSummary, rollVampireV5, type AssimilationRollResult, type DiceRollResult, type DiceRollSummary, type FateRollResult, type MixedRollResult, type VampireV5RollResult } from '@erpg/dicecore';\nconst result: DiceRollResult = rollRpgDice('1d6', { seed: 'package-check-esm' });\nconst summary: DiceRollSummary = rollRpgDiceSummary('1d6', { seed: 'package-check-summary' });\nconst vampire: VampireV5RollResult = rollVampireV5({ pool: 2, hunger: 1 }, { seed: 'package-check-vampire' });\nconst assimilation: AssimilationRollResult = rollAssimilation({ d6: 1 }, { seed: 'package-check-assimilation' });\nconst fate: FateRollResult = rollFateDice(undefined, { seed: 'package-check-fate' });\nconst mixed: MixedRollResult = rollMixedDice('1d6; fate(1)', { seed: 'package-check-mixed' });\nevaluateAssimilationSelection(assimilation, [assimilation.dice[0]!.id]);\nvoid result;\nvoid summary;\nvoid vampire;\nvoid fate;\nvoid mixed;\n",
+    "import { createSystemRoller, evaluateAssimilationSelection, rollAssimilation, rollDaggerheart, rollFateDice, rollMixedDice, rollRpgDice, rollRpgDiceDetails, rollRpgDiceSummary, rollVampireV5, type AssimilationRollResult, type DaggerheartRollResult, type DiceRollDetails, type DiceRollResult, type DiceRollSummary, type FateRollResult, type MixedRollResult, type VampireV5RollResult } from '@erpg/dicecore';\nimport { createDiceEngine } from '@erpg/dicecore/core';\nconst result: DiceRollResult = rollRpgDice('1d6', { seed: 'package-check-esm' });\nconst details: DiceRollDetails = rollRpgDiceDetails('1d6', { seed: 'package-check-details' });\nconst summary: DiceRollSummary = rollRpgDiceSummary('1d6', { seed: 'package-check-summary' });\nconst vampire: VampireV5RollResult = rollVampireV5({ pool: 2, hunger: 1 }, { seed: 'package-check-vampire' });\nconst assimilation: AssimilationRollResult = rollAssimilation({ d6: 1 }, { seed: 'package-check-assimilation' });\nconst fate: FateRollResult = rollFateDice(undefined, { seed: 'package-check-fate' });\nconst daggerheart: DaggerheartRollResult = rollDaggerheart(undefined, { seed: 'package-check-daggerheart' });\nconst mixed: MixedRollResult = rollMixedDice('1d6; fate(1)', { seed: 'package-check-mixed' });\ncreateSystemRoller(createDiceEngine()).rollFateDice(undefined, { detail: 'compact', seed: 'compact' });\nevaluateAssimilationSelection(assimilation, [assimilation.dice[0]!.id]);\nvoid result; void details; void summary; void vampire; void fate; void daggerheart; void mixed;\n",
   );
   writeFileSync(
     join(temporaryDirectory, 'smoke.cts'),
@@ -211,7 +245,7 @@ try {
   run(process.execPath, [tscExecutable, '-p', 'tsconfig.json'], temporaryDirectory);
 
   console.log(
-    `Package verified: ${packResult.filename} (${packResult.size} bytes packed, ${packResult.unpackedSize} bytes unpacked, ${esmGzipSize} bytes ESM gzip)`,
+    `Package verified: ${packResult.filename} (${packResult.size} bytes packed, ${packResult.unpackedSize} bytes unpacked, ${rootEsmGzipSize} bytes root ESM gzip, ${coreEsmGzipSize} bytes core ESM gzip)`,
   );
 } finally {
   rmSync(temporaryDirectory, { force: true, recursive: true });

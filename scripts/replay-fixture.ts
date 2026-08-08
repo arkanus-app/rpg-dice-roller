@@ -3,6 +3,7 @@ import { resolve } from 'node:path';
 import { crossRuntimeReplayVectors } from './replay-vectors.js';
 
 interface ReplayApi {
+  rollMixedDice(input: string, options: object): unknown;
   rollRpgDice(input: string, options: object): unknown;
 }
 
@@ -25,11 +26,15 @@ function isFunction(value: unknown): value is (...arguments_: readonly unknown[]
 }
 
 function loadApi(value: unknown): ReplayApi {
-  if (!isObject(value) || !isFunction(value['rollRpgDice'])) {
-    throw new TypeError('dist does not expose rollRpgDice');
+  if (!isObject(value)
+    || !isFunction(value['rollMixedDice'])
+    || !isFunction(value['rollRpgDice'])) {
+    throw new TypeError('dist does not expose replay fixture APIs');
   }
+  const rollMixedDice = value['rollMixedDice'];
   const rollRpgDice = value['rollRpgDice'];
   return {
+    rollMixedDice: (input, options) => rollMixedDice(input, options),
     rollRpgDice: (input, options) => rollRpgDice(input, options),
   };
 }
@@ -61,7 +66,9 @@ function createReference(api: ReplayApi): ReplayReference {
   return {
     schemaVersion: 1,
     vectors: crossRuntimeReplayVectors.map((vector) => ({
-      json: JSON.stringify(api.rollRpgDice(vector.input, vector.options)),
+      json: JSON.stringify(vector.kind === 'mixed'
+        ? api.rollMixedDice(vector.input, vector.options)
+        : api.rollRpgDice(vector.input, vector.options)),
       name: vector.name,
     })),
   };

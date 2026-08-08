@@ -8,8 +8,13 @@ import {
   type CompiledDiceProgram,
 } from './compiler.js';
 import { DiceRollError, isDiceRollError } from './errors.js';
-import { executeRollPlan, executeRollPlanSummary } from './executor.js';
 import {
+  executeRollPlan,
+  executeRollPlanDetails,
+  executeRollPlanSummary,
+} from './executor.js';
+import {
+  freezeDiceRollDetails,
   freezeDiceRollResult,
   freezeDiceRollSummary,
   shouldFreezeResults,
@@ -34,6 +39,7 @@ import type {
   DiceEngineOptions,
   DiceNotationInspection,
   DiceRollResult,
+  DiceRollDetails,
   DiceRollSummary,
   FreezeResultsMode,
   RollOptions,
@@ -411,6 +417,28 @@ class DefaultDiceEngine implements DiceEngine {
     return shouldFreezeResults(this.freezeResults) ? freezeDiceRollResult(result) : result;
   }
 
+  rollDetails(input: string | RollPlan, options: RollOptions = {}): DiceRollDetails {
+    const runtimeOptions = readRuntimeRollOptions(options);
+    const limits = resolveCallLimits(this.limits, runtimeOptions.limits);
+    const plan = this.resolvePlan(input, limits);
+    const result = runtimeOptions.replay !== undefined
+      ? executeRollPlanDetails(plan, {
+          limits,
+          replay: replayForPlan(runtimeOptions.replay, plan),
+        })
+      : runtimeOptions.seed === undefined
+        ? executeRollPlanDetails(plan, {
+            limits,
+            randomAlgorithm: runtimeOptions.randomAlgorithm ?? this.randomAlgorithm,
+          })
+        : executeRollPlanDetails(plan, {
+            limits,
+            seed: runtimeOptions.seed,
+            randomAlgorithm: runtimeOptions.randomAlgorithm ?? this.randomAlgorithm,
+          });
+    return shouldFreezeResults(this.freezeResults) ? freezeDiceRollDetails(result) : result;
+  }
+
   rollSummary(input: string | RollPlan, options: RollOptions = {}): DiceRollSummary {
     const runtimeOptions = readRuntimeRollOptions(options);
     const limits = resolveCallLimits(this.limits, runtimeOptions.limits);
@@ -467,7 +495,7 @@ export function createDiceEngine(options: DiceEngineOptions = {}): DiceEngine {
   return new DefaultDiceEngine(options);
 }
 
-const defaultDiceEngine = createDiceEngine();
+export const defaultDiceEngine = createDiceEngine();
 
 export function compileRpgDice(input: string, options: CompileOptions = {}): RollPlan {
   return defaultDiceEngine.compile(input, options);
@@ -485,6 +513,13 @@ export function rollRpgDice(
   options: RollOptions = {},
 ): DiceRollResult {
   return defaultDiceEngine.roll(input, options);
+}
+
+export function rollRpgDiceDetails(
+  input: string | RollPlan,
+  options: RollOptions = {},
+): DiceRollDetails {
+  return defaultDiceEngine.rollDetails(input, options);
 }
 
 export function rollRpgDiceSummary(

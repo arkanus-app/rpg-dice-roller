@@ -2,7 +2,7 @@
   "name": "@erpg/dicecore",
   "description": "ERPG dice core with ergonomic RPG notation, grouped rolls, structured UI data, deterministic replay, and safe parse-only inspection.",
   "author": "Arkanus",
-  "version": "3.4.0",
+  "version": "3.5.0",
   "license": "MIT",
   "type": "module",
   "sideEffects": false,
@@ -24,6 +24,76 @@
         "default": "./dist/index.cjs"
       }
     },
+    "./core": {
+      "import": {
+        "types": "./dist/v3/core.d.ts",
+        "default": "./dist/core.js"
+      },
+      "require": {
+        "types": "./dist/v3/core.d.cts",
+        "default": "./dist/core.cjs"
+      }
+    },
+    "./systems": {
+      "import": {
+        "types": "./dist/v3/systems/index.d.ts",
+        "default": "./dist/systems/index.js"
+      },
+      "require": {
+        "types": "./dist/v3/systems/index.d.cts",
+        "default": "./dist/systems/index.cjs"
+      }
+    },
+    "./systems/assimilation": {
+      "import": {
+        "types": "./dist/v3/systems/assimilation.d.ts",
+        "default": "./dist/systems/assimilation.js"
+      },
+      "require": {
+        "types": "./dist/v3/systems/assimilation.d.cts",
+        "default": "./dist/systems/assimilation.cjs"
+      }
+    },
+    "./systems/daggerheart": {
+      "import": {
+        "types": "./dist/v3/systems/daggerheart.d.ts",
+        "default": "./dist/systems/daggerheart.js"
+      },
+      "require": {
+        "types": "./dist/v3/systems/daggerheart.d.cts",
+        "default": "./dist/systems/daggerheart.cjs"
+      }
+    },
+    "./systems/fate": {
+      "import": {
+        "types": "./dist/v3/systems/fate.d.ts",
+        "default": "./dist/systems/fate.js"
+      },
+      "require": {
+        "types": "./dist/v3/systems/fate.d.cts",
+        "default": "./dist/systems/fate.cjs"
+      }
+    },
+    "./systems/mixed": {
+      "import": {
+        "types": "./dist/v3/systems/mixed.d.ts",
+        "default": "./dist/systems/mixed.js"
+      },
+      "require": {
+        "types": "./dist/v3/systems/mixed.d.cts",
+        "default": "./dist/systems/mixed.cjs"
+      }
+    },
+    "./systems/vampire-v5": {
+      "import": {
+        "types": "./dist/v3/systems/vampire-v5.d.ts",
+        "default": "./dist/systems/vampire-v5.js"
+      },
+      "require": {
+        "types": "./dist/v3/systems/vampire-v5.d.cts",
+        "default": "./dist/systems/vampire-v5.cjs"
+      }
+    },
     "./package.json": "./package.json"
   },
   "types": "./dist/index.d.ts",
@@ -35,6 +105,9 @@
     "url": "https://github.com/arkanus-app/rpg-dice-roller/issues"
   },
   "homepage": "https://github.com/arkanus-app/rpg-dice-roller",
+  "publishConfig": {
+    "access": "public"
+  },
   "keywords": [
     "dice",
     "roller",
@@ -93,11 +166,15 @@
     "lint:fix": "eslint . --fix --max-warnings=0",
     "pretest": "npm run build:prepare",
     "test": "vitest run",
+    "test:run": "vitest run",
     "pretest:coverage": "npm run build:prepare",
     "test:coverage": "vitest run --coverage",
+    "test:coverage:run": "vitest run --coverage",
+    "test:coverage:v3": "vitest run --coverage --config ./vitest.v3.config.ts",
     "test:browser": "vitest run --config ./vitest.browser.config.ts",
     "test:watch": "vitest",
     "package:check": "npm run build && publint run . --strict && tsx ./scripts/check-package.ts",
+    "package:verify": "publint run . --strict && tsx ./scripts/check-package.ts",
     "check": "npm run test:coverage && npm run package:check",
     "prepare": "npm run build",
     "prepublishOnly": "npm run check"

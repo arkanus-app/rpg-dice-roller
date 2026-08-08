@@ -1,11 +1,17 @@
-import { rollRpgDice } from '../engine.js';
-import type { DiceRollResult, ResolvedDie, RollOptions } from '../types.js';
+import { defaultDiceEngine } from '../engine.js';
+import type { DiceEngine, ResolvedDie } from '../types.js';
 import {
   createSystemDieResult,
+  executeSystemRoll,
   readOptionalSystemInteger,
   readRequiredSystemInteger,
   readSystemInput,
   type SystemDieResult,
+  type CompactSystemRollOptions,
+  type FullSystemRollOptions,
+  type SystemBaseRoll,
+  type SystemRollDetail,
+  type SystemRollOptions,
 } from './common.js';
 
 export const VAMPIRE_V5_NORMAL_D10_PROFILE = 'vampire-v5-normal-d10' as const;
@@ -59,7 +65,7 @@ export interface VampireV5RollInput {
   readonly difficulty?: number;
 }
 
-export interface VampireV5RollResult {
+export interface VampireV5RollResult<Detail extends SystemRollDetail = 'full'> {
   readonly type: 'vampire-v5-roll';
   readonly schemaVersion: 1;
   readonly system: 'vampire-v5';
@@ -73,7 +79,7 @@ export interface VampireV5RollResult {
   readonly criticalPairs: number;
   readonly outcome: VampireV5Outcome;
   readonly dice: readonly VampireV5DieResult[];
-  readonly baseRoll: DiceRollResult;
+  readonly baseRoll: SystemBaseRoll<Detail>;
 }
 
 const NO_SYMBOLS: readonly VampireV5Symbol[] = Object.freeze([]);
@@ -207,16 +213,36 @@ function vampireNotation(normalDice: number, hungerDice: number): string {
 /** Rolls and evaluates a Vampire: The Masquerade Fifth Edition dice pool. */
 export function rollVampireV5(
   input: VampireV5RollInput,
-  options: RollOptions = {},
-): VampireV5RollResult {
+  options: CompactSystemRollOptions,
+): VampireV5RollResult<'compact'>;
+export function rollVampireV5(
+  input: VampireV5RollInput,
+  options?: FullSystemRollOptions,
+): VampireV5RollResult;
+export function rollVampireV5(
+  input: VampireV5RollInput,
+  options: SystemRollOptions = {},
+): VampireV5RollResult<SystemRollDetail> {
+  return rollVampireV5WithEngine(defaultDiceEngine, input, options);
+}
+
+export function rollVampireV5WithEngine(
+  engine: DiceEngine,
+  input: VampireV5RollInput,
+  options: SystemRollOptions = {},
+): VampireV5RollResult<SystemRollDetail> {
   const source = readSystemInput(input, 'vampire-v5');
   const pool = readRequiredSystemInteger(source, 'vampire-v5', 'pool', 1);
   const hunger = readRequiredSystemInteger(source, 'vampire-v5', 'hunger', 0, 5);
   const difficulty = readOptionalSystemInteger(source, 'vampire-v5', 'difficulty', 0);
   const hungerDice = Math.min(pool, hunger);
   const normalDice = pool - hungerDice;
-  const baseRoll = rollRpgDice(vampireNotation(normalDice, hungerDice), options);
-  const dice = baseRoll.dice.map((die, index) => (
+  const { resolved, baseRoll } = executeSystemRoll(
+    engine,
+    vampireNotation(normalDice, hungerDice),
+    options,
+  );
+  const dice = resolved.dice.map((die, index) => (
     index < normalDice ? toNormalDie(die) : toHungerDie(die)
   ));
   const evaluation = evaluateVampireV5(dice, difficulty);

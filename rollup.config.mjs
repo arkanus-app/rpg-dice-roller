@@ -23,7 +23,16 @@ if (
   throw new TypeError('package.json has invalid package metadata');
 }
 
-const inputPath = 'src/index.ts';
+const input = {
+  index: 'src/index.ts',
+  core: 'src/v3/core.ts',
+  'systems/index': 'src/v3/systems/index.ts',
+  'systems/assimilation': 'src/v3/systems/assimilation.ts',
+  'systems/daggerheart': 'src/v3/systems/daggerheart.ts',
+  'systems/fate': 'src/v3/systems/fate.ts',
+  'systems/mixed': 'src/v3/systems/mixed.ts',
+  'systems/vampire-v5': 'src/v3/systems/vampire-v5.ts',
+};
 const banner = `/*!
  * ${packageJson.name} - ${packageJson.description}
  *
@@ -46,18 +55,22 @@ const createPlugins = () => [
 
 const configurations = [
   {
-    input: inputPath,
+    input,
     output: {
-      file: 'dist/index.js',
+      dir: 'dist',
+      entryFileNames: '[name].js',
+      chunkFileNames: 'chunks/[name]-[hash].js',
       format: 'esm',
       banner,
     },
     plugins: createPlugins(),
   },
   {
-    input: inputPath,
+    input,
     output: {
-      file: 'dist/index.cjs',
+      dir: 'dist',
+      entryFileNames: '[name].cjs',
+      chunkFileNames: 'chunks/[name]-[hash].cjs',
       format: 'cjs',
       banner,
       exports: 'named',

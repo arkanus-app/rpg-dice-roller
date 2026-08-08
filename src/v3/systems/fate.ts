@@ -1,10 +1,16 @@
-import { rollRpgDice } from '../engine.js';
-import type { DiceRollResult, ResolvedDie, RollOptions } from '../types.js';
+import { defaultDiceEngine } from '../engine.js';
+import type { DiceEngine, ResolvedDie } from '../types.js';
 import {
   createSystemDieResult,
+  executeSystemRoll,
   readOptionalSystemInteger,
   readSystemInput,
   type SystemDieResult,
+  type CompactSystemRollOptions,
+  type FullSystemRollOptions,
+  type SystemBaseRoll,
+  type SystemRollDetail,
+  type SystemRollOptions,
 } from './common.js';
 
 export const FATE_DF_PROFILE = 'fate-df' as const;
@@ -29,7 +35,7 @@ export interface FateRollInput {
   readonly dice?: number;
 }
 
-export interface FateRollResult {
+export interface FateRollResult<Detail extends SystemRollDetail = 'full'> {
   readonly type: 'fate-roll';
   readonly schemaVersion: 1;
   readonly system: 'fate';
@@ -38,7 +44,7 @@ export interface FateRollResult {
   /** Sum of `fateValue`, ranging from `-diceCount` to `diceCount`. */
   readonly total: number;
   readonly dice: readonly FateDieResult[];
-  readonly baseRoll: DiceRollResult;
+  readonly baseRoll: SystemBaseRoll<Detail>;
 }
 
 interface FateFace {
@@ -96,13 +102,29 @@ function toFateDie(die: ResolvedDie): FateDieResult {
  * Faces 1-2 are minus, 3-4 are blank, and 5-6 are plus.
  */
 export function rollFateDice(
+  input: FateRollInput | undefined,
+  options: CompactSystemRollOptions,
+): FateRollResult<'compact'>;
+export function rollFateDice(
+  input?: FateRollInput,
+  options?: FullSystemRollOptions,
+): FateRollResult;
+export function rollFateDice(
   input: FateRollInput = {},
-  options: RollOptions = {},
-): FateRollResult {
+  options: SystemRollOptions = {},
+): FateRollResult<SystemRollDetail> {
+  return rollFateDiceWithEngine(defaultDiceEngine, input, options);
+}
+
+export function rollFateDiceWithEngine(
+  engine: DiceEngine,
+  input: FateRollInput = {},
+  options: SystemRollOptions = {},
+): FateRollResult<SystemRollDetail> {
   const source = readSystemInput(input, 'fate');
   const diceCount = readOptionalSystemInteger(source, 'fate', 'dice', 1) ?? 4;
-  const baseRoll = rollRpgDice(`${diceCount}d6`, options);
-  const dice = baseRoll.dice.map(toFateDie);
+  const { resolved, baseRoll } = executeSystemRoll(engine, `${diceCount}d6`, options);
+  const dice = resolved.dice.map(toFateDie);
   const total = dice.reduce((sum, die) => sum + die.fateValue, 0);
 
   return {

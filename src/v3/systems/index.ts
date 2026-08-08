@@ -14,7 +14,13 @@ export {
   FATE_DF_PROFILE,
   rollFateDice,
 } from './fate.js';
+export {
+  DAGGERHEART_FEAR_D12_PROFILE,
+  DAGGERHEART_HOPE_D12_PROFILE,
+  rollDaggerheart,
+} from './daggerheart.js';
 export { rollMixedDice } from './mixed.js';
+export { createSystemRoller } from './system-roller.js';
 
 export type {
   AssimilationDieKind,
@@ -28,8 +34,14 @@ export type {
 } from './assimilation.js';
 export type {
   DiceSystemId,
+  CompactSystemRollOptions,
+  FullSystemRollOptions,
+  SystemBaseRoll,
   SystemDieResult,
+  SystemRollDetail,
+  SystemRollOptions,
 } from './common.js';
+export type { SystemRoller } from './system-roller.js';
 export type {
   FateDieKind,
   FateDieResult,
@@ -40,8 +52,24 @@ export type {
   FateValue,
 } from './fate.js';
 export type {
+  DaggerheartDieKind,
+  DaggerheartDieResult,
+  DaggerheartDuality,
+  DaggerheartFaceKey,
+  DaggerheartFearDieResult,
+  DaggerheartHopeDieResult,
+  DaggerheartOutcome,
+  DaggerheartProfileId,
+  DaggerheartRollInput,
+  DaggerheartRollResult,
+  DaggerheartSymbol,
+} from './daggerheart.js';
+export type {
   MixedAssimilationRollItem,
+  MixedCompactRollOptions,
+  MixedDaggerheartRollItem,
   MixedFateRollItem,
+  MixedFullRollOptions,
   MixedGenericDieResult,
   MixedGenericRollItem,
   MixedRollDieResult,

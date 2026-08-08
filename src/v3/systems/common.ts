@@ -1,7 +1,55 @@
 import { DiceRollError } from '../errors.js';
-import type { ResolvedDie } from '../types.js';
+import type {
+  DiceEngine,
+  DiceRollDetails,
+  DiceRollResult,
+  DiceRollSummary,
+  ResolvedDie,
+  RollOptions,
+} from '../types.js';
 
-export type DiceSystemId = 'assimilation' | 'fate' | 'vampire-v5';
+export type DiceSystemId = 'assimilation' | 'daggerheart' | 'fate' | 'vampire-v5';
+
+export type SystemRollDetail = 'compact' | 'full';
+export type FullSystemRollOptions = RollOptions & { readonly detail?: 'full' };
+export type CompactSystemRollOptions = RollOptions & { readonly detail: 'compact' };
+export type SystemRollOptions = FullSystemRollOptions | CompactSystemRollOptions;
+export type SystemBaseRoll<Detail extends SystemRollDetail = 'full'> =
+  Detail extends 'compact' ? DiceRollSummary : DiceRollResult;
+
+export interface SystemRollExecution {
+  readonly resolved: DiceRollDetails | DiceRollResult;
+  readonly baseRoll: DiceRollResult | DiceRollSummary;
+}
+
+function compactBaseRoll(result: DiceRollDetails): DiceRollSummary {
+  return Object.freeze({
+    type: 'dice-roll-summary',
+    schemaVersion: result.schemaVersion,
+    input: result.input,
+    notation: result.notation,
+    normalizedNotation: result.normalizedNotation,
+    comment: result.comment,
+    total: result.total,
+    replay: result.replay,
+    stats: result.stats,
+    rolls: Object.freeze(result.rolls.slice()),
+    pool: result.pool,
+  });
+}
+
+export function executeSystemRoll(
+  engine: DiceEngine,
+  notation: string,
+  options: SystemRollOptions,
+): SystemRollExecution {
+  if (options.detail === 'compact') {
+    const resolved = engine.rollDetails(notation, options);
+    return { resolved, baseRoll: compactBaseRoll(resolved) };
+  }
+  const resolved = engine.roll(notation, options);
+  return { resolved, baseRoll: resolved };
+}
 
 /**
  * A semantic projection of one numeric die produced by the V3 executor.
