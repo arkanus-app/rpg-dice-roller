@@ -1,10 +1,16 @@
-import { rollRpgDice } from '../engine.js';
-import type { DiceRollResult, ResolvedDie, RollOptions } from '../types.js';
+import { defaultDiceEngine } from '../engine.js';
+import type { DiceEngine, ResolvedDie } from '../types.js';
 import {
   createSystemDieResult,
+  executeSystemRoll,
   readOptionalSystemInteger,
   readSystemInput,
   type SystemDieResult,
+  type CompactSystemRollOptions,
+  type FullSystemRollOptions,
+  type SystemBaseRoll,
+  type SystemRollDetail,
+  type SystemRollOptions,
 } from './common.js';
 
 export const DAGGERHEART_HOPE_D12_PROFILE = 'daggerheart-hope-d12' as const;
@@ -55,7 +61,7 @@ export interface DaggerheartRollInput {
   readonly difficulty?: number;
 }
 
-export interface DaggerheartRollResult {
+export interface DaggerheartRollResult<Detail extends SystemRollDetail = 'full'> {
   readonly type: 'daggerheart-roll';
   readonly schemaVersion: 1;
   readonly system: 'daggerheart';
@@ -74,7 +80,7 @@ export interface DaggerheartRollResult {
   readonly hopeDie: DaggerheartHopeDieResult;
   readonly fearDie: DaggerheartFearDieResult;
   readonly dice: readonly [DaggerheartHopeDieResult, DaggerheartFearDieResult];
-  readonly baseRoll: DiceRollResult;
+  readonly baseRoll: SystemBaseRoll<Detail>;
 }
 
 const HOPE_SYMBOLS = Object.freeze(['hope'] as const);
@@ -148,9 +154,25 @@ const evaluateOutcome = (
  * optional Difficulty resolves success or failure from the total.
  */
 export function rollDaggerheart(
+  input: DaggerheartRollInput | undefined,
+  options: CompactSystemRollOptions,
+): DaggerheartRollResult<'compact'>;
+export function rollDaggerheart(
+  input?: DaggerheartRollInput,
+  options?: FullSystemRollOptions,
+): DaggerheartRollResult;
+export function rollDaggerheart(
   input: DaggerheartRollInput = {},
-  options: RollOptions = {},
-): DaggerheartRollResult {
+  options: SystemRollOptions = {},
+): DaggerheartRollResult<SystemRollDetail> {
+  return rollDaggerheartWithEngine(defaultDiceEngine, input, options);
+}
+
+export function rollDaggerheartWithEngine(
+  engine: DiceEngine,
+  input: DaggerheartRollInput = {},
+  options: SystemRollOptions = {},
+): DaggerheartRollResult<SystemRollDetail> {
   const source = readSystemInput(input, 'daggerheart');
   const modifier = readOptionalSystemInteger(
     source,
@@ -160,8 +182,8 @@ export function rollDaggerheart(
     MAXIMUM_MODIFIER,
   ) ?? 0;
   const difficulty = readOptionalSystemInteger(source, 'daggerheart', 'difficulty', 0);
-  const baseRoll = rollRpgDice('1d12+1d12', options);
-  const [hopeSourceDie, fearSourceDie] = baseRoll.dice;
+  const { resolved, baseRoll } = executeSystemRoll(engine, '1d12+1d12', options);
+  const [hopeSourceDie, fearSourceDie] = resolved.dice;
 
   if (hopeSourceDie === undefined || fearSourceDie === undefined) {
     throw new Error('Daggerheart Duality Dice must resolve exactly two d12s.');

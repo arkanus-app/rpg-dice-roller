@@ -1,6 +1,12 @@
 import { afterEach, describe, expect, test } from 'vitest';
-import { compileRpgDice, rollRpgDice, rollRpgDiceSummary } from './engine.js';
 import {
+  compileRpgDice,
+  rollRpgDice,
+  rollRpgDiceDetails,
+  rollRpgDiceSummary,
+} from './engine.js';
+import {
+  freezeDiceRollDetails,
   freezeDiceRollResult,
   freezeDiceRollSummary,
   freezeRollPlan,
@@ -37,6 +43,11 @@ describe('V3 runtime freezing', () => {
   });
 
   test('freezes summaries and public plans deeply', () => {
+    const details = freezeDiceRollDetails(rollRpgDiceDetails('2d6', { seed: 'freeze-details' }));
+    expect(Object.isFrozen(details)).toBe(true);
+    expect(Object.isFrozen(details.dice)).toBe(true);
+    expect(Object.isFrozen(details.dice[0]?.states)).toBe(true);
+
     const summary = freezeDiceRollSummary(rollRpgDiceSummary('2d6>=4', { seed: 'freeze-summary' }));
     expect(Object.isFrozen(summary)).toBe(true);
     expect(Object.isFrozen(summary.rolls)).toBe(true);

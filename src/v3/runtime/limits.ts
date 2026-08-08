@@ -19,6 +19,8 @@ export interface DiceLimits {
 
 export type DiceLimitOverrides = Partial<DiceLimits>;
 
+export type DiceLimitPreset = 'browser' | 'trustedServer' | 'untrustedServer';
+
 export const DEFAULT_DICE_LIMITS: DiceLimits = Object.freeze({
   maxInputLength: 4_096,
   maxAstDepth: 64,
@@ -34,6 +36,44 @@ export const DEFAULT_DICE_LIMITS: DiceLimits = Object.freeze({
   maxResolvedGroups: 100_000,
   maxResultItems: 250_000,
   maxOutputLength: 1_000_000,
+});
+
+/**
+ * Ready-to-use policies for the most common trust boundaries. Consumers may
+ * still lower individual values when creating an engine or making a call.
+ */
+export const DICE_LIMIT_PRESETS: Readonly<Record<DiceLimitPreset, DiceLimits>> = Object.freeze({
+  browser: DEFAULT_DICE_LIMITS,
+  trustedServer: Object.freeze({
+    ...DEFAULT_DICE_LIMITS,
+    maxInputLength: 2_048,
+    maxAstNodes: 5_000,
+    maxInitialDice: 5_000,
+    maxGeneratedDice: 10_000,
+    maxRandomCalls: 50_000,
+    maxEvents: 50_000,
+    maxModifierSteps: 50_000,
+    maxResolvedGroups: 50_000,
+    maxResultItems: 125_000,
+    maxOutputLength: 500_000,
+  }),
+  untrustedServer: Object.freeze({
+    ...DEFAULT_DICE_LIMITS,
+    maxInputLength: 1_000,
+    maxAstDepth: 32,
+    maxAstNodes: 1_000,
+    maxRolls: 50,
+    maxInitialDice: 500,
+    maxGeneratedDice: 1_000,
+    maxRandomCalls: 5_000,
+    maxEvents: 10_000,
+    maxSides: 1_000_000,
+    maxSeedLength: 256,
+    maxModifierSteps: 5_000,
+    maxResolvedGroups: 10_000,
+    maxResultItems: 25_000,
+    maxOutputLength: 100_000,
+  }),
 });
 
 type DiceLimitName = keyof DiceLimits;

@@ -80,6 +80,6 @@ Nenhuma nova notação foi adotada como objetivo desta migração: a prioridade 
 
 ## Estado de entrega
 
-A V3 está implementada no repositório com fachada, parser, compilador, runtime, DTOs e testes TypeScript. O pipeline prepara ESM/CJS e declarações a partir de `dist/`, além de executar validações de tipos, lint, cobertura e integridade do pacote.
+A V3 está implementada no repositório com fachada, parser, compilador, runtime, DTOs e testes TypeScript. A linha 3.5 acrescenta projeções `details` e `compact`, entrypoints modulares, um `SystemRoller` vinculado ao engine e presets explícitos de segurança. O pipeline prepara ESM/CJS e declarações a partir de `dist/`, além de executar validações de tipos, lint, cobertura, replay cruzado, benchmark e integridade do pacote.
 
-As migrações de código do frontend e do backend ERPG acompanham esta implementação. A publicação no npm, a criação da tag `v3.0.0` e a regeneração dos lockfiles contra o commit imutável continuam como passos de release separados e não são presumidos por este devlog. O roteiro dos consumidores está em [docs/MIGRATION_V3.md](docs/MIGRATION_V3.md).
+As migrações de código dos consumidores ERPG acompanham esta implementação. A publicação no npm, a criação da tag correspondente e a atualização dos lockfiles consumidores contra o artefato imutável continuam como passos de release separados e não são presumidos por este devlog. O roteiro dos consumidores está em [docs/MIGRATION_V3.md](docs/MIGRATION_V3.md).

@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { rollRpgDice } from '../../dist/index.js';
+import { rollMixedDice, rollRpgDice } from '../../dist/index.js';
 import { crossRuntimeReplayVectors } from '../../scripts/replay-vectors.js';
 
 interface ReplayReferenceEntry {
@@ -50,8 +50,9 @@ describe('cross-runtime deterministic replay', () => {
     for (const [index, vector] of crossRuntimeReplayVectors.entries()) {
       const expected = reference.vectors[index];
       expect(expected?.name).toBe(vector.name);
-      const first = JSON.stringify(rollRpgDice(vector.input, vector.options));
-      const second = JSON.stringify(rollRpgDice(vector.input, vector.options));
+      const execute = vector.kind === 'mixed' ? rollMixedDice : rollRpgDice;
+      const first = JSON.stringify(execute(vector.input, vector.options));
+      const second = JSON.stringify(execute(vector.input, vector.options));
       expect(first).toBe(expected?.json);
       expect(second).toBe(first);
     }

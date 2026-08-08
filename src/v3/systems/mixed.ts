@@ -1,6 +1,6 @@
-import { compileRpgDice, rollRpgDice } from '../engine.js';
+import { defaultDiceEngine } from '../engine.js';
 import { DiceRollError } from '../errors.js';
-import { createDiceLimits, type DiceLimits } from '../runtime/limits.js';
+import { resolveDiceLimits, type DiceLimits } from '../runtime/limits.js';
 import {
   createProvidedSeed,
   validateReplayDescriptor,
@@ -10,6 +10,7 @@ import {
   type SeedMaterial,
 } from '../runtime/replay.js';
 import type {
+  DiceEngine,
   DiceRollResult,
   ExecutionStats,
   ResolvedDie,
@@ -17,29 +18,30 @@ import type {
   RollPlan,
 } from '../types.js';
 import {
-  rollAssimilation,
+  rollAssimilationWithEngine,
   type AssimilationDieResult,
   type AssimilationRollInput,
   type AssimilationRollResult,
 } from './assimilation.js';
 import {
-  rollDaggerheart,
+  rollDaggerheartWithEngine,
   type DaggerheartDieResult,
   type DaggerheartRollInput,
   type DaggerheartRollResult,
 } from './daggerheart.js';
 import {
-  rollFateDice,
+  rollFateDiceWithEngine,
   type FateDieResult,
   type FateRollInput,
   type FateRollResult,
 } from './fate.js';
 import {
-  rollVampireV5,
+  rollVampireV5WithEngine,
   type VampireV5DieResult,
   type VampireV5RollInput,
   type VampireV5RollResult,
 } from './vampire-v5.js';
+import type { SystemRollDetail, SystemRollOptions } from './common.js';
 
 export type MixedRollKind =
   | 'generic'
@@ -66,6 +68,7 @@ type MixedSeededRollOptions = {
   readonly seed?: SeedInput;
   readonly replay?: never;
   readonly randomAlgorithm?: RandomAlgorithm;
+  readonly detail?: SystemRollDetail;
 };
 
 type MixedReplayRollOptions = {
@@ -73,9 +76,12 @@ type MixedReplayRollOptions = {
   readonly seed?: never;
   readonly replay: MixedRollReplayDescriptor;
   readonly randomAlgorithm?: never;
+  readonly detail?: SystemRollDetail;
 };
 
 export type MixedRollOptions = MixedSeededRollOptions | MixedReplayRollOptions;
+export type MixedCompactRollOptions = MixedRollOptions & { readonly detail: 'compact' };
+export type MixedFullRollOptions = MixedRollOptions & { readonly detail?: 'full' };
 
 interface MixedRollItemBase<
   Kind extends MixedRollKind,
@@ -93,32 +99,32 @@ export type MixedGenericRollItem = MixedRollItemBase<
   DiceRollResult
 >;
 
-export type MixedVampireV5RollItem = MixedRollItemBase<
+export type MixedVampireV5RollItem<Detail extends SystemRollDetail = 'full'> = MixedRollItemBase<
   'vampire-v5',
-  VampireV5RollResult
+  VampireV5RollResult<Detail>
 >;
 
-export type MixedFateRollItem = MixedRollItemBase<
+export type MixedFateRollItem<Detail extends SystemRollDetail = 'full'> = MixedRollItemBase<
   'fate',
-  FateRollResult
+  FateRollResult<Detail>
 >;
 
-export type MixedAssimilationRollItem = MixedRollItemBase<
+export type MixedAssimilationRollItem<Detail extends SystemRollDetail = 'full'> = MixedRollItemBase<
   'assimilation',
-  AssimilationRollResult
+  AssimilationRollResult<Detail>
 >;
 
-export type MixedDaggerheartRollItem = MixedRollItemBase<
+export type MixedDaggerheartRollItem<Detail extends SystemRollDetail = 'full'> = MixedRollItemBase<
   'daggerheart',
-  DaggerheartRollResult
+  DaggerheartRollResult<Detail>
 >;
 
-export type MixedRollItem =
+export type MixedRollItem<Detail extends SystemRollDetail = 'full'> =
   | MixedGenericRollItem
-  | MixedVampireV5RollItem
-  | MixedFateRollItem
-  | MixedAssimilationRollItem
-  | MixedDaggerheartRollItem;
+  | MixedVampireV5RollItem<Detail>
+  | MixedFateRollItem<Detail>
+  | MixedAssimilationRollItem<Detail>
+  | MixedDaggerheartRollItem<Detail>;
 
 export interface MixedGenericDieResult extends ResolvedDie {
   readonly mixedRollId: string;
@@ -144,12 +150,12 @@ export type MixedSystemDieResult = MixedSourceSystemDieResult & {
 
 export type MixedRollDieResult = MixedGenericDieResult | MixedSystemDieResult;
 
-export interface MixedRollResult {
+export interface MixedRollResult<Detail extends SystemRollDetail = 'full'> {
   readonly type: 'mixed-roll';
   readonly schemaVersion: 1;
   readonly input: string;
   readonly notation: string;
-  readonly rolls: readonly MixedRollItem[];
+  readonly rolls: readonly MixedRollItem<Detail>[];
   readonly dice: readonly MixedRollDieResult[];
   readonly output: string;
   readonly replay: MixedRollReplayDescriptor;
@@ -632,6 +638,7 @@ function parseMixedRoll(
   originalInput: string,
   segment: number,
   limits: DiceLimits,
+  engine: DiceEngine,
 ): ParsedMixedRoll {
   const call = /^([\p{L}][\p{L}\p{N}_-]*)\s*\(([\s\S]*)\)$/u.exec(segmentInput);
   if (call !== null) {
@@ -652,7 +659,7 @@ function parseMixedRoll(
     }
   }
 
-  const plan = compileRpgDice(segmentInput, { limits });
+  const plan = engine.compile(segmentInput, { limits });
   return Object.freeze({
     kind: 'generic',
     notation: plan.normalizedNotation,
@@ -829,7 +836,8 @@ function createItemOptions(
   index: number,
   rootSeed: SeedMaterial | null,
   replay: MixedRollReplayDescriptor | null,
-): RollOptions {
+): SystemRollOptions {
+  const detail = options.detail ?? 'full';
   if (replay !== null) {
     const entry = replay.rolls[index];
     if (entry === undefined) {
@@ -838,36 +846,42 @@ function createItemOptions(
         details: { index },
       });
     }
-    return { limits, replay: entry.replay };
+    return detail === 'compact'
+      ? { limits, replay: entry.replay, detail }
+      : { limits, replay: entry.replay, detail };
   }
 
   const seeded = options as MixedSeededRollOptions;
-  return {
+  const rollOptions: RollOptions = {
     limits,
     ...(rootSeed === null ? {} : { seed: deriveItemSeed(rootSeed, index) }),
     ...(seeded.randomAlgorithm === undefined
       ? {}
       : { randomAlgorithm: seeded.randomAlgorithm }),
   };
+  return detail === 'compact'
+    ? { ...rollOptions, detail }
+    : { ...rollOptions, detail };
 }
 
-function resultStats(item: MixedRollItem): ExecutionStats {
+function resultStats(item: MixedRollItem<SystemRollDetail>): ExecutionStats {
   return item.kind === 'generic'
     ? item.result.stats
     : item.result.baseRoll.stats;
 }
 
-function resultReplay(item: MixedRollItem): ReplayDescriptor {
+function resultReplay(item: MixedRollItem<SystemRollDetail>): ReplayDescriptor {
   return item.kind === 'generic'
     ? item.result.replay
     : item.result.baseRoll.replay;
 }
 
 function createMixedItem(
+  engine: DiceEngine,
   parsed: ParsedMixedRoll,
   index: number,
-  options: RollOptions,
-): MixedRollItem {
+  options: SystemRollOptions,
+): MixedRollItem<SystemRollDetail> {
   const id = `mixed-roll-${index + 1}`;
   switch (parsed.kind) {
     case 'generic':
@@ -876,7 +890,7 @@ function createMixedItem(
         index,
         kind: parsed.kind,
         notation: parsed.notation,
-        result: rollRpgDice(parsed.plan, options),
+        result: engine.roll(parsed.plan, options),
       });
     case 'vampire-v5':
       return Object.freeze({
@@ -884,7 +898,7 @@ function createMixedItem(
         index,
         kind: parsed.kind,
         notation: parsed.notation,
-        result: rollVampireV5(parsed.input, options),
+        result: rollVampireV5WithEngine(engine, parsed.input, options),
       });
     case 'fate':
       return Object.freeze({
@@ -892,7 +906,7 @@ function createMixedItem(
         index,
         kind: parsed.kind,
         notation: parsed.notation,
-        result: rollFateDice(parsed.input, options),
+        result: rollFateDiceWithEngine(engine, parsed.input, options),
       });
     case 'assimilation':
       return Object.freeze({
@@ -900,7 +914,7 @@ function createMixedItem(
         index,
         kind: parsed.kind,
         notation: parsed.notation,
-        result: rollAssimilation(parsed.input, options),
+        result: rollAssimilationWithEngine(engine, parsed.input, options),
       });
     case 'daggerheart':
       return Object.freeze({
@@ -908,7 +922,7 @@ function createMixedItem(
         index,
         kind: parsed.kind,
         notation: parsed.notation,
-        result: rollDaggerheart(parsed.input, options),
+        result: rollDaggerheartWithEngine(engine, parsed.input, options),
       });
   }
 }
@@ -945,10 +959,10 @@ function flattenGenericDice(item: MixedGenericRollItem): readonly MixedGenericDi
 
 function flattenSystemDice(
   item:
-    | MixedVampireV5RollItem
-    | MixedFateRollItem
-    | MixedAssimilationRollItem
-    | MixedDaggerheartRollItem,
+    | MixedVampireV5RollItem<SystemRollDetail>
+    | MixedFateRollItem<SystemRollDetail>
+    | MixedAssimilationRollItem<SystemRollDetail>
+    | MixedDaggerheartRollItem<SystemRollDetail>,
 ): readonly MixedSystemDieResult[] {
   return item.result.dice.map((die) => Object.freeze({
     ...die,
@@ -961,7 +975,9 @@ function flattenSystemDice(
   }));
 }
 
-function flattenDice(items: readonly MixedRollItem[]): readonly MixedRollDieResult[] {
+function flattenDice(
+  items: readonly MixedRollItem<SystemRollDetail>[],
+): readonly MixedRollDieResult[] {
   const dice: MixedRollDieResult[] = [];
   for (const item of items) {
     if (item.kind === 'generic') {
@@ -977,7 +993,7 @@ function signed(value: number): string {
   return value > 0 ? `+${value}` : String(value);
 }
 
-function formatItem(item: MixedRollItem): string {
+function formatItem(item: MixedRollItem<SystemRollDetail>): string {
   switch (item.kind) {
     case 'generic':
       return item.result.output;
@@ -1016,8 +1032,28 @@ function formatItem(item: MixedRollItem): string {
  */
 export function rollMixedDice(
   input: string,
+  options: MixedCompactRollOptions,
+): MixedRollResult<'compact'>;
+export function rollMixedDice(
+  input: string,
+  options?: MixedFullRollOptions,
+): MixedRollResult;
+export function rollMixedDice(
+  input: string,
+  options: MixedRollOptions,
+): MixedRollResult<SystemRollDetail>;
+export function rollMixedDice(
+  input: string,
   options: MixedRollOptions = {},
-): MixedRollResult {
+): MixedRollResult<SystemRollDetail> {
+  return rollMixedDiceWithEngine(defaultDiceEngine, input, options);
+}
+
+export function rollMixedDiceWithEngine(
+  engine: DiceEngine,
+  input: string,
+  options: MixedRollOptions = {},
+): MixedRollResult<SystemRollDetail> {
   if (typeof input !== 'string' || input.trim().length === 0) {
     throw new DiceRollError('Mixed dice notation is required', {
       code: 'DICE_NOTATION_REQUIRED',
@@ -1025,7 +1061,7 @@ export function rollMixedDice(
     });
   }
 
-  const limits = createDiceLimits(options.limits);
+  const limits = resolveDiceLimits(engine.limits, options.limits);
   if (input.length > limits.maxInputLength) {
     throw new DiceRollError('Mixed dice notation exceeds the input-length limit', {
       code: 'INPUT_TOO_LONG',
@@ -1036,7 +1072,7 @@ export function rollMixedDice(
 
   const segments = splitMixedNotation(input);
   const parsed = Object.freeze(segments.map((segmentInput, index) => (
-    parseMixedRoll(segmentInput, input, index + 1, limits)
+    parseMixedRoll(segmentInput, input, index + 1, limits, engine)
   )));
   assertStaticBudgets(parsed, limits, input);
   const notation = parsed.map((roll) => roll.notation).join('; ');
@@ -1049,7 +1085,7 @@ export function rollMixedDice(
     ? createProvidedSeed(seededOptions.seed, limits.maxSeedLength)
     : null;
 
-  const items: MixedRollItem[] = [];
+  const items: MixedRollItem<SystemRollDetail>[] = [];
   let stats = EMPTY_STATS;
   let outputLength = 0;
   for (let index = 0; index < parsed.length; index += 1) {
@@ -1065,7 +1101,7 @@ export function rollMixedDice(
       rootSeed,
       replayOption,
     );
-    const item = createMixedItem(parsedRoll, index, itemOptions);
+    const item = createMixedItem(engine, parsedRoll, index, itemOptions);
     items.push(item);
     stats = addStats(stats, resultStats(item));
     outputLength += formatItem(item).length;

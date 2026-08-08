@@ -233,6 +233,17 @@ export interface DiceRollResult extends RollResultBase {
   readonly events: readonly DiceEvent[];
 }
 
+/**
+ * Dice-focused projection for semantic system adapters and 3D renderers.
+ * It preserves replay, statistics, roll totals, pools, and resolved dice while
+ * avoiding the much larger group, event, and formatted-output projections.
+ */
+export interface DiceRollDetails extends RollResultBase {
+  readonly type: 'dice-roll-details';
+  readonly rolls: readonly ResolvedRollSummary[];
+  readonly dice: readonly ResolvedDie[];
+}
+
 export interface ResolvedRollSummary {
   readonly index: number;
   readonly total: number;
@@ -322,6 +333,7 @@ export interface DiceEngine {
   inspect(input: string, options?: CompileOptions): DiceNotationInspection;
   normalize(input: string): string;
   roll(input: string | RollPlan, options?: RollOptions): DiceRollResult;
+  rollDetails(input: string | RollPlan, options?: RollOptions): DiceRollDetails;
   rollSummary(input: string | RollPlan, options?: RollOptions): DiceRollSummary;
   verify(input: string, options?: CompileOptions): boolean;
 }

@@ -1,6 +1,5 @@
 import {
   getPlanProgram,
-  orderCompiledModifiers,
   type CompiledDiceProgram,
   type CompiledDiceSpec,
 } from './compiler.js';
@@ -28,6 +27,7 @@ import type {
 } from './syntax/index.js';
 import type {
   DiceRollResult,
+  DiceRollDetails,
   DiceRollSummary,
   DiceSides,
   DiceState,
@@ -103,7 +103,7 @@ export interface ExecuteRollPlanOptions {
   readonly randomAlgorithm?: RandomAlgorithm;
 }
 
-type ExecutionMode = 'full' | 'summary';
+type ExecutionMode = 'details' | 'full' | 'summary';
 
 function resolvedGroupId(node: ExpressionNode, rollIndex: number): string {
   return `roll-${rollIndex}:group:${node.id}`;
@@ -771,7 +771,15 @@ function evaluateGroup(node: GroupNode, state: RollState): Evaluation {
     const evaluation = evaluateNode(expression, state);
     return { evaluation, value: evaluation.value, included: true };
   });
-  const modifiers = orderCompiledModifiers(node.modifiers);
+  const modifiers = state.program.groupModifiers.get(node.id);
+  if (modifiers === undefined) {
+    throw new DiceRollError('Compiled group modifier pipeline is missing', {
+      code: 'UNSUPPORTED_NOTATION',
+      input: state.plan.input,
+      span: node.span,
+      details: { nodeId: node.id },
+    });
+  }
   const orderedItems = applyGroupModifiers(items, modifiers, state);
   const value = roundResult(items.reduce(
     (total, item) => total + (item.included ? item.value : 0),
@@ -1237,10 +1245,11 @@ function execute(
   plan: RollPlan,
   options: ExecuteRollPlanOptions,
   mode: ExecutionMode,
-): DiceRollResult | DiceRollSummary {
+): DiceRollDetails | DiceRollResult | DiceRollSummary {
   const full = mode === 'full';
+  const materializeDice = mode !== 'summary';
   const program = getPlanProgram(plan);
-  if (!full && supportsFastSummary(program)) {
+  if (mode === 'summary' && supportsFastSummary(program)) {
     return executeFastSummary(plan, program, options);
   }
   const context = createContext(plan, options, full);
@@ -1270,11 +1279,13 @@ function execute(
     };
     const evaluation = evaluateNode(ast, state);
     const total = roundResult(evaluation.value);
-    const resolvedDice = finalizeDice(state, full);
+    const resolvedDice = finalizeDice(state, materializeDice);
     const resolvedGroups = finalizeGroups(state, full);
     const pool = buildPool(state.dice);
-    if (full) {
+    if (materializeDice) {
       dice.push(...resolvedDice);
+    }
+    if (full) {
       groups.push(...resolvedGroups);
       const rollOutputLength = plan.notation.length + 2 + evaluation.rendered.length
         + 3 + String(total).length;
@@ -1308,7 +1319,9 @@ function execute(
     pool: aggregatePool(rollViews),
   };
   if (!full) {
-    return { ...base, type: 'dice-roll-summary', rolls: rollSummaries };
+    return mode === 'details'
+      ? { ...base, type: 'dice-roll-details', rolls: rollSummaries, dice }
+      : { ...base, type: 'dice-roll-summary', rolls: rollSummaries };
   }
   const output = formatAggregateOutput(outputs, total, context);
   return {
@@ -1320,6 +1333,17 @@ function execute(
     dice,
     events,
   };
+}
+
+export function executeRollPlanDetails(
+  plan: RollPlan,
+  options: ExecuteRollPlanOptions,
+): DiceRollDetails {
+  const result = execute(plan, options, 'details');
+  if (result.type !== 'dice-roll-details') {
+    throw new TypeError('Details execution returned an invalid result kind');
+  }
+  return result;
 }
 
 export function executeRollPlan(

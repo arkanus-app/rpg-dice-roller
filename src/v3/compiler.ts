@@ -50,6 +50,7 @@ export interface CompiledDiceProgram {
   readonly staticDice: number;
   readonly maximumSides: number;
   readonly diceSpecs: ReadonlyMap<string, CompiledDiceSpec>;
+  readonly groupModifiers: ReadonlyMap<string, readonly ModifierNode[]>;
   readonly constants: ReadonlyMap<string, number>;
 }
 
@@ -510,12 +511,14 @@ export function compileDiceProgram(
   const traversal = buildPostOrder(ast);
   const metrics = measureProgram(ast);
   const diceSpecs = new Map<string, CompiledDiceSpec>();
+  const groupModifiers = new Map<string, readonly ModifierNode[]>();
   const constants = new Map<string, number>();
   let staticDice = 0;
   let maximumSides = 0;
   for (const node of traversal.nodes) {
     if (node.kind === 'group') {
       validateGroupModifiers(node, sourceInput);
+      groupModifiers.set(node.id, orderCompiledModifiers(node.modifiers));
     }
     if (node.kind === 'dice') {
       const spec = createDiceSpec(node, sourceInput, limits, constants);
@@ -542,6 +545,7 @@ export function compileDiceProgram(
     staticDice,
     maximumSides,
     diceSpecs,
+    groupModifiers,
     constants,
   });
 }
@@ -765,7 +769,7 @@ export function validateKnownPlan(plan: RollPlan, limits: DiceLimits): void {
   validateProgramCaps(plan.input, plan.notation, plan.rollCount, getPlanProgram(plan), limits);
 }
 
-/** Kept while the executor transitions from the AST to the compiled IR. */
+/** Returns the executable root associated with the compiled post-order IR. */
 export function getPlanAst(plan: RollPlan): ExpressionNode {
   return getPlanProgram(plan).ast;
 }

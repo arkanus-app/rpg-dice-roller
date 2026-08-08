@@ -1,6 +1,49 @@
 # Changelog
 
-## Nao publicado
+## 3.5.0 — 2026-08-08
+
+### Adicionado
+
+- Entrypoints modulares `@erpg/dicecore/core`, `@erpg/dicecore/systems` e
+  `@erpg/dicecore/systems/*`, permitindo que consumidores carreguem somente o
+  núcleo ou um sistema específico.
+- `rollRpgDiceDetails()` e `DiceEngine.rollDetails()`, uma projeção intermediária
+  que preserva os dados resolvidos sem materializar grupos, eventos ou output.
+- Modo `{ detail: 'compact' }` nas rolagens de sistema e nos segmentos de sistema
+  de `rollMixedDice()`, removendo do payload a duplicação do `baseRoll` completo.
+- `createSystemRoller(engine)` para que Fate, Vampiro V5, Assimilação,
+  Daggerheart e lotes mistos herdem limites, cache e algoritmo aleatório de um
+  engine configurado pela aplicação.
+- Presets explícitos `DICE_LIMIT_PRESETS.browser`, `.trustedServer` e
+  `.untrustedServer` para políticas de execução adequadas a cada fronteira.
+
+### Otimizado
+
+- Pipelines de modificadores de grupo passam a ser ordenados durante a
+  compilação e reutilizados em todas as execuções do plano.
+- `xoshiro128ss` passa a ter cobertura comparativa dedicada para cargas com
+  seed fornecida e entropia criptográfica.
+- O build passou a produzir chunks compartilhados e subpaths tree-shakeáveis; o
+  orçamento mede o grafo ESM real, não apenas o pequeno arquivo de entrada.
+
+### Qualidade e segurança
+
+- Replay cruzado agora cobre lotes com todos os sistemas em Node.js e browser.
+- Benchmarks cobrem projeções full/details/summary, RNG criptográfico e payloads
+  compactos; a CI reutiliza um único artefato de build entre as verificações.
+- Cobertura dedicada da V3 e smoke tests ESM, CommonJS e TypeScript incluem
+  Daggerheart, subpaths, detalhes e o `SystemRoller`.
+- Dependências de desenvolvimento foram atualizadas; `npm audit` não reporta
+  vulnerabilidades conhecidas no lockfile desta versão.
+
+### Compatibilidade
+
+- O entrypoint raiz, o modo `detail: 'full'` e o MT19937 padrão permanecem
+  inalterados; as projeções compactas, subpaths e o `SystemRoller` são aditivos.
+- Replay continua registrando o algoritmo utilizado e não aceita troca de RNG
+  durante a reprodução.
+
+## 3.4.1 — 2026-08-04
 
 ### Adicionado
 

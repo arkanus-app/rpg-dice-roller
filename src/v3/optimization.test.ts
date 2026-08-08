@@ -3,6 +3,7 @@ import {
   compileRpgDice,
   createDiceEngine,
   rollRpgDice,
+  rollRpgDiceDetails,
   rollRpgDiceSummary,
 } from './engine.js';
 import type { DiceEvent, DiceState, GroupState } from './types.js';
@@ -183,6 +184,29 @@ describe('V3 optimized execution contract', () => {
     expect(plainSummary.rolls.map((roll) => roll.total))
       .toEqual(plainFull.rolls.map((roll) => roll.total));
     expect(plainSummary.stats).toEqual(plainFull.stats);
+  });
+
+  test('projects resolved dice without materializing groups, events, or output', () => {
+    const full = rollRpgDice('20d20kh10+2', { seed: 'details-projection' });
+    const details = rollRpgDiceDetails(full.input, { replay: full.replay });
+
+    expect(details).toMatchObject({
+      type: 'dice-roll-details',
+      total: full.total,
+      pool: full.pool,
+      replay: full.replay,
+      stats: full.stats,
+      dice: full.dice,
+    });
+    expect(details.rolls).toEqual(full.rolls.map((roll) => ({
+      index: roll.index,
+      total: roll.total,
+      pool: roll.pool,
+    })));
+    expect('groups' in details).toBe(false);
+    expect('events' in details).toBe(false);
+    expect('output' in details).toBe(false);
+    expect(JSON.stringify(details).length).toBeLessThan(JSON.stringify(full).length / 2);
   });
 
   test('replays the complete DTO byte-for-byte for both algorithms', () => {

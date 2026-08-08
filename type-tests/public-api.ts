@@ -5,12 +5,14 @@ import {
   DAGGERHEART_FEAR_D12_PROFILE,
   DAGGERHEART_HOPE_D12_PROFILE,
   DEFAULT_DICE_LIMITS,
+  DICE_LIMIT_PRESETS,
   DiceRollError,
   FATE_DF_PROFILE,
   VAMPIRE_V5_HUNGER_D10_PROFILE,
   VAMPIRE_V5_NORMAL_D10_PROFILE,
   compileRpgDice,
   createDiceEngine,
+  createSystemRoller,
   evaluateAssimilationSelection,
   inspectRpgDiceNotation,
   isDiceRollError,
@@ -21,6 +23,7 @@ import {
   rollFateDice,
   rollMixedDice,
   rollRpgDice,
+  rollRpgDiceDetails,
   rollRpgDiceSummary,
   rollVampireV5,
   verifyRpgDiceNotation,
@@ -46,6 +49,7 @@ import type {
   DiceLimits,
   DiceNotationInspection,
   DiceRollErrorCode,
+  DiceRollDetails,
   DiceRollResult,
   DiceRollSummary,
   DiceSides,
@@ -79,6 +83,7 @@ import type {
   MixedRollItem,
   MixedRollKind,
   MixedRollOptions,
+  MixedCompactRollOptions,
   MixedRollReplayDescriptor,
   MixedRollResult,
   MixedSystemDieResult,
@@ -88,6 +93,7 @@ import type {
   ResolvedDie,
   ResolvedGroup,
   ResolvedRoll,
+  CompactSystemRollOptions,
   RollDiceEvent,
   RollOptions,
   RollPlan,
@@ -96,6 +102,7 @@ import type {
   SeedOrigin,
   SourceSpan,
   SystemDieResult,
+  SystemRoller,
   VampireV5DieKind,
   VampireV5DieResult,
   VampireV5FaceKey,
@@ -216,7 +223,9 @@ export function publicApiContracts(): void {
   };
 
   expectType<DiceRollResult>(rollRpgDice(compiledPlan, rollOptions));
+  expectType<DiceRollDetails>(rollRpgDiceDetails(compiledPlan, rollOptions));
   expectType<DiceRollResult>(engine.roll('d20', { replay }));
+  expectType<DiceRollDetails>(engine.rollDetails('d20', { replay }));
   expectType<DiceRollSummary>(rollRpgDiceSummary(compiledPlan, rollOptions));
   expectType<DiceRollSummary>(engine.rollSummary('d20', { replay }));
 
@@ -490,7 +499,21 @@ export function publicApiContracts(): void {
   expectType<SystemDieResult>(daggerheartDie);
   expectType<DiceRollResult>(daggerheartResult.baseRoll);
 
+  const compactOptions: CompactSystemRollOptions = {
+    detail: 'compact',
+    seed: 'compact-public-api',
+  };
+  expectType<DiceRollSummary>(rollFateDice(undefined, compactOptions).baseRoll);
+  const systems: SystemRoller = createSystemRoller(createDiceEngine({
+    limits: DICE_LIMIT_PRESETS.untrustedServer,
+  }));
+  expectType<DiceRollSummary>(systems.rollDaggerheart(undefined, compactOptions).baseRoll);
+
   const mixedOptions: MixedRollOptions = { seed: 'mixed-public-api' };
+  const compactMixedOptions: MixedCompactRollOptions = {
+    detail: 'compact',
+    seed: 'mixed-compact-public-api',
+  };
   const mixedResult: MixedRollResult = rollMixedDice(
     '1d20; v5(5,2,3); fate(4); assim(1,1,1,2)',
     mixedOptions,
@@ -501,6 +524,9 @@ export function publicApiContracts(): void {
   const mixedDie: MixedRollDieResult = mixedResult.dice[0]!;
 
   expectType<MixedRollResult>(mixedResult);
+  expectType<MixedRollResult<'compact'>>(
+    rollMixedDice('fate(4)', compactMixedOptions),
+  );
   expectType<MixedRollReplayDescriptor>(mixedReplay);
   expectType<MixedRollKind>(mixedKind);
   expectType<MixedRollItem>(mixedItem);

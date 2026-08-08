@@ -1,5 +1,6 @@
 import type {
   DiceEvent,
+  DiceRollDetails,
   DiceRollResult,
   DiceRollSummary,
   ResolvedDie,
@@ -71,6 +72,17 @@ export function freezeDiceRollResult(result: DiceRollResult): DiceRollResult {
   Object.freeze(result.dice);
   Object.freeze(result.groups);
   Object.freeze(result.events);
+  Object.freeze(result.replay);
+  Object.freeze(result.stats);
+  freezePool(result.pool);
+  return Object.freeze(result);
+}
+
+export function freezeDiceRollDetails(result: DiceRollDetails): DiceRollDetails {
+  result.rolls.forEach(freezeRollSummary);
+  result.dice.forEach(freezeDie);
+  Object.freeze(result.rolls);
+  Object.freeze(result.dice);
   Object.freeze(result.replay);
   Object.freeze(result.stats);
   freezePool(result.pool);
