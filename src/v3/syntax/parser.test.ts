@@ -47,6 +47,13 @@ describe('V3 notation scanner', () => {
       .toEqual(['<=', '>=', '<>', '=', '<', '>', '=']);
     expect(tokenizeDiceNotation('!=1')[0]?.kind).toBe('bang');
   });
+
+  test('recognizes structural modifier words as complete identifiers', () => {
+    expect(tokenizeDiceNotation('pool(+1)step(-2)advdis')
+      .filter((token) => token.kind === 'identifier')
+      .map((token) => token.lexeme))
+      .toEqual(['pool', 'step', 'adv', 'dis']);
+  });
 });
 
 describe('V3 notation parser', () => {
@@ -113,7 +120,9 @@ describe('V3 notation parser', () => {
   test('parses all modifier defaults and signed compare points', () => {
     const node = parseDice('2d6!rukh1dl1min-1max+6cscfsa');
     expect(node.modifiers).toMatchObject([
-      { kind: 'explode', compound: false, penetrate: false, compare: null },
+      {
+        kind: 'explode', compound: false, penetrate: false, maxExplosions: null, compare: null,
+      },
       { kind: 'reroll', once: false, compare: null },
       { kind: 'unique', once: false, compare: null },
       { kind: 'keep', selection: 'highest', quantity: 1 },
@@ -142,7 +151,12 @@ describe('V3 notation parser', () => {
       'sort',
     ]);
     expect(node.modifiers).toMatchObject([
-      { compound: true, penetrate: true, compare: { operator: '>=', value: 10 } },
+      {
+        compound: true,
+        penetrate: true,
+        maxExplosions: null,
+        compare: { operator: '>=', value: 10 },
+      },
       { success: { operator: '>=', value: 8 }, failure: { operator: '=', value: 1 } },
       { selection: 'lowest', quantity: 1 },
       { selection: 'highest', quantity: 2 },
@@ -156,9 +170,163 @@ describe('V3 notation parser', () => {
     ]);
   });
 
+  test.each([
+    ['1d6!2', false, false, 2, null],
+    ['1d6!!3', true, false, 3, null],
+    ['1d6!p4', false, true, 4, null],
+    ['1d6!!p5>=6', true, true, 5, { operator: '>=', value: 6 }],
+    ['1d6!2!=5', false, false, 2, { operator: '!=', value: 5 }],
+  ] as const)(
+    'parses the explosion ceiling in %s',
+    (input, compound, penetrate, maxExplosions, compare) => {
+      expect(parseDice(input).modifiers[0]).toMatchObject({
+        kind: 'explode',
+        compound,
+        penetrate,
+        maxExplosions,
+        compare,
+      });
+    },
+  );
+
+  test('parses structural pool adjustments and selections in source order', () => {
+    const node = parseDice('2d20pool(+2)pool(-1)advdis');
+
+    expect(node.modifiers).toMatchObject([
+      { kind: 'pool-adjustment', delta: 2, span: { start: 4, end: 12 } },
+      { kind: 'pool-adjustment', delta: -1, span: { start: 12, end: 20 } },
+      { kind: 'pool-selection', selection: 'highest', span: { start: 20, end: 23 } },
+      { kind: 'pool-selection', selection: 'lowest', span: { start: 23, end: 26 } },
+    ]);
+    expect(node).toMatchObject({ id: 'dice@0:26', span: { start: 0, end: 26 } });
+  });
+
+  test('parses signed dice steps in source order', () => {
+    const node = parseDice('1d5step(+2)step(-1)');
+
+    expect(node.modifiers).toMatchObject([
+      { kind: 'dice-step', delta: 2, span: { start: 3, end: 11 } },
+      { kind: 'dice-step', delta: -1, span: { start: 11, end: 19 } },
+    ]);
+    expect(node).toMatchObject({ id: 'dice@0:19', span: { start: 0, end: 19 } });
+  });
+
+  test('counts dice steps against the parser node budget', () => {
+    expect(() => parseDiceNotation('1d5step(+1)', { maxDepth: 10, maxNodes: 3 }))
+      .toThrow(expect.objectContaining({ code: 'TOO_MANY_NODES' }));
+    expect(parseDiceNotation('1d5step(+1)', { maxDepth: 10, maxNodes: 4 }))
+      .toMatchObject({ kind: 'dice' });
+  });
+
+  test.each([
+    [
+      '1d20+2pool(-1)',
+      'binary@0:14',
+      [{ kind: 'pool-adjustment', delta: -1, span: { start: 6, end: 14 } }],
+    ],
+    [
+      '1d20+2adv',
+      'binary@0:9',
+      [{ kind: 'pool-selection', selection: 'highest', span: { start: 6, end: 9 } }],
+    ],
+    [
+      '1d20+2pool(+2)advdis',
+      'binary@0:20',
+      [
+        { kind: 'pool-adjustment', delta: 2, span: { start: 6, end: 14 } },
+        { kind: 'pool-selection', selection: 'highest', span: { start: 14, end: 17 } },
+        { kind: 'pool-selection', selection: 'lowest', span: { start: 17, end: 20 } },
+      ],
+    ],
+  ])('attaches expression postfixes to the unique die in %s', (input, rootId, modifiers) => {
+    expect(parseDiceNotation(input)).toMatchObject({
+      kind: 'binary',
+      id: rootId,
+      span: { start: 0, end: input.length },
+      left: {
+        kind: 'dice',
+        id: 'dice@0:4',
+        span: { start: 0, end: 4 },
+        modifiers,
+      },
+    });
+  });
+
+  test('finds a unique dice node recursively and only extends the root span', () => {
+    expect(parseDiceNotation('(1d20+2)adv')).toMatchObject({
+      kind: 'parenthesized',
+      id: 'parenthesized@0:11',
+      span: { start: 0, end: 11 },
+      expression: {
+        kind: 'binary',
+        id: 'binary@1:7',
+        span: { start: 1, end: 7 },
+        left: {
+          kind: 'dice',
+          id: 'dice@1:5',
+          span: { start: 1, end: 5 },
+          modifiers: [{ kind: 'pool-selection', selection: 'highest' }],
+        },
+      },
+    });
+  });
+
+  test('attaches a terminal dice step to the unique die in an expression', () => {
+    expect(parseDiceNotation('1d5+2step(+1)')).toMatchObject({
+      kind: 'binary',
+      id: 'binary@0:13',
+      span: { start: 0, end: 13 },
+      left: {
+        kind: 'dice',
+        id: 'dice@0:3',
+        span: { start: 0, end: 3 },
+        modifiers: [{ kind: 'dice-step', delta: 1, span: { start: 5, end: 13 } }],
+      },
+    });
+  });
+
+  test.each([
+    '1+2adv',
+    '1d20+1d6+2adv',
+    'max(1d20,1d6)+2pool(-1)',
+    '1d5+1d6+2step(+1)',
+  ])('rejects an ambiguous expression postfix target in %s', (input) => {
+    expect(() => parseDiceNotation(input)).toThrow(expect.objectContaining({
+      code: 'INVALID_NOTATION',
+    }));
+  });
+
+  test('preserves immediate structural modifier binding inside arithmetic', () => {
+    expect(parseDiceNotation('1d20adv+2')).toMatchObject({
+      kind: 'binary',
+      left: {
+        kind: 'dice',
+        id: 'dice@0:7',
+        modifiers: [{ kind: 'pool-selection', selection: 'highest' }],
+      },
+      right: { kind: 'number' },
+    });
+  });
+
+  test.each([
+    ['1d6!+1', '+'],
+    ['1d6!-1', '-'],
+  ] as const)('preserves arithmetic after an uncapped explosion in %s', (input, operator) => {
+    expect(parseDiceNotation(input)).toMatchObject({
+      kind: 'binary',
+      operator,
+      left: {
+        kind: 'dice',
+        modifiers: [{ kind: 'explode', maxExplosions: null }],
+      },
+      right: { kind: 'number', value: 1 },
+    });
+  });
+
   test('preserves legacy explode and contextual not-equal syntax', () => {
     expect(parseDice('1d6!=1').modifiers[0]).toMatchObject({
       kind: 'explode',
+      maxExplosions: null,
       compare: { operator: '=', value: 1 },
     });
     expect(parseDice('1d6r!=1').modifiers[0]).toMatchObject({
@@ -185,7 +353,11 @@ describe('V3 notation parser', () => {
   test.each([
     '', '0d6', '01d6', '1d0', '1d01', 'dF.3', 'dF.01', '{}', 'foo(1)', '1d6kh0', '1d6kh01',
     '(1+2', '1+2)', '{1d6,}', '{,1d6}', 'abs(1,2)', 'max(1)', '1d6xyz', '1d6sfoo',
-    '1d6>=', '.', '1..2', '1d6min', '1d6max', '1d6d',
+    '1d6>=', '.', '1..2', '1d6min', '1d6max', '1d6d', '1d6!0', '1d6!01', '1d6!1.0', '1d6!1.5',
+    '1d6!9007199254740992', '1d6!2p', '1d6pool(1)', '1d6pool(+0)', '1d6pool(-0)',
+    '1d6pool(+01)', '1d6pool(+1.5)', '1d6pool(+9007199254740992)', '1d6pool(+)',
+    '1d6step(1)', '1d6step(+0)', '1d6step(-0)', '1d6step(+01)', '1d6step(+1.5)',
+    '1d6step(+9007199254740992)', '1d6step(+)',
   ])('rejects invalid notation %j', (input) => {
     try {
       parseDiceNotation(input);

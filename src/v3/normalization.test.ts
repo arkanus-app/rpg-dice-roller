@@ -72,4 +72,37 @@ describe('V3 notation normalization', () => {
   test('preserves parenthesized quantities and sides', () => {
     expect(normalizeRpgDiceNotation('(2+1)d(3+3)')).toBe('(2+1)d(3+3)');
   });
+
+  test('does not reinterpret adjacent modifier quantities as friendly dice', () => {
+    expect(normalizeRpgDiceNotation('4d6kh3dl1')).toBe('4d6kh3dl1');
+    expect(normalizeRpgDiceNotation('4d6kh3dis')).toBe('4d6kh3dis');
+  });
+
+  test.each([
+    ['2d20-pool(1)', '2d20pool(-1)'],
+    ['2d20+pool(2)', '2d20pool(+2)'],
+    ['2d20-pull(3)', '2d20pool(-3)'],
+    ['2d20+PULL(4)', '2d20pool(+4)'],
+    ['2d20pull(-1)', '2d20pool(-1)'],
+    ['d20ADVpull(-1)', 'd20advpool(-1)'],
+    ['1d20+2-pool(1)', '1d20+2pool(-1)'],
+    ['1d20+2-pull(1)adv', '1d20+2pool(-1)adv'],
+    ['d20ADV', 'd20adv'],
+    ['d20DIS', 'd20dis'],
+  ])('normalizes structural pool alias %s', (input, expected) => {
+    expect(normalizeRpgDiceNotation(input)).toBe(expected);
+    expect(normalizeRpgDiceNotation(expected)).toBe(expected);
+  });
+
+  test.each([
+    ['1d5-step(1)', '1d5step(-1)'],
+    ['1d5+step(2)', '1d5step(+2)'],
+    ['1d5-STEP(3)', '1d5step(-3)'],
+    ['1d5-STREP(1)', '1d5step(-1)'],
+    ['1d5strep(+2)', '1d5step(+2)'],
+    ['1d5+2-step(1)', '1d5+2step(-1)'],
+  ])('normalizes structural dice-step alias %s', (input, expected) => {
+    expect(normalizeRpgDiceNotation(input)).toBe(expected);
+    expect(normalizeRpgDiceNotation(expected)).toBe(expected);
+  });
 });

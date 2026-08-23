@@ -323,6 +323,26 @@ Todos são inteiros positivos. Os limites do engine são tetos imutáveis; uma c
 
 `1d1!`, `1d1r`, condições comprovadamente infinitas e unique impossível são rejeitados com erros estruturados. Dados aceitam no máximo `2^32` lados. Em grupos `{...}`, apenas `keep`, `drop` e `sort` são válidos.
 
+Condições de quantidade são postfixes do dado: `2d8pool(-1)` rola fisicamente
+`1d8`, enquanto `d20adv` e `d20dis` acrescentam um dado e mantêm respectivamente
+o maior ou o menor. As formas amigáveis `2d8-pool(1)` e `2d8+pool(1)` são
+normalizadas para `pool(-1)` e `pool(+1)`. O saldo zero já é o primeiro nível de
+desvantagem e valores negativos acrescentam níveis adicionais. `adv` e `dis`
+acumulam em direções opostas e se cancelam. O postfix também pode encerrar uma
+expressão com exatamente um dado, como em `1d20+2-pool(1)`; com vários dados deve
+acompanhar o alvo. Esses postfixes não são aceitos em grupos nem, quando produzem
+seleção, junto de `keep`/`drop` explícito.
+
+`step(±N)` transforma os lados de dados numéricos padrão antes da validação de
+limites e da execução. A escada é `d2 → d4 → d6 → d8 → d10 → d12 → d20 →
+d100`; lados intermediários usam o primeiro degrau estritamente maior ou menor
+na direção pedida. Assim, `1d5step(+1)`, `1d5step(+2)` e `1d5step(-1)` resolvem
+respectivamente para `d6`, `d8` e `d4`. As formas `+step(N)` e `-step(N)` são
+aliases de entrada. Deltas repetidos são agregados e podem se cancelar. O
+postfix terminal pode atingir a expressão com um único dado; em fórmulas com
+vários dados deve acompanhar o alvo. Um saldo não nulo em `d%` ou `dF`, assim
+como ultrapassar `d2` ou `d100`, falha com `UNSUPPORTED_NOTATION`.
+
 ## Plano compilado
 
 ```ts

@@ -186,6 +186,53 @@ describe('V3 optimized execution contract', () => {
     expect(plainSummary.stats).toEqual(plainFull.stats);
   });
 
+  test('keeps structural transformations, replay, and summary projections in lockstep', () => {
+    const notations = [
+      '1d20+2-pool(1)',
+      '2#2d8-pool(1)',
+      '2#1d20-pool(3)',
+      '2#1d20advadv',
+      '2#1d20advdis',
+      '2#1d20pool(-1)adv',
+      '2#1d20pool(-2)adv',
+      '2#1d20pool(-2)advadv',
+      '1d5step(+1)',
+      '2#1d5step(+2)',
+      '1d5+2+step(1)',
+      '1d5step(+2)step(-1)',
+    ];
+
+    for (const algorithm of ['mt19937', 'xoshiro128ss'] as const) {
+      for (const notation of notations) {
+        const full = rollRpgDice(notation, {
+          randomAlgorithm: algorithm,
+          seed: `pool-parity:${algorithm}:${notation}`,
+        });
+        const replayed = rollRpgDice(full.input, { replay: full.replay });
+        const summary = rollRpgDiceSummary(compileRpgDice(full.input), {
+          replay: full.replay,
+        });
+
+        expect(JSON.stringify(replayed)).toBe(JSON.stringify(full));
+        expect(summary).toMatchObject({
+          type: 'dice-roll-summary',
+          input: full.input,
+          notation: full.notation,
+          normalizedNotation: full.normalizedNotation,
+          total: full.total,
+          pool: full.pool,
+          replay: full.replay,
+          stats: full.stats,
+        });
+        expect(summary.rolls).toEqual(full.rolls.map((roll) => ({
+          index: roll.index,
+          total: roll.total,
+          pool: roll.pool,
+        })));
+      }
+    }
+  });
+
   test('projects resolved dice without materializing groups, events, or output', () => {
     const full = rollRpgDice('20d20kh10+2', { seed: 'details-projection' });
     const details = rollRpgDiceDetails(full.input, { replay: full.replay });
@@ -227,6 +274,8 @@ describe('V3 optimized execution contract', () => {
       '4d6min4max5kh3>=4cs=5cf=4',
       '1d6!!',
       '1d6!p',
+      '1d1!p2',
+      '1d1!!p2',
       '{1d6,1d8}sd',
       '{1,2}kh1',
     ]) {

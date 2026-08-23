@@ -15,6 +15,7 @@ import {
   type ModifierNode,
   type NumberNode,
   type ParenthesizedNode,
+  type StructuralModifierNode,
   type UnaryFunctionName,
   type UnaryNode,
   type UnaryOperator,
@@ -89,7 +90,11 @@ class DiceNotationParser {
       return this.fail('Dice notation is required', this.current().span, {});
     }
 
-    const expression = this.parseExpression(0);
+    let expression = this.parseExpression(0);
+    const trailingModifiers = this.parseStructuralModifiers();
+    if (trailingModifiers.length > 0) {
+      expression = this.attachStructuralModifiers(expression, trailingModifiers);
+    }
     const trailing = this.current();
     if (trailing.kind !== 'eof') {
       return this.fail(
@@ -169,6 +174,9 @@ class DiceNotationParser {
       case 'min':
       case 'max':
       case 'sort':
+      case 'pool-adjustment':
+      case 'pool-selection':
+      case 'dice-step':
         return [];
       case 'unary':
         return [node.operand];
@@ -221,6 +229,48 @@ class DiceNotationParser {
         }
       }
     }
+  }
+
+  private collectDiceNodes(root: ExpressionNode): readonly DiceNode[] {
+    const dice: DiceNode[] = [];
+    const pending: CountedNode[] = [root];
+    while (pending.length > 0) {
+      const node = pending.pop();
+      if (node === undefined) {
+        break;
+      }
+      if (node.kind === 'dice') {
+        dice.push(node);
+      }
+      pending.push(...this.countedChildren(node));
+    }
+    return dice;
+  }
+
+  private attachStructuralModifiers(
+    expression: ExpressionNode,
+    modifiers: readonly StructuralModifierNode[],
+  ): ExpressionNode {
+    const dice = this.collectDiceNodes(expression);
+    const firstModifier = modifiers[0] as StructuralModifierNode;
+    const lastModifier = modifiers[modifiers.length - 1] as StructuralModifierNode;
+    if (dice.length !== 1) {
+      return this.fail(
+        'Structural modifier needs one dice node',
+        mergeSpan(firstModifier.span, lastModifier.span),
+        { reason: 'ambiguous-structural-modifier-target', diceCount: dice.length },
+      );
+    }
+    const target = dice[0] as DiceNode;
+    const writableTarget = target as { modifiers: readonly ModifierNode[] };
+    writableTarget.modifiers = [...target.modifiers, ...modifiers];
+
+    const nodeSpan = mergeSpan(expression.span, lastModifier.span);
+    return {
+      ...expression,
+      id: createNodeId(expression.kind, nodeSpan),
+      span: nodeSpan,
+    };
   }
 
   private expect(kind: SyntaxToken['kind'], expected: string): SyntaxToken {
@@ -583,8 +633,43 @@ class DiceNotationParser {
     return modifiers;
   }
 
+  private parseStructuralModifiers(): readonly StructuralModifierNode[] {
+    const modifiers: StructuralModifierNode[] = [];
+    while (true) {
+      const modifier = this.parseStructuralModifier();
+      if (modifier === null) {
+        break;
+      }
+      modifiers.push(modifier);
+    }
+    return modifiers;
+  }
+
+  private parseStructuralModifier(): StructuralModifierNode | null {
+    const token = this.current();
+    if (token.kind !== 'identifier') {
+      return null;
+    }
+    switch (token.value) {
+      case 'pool':
+        return this.parsePoolAdjustment();
+      case 'step':
+        return this.parseDiceStep();
+      case 'adv':
+        return this.parsePoolSelection('highest');
+      case 'dis':
+        return this.parsePoolSelection('lowest');
+      default:
+        return null;
+    }
+  }
+
   private parseModifier(): ModifierNode | null {
     const token = this.current();
+    const structuralModifier = this.parseStructuralModifier();
+    if (structuralModifier !== null) {
+      return structuralModifier;
+    }
     if (token.kind === 'bang') {
       return this.parseExplode();
     }
@@ -630,6 +715,17 @@ class DiceNotationParser {
       penetrate = true;
       this.consume();
     }
+    let maxExplosions: number | null = null;
+    const limitToken = this.current();
+    if (limitToken.kind === 'number') {
+      if (!Number.isSafeInteger(limitToken.value)
+        || limitToken.value < 1
+        || limitToken.lexeme !== String(limitToken.value)) {
+        return this.fail('Invalid explosion limit', limitToken.span, {});
+      }
+      maxExplosions = limitToken.value;
+      this.consume();
+    }
     const compare = this.isComparePointStart() ? this.parseComparePoint() : null;
     const lastSpan = compare?.span ?? this.tokens[this.cursor - 1]?.span ?? firstBang.span;
     const nodeSpan = mergeSpan(firstBang.span, lastSpan);
@@ -639,6 +735,7 @@ class DiceNotationParser {
       span: nodeSpan,
       compound,
       penetrate,
+      maxExplosions,
       compare,
     };
   }
@@ -756,6 +853,61 @@ class DiceNotationParser {
     }
     const nodeSpan = mergeSpan(opening.span, closingSpan);
     return { kind: 'sort', id: createNodeId('sort', nodeSpan), span: nodeSpan, direction };
+  }
+
+  private parsePoolAdjustment(): StructuralModifierNode {
+    return this.parseSignedStructuralAdjustment('pool-adjustment', 'pool', 'Pool adjustment');
+  }
+
+  private parseSignedStructuralAdjustment(
+    kind: 'pool-adjustment' | 'dice-step',
+    keyword: 'pool' | 'step',
+    label: 'Pool adjustment' | 'Dice step',
+  ): StructuralModifierNode {
+    const opening = this.consume();
+    this.expect('left-parenthesis', `"(" after "${keyword}"`);
+    const signToken = this.current();
+    if (signToken.kind !== 'operator'
+      || (signToken.value !== '+' && signToken.value !== '-')) {
+      return this.fail(`${label} requires an explicit sign`, signToken.span, {
+        found: signToken.lexeme,
+        expected: '"+" or "-"',
+      });
+    }
+    this.consume();
+    const quantity = this.expect('number', `a non-zero ${label.toLowerCase()}`);
+    if (quantity.kind !== 'number'
+      || !Number.isSafeInteger(quantity.value)
+      || quantity.value === 0
+      || quantity.lexeme !== String(quantity.value)) {
+      return this.fail(`${label} must be a non-zero safe integer`, quantity.span, {
+        value: quantity.kind === 'number' ? quantity.value : quantity.lexeme,
+      });
+    }
+    const closing = this.expect('right-parenthesis', `")" after ${label.toLowerCase()}`);
+    const nodeSpan = mergeSpan(opening.span, closing.span);
+    const shared = {
+      id: createNodeId(kind, nodeSpan),
+      span: nodeSpan,
+      delta: signToken.value === '-' ? -quantity.value : quantity.value,
+    };
+    return kind === 'pool-adjustment'
+      ? { kind, ...shared }
+      : { kind, ...shared };
+  }
+
+  private parsePoolSelection(selection: 'lowest' | 'highest'): StructuralModifierNode {
+    const token = this.consume();
+    return {
+      kind: 'pool-selection',
+      id: createNodeId('pool-selection', token.span),
+      span: token.span,
+      selection,
+    };
+  }
+
+  private parseDiceStep(): StructuralModifierNode {
+    return this.parseSignedStructuralAdjustment('dice-step', 'step', 'Dice step');
   }
 }
 

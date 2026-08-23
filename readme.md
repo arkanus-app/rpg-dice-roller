@@ -390,11 +390,45 @@ A normalização preserva atalhos comuns:
 - `f` → `4dF`, `2f` → `2dF`, `df` → `dF`;
 - `ei6` → `!>=6`;
 - `km` → `kl`, e `k`, `kh` ou `kl` sem quantidade recebem `1`;
+- `-pool(N)` e `+pool(N)` → `pool(-N)` e `pool(+N)`; `pull` também é aceito como alias de entrada;
 - combinações simples como `+-`, `-+`, `++` e `--` são limpas;
 - `N#formula` executa rolagens independentes; `N` também pode ser uma expressão matemática determinística, como `(3-1)#1d20` (com `()`, `{}` ou `[]` para agrupamento);
 - comentários podem usar `[texto]`, `//`, `#` ou `/* ... */` conforme o contexto.
 
 A sintaxe inclui dados padrão, percentuais e Fudge; aritmética e funções; grupos; keep/drop; reroll/unique; explode/compound/penetrate; min/max; critical; sort; e targets de sucesso/falha.
+
+### Condições estruturais de pool
+
+Os sufixos `pool(±N)`, `adv` e `dis` são resolvidos antes da rolagem. Quantidade compilada, limites, custo, RNG, replay e `stats.initialDice` refletem os dados realmente rolados.
+
+```ts
+rollRpgDice('2d8-pool(1)');     // 1d8 físico
+rollRpgDice('1d20adv+5');       // 2d20, mantém o maior, depois soma 5
+rollRpgDice('1d20-pool(1)');    // saldo 0: 2d20, mantém o menor
+rollRpgDice('1d20-pool(2)');    // saldo -1: 3d20, mantém o menor
+rollRpgDice('1d20-pool(1)adv'); // a vantagem cancela a desvantagem: 1d20
+rollRpgDice('1d20+2-pool(1)');  // desvantagem no d20 e +2 no total
+```
+
+O saldo começa na quantidade escrita e recebe os ajustes `pool`. Se for positivo, vira a nova quantidade física. Zero é a primeira desvantagem; abaixo disso, um saldo `P <= 0` rola `2 - P` dados e mantém o menor. Cada `adv` soma um nível e cada `dis` subtrai um; condições repetidas acumulam e opostas se cancelam. Um saldo de seleção não nulo não pode ser combinado com `keep`/`drop` explícito.
+
+O sufixo pode acompanhar o dado (`1d20adv+5`) ou ficar no fim de uma expressão que contenha exatamente um dado (`1d20+5adv`, `1d20+2-pool(1)`). Em expressões com vários dados, ele precisa ficar junto do dado-alvo para evitar ambiguidade. O modificador `pool(...)` trata a quantidade física; a propriedade `result.pool` continua sendo exclusivamente o resumo de sucessos e falhas criado por targets.
+
+### Passos de dado
+
+O modificador estrutural `step(±N)` promove ou rebaixa os lados antes da rolagem pela escada `d2 → d4 → d6 → d8 → d10 → d12 → d20 → d100`. Um dado que esteja entre dois degraus segue para o primeiro estritamente maior ou menor na direção escolhida.
+
+```ts
+rollRpgDice('1d5step(+1)');          // 1d6
+rollRpgDice('1d5step(+2)');          // 1d8
+rollRpgDice('1d5step(-1)');          // 1d4
+rollRpgDice('1d5+2+step(1)');        // 1d6 + 2
+rollRpgDice('1d5step(+2)step(-1)');  // saldo +1: 1d6
+```
+
+As formas amigáveis `+step(N)` e `-step(N)` são normalizadas para `step(+N)` e `step(-N)`. Todos os passos do mesmo dado são somados antes da transformação, portanto passos opostos se cancelam. O sufixo terminal segue a mesma regra de alvo único de `pool`; com vários dados deve acompanhar o dado alterado. A primeira versão aceita apenas dados numéricos padrão. `d%`, `dF` e movimentos além das extremidades da escada falham explicitamente, sem saturação silenciosa.
+
+Explosões aceitam um teto inteiro positivo opcional logo após `!`, `!!`, `!p` ou `!!p`. `d6!2` gera no máximo dois dados adicionais por dado original; o teto também pode ser combinado com um gatilho (`d6!2>=5`), compound (`d6!!2`) e penetrate (`d6!p2` ou `d6!!p2`). Sem o número, as explosões continuam encadeando normalmente e permanecem sujeitas aos limites globais do engine. Para manter a compilação limitada, interações excepcionalmente amplas entre um teto e `reroll`/`unique` contínuos falham de forma segura com `UNSUPPORTED_NOTATION` quando excedem o domínio de análise semântica.
 
 ```ts
 rollRpgDice('4d6kh3');

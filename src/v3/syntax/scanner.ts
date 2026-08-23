@@ -4,6 +4,10 @@ import type { BinaryOperator } from './ast.js';
 import type { PunctuationKind, SyntaxToken } from './tokens.js';
 
 const RESERVED_WORDS: readonly string[] = [
+  'pool',
+  'step',
+  'adv',
+  'dis',
   'floor',
   'round',
   'sqrt',

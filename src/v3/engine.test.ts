@@ -74,6 +74,135 @@ describe('V3 dice engine', () => {
     expect(sorted.groups[0]?.childIds).toEqual(['roll-1-die-1', 'roll-1-die-2']);
   });
 
+  test('turns positive adjusted pools into physical dice and zero or less into disadvantage', () => {
+    const reduced = rollRpgDice('2d8-pool(1)', { seed: 'pool-reduced' });
+    expect(reduced).toMatchObject({
+      notation: '2d8pool(-1)',
+      normalizedNotation: '2d8pool(-1)',
+      stats: { initialDice: 1, randomCalls: 1, generatedDice: 0, modifierSteps: 0 },
+    });
+    expect(reduced.dice).toHaveLength(1);
+    expect(reduced.dice[0]).toMatchObject({ included: true, contribution: reduced.total, states: [] });
+
+    for (const amount of [1, 2, 3]) {
+      const result = rollRpgDice(`1d20-pool(${amount})`, { seed: `pool-underflow-${amount}` });
+      const values = result.dice.map((die) => die.value);
+      const quantity = amount + 1;
+
+      expect(result.dice).toHaveLength(quantity);
+      expect(result.dice.filter((die) => die.included)).toHaveLength(1);
+      expect(result.dice.filter((die) => !die.included)).toHaveLength(amount);
+      expect(result.total).toBe(Math.min(...values));
+      expect(result.stats).toMatchObject({
+        initialDice: quantity,
+        randomCalls: quantity,
+        generatedDice: 0,
+        modifierSteps: 0,
+      });
+      expect(result.events.filter((event) => event.type === 'exclude')).toHaveLength(amount);
+    }
+
+    const increased = rollRpgDice('2d8+pool(2)', { seed: 'pool-increased' });
+    expect(increased.dice).toHaveLength(4);
+    expect(increased.dice.every((die) => die.included)).toBe(true);
+    expect(increased.total).toBe(increased.dice.reduce((total, die) => total + die.value, 0));
+    expect(increased.stats).toMatchObject({ initialDice: 4, randomCalls: 4 });
+
+    const summed = rollRpgDice('2d8-pool(1)-pool(1)', { seed: 'pool-summed' });
+    expect(summed.normalizedNotation).toBe('2d8pool(-1)pool(-1)');
+    expect(summed.dice).toHaveLength(2);
+    expect(summed.dice.filter((die) => die.included)).toHaveLength(1);
+    expect(summed.total).toBe(Math.min(...summed.dice.map((die) => die.value)));
+  });
+
+  test('applies a trailing pool condition to the die before an arithmetic bonus', () => {
+    const result = rollRpgDice('1d20+2-pool(1)', { seed: 'trailing-pool-condition' });
+    const values = result.dice.map((die) => die.value);
+
+    expect(result).toMatchObject({
+      notation: '1d20+2pool(-1)',
+      normalizedNotation: '1d20+2pool(-1)',
+      stats: { initialDice: 2, randomCalls: 2, generatedDice: 0, modifierSteps: 0 },
+    });
+    expect(result.dice).toHaveLength(2);
+    expect(result.dice.filter((die) => die.included)).toHaveLength(1);
+    expect(result.total).toBe(Math.min(...values) + 2);
+  });
+
+  test('steps numeric dice through the conventional RPG ladder before rolling', () => {
+    const cases = [
+      ['1d5step(+1)', 6],
+      ['1d5step(+2)', 8],
+      ['1d5step(-1)', 4],
+      ['1d6step(+1)', 8],
+      ['1d7step(-1)', 6],
+      ['1d20step(+1)', 100],
+    ] as const;
+
+    for (const [notation, sides] of cases) {
+      const result = rollRpgDice(notation, { seed: `step:${notation}` });
+
+      expect(result.dice).toHaveLength(1);
+      expect(result.dice[0]).toMatchObject({ sides, included: true });
+      expect(result.dice[0]?.value).toBeGreaterThanOrEqual(1);
+      expect(result.dice[0]?.value).toBeLessThanOrEqual(sides);
+      expect(result.stats).toMatchObject({ initialDice: 1, randomCalls: 1 });
+    }
+  });
+
+  test('stacks, cancels, and applies a trailing die step before arithmetic', () => {
+    const stacked = rollRpgDice('1d5step(+2)step(-1)', { seed: 'step-stacked' });
+    expect(stacked.dice[0]?.sides).toBe(6);
+
+    const cancelled = rollRpgDice('1d5step(+1)step(-1)', { seed: 'step-cancelled' });
+    expect(cancelled.dice[0]?.sides).toBe(5);
+
+    const trailing = rollRpgDice('1d5+2+step(1)', { seed: 'step-trailing' });
+    expect(trailing).toMatchObject({
+      notation: '1d5+2step(+1)',
+      normalizedNotation: '1d5+2step(+1)',
+    });
+    expect(trailing.dice[0]?.sides).toBe(6);
+    expect(trailing.total).toBe((trailing.dice[0]?.value ?? 0) + 2);
+  });
+
+  test('stacks and cancels advantage, disadvantage, and pool underflow in one balance', () => {
+    const cases = [
+      ['1d20adv', 2, 'highest'],
+      ['1d20advadv', 3, 'highest'],
+      ['1d20dis', 2, 'lowest'],
+      ['1d20disdis', 3, 'lowest'],
+      ['1d20pool(-2)adv', 2, 'lowest'],
+      ['1d20pool(-2)dis', 4, 'lowest'],
+    ] as const;
+
+    for (const [notation, quantity, selection] of cases) {
+      const result = rollRpgDice(notation, { seed: `selection:${notation}` });
+      const values = result.dice.map((die) => die.value);
+
+      expect(result.dice).toHaveLength(quantity);
+      expect(result.dice.filter((die) => die.included)).toHaveLength(1);
+      expect(result.total).toBe(selection === 'highest'
+        ? Math.max(...values)
+        : Math.min(...values));
+      expect(result.stats).toMatchObject({ initialDice: quantity, randomCalls: quantity });
+    }
+
+    for (const notation of [
+      '1d20advdis',
+      '1d20disadv',
+      '1d20pool(-1)adv',
+      '1d20pool(-2)advadv',
+    ]) {
+      const result = rollRpgDice(notation, { seed: `cancel:${notation}` });
+
+      expect(result.dice).toHaveLength(1);
+      expect(result.dice[0]).toMatchObject({ included: true, contribution: result.total, states: [] });
+      expect(result.events.some((event) => event.type === 'exclude')).toBe(false);
+      expect(result.stats).toMatchObject({ initialDice: 1, randomCalls: 1, modifierSteps: 0 });
+    }
+  });
+
   test('records causal explosions, rerolls, and unique retries', () => {
     const exploded = rollRpgDice('1d6!', { seed: 's12' });
     expect(exploded.dice.map((die) => die.rawValue)).toEqual([6, 2]);
@@ -93,6 +222,49 @@ describe('V3 dice engine', () => {
     const unique = rollRpgDice('4d6u', { seed: 's2' });
     expect(unique.dice[3]).toMatchObject({ rawValue: 4, value: 6, states: ['unique-rerolled'] });
     expect(unique.events.filter((event) => event.type === 'reroll')).toHaveLength(3);
+  });
+
+  test('caps explosion chains independently for each root die', () => {
+    const result = rollRpgDice('2d1!2');
+    const explosions = result.events.filter((event) => event.type === 'explode');
+
+    expect(result.dice).toMatchObject([
+      { id: 'roll-1-die-1', parentDieId: null, rawValue: 1, states: ['exploded'] },
+      { id: 'roll-1-die-2', parentDieId: null, rawValue: 1, states: ['exploded'] },
+      { id: 'roll-1-die-3', parentDieId: 'roll-1-die-1', rawValue: 1, states: ['exploded'] },
+      { id: 'roll-1-die-4', parentDieId: 'roll-1-die-3', rawValue: 1, states: [] },
+      { id: 'roll-1-die-5', parentDieId: 'roll-1-die-2', rawValue: 1, states: ['exploded'] },
+      { id: 'roll-1-die-6', parentDieId: 'roll-1-die-5', rawValue: 1, states: [] },
+    ]);
+    expect(explosions).toEqual([
+      expect.objectContaining({ dieId: 'roll-1-die-1', childDieId: 'roll-1-die-3' }),
+      expect.objectContaining({ dieId: 'roll-1-die-3', childDieId: 'roll-1-die-4' }),
+      expect.objectContaining({ dieId: 'roll-1-die-2', childDieId: 'roll-1-die-5' }),
+      expect.objectContaining({ dieId: 'roll-1-die-5', childDieId: 'roll-1-die-6' }),
+    ]);
+    expect(result.stats).toMatchObject({
+      initialDice: 2,
+      generatedDice: 4,
+      randomCalls: 6,
+      modifierSteps: 4,
+    });
+  });
+
+  test('applies a ceiling to compound penetrate explosions with a compare point', () => {
+    const result = rollRpgDice('1d1!!p2>=1');
+
+    expect(result.total).toBe(1);
+    expect(result.dice.map((die) => die.value)).toEqual([1, 0, 0]);
+    expect(result.dice.map((die) => die.included)).toEqual([true, false, false]);
+    expect(result.dice.map((die) => die.states)).toEqual([
+      ['exploded', 'penetrated', 'compound'],
+      ['penetrated', 'exploded'],
+      ['penetrated'],
+    ]);
+    expect(result.events.filter((event) => event.type === 'explode')).toHaveLength(2);
+    expect(result.events.filter(
+      (event) => event.type === 'transform' && event.reason === 'penetrate',
+    )).toHaveLength(2);
   });
 
   test('keeps every causal reference valid and event sequences strictly increasing', () => {
@@ -229,8 +401,19 @@ describe('V3 dice engine', () => {
       .roll('2d6', { seed: 'budget' }))
       .toThrow(expect.objectContaining({ code: 'RANDOM_BUDGET_EXCEEDED' }));
 
+    expect(() => createDiceEngine({ limits: { maxRandomCalls: 4 } })
+      .roll('1d20-pool(3)', { seed: 'pool-random-budget' }))
+      .not.toThrow();
+    expect(() => createDiceEngine({ limits: { maxRandomCalls: 3 } })
+      .roll('1d20-pool(3)', { seed: 'pool-random-budget' }))
+      .toThrow(expect.objectContaining({ code: 'RANDOM_BUDGET_EXCEEDED' }));
+
     expect(() => createDiceEngine({ limits: { maxGeneratedDice: 1 } })
       .roll('1d2!', { seed: 's12' }))
+      .toThrow(expect.objectContaining({ code: 'GENERATED_DICE_LIMIT_EXCEEDED' }));
+
+    expect(() => createDiceEngine({ limits: { maxGeneratedDice: 1 } })
+      .roll('1d1!2', { seed: 'capped-budget' }))
       .toThrow(expect.objectContaining({ code: 'GENERATED_DICE_LIMIT_EXCEEDED' }));
 
     expect(() => createDiceEngine({ limits: { maxEvents: 1 } })

@@ -47,6 +47,9 @@ const createPlugins = () => [
     tsconfig: './tsconfig.build.json',
   }),
   terser({
+    compress: {
+      passes: 2,
+    },
     format: {
       comments: /@license|^!/u,
     },

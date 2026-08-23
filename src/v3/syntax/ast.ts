@@ -123,6 +123,7 @@ export interface ExplodeModifierNode extends SyntaxNodeBase {
   readonly kind: 'explode';
   readonly compound: boolean;
   readonly penetrate: boolean;
+  readonly maxExplosions: number | null;
   readonly compare: ComparePointNode | null;
 }
 
@@ -181,7 +182,7 @@ export interface SortModifierNode extends SyntaxNodeBase {
   readonly direction: 'ascending' | 'descending';
 }
 
-export type ModifierNode =
+export type RuntimeModifierNode =
   | ExplodeModifierNode
   | TargetModifierNode
   | DropModifierNode
@@ -193,6 +194,14 @@ export type ModifierNode =
   | CriticalSuccessModifierNode
   | CriticalFailureModifierNode
   | SortModifierNode;
+
+export type StructuralModifierNode = SyntaxNodeBase & (
+  | { readonly kind: 'pool-adjustment'; readonly delta: number }
+  | { readonly kind: 'pool-selection'; readonly selection: 'lowest' | 'highest' }
+  | { readonly kind: 'dice-step'; readonly delta: number }
+);
+
+export type ModifierNode = RuntimeModifierNode | StructuralModifierNode;
 
 export function createNodeId(kind: string, span: SourceSpan): NodeId {
   return `${kind}@${span.start}:${span.end}`;

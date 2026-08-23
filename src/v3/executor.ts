@@ -23,7 +23,7 @@ import type {
   DiceNode,
   ExpressionNode,
   GroupNode,
-  ModifierNode,
+  RuntimeModifierNode,
 } from './syntax/index.js';
 import type {
   DiceRollResult,
@@ -241,7 +241,7 @@ function applyMaximum(dice: readonly WorkingDie[], maximum: number, state: RollS
 
 function applyExplode(
   dice: WorkingDie[],
-  modifier: Extract<ModifierNode, { readonly kind: 'explode' }>,
+  modifier: Extract<RuntimeModifierNode, { readonly kind: 'explode' }>,
   node: DiceNode,
   spec: CompiledDiceSpec,
   state: RollState,
@@ -252,9 +252,13 @@ function applyExplode(
   for (const root of roots) {
     let current = root;
     let compareValue = current.value;
+    let explosionCount = 0;
     const chain: WorkingDie[] = [root];
 
     while (true) {
+      if (modifier.maxExplosions !== null && explosionCount >= modifier.maxExplosions) {
+        break;
+      }
       const matches = modifier.compare === null
         ? compareValue === defaultMaximum
         : compare(modifier.compare, compareValue);
@@ -272,6 +276,7 @@ function applyExplode(
       if (modifier.penetrate) {
         const from = child.value;
         child.value -= 1;
+        appendState(child, 'penetrated');
         syncContribution(child);
         state.context.journal.record({
           type: 'transform',
@@ -296,9 +301,10 @@ function applyExplode(
         sourceNodeId: node.id,
         childDieId: child.id,
         value: child.value,
-        reason: modifier.compound ? 'compound' : modifier.penetrate ? 'penetrate' : 'explode',
+        reason: modifier.penetrate ? 'penetrate' : modifier.compound ? 'compound' : 'explode',
       });
       current = child;
+      explosionCount += 1;
     }
 
     if (modifier.compound && chain.length > 1) {
@@ -341,7 +347,7 @@ function applyExplode(
 
 function applyReroll(
   dice: readonly WorkingDie[],
-  modifier: Extract<ModifierNode, { readonly kind: 'reroll' }>,
+  modifier: Extract<RuntimeModifierNode, { readonly kind: 'reroll' }>,
   node: DiceNode,
   spec: CompiledDiceSpec,
   state: RollState,
@@ -386,7 +392,7 @@ function applyReroll(
 
 function applyUnique(
   dice: readonly WorkingDie[],
-  modifier: Extract<ModifierNode, { readonly kind: 'unique' }>,
+  modifier: Extract<RuntimeModifierNode, { readonly kind: 'unique' }>,
   node: DiceNode,
   spec: CompiledDiceSpec,
   state: RollState,
@@ -456,7 +462,7 @@ function indexesToExclude(
 
 function applySelection(
   dice: readonly WorkingDie[],
-  modifier: Extract<ModifierNode, { readonly kind: 'drop' | 'keep' }>,
+  modifier: Extract<RuntimeModifierNode, { readonly kind: 'drop' | 'keep' }>,
   state: RollState,
 ): void {
   const active = dice.filter((die) => die.active);
@@ -489,7 +495,7 @@ function applySelection(
 
 function applyTarget(
   dice: readonly WorkingDie[],
-  modifier: Extract<ModifierNode, { readonly kind: 'target' }>,
+  modifier: Extract<RuntimeModifierNode, { readonly kind: 'target' }>,
   state: RollState,
 ): void {
   for (const die of dice) {
@@ -524,7 +530,7 @@ function applyTarget(
 
 function applyCritical(
   dice: readonly WorkingDie[],
-  modifier: Extract<ModifierNode, {
+  modifier: Extract<RuntimeModifierNode, {
     readonly kind: 'critical-success' | 'critical-failure';
   }>,
   spec: CompiledDiceSpec,
@@ -556,7 +562,7 @@ function applyCritical(
 
 function applyDiceModifiers(
   dice: WorkingDie[],
-  modifiers: readonly ModifierNode[],
+  modifiers: readonly RuntimeModifierNode[],
   node: DiceNode,
   spec: CompiledDiceSpec,
   state: RollState,
@@ -716,7 +722,7 @@ function excludeEvaluationDice(item: GroupItem, state: RollState, reason: 'drop'
 
 function applyGroupModifiers(
   items: GroupItem[],
-  modifiers: readonly ModifierNode[],
+  modifiers: readonly RuntimeModifierNode[],
   state: RollState,
 ): readonly GroupItem[] {
   let displayOrder: readonly GroupItem[] = items;

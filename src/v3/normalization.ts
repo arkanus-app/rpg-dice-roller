@@ -217,7 +217,14 @@ function normalizeFriendlyTokens(notation: string): string {
       const [quantity, afterQuantity] = readWhile(notation, cursor, isDigit);
       const marker = notation.charAt(afterQuantity);
 
-      if (marker.toLowerCase() === 'd') {
+      const afterMarker = notation.charAt(afterQuantity + 1);
+      if (marker.toLowerCase() === 'd' && (
+        afterMarker === ''
+        || isIdentifierBoundary(afterMarker)
+        || isDigit(afterMarker)
+        || afterMarker === '%'
+        || afterMarker.toLowerCase() === 'f'
+      )) {
         const [sides, afterSides] = readDiceSides(notation, afterQuantity + 1);
         output += Number(quantity) === 0 ? '0' : `${quantity}d${sides}`;
         cursor = afterSides;
@@ -276,6 +283,14 @@ function normalizeFriendlyTokens(notation: string): string {
   return output;
 }
 
+function normalizeStructuralAliases(notation: string): string {
+  const canonicalWords = notation
+    .replace(/pull/giu, 'pool')
+    .replace(/strep/giu, 'step')
+    .replace(/pool|step|adv|dis/giu, (word) => word.toLowerCase());
+  return canonicalWords.replace(/([+-])(pool|step)\((\d+)\)/gu, '$2($1$3)');
+}
+
 function normalizeSimpleOperators(notation: string): string {
   let normalized = notation;
   let previous = '';
@@ -294,12 +309,16 @@ function normalizeSimpleOperators(notation: string): string {
 
 export function normalizeRpgDiceNotation(input: string): string {
   const cleaned = cleanInput(input);
-  return normalizeSimpleOperators(normalizeFriendlyTokens(cleaned.notation));
+  return normalizeSimpleOperators(
+    normalizeStructuralAliases(normalizeFriendlyTokens(cleaned.notation)),
+  );
 }
 
 export function parseNormalizedDiceInput(input: string): NormalizedDiceInput {
   const cleaned = cleanInput(input);
-  const normalizedNotation = normalizeSimpleOperators(normalizeFriendlyTokens(cleaned.notation));
+  const normalizedNotation = normalizeSimpleOperators(
+    normalizeStructuralAliases(normalizeFriendlyTokens(cleaned.notation)),
+  );
   const multiRollMatch = /^(\d+)#/u.exec(normalizedNotation);
   const rollCountText = multiRollMatch?.[1];
   const rollCount = rollCountText === undefined ? 1 : Number.parseInt(rollCountText, 10);

@@ -11,10 +11,10 @@ import { dirname, join, resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { gzipSync } from 'node:zlib';
 
-const maximumPackedSize = 90 * 1024;
+const maximumPackedSize = 94 * 1024;
 const maximumUnpackedSize = 375 * 1024;
-const maximumRootEsmGzipSize = 28 * 1024;
-const maximumCoreEsmGzipSize = 21 * 1024;
+const maximumRootEsmGzipSize = 30 * 1024;
+const maximumCoreEsmGzipSize = 23 * 1024;
 const root = resolve(dirname(fileURLToPath(import.meta.url)), '..');
 const tscExecutable = resolve(root, 'node_modules/typescript/bin/tsc');
 const npmExecutable = process.env['npm_execpath'];

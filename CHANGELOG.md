@@ -1,5 +1,32 @@
 # Changelog
 
+## Não publicado
+
+### Adicionado
+
+- Teto opcional por cadeia de explosão na notação (`!N`, `!!N`, `!pN` e `!!pN`),
+  combinável com pontos de comparação, como em `d6!2>=5`.
+- Condições estruturais de pool com `pool(±N)`, aliases `±pool(N)`, vantagem
+  `adv` e desvantagem `dis`, incluindo acúmulo, cancelamento e conversão de
+  saldos não positivos em níveis de desvantagem. Em expressões com um único
+  dado, a condição também pode ser concatenada depois do bônus aritmético.
+- Passos estruturais de dado com `step(±N)` e aliases `±step(N)`, usando a
+  escada `d2 → d4 → d6 → d8 → d10 → d12 → d20 → d100`, com agregação,
+  cancelamento e suporte a lados intermediários como `d5`.
+
+### Corrigido
+
+- O journal de explosões penetrantes agora reconstrói o estado `penetrated` nos
+  dados transformados, inclusive na combinação compound + penetrate.
+- A normalização não reinterpreta mais quantidades de `keep` seguidas por `dl`,
+  `dh` ou `dis` como o início de outro dado.
+
+### Qualidade e segurança
+
+- Os tetos gzip dos grafos ESM raiz e core foram elevados em 2 KiB e o teto do
+  pacote compactado em 4 KiB para acomodar as novas gramáticas, documentação e
+  o lowering estrutural de pool e step, mantendo verificações rígidas de tamanho.
+
 ## 3.5.0 — 2026-08-08
 
 ### Adicionado

@@ -1,14 +1,17 @@
 import { DiceRollError, isDiceRollError, type SourceSpan } from './errors.js';
 import { freezeRollPlan } from './freeze.js';
+import { compareValues } from './math.js';
 import { parseNormalizedDiceInput, type NormalizedDiceInput } from './normalization.js';
 import { ExecutionBudget } from './runtime/budget.js';
 import type { DiceLimits } from './runtime/limits.js';
 import {
+  createNodeId,
   parseDiceNotation,
   type ComparePointNode,
   type DiceNode,
   type ExpressionNode,
   type ModifierNode,
+  type RuntimeModifierNode,
 } from './syntax/index.js';
 import type {
   DiceInspectionCost,
@@ -20,11 +23,26 @@ import type {
 
 export const DICE_COMPILER_VERSION = 1 as const;
 const MAX_SAFE_COST = Number.MAX_SAFE_INTEGER;
+const MAX_SEMANTIC_STATES = 4_096;
+const MAX_SEMANTIC_TRANSITIONS = 1_000_000;
+const MINIMUM_DICE_STEP_SIDE = 2;
+const MAXIMUM_DICE_STEP_SIDE = 100;
+const DICE_STEP_LADDER = Object.freeze([2, 4, 6, 8, 10, 12, 20, 100] as const);
 
 interface CostAccumulator {
   readonly staticDice: number;
   readonly worstCaseGeneratedDice: number;
   readonly worstCaseRandomCalls: number;
+}
+
+interface NumericRange {
+  readonly minimum: number;
+  readonly maximum: number;
+  readonly integersOnly: boolean;
+}
+
+interface SemanticAnalysisBudget {
+  remainingTransitions: number;
 }
 
 type CountedProgramNode = ExpressionNode | ModifierNode | ComparePointNode;
@@ -36,7 +54,7 @@ export interface CompiledDiceSpec {
   readonly minimum: number;
   readonly maximum: number;
   readonly possibleFaces: number;
-  readonly modifiers: readonly ModifierNode[];
+  readonly modifiers: readonly RuntimeModifierNode[];
 }
 
 export interface CompiledDiceProgram {
@@ -50,7 +68,7 @@ export interface CompiledDiceProgram {
   readonly staticDice: number;
   readonly maximumSides: number;
   readonly diceSpecs: ReadonlyMap<string, CompiledDiceSpec>;
-  readonly groupModifiers: ReadonlyMap<string, readonly ModifierNode[]>;
+  readonly groupModifiers: ReadonlyMap<string, readonly RuntimeModifierNode[]>;
   readonly constants: ReadonlyMap<string, number>;
 }
 
@@ -110,7 +128,7 @@ function readPositiveInteger(
   return value;
 }
 
-function modifierOrder(modifier: ModifierNode): number {
+function modifierOrder(modifier: RuntimeModifierNode): number {
   switch (modifier.kind) {
     case 'min': return 1;
     case 'max': return 2;
@@ -127,9 +145,11 @@ function modifierOrder(modifier: ModifierNode): number {
 }
 
 /** Returns the V3 modifier pipeline (last duplicate wins) without per-roll sorting. */
-export function orderCompiledModifiers(modifiers: readonly ModifierNode[]): readonly ModifierNode[] {
-  const kinds = new Set<ModifierNode['kind']>();
-  const deduplicated: ModifierNode[] = [];
+export function orderCompiledModifiers(
+  modifiers: readonly RuntimeModifierNode[],
+): readonly RuntimeModifierNode[] {
+  const kinds = new Set<RuntimeModifierNode['kind']>();
+  const deduplicated: RuntimeModifierNode[] = [];
   for (let index = modifiers.length - 1; index >= 0; index -= 1) {
     const modifier = modifiers[index];
     if (modifier !== undefined && !kinds.has(modifier.kind)) {
@@ -142,16 +162,364 @@ export function orderCompiledModifiers(modifiers: readonly ModifierNode[]): read
   return Object.freeze(deduplicated);
 }
 
-function comparisonAlwaysMatches(compare: ComparePointNode, minimum: number, maximum: number): boolean {
+interface ResolvedDicePool {
+  readonly quantity: number;
+  readonly modifiers: readonly RuntimeModifierNode[];
+  readonly stepDelta: bigint;
+  readonly stepSpan: SourceSpan | null;
+}
+
+function invalidPoolTransformation(
+  input: string,
+  node: DiceNode,
+  reason: 'conflicting-selection' | 'unsafe-pool-balance',
+  details: Readonly<Record<string, number | string>>,
+): never {
+  throw new DiceRollError(
+    reason === 'conflicting-selection'
+      ? 'Pool advantage or disadvantage cannot be combined with keep or drop'
+      : 'Pool transformation exceeds the safe dice quantity range',
+    {
+      code: 'UNSUPPORTED_NOTATION',
+      input,
+      span: node.span,
+      details: { reason, ...details },
+    },
+  );
+}
+
+/**
+ * Resolves structural pool conditions before the runtime modifier pipeline.
+ *
+ * Positive adjusted pools are physical dice quantities. Zero is the first
+ * disadvantage level; each value below it adds another discarded high die.
+ * Thus `0` rolls two dice and keeps the lowest one, `-1` rolls three, and so on.
+ * Explicit `adv`/`dis` conditions add to the same signed selection balance.
+ */
+function resolveDicePool(node: DiceNode, baseQuantity: number, input: string): ResolvedDicePool {
+  let adjustedPool = baseQuantity;
+  let selectionBalance = 0;
+  let structuralSpan: SourceSpan | null = null;
+  let stepDelta = 0n;
+  let stepSpan: SourceSpan | null = null;
+  const runtimeModifiers: RuntimeModifierNode[] = [];
+
+  for (const modifier of node.modifiers) {
+    if (modifier.kind === 'pool-adjustment') {
+      const nextPool = adjustedPool + modifier.delta;
+      if (!Number.isSafeInteger(nextPool)) {
+        return invalidPoolTransformation(input, node, 'unsafe-pool-balance', {
+          baseQuantity,
+          delta: modifier.delta,
+        });
+      }
+      adjustedPool = nextPool;
+      structuralSpan = modifier.span;
+    } else if (modifier.kind === 'pool-selection') {
+      selectionBalance += modifier.selection === 'highest' ? 1 : -1;
+      structuralSpan = modifier.span;
+    } else if (modifier.kind === 'dice-step') {
+      stepDelta += BigInt(modifier.delta);
+      stepSpan = stepSpan === null
+        ? modifier.span
+        : { start: stepSpan.start, end: modifier.span.end };
+    } else {
+      runtimeModifiers.push(modifier);
+    }
+  }
+
+  const keptQuantity = Math.max(1, adjustedPool);
+  const underflowDisadvantage = Math.min(0, adjustedPool - 1);
+  const effectiveSelection = selectionBalance + underflowDisadvantage;
+  const quantity = keptQuantity + Math.abs(effectiveSelection);
+  if (!Number.isSafeInteger(quantity)) {
+    return invalidPoolTransformation(input, node, 'unsafe-pool-balance', {
+      adjustedPool,
+      selectionBalance,
+    });
+  }
+
+  if (effectiveSelection !== 0) {
+    const conflicting = runtimeModifiers.find(
+      (modifier) => modifier.kind === 'keep' || modifier.kind === 'drop',
+    );
+    if (conflicting !== undefined) {
+      return invalidPoolTransformation(input, node, 'conflicting-selection', {
+        modifier: conflicting.kind,
+      });
+    }
+    const selectionSpan = structuralSpan ?? node.span;
+    runtimeModifiers.push({
+      kind: 'keep',
+      id: createNodeId('keep', selectionSpan),
+      span: selectionSpan,
+      selection: effectiveSelection > 0 ? 'highest' : 'lowest',
+      quantity: keptQuantity,
+    });
+  }
+
+  return { quantity, modifiers: runtimeModifiers, stepDelta, stepSpan };
+}
+
+function serializedStepDelta(delta: bigint): number | string {
+  const numericDelta = Number(delta);
+  return Number.isSafeInteger(numericDelta) ? numericDelta : delta.toString();
+}
+
+function invalidDiceStep(
+  input: string,
+  span: SourceSpan,
+  reason: 'dice-step-out-of-range' | 'dice-step-non-standard-die',
+  details: Readonly<Record<string, number | string>>,
+): never {
+  throw new DiceRollError(
+    reason === 'dice-step-out-of-range'
+      ? 'Dice step exceeds the supported side ladder'
+      : 'Dice step requires a standard numeric die',
+    {
+      code: 'UNSUPPORTED_NOTATION',
+      input,
+      span,
+      details: { reason, ...details },
+    },
+  );
+}
+
+function resolveSteppedSides(
+  baseSides: number,
+  delta: bigint,
+  input: string,
+  span: SourceSpan,
+): number {
+  if (delta === 0n) {
+    return baseSides;
+  }
+
+  const candidates = delta > 0n
+    ? DICE_STEP_LADDER.filter((sides) => sides > baseSides)
+    : [...DICE_STEP_LADDER].reverse().filter((sides) => sides < baseSides);
+  const distance = delta < 0n ? -delta : delta;
+  if (distance > BigInt(candidates.length)) {
+    return invalidDiceStep(input, span, 'dice-step-out-of-range', {
+      baseSides,
+      delta: serializedStepDelta(delta),
+      ladderMinimum: MINIMUM_DICE_STEP_SIDE,
+      ladderMaximum: MAXIMUM_DICE_STEP_SIDE,
+    });
+  }
+
+  return candidates[Number(distance) - 1] as number;
+}
+
+function comparisonAlwaysMatchesRange(
+  compare: ComparePointNode,
+  minimum: number,
+  maximum: number,
+  integersOnly: boolean,
+): boolean {
   switch (compare.operator) {
     case '=': return minimum === maximum && minimum === compare.value;
     case '!=':
-    case '<>': return compare.value < minimum || compare.value > maximum;
+    case '<>': return (integersOnly && !Number.isInteger(compare.value))
+      || compare.value < minimum
+      || compare.value > maximum;
     case '<': return maximum < compare.value;
     case '<=': return maximum <= compare.value;
     case '>': return minimum > compare.value;
     case '>=': return minimum >= compare.value;
   }
+}
+
+function comparisonCanMatchRange(
+  compare: ComparePointNode,
+  range: NumericRange,
+): boolean {
+  switch (compare.operator) {
+    case '=': return (!range.integersOnly || Number.isInteger(compare.value))
+      && compare.value >= range.minimum
+      && compare.value <= range.maximum;
+    case '!=':
+    case '<>': return range.minimum !== range.maximum || range.minimum !== compare.value;
+    case '<': return range.minimum < compare.value;
+    case '<=': return range.minimum <= compare.value;
+    case '>': return range.maximum > compare.value;
+    case '>=': return range.maximum >= compare.value;
+  }
+}
+
+function rangeCanMatch(
+  range: NumericRange,
+  compare: ComparePointNode | null,
+  defaultValue: number,
+): boolean {
+  return compare === null
+    ? defaultValue >= range.minimum
+      && defaultValue <= range.maximum
+      && (!range.integersOnly || Number.isInteger(defaultValue))
+    : comparisonCanMatchRange(compare, range);
+}
+
+function rangeAlwaysMatches(
+  range: NumericRange,
+  compare: ComparePointNode | null,
+  defaultValue: number,
+): boolean {
+  return compare === null
+    ? range.minimum === range.maximum && range.minimum === defaultValue
+    : comparisonAlwaysMatchesRange(
+      compare,
+      range.minimum,
+      range.maximum,
+      range.integersOnly,
+    );
+}
+
+function applyLimitToRange(
+  range: NumericRange,
+  limit: number,
+  clamp: (value: number, limit: number) => number,
+): NumericRange {
+  const minimum = clamp(range.minimum, limit);
+  const maximum = clamp(range.maximum, limit);
+  return minimum === range.minimum && maximum === range.maximum ? range : {
+    minimum,
+    maximum,
+    integersOnly: range.integersOnly && Number.isInteger(limit),
+  };
+}
+
+function valueMatches(
+  value: number,
+  compare: ComparePointNode | null,
+  defaultValue: number,
+): boolean {
+  return compare === null
+    ? value === defaultValue
+    : compareValues(compare.operator, value, compare.value);
+}
+
+function enumerateFaceValues(
+  minimum: number,
+  maximum: number,
+  possibleValues: number,
+): ReadonlySet<number> | null {
+  if (possibleValues > MAX_SEMANTIC_STATES) {
+    return null;
+  }
+  const values = new Set<number>();
+  for (let value = minimum; value <= maximum; value += 1) {
+    values.add(value);
+  }
+  return values;
+}
+
+function mapValueSet(
+  values: ReadonlySet<number> | null,
+  transform: (value: number) => number,
+): ReadonlySet<number> | null {
+  if (values === null) {
+    return null;
+  }
+  return new Set([...values].map(transform));
+}
+
+function unionValueSets(
+  ...sets: ReadonlyArray<ReadonlySet<number> | null>
+): ReadonlySet<number> | null {
+  const result = new Set<number>();
+  for (const values of sets) {
+    if (values === null) {
+      return null;
+    }
+    for (const value of values) {
+      result.add(value);
+      if (result.size > MAX_SEMANTIC_STATES) {
+        return null;
+      }
+    }
+  }
+  return result;
+}
+
+function semanticAnalysisLimit(
+  input: string,
+  modifier: Extract<RuntimeModifierNode, { readonly kind: 'reroll' | 'unique' }>,
+): never {
+  throw new DiceRollError('Unsupported interaction', {
+    code: 'UNSUPPORTED_NOTATION',
+    input,
+    span: modifier.span,
+    details: { reason: 'semantic-analysis-limit' },
+  });
+}
+
+function anyValueMatches(
+  values: ReadonlySet<number>,
+  compare: ComparePointNode | null,
+  defaultValue: number,
+): boolean {
+  return [...values].some((value) => valueMatches(value, compare, defaultValue));
+}
+
+function everyValueMatches(
+  values: ReadonlySet<number>,
+  compare: ComparePointNode | null,
+  defaultValue: number,
+): boolean {
+  return [...values].every((value) => valueMatches(value, compare, defaultValue));
+}
+
+function analyzeCompoundExplosionValues(
+  rootValues: ReadonlySet<number> | null,
+  rawValues: ReadonlySet<number> | null,
+  modifier: Extract<RuntimeModifierNode, { readonly kind: 'explode' }>,
+  maxExplosions: number,
+  defaultMaximum: number,
+  budget: SemanticAnalysisBudget,
+): ReadonlySet<number> | null {
+  if (rootValues === null || rawValues === null) {
+    return null;
+  }
+
+  const outcomes = new Set<number>();
+  let pending = new Set<number>();
+  for (const rootValue of rootValues) {
+    if (valueMatches(rootValue, modifier.compare, defaultMaximum)) {
+      pending.add(rootValue);
+    } else {
+      outcomes.add(rootValue);
+    }
+  }
+  for (let depth = 1; depth <= maxExplosions; depth += 1) {
+    const nextPending = new Set<number>();
+    for (const sum of pending) {
+      for (const rawValue of rawValues) {
+        budget.remainingTransitions -= 1;
+        if (budget.remainingTransitions < 0) {
+          return null;
+        }
+        const storedValue = modifier.penetrate ? rawValue - 1 : rawValue;
+        const nextSum = sum + storedValue;
+        if (
+          depth === maxExplosions
+          || !valueMatches(rawValue, modifier.compare, defaultMaximum)
+        ) {
+          outcomes.add(nextSum);
+        } else {
+          nextPending.add(nextSum);
+        }
+        if (outcomes.size + nextPending.size > MAX_SEMANTIC_STATES) {
+          return null;
+        }
+      }
+    }
+    pending = nextPending;
+    if (pending.size === 0) {
+      break;
+    }
+  }
+
+  return outcomes;
 }
 
 function validateGroupModifiers(node: Extract<ExpressionNode, { readonly kind: 'group' }>, input: string): void {
@@ -172,14 +540,23 @@ function createDiceSpec(
   input: string,
   limits: DiceLimits,
   constants: ReadonlyMap<string, number>,
+  semanticBudget: SemanticAnalysisBudget,
 ): CompiledDiceSpec {
-  const quantity = readPositiveInteger(node.quantity, input, 'quantity', constants);
+  const baseQuantity = readPositiveInteger(node.quantity, input, 'quantity', constants);
+  const resolvedPool = resolveDicePool(node, baseQuantity, input);
+  const quantity = resolvedPool.quantity;
   let sides: DiceSides;
   let minimum: number;
   let maximum: number;
   let possibleFaces: number;
   if (node.diceKind === 'standard') {
-    const resolvedSides = readPositiveInteger(node.sides, input, 'sides', constants);
+    const baseSides = readPositiveInteger(node.sides, input, 'sides', constants);
+    const resolvedSides = resolveSteppedSides(
+      baseSides,
+      resolvedPool.stepDelta,
+      input,
+      resolvedPool.stepSpan ?? node.sides.span,
+    );
     if (resolvedSides > limits.maxSides) {
       throw new DiceRollError('Dice sides exceed the configured limit', {
         code: 'DICE_SIDES_LIMIT_EXCEEDED',
@@ -193,51 +570,261 @@ function createDiceSpec(
     maximum = resolvedSides;
     possibleFaces = resolvedSides;
   } else if (node.diceKind === 'percentile') {
+    if (resolvedPool.stepDelta !== 0n) {
+      invalidDiceStep(
+        input,
+        resolvedPool.stepSpan ?? node.span,
+        'dice-step-non-standard-die',
+        {
+          diceKind: node.diceKind,
+          delta: serializedStepDelta(resolvedPool.stepDelta),
+        },
+      );
+    }
     sides = 100;
     minimum = 1;
     maximum = 100;
     possibleFaces = 100;
   } else {
+    if (resolvedPool.stepDelta !== 0n) {
+      invalidDiceStep(
+        input,
+        resolvedPool.stepSpan ?? node.span,
+        'dice-step-non-standard-die',
+        {
+          diceKind: node.diceKind,
+          delta: serializedStepDelta(resolvedPool.stepDelta),
+        },
+      );
+    }
     sides = 'F';
     minimum = -1;
     maximum = 1;
     possibleFaces = 3;
   }
 
-  const modifiers = orderCompiledModifiers(node.modifiers);
+  const modifiers = orderCompiledModifiers(resolvedPool.modifiers);
+  const cappedExplosionModifier = modifiers.find((modifier): modifier is Extract<
+    RuntimeModifierNode,
+    { readonly kind: 'explode' }
+  > => modifier.kind === 'explode' && modifier.maxExplosions !== null) ?? null;
+  const needsCappedSemanticAnalysis = cappedExplosionModifier !== null
+    && modifiers.some((modifier) => (
+      modifier.kind === 'reroll' && !modifier.once
+    ) || (
+      modifier.kind === 'unique'
+      && !modifier.once
+      && (!cappedExplosionModifier.compound || quantity > 1)
+    ));
+  const rawValues = needsCappedSemanticAnalysis
+    ? enumerateFaceValues(minimum, maximum, possibleFaces)
+    : null;
+  const rawRange: NumericRange = { minimum, maximum, integersOnly: true };
+  let rootValues = rawValues;
+  let childValues: ReadonlySet<number> | null = rawValues === null ? null : new Set<number>();
+  let rootRange = rawRange;
+  let guaranteedActiveDice = quantity;
+  const cappedExplosionRequiresAnalysis = needsCappedSemanticAnalysis;
+  let unchangedMinimum = minimum;
+  let unchangedMaximum = maximum;
   for (const modifier of modifiers) {
-    if (modifier.kind === 'explode' && (
-      modifier.compare === null
-        ? minimum === maximum
-        : comparisonAlwaysMatches(modifier.compare, minimum, maximum)
-    )) {
-      throw new DiceRollError('Explode modifier cannot terminate for this die', {
-        code: 'NON_TERMINATING_MODIFIER',
-        input,
-        span: modifier.span,
-        details: { reason: 'non-terminating-explode', minimum, maximum },
-      });
-    }
-    if (modifier.kind === 'reroll' && !modifier.once && (
-      modifier.compare === null
-        ? minimum === maximum
-        : comparisonAlwaysMatches(modifier.compare, minimum, maximum)
-    )) {
-      throw new DiceRollError('Reroll modifier cannot terminate for this die', {
-        code: 'NON_TERMINATING_MODIFIER',
-        input,
-        span: modifier.span,
-        details: { reason: 'non-terminating-reroll', minimum, maximum },
-      });
-    }
-    if (modifier.kind === 'unique' && !modifier.once && quantity > possibleFaces
-      && (modifier.compare === null || comparisonAlwaysMatches(modifier.compare, minimum, maximum))) {
-      throw new DiceRollError('Unique modifier cannot produce enough distinct faces', {
-        code: 'IMPOSSIBLE_UNIQUE',
-        input,
-        span: modifier.span,
-        details: { reason: 'impossible-unique', quantity, possibleFaces },
-      });
+    switch (modifier.kind) {
+      case 'min': {
+        unchangedMinimum = Math.max(unchangedMinimum, Math.ceil(modifier.value));
+        rootValues = mapValueSet(rootValues, (value) => Math.max(value, modifier.value));
+        rootRange = applyLimitToRange(rootRange, modifier.value, Math.max);
+        break;
+      }
+      case 'max': {
+        unchangedMaximum = Math.min(unchangedMaximum, Math.floor(modifier.value));
+        rootValues = mapValueSet(rootValues, (value) => Math.min(value, modifier.value));
+        rootRange = applyLimitToRange(rootRange, modifier.value, Math.min);
+        break;
+      }
+      case 'explode': {
+        const maxExplosions = modifier.maxExplosions;
+        const rawAlwaysExplodes = rangeAlwaysMatches(rawRange, modifier.compare, maximum);
+        if (maxExplosions === null && rawAlwaysExplodes) {
+          throw new DiceRollError('Explode modifier cannot terminate for this die', {
+            code: 'NON_TERMINATING_MODIFIER',
+            input,
+            span: modifier.span,
+            details: { reason: 'non-terminating-explode', minimum, maximum },
+          });
+        }
+        if (maxExplosions === null) {
+          break;
+        }
+
+        const rootCanExplode = rootValues === null
+          ? rangeCanMatch(rootRange, modifier.compare, maximum)
+          : anyValueMatches(rootValues, modifier.compare, maximum);
+        if (modifier.compound) {
+          if (!rootCanExplode) {
+            break;
+          }
+          rootValues = analyzeCompoundExplosionValues(
+            rootValues,
+            rawValues,
+            modifier,
+            maxExplosions,
+            maximum,
+            semanticBudget,
+          );
+          childValues = rootValues === null ? null : new Set<number>();
+          if (
+            unchangedMinimum <= unchangedMaximum
+            && (modifier.compare === null
+              ? unchangedMinimum === unchangedMaximum && unchangedMinimum === maximum
+              : comparisonAlwaysMatchesRange(
+                modifier.compare,
+                unchangedMinimum,
+                unchangedMaximum,
+                true,
+              ))
+          ) {
+            unchangedMinimum = unchangedMaximum + 1;
+          }
+        } else {
+          const penetration = modifier.penetrate ? 1 : 0;
+          childValues = rootCanExplode
+            ? mapValueSet(rawValues, (value) => value - penetration)
+            : rootValues === null ? null : new Set<number>();
+          const rootAlwaysExplodes = rootValues === null
+            ? rangeAlwaysMatches(rootRange, modifier.compare, maximum)
+            : everyValueMatches(rootValues, modifier.compare, maximum);
+          if (rootAlwaysExplodes) {
+            const guaranteedExplosions = rawAlwaysExplodes ? maxExplosions : 1;
+            guaranteedActiveDice = saturatingAdd(
+              guaranteedActiveDice,
+              saturatingMultiply(quantity, guaranteedExplosions),
+            );
+          }
+        }
+        break;
+      }
+      case 'reroll': {
+        const rawAlwaysRerolls = rangeAlwaysMatches(rawRange, modifier.compare, minimum);
+        const currentValues = unionValueSets(rootValues, childValues);
+        const cappedCurrentCanReroll = currentValues !== null
+          && anyValueMatches(currentValues, modifier.compare, minimum);
+        const shouldReject = !modifier.once && rawAlwaysRerolls && (
+          !cappedExplosionRequiresAnalysis
+          || cappedCurrentCanReroll
+          || unchangedMinimum <= unchangedMaximum
+        );
+        if (shouldReject) {
+          throw new DiceRollError('Reroll modifier cannot terminate for this die', {
+            code: 'NON_TERMINATING_MODIFIER',
+            input,
+            span: modifier.span,
+            details: { reason: 'non-terminating-reroll', minimum, maximum },
+          });
+        }
+        if (
+          !modifier.once
+          && rawAlwaysRerolls
+          && cappedExplosionRequiresAnalysis
+          && currentValues === null
+        ) {
+          semanticAnalysisLimit(input, modifier);
+        }
+        if (cappedExplosionRequiresAnalysis && rawValues !== null) {
+          if (
+            rootValues !== null
+            && anyValueMatches(rootValues, modifier.compare, minimum)
+          ) {
+            rootValues = unionValueSets(rootValues, rawValues);
+          }
+          if (
+            childValues !== null
+            && anyValueMatches(childValues, modifier.compare, minimum)
+          ) {
+            childValues = unionValueSets(childValues, rawValues);
+          }
+        }
+        break;
+      }
+      case 'unique': {
+        let impossibleQuantity: number | null = null;
+        let uniqueValueCount: number | null = null;
+        if (!modifier.once && cappedExplosionRequiresAnalysis && guaranteedActiveDice > 1) {
+          if (rawValues === null || rootValues === null || childValues === null) {
+            semanticAnalysisLimit(input, modifier);
+          }
+          const rootUniqueValues = unionValueSets(rootValues, rawValues);
+          const guaranteedChildren = Math.max(0, guaranteedActiveDice - quantity);
+          const childUniqueValues = unionValueSets(childValues, rawValues);
+          const allUniqueValues = unionValueSets(rootValues, childValues, rawValues);
+          if (
+            rootUniqueValues === null
+            || childUniqueValues === null
+            || allUniqueValues === null
+          ) {
+            semanticAnalysisLimit(input, modifier);
+          }
+          if (
+            quantity > rootUniqueValues.size
+            && (
+              modifier.compare === null
+              || everyValueMatches(rootUniqueValues, modifier.compare, minimum)
+            )
+          ) {
+            impossibleQuantity = quantity;
+            uniqueValueCount = rootUniqueValues.size;
+          } else if (
+            guaranteedChildren > childUniqueValues.size
+            && (
+              modifier.compare === null
+              || everyValueMatches(childUniqueValues, modifier.compare, minimum)
+            )
+          ) {
+            impossibleQuantity = guaranteedChildren;
+            uniqueValueCount = childUniqueValues.size;
+          } else if (
+            guaranteedActiveDice > allUniqueValues.size
+            && (
+              modifier.compare === null
+              || everyValueMatches(allUniqueValues, modifier.compare, minimum)
+            )
+          ) {
+            impossibleQuantity = guaranteedActiveDice;
+            uniqueValueCount = allUniqueValues.size;
+          }
+        } else if (
+          !modifier.once
+          && !cappedExplosionRequiresAnalysis
+          && quantity > possibleFaces
+          && (
+            modifier.compare === null
+            || comparisonAlwaysMatchesRange(modifier.compare, minimum, maximum, true)
+          )
+        ) {
+          impossibleQuantity = quantity;
+          uniqueValueCount = possibleFaces;
+        }
+
+        if (impossibleQuantity !== null && uniqueValueCount !== null) {
+          throw new DiceRollError('Unique modifier cannot produce enough distinct faces', {
+            code: 'IMPOSSIBLE_UNIQUE',
+            input,
+            span: modifier.span,
+            details: {
+              reason: 'impossible-unique',
+              quantity: impossibleQuantity,
+              possibleFaces: uniqueValueCount,
+            },
+          });
+        }
+        break;
+      }
+      case 'target':
+      case 'drop':
+      case 'keep':
+      case 'critical-success':
+      case 'critical-failure':
+      case 'sort':
+        break;
     }
   }
 
@@ -305,7 +892,10 @@ function countedProgramChildren(node: CountedProgramNode): readonly CountedProgr
     case 'keep':
     case 'min':
     case 'max':
-    case 'sort': return [];
+    case 'sort':
+    case 'pool-adjustment':
+    case 'pool-selection':
+    case 'dice-step': return [];
     case 'unary': return [node.operand];
     case 'binary': return [node.left, node.right];
     case 'parenthesized': return [node.expression];
@@ -511,17 +1101,23 @@ export function compileDiceProgram(
   const traversal = buildPostOrder(ast);
   const metrics = measureProgram(ast);
   const diceSpecs = new Map<string, CompiledDiceSpec>();
-  const groupModifiers = new Map<string, readonly ModifierNode[]>();
+  const groupModifiers = new Map<string, readonly RuntimeModifierNode[]>();
   const constants = new Map<string, number>();
+  const semanticBudget: SemanticAnalysisBudget = {
+    remainingTransitions: MAX_SEMANTIC_TRANSITIONS,
+  };
   let staticDice = 0;
   let maximumSides = 0;
   for (const node of traversal.nodes) {
     if (node.kind === 'group') {
       validateGroupModifiers(node, sourceInput);
-      groupModifiers.set(node.id, orderCompiledModifiers(node.modifiers));
+      groupModifiers.set(
+        node.id,
+        orderCompiledModifiers(node.modifiers as readonly RuntimeModifierNode[]),
+      );
     }
     if (node.kind === 'dice') {
-      const spec = createDiceSpec(node, sourceInput, limits, constants);
+      const spec = createDiceSpec(node, sourceInput, limits, constants, semanticBudget);
       diceSpecs.set(node.id, spec);
       staticDice = saturatingAdd(staticDice, spec.quantity);
       if (typeof spec.sides === 'number') {
@@ -645,9 +1241,11 @@ function createPlanGroups(root: ExpressionNode, notation: string): readonly Roll
   return groups;
 }
 
-function modifierIterations(modifier: ModifierNode, limits: DiceLimits): number {
+function modifierIterations(modifier: RuntimeModifierNode, limits: DiceLimits): number {
   switch (modifier.kind) {
-    case 'explode': return limits.maxModifierSteps;
+    case 'explode': return modifier.maxExplosions === null
+      ? limits.maxModifierSteps
+      : Math.min(modifier.maxExplosions, limits.maxModifierSteps);
     case 'reroll':
     case 'unique': return modifier.once ? 1 : limits.maxModifierSteps;
     case 'target':
@@ -664,24 +1262,39 @@ function modifierIterations(modifier: ModifierNode, limits: DiceLimits): number 
 function createInspectionCost(program: CompiledDiceProgram, rollCount: number, limits: DiceLimits): DiceInspectionCost {
   let cost: CostAccumulator = { staticDice: 0, worstCaseGeneratedDice: 0, worstCaseRandomCalls: 0 };
   for (const spec of program.diceSpecs.values()) {
-    let generatedIterations = 0;
-    let randomIterations = 1;
+    let generatedDice = 0;
+    let activeDice = spec.quantity;
+    let randomCalls = spec.quantity;
     for (const modifier of spec.modifiers) {
       const iterations = modifierIterations(modifier, limits);
-      randomIterations = saturatingAdd(randomIterations, iterations);
       if (modifier.kind === 'explode') {
-        generatedIterations = saturatingAdd(generatedIterations, iterations);
+        const generatedByExplosion = saturatingMultiply(spec.quantity, iterations);
+        generatedDice = saturatingAdd(generatedDice, generatedByExplosion);
+        randomCalls = saturatingAdd(randomCalls, generatedByExplosion);
+        if (!modifier.compound) {
+          activeDice = saturatingAdd(activeDice, generatedByExplosion);
+        }
+      } else if (modifier.kind === 'reroll') {
+        randomCalls = saturatingAdd(
+          randomCalls,
+          saturatingMultiply(activeDice, iterations),
+        );
+      } else if (modifier.kind === 'unique') {
+        randomCalls = saturatingAdd(
+          randomCalls,
+          saturatingMultiply(Math.max(0, activeDice - 1), iterations),
+        );
       }
     }
     cost = {
       staticDice: saturatingAdd(cost.staticDice, spec.quantity),
       worstCaseGeneratedDice: saturatingAdd(
         cost.worstCaseGeneratedDice,
-        saturatingMultiply(spec.quantity, generatedIterations),
+        generatedDice,
       ),
       worstCaseRandomCalls: saturatingAdd(
         cost.worstCaseRandomCalls,
-        saturatingMultiply(spec.quantity, randomIterations),
+        randomCalls,
       ),
     };
   }
