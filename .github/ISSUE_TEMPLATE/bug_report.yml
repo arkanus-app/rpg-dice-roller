@@ -3,8 +3,7 @@ description: File a bug report.
 title: '[Bug]: '
 labels: ['bug']
 type: 'Bug'
-assignees:
-  - GreenImp
+assignees: []
 body:
   - type: markdown
     attributes:
@@ -25,17 +24,17 @@ body:
     attributes:
       label: Dice Roller version
       description: Which version of the dice roller are you using?
-      placeholder: e.g. v5.3.0
+      placeholder: e.g. 3.6.0
     validations:
       required: true
   - type: dropdown
     id: library_type
     attributes:
       label: Bundle type
-      description: Are you using ES modules (`import`), UMD / CommonJS (`require`), or browser (`<link ...>`)?
+      description: Are you using ES modules (`import`), CommonJS (`require`), or a browser build?
       options:
         - ESM
-        - UMD
+        - CommonJS
         - Browser
     validations:
       required: true
@@ -44,7 +43,7 @@ body:
     attributes:
       label: Node version
       description: Which version of the node are you running it on
-      placeholder: e.g. v18
+      placeholder: e.g. v22
   - type: input
     id: browser
     attributes:
