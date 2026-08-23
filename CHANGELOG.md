@@ -1,6 +1,6 @@
 # Changelog
 
-## Não publicado
+## 3.6.0 — 2026-08-23
 
 ### Adicionado
 
