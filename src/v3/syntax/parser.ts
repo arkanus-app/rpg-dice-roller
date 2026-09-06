@@ -427,14 +427,15 @@ class DiceNotationParser {
     return quantity;
   }
 
-  private validateDiceArgument(argument: DiceArgumentNode, label: string): void {
+  private validateDiceArgument(argument: DiceArgumentNode, label: 'quantity' | 'sides'): void {
+    const minimum = label === 'sides' ? 0 : 1;
     if (argument.kind === 'number' && (
       !Number.isInteger(argument.value)
-      || argument.value < 1
+      || argument.value < minimum
       || (argument.raw.length > 1 && argument.raw.startsWith('0'))
     )) {
       this.fail(
-        `Dice ${label} must be a positive integer`,
+        `Dice ${label} must be a ${minimum === 0 ? 'non-negative' : 'positive'} integer`,
         argument.span,
         { value: argument.value, argument: label },
       );

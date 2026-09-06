@@ -102,7 +102,7 @@ function ensureFiniteConstant(value: number, input: string, span: SourceSpan): n
   return Object.is(normalized, -0) ? 0 : normalized;
 }
 
-function readPositiveInteger(
+function readDiceInteger(
   node: ExpressionNode,
   input: string,
   argument: 'quantity' | 'sides',
@@ -117,8 +117,9 @@ function readPositiveInteger(
       details: { argument, nodeKind: node.kind },
     });
   }
-  if (!Number.isSafeInteger(value) || value < 1) {
-    throw new DiceRollError(`Dice ${argument} must be a positive safe integer`, {
+  const minimum = argument === 'sides' ? 0 : 1;
+  if (!Number.isSafeInteger(value) || value < minimum) {
+    throw new DiceRollError(`Dice ${argument} must be a ${minimum === 0 ? 'non-negative' : 'positive'} safe integer`, {
       code: 'INVALID_NOTATION',
       input,
       span: node.span,
@@ -542,7 +543,7 @@ function createDiceSpec(
   constants: ReadonlyMap<string, number>,
   semanticBudget: SemanticAnalysisBudget,
 ): CompiledDiceSpec {
-  const baseQuantity = readPositiveInteger(node.quantity, input, 'quantity', constants);
+  const baseQuantity = readDiceInteger(node.quantity, input, 'quantity', constants);
   const resolvedPool = resolveDicePool(node, baseQuantity, input);
   const quantity = resolvedPool.quantity;
   let sides: DiceSides;
@@ -550,7 +551,7 @@ function createDiceSpec(
   let maximum: number;
   let possibleFaces: number;
   if (node.diceKind === 'standard') {
-    const baseSides = readPositiveInteger(node.sides, input, 'sides', constants);
+    const baseSides = readDiceInteger(node.sides, input, 'sides', constants);
     const resolvedSides = resolveSteppedSides(
       baseSides,
       resolvedPool.stepDelta,
@@ -566,9 +567,9 @@ function createDiceSpec(
       });
     }
     sides = resolvedSides;
-    minimum = 1;
+    minimum = resolvedSides === 0 ? 0 : 1;
     maximum = resolvedSides;
-    possibleFaces = resolvedSides;
+    possibleFaces = Math.max(1, resolvedSides);
   } else if (node.diceKind === 'percentile') {
     if (resolvedPool.stepDelta !== 0n) {
       invalidDiceStep(

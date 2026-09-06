@@ -82,10 +82,22 @@ describe('V3 compiler', () => {
   });
 
   test('validates constant dice arguments', () => {
-    expect(() => compileDicePlan('1d(2-2)', DEFAULT_DICE_LIMITS))
+    expect(() => compileDicePlan('1d(1-2)', DEFAULT_DICE_LIMITS))
       .toThrow(expect.objectContaining({ code: 'INVALID_NOTATION' }));
     expect(() => compileDicePlan('(1-1)d6', DEFAULT_DICE_LIMITS))
       .toThrow(expect.objectContaining({ code: 'INVALID_NOTATION' }));
+  });
+
+  test.each(['d0', '3d0', '1d(2-2)'])('compiles %s with zero as its only face', (input) => {
+    const plan = compileDicePlan(input, DEFAULT_DICE_LIMITS);
+    const program = getPlanProgram(plan);
+
+    expect([...program.diceSpecs.values()][0]).toMatchObject({
+      sides: 0,
+      minimum: 0,
+      maximum: 0,
+      possibleFaces: 1,
+    });
   });
 
   test('returns structured inspection failures without throwing', () => {

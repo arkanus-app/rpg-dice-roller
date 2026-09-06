@@ -384,6 +384,11 @@ const repeated = rollRpgDice('2d20kh1', { replay: first.replay });
 
 ## Notação ERPG
 
+`d0` (ou `D0`) é válido e cada dado retorna a face `0`, inclusive quando o número
+de lados é calculado, como em `1d(2-2)`. Ele participa normalmente das operações:
+`12d20+1d0` soma zero à rolagem, `5*1d0` resulta em zero e `1d0/5` resulta em zero.
+Divisão por zero e modificadores continuam seguindo as regras normais da expressão.
+
 A normalização preserva atalhos comuns:
 
 - `d` → `d20`, `2d` → `2d20`;
