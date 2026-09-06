@@ -1,4 +1,4 @@
-# @erpg/dicecore 3.6.0
+# @erpg/dicecore 3.7.0
 
 Núcleo de dados do ERPG para compilar, inspecionar e resolver notações de dados. A V3 é escrita em TypeScript estrito, não mantém estado global de RNG e entrega resultados `readonly`, JSON-safe e próprios para frontend, backend, automações e visualização 3D.
 

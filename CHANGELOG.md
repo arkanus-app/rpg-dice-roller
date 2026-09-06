@@ -1,5 +1,14 @@
 # Changelog
 
+## 3.7.0 — 2026-09-06
+
+### Adicionado
+
+- Suporte a `d0` e `D0`: cada dado retorna a face zero e participa normalmente
+  das operações, como em `12d20+1d0` e `5*1d0`.
+- Lados calculados também podem resultar em zero, como em `1d(2-2)`, com suporte
+  a grupos, rolagens repetidas, resultados resumidos, notação mista e replay.
+
 ## 3.6.0 — 2026-08-23
 
 ### Adicionado
