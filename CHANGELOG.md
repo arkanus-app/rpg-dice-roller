@@ -1,5 +1,14 @@
 # Changelog
 
+## 3.7.1 — 2026-09-07
+
+### Corrigido
+
+- `pool(0)`, `pool(+0)` e `pool(-0)` agora são ajustes neutros, sem alterar
+  os dados, o total ou os demais modificadores e sem gerar erro de notação.
+- O ajuste zero também funciona com os aliases `+pool(0)`, `-pool(0)` e
+  `pull(0)`, rolagens repetidas, notação mista e replay.
+
 ## 3.7.0 — 2026-09-06
 
 ### Adicionado
