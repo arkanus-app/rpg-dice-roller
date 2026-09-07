@@ -201,6 +201,12 @@ describe('V3 notation parser', () => {
     expect(node).toMatchObject({ id: 'dice@0:26', span: { start: 0, end: 26 } });
   });
 
+  test.each(['0', '+0', '-0'])('accepts pool(%s) as a zero adjustment', (delta) => {
+    expect(parseDice(`2d20pool(${delta})`).modifiers).toMatchObject([
+      { kind: 'pool-adjustment', delta: 0 },
+    ]);
+  });
+
   test('parses signed dice steps in source order', () => {
     const node = parseDice('1d5step(+2)step(-1)');
 
@@ -354,7 +360,7 @@ describe('V3 notation parser', () => {
     '', '0d6', '01d6', '1d00', '1d01', 'dF.3', 'dF.01', '{}', 'foo(1)', '1d6kh0', '1d6kh01',
     '(1+2', '1+2)', '{1d6,}', '{,1d6}', 'abs(1,2)', 'max(1)', '1d6xyz', '1d6sfoo',
     '1d6>=', '.', '1..2', '1d6min', '1d6max', '1d6d', '1d6!0', '1d6!01', '1d6!1.0', '1d6!1.5',
-    '1d6!9007199254740992', '1d6!2p', '1d6pool(1)', '1d6pool(+0)', '1d6pool(-0)',
+    '1d6!9007199254740992', '1d6!2p', '1d6pool(1)', '1d6pool(00)', '1d6pool(+0.0)',
     '1d6pool(+01)', '1d6pool(+1.5)', '1d6pool(+9007199254740992)', '1d6pool(+)',
     '1d6step(1)', '1d6step(+0)', '1d6step(-0)', '1d6step(+01)', '1d6step(+1.5)',
     '1d6step(+9007199254740992)', '1d6step(+)',

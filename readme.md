@@ -406,6 +406,8 @@ A sintaxe inclui dados padrão, percentuais e Fudge; aritmética e funções; gr
 
 Os sufixos `pool(±N)`, `adv` e `dis` são resolvidos antes da rolagem. Quantidade compilada, limites, custo, RNG, replay e `stats.initialDice` refletem os dados realmente rolados.
 
+`pool(0)`, `pool(+0)` e `pool(-0)` são ajustes neutros: mantêm os dados e os demais modificadores sem gerar erro. Isso também vale para `+pool(0)` e `-pool(0)`.
+
 ```ts
 rollRpgDice('2d8-pool(1)');     // 1d8 físico
 rollRpgDice('1d20adv+5');       // 2d20, mantém o maior, depois soma 5

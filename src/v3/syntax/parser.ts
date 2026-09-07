@@ -251,6 +251,9 @@ class DiceNotationParser {
     expression: ExpressionNode,
     modifiers: readonly StructuralModifierNode[],
   ): ExpressionNode {
+    if (modifiers.every((modifier) => modifier.kind === 'pool-adjustment' && modifier.delta === 0)) {
+      return expression;
+    }
     const dice = this.collectDiceNodes(expression);
     const firstModifier = modifiers[0] as StructuralModifierNode;
     const lastModifier = modifiers[modifiers.length - 1] as StructuralModifierNode;
@@ -868,20 +871,24 @@ class DiceNotationParser {
     const opening = this.consume();
     this.expect('left-parenthesis', `"(" after "${keyword}"`);
     const signToken = this.current();
-    if (signToken.kind !== 'operator'
-      || (signToken.value !== '+' && signToken.value !== '-')) {
+    const allowsZero = kind === 'pool-adjustment';
+    const hasSign = signToken.kind === 'operator'
+      && (signToken.value === '+' || signToken.value === '-');
+    const isUnsignedZero = allowsZero && signToken.kind === 'number' && signToken.lexeme === '0';
+    if (!hasSign && !isUnsignedZero) {
       return this.fail(`${label} requires an explicit sign`, signToken.span, {
         found: signToken.lexeme,
         expected: '"+" or "-"',
       });
     }
-    this.consume();
-    const quantity = this.expect('number', `a non-zero ${label.toLowerCase()}`);
+    if (hasSign) this.consume();
+    const quantityRequirement = allowsZero ? 'safe integer' : 'non-zero safe integer';
+    const quantity = this.expect('number', `a ${quantityRequirement} ${label.toLowerCase()}`);
     if (quantity.kind !== 'number'
       || !Number.isSafeInteger(quantity.value)
-      || quantity.value === 0
+      || (!allowsZero && quantity.value === 0)
       || quantity.lexeme !== String(quantity.value)) {
-      return this.fail(`${label} must be a non-zero safe integer`, quantity.span, {
+      return this.fail(`${label} must be a ${quantityRequirement}`, quantity.span, {
         value: quantity.kind === 'number' ? quantity.value : quantity.lexeme,
       });
     }
@@ -890,7 +897,9 @@ class DiceNotationParser {
     const shared = {
       id: createNodeId(kind, nodeSpan),
       span: nodeSpan,
-      delta: signToken.value === '-' ? -quantity.value : quantity.value,
+      delta: quantity.value !== 0 && hasSign && signToken.value === '-'
+        ? -quantity.value
+        : quantity.value,
     };
     return kind === 'pool-adjustment'
       ? { kind, ...shared }
