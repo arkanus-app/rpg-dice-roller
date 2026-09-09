@@ -61,10 +61,7 @@ function isDigit(value: string | undefined): boolean {
   return value !== undefined && value >= '0' && value <= '9';
 }
 
-function isWhitespace(value: string | undefined): boolean {
-  if (value === undefined) {
-    return false;
-  }
+function isWhitespace(value: string): boolean {
   const code = value.charCodeAt(0);
   return code === 0x09 || code === 0x0a || code === 0x0b || code === 0x0c
     || code === 0x0d || code === 0x20 || code === 0xa0 || code === 0x1680
@@ -72,10 +69,7 @@ function isWhitespace(value: string | undefined): boolean {
     || code === 0x202f || code === 0x205f || code === 0x3000 || code === 0xfeff;
 }
 
-function isAsciiLetter(value: string | undefined): boolean {
-  if (value === undefined) {
-    return false;
-  }
+function isAsciiLetter(value: string): boolean {
   const code = value.charCodeAt(0);
   return (code >= 65 && code <= 90) || (code >= 97 && code <= 122);
 }
@@ -128,8 +122,8 @@ function readIdentifier(input: string, start: number): SyntaxToken {
     };
   }
 
-  const value = input[start];
-  if (value !== undefined && SINGLE_LETTER_IDENTIFIERS.includes(value)) {
+  const value = input.charAt(start);
+  if (SINGLE_LETTER_IDENTIFIERS.includes(value)) {
     return {
       kind: 'identifier',
       lexeme: value,
@@ -142,24 +136,13 @@ function readIdentifier(input: string, start: number): SyntaxToken {
     input,
     `Unexpected identifier at offset ${start}`,
     span(start, start + 1),
-    { found: value ?? '' },
+    { found: value },
   );
 }
 
 function punctuation(kind: PunctuationKind, lexeme: string, start: number): SyntaxToken {
   const tokenSpan = span(start, start + lexeme.length);
-  switch (kind) {
-    case 'left-parenthesis':
-    case 'right-parenthesis':
-    case 'left-brace':
-    case 'right-brace':
-    case 'comma':
-    case 'dot':
-    case 'bang':
-      return { kind, lexeme, span: tokenSpan };
-    default:
-      throw new Error('Invalid punctuation token kind');
-  }
+  return { kind, lexeme, span: tokenSpan };
 }
 
 /** Tokenizes compact V3 notation while retaining exact source offsets. */
@@ -168,7 +151,7 @@ export function tokenizeDiceNotation(input: string): readonly SyntaxToken[] {
   let cursor = 0;
 
   while (cursor < input.length) {
-    const current = input[cursor];
+    const current = input.charAt(cursor);
 
     if (isWhitespace(current)) {
       cursor += 1;
@@ -190,15 +173,13 @@ export function tokenizeDiceNotation(input: string): readonly SyntaxToken[] {
       cursor += 2;
     } else if (input.startsWith('<=', cursor) || input.startsWith('>=', cursor)
       || input.startsWith('<>', cursor)) {
-      const value = input.slice(cursor, cursor + 2);
-      if (value === '<=' || value === '>=' || value === '<>') {
-        tokens.push({
-          kind: 'comparison',
-          lexeme: value,
-          value,
-          span: span(cursor, cursor + 2),
-        });
-      }
+      const value = input.slice(cursor, cursor + 2) as '<=' | '>=' | '<>';
+      tokens.push({
+        kind: 'comparison',
+        lexeme: value,
+        value,
+        span: span(cursor, cursor + 2),
+      });
       cursor += 2;
     } else if (isBinaryOperator(current)) {
       tokens.push({
@@ -217,16 +198,16 @@ export function tokenizeDiceNotation(input: string): readonly SyntaxToken[] {
       });
       cursor += 1;
     } else {
-      const kind = current === undefined ? undefined : PUNCTUATION_KINDS[current];
+      const kind = PUNCTUATION_KINDS[current];
       if (kind === undefined) {
         return invalidNotation(
           input,
           `Unexpected character at offset ${cursor}`,
           span(cursor, cursor + 1),
-          { found: current ?? '' },
+          { found: current },
         );
       }
-      tokens.push(punctuation(kind, current ?? '', cursor));
+      tokens.push(punctuation(kind, current, cursor));
       cursor += 1;
     }
   }

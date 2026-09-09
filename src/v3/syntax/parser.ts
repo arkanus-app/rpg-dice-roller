@@ -108,23 +108,14 @@ class DiceNotationParser {
   }
 
   private current(offset = 0): SyntaxToken {
-    const index = this.cursor + offset;
-    const token = this.tokens[index];
-    if (token !== undefined) {
-      return token;
-    }
-    return {
-      kind: 'eof',
-      lexeme: '',
-      span: { start: this.input.length, end: this.input.length },
-    };
+    // The scanner appends EOF; lookahead occurs only before a non-EOF token.
+    return this.tokens[this.cursor + offset] as SyntaxToken;
   }
 
   private consume(): SyntaxToken {
     const token = this.current();
-    if (token.kind !== 'eof') {
-      this.cursor += 1;
-    }
+    // Callers consume recognized tokens, never the EOF sentinel.
+    this.cursor += 1;
     return token;
   }
 
@@ -209,11 +200,7 @@ class DiceNotationParser {
     ];
     let count = 0;
 
-    while (pending.length > 0) {
-      const current = pending.pop();
-      if (current === undefined) {
-        break;
-      }
+    for (let current = pending.pop(); current !== undefined; current = pending.pop()) {
       count += 1;
       if (count > this.limits.maxNodes) {
         this.failLimit('TOO_MANY_NODES', this.limits.maxNodes, count, current.node.span);
@@ -223,10 +210,8 @@ class DiceNotationParser {
       }
       const children = this.countedChildren(current.node);
       for (let index = children.length - 1; index >= 0; index -= 1) {
-        const child = children[index];
-        if (child !== undefined) {
-          pending.push({ node: child, depth: current.depth + 1 });
-        }
+        const child = children[index] as CountedNode;
+        pending.push({ node: child, depth: current.depth + 1 });
       }
     }
   }
@@ -234,11 +219,7 @@ class DiceNotationParser {
   private collectDiceNodes(root: ExpressionNode): readonly DiceNode[] {
     const dice: DiceNode[] = [];
     const pending: CountedNode[] = [root];
-    while (pending.length > 0) {
-      const node = pending.pop();
-      if (node === undefined) {
-        break;
-      }
+    for (let node = pending.pop(); node !== undefined; node = pending.pop()) {
       if (node.kind === 'dice') {
         dice.push(node);
       }
@@ -276,7 +257,7 @@ class DiceNotationParser {
     };
   }
 
-  private expect(kind: SyntaxToken['kind'], expected: string): SyntaxToken {
+  private expect<K extends SyntaxToken['kind']>(kind: K, expected: string): SyntaxToken & { readonly kind: K } {
     const token = this.current();
     if (token.kind !== kind) {
       return this.fail(
@@ -285,7 +266,8 @@ class DiceNotationParser {
         { found: token.lexeme, expected },
       );
     }
-    return this.consume();
+    this.consume();
+    return token as SyntaxToken & { readonly kind: K };
   }
 
   private isIdentifier(value: string, offset = 0): boolean {
@@ -379,9 +361,6 @@ class DiceNotationParser {
   private parseNumber(sign: UnaryOperator | null): NumberNode {
     const signToken = sign === null ? null : this.tokens[this.cursor - 1];
     const token = this.expect('number', 'a number');
-    if (token.kind !== 'number') {
-      return this.fail('Internal number token mismatch', token.span, {});
-    }
     const nodeSpan = signToken === undefined || signToken === null
       ? token.span
       : mergeSpan(signToken.span, token.span);
@@ -446,10 +425,8 @@ class DiceNotationParser {
   }
 
   private parseDice(quantity: DiceArgumentNode | null): DiceNode {
-    const marker = this.consume();
-    if (marker.kind !== 'identifier' || (marker.value !== 'd' && marker.value !== 'dF')) {
-      return this.fail('Expected a dice marker', marker.span, { found: marker.lexeme });
-    }
+    // Only called after recognizing d or dF.
+    const marker = this.expect('identifier', 'a dice marker');
     const actualQuantity = quantity ?? this.implicitOne(marker.span.start);
     const startSpan = quantity?.span ?? marker.span;
 
@@ -469,7 +446,7 @@ class DiceNotationParser {
         coreEnd = variantToken.span;
       }
       const modifiers = this.parseModifiers();
-      const endSpan = modifiers.length === 0 ? coreEnd : modifiers[modifiers.length - 1]?.span ?? coreEnd;
+      const endSpan = modifiers.at(-1)?.span ?? coreEnd;
       const nodeSpan = mergeSpan(startSpan, endSpan);
       return {
         kind: 'dice',
@@ -486,9 +463,7 @@ class DiceNotationParser {
     if (sideToken.kind === 'operator' && sideToken.value === '%') {
       this.consume();
       const modifiers = this.parseModifiers();
-      const endSpan = modifiers.length === 0
-        ? sideToken.span
-        : modifiers[modifiers.length - 1]?.span ?? sideToken.span;
+      const endSpan = modifiers.at(-1)?.span ?? sideToken.span;
       const nodeSpan = mergeSpan(startSpan, endSpan);
       return {
         kind: 'dice',
@@ -505,9 +480,7 @@ class DiceNotationParser {
       : this.parseNumber(null);
     this.validateDiceArgument(sides, 'sides');
     const modifiers = this.parseModifiers();
-    const endSpan = modifiers.length === 0
-      ? sides.span
-      : modifiers[modifiers.length - 1]?.span ?? sides.span;
+    const endSpan = modifiers.at(-1)?.span ?? sides.span;
     const nodeSpan = mergeSpan(startSpan, endSpan);
     return {
       kind: 'dice',
@@ -521,10 +494,8 @@ class DiceNotationParser {
   }
 
   private parseFunction(): FunctionNode {
-    const nameToken = this.consume();
-    if (nameToken.kind !== 'identifier') {
-      return this.fail('Expected a function name', nameToken.span, {});
-    }
+    // parsePrimary has already recognized a supported function name.
+    const nameToken = this.expect('identifier', 'a function name');
     this.expect('left-parenthesis', '"("');
     const first = this.parseExpression(0);
 
@@ -545,13 +516,10 @@ class DiceNotationParser {
     const second = this.parseExpression(0);
     const closing = this.expect('right-parenthesis', '")"');
     const nodeSpan = mergeSpan(nameToken.span, closing.span);
-    if (!isBinaryFunctionName(nameToken.value)) {
-      return this.fail('Unsupported function', nameToken.span, { found: nameToken.value });
-    }
     return {
       kind: 'function',
       functionKind: 'binary',
-      name: nameToken.value,
+      name: nameToken.value as BinaryFunctionName,
       arguments: [first, second],
       id: createNodeId('function', nodeSpan),
       span: nodeSpan,
@@ -567,9 +535,7 @@ class DiceNotationParser {
     }
     const closing = this.expect('right-brace', '"}"');
     const modifiers = this.parseModifiers();
-    const endSpan = modifiers.length === 0
-      ? closing.span
-      : modifiers[modifiers.length - 1]?.span ?? closing.span;
+    const endSpan = modifiers.at(-1)?.span ?? closing.span;
     const nodeSpan = mergeSpan(opening.span, endSpan);
     return {
       kind: 'group',
@@ -594,17 +560,12 @@ class DiceNotationParser {
     if (first.kind === 'bang') {
       this.consume();
       const equals = this.expect('comparison', '"=" after "!"');
-      if (equals.kind !== 'comparison' || equals.value !== '=') {
-        return this.fail('Expected "=" after "!"', equals.span, { found: equals.lexeme });
-      }
       operator = '!=';
       operatorSpan = mergeSpan(first.span, equals.span);
-    } else if (first.kind === 'comparison') {
-      this.consume();
-      operator = first.value;
-      operatorSpan = first.span;
     } else {
-      return this.fail('Expected a comparison operator', first.span, { found: first.lexeme });
+      const comparison = this.expect('comparison', 'a comparison operator');
+      operator = comparison.value;
+      operatorSpan = comparison.span;
     }
 
     let sign: UnaryOperator | null = null;
@@ -731,7 +692,7 @@ class DiceNotationParser {
       this.consume();
     }
     const compare = this.isComparePointStart() ? this.parseComparePoint() : null;
-    const lastSpan = compare?.span ?? this.tokens[this.cursor - 1]?.span ?? firstBang.span;
+    const lastSpan = compare?.span ?? (this.tokens[this.cursor - 1] as SyntaxToken).span;
     const nodeSpan = mergeSpan(firstBang.span, lastSpan);
     return {
       kind: 'explode',
@@ -827,7 +788,7 @@ class DiceNotationParser {
       this.consume();
     }
     const compare = this.isComparePointStart() ? this.parseComparePoint() : null;
-    const lastSpan = compare?.span ?? this.tokens[this.cursor - 1]?.span ?? opening.span;
+    const lastSpan = compare?.span ?? (this.tokens[this.cursor - 1] as SyntaxToken).span;
     const nodeSpan = mergeSpan(opening.span, lastSpan);
     if (kind === 'reroll') {
       return { kind, id: createNodeId(kind, nodeSpan), span: nodeSpan, once, compare };
@@ -889,7 +850,7 @@ class DiceNotationParser {
       || (!allowsZero && quantity.value === 0)
       || quantity.lexeme !== String(quantity.value)) {
       return this.fail(`${label} must be a ${quantityRequirement}`, quantity.span, {
-        value: quantity.kind === 'number' ? quantity.value : quantity.lexeme,
+        value: quantity.value,
       });
     }
     const closing = this.expect('right-parenthesis', `")" after ${label.toLowerCase()}`);

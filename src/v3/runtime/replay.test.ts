@@ -29,7 +29,7 @@ function descriptor(overrides: Partial<ReplayDescriptor> = {}): ReplayDescriptor
   };
 }
 
-describe('seed and replay V2', () => {
+describe('seed and replay schema 2', () => {
   it('canonicalizes number and string seeds into separate fixed materials', () => {
     expect(canonicalizeSeed(42)).toBe('number:42');
     expect(canonicalizeSeed('42')).toBe('string:42');

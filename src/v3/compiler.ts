@@ -70,6 +70,7 @@ export interface CompiledDiceProgram {
   readonly diceSpecs: ReadonlyMap<string, CompiledDiceSpec>;
   readonly groupModifiers: ReadonlyMap<string, readonly RuntimeModifierNode[]>;
   readonly constants: ReadonlyMap<string, number>;
+  readonly supportsFastSummary: boolean;
 }
 
 export interface PreparedDicePlanInput {
@@ -123,7 +124,7 @@ function readDiceInteger(
       code: 'INVALID_NOTATION',
       input,
       span: node.span,
-      details: { argument, value: Number.isFinite(value) ? value : String(value) },
+      details: { argument, value },
     });
   }
   return value;
@@ -249,7 +250,7 @@ function resolveDicePool(node: DiceNode, baseQuantity: number, input: string): R
         modifier: conflicting.kind,
       });
     }
-    const selectionSpan = structuralSpan ?? node.span;
+    const selectionSpan = structuralSpan as SourceSpan;
     runtimeModifiers.push({
       kind: 'keep',
       id: createNodeId('keep', selectionSpan),
@@ -574,7 +575,7 @@ function createDiceSpec(
     if (resolvedPool.stepDelta !== 0n) {
       invalidDiceStep(
         input,
-        resolvedPool.stepSpan ?? node.span,
+        resolvedPool.stepSpan as SourceSpan,
         'dice-step-non-standard-die',
         {
           diceKind: node.diceKind,
@@ -590,7 +591,7 @@ function createDiceSpec(
     if (resolvedPool.stepDelta !== 0n) {
       invalidDiceStep(
         input,
-        resolvedPool.stepSpan ?? node.span,
+        resolvedPool.stepSpan as SourceSpan,
         'dice-step-non-standard-die',
         {
           diceKind: node.diceKind,
@@ -863,11 +864,7 @@ function buildPostOrder(root: ExpressionNode): {
     { node: root, depth: 1, visited: false },
   ];
   let maxDepth = 1;
-  while (pending.length > 0) {
-    const current = pending.pop();
-    if (current === undefined) {
-      break;
-    }
+  for (let current = pending.pop(); current !== undefined; current = pending.pop()) {
     maxDepth = Math.max(maxDepth, current.depth);
     if (current.visited) {
       output.push(current.node);
@@ -876,10 +873,8 @@ function buildPostOrder(root: ExpressionNode): {
     pending.push({ node: current.node, depth: current.depth, visited: true });
     const children = expressionChildren(current.node);
     for (let index = children.length - 1; index >= 0; index -= 1) {
-      const child = children[index];
-      if (child !== undefined) {
-        pending.push({ node: child, depth: current.depth + 1, visited: false });
-      }
+      const child = children[index] as ExpressionNode;
+      pending.push({ node: child, depth: current.depth + 1, visited: false });
     }
   }
   return { nodes: Object.freeze(output), maxDepth };
@@ -922,33 +917,26 @@ function measureProgram(root: ExpressionNode): { readonly nodeCount: number; rea
   ];
   let nodeCount = 0;
   let maxDepth = 1;
-  while (pending.length > 0) {
-    const current = pending.pop();
-    if (current === undefined) {
-      break;
-    }
+  for (let current = pending.pop(); current !== undefined; current = pending.pop()) {
     nodeCount += 1;
     maxDepth = Math.max(maxDepth, current.depth);
     const children = countedProgramChildren(current.node);
     for (let index = children.length - 1; index >= 0; index -= 1) {
-      const child = children[index];
-      if (child !== undefined) {
-        pending.push({ node: child, depth: current.depth + 1 });
-      }
+      const child = children[index] as CountedProgramNode;
+      pending.push({ node: child, depth: current.depth + 1 });
     }
   }
   return { nodeCount, maxDepth };
 }
 
 function foldConstant(
-  node: ExpressionNode,
+  node: Exclude<ExpressionNode, DiceNode>,
   constants: ReadonlyMap<string, number>,
   input: string,
 ): number | null {
   const read = (child: ExpressionNode): number | null => constants.get(child.id) ?? null;
   switch (node.kind) {
     case 'number': return node.value;
-    case 'dice':
     case 'group': return null;
     case 'unary': {
       const value = read(node.operand);
@@ -1109,8 +1097,10 @@ export function compileDiceProgram(
   };
   let staticDice = 0;
   let maximumSides = 0;
+  let supportsFastSummary = true;
   for (const node of traversal.nodes) {
     if (node.kind === 'group') {
+      supportsFastSummary &&= node.modifiers.length === 0;
       validateGroupModifiers(node, sourceInput);
       groupModifiers.set(
         node.id,
@@ -1119,6 +1109,10 @@ export function compileDiceProgram(
     }
     if (node.kind === 'dice') {
       const spec = createDiceSpec(node, sourceInput, limits, constants, semanticBudget);
+      // Modified pools must be the root to retain causal budget ordering.
+      supportsFastSummary &&= spec.modifiers.length === 0 || (node === ast
+        && spec.modifiers.length === 1
+        && spec.modifiers.every(({ kind }) => ['min', 'max', 'keep', 'drop', 'target'].includes(kind)));
       diceSpecs.set(node.id, spec);
       staticDice = saturatingAdd(staticDice, spec.quantity);
       if (typeof spec.sides === 'number') {
@@ -1144,6 +1138,7 @@ export function compileDiceProgram(
     diceSpecs,
     groupModifiers,
     constants,
+    supportsFastSummary,
   });
 }
 
@@ -1218,11 +1213,7 @@ function groupId(node: ExpressionNode): string {
 function createPlanGroups(root: ExpressionNode, notation: string): readonly RollPlanGroup[] {
   const groups: RollPlanGroup[] = [];
   const pending: ExpressionNode[] = [root];
-  while (pending.length > 0) {
-    const node = pending.pop();
-    if (node === undefined) {
-      break;
-    }
+  for (let node = pending.pop(); node !== undefined; node = pending.pop()) {
     const children = semanticChildren(node);
     groups.push({
       id: groupId(node),
@@ -1233,10 +1224,7 @@ function createPlanGroups(root: ExpressionNode, notation: string): readonly Roll
       childIds: children.map(groupId),
     });
     for (let index = children.length - 1; index >= 0; index -= 1) {
-      const child = children[index];
-      if (child !== undefined) {
-        pending.push(child);
-      }
+      pending.push(children[index] as ExpressionNode);
     }
   }
   return groups;

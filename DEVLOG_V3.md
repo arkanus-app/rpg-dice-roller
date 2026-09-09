@@ -12,7 +12,7 @@ As invariantes definidas foram:
 2. cada execução possui RNG, orçamento e journal próprios;
 3. o resultado público não expõe AST, classes internas, `Map`, `Set` ou `unknown[]`;
 4. o dice3dview apresenta o resultado, mas não decide regras;
-5. a V2 serve somente como referência de compatibilidade durante o desenvolvimento.
+5. a compatibilidade histórica é preservada por resultados de referência fixos, sem depender do runtime V2.
 
 ## Toolchain TypeScript
 
@@ -20,7 +20,7 @@ Runtime V3, testes, benchmark e scripts de pacote foram escritos em TypeScript. 
 
 Jest e Babel foram substituídos por Vitest. O lint usa configuração flat e análise type-aware. Rollup gera ESM e CommonJS, enquanto o TypeScript emite as declarações. `publint`, Are the Types Wrong e fixtures consumidoras verificam o tarball.
 
-`dist/` é um produto reproduzível do build e fica fora do Git. O pacote preparado inclui apenas o necessário para consumo. A V3 não declara dependências de runtime; bibliotecas usadas para testes de compatibilidade da V2 continuam restritas ao desenvolvimento.
+`dist/` é um produto reproduzível do build e fica fora do Git. O pacote preparado inclui apenas o necessário para consumo. A V3 não declara dependências de runtime. `random-js`, usado exclusivamente pelo legado, foi removido também das dependências de desenvolvimento.
 
 ## Compilador próprio
 
@@ -65,7 +65,9 @@ Esse contrato elimina a reconstrução de grupos pelo frontend e a segunda avali
 
 ## Compatibilidade V2
 
-Os testes e o código legado mantidos no checkout são usados para comparar notações, modificadores, matemática, grupos, pools, multi-roll e erros enquanto a migração é estabilizada. Eles não são reexportados pelo entrypoint V3 nem entram como superfície pública do pacote.
+A migração interna foi encerrada em 2026-09-09. Antes da remoção, V2 e V3 foram executadas contra o mesmo corpus de 31 notações e duas seeds, totalizando 62 resultados esperados. Esse corpus permanece em `tests/fixtures/v3-compatibility-corpus.ts`, sem regeneração a partir do motor atual. `src/v3/compatibility-golden.test.ts` mantém a verificação de normalização, totais, valores dos dados e pools sem executar a V2.
+
+O runtime, parser gerado, gramática, testes exclusivos e templates de documentação da V2 foram removidos. O build, lint e typecheck agora usam apenas o código atual. O histórico da V2 continua disponível no Git e o guia de migração permanece útil para consumidores antigos.
 
 Diferenças intencionais da V3 incluem:
 
@@ -76,7 +78,7 @@ Diferenças intencionais da V3 incluem:
 - replay com algoritmo e versão;
 - planos compilados reutilizáveis e planos JSON-safe restauráveis com validação no engine de destino.
 
-Nenhuma nova notação foi adotada como objetivo desta migração: a prioridade é preservar a semântica suportada enquanto a arquitetura antiga é retirada do pacote publicado.
+A retirada do legado não muda a API pública nem as regras da V3: o código antigo já não fazia parte do pacote publicado.
 
 ## Estado de entrega
 

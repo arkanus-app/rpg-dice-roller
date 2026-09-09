@@ -5,6 +5,7 @@
     "src/v3/**/*.ts"
   ],
   "exclude": [
+    "src/**/*.test.ts",
     "tests",
     "dist",
     "node_modules"

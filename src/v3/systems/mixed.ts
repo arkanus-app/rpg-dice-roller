@@ -642,10 +642,10 @@ function parseMixedRoll(
 ): ParsedMixedRoll {
   const call = /^([\p{L}][\p{L}\p{N}_-]*)\s*\(([\s\S]*)\)$/u.exec(segmentInput);
   if (call !== null) {
-    const name = normalizeSystemName(call[1] ?? '');
+    const name = normalizeSystemName(call[1] as string);
     const system = SYSTEM_ALIASES[name];
     if (system !== undefined) {
-      const args = parseArguments(call[2] ?? '', originalInput, segment);
+      const args = parseArguments(call[2] as string, originalInput, segment);
       switch (system) {
         case 'vampire-v5':
           return parseVampireV5(args, originalInput, segment);
@@ -745,9 +745,9 @@ function mix32(value: number): number {
 }
 
 function deriveItemSeed(root: SeedMaterial, index: number): number {
-  const high = mix32((root.words[index % root.words.length] ?? 0) ^ index);
+  const high = mix32((root.words[index % root.words.length] as number) ^ index);
   const low = mix32(
-    (root.words[(index + 1) % root.words.length] ?? 0)
+    (root.words[(index + 1) % root.words.length] as number)
     ^ Math.imul(index + 1, 0x9e3779b1),
   );
   return (high & 0x1fffff) * 0x1_0000_0000 + low;
@@ -953,7 +953,7 @@ function flattenGenericDice(item: MixedGenericRollItem): readonly MixedGenericDi
     groupId: `${item.id}:${die.groupId}`,
     mixedRollId: item.id,
     mixedRollIndex: item.index,
-    physicalValue: physicalValues.get(die.id) ?? die.rawValue,
+    physicalValue: physicalValues.get(die.id) as number,
   }));
 }
 
@@ -1088,11 +1088,7 @@ export function rollMixedDiceWithEngine(
   const items: MixedRollItem<SystemRollDetail>[] = [];
   let stats = EMPTY_STATS;
   let outputLength = 0;
-  for (let index = 0; index < parsed.length; index += 1) {
-    const parsedRoll = parsed[index];
-    if (parsedRoll === undefined) {
-      continue;
-    }
+  for (const [index, parsedRoll] of parsed.entries()) {
     const itemLimits = createRemainingLimits(limits, stats, outputLength);
     const itemOptions = createItemOptions(
       options,

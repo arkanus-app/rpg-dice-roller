@@ -26,9 +26,7 @@ import {
   type DiceLimits,
 } from './runtime/limits.js';
 import {
-  validateReplayDescriptor,
   type RandomAlgorithm,
-  type ReplayDescriptor,
   type SeedInput,
 } from './runtime/replay.js';
 import type {
@@ -135,10 +133,6 @@ function limitsCacheKey(limits: DiceLimits): string {
   ].join(':');
 }
 
-function inputCacheKey(input: string, limits: DiceLimits): string {
-  return `${limitsCacheKey(limits)}\u0000${input}`;
-}
-
 function isObject(value: unknown): value is object {
   return typeof value === 'object' && value !== null;
 }
@@ -220,10 +214,6 @@ function resolveCallLimits(engineLimits: DiceLimits, overrides: unknown): DiceLi
   return overrides === undefined
     ? engineLimits
     : resolveDiceLimits(engineLimits, overrides);
-}
-
-function replayForPlan(replay: unknown, plan: RollPlan): ReplayDescriptor {
-  return validateReplayDescriptor(replay, plan.planFingerprint);
 }
 
 function readExternalPlan(value: unknown): ExternalPlanEnvelope {
@@ -318,9 +308,12 @@ class DefaultDiceEngine implements DiceEngine {
 
   private readonly ownedPlans = new WeakSet<RollPlan>();
 
+  private readonly defaultLimitsKey: string;
+
   constructor(options: DiceEngineOptions) {
     const runtimeOptions = readRuntimeEngineOptions(options);
     this.limits = createDiceLimits(runtimeOptions.limits ?? {});
+    this.defaultLimitsKey = limitsCacheKey(this.limits);
     this.freezeResults = runtimeOptions.freezeResults ?? 'never';
     this.randomAlgorithm = runtimeOptions.randomAlgorithm ?? 'mt19937';
     const cache = resolveCacheOptions(runtimeOptions.cache);
@@ -360,6 +353,10 @@ class DefaultDiceEngine implements DiceEngine {
       });
     }
     const limits = resolveCallLimits(this.limits, readCompileLimits(options));
+    return this.compileResolved(input, limits);
+  }
+
+  private compileResolved(input: string, limits: DiceLimits): RollPlan {
     if (input.length > limits.maxInputLength) {
       throw new DiceRollError('Dice input exceeds the configured length limit', {
         code: 'INPUT_TOO_LONG',
@@ -367,7 +364,7 @@ class DefaultDiceEngine implements DiceEngine {
         details: { actual: input.length, limit: limits.maxInputLength },
       });
     }
-    const key = inputCacheKey(input, limits);
+    const key = `${limits === this.limits ? this.defaultLimitsKey : limitsCacheKey(limits)}\u0000${input}`;
     const cached = this.inputCache.get(key);
     if (cached !== undefined) {
       return cached;
@@ -403,7 +400,7 @@ class DefaultDiceEngine implements DiceEngine {
     const limits = resolveCallLimits(this.limits, runtimeOptions.limits);
     const plan = this.resolvePlan(input, limits);
     const result = runtimeOptions.replay !== undefined
-      ? executeRollPlan(plan, { limits, replay: replayForPlan(runtimeOptions.replay, plan) })
+      ? executeRollPlan(plan, { limits, replay: runtimeOptions.replay })
       : runtimeOptions.seed === undefined
         ? executeRollPlan(plan, {
             limits,
@@ -424,7 +421,7 @@ class DefaultDiceEngine implements DiceEngine {
     const result = runtimeOptions.replay !== undefined
       ? executeRollPlanDetails(plan, {
           limits,
-          replay: replayForPlan(runtimeOptions.replay, plan),
+          replay: runtimeOptions.replay,
         })
       : runtimeOptions.seed === undefined
         ? executeRollPlanDetails(plan, {
@@ -446,7 +443,7 @@ class DefaultDiceEngine implements DiceEngine {
     const result = runtimeOptions.replay !== undefined
       ? executeRollPlanSummary(plan, {
           limits,
-          replay: replayForPlan(runtimeOptions.replay, plan),
+          replay: runtimeOptions.replay,
         })
       : runtimeOptions.seed === undefined
         ? executeRollPlanSummary(plan, {
@@ -467,7 +464,7 @@ class DefaultDiceEngine implements DiceEngine {
 
   private resolvePlan(input: string | RollPlan, limits: DiceLimits): RollPlan {
     if (typeof input === 'string') {
-      return this.compile(input, { limits });
+      return this.compileResolved(input, limits);
     }
     if (hasPlanProgram(input)) {
       if (!this.ownedPlans.has(input) || limits !== this.limits) {
@@ -476,7 +473,7 @@ class DefaultDiceEngine implements DiceEngine {
       return input;
     }
     const envelope = readExternalPlan(input);
-    const plan = this.compile(envelope.input, { limits });
+    const plan = this.compileResolved(envelope.input, limits);
     if (envelope.planFingerprint !== plan.planFingerprint) {
       throw new DiceRollError('Roll plan does not match its source input', {
         code: 'UNSUPPORTED_NOTATION',

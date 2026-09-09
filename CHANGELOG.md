@@ -1,5 +1,30 @@
 # Changelog
 
+## Não publicado
+
+### Licença
+
+- Adotada a Licença Arkanus Dicecore — Uso Não Comercial e Projetos Abertos 1.0:
+  projetos comerciais abertos elegíveis têm autorização automática; demais
+  usos comerciais exigem autorização prévia da Arkanus, que pode ser concedida
+  por e-mail, sem contrato separado ou assinatura manuscrita.
+- Preservados os avisos MIT em `THIRD_PARTY_NOTICES.txt`, incluído no pacote;
+  direitos de terceiros e permissões de versões anteriores não são revogados.
+- A alteração se aplica às distribuições acompanhadas dos novos termos;
+  não altera retroativamente as versões já publicadas.
+
+### Manutenção
+
+- Encerrada a migração interna para a V3: removidos o runtime, parser, gramática,
+  testes exclusivos e templates de documentação da V2.
+- Preservados os resultados fixos de compatibilidade, validados contra os dois
+  motores antes da remoção, sem depender da execução da V2 nos testes.
+- Removidos `random-js` e o typecheck legado; a API pública da V3 permanece igual.
+- Cobertura da V3 elevada a 100% de linhas, instruções, funções e branches,
+  com exigência de 100% por arquivo nos dois comandos de cobertura.
+- Adicionados testes de limites, entradas inválidas, falhas de dependências,
+  replay, pipelines de modificadores e contratos de engines personalizadas.
+
 ## 3.7.1 — 2026-09-07
 
 ### Corrigido

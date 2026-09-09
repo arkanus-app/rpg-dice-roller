@@ -5,9 +5,8 @@ import { createDiceLimits, type DiceLimitOverrides, type DiceLimits } from './li
 import { MersenneTwister19937, type RandomSource } from './mt19937.js';
 import {
   createReplayDescriptor,
-  createReplaySeed,
+  createReplayState,
   createSeedMaterial,
-  validateReplayDescriptor,
   type CryptoSource,
   type RandomAlgorithm,
   type ReplayDescriptor,
@@ -22,7 +21,7 @@ export interface ExecutionContextOptions {
   /** Already resolved immutable limits used by the engine hot path. */
   readonly resolvedLimits?: DiceLimits;
   readonly seed?: SeedInput;
-  readonly replay?: ReplayDescriptor;
+  readonly replay?: unknown;
   readonly randomAlgorithm?: RandomAlgorithm;
   readonly planFingerprint?: string;
   readonly collectEvents?: boolean;
@@ -82,9 +81,10 @@ export class ExecutionContext {
           : { planFingerprint: options.planFingerprint }),
       });
     } else {
-      const replay = validateReplayDescriptor(options.replay, options.planFingerprint);
+      const restored = createReplayState(options.replay, options.planFingerprint);
+      const replay = restored.replay;
       algorithm = replay.algorithm;
-      seed = createReplaySeed(replay, options.planFingerprint);
+      seed = restored.seed;
       this.replay = replay;
     }
     this.random = algorithm === 'mt19937'

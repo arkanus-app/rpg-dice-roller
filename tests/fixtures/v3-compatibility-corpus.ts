@@ -1,3 +1,8 @@
+/**
+ * Frozen migration reference, verified against both V2 and V3 on 2026-09-09
+ * before removing the V2 runtime. Do not regenerate from the current engine:
+ * these expected outcomes independently guard normalization and roll semantics.
+ */
 export interface CompatibilitySeed {
   readonly name: string;
   readonly words: readonly number[];

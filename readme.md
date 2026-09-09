@@ -2,6 +2,11 @@
 
 Núcleo de dados do ERPG para compilar, inspecionar e resolver notações de dados. A V3 é escrita em TypeScript estrito, não mantém estado global de RNG e entrega resultados `readonly`, JSON-safe e próprios para frontend, backend, automações e visualização 3D.
 
+**Licença Arkanus:** uso não comercial e projetos abertos elegíveis dispensam
+autorização individual; demais usos comerciais exigem autorização prévia,
+que pode ser concedida por e-mail, sem contrato separado.
+Consulte os [termos completos](licence.txt), inclusive as condições da exceção.
+
 ## Requisitos e formatos
 
 - Node.js 22 ou mais recente;
@@ -481,10 +486,38 @@ O viewer pré-compila o journal inteiro porque o `roll` de um filho aparece ante
 
 O parser e o MT19937 da V3 são implementações TypeScript do próprio pacote. Vitest, o perfil TypeScript estrito e as verificações do tarball fazem parte da toolchain. `dist/` é sempre gerado e não é versionado.
 
-O núcleo V2 não é exportado pelo pacote V3. Ele permanece no repositório apenas como corpus de compatibilidade durante o desenvolvimento e pode ser removido quando a migração for encerrada.
+A migração interna para a V3 está encerrada. O código e os testes exclusivos da V2 foram removidos; os resultados de referência da migração permanecem em `tests/fixtures/v3-compatibility-corpus.ts` e são verificados sem executar o motor antigo. Para atualizar aplicações consumidoras, consulte [o guia de migração](docs/MIGRATION_V3.md).
 
 ## Atribuição e licença
 
-Este pacote é um derivado mantido pelo ERPG a partir do projeto open source `@dice-roller/rpg-dice-roller`, de GreenImp. A V3 substitui o parser e o runtime publicados por implementações próprias em TypeScript, mantendo o crédito e o aviso original em `licence.txt`.
+O Dicecore usa a [Licença Arkanus Dicecore — Uso Não Comercial e Projetos Abertos 1.0](licence.txt).
 
-Licença MIT.
+| Uso | Autorização individual da Arkanus |
+| --- | --- |
+| Não comercial, conforme os termos da licença | Dispensada |
+| Comercial em Projeto Aberto Elegível, conforme a seção 3.1 | Dispensada |
+| Comercial em projeto fechado ou fora da exceção | Obrigatória e prévia; pode ser concedida por e-mail |
+
+Para a exceção, o código-fonte próprio do projeto e sua integração devem estar
+públicos sob licença [aprovada pela OSI](https://opensource.org/licenses).
+Alterações no Dicecore e instruções de build também devem estar disponíveis,
+correspondendo à versão oferecida. O Dicecore mantém sua própria licença.
+Isso permite cobrar por distribuição, hospedagem, suporte e serviços de
+projetos elegíveis. Apenas usar dependências open source ou publicar um núcleo
+aberto de um produto com funcionalidades fechadas não basta para a exceção.
+
+Outros usos comerciais — incluindo produtos, serviços hospedados, APIs,
+operações internas de empresas e trabalho remunerado para clientes — exigem
+autorização, que pode ser concedida por e-mail, sem contrato separado, documento
+em papel ou assinatura manuscrita. Solicitações podem ser encaminhadas pelos canais de contato do
+[repositório oficial](https://github.com/arkanus-app/rpg-dice-roller).
+Esta é uma licença de código disponível com restrição comercial, não uma
+licença open source aprovada pela OSI. A exceção comercial não garante, por si
+só, compatibilidade com as licenças dos demais componentes de um projeto.
+
+O projeto teve origem em `@dice-roller/rpg-dice-roller`, de GreenImp. A V3
+substitui o parser e o runtime por implementações próprias em TypeScript.
+Os avisos e a licença MIT aplicáveis ao material anterior estão preservados
+em [THIRD_PARTY_NOTICES.txt](THIRD_PARTY_NOTICES.txt). A nova licença não revoga
+direitos sobre versões ou materiais anteriormente recebidos sob MIT, nem
+restringe direitos concedidos pelas licenças independentes de terceiros.

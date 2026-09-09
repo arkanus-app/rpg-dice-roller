@@ -97,7 +97,8 @@ export class MersenneTwister19937 implements RandomSource {
   }
 
   private readState(index: number): number {
-    return this.state[index] ?? 0;
+    // All callers address the initialized, fixed-size state buffer.
+    return this.state[index] as number;
   }
 
   private writeState(index: number, value: number): void {

@@ -46,6 +46,7 @@ bower_components
 
 ## Testing
 /coverage
+/coverage-v3/
 /.artifacts
 
 ## Docs

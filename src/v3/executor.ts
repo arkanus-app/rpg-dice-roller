@@ -15,7 +15,6 @@ import { createExecutionContext, type ExecutionContext } from './runtime/context
 import type { DiceLimits } from './runtime/limits.js';
 import type {
   RandomAlgorithm,
-  ReplayDescriptor,
   SeedInput,
 } from './runtime/replay.js';
 import type {
@@ -60,7 +59,7 @@ interface WorkingDie {
 interface Evaluation {
   readonly value: number;
   readonly rendered: string;
-  readonly groupId: string | null;
+  readonly groupId: string;
   readonly diceRange: EntityRange;
 }
 
@@ -99,7 +98,7 @@ interface RollState {
 export interface ExecuteRollPlanOptions {
   readonly limits: DiceLimits;
   readonly seed?: SeedInput;
-  readonly replay?: ReplayDescriptor;
+  readonly replay?: unknown;
   readonly randomAlgorithm?: RandomAlgorithm;
 }
 
@@ -324,10 +323,7 @@ function applyExplode(
         reason: 'compound',
       });
       for (let index = 1; index < chain.length; index += 1) {
-        const child = chain[index];
-        if (child === undefined) {
-          continue;
-        }
+        const child = chain[index] as WorkingDie;
         child.active = false;
         child.included = false;
         syncContribution(child);
@@ -400,11 +396,7 @@ function applyUnique(
   const active = dice.filter((die) => die.active);
   const seenValues = new Set<number>();
 
-  for (let index = 0; index < active.length; index += 1) {
-    const die = active[index];
-    if (die === undefined) {
-      continue;
-    }
+  for (const die of active) {
 
     while (true) {
       const duplicate = seenValues.has(die.value);
@@ -446,17 +438,11 @@ function indexesToExclude(
   const ranked = values
     .map((value, index) => ({ index, value: value.value }))
     .sort((left, right) => left.value - right.value || left.index - right.index);
-  const selected = selection === 'lowest'
-    ? ranked.slice(0, quantity)
-    : ranked.slice(Math.max(0, ranked.length - quantity));
-  const selectedIndexes = selected.map((entry) => entry.index);
-
-  if (kind === 'drop') {
-    return selectedIndexes;
-  }
-  const selectedIndexSet = new Set(selectedIndexes);
-  return ranked
-    .filter((entry) => !selectedIndexSet.has(entry.index))
+  const boundary = selection === 'lowest' ? quantity : Math.max(0, ranked.length - quantity);
+  // Selection is a contiguous range in ranked order. Its complement is the
+  // other range, so keep does not need a Set or another membership traversal.
+  const excludePrefix = (selection === 'lowest') === (kind === 'drop');
+  return (excludePrefix ? ranked.slice(0, boundary) : ranked.slice(boundary))
     .map((entry) => entry.index);
 }
 
@@ -693,15 +679,10 @@ function excludeGroupTree(groupId: string, state: RollState, reason: 'drop' | 'k
 
 function excludeEvaluationDice(item: GroupItem, state: RollState, reason: 'drop' | 'keep'): void {
   item.included = false;
-  if (item.evaluation.groupId !== null) {
-    excludeGroupTree(item.evaluation.groupId, state, reason);
-  }
+  excludeGroupTree(item.evaluation.groupId, state, reason);
   const end = item.evaluation.diceRange.start + item.evaluation.diceRange.count;
   for (let index = item.evaluation.diceRange.start; index < end; index += 1) {
-    const die = state.dice[index];
-    if (die === undefined) {
-      continue;
-    }
+    const die = state.dice[index] as WorkingDie;
     if (!die.included) {
       continue;
     }
@@ -791,12 +772,8 @@ function evaluateGroup(node: GroupNode, state: RollState): Evaluation {
     (total, item) => total + (item.included ? item.value : 0),
     0,
   ));
-  const originalChildIds = items.flatMap((item) => (
-    item.evaluation.groupId === null ? [] : [item.evaluation.groupId]
-  ));
-  const childIds = orderedItems.flatMap((item) => (
-    item.evaluation.groupId === null ? [] : [item.evaluation.groupId]
-  ));
+  const originalChildIds = items.map((item) => item.evaluation.groupId);
+  const childIds = orderedItems.map((item) => item.evaluation.groupId);
   const sortModifier = modifiers.find((modifier) => modifier.kind === 'sort');
   const groupStates: readonly GroupState[] = sortModifier === undefined
     ? []
@@ -842,7 +819,7 @@ function evaluateNode(node: ExpressionNode, state: RollState): Evaluation {
         node,
         state,
         value,
-        operand.groupId === null ? [] : [operand.groupId],
+        [operand.groupId],
       );
       return {
         value,
@@ -860,8 +837,7 @@ function evaluateNode(node: ExpressionNode, state: RollState): Evaluation {
         right.value,
         state.plan.input,
       );
-      const childIds = [left.groupId, right.groupId]
-        .filter((id): id is string => id !== null);
+      const childIds = [left.groupId, right.groupId];
       const groupId = addResolvedGroup(node, state, value, childIds);
       return {
         value,
@@ -879,7 +855,7 @@ function evaluateNode(node: ExpressionNode, state: RollState): Evaluation {
         node,
         state,
         expression.value,
-        expression.groupId === null ? [] : [expression.groupId],
+        [expression.groupId],
       );
       return {
         value: expression.value,
@@ -896,7 +872,7 @@ function evaluateNode(node: ExpressionNode, state: RollState): Evaluation {
           node,
           state,
           value,
-          argument.groupId === null ? [] : [argument.groupId],
+          [argument.groupId],
         );
         return {
           value,
@@ -908,8 +884,7 @@ function evaluateNode(node: ExpressionNode, state: RollState): Evaluation {
       const left = evaluateNode(node.arguments[0], state);
       const right = evaluateNode(node.arguments[1], state);
       const value = evaluateBinaryFunction(node.name, left.value, right.value, state.plan.input);
-      const childIds = [left.groupId, right.groupId]
-        .filter((id): id is string => id !== null);
+      const childIds = [left.groupId, right.groupId];
       const groupId = addResolvedGroup(node, state, value, childIds);
       return {
         value,
@@ -930,11 +905,7 @@ function evaluateNode(node: ExpressionNode, state: RollState): Evaluation {
 
 function finalizeDice(state: RollState, materialize: boolean): readonly ResolvedDie[] {
   const resolved: ResolvedDie[] = [];
-  for (let index = 0; index < state.dice.length; index += 1) {
-    const die = state.dice[index];
-    if (die === undefined) {
-      continue;
-    }
+  for (const [index, die] of state.dice.entries()) {
     if (die.active && die.included) {
       state.context.journal.record({
         type: 'include',
@@ -1044,14 +1015,13 @@ function formatAggregateOutput(
   context: ExecutionContext,
 ): string {
   if (outputs.length === 1) {
-    const output = outputs[0] ?? '';
+    const output = outputs[0] as string;
     context.budget.assertOutputLength(output.length);
     return output;
   }
   const totalLine = `Total: ${total}`;
   let outputLength = totalLine.length;
-  for (let index = 0; index < outputs.length; index += 1) {
-    const output = outputs[index] ?? '';
+  for (const [index, output] of outputs.entries()) {
     outputLength += String(index + 1).length + 2 + output.length + 1;
   }
   context.budget.assertOutputLength(outputLength);
@@ -1109,20 +1079,6 @@ function toExecutionStats(context: ExecutionContext): ExecutionStats {
   };
 }
 
-function supportsFastSummary(program: CompiledDiceProgram): boolean {
-  for (const spec of program.diceSpecs.values()) {
-    if (spec.modifiers.length > 0) {
-      return false;
-    }
-  }
-  for (const node of program.postOrder) {
-    if (node.kind === 'group' && node.modifiers.length > 0) {
-      return false;
-    }
-  }
-  return true;
-}
-
 function consumeSummaryEvent(context: ExecutionContext, count = 1): void {
   context.budget.consumeEvents(count);
   context.budget.consumeResultItems(count);
@@ -1132,6 +1088,86 @@ function finishSummaryGroup(context: ExecutionContext): void {
   context.budget.consumeResolvedGroups();
   context.budget.consumeResultItems();
   consumeSummaryEvent(context);
+}
+
+type SummaryModifier = Extract<RuntimeModifierNode, { readonly kind: 'keep' | 'drop' | 'min' | 'max' | 'target' }>;
+
+function evaluateModifiedSummary(
+  node: DiceNode,
+  spec: CompiledDiceSpec,
+  modifier: SummaryModifier,
+  context: ExecutionContext,
+): { readonly total: number; readonly pool: PoolSummary | null } {
+  const values: number[] = [];
+  for (let index = 0; index < spec.quantity; index += 1) {
+    context.budget.consumeInitialDice();
+    context.budget.consumeResultItems();
+    values.push(rollCompiledFace(node, spec, context));
+    consumeSummaryEvent(context);
+  }
+  let total = 0;
+  let included = values.length;
+  let pool: PoolSummary | null = null;
+  if (modifier.kind === 'keep' || modifier.kind === 'drop') {
+    const selected = Math.min(modifier.quantity, values.length);
+    included = modifier.kind === 'keep' ? selected : values.length - selected;
+    const sum = values.reduce((accumulator, value) => accumulator + value, 0);
+    if (selected === values.length) {
+      total = modifier.kind === 'keep' ? sum : 0;
+    } else if (selected === 1) {
+      // Only the extremum's value matters in summary mode, including ties.
+      let extreme = values[0] as number;
+      for (const value of values) {
+        extreme = modifier.selection === 'highest'
+          ? Math.max(extreme, value) : Math.min(extreme, value);
+      }
+      total = modifier.kind === 'keep' ? extreme : sum - extreme;
+    } else {
+      values.sort((left, right) => left - right);
+      const start = modifier.selection === 'lowest' ? 0 : values.length - selected;
+      let selectedTotal = 0;
+      for (let index = start; index < start + selected; index += 1) {
+        selectedTotal += values[index] as number;
+      }
+      total = modifier.kind === 'keep' ? selectedTotal : sum - selectedTotal;
+    }
+    for (let index = included; index < values.length; index += 1) {
+      consumeSummaryEvent(context);
+    }
+  } else {
+    let successes = 0;
+    let failures = 0;
+    for (const value of values) {
+      if (modifier.kind === 'target') {
+        if (compare(modifier.success, value)) {
+          successes += 1;
+        } else if (modifier.failure !== null && compare(modifier.failure, value)) {
+          failures += 1;
+        }
+        consumeSummaryEvent(context);
+      } else {
+        const transformed = modifier.kind === 'min' ? Math.max(value, modifier.value)
+          : Math.min(value, modifier.value);
+        if (transformed !== value) {
+          consumeSummaryEvent(context);
+        }
+        total += transformed;
+      }
+    }
+    if (modifier.kind === 'target') {
+      total = successes - failures;
+      pool = { successes, failures, netSuccesses: total };
+    }
+  }
+  // Match addResolvedGroup -> finalizeDice -> finalizeGroups, including the
+  // first failing counter when several per-call budgets are exhausted.
+  context.budget.consumeResolvedGroups();
+  context.budget.consumeResultItems();
+  for (let index = 0; index < included; index += 1) {
+    consumeSummaryEvent(context);
+  }
+  consumeSummaryEvent(context);
+  return { total: roundResult(total), pool };
 }
 
 function evaluateFastSummaryNode(
@@ -1219,8 +1255,16 @@ function executeFastSummary(
   const context = createContext(plan, options, false);
   context.budget.consumeRolls(plan.rollCount);
   const rolls: ResolvedRollSummary[] = [];
+  const spec = program.ast.kind === 'dice' ? program.diceSpecs.get(program.ast.id) : undefined;
+  const modifier = spec?.modifiers[0];
   for (let rollIndex = 1; rollIndex <= plan.rollCount; rollIndex += 1) {
     context.budget.consumeResultItems();
+    if (program.ast.kind === 'dice' && spec !== undefined && modifier !== undefined) {
+      // The compiler certifies this pipeline when supportsFastSummary is true.
+      const result = evaluateModifiedSummary(program.ast, spec, modifier as SummaryModifier, context);
+      rolls.push({ index: rollIndex, ...result });
+      continue;
+    }
     rolls.push({
       index: rollIndex,
       total: roundResult(evaluateFastSummaryNode(
@@ -1232,7 +1276,7 @@ function executeFastSummary(
       pool: null,
     });
   }
-  return {
+  const summary: DiceRollSummary = {
     type: 'dice-roll-summary',
     schemaVersion: 3,
     input: plan.input,
@@ -1243,10 +1287,19 @@ function executeFastSummary(
     replay: context.replay,
     stats: toExecutionStats(context),
     rolls,
-    pool: null,
+    pool: aggregatePool(rolls),
   };
+  if (modifier !== undefined) {
+    // Preserve the general executor's JSON key order for existing replays.
+    const { type, rolls: rollViews, pool, ...base } = summary;
+    return { ...base, pool, type, rolls: rollViews };
+  }
+  return summary;
 }
 
+function execute(plan: RollPlan, options: ExecuteRollPlanOptions, mode: 'full'): DiceRollResult;
+function execute(plan: RollPlan, options: ExecuteRollPlanOptions, mode: 'details'): DiceRollDetails;
+function execute(plan: RollPlan, options: ExecuteRollPlanOptions, mode: 'summary'): DiceRollSummary;
 function execute(
   plan: RollPlan,
   options: ExecuteRollPlanOptions,
@@ -1255,7 +1308,7 @@ function execute(
   const full = mode === 'full';
   const materializeDice = mode !== 'summary';
   const program = getPlanProgram(plan);
-  if (mode === 'summary' && supportsFastSummary(program)) {
+  if (mode === 'summary' && program.supportsFastSummary) {
     return executeFastSummary(plan, program, options);
   }
   const context = createContext(plan, options, full);
@@ -1345,31 +1398,19 @@ export function executeRollPlanDetails(
   plan: RollPlan,
   options: ExecuteRollPlanOptions,
 ): DiceRollDetails {
-  const result = execute(plan, options, 'details');
-  if (result.type !== 'dice-roll-details') {
-    throw new TypeError('Details execution returned an invalid result kind');
-  }
-  return result;
+  return execute(plan, options, 'details');
 }
 
 export function executeRollPlan(
   plan: RollPlan,
   options: ExecuteRollPlanOptions,
 ): DiceRollResult {
-  const result = execute(plan, options, 'full');
-  if (result.type !== 'dice-roll') {
-    throw new TypeError('Full execution returned an invalid result kind');
-  }
-  return result;
+  return execute(plan, options, 'full');
 }
 
 export function executeRollPlanSummary(
   plan: RollPlan,
   options: ExecuteRollPlanOptions,
 ): DiceRollSummary {
-  const result = execute(plan, options, 'summary');
-  if (result.type !== 'dice-roll-summary') {
-    throw new TypeError('Summary execution returned an invalid result kind');
-  }
-  return result;
+  return execute(plan, options, 'summary');
 }

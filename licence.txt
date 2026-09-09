@@ -1,23 +1,170 @@
-The MIT License (MIT)
+LICENÇA ARKANUS DICECORE — USO NÃO COMERCIAL E PROJETOS ABERTOS
+Versão 1.0 — 9 de setembro de 2026
 
-Copyright (c) 2015 - 2021 GreenImp Limited <greenimp.co.uk>
-Copyright (c) 2021 - present GreenImp Media Limited <greenimp.co.uk>
 Copyright (c) 2026 Arkanus
 
-Permission is hereby granted, free of charge, to any person obtaining a copy
-of this software and associated documentation files (the "Software"), to deal
-in the Software without restriction, including without limitation the rights
-to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-copies of the Software, and to permit persons to whom the Software is
-furnished to do so, subject to the following conditions:
+1. OBJETO E ALCANCE
 
-The above copyright notice and this permission notice shall be included in
-all copies or substantial portions of the Software.
+Esta licença rege o código e a documentação do @erpg/dicecore que a Arkanus
+tenha direito de licenciar e que sejam disponibilizados acompanhados destes
+termos ("Material Coberto"). "Você" é a pessoa física ou jurídica que utiliza
+esse material. As exceções da seção 5 prevalecem sobre as demais disposições.
 
-THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
-THE SOFTWARE.
+Esta é uma licença de código disponível com restrição de uso comercial
+e autorização automática para os Projetos Abertos Elegíveis da seção 3.1.
+Ela não é apresentada como licença open source aprovada pela OSI.
+
+2. PERMISSÕES PARA USO NÃO COMERCIAL
+
+Sujeito a esta licença, a Arkanus concede a Você permissão gratuita, mundial
+e não exclusiva para usar, estudar, executar, copiar, modificar e redistribuir
+o Material Coberto, em código-fonte ou compilado, para fins não comerciais.
+
+São exemplos de uso não comercial projetos pessoais de hobby, estudo, ensino
+e pesquisa sem finalidade comercial, desde que não integrem nem sustentem
+uma atividade comercial descrita na seção 3.
+
+Ao redistribuir o Material Coberto ou modificações dele, Você deve:
+
+a) incluir esta licença e o arquivo THIRD_PARTY_NOTICES.txt;
+b) preservar os avisos de autoria e de licença aplicáveis;
+c) identificar as modificações feitas por Você, sem atribuí-las à Arkanus;
+d) informar aos destinatários que o uso comercial do Material Coberto depende
+   da exceção da seção 3.1 ou de autorização separada, e não conceder direitos
+   sobre esse material além dos que Você recebeu. Estas condições não alteram
+   as licenças da seção 5.
+
+Você conserva os direitos que possua sobre suas contribuições originais.
+Esta licença não transfere a titularidade dessas contribuições à Arkanus.
+
+3. USO COMERCIAL FORA DA EXCEÇÃO EXIGE AUTORIZAÇÃO
+
+Salvo a autorização automática da seção 3.1 e os direitos da seção 5, o uso
+comercial do Material Coberto exige autorização prévia e expressa da Arkanus
+ou de representante autorizado pelo titular. Essa autorização pode ser
+concedida por e-mail, sem necessidade de contrato separado, documento em
+papel ou assinatura manuscrita.
+A autorização deve identificar o beneficiário e o uso autorizado. Eventuais
+prazos, valores e demais condições comerciais podem constar do próprio e-mail.
+
+"Uso comercial" é o uso destinado a obter vantagem comercial ou remuneração
+direta ou indireta, ou a integrar ou apoiar uma atividade empresarial. Inclui:
+
+a) incorporar o material em produtos ou serviços vendidos, licenciados,
+   monetizados por publicidade, assinaturas ou outras receitas;
+b) disponibilizar serviços hospedados, APIs ou funcionalidades comerciais
+   que utilizem o material, mesmo sem distribuir seu código;
+c) utilizá-lo em operações internas de empresas ou em trabalho remunerado
+   para clientes;
+d) vender, sublicenciar comercialmente ou redistribuir comercialmente o
+   Material Coberto ou produtos que o incorporem.
+
+Oferecer acesso gratuito ao usuário final não torna não comercial um serviço
+que gere receita ou apoie uma atividade empresarial. A ausência de lucro
+imediato ou a forma jurídica da organização não dispensam, por si só,
+a autorização.
+
+Disponibilidade pública no GitHub, no npm ou em outro canal, download,
+instalação, silêncio do titular e envio de uma solicitação não constituem
+autorização comercial fora da seção 3.1. Permissões adicionais dependem de
+autorização expressa, que também pode ser concedida por e-mail.
+
+Solicitações podem ser encaminhadas pelos canais de contato indicados no
+repositório oficial: https://github.com/arkanus-app/rpg-dice-roller
+
+3.1. AUTORIZAÇÃO AUTOMÁTICA PARA PROJETOS ABERTOS ELEGÍVEIS
+
+A Arkanus autoriza, gratuitamente e sem solicitação, cadastro ou aprovação
+individual, o uso, a cópia, a modificação e a redistribuição comerciais do
+Material Coberto como parte de um Projeto Aberto Elegível. Isso inclui cobrar
+por distribuição, hospedagem, suporte ou serviços desse projeto.
+
+Um "Projeto Aberto Elegível" é o produto ou serviço específico que utiliza
+o Material Coberto e que atende simultaneamente às seguintes condições:
+
+a) todo o código-fonte próprio do projeto, incluindo a integração com o
+   Dicecore e os componentes que implementam as funcionalidades oferecidas,
+   está disponível publicamente, sem cobrança ou aprovação individual, na
+   forma preferida para modificação;
+b) esse código próprio está sob uma ou mais licenças aprovadas pela Open
+   Source Initiative (OSI), conforme https://opensource.org/licenses;
+c) as modificações no Material Coberto e as instruções necessárias para
+   construir e executar a versão oferecida também estão disponíveis
+   publicamente. O Material Coberto conserva esta licença; componentes de
+   terceiros conservam suas respectivas licenças;
+d) a disponibilidade do código corresponde à versão comercialmente usada
+   ou distribuída e permanece durante esse uso ou distribuição;
+e) os avisos e condições de redistribuição da seção 2 são respeitados.
+
+Não é necessário publicar credenciais, dados pessoais, dados dos usuários
+ou sistemas independentes que não integrem o produto ou serviço em questão.
+
+Somente utilizar dependências open source, publicar exemplos ou disponibilizar
+um núcleo aberto com componentes próprios fechados que implementem parte do
+produto não torna o produto fechado um Projeto Aberto Elegível. Um repositório
+público sem licença open source para o código próprio também não basta.
+
+A autorização é limitada ao uso no projeto elegível. Ela não permite
+relicenciar o Material Coberto como MIT, Apache, GPL ou outra licença, nem
+concede a seus destinatários autorização para empregá-lo em projetos
+comerciais fechados. Cada destinatário pode utilizar esta mesma exceção
+quando seu próprio projeto atender às condições acima. A compatibilidade
+das licenças dos demais componentes deve ser respeitada.
+
+Se a versão usada deixar de atender às condições, o uso comercial dessa
+versão dependerá de autorização prévia, inclusive por e-mail, antes de
+continuar. As permissões
+independentes descritas na seção 5 permanecem preservadas.
+
+4. ATRIBUIÇÃO E MARCAS
+
+Os créditos não significam endosso de um produto ou serviço. Esta licença não
+concede direitos de uso das marcas, logotipos ou identidade visual da Arkanus,
+do ERPG ou de terceiros, salvo a identificação factual exigida pelos avisos.
+
+5. MATERIAL DE TERCEIROS E LICENÇAS ANTERIORES
+
+O projeto teve origem em @dice-roller/rpg-dice-roller, de GreenImp. O material
+de terceiros conserva suas licenças e avisos, reproduzidos quando aplicáveis
+em THIRD_PARTY_NOTICES.txt. Esta licença não impõe a restrição comercial da
+seção 3 a material que Você utilize sob uma licença independente que autorize
+esse uso, nem substitui as permissões concedidas pelos respectivos titulares.
+
+Versões e materiais anteriormente disponibilizados sob MIT ou outra licença
+continuam sujeitos às permissões recebidas sob aquela licença. Estes termos
+não revogam nem restringem retroativamente esses direitos. Uma licença
+anterior não concede, por si só, direitos sobre contribuições posteriores
+disponibilizadas exclusivamente sob estes termos.
+
+Nada nesta licença limita direitos que a legislação aplicável conceda
+independentemente de autorização do titular.
+
+6. DESCUMPRIMENTO
+
+As permissões concedidas por esta licença terminam automaticamente em caso
+de descumprimento. Você deve cessar os atos que dependam dessas permissões.
+A terminação não afeta direitos independentes referidos na seção 5 nem as
+licenças válidas de destinatários que cumpram suas próprias condições.
+A retomada das permissões após descumprimento exige autorização expressa,
+que pode ser concedida por e-mail nos termos da seção 3.
+
+7. AUSÊNCIA DE GARANTIAS E LIMITAÇÃO DE RESPONSABILIDADE
+
+Na máxima extensão permitida pela legislação aplicável, o Material Coberto
+é fornecido "como está", sem garantias expressas ou implícitas, incluindo
+comercialização, adequação a uma finalidade específica ou não violação.
+Não há obrigação de suporte, manutenção ou fornecimento de atualizações.
+
+Na máxima extensão permitida pela legislação aplicável, os titulares e
+colaboradores não respondem por danos ou outras responsabilidades decorrentes
+do uso ou da impossibilidade de uso do material, em contrato, responsabilidade
+civil ou outra hipótese. Esta disposição não exclui responsabilidades que
+não possam ser afastadas por lei.
+
+8. DISPOSIÇÕES FINAIS
+
+Direitos não concedidos expressamente ficam reservados, observada a seção 5.
+Se uma disposição for inexequível, as demais permanecem aplicáveis na medida
+permitida por lei. O texto em português desta versão é o texto de referência.
+Uma atualização futura da licença não altera automaticamente esta versão
+nem as autorizações comerciais já concedidas.

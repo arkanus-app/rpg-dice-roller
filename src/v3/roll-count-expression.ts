@@ -72,11 +72,7 @@ function buildPostOrder(root: ExpressionNode): readonly ExpressionNode[] {
     { node: root, visited: false },
   ];
 
-  while (pending.length > 0) {
-    const current = pending.pop();
-    if (current === undefined) {
-      break;
-    }
+  for (let current = pending.pop(); current !== undefined; current = pending.pop()) {
     if (current.visited) {
       output.push(current.node);
       continue;
@@ -84,10 +80,8 @@ function buildPostOrder(root: ExpressionNode): readonly ExpressionNode[] {
     pending.push({ node: current.node, visited: true });
     const children = expressionChildren(current.node);
     for (let index = children.length - 1; index >= 0; index -= 1) {
-      const child = children[index];
-      if (child !== undefined) {
-        pending.push({ node: child, visited: false });
-      }
+      const child = children[index] as ExpressionNode;
+      pending.push({ node: child, visited: false });
     }
   }
 

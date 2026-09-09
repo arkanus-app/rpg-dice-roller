@@ -30,6 +30,8 @@ describe('ExecutionJournal', () => {
 
     const events = journal.toArray();
     expect(events.map((event) => event.sequence)).toEqual([1, 2]);
+    expect(journal.slice(1, 2)).toEqual([events[1]]);
+    expect(journal.slice(0)).toEqual(events);
     expect(events[1]).toEqual(expect.objectContaining({
       type: 'explode',
       dieId: 'die-1',

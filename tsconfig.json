@@ -3,10 +3,9 @@
     "src/**/*.ts"
   ],
   "exclude": [
-    "src/v3",
+    "src/**/*.test.ts",
     "tests",
-    "lib",
-    "types",
+    "dist",
     "node_modules"
   ],
   "compilerOptions": {

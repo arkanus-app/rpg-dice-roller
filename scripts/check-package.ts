@@ -30,7 +30,6 @@ const ignoredJavaScriptDirectories = new Set([
 ]);
 const allowedJavaScriptFiles = new Set([
   resolve(root, 'rollup.config.mjs'),
-  resolve(root, 'src/parser/grammars/grammar.js'),
 ]);
 const javaScriptExtensions = ['.cjs', '.js', '.mjs'] as const;
 

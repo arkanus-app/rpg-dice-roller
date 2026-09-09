@@ -1,5 +1,7 @@
 # Migração do @erpg/dicecore V2 para V3
 
+**Estado do repositório:** a migração interna foi concluída em 2026-09-09 e o runtime V2 foi removido. Este guia permanece como referência para aplicações que ainda consomem versões antigas; ele não indica que esses consumidores externos já foram atualizados.
+
 A V3 preserva a fachada funcional de normalização, inspeção, validação e rolagem, mas substitui o parser, o runtime e o DTO público. A migração deve remover acessos ao snapshot e tratar os novos tipos explícitos em vez de reconstruir o resultado legado.
 
 ## Requisitos e importação

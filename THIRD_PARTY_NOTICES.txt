@@ -1,0 +1,37 @@
+AVISOS DE TERCEIROS E LICENÇA MIT HISTÓRICA
+
+O @erpg/dicecore teve origem no projeto @dice-roller/rpg-dice-roller,
+mantido por GreenImp: https://github.com/dice-roller/rpg-dice-roller
+
+O texto abaixo preserva os avisos do projeto original e da distribuição MIT
+anterior do Dicecore. Ele se aplica ao material recebido sob essa licença,
+incluindo as contribuições da Arkanus que tenham sido distribuídas sob MIT.
+Ele não concede automaticamente licença MIT a contribuições posteriores
+disponibilizadas exclusivamente sob a licença Arkanus em licence.txt.
+
+Os direitos MIT aplicáveis permanecem válidos, inclusive para uso comercial.
+A licença própria da Arkanus não restringe esses direitos independentes.
+
+The MIT License (MIT)
+
+Copyright (c) 2015 - 2021 GreenImp Limited <greenimp.co.uk>
+Copyright (c) 2021 - present GreenImp Media Limited <greenimp.co.uk>
+Copyright (c) 2026 Arkanus
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in
+all copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
+THE SOFTWARE.

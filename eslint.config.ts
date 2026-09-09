@@ -14,8 +14,6 @@ export default tseslint.config(
       'dist/**',
       'lib/**',
       'node_modules/**',
-      'src/parser/grammars/grammar.d.ts',
-      'src/parser/grammars/grammar.js',
       'types/**',
     ],
   },

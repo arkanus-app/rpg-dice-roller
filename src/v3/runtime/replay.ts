@@ -40,6 +40,11 @@ const WORD_COUNT = 4;
 const HEX_128_PATTERN = /^[0-9a-f]{32}$/u;
 const EMPTY_PLAN_FINGERPRINT = '00000000000000000000000000000000';
 
+const REPLAY_KEYS = new Set([
+  'algorithm', 'algorithmVersion', 'executionVersion', 'mathProfile',
+  'origin', 'planFingerprint', 'schemaVersion', 'seedMaterial',
+]);
+
 function defaultCryptoSource(): CryptoSource | null {
   const cryptoSource = globalThis.crypto;
   return typeof cryptoSource?.getRandomValues === 'function' ? cryptoSource : null;
@@ -64,10 +69,10 @@ function hashCanonicalSeed(value: string): readonly number[] {
   return Object.freeze(words);
 }
 
-function wordsToHex(words: ArrayLike<number>): string {
+function wordsToHex(words: readonly number[]): string {
   let output = '';
-  for (let index = 0; index < words.length; index += 1) {
-    output += (words[index] ?? 0).toString(16).padStart(8, '0');
+  for (const word of words) {
+    output += word.toString(16).padStart(8, '0');
   }
   return output;
 }
@@ -96,18 +101,9 @@ function isRecord(value: unknown): value is Readonly<Record<string, unknown>> {
 }
 
 function hasExactReplayKeys(value: Readonly<Record<string, unknown>>): boolean {
-  const expected = [
-    'algorithm',
-    'algorithmVersion',
-    'executionVersion',
-    'mathProfile',
-    'origin',
-    'planFingerprint',
-    'schemaVersion',
-    'seedMaterial',
-  ];
   try {
-    return Object.keys(value).sort().join(',') === expected.join(',');
+    const keys = Object.keys(value);
+    return keys.length === REPLAY_KEYS.size && keys.every((key) => REPLAY_KEYS.has(key));
   } catch {
     return false;
   }
@@ -145,37 +141,48 @@ export function validateReplayDescriptor(
     throw invalidReplay('Replay descriptor must be a non-null object');
   }
 
+  // Read an external descriptor once; getters cannot change values between
+  // validation and RNG initialization. Never cache the external object.
+  let snapshot: Readonly<Record<string, unknown>>;
+  let exactKeys: boolean;
   try {
-    if (value['schemaVersion'] !== 2
-      || value['algorithmVersion'] !== 1
-      || value['executionVersion'] !== 1
-      || value['mathProfile'] !== MATH_PROFILE
-      || (value['algorithm'] !== 'mt19937' && value['algorithm'] !== 'xoshiro128ss')) {
-      throw new DiceRollError('The replay algorithm or version is not supported', {
-        code: 'UNSUPPORTED_REPLAY_VERSION',
-      });
-    }
-  } catch (error: unknown) {
-    if (error instanceof DiceRollError) {
-      throw error;
-    }
+    exactKeys = hasExactReplayKeys(value);
+    snapshot = {
+      schemaVersion: value['schemaVersion'],
+      algorithm: value['algorithm'],
+      algorithmVersion: value['algorithmVersion'],
+      executionVersion: value['executionVersion'],
+      mathProfile: value['mathProfile'],
+      origin: value['origin'],
+      seedMaterial: value['seedMaterial'],
+      planFingerprint: value['planFingerprint'],
+    };
+  } catch {
     throw invalidReplay('Replay descriptor could not be read');
   }
-
-  if (!isReplayDescriptor(value)) {
+  if (snapshot['schemaVersion'] !== 2
+    || snapshot['algorithmVersion'] !== 1
+    || snapshot['executionVersion'] !== 1
+    || snapshot['mathProfile'] !== MATH_PROFILE
+    || (snapshot['algorithm'] !== 'mt19937' && snapshot['algorithm'] !== 'xoshiro128ss')) {
+    throw new DiceRollError('The replay algorithm or version is not supported', {
+      code: 'UNSUPPORTED_REPLAY_VERSION',
+    });
+  }
+  if (!exactKeys || !isReplayDescriptor(snapshot)) {
     throw invalidReplay('Replay descriptor contains malformed or unexpected fields');
   }
   if (expectedPlanFingerprint !== undefined
-    && value.planFingerprint !== expectedPlanFingerprint) {
+    && snapshot.planFingerprint !== expectedPlanFingerprint) {
     throw new DiceRollError('Replay descriptor belongs to a different roll plan', {
       code: 'REPLAY_PLAN_MISMATCH',
       details: {
         expectedPlanFingerprint,
-        actualPlanFingerprint: value.planFingerprint,
+        actualPlanFingerprint: snapshot.planFingerprint,
       },
     });
   }
-  return value;
+  return Object.freeze(snapshot);
 }
 
 export function canonicalizeSeed(
@@ -263,14 +270,23 @@ export function createReplaySeed(
   descriptor: unknown,
   expectedPlanFingerprint?: string,
 ): SeedMaterial {
+  return createReplayState(descriptor, expectedPlanFingerprint).seed;
+}
+
+/** Validates and restores both runtime inputs in one pass. */
+export function createReplayState(
+  descriptor: unknown,
+  expectedPlanFingerprint?: string,
+): { readonly replay: ReplayDescriptor; readonly seed: SeedMaterial } {
   const replay = validateReplayDescriptor(descriptor, expectedPlanFingerprint);
   const words = hexToWords(replay.seedMaterial);
-  return Object.freeze({
+  const seed: SeedMaterial = Object.freeze({
     canonicalSeed: `replay:${replay.seedMaterial}`,
     seedMaterial: replay.seedMaterial,
     origin: replay.origin,
     words,
   });
+  return { replay, seed };
 }
 
 export function createSeedMaterial(
