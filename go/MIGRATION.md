@@ -27,7 +27,7 @@ transfer automatically to a port in another language.
 | Replay foundations | Schema validation, seed restoration, deterministic generator restoration |
 | Math | Decimal12 rounding, arithmetic and functions; exact transcendental parity incomplete |
 | Reference tests | Versioned TypeScript JSON oracle plus native Go tests and parser fuzz target |
-| Automation | Go format/vet/tests/race and TypeScript fixture reproduction workflow |
+| Automation | Go format/vet/tests/race, exact 100% statement coverage gate, and TypeScript fixture reproduction |
 
 Replay support here means descriptors and RNG restoration. A caller currently
 supplies the plan fingerprint. Compiling a formula and replaying its **complete
@@ -36,11 +36,26 @@ syntax; it does not execute or semantically validate every modifier combination.
 
 ## Validation boundaries
 
-The initial Go suite passed with **98.5% statement coverage**, and `go vet` and
-`gofmt` checks passed. This percentage covers only the Go code implemented so far;
-it does not measure how much of the TypeScript engine has been migrated. The
-regular suite explicitly skips the known cases described below. The strict math
-check was also executed and reproduced all eight pending failures.
+The Go suite now passes with **100% statement coverage**, using
+`go test -coverpkg=./... -coverprofile=coverage.out ./...`. `go vet` and `gofmt`
+checks also pass. The CI gate requires every measured statement to be covered
+and rejects empty or malformed profiles. It reads exact counts, so an uncovered
+statement cannot hide behind a rounded `100.0%` display. No source files are
+excluded from measurement.
+
+The new tests cover native integer seeds, UTF-16 size boundaries, malformed
+replay data, rejection before drawing randomness, unexpected parser panics, EOF
+lookahead, malformed delimiters, and numeric diagnostic formatting. The parser's
+recovery boundary was extracted into a private helper to test panic propagation.
+One unreachable duplicate seed-length check was removed; both string forms retain
+their earlier checks, with exact-limit and over-limit tests confirming rejection.
+
+This coverage requirement applies to all implemented Go code. It does not measure
+how much of the TypeScript engine has been migrated, and Go's native statement
+metric is distinct from TypeScript's branch/function/line metrics. The regular
+suite still explicitly skips the known conformance cases described below. The
+strict math check previously reproduced all eight pending failures; statement
+coverage does not close those semantic gaps.
 
 The oracle contains **539 cases in 11 JSON files**:
 

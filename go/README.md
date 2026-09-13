@@ -74,12 +74,21 @@ directory:
 ```sh
 go test ./...
 go vet ./...
-go test -coverprofile=coverage.out ./...
+go test -coverpkg=./... -coverprofile=coverage.out ./...
 go tool cover -func=coverage.out
+node ../scripts/check-go-coverage.mjs coverage.out
 ```
 
-The GitHub Actions workflow also runs `go test -race ./...` on Linux. The race
-detector requires a compatible platform and C toolchain.
+The required coverage is **100% of Go statements**, across all packages in this
+module. The gate reads the raw profile and rejects any uncovered statement; a
+rounded display of `100.0%` is insufficient. It also rejects empty or malformed
+profiles. Node.js is used only for this development check, not by the Go runtime.
+
+The GitHub Actions workflow enforces the same gate after running the suite with
+the race detector on Linux. Race detection requires a compatible platform and C
+toolchain. Go's native coverage metric counts statements; the TypeScript suite
+separately measures statements, branches, functions, and lines. Coverage remains
+distinct from the cross-language conformance checks below.
 
 To regenerate or verify the TypeScript oracle, run from the **repository root**
 with the existing npm development dependencies installed:

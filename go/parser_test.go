@@ -58,6 +58,49 @@ func TestParseNotationAppliesExecutionLimits(t *testing.T) {
 	}
 }
 
+func TestParserRecoveryPreservesFailureKinds(t *testing.T) {
+	t.Run("syntax failure clears partial tree", func(t *testing.T) {
+		failure := newDiceError("INVALID_NOTATION", "missing operand", "1+", map[string]any{})
+		parse := func() (root *ExpressionNode, err error) {
+			defer recoverDiceParserPanic(&root, &err)
+			root = &ExpressionNode{Kind: "number", Value: 1}
+			panic(failure)
+		}
+		root, err := parse()
+		if root != nil || err != failure {
+			t.Fatalf("syntax recovery returned root=%#v, err=%v; want nil and original failure", root, err)
+		}
+	})
+	t.Run("unexpected panic reaches caller unchanged", func(t *testing.T) {
+		failure := errors.New("unexpected parser invariant failure")
+		var recovered any
+		func() {
+			defer func() { recovered = recover() }()
+			var root *ExpressionNode
+			var err error
+			defer recoverDiceParserPanic(&root, &err)
+			panic(failure)
+		}()
+		if recovered != failure {
+			t.Fatalf("unexpected panic was masked or changed: got %#v, want %#v", recovered, failure)
+		}
+	})
+}
+
+func TestParserLookaheadStopsAtEOF(t *testing.T) {
+	tokens, err := TokenizeDiceNotation("1d6!")
+	if err != nil {
+		t.Fatal(err)
+	}
+	parser := &diceNotationParser{tokens: tokens, cursor: len(tokens) - 1}
+	want := tokens[len(tokens)-1]
+	for _, offset := range []int{0, 1, 10} {
+		if got := parser.current(offset); got != want {
+			t.Fatalf("lookahead %d returned %#v, want EOF sentinel %#v", offset, got, want)
+		}
+	}
+}
+
 func TestParserAssociativityAndStructuralBinding(t *testing.T) {
 	node, err := ParseDiceNotation("-2^2^3")
 	if err != nil {

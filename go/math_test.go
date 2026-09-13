@@ -14,6 +14,30 @@ func requireErrorCode(t *testing.T, err error, code string) {
 	}
 }
 
+func TestMathNumberFormatting(t *testing.T) {
+	for _, tc := range []struct {
+		name  string
+		value float64
+		want  string
+	}{
+		{"integer", 42, "42"},
+		{"negative fraction", -12.375, "-12.375"},
+		{"zero", 0, "0"},
+		{"negative zero", math.Copysign(0, -1), "-0"},
+		{"subnormal", math.SmallestNonzeroFloat64, "5e-324"},
+		{"large finite", 1e30, "1e+30"},
+		{"not a number", math.NaN(), "NaN"},
+		{"positive infinity", math.Inf(1), "Infinity"},
+		{"negative infinity", math.Inf(-1), "-Infinity"},
+	} {
+		t.Run(tc.name, func(t *testing.T) {
+			if got := mathNumberString(tc.value); got != tc.want {
+				t.Fatalf("numeric diagnostic: got %q, want %q", got, tc.want)
+			}
+		})
+	}
+}
+
 func TestMathProfile(t *testing.T) {
 	if MathProfile != "decimal12-v1" {
 		t.Fatal(MathProfile)

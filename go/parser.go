@@ -45,19 +45,23 @@ type diceNotationParser struct {
 	limits         DiceParserLimits
 }
 
+// recoverDiceParserPanic is deferred at the public parsing boundary. Syntax
+// failures become errors; unexpected panics retain their identity for the caller.
+func recoverDiceParserPanic(root **ExpressionNode, err *error) {
+	if r := recover(); r != nil {
+		if parseErr, ok := r.(*DiceRollError); ok {
+			*root, *err = nil, parseErr
+		} else {
+			panic(r)
+		}
+	}
+}
+
 // ParseDiceNotation parses one comment-free formula without an N# prefix. Its
 // optional limits match the TypeScript syntax API; ParseNotation applies the
 // bounded execution defaults appropriate for accepting untrusted input.
 func ParseDiceNotation(input string, limits ...DiceParserLimits) (root *ExpressionNode, err error) {
-	defer func() {
-		if r := recover(); r != nil {
-			if parseErr, ok := r.(*DiceRollError); ok {
-				root, err = nil, parseErr
-			} else {
-				panic(r)
-			}
-		}
-	}()
+	defer recoverDiceParserPanic(&root, &err)
 	parserLimits := DiceParserLimits{MaxDepth: 9007199254740991, MaxNodes: 9007199254740991}
 	if len(limits) > 0 {
 		parserLimits = limits[0]

@@ -63,12 +63,16 @@ jobs:
         env:
           CGO_ENABLED: '1'
         run: |
-          go test -race -coverprofile="$RUNNER_TEMP/go-coverage.out" ./...
+          go test -race -coverpkg=./... -coverprofile="$RUNNER_TEMP/go-coverage.out" ./...
           go tool cover -func="$RUNNER_TEMP/go-coverage.out"
       - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4
         with:
           node-version: '24.18.0'
           cache: npm
+      - name: Test the exact statement coverage gate
+        run: node --test scripts/check-go-coverage.test.mjs
+      - name: Require every Go statement to be covered
+        run: node scripts/check-go-coverage.mjs "$RUNNER_TEMP/go-coverage.out"
       - name: Install TypeScript oracle dependencies
         run: npm ci --ignore-scripts
       - name: Build the TypeScript oracle once

@@ -99,9 +99,6 @@ func canonicalSeedUnits(seed any, limits []int64) (string, []uint16, SeedOrigin,
 		canonical = "number:" + seedNumberString(number)
 		return canonical, utf16.Encode([]rune(canonical)), SeedProvidedNumber, nil
 	}
-	if int64(len(units)) > limit {
-		return "", nil, "", newDiceError("INVALID_SEED", "Text seed exceeds the maximum length", "", map[string]any{"seedLength": len(units), "maxSeedLength": limit})
-	}
 	all := make([]uint16, 0, 7+len(units))
 	all = append(all, 's', 't', 'r', 'i', 'n', 'g', ':')
 	all = append(all, units...)
