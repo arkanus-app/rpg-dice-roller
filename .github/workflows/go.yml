@@ -1,0 +1,77 @@
+name: Go migration
+
+on:
+  push:
+    branches: [Go-Version, main, develop]
+    paths:
+      - 'go/**'
+      - 'src/**'
+      - 'scripts/**'
+      - 'tests/**'
+      - 'package.json'
+      - 'package-lock.json'
+      - 'tsconfig*.json'
+      - 'declaration.tsconfig.json'
+      - '*.config.*'
+      - '.github/workflows/go.yml'
+  pull_request:
+    paths:
+      - 'go/**'
+      - 'src/**'
+      - 'scripts/**'
+      - 'tests/**'
+      - 'package.json'
+      - 'package-lock.json'
+      - 'tsconfig*.json'
+      - 'declaration.tsconfig.json'
+      - '*.config.*'
+      - '.github/workflows/go.yml'
+
+permissions:
+  contents: read
+
+concurrency:
+  group: dicecore-${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  conformance:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+      - uses: actions/setup-go@924ae3a1cded613372ab5595356fb5720e22ba16 # v6
+        with:
+          go-version: '1.26.2'
+          cache: false # This module has no external dependencies or go.sum.
+      - name: Check Go formatting
+        working-directory: go
+        shell: bash
+        run: |
+          unformatted="$(gofmt -l .)"
+          if [ -n "$unformatted" ]; then
+            printf '%s\n' "$unformatted"
+            exit 1
+          fi
+      - name: Vet Go
+        working-directory: go
+        run: go vet ./...
+      # Local Windows validation runs with CGO_ENABLED=0. Race validation is
+      # performed here on Ubuntu with its C toolchain and CGO explicitly enabled.
+      - name: Test Go with race detection and coverage
+        working-directory: go
+        env:
+          CGO_ENABLED: '1'
+        run: |
+          go test -race -coverprofile="$RUNNER_TEMP/go-coverage.out" ./...
+          go tool cover -func="$RUNNER_TEMP/go-coverage.out"
+      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4
+        with:
+          node-version: '24.18.0'
+          cache: npm
+      - name: Install TypeScript oracle dependencies
+        run: npm ci --ignore-scripts
+      - name: Build the TypeScript oracle once
+        run: npm run build
+      - name: Verify deterministic TypeScript fixtures
+        run: node scripts/generate-go-fixtures.mjs --check

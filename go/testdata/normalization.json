@@ -1,0 +1,1234 @@
+{
+  "schemaVersion": 1,
+  "provenance": {
+    "package": "@erpg/dicecore",
+    "version": "3.7.1",
+    "commit": "1940044"
+  },
+  "cases": [
+    {
+      "name": "normalization-1",
+      "input": "d + 2d + f",
+      "outcome": {
+        "value": "d20+2d20+4dF"
+      },
+      "parsedOutcome": {
+        "value": {
+          "input": "d + 2d + f",
+          "comment": "",
+          "notation": "d20+2d20+4dF",
+          "normalizedNotation": "d20+2d20+4dF",
+          "rollCount": 1,
+          "isMultiRoll": false
+        }
+      }
+    },
+    {
+      "name": "normalization-2",
+      "input": "2d6+3",
+      "outcome": {
+        "value": "2d6+3"
+      },
+      "parsedOutcome": {
+        "value": {
+          "input": "2d6+3",
+          "comment": "",
+          "notation": "2d6+3",
+          "normalizedNotation": "2d6+3",
+          "rollCount": 1,
+          "isMultiRoll": false
+        }
+      }
+    },
+    {
+      "name": "normalization-3",
+      "input": "2#2d6+1",
+      "outcome": {
+        "value": "2#2d6+1"
+      },
+      "parsedOutcome": {
+        "value": {
+          "input": "2#2d6+1",
+          "comment": "",
+          "notation": "2d6+1",
+          "normalizedNotation": "2#2d6+1",
+          "rollCount": 2,
+          "isMultiRoll": true
+        }
+      }
+    },
+    {
+      "name": "normalization-4",
+      "input": "d%",
+      "outcome": {
+        "value": "d%"
+      },
+      "parsedOutcome": {
+        "value": {
+          "input": "d%",
+          "comment": "",
+          "notation": "d%",
+          "normalizedNotation": "d%",
+          "rollCount": 1,
+          "isMultiRoll": false
+        }
+      }
+    },
+    {
+      "name": "normalization-5",
+      "input": "2dF.1+2dF.2",
+      "outcome": {
+        "value": "2dF.1+2dF.2"
+      },
+      "parsedOutcome": {
+        "value": {
+          "input": "2dF.1+2dF.2",
+          "comment": "",
+          "notation": "2dF.1+2dF.2",
+          "normalizedNotation": "2dF.1+2dF.2",
+          "rollCount": 1,
+          "isMultiRoll": false
+        }
+      }
+    },
+    {
+      "name": "normalization-6",
+      "input": "4d6kh3",
+      "outcome": {
+        "value": "4d6kh3"
+      },
+      "parsedOutcome": {
+        "value": {
+          "input": "4d6kh3",
+          "comment": "",
+          "notation": "4d6kh3",
+          "normalizedNotation": "4d6kh3",
+          "rollCount": 1,
+          "isMultiRoll": false
+        }
+      }
+    },
+    {
+      "name": "normalization-7",
+      "input": "4d6dl1",
+      "outcome": {
+        "value": "4d6dl1"
+      },
+      "parsedOutcome": {
+        "value": {
+          "input": "4d6dl1",
+          "comment": "",
+          "notation": "4d6dl1",
+          "normalizedNotation": "4d6dl1",
+          "rollCount": 1,
+          "isMultiRoll": false
+        }
+      }
+    },
+    {
+      "name": "normalization-8",
+      "input": "3d6min3max5",
+      "outcome": {
+        "value": "3d6min3max5"
+      },
+      "parsedOutcome": {
+        "value": {
+          "input": "3d6min3max5",
+          "comment": "",
+          "notation": "3d6min3max5",
+          "normalizedNotation": "3d6min3max5",
+          "rollCount": 1,
+          "isMultiRoll": false
+        }
+      }
+    },
+    {
+      "name": "normalization-9",
+      "input": "2d6cs=6cf=1",
+      "outcome": {
+        "value": "2d6cs=6cf=1"
+      },
+      "parsedOutcome": {
+        "value": {
+          "input": "2d6cs=6cf=1",
+          "comment": "",
+          "notation": "2d6cs=6cf=1",
+          "normalizedNotation": "2d6cs=6cf=1",
+          "rollCount": 1,
+          "isMultiRoll": false
+        }
+      }
+    },
+    {
+      "name": "normalization-10",
+      "input": "4d6sa",
+      "outcome": {
+        "value": "4d6sa"
+      },
+      "parsedOutcome": {
+        "value": {
+          "input": "4d6sa",
+          "comment": "",
+          "notation": "4d6sa",
+          "normalizedNotation": "4d6sa",
+          "rollCount": 1,
+          "isMultiRoll": false
+        }
+      }
+    },
+    {
+      "name": "normalization-11",
+      "input": "5d10>=8f=1",
+      "outcome": {
+        "value": "5d10>=8f=1"
+      },
+      "parsedOutcome": {
+        "value": {
+          "input": "5d10>=8f=1",
+          "comment": "",
+          "notation": "5d10>=8f=1",
+          "normalizedNotation": "5d10>=8f=1",
+          "rollCount": 1,
+          "isMultiRoll": false
+        }
+      }
+    },
+    {
+      "name": "normalization-12",
+      "input": "{1d6,1d8}kh1",
+      "outcome": {
+        "value": "{1d6,1d8}kh1"
+      },
+      "parsedOutcome": {
+        "value": {
+          "input": "{1d6,1d8}kh1",
+          "comment": "",
+          "notation": "{1d6,1d8}kh1",
+          "normalizedNotation": "{1d6,1d8}kh1",
+          "rollCount": 1,
+          "isMultiRoll": false
+        }
+      }
+    },
+    {
+      "name": "normalization-13",
+      "input": "ceil(1d6/2)+pow(2,3)",
+      "outcome": {
+        "value": "ceil(1d6/2)+pow(2,3)"
+      },
+      "parsedOutcome": {
+        "value": {
+          "input": "ceil(1d6/2)+pow(2,3)",
+          "comment": "",
+          "notation": "ceil(1d6/2)+pow(2,3)",
+          "normalizedNotation": "ceil(1d6/2)+pow(2,3)",
+          "rollCount": 1,
+          "isMultiRoll": false
+        }
+      }
+    },
+    {
+      "name": "normalization-14",
+      "input": "(2d6+1)*2",
+      "outcome": {
+        "value": "(2d6+1)*2"
+      },
+      "parsedOutcome": {
+        "value": {
+          "input": "(2d6+1)*2",
+          "comment": "",
+          "notation": "(2d6+1)*2",
+          "normalizedNotation": "(2d6+1)*2",
+          "rollCount": 1,
+          "isMultiRoll": false
+        }
+      }
+    },
+    {
+      "name": "normalization-15",
+      "input": "1d6!=1",
+      "outcome": {
+        "value": "1d6!=1"
+      },
+      "parsedOutcome": {
+        "value": {
+          "input": "1d6!=1",
+          "comment": "",
+          "notation": "1d6!=1",
+          "normalizedNotation": "1d6!=1",
+          "rollCount": 1,
+          "isMultiRoll": false
+        }
+      }
+    },
+    {
+      "name": "normalization-16",
+      "input": "2d6r<3",
+      "outcome": {
+        "value": "2d6r<3"
+      },
+      "parsedOutcome": {
+        "value": {
+          "input": "2d6r<3",
+          "comment": "",
+          "notation": "2d6r<3",
+          "normalizedNotation": "2d6r<3",
+          "rollCount": 1,
+          "isMultiRoll": false
+        }
+      }
+    },
+    {
+      "name": "normalization-17",
+      "input": "4d6u",
+      "outcome": {
+        "value": "4d6u"
+      },
+      "parsedOutcome": {
+        "value": {
+          "input": "4d6u",
+          "comment": "",
+          "notation": "4d6u",
+          "normalizedNotation": "4d6u",
+          "rollCount": 1,
+          "isMultiRoll": false
+        }
+      }
+    },
+    {
+      "name": "normalization-18",
+      "input": "2d6ei6",
+      "outcome": {
+        "value": "2d6!>=6"
+      },
+      "parsedOutcome": {
+        "value": {
+          "input": "2d6ei6",
+          "comment": "",
+          "notation": "2d6!>=6",
+          "normalizedNotation": "2d6!>=6",
+          "rollCount": 1,
+          "isMultiRoll": false
+        }
+      }
+    },
+    {
+      "name": "normalization-19",
+      "input": "4d6km",
+      "outcome": {
+        "value": "4d6kl1"
+      },
+      "parsedOutcome": {
+        "value": {
+          "input": "4d6km",
+          "comment": "",
+          "notation": "4d6kl1",
+          "normalizedNotation": "4d6kl1",
+          "rollCount": 1,
+          "isMultiRoll": false
+        }
+      }
+    },
+    {
+      "name": "normalization-20",
+      "input": "3d6kh2+2",
+      "outcome": {
+        "value": "3d6kh2+2"
+      },
+      "parsedOutcome": {
+        "value": {
+          "input": "3d6kh2+2",
+          "comment": "",
+          "notation": "3d6kh2+2",
+          "normalizedNotation": "3d6kh2+2",
+          "rollCount": 1,
+          "isMultiRoll": false
+        }
+      }
+    },
+    {
+      "name": "normalization-21",
+      "input": "3d6dh1",
+      "outcome": {
+        "value": "3d6dh1"
+      },
+      "parsedOutcome": {
+        "value": {
+          "input": "3d6dh1",
+          "comment": "",
+          "notation": "3d6dh1",
+          "normalizedNotation": "3d6dh1",
+          "rollCount": 1,
+          "isMultiRoll": false
+        }
+      }
+    },
+    {
+      "name": "normalization-22",
+      "input": "6d10>=7f=1",
+      "outcome": {
+        "value": "6d10>=7f=1"
+      },
+      "parsedOutcome": {
+        "value": {
+          "input": "6d10>=7f=1",
+          "comment": "",
+          "notation": "6d10>=7f=1",
+          "normalizedNotation": "6d10>=7f=1",
+          "rollCount": 1,
+          "isMultiRoll": false
+        }
+      }
+    },
+    {
+      "name": "normalization-23",
+      "input": "abs(1d6-6)+floor(1d8/3)",
+      "outcome": {
+        "value": "abs(1d6-6)+floor(1d8/3)"
+      },
+      "parsedOutcome": {
+        "value": {
+          "input": "abs(1d6-6)+floor(1d8/3)",
+          "comment": "",
+          "notation": "abs(1d6-6)+floor(1d8/3)",
+          "normalizedNotation": "abs(1d6-6)+floor(1d8/3)",
+          "rollCount": 1,
+          "isMultiRoll": false
+        }
+      }
+    },
+    {
+      "name": "normalization-24",
+      "input": "{1d4+1,1d6+2}dl1",
+      "outcome": {
+        "value": "{1d4+1,1d6+2}dl1"
+      },
+      "parsedOutcome": {
+        "value": {
+          "input": "{1d4+1,1d6+2}dl1",
+          "comment": "",
+          "notation": "{1d4+1,1d6+2}dl1",
+          "normalizedNotation": "{1d4+1,1d6+2}dl1",
+          "rollCount": 1,
+          "isMultiRoll": false
+        }
+      }
+    },
+    {
+      "name": "normalization-25",
+      "input": "3#1d20+5",
+      "outcome": {
+        "value": "3#1d20+5"
+      },
+      "parsedOutcome": {
+        "value": {
+          "input": "3#1d20+5",
+          "comment": "",
+          "notation": "1d20+5",
+          "normalizedNotation": "3#1d20+5",
+          "rollCount": 3,
+          "isMultiRoll": true
+        }
+      }
+    },
+    {
+      "name": "normalization-26",
+      "input": "2d6ro<3",
+      "outcome": {
+        "value": "2d6ro<3"
+      },
+      "parsedOutcome": {
+        "value": {
+          "input": "2d6ro<3",
+          "comment": "",
+          "notation": "2d6ro<3",
+          "normalizedNotation": "2d6ro<3",
+          "rollCount": 1,
+          "isMultiRoll": false
+        }
+      }
+    },
+    {
+      "name": "normalization-27",
+      "input": "2d6!p=6",
+      "outcome": {
+        "value": "2d6!p=6"
+      },
+      "parsedOutcome": {
+        "value": {
+          "input": "2d6!p=6",
+          "comment": "",
+          "notation": "2d6!p=6",
+          "normalizedNotation": "2d6!p=6",
+          "rollCount": 1,
+          "isMultiRoll": false
+        }
+      }
+    },
+    {
+      "name": "normalization-28",
+      "input": "2d6!>=5",
+      "outcome": {
+        "value": "2d6!>=5"
+      },
+      "parsedOutcome": {
+        "value": {
+          "input": "2d6!>=5",
+          "comment": "",
+          "notation": "2d6!>=5",
+          "normalizedNotation": "2d6!>=5",
+          "rollCount": 1,
+          "isMultiRoll": false
+        }
+      }
+    },
+    {
+      "name": "normalization-29",
+      "input": "2d8sd",
+      "outcome": {
+        "value": "2d8sd"
+      },
+      "parsedOutcome": {
+        "value": {
+          "input": "2d8sd",
+          "comment": "",
+          "notation": "2d8sd",
+          "normalizedNotation": "2d8sd",
+          "rollCount": 1,
+          "isMultiRoll": false
+        }
+      }
+    },
+    {
+      "name": "normalization-30",
+      "input": "sqrt(1d100)",
+      "outcome": {
+        "value": "sqrt(1d100)"
+      },
+      "parsedOutcome": {
+        "value": {
+          "input": "sqrt(1d100)",
+          "comment": "",
+          "notation": "sqrt(1d100)",
+          "normalizedNotation": "sqrt(1d100)",
+          "rollCount": 1,
+          "isMultiRoll": false
+        }
+      }
+    },
+    {
+      "name": "normalization-31",
+      "input": "2d%kh1",
+      "outcome": {
+        "value": "2d%kh1"
+      },
+      "parsedOutcome": {
+        "value": {
+          "input": "2d%kh1",
+          "comment": "",
+          "notation": "2d%kh1",
+          "normalizedNotation": "2d%kh1",
+          "rollCount": 1,
+          "isMultiRoll": false
+        }
+      }
+    },
+    {
+      "name": "normalization-32",
+      "input": "",
+      "outcome": {
+        "value": ""
+      },
+      "parsedOutcome": {
+        "value": {
+          "input": "",
+          "comment": "",
+          "notation": "",
+          "normalizedNotation": "",
+          "rollCount": 1,
+          "isMultiRoll": false
+        }
+      }
+    },
+    {
+      "name": "normalization-33",
+      "input": " ",
+      "outcome": {
+        "value": ""
+      },
+      "parsedOutcome": {
+        "value": {
+          "input": " ",
+          "comment": "",
+          "notation": "",
+          "normalizedNotation": "",
+          "rollCount": 1,
+          "isMultiRoll": false
+        }
+      }
+    },
+    {
+      "name": "normalization-34",
+      "input": "d + 2d + f + 2f + df + 2d6ei6 + 4d6km",
+      "outcome": {
+        "value": "d20+2d20+4dF+2dF+dF+2d6!>=6+4d6kl1"
+      },
+      "parsedOutcome": {
+        "value": {
+          "input": "d + 2d + f + 2f + df + 2d6ei6 + 4d6km",
+          "comment": "",
+          "notation": "d20+2d20+4dF+2dF+dF+2d6!>=6+4d6kl1",
+          "normalizedNotation": "d20+2d20+4dF+2dF+dF+2d6!>=6+4d6kl1",
+          "rollCount": 1,
+          "isMultiRoll": false
+        }
+      }
+    },
+    {
+      "name": "normalization-35",
+      "input": "floor(1d6/2)+max(1d6,2)",
+      "outcome": {
+        "value": "floor(1d6/2)+max(1d6,2)"
+      },
+      "parsedOutcome": {
+        "value": {
+          "input": "floor(1d6/2)+max(1d6,2)",
+          "comment": "",
+          "notation": "floor(1d6/2)+max(1d6,2)",
+          "normalizedNotation": "floor(1d6/2)+max(1d6,2)",
+          "rollCount": 1,
+          "isMultiRoll": false
+        }
+      }
+    },
+    {
+      "name": "normalization-36",
+      "input": " 2 # 1d6 [ataque] // vantagem",
+      "outcome": {
+        "value": "2#1d6"
+      },
+      "parsedOutcome": {
+        "value": {
+          "input": " 2 # 1d6 [ataque] // vantagem",
+          "comment": "ataque vantagem",
+          "notation": "1d6",
+          "normalizedNotation": "2#1d6",
+          "rollCount": 2,
+          "isMultiRoll": true
+        }
+      }
+    },
+    {
+      "name": "normalization-37",
+      "input": "3-1#1d6",
+      "outcome": {
+        "value": "2#1d6"
+      },
+      "parsedOutcome": {
+        "value": {
+          "input": "3-1#1d6",
+          "comment": "",
+          "notation": "1d6",
+          "normalizedNotation": "2#1d6",
+          "rollCount": 2,
+          "isMultiRoll": true
+        }
+      }
+    },
+    {
+      "name": "normalization-38",
+      "input": "(3-1)#1d6",
+      "outcome": {
+        "value": "2#1d6"
+      },
+      "parsedOutcome": {
+        "value": {
+          "input": "(3-1)#1d6",
+          "comment": "",
+          "notation": "1d6",
+          "normalizedNotation": "2#1d6",
+          "rollCount": 2,
+          "isMultiRoll": true
+        }
+      }
+    },
+    {
+      "name": "normalization-39",
+      "input": "{3-1}#1d6",
+      "outcome": {
+        "value": "2#1d6"
+      },
+      "parsedOutcome": {
+        "value": {
+          "input": "{3-1}#1d6",
+          "comment": "",
+          "notation": "1d6",
+          "normalizedNotation": "2#1d6",
+          "rollCount": 2,
+          "isMultiRoll": true
+        }
+      }
+    },
+    {
+      "name": "normalization-40",
+      "input": "[3-1]#1d6",
+      "outcome": {
+        "value": "2#1d6"
+      },
+      "parsedOutcome": {
+        "value": {
+          "input": "[3-1]#1d6",
+          "comment": "",
+          "notation": "1d6",
+          "normalizedNotation": "2#1d6",
+          "rollCount": 2,
+          "isMultiRoll": true
+        }
+      }
+    },
+    {
+      "name": "normalization-41",
+      "input": "ceil(3/2)#1d6",
+      "outcome": {
+        "value": "2#1d6"
+      },
+      "parsedOutcome": {
+        "value": {
+          "input": "ceil(3/2)#1d6",
+          "comment": "",
+          "notation": "1d6",
+          "normalizedNotation": "2#1d6",
+          "rollCount": 2,
+          "isMultiRoll": true
+        }
+      }
+    },
+    {
+      "name": "normalization-42",
+      "input": "1d20 # iniciativa",
+      "outcome": {
+        "value": "1d20"
+      },
+      "parsedOutcome": {
+        "value": {
+          "input": "1d20 # iniciativa",
+          "comment": "iniciativa",
+          "notation": "1d20",
+          "normalizedNotation": "1d20",
+          "rollCount": 1,
+          "isMultiRoll": false
+        }
+      }
+    },
+    {
+      "name": "normalization-43",
+      "input": "[ataque] # iniciativa",
+      "outcome": {
+        "value": ""
+      },
+      "parsedOutcome": {
+        "value": {
+          "input": "[ataque] # iniciativa",
+          "comment": "ataque iniciativa",
+          "notation": "",
+          "normalizedNotation": "",
+          "rollCount": 1,
+          "isMultiRoll": false
+        }
+      }
+    },
+    {
+      "name": "normalization-44",
+      "input": "1d6/* a */+1 [b]\n// c\n+2# d",
+      "outcome": {
+        "value": "1d6+1+2"
+      },
+      "parsedOutcome": {
+        "value": {
+          "input": "1d6/* a */+1 [b]\n// c\n+2# d",
+          "comment": "a b c d",
+          "notation": "1d6+1+2",
+          "normalizedNotation": "1d6+1+2",
+          "rollCount": 1,
+          "isMultiRoll": false
+        }
+      }
+    },
+    {
+      "name": "normalization-45",
+      "input": "1d6 /* open",
+      "outcome": {
+        "value": "1d6"
+      },
+      "parsedOutcome": {
+        "value": {
+          "input": "1d6 /* open",
+          "comment": "open",
+          "notation": "1d6",
+          "normalizedNotation": "1d6",
+          "rollCount": 1,
+          "isMultiRoll": false
+        }
+      }
+    },
+    {
+      "name": "normalization-46",
+      "input": "1d6 [open",
+      "outcome": {
+        "value": "1d6"
+      },
+      "parsedOutcome": {
+        "value": {
+          "input": "1d6 [open",
+          "comment": "open",
+          "notation": "1d6",
+          "normalizedNotation": "1d6",
+          "rollCount": 1,
+          "isMultiRoll": false
+        }
+      }
+    },
+    {
+      "name": "normalization-47",
+      "input": "(2+1)d(3+3)",
+      "outcome": {
+        "value": "(2+1)d(3+3)"
+      },
+      "parsedOutcome": {
+        "value": {
+          "input": "(2+1)d(3+3)",
+          "comment": "",
+          "notation": "(2+1)d(3+3)",
+          "normalizedNotation": "(2+1)d(3+3)",
+          "rollCount": 1,
+          "isMultiRoll": false
+        }
+      }
+    },
+    {
+      "name": "normalization-48",
+      "input": "4d6kh3dl1",
+      "outcome": {
+        "value": "4d6kh3dl1"
+      },
+      "parsedOutcome": {
+        "value": {
+          "input": "4d6kh3dl1",
+          "comment": "",
+          "notation": "4d6kh3dl1",
+          "normalizedNotation": "4d6kh3dl1",
+          "rollCount": 1,
+          "isMultiRoll": false
+        }
+      }
+    },
+    {
+      "name": "normalization-49",
+      "input": "4d6kh3dis",
+      "outcome": {
+        "value": "4d6kh3dis"
+      },
+      "parsedOutcome": {
+        "value": {
+          "input": "4d6kh3dis",
+          "comment": "",
+          "notation": "4d6kh3dis",
+          "normalizedNotation": "4d6kh3dis",
+          "rollCount": 1,
+          "isMultiRoll": false
+        }
+      }
+    },
+    {
+      "name": "normalization-50",
+      "input": "2d20-pool(1)",
+      "outcome": {
+        "value": "2d20pool(-1)"
+      },
+      "parsedOutcome": {
+        "value": {
+          "input": "2d20-pool(1)",
+          "comment": "",
+          "notation": "2d20pool(-1)",
+          "normalizedNotation": "2d20pool(-1)",
+          "rollCount": 1,
+          "isMultiRoll": false
+        }
+      }
+    },
+    {
+      "name": "normalization-51",
+      "input": "2d20+pool(2)",
+      "outcome": {
+        "value": "2d20pool(+2)"
+      },
+      "parsedOutcome": {
+        "value": {
+          "input": "2d20+pool(2)",
+          "comment": "",
+          "notation": "2d20pool(+2)",
+          "normalizedNotation": "2d20pool(+2)",
+          "rollCount": 1,
+          "isMultiRoll": false
+        }
+      }
+    },
+    {
+      "name": "normalization-52",
+      "input": "2d20-pull(3)",
+      "outcome": {
+        "value": "2d20pool(-3)"
+      },
+      "parsedOutcome": {
+        "value": {
+          "input": "2d20-pull(3)",
+          "comment": "",
+          "notation": "2d20pool(-3)",
+          "normalizedNotation": "2d20pool(-3)",
+          "rollCount": 1,
+          "isMultiRoll": false
+        }
+      }
+    },
+    {
+      "name": "normalization-53",
+      "input": "2d20+PULL(4)",
+      "outcome": {
+        "value": "2d20pool(+4)"
+      },
+      "parsedOutcome": {
+        "value": {
+          "input": "2d20+PULL(4)",
+          "comment": "",
+          "notation": "2d20pool(+4)",
+          "normalizedNotation": "2d20pool(+4)",
+          "rollCount": 1,
+          "isMultiRoll": false
+        }
+      }
+    },
+    {
+      "name": "normalization-54",
+      "input": "2d20pull(-1)",
+      "outcome": {
+        "value": "2d20pool(-1)"
+      },
+      "parsedOutcome": {
+        "value": {
+          "input": "2d20pull(-1)",
+          "comment": "",
+          "notation": "2d20pool(-1)",
+          "normalizedNotation": "2d20pool(-1)",
+          "rollCount": 1,
+          "isMultiRoll": false
+        }
+      }
+    },
+    {
+      "name": "normalization-55",
+      "input": "d20ADVpull(-1)",
+      "outcome": {
+        "value": "d20advpool(-1)"
+      },
+      "parsedOutcome": {
+        "value": {
+          "input": "d20ADVpull(-1)",
+          "comment": "",
+          "notation": "d20advpool(-1)",
+          "normalizedNotation": "d20advpool(-1)",
+          "rollCount": 1,
+          "isMultiRoll": false
+        }
+      }
+    },
+    {
+      "name": "normalization-56",
+      "input": "1d20+2-pool(1)",
+      "outcome": {
+        "value": "1d20+2pool(-1)"
+      },
+      "parsedOutcome": {
+        "value": {
+          "input": "1d20+2-pool(1)",
+          "comment": "",
+          "notation": "1d20+2pool(-1)",
+          "normalizedNotation": "1d20+2pool(-1)",
+          "rollCount": 1,
+          "isMultiRoll": false
+        }
+      }
+    },
+    {
+      "name": "normalization-57",
+      "input": "1d20+2-pull(1)adv",
+      "outcome": {
+        "value": "1d20+2pool(-1)adv"
+      },
+      "parsedOutcome": {
+        "value": {
+          "input": "1d20+2-pull(1)adv",
+          "comment": "",
+          "notation": "1d20+2pool(-1)adv",
+          "normalizedNotation": "1d20+2pool(-1)adv",
+          "rollCount": 1,
+          "isMultiRoll": false
+        }
+      }
+    },
+    {
+      "name": "normalization-58",
+      "input": "d20ADV",
+      "outcome": {
+        "value": "d20adv"
+      },
+      "parsedOutcome": {
+        "value": {
+          "input": "d20ADV",
+          "comment": "",
+          "notation": "d20adv",
+          "normalizedNotation": "d20adv",
+          "rollCount": 1,
+          "isMultiRoll": false
+        }
+      }
+    },
+    {
+      "name": "normalization-59",
+      "input": "d20DIS",
+      "outcome": {
+        "value": "d20dis"
+      },
+      "parsedOutcome": {
+        "value": {
+          "input": "d20DIS",
+          "comment": "",
+          "notation": "d20dis",
+          "normalizedNotation": "d20dis",
+          "rollCount": 1,
+          "isMultiRoll": false
+        }
+      }
+    },
+    {
+      "name": "normalization-60",
+      "input": "1d5-step(1)",
+      "outcome": {
+        "value": "1d5step(-1)"
+      },
+      "parsedOutcome": {
+        "value": {
+          "input": "1d5-step(1)",
+          "comment": "",
+          "notation": "1d5step(-1)",
+          "normalizedNotation": "1d5step(-1)",
+          "rollCount": 1,
+          "isMultiRoll": false
+        }
+      }
+    },
+    {
+      "name": "normalization-61",
+      "input": "1d5+step(2)",
+      "outcome": {
+        "value": "1d5step(+2)"
+      },
+      "parsedOutcome": {
+        "value": {
+          "input": "1d5+step(2)",
+          "comment": "",
+          "notation": "1d5step(+2)",
+          "normalizedNotation": "1d5step(+2)",
+          "rollCount": 1,
+          "isMultiRoll": false
+        }
+      }
+    },
+    {
+      "name": "normalization-62",
+      "input": "1d5-STEP(3)",
+      "outcome": {
+        "value": "1d5step(-3)"
+      },
+      "parsedOutcome": {
+        "value": {
+          "input": "1d5-STEP(3)",
+          "comment": "",
+          "notation": "1d5step(-3)",
+          "normalizedNotation": "1d5step(-3)",
+          "rollCount": 1,
+          "isMultiRoll": false
+        }
+      }
+    },
+    {
+      "name": "normalization-63",
+      "input": "1d5-STREP(1)",
+      "outcome": {
+        "value": "1d5step(-1)"
+      },
+      "parsedOutcome": {
+        "value": {
+          "input": "1d5-STREP(1)",
+          "comment": "",
+          "notation": "1d5step(-1)",
+          "normalizedNotation": "1d5step(-1)",
+          "rollCount": 1,
+          "isMultiRoll": false
+        }
+      }
+    },
+    {
+      "name": "normalization-64",
+      "input": "1d5strep(+2)",
+      "outcome": {
+        "value": "1d5step(+2)"
+      },
+      "parsedOutcome": {
+        "value": {
+          "input": "1d5strep(+2)",
+          "comment": "",
+          "notation": "1d5step(+2)",
+          "normalizedNotation": "1d5step(+2)",
+          "rollCount": 1,
+          "isMultiRoll": false
+        }
+      }
+    },
+    {
+      "name": "normalization-65",
+      "input": "1d5+2-step(1)",
+      "outcome": {
+        "value": "1d5+2step(-1)"
+      },
+      "parsedOutcome": {
+        "value": {
+          "input": "1d5+2-step(1)",
+          "comment": "",
+          "notation": "1d5+2step(-1)",
+          "normalizedNotation": "1d5+2step(-1)",
+          "rollCount": 1,
+          "isMultiRoll": false
+        }
+      }
+    },
+    {
+      "name": "normalization-66",
+      "input": "2 D 6 [ação 🎲] // descrição",
+      "outcome": {
+        "value": "2d6"
+      },
+      "parsedOutcome": {
+        "value": {
+          "input": "2 D 6 [ação 🎲] // descrição",
+          "comment": "ação 🎲 descrição",
+          "notation": "2d6",
+          "normalizedNotation": "2d6",
+          "rollCount": 1,
+          "isMultiRoll": false
+        }
+      }
+    },
+    {
+      "name": "normalization-67",
+      "input": "1d6 + 1",
+      "outcome": {
+        "value": "1d6+1"
+      },
+      "parsedOutcome": {
+        "value": {
+          "input": "1d6 + 1",
+          "comment": "",
+          "notation": "1d6+1",
+          "normalizedNotation": "1d6+1",
+          "rollCount": 1,
+          "isMultiRoll": false
+        }
+      }
+    },
+    {
+      "name": "normalization-68",
+      "input": "1d6 // a\r\n+2",
+      "outcome": {
+        "value": "1d6+2"
+      },
+      "parsedOutcome": {
+        "value": {
+          "input": "1d6 // a\r\n+2",
+          "comment": "a",
+          "notation": "1d6+2",
+          "normalizedNotation": "1d6+2",
+          "rollCount": 1,
+          "isMultiRoll": false
+        }
+      }
+    },
+    {
+      "name": "normalization-69",
+      "input": "0#1d6",
+      "outcome": {
+        "value": "0#1d6"
+      },
+      "parsedOutcome": {
+        "value": {
+          "input": "0#1d6",
+          "comment": "",
+          "notation": "1d6",
+          "normalizedNotation": "0#1d6",
+          "rollCount": 0,
+          "isMultiRoll": true
+        }
+      }
+    },
+    {
+      "name": "normalization-70",
+      "input": "1.5#1d6",
+      "outcome": {
+        "value": "1.5"
+      },
+      "parsedOutcome": {
+        "value": {
+          "input": "1.5#1d6",
+          "comment": "1d6",
+          "notation": "1.5",
+          "normalizedNotation": "1.5",
+          "rollCount": 1,
+          "isMultiRoll": false
+        }
+      }
+    },
+    {
+      "name": "normalization-71",
+      "input": "1/0#1d6",
+      "outcome": {
+        "value": "1/0"
+      },
+      "parsedOutcome": {
+        "value": {
+          "input": "1/0#1d6",
+          "comment": "1d6",
+          "notation": "1/0",
+          "normalizedNotation": "1/0",
+          "rollCount": 1,
+          "isMultiRoll": false
+        }
+      }
+    },
+    {
+      "name": "normalization-72",
+      "input": "2#3#d6",
+      "outcome": {
+        "value": "2#3"
+      },
+      "parsedOutcome": {
+        "value": {
+          "input": "2#3#d6",
+          "comment": "d6",
+          "notation": "3",
+          "normalizedNotation": "2#3",
+          "rollCount": 2,
+          "isMultiRoll": true
+        }
+      }
+    }
+  ]
+}

@@ -1,0 +1,1273 @@
+{
+  "schemaVersion": 1,
+  "provenance": {
+    "package": "@erpg/dicecore",
+    "version": "3.7.1",
+    "commit": "1940044"
+  },
+  "cases": [
+    {
+      "name": "consumeRolls",
+      "limits": {
+        "maxRolls": 2
+      },
+      "operations": [
+        {
+          "method": "consumeRolls",
+          "args": [],
+          "outcome": {
+            "value": null
+          }
+        },
+        {
+          "method": "consumeRolls",
+          "args": [
+            1
+          ],
+          "outcome": {
+            "value": null
+          }
+        },
+        {
+          "method": "consumeRolls",
+          "args": [],
+          "outcome": {
+            "error": {
+              "name": "DiceRollError",
+              "code": "TOO_MANY_ROLLS",
+              "message": "Roll count exceeds the execution limit",
+              "span": null,
+              "input": "",
+              "details": {
+                "consumed": 3,
+                "limitName": "maxRolls",
+                "limit": 2,
+                "actual": 3
+              }
+            }
+          }
+        },
+        {
+          "method": "consumeRolls",
+          "args": [
+            0
+          ],
+          "outcome": {
+            "value": null
+          }
+        },
+        {
+          "method": "consumeRolls",
+          "args": [
+            -1
+          ],
+          "outcome": {
+            "error": {
+              "name": "DiceRollError",
+              "code": "ROLL_EXECUTION_LIMIT",
+              "message": "Budget consumption must be a non-negative safe integer",
+              "span": null,
+              "input": "",
+              "details": {
+                "count": -1
+              }
+            }
+          }
+        },
+        {
+          "method": "consumeRolls",
+          "args": [
+            0.5
+          ],
+          "outcome": {
+            "error": {
+              "name": "DiceRollError",
+              "code": "ROLL_EXECUTION_LIMIT",
+              "message": "Budget consumption must be a non-negative safe integer",
+              "span": null,
+              "input": "",
+              "details": {
+                "count": 0.5
+              }
+            }
+          }
+        }
+      ],
+      "snapshot": {
+        "astNodes": 0,
+        "rolls": 2,
+        "initialDice": 0,
+        "generatedDice": 0,
+        "randomCalls": 0,
+        "modifierSteps": 0,
+        "events": 0,
+        "resolvedGroups": 0,
+        "resultItems": 0
+      },
+      "stats": {
+        "rolls": 2,
+        "initialDice": 0,
+        "generatedDice": 0,
+        "randomCalls": 0,
+        "modifierSteps": 0,
+        "events": 0,
+        "resolvedGroups": 0,
+        "resultItems": 0
+      }
+    },
+    {
+      "name": "consumeInitialDice",
+      "limits": {
+        "maxInitialDice": 2
+      },
+      "operations": [
+        {
+          "method": "consumeInitialDice",
+          "args": [],
+          "outcome": {
+            "value": null
+          }
+        },
+        {
+          "method": "consumeInitialDice",
+          "args": [
+            1
+          ],
+          "outcome": {
+            "value": null
+          }
+        },
+        {
+          "method": "consumeInitialDice",
+          "args": [],
+          "outcome": {
+            "error": {
+              "name": "DiceRollError",
+              "code": "TOO_MANY_INITIAL_DICE",
+              "message": "Initial dice count exceeds the execution limit",
+              "span": null,
+              "input": "",
+              "details": {
+                "consumed": 3,
+                "limitName": "maxInitialDice",
+                "limit": 2,
+                "actual": 3
+              }
+            }
+          }
+        },
+        {
+          "method": "consumeInitialDice",
+          "args": [
+            0
+          ],
+          "outcome": {
+            "value": null
+          }
+        },
+        {
+          "method": "consumeInitialDice",
+          "args": [
+            -1
+          ],
+          "outcome": {
+            "error": {
+              "name": "DiceRollError",
+              "code": "ROLL_EXECUTION_LIMIT",
+              "message": "Budget consumption must be a non-negative safe integer",
+              "span": null,
+              "input": "",
+              "details": {
+                "count": -1
+              }
+            }
+          }
+        },
+        {
+          "method": "consumeInitialDice",
+          "args": [
+            0.5
+          ],
+          "outcome": {
+            "error": {
+              "name": "DiceRollError",
+              "code": "ROLL_EXECUTION_LIMIT",
+              "message": "Budget consumption must be a non-negative safe integer",
+              "span": null,
+              "input": "",
+              "details": {
+                "count": 0.5
+              }
+            }
+          }
+        }
+      ],
+      "snapshot": {
+        "astNodes": 0,
+        "rolls": 0,
+        "initialDice": 2,
+        "generatedDice": 0,
+        "randomCalls": 0,
+        "modifierSteps": 0,
+        "events": 0,
+        "resolvedGroups": 0,
+        "resultItems": 0
+      },
+      "stats": {
+        "rolls": 0,
+        "initialDice": 2,
+        "generatedDice": 0,
+        "randomCalls": 0,
+        "modifierSteps": 0,
+        "events": 0,
+        "resolvedGroups": 0,
+        "resultItems": 0
+      }
+    },
+    {
+      "name": "consumeGeneratedDice",
+      "limits": {
+        "maxGeneratedDice": 2
+      },
+      "operations": [
+        {
+          "method": "consumeGeneratedDice",
+          "args": [],
+          "outcome": {
+            "value": null
+          }
+        },
+        {
+          "method": "consumeGeneratedDice",
+          "args": [
+            1
+          ],
+          "outcome": {
+            "value": null
+          }
+        },
+        {
+          "method": "consumeGeneratedDice",
+          "args": [],
+          "outcome": {
+            "error": {
+              "name": "DiceRollError",
+              "code": "GENERATED_DICE_LIMIT_EXCEEDED",
+              "message": "Generated dice count exceeds the execution limit",
+              "span": null,
+              "input": "",
+              "details": {
+                "consumed": 3,
+                "limitName": "maxGeneratedDice",
+                "limit": 2,
+                "actual": 3
+              }
+            }
+          }
+        },
+        {
+          "method": "consumeGeneratedDice",
+          "args": [
+            0
+          ],
+          "outcome": {
+            "value": null
+          }
+        },
+        {
+          "method": "consumeGeneratedDice",
+          "args": [
+            -1
+          ],
+          "outcome": {
+            "error": {
+              "name": "DiceRollError",
+              "code": "ROLL_EXECUTION_LIMIT",
+              "message": "Budget consumption must be a non-negative safe integer",
+              "span": null,
+              "input": "",
+              "details": {
+                "count": -1
+              }
+            }
+          }
+        },
+        {
+          "method": "consumeGeneratedDice",
+          "args": [
+            0.5
+          ],
+          "outcome": {
+            "error": {
+              "name": "DiceRollError",
+              "code": "ROLL_EXECUTION_LIMIT",
+              "message": "Budget consumption must be a non-negative safe integer",
+              "span": null,
+              "input": "",
+              "details": {
+                "count": 0.5
+              }
+            }
+          }
+        }
+      ],
+      "snapshot": {
+        "astNodes": 0,
+        "rolls": 0,
+        "initialDice": 0,
+        "generatedDice": 2,
+        "randomCalls": 0,
+        "modifierSteps": 0,
+        "events": 0,
+        "resolvedGroups": 0,
+        "resultItems": 0
+      },
+      "stats": {
+        "rolls": 0,
+        "initialDice": 0,
+        "generatedDice": 2,
+        "randomCalls": 0,
+        "modifierSteps": 0,
+        "events": 0,
+        "resolvedGroups": 0,
+        "resultItems": 0
+      }
+    },
+    {
+      "name": "consumeRandomCalls",
+      "limits": {
+        "maxRandomCalls": 2
+      },
+      "operations": [
+        {
+          "method": "consumeRandomCalls",
+          "args": [],
+          "outcome": {
+            "value": null
+          }
+        },
+        {
+          "method": "consumeRandomCalls",
+          "args": [
+            1
+          ],
+          "outcome": {
+            "value": null
+          }
+        },
+        {
+          "method": "consumeRandomCalls",
+          "args": [],
+          "outcome": {
+            "error": {
+              "name": "DiceRollError",
+              "code": "RANDOM_BUDGET_EXCEEDED",
+              "message": "Random call count exceeds the execution limit",
+              "span": null,
+              "input": "",
+              "details": {
+                "consumed": 3,
+                "limitName": "maxRandomCalls",
+                "limit": 2,
+                "actual": 3
+              }
+            }
+          }
+        },
+        {
+          "method": "consumeRandomCalls",
+          "args": [
+            0
+          ],
+          "outcome": {
+            "value": null
+          }
+        },
+        {
+          "method": "consumeRandomCalls",
+          "args": [
+            -1
+          ],
+          "outcome": {
+            "error": {
+              "name": "DiceRollError",
+              "code": "ROLL_EXECUTION_LIMIT",
+              "message": "Budget consumption must be a non-negative safe integer",
+              "span": null,
+              "input": "",
+              "details": {
+                "count": -1
+              }
+            }
+          }
+        },
+        {
+          "method": "consumeRandomCalls",
+          "args": [
+            0.5
+          ],
+          "outcome": {
+            "error": {
+              "name": "DiceRollError",
+              "code": "ROLL_EXECUTION_LIMIT",
+              "message": "Budget consumption must be a non-negative safe integer",
+              "span": null,
+              "input": "",
+              "details": {
+                "count": 0.5
+              }
+            }
+          }
+        }
+      ],
+      "snapshot": {
+        "astNodes": 0,
+        "rolls": 0,
+        "initialDice": 0,
+        "generatedDice": 0,
+        "randomCalls": 2,
+        "modifierSteps": 0,
+        "events": 0,
+        "resolvedGroups": 0,
+        "resultItems": 0
+      },
+      "stats": {
+        "rolls": 0,
+        "initialDice": 0,
+        "generatedDice": 0,
+        "randomCalls": 2,
+        "modifierSteps": 0,
+        "events": 0,
+        "resolvedGroups": 0,
+        "resultItems": 0
+      }
+    },
+    {
+      "name": "consumeEvents",
+      "limits": {
+        "maxEvents": 2
+      },
+      "operations": [
+        {
+          "method": "consumeEvents",
+          "args": [],
+          "outcome": {
+            "value": null
+          }
+        },
+        {
+          "method": "consumeEvents",
+          "args": [
+            1
+          ],
+          "outcome": {
+            "value": null
+          }
+        },
+        {
+          "method": "consumeEvents",
+          "args": [],
+          "outcome": {
+            "error": {
+              "name": "DiceRollError",
+              "code": "EVENT_LIMIT_EXCEEDED",
+              "message": "Event count exceeds the execution limit",
+              "span": null,
+              "input": "",
+              "details": {
+                "consumed": 3,
+                "limitName": "maxEvents",
+                "limit": 2,
+                "actual": 3
+              }
+            }
+          }
+        },
+        {
+          "method": "consumeEvents",
+          "args": [
+            0
+          ],
+          "outcome": {
+            "value": null
+          }
+        },
+        {
+          "method": "consumeEvents",
+          "args": [
+            -1
+          ],
+          "outcome": {
+            "error": {
+              "name": "DiceRollError",
+              "code": "ROLL_EXECUTION_LIMIT",
+              "message": "Budget consumption must be a non-negative safe integer",
+              "span": null,
+              "input": "",
+              "details": {
+                "count": -1
+              }
+            }
+          }
+        },
+        {
+          "method": "consumeEvents",
+          "args": [
+            0.5
+          ],
+          "outcome": {
+            "error": {
+              "name": "DiceRollError",
+              "code": "ROLL_EXECUTION_LIMIT",
+              "message": "Budget consumption must be a non-negative safe integer",
+              "span": null,
+              "input": "",
+              "details": {
+                "count": 0.5
+              }
+            }
+          }
+        }
+      ],
+      "snapshot": {
+        "astNodes": 0,
+        "rolls": 0,
+        "initialDice": 0,
+        "generatedDice": 0,
+        "randomCalls": 0,
+        "modifierSteps": 0,
+        "events": 2,
+        "resolvedGroups": 0,
+        "resultItems": 0
+      },
+      "stats": {
+        "rolls": 0,
+        "initialDice": 0,
+        "generatedDice": 0,
+        "randomCalls": 0,
+        "modifierSteps": 0,
+        "events": 2,
+        "resolvedGroups": 0,
+        "resultItems": 0
+      }
+    },
+    {
+      "name": "consumeModifierSteps",
+      "limits": {
+        "maxModifierSteps": 2
+      },
+      "operations": [
+        {
+          "method": "consumeModifierSteps",
+          "args": [],
+          "outcome": {
+            "value": null
+          }
+        },
+        {
+          "method": "consumeModifierSteps",
+          "args": [
+            1
+          ],
+          "outcome": {
+            "value": null
+          }
+        },
+        {
+          "method": "consumeModifierSteps",
+          "args": [],
+          "outcome": {
+            "error": {
+              "name": "DiceRollError",
+              "code": "MODIFIER_STEP_LIMIT_EXCEEDED",
+              "message": "Modifier step count exceeds the execution limit",
+              "span": null,
+              "input": "",
+              "details": {
+                "consumed": 3,
+                "limitName": "maxModifierSteps",
+                "limit": 2,
+                "actual": 3
+              }
+            }
+          }
+        },
+        {
+          "method": "consumeModifierSteps",
+          "args": [
+            0
+          ],
+          "outcome": {
+            "value": null
+          }
+        },
+        {
+          "method": "consumeModifierSteps",
+          "args": [
+            -1
+          ],
+          "outcome": {
+            "error": {
+              "name": "DiceRollError",
+              "code": "ROLL_EXECUTION_LIMIT",
+              "message": "Budget consumption must be a non-negative safe integer",
+              "span": null,
+              "input": "",
+              "details": {
+                "count": -1
+              }
+            }
+          }
+        },
+        {
+          "method": "consumeModifierSteps",
+          "args": [
+            0.5
+          ],
+          "outcome": {
+            "error": {
+              "name": "DiceRollError",
+              "code": "ROLL_EXECUTION_LIMIT",
+              "message": "Budget consumption must be a non-negative safe integer",
+              "span": null,
+              "input": "",
+              "details": {
+                "count": 0.5
+              }
+            }
+          }
+        }
+      ],
+      "snapshot": {
+        "astNodes": 0,
+        "rolls": 0,
+        "initialDice": 0,
+        "generatedDice": 0,
+        "randomCalls": 0,
+        "modifierSteps": 2,
+        "events": 0,
+        "resolvedGroups": 0,
+        "resultItems": 0
+      },
+      "stats": {
+        "rolls": 0,
+        "initialDice": 0,
+        "generatedDice": 0,
+        "randomCalls": 0,
+        "modifierSteps": 2,
+        "events": 0,
+        "resolvedGroups": 0,
+        "resultItems": 0
+      }
+    },
+    {
+      "name": "consumeResolvedGroups",
+      "limits": {
+        "maxResolvedGroups": 2
+      },
+      "operations": [
+        {
+          "method": "consumeResolvedGroups",
+          "args": [],
+          "outcome": {
+            "value": null
+          }
+        },
+        {
+          "method": "consumeResolvedGroups",
+          "args": [
+            1
+          ],
+          "outcome": {
+            "value": null
+          }
+        },
+        {
+          "method": "consumeResolvedGroups",
+          "args": [],
+          "outcome": {
+            "error": {
+              "name": "DiceRollError",
+              "code": "RESOLVED_GROUP_LIMIT_EXCEEDED",
+              "message": "Resolved group count exceeds the execution limit",
+              "span": null,
+              "input": "",
+              "details": {
+                "consumed": 3,
+                "limitName": "maxResolvedGroups",
+                "limit": 2,
+                "actual": 3
+              }
+            }
+          }
+        },
+        {
+          "method": "consumeResolvedGroups",
+          "args": [
+            0
+          ],
+          "outcome": {
+            "value": null
+          }
+        },
+        {
+          "method": "consumeResolvedGroups",
+          "args": [
+            -1
+          ],
+          "outcome": {
+            "error": {
+              "name": "DiceRollError",
+              "code": "ROLL_EXECUTION_LIMIT",
+              "message": "Budget consumption must be a non-negative safe integer",
+              "span": null,
+              "input": "",
+              "details": {
+                "count": -1
+              }
+            }
+          }
+        },
+        {
+          "method": "consumeResolvedGroups",
+          "args": [
+            0.5
+          ],
+          "outcome": {
+            "error": {
+              "name": "DiceRollError",
+              "code": "ROLL_EXECUTION_LIMIT",
+              "message": "Budget consumption must be a non-negative safe integer",
+              "span": null,
+              "input": "",
+              "details": {
+                "count": 0.5
+              }
+            }
+          }
+        }
+      ],
+      "snapshot": {
+        "astNodes": 0,
+        "rolls": 0,
+        "initialDice": 0,
+        "generatedDice": 0,
+        "randomCalls": 0,
+        "modifierSteps": 0,
+        "events": 0,
+        "resolvedGroups": 2,
+        "resultItems": 0
+      },
+      "stats": {
+        "rolls": 0,
+        "initialDice": 0,
+        "generatedDice": 0,
+        "randomCalls": 0,
+        "modifierSteps": 0,
+        "events": 0,
+        "resolvedGroups": 2,
+        "resultItems": 0
+      }
+    },
+    {
+      "name": "consumeResultItems",
+      "limits": {
+        "maxResultItems": 2
+      },
+      "operations": [
+        {
+          "method": "consumeResultItems",
+          "args": [],
+          "outcome": {
+            "value": null
+          }
+        },
+        {
+          "method": "consumeResultItems",
+          "args": [
+            1
+          ],
+          "outcome": {
+            "value": null
+          }
+        },
+        {
+          "method": "consumeResultItems",
+          "args": [],
+          "outcome": {
+            "error": {
+              "name": "DiceRollError",
+              "code": "RESULT_LIMIT_EXCEEDED",
+              "message": "Result item count exceeds the execution limit",
+              "span": null,
+              "input": "",
+              "details": {
+                "consumed": 3,
+                "limitName": "maxResultItems",
+                "limit": 2,
+                "actual": 3
+              }
+            }
+          }
+        },
+        {
+          "method": "consumeResultItems",
+          "args": [
+            0
+          ],
+          "outcome": {
+            "value": null
+          }
+        },
+        {
+          "method": "consumeResultItems",
+          "args": [
+            -1
+          ],
+          "outcome": {
+            "error": {
+              "name": "DiceRollError",
+              "code": "ROLL_EXECUTION_LIMIT",
+              "message": "Budget consumption must be a non-negative safe integer",
+              "span": null,
+              "input": "",
+              "details": {
+                "count": -1
+              }
+            }
+          }
+        },
+        {
+          "method": "consumeResultItems",
+          "args": [
+            0.5
+          ],
+          "outcome": {
+            "error": {
+              "name": "DiceRollError",
+              "code": "ROLL_EXECUTION_LIMIT",
+              "message": "Budget consumption must be a non-negative safe integer",
+              "span": null,
+              "input": "",
+              "details": {
+                "count": 0.5
+              }
+            }
+          }
+        }
+      ],
+      "snapshot": {
+        "astNodes": 0,
+        "rolls": 0,
+        "initialDice": 0,
+        "generatedDice": 0,
+        "randomCalls": 0,
+        "modifierSteps": 0,
+        "events": 0,
+        "resolvedGroups": 0,
+        "resultItems": 2
+      },
+      "stats": {
+        "rolls": 0,
+        "initialDice": 0,
+        "generatedDice": 0,
+        "randomCalls": 0,
+        "modifierSteps": 0,
+        "events": 0,
+        "resolvedGroups": 0,
+        "resultItems": 2
+      }
+    },
+    {
+      "name": "ast-nodes",
+      "limits": {
+        "maxAstDepth": 2,
+        "maxAstNodes": 2
+      },
+      "operations": [
+        {
+          "method": "consumeAstNode",
+          "args": [
+            1
+          ],
+          "outcome": {
+            "value": null
+          }
+        },
+        {
+          "method": "consumeAstNode",
+          "args": [
+            2
+          ],
+          "outcome": {
+            "value": null
+          }
+        },
+        {
+          "method": "consumeAstNode",
+          "args": [
+            2
+          ],
+          "outcome": {
+            "error": {
+              "name": "DiceRollError",
+              "code": "TOO_MANY_NODES",
+              "message": "AST exceeds the maximum node count",
+              "span": null,
+              "input": "",
+              "details": {
+                "consumed": 3,
+                "limitName": "maxAstNodes",
+                "limit": 2,
+                "actual": 3
+              }
+            }
+          }
+        },
+        {
+          "method": "consumeAstNode",
+          "args": [
+            3
+          ],
+          "outcome": {
+            "error": {
+              "name": "DiceRollError",
+              "code": "AST_TOO_DEEP",
+              "message": "AST exceeds the maximum depth",
+              "span": null,
+              "input": "",
+              "details": {
+                "depth": 3,
+                "limitName": "maxAstDepth",
+                "limit": 2,
+                "actual": 3
+              }
+            }
+          }
+        },
+        {
+          "method": "consumeAstNode",
+          "args": [
+            0
+          ],
+          "outcome": {
+            "error": {
+              "name": "DiceRollError",
+              "code": "ROLL_EXECUTION_LIMIT",
+              "message": "AST depth must be a positive safe integer",
+              "span": null,
+              "input": "",
+              "details": {
+                "depth": 0
+              }
+            }
+          }
+        },
+        {
+          "method": "consumeAstNode",
+          "args": [
+            1.5
+          ],
+          "outcome": {
+            "error": {
+              "name": "DiceRollError",
+              "code": "ROLL_EXECUTION_LIMIT",
+              "message": "AST depth must be a positive safe integer",
+              "span": null,
+              "input": "",
+              "details": {
+                "depth": 1.5
+              }
+            }
+          }
+        }
+      ],
+      "snapshot": {
+        "astNodes": 2,
+        "rolls": 0,
+        "initialDice": 0,
+        "generatedDice": 0,
+        "randomCalls": 0,
+        "modifierSteps": 0,
+        "events": 0,
+        "resolvedGroups": 0,
+        "resultItems": 0
+      },
+      "stats": {
+        "rolls": 0,
+        "initialDice": 0,
+        "generatedDice": 0,
+        "randomCalls": 0,
+        "modifierSteps": 0,
+        "events": 0,
+        "resolvedGroups": 0,
+        "resultItems": 0
+      }
+    },
+    {
+      "name": "input-length-utf16",
+      "limits": {
+        "maxInputLength": 2
+      },
+      "operations": [
+        {
+          "method": "assertInputLength",
+          "args": [
+            "🎲"
+          ],
+          "outcome": {
+            "value": null
+          }
+        },
+        {
+          "method": "assertInputLength",
+          "args": [
+            "🎲a"
+          ],
+          "outcome": {
+            "error": {
+              "name": "DiceRollError",
+              "code": "INPUT_TOO_LONG",
+              "message": "Dice input exceeds the maximum length",
+              "span": null,
+              "input": "🎲a",
+              "details": {
+                "inputLength": 3,
+                "limitName": "maxInputLength",
+                "limit": 2,
+                "actual": 3
+              }
+            }
+          }
+        },
+        {
+          "method": "assertInputLength",
+          "args": [
+            "abc"
+          ],
+          "outcome": {
+            "error": {
+              "name": "DiceRollError",
+              "code": "INPUT_TOO_LONG",
+              "message": "Dice input exceeds the maximum length",
+              "span": null,
+              "input": "abc",
+              "details": {
+                "inputLength": 3,
+                "limitName": "maxInputLength",
+                "limit": 2,
+                "actual": 3
+              }
+            }
+          }
+        }
+      ],
+      "snapshot": {
+        "astNodes": 0,
+        "rolls": 0,
+        "initialDice": 0,
+        "generatedDice": 0,
+        "randomCalls": 0,
+        "modifierSteps": 0,
+        "events": 0,
+        "resolvedGroups": 0,
+        "resultItems": 0
+      },
+      "stats": {
+        "rolls": 0,
+        "initialDice": 0,
+        "generatedDice": 0,
+        "randomCalls": 0,
+        "modifierSteps": 0,
+        "events": 0,
+        "resolvedGroups": 0,
+        "resultItems": 0
+      }
+    },
+    {
+      "name": "output-length",
+      "limits": {
+        "maxOutputLength": 2
+      },
+      "operations": [
+        {
+          "method": "assertOutputLength",
+          "args": [
+            2
+          ],
+          "outcome": {
+            "value": null
+          }
+        },
+        {
+          "method": "assertOutputLength",
+          "args": [
+            3
+          ],
+          "outcome": {
+            "error": {
+              "name": "DiceRollError",
+              "code": "OUTPUT_LIMIT_EXCEEDED",
+              "message": "Output exceeds the maximum length",
+              "span": null,
+              "input": "",
+              "details": {
+                "outputLength": 3,
+                "limitName": "maxOutputLength",
+                "limit": 2,
+                "actual": 3
+              }
+            }
+          }
+        },
+        {
+          "method": "assertOutputLength",
+          "args": [
+            -1
+          ],
+          "outcome": {
+            "error": {
+              "name": "DiceRollError",
+              "code": "ROLL_EXECUTION_LIMIT",
+              "message": "Budget consumption must be a non-negative safe integer",
+              "span": null,
+              "input": "",
+              "details": {
+                "count": -1
+              }
+            }
+          }
+        }
+      ],
+      "snapshot": {
+        "astNodes": 0,
+        "rolls": 0,
+        "initialDice": 0,
+        "generatedDice": 0,
+        "randomCalls": 0,
+        "modifierSteps": 0,
+        "events": 0,
+        "resolvedGroups": 0,
+        "resultItems": 0
+      },
+      "stats": {
+        "rolls": 0,
+        "initialDice": 0,
+        "generatedDice": 0,
+        "randomCalls": 0,
+        "modifierSteps": 0,
+        "events": 0,
+        "resolvedGroups": 0,
+        "resultItems": 0
+      }
+    },
+    {
+      "name": "combined",
+      "limits": {},
+      "operations": [
+        {
+          "method": "consumeAstNode",
+          "args": [
+            2
+          ],
+          "outcome": {
+            "value": null
+          }
+        },
+        {
+          "method": "consumeRolls",
+          "args": [
+            3
+          ],
+          "outcome": {
+            "value": null
+          }
+        },
+        {
+          "method": "consumeInitialDice",
+          "args": [
+            3
+          ],
+          "outcome": {
+            "value": null
+          }
+        },
+        {
+          "method": "consumeGeneratedDice",
+          "args": [
+            3
+          ],
+          "outcome": {
+            "value": null
+          }
+        },
+        {
+          "method": "consumeRandomCalls",
+          "args": [
+            3
+          ],
+          "outcome": {
+            "value": null
+          }
+        },
+        {
+          "method": "consumeEvents",
+          "args": [
+            3
+          ],
+          "outcome": {
+            "value": null
+          }
+        },
+        {
+          "method": "consumeModifierSteps",
+          "args": [
+            3
+          ],
+          "outcome": {
+            "value": null
+          }
+        },
+        {
+          "method": "consumeResolvedGroups",
+          "args": [
+            3
+          ],
+          "outcome": {
+            "value": null
+          }
+        },
+        {
+          "method": "consumeResultItems",
+          "args": [
+            3
+          ],
+          "outcome": {
+            "value": null
+          }
+        }
+      ],
+      "snapshot": {
+        "astNodes": 1,
+        "rolls": 3,
+        "initialDice": 3,
+        "generatedDice": 3,
+        "randomCalls": 3,
+        "modifierSteps": 3,
+        "events": 3,
+        "resolvedGroups": 3,
+        "resultItems": 3
+      },
+      "stats": {
+        "rolls": 3,
+        "initialDice": 3,
+        "generatedDice": 3,
+        "randomCalls": 3,
+        "modifierSteps": 3,
+        "events": 3,
+        "resolvedGroups": 3,
+        "resultItems": 3
+      }
+    }
+  ]
+}

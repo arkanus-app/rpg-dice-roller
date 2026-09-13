@@ -1,0 +1,1850 @@
+{
+  "schemaVersion": 1,
+  "provenance": {
+    "package": "@erpg/dicecore",
+    "version": "3.7.1",
+    "commit": "1940044"
+  },
+  "mathProfile": "decimal12-v1",
+  "cases": [
+    {
+      "name": "normalize-1",
+      "operation": "normalize",
+      "args": [
+        0
+      ],
+      "input": "fixture-expression",
+      "outcome": {
+        "value": 0
+      }
+    },
+    {
+      "name": "normalize-2",
+      "operation": "normalize",
+      "args": [
+        "-0"
+      ],
+      "input": "fixture-expression",
+      "outcome": {
+        "value": 0
+      }
+    },
+    {
+      "name": "normalize-3",
+      "operation": "normalize",
+      "args": [
+        1
+      ],
+      "input": "fixture-expression",
+      "outcome": {
+        "value": 1
+      }
+    },
+    {
+      "name": "normalize-4",
+      "operation": "normalize",
+      "args": [
+        -1
+      ],
+      "input": "fixture-expression",
+      "outcome": {
+        "value": -1
+      }
+    },
+    {
+      "name": "normalize-5",
+      "operation": "normalize",
+      "args": [
+        0.30000000000000004
+      ],
+      "input": "fixture-expression",
+      "outcome": {
+        "value": 0.3
+      }
+    },
+    {
+      "name": "normalize-6",
+      "operation": "normalize",
+      "args": [
+        0.3333333333333333
+      ],
+      "input": "fixture-expression",
+      "outcome": {
+        "value": 0.333333333333
+      }
+    },
+    {
+      "name": "normalize-7",
+      "operation": "normalize",
+      "args": [
+        1.23456789012345e+25
+      ],
+      "input": "fixture-expression",
+      "outcome": {
+        "value": 1.23456789012e+25
+      }
+    },
+    {
+      "name": "normalize-8",
+      "operation": "normalize",
+      "args": [
+        9007199254740991
+      ],
+      "input": "fixture-expression",
+      "outcome": {
+        "value": 9007199254740991
+      }
+    },
+    {
+      "name": "normalize-9",
+      "operation": "normalize",
+      "args": [
+        9007199254740992
+      ],
+      "input": "fixture-expression",
+      "outcome": {
+        "value": 9007199254740000
+      }
+    },
+    {
+      "name": "normalize-10",
+      "operation": "normalize",
+      "args": [
+        5e-324
+      ],
+      "input": "fixture-expression",
+      "outcome": {
+        "value": 5e-324
+      }
+    },
+    {
+      "name": "normalize-11",
+      "operation": "normalize",
+      "args": [
+        1e-300
+      ],
+      "input": "fixture-expression",
+      "outcome": {
+        "value": 1e-300
+      }
+    },
+    {
+      "name": "normalize-12",
+      "operation": "normalize",
+      "args": [
+        -1e-300
+      ],
+      "input": "fixture-expression",
+      "outcome": {
+        "value": -1e-300
+      }
+    },
+    {
+      "name": "normalize-13",
+      "operation": "normalize",
+      "args": [
+        999999999999.5
+      ],
+      "input": "fixture-expression",
+      "outcome": {
+        "value": 1000000000000
+      }
+    },
+    {
+      "name": "normalize-14",
+      "operation": "normalize",
+      "args": [
+        123456789012.5
+      ],
+      "input": "fixture-expression",
+      "outcome": {
+        "value": 123456789013
+      }
+    },
+    {
+      "name": "normalize-15",
+      "operation": "normalize",
+      "args": [
+        1.234567890125
+      ],
+      "input": "fixture-expression",
+      "outcome": {
+        "value": 1.23456789012
+      }
+    },
+    {
+      "name": "normalize-16",
+      "operation": "normalize",
+      "args": [
+        -1.234567890125
+      ],
+      "input": "fixture-expression",
+      "outcome": {
+        "value": -1.23456789012
+      }
+    },
+    {
+      "name": "normalize-17",
+      "operation": "normalize",
+      "args": [
+        "Infinity"
+      ],
+      "input": "fixture-expression",
+      "outcome": {
+        "error": {
+          "name": "DiceRollError",
+          "code": "NON_FINITE_RESULT",
+          "message": "Dice expression produced a non-finite result",
+          "span": null,
+          "input": "fixture-expression",
+          "details": {
+            "value": "Infinity"
+          }
+        }
+      }
+    },
+    {
+      "name": "normalize-18",
+      "operation": "normalize",
+      "args": [
+        "-Infinity"
+      ],
+      "input": "fixture-expression",
+      "outcome": {
+        "error": {
+          "name": "DiceRollError",
+          "code": "NON_FINITE_RESULT",
+          "message": "Dice expression produced a non-finite result",
+          "span": null,
+          "input": "fixture-expression",
+          "details": {
+            "value": "-Infinity"
+          }
+        }
+      }
+    },
+    {
+      "name": "normalize-19",
+      "operation": "normalize",
+      "args": [
+        "NaN"
+      ],
+      "input": "fixture-expression",
+      "outcome": {
+        "error": {
+          "name": "DiceRollError",
+          "code": "NON_FINITE_RESULT",
+          "message": "Dice expression produced a non-finite result",
+          "span": null,
+          "input": "fixture-expression",
+          "details": {
+            "value": "NaN"
+          }
+        }
+      }
+    },
+    {
+      "name": "binary-20",
+      "operation": "binary",
+      "args": [
+        "+",
+        7,
+        2
+      ],
+      "input": "fixture-expression",
+      "outcome": {
+        "value": 9
+      }
+    },
+    {
+      "name": "binary-21",
+      "operation": "binary",
+      "args": [
+        "+",
+        -7,
+        2
+      ],
+      "input": "fixture-expression",
+      "outcome": {
+        "value": -5
+      }
+    },
+    {
+      "name": "binary-22",
+      "operation": "binary",
+      "args": [
+        "+",
+        0.1,
+        0.2
+      ],
+      "input": "fixture-expression",
+      "outcome": {
+        "value": 0.3
+      }
+    },
+    {
+      "name": "binary-23",
+      "operation": "binary",
+      "args": [
+        "-",
+        7,
+        2
+      ],
+      "input": "fixture-expression",
+      "outcome": {
+        "value": 5
+      }
+    },
+    {
+      "name": "binary-24",
+      "operation": "binary",
+      "args": [
+        "-",
+        -7,
+        2
+      ],
+      "input": "fixture-expression",
+      "outcome": {
+        "value": -9
+      }
+    },
+    {
+      "name": "binary-25",
+      "operation": "binary",
+      "args": [
+        "-",
+        0.1,
+        0.2
+      ],
+      "input": "fixture-expression",
+      "outcome": {
+        "value": -0.1
+      }
+    },
+    {
+      "name": "binary-26",
+      "operation": "binary",
+      "args": [
+        "*",
+        7,
+        2
+      ],
+      "input": "fixture-expression",
+      "outcome": {
+        "value": 14
+      }
+    },
+    {
+      "name": "binary-27",
+      "operation": "binary",
+      "args": [
+        "*",
+        -7,
+        2
+      ],
+      "input": "fixture-expression",
+      "outcome": {
+        "value": -14
+      }
+    },
+    {
+      "name": "binary-28",
+      "operation": "binary",
+      "args": [
+        "*",
+        0.1,
+        0.2
+      ],
+      "input": "fixture-expression",
+      "outcome": {
+        "value": 0.02
+      }
+    },
+    {
+      "name": "binary-29",
+      "operation": "binary",
+      "args": [
+        "/",
+        7,
+        2
+      ],
+      "input": "fixture-expression",
+      "outcome": {
+        "value": 3.5
+      }
+    },
+    {
+      "name": "binary-30",
+      "operation": "binary",
+      "args": [
+        "/",
+        -7,
+        2
+      ],
+      "input": "fixture-expression",
+      "outcome": {
+        "value": -3.5
+      }
+    },
+    {
+      "name": "binary-31",
+      "operation": "binary",
+      "args": [
+        "/",
+        0.1,
+        0.2
+      ],
+      "input": "fixture-expression",
+      "outcome": {
+        "value": 0.5
+      }
+    },
+    {
+      "name": "binary-32",
+      "operation": "binary",
+      "args": [
+        "%",
+        7,
+        2
+      ],
+      "input": "fixture-expression",
+      "outcome": {
+        "value": 1
+      }
+    },
+    {
+      "name": "binary-33",
+      "operation": "binary",
+      "args": [
+        "%",
+        -7,
+        2
+      ],
+      "input": "fixture-expression",
+      "outcome": {
+        "value": -1
+      }
+    },
+    {
+      "name": "binary-34",
+      "operation": "binary",
+      "args": [
+        "%",
+        0.1,
+        0.2
+      ],
+      "input": "fixture-expression",
+      "outcome": {
+        "value": 0.1
+      }
+    },
+    {
+      "name": "binary-35",
+      "operation": "binary",
+      "args": [
+        "^",
+        7,
+        2
+      ],
+      "input": "fixture-expression",
+      "outcome": {
+        "value": 49
+      }
+    },
+    {
+      "name": "binary-36",
+      "operation": "binary",
+      "args": [
+        "^",
+        -7,
+        2
+      ],
+      "input": "fixture-expression",
+      "outcome": {
+        "value": 49
+      }
+    },
+    {
+      "name": "binary-37",
+      "operation": "binary",
+      "args": [
+        "^",
+        0.1,
+        0.2
+      ],
+      "input": "fixture-expression",
+      "outcome": {
+        "value": 0.63095734448
+      }
+    },
+    {
+      "name": "binary-38",
+      "operation": "binary",
+      "args": [
+        "/",
+        1,
+        0
+      ],
+      "input": "fixture-expression",
+      "outcome": {
+        "error": {
+          "name": "DiceRollError",
+          "code": "NON_FINITE_RESULT",
+          "message": "Dice expression produced a non-finite result",
+          "span": null,
+          "input": "fixture-expression",
+          "details": {
+            "value": "Infinity"
+          }
+        }
+      }
+    },
+    {
+      "name": "binary-39",
+      "operation": "binary",
+      "args": [
+        "/",
+        0,
+        0
+      ],
+      "input": "fixture-expression",
+      "outcome": {
+        "error": {
+          "name": "DiceRollError",
+          "code": "NON_FINITE_RESULT",
+          "message": "Dice expression produced a non-finite result",
+          "span": null,
+          "input": "fixture-expression",
+          "details": {
+            "value": "NaN"
+          }
+        }
+      }
+    },
+    {
+      "name": "binary-40",
+      "operation": "binary",
+      "args": [
+        "%",
+        1,
+        0
+      ],
+      "input": "fixture-expression",
+      "outcome": {
+        "error": {
+          "name": "DiceRollError",
+          "code": "NON_FINITE_RESULT",
+          "message": "Dice expression produced a non-finite result",
+          "span": null,
+          "input": "fixture-expression",
+          "details": {
+            "value": "NaN"
+          }
+        }
+      }
+    },
+    {
+      "name": "binary-41",
+      "operation": "binary",
+      "args": [
+        "^",
+        -1,
+        0.5
+      ],
+      "input": "fixture-expression",
+      "outcome": {
+        "error": {
+          "name": "DiceRollError",
+          "code": "NON_FINITE_RESULT",
+          "message": "Dice expression produced a non-finite result",
+          "span": null,
+          "input": "fixture-expression",
+          "details": {
+            "value": "NaN"
+          }
+        }
+      }
+    },
+    {
+      "name": "binary-42",
+      "operation": "binary",
+      "args": [
+        "^",
+        10,
+        400
+      ],
+      "input": "fixture-expression",
+      "outcome": {
+        "error": {
+          "name": "DiceRollError",
+          "code": "NON_FINITE_RESULT",
+          "message": "Dice expression produced a non-finite result",
+          "span": null,
+          "input": "fixture-expression",
+          "details": {
+            "value": "Infinity"
+          }
+        }
+      }
+    },
+    {
+      "name": "binary-43",
+      "operation": "binary",
+      "args": [
+        "/",
+        1,
+        3
+      ],
+      "input": "fixture-expression",
+      "outcome": {
+        "value": 0.333333333333
+      }
+    },
+    {
+      "name": "binary-44",
+      "operation": "binary",
+      "args": [
+        "*",
+        0,
+        -1
+      ],
+      "input": "fixture-expression",
+      "outcome": {
+        "value": 0
+      }
+    },
+    {
+      "name": "unaryFunction-45",
+      "operation": "unaryFunction",
+      "args": [
+        "abs",
+        -2
+      ],
+      "input": "fixture-expression",
+      "outcome": {
+        "value": 2
+      }
+    },
+    {
+      "name": "unaryFunction-46",
+      "operation": "unaryFunction",
+      "args": [
+        "abs",
+        "-0"
+      ],
+      "input": "fixture-expression",
+      "outcome": {
+        "value": 0
+      }
+    },
+    {
+      "name": "unaryFunction-47",
+      "operation": "unaryFunction",
+      "args": [
+        "ceil",
+        1.2
+      ],
+      "input": "fixture-expression",
+      "outcome": {
+        "value": 2
+      }
+    },
+    {
+      "name": "unaryFunction-48",
+      "operation": "unaryFunction",
+      "args": [
+        "ceil",
+        -1.2
+      ],
+      "input": "fixture-expression",
+      "outcome": {
+        "value": -1
+      }
+    },
+    {
+      "name": "unaryFunction-49",
+      "operation": "unaryFunction",
+      "args": [
+        "ceil",
+        -0.5
+      ],
+      "input": "fixture-expression",
+      "outcome": {
+        "value": 0
+      }
+    },
+    {
+      "name": "unaryFunction-50",
+      "operation": "unaryFunction",
+      "args": [
+        "cos",
+        0
+      ],
+      "input": "fixture-expression",
+      "outcome": {
+        "value": 1
+      }
+    },
+    {
+      "name": "unaryFunction-51",
+      "operation": "unaryFunction",
+      "args": [
+        "cos",
+        1
+      ],
+      "input": "fixture-expression",
+      "outcome": {
+        "value": 0.540302305868
+      }
+    },
+    {
+      "name": "unaryFunction-52",
+      "operation": "unaryFunction",
+      "args": [
+        "exp",
+        0
+      ],
+      "input": "fixture-expression",
+      "outcome": {
+        "value": 1
+      }
+    },
+    {
+      "name": "unaryFunction-53",
+      "operation": "unaryFunction",
+      "args": [
+        "exp",
+        1
+      ],
+      "input": "fixture-expression",
+      "outcome": {
+        "value": 2.71828182846
+      }
+    },
+    {
+      "name": "unaryFunction-54",
+      "operation": "unaryFunction",
+      "args": [
+        "exp",
+        1000
+      ],
+      "input": "fixture-expression",
+      "outcome": {
+        "error": {
+          "name": "DiceRollError",
+          "code": "NON_FINITE_RESULT",
+          "message": "Dice expression produced a non-finite result",
+          "span": null,
+          "input": "fixture-expression",
+          "details": {
+            "value": "Infinity"
+          }
+        }
+      }
+    },
+    {
+      "name": "unaryFunction-55",
+      "operation": "unaryFunction",
+      "args": [
+        "floor",
+        1.8
+      ],
+      "input": "fixture-expression",
+      "outcome": {
+        "value": 1
+      }
+    },
+    {
+      "name": "unaryFunction-56",
+      "operation": "unaryFunction",
+      "args": [
+        "floor",
+        -1.8
+      ],
+      "input": "fixture-expression",
+      "outcome": {
+        "value": -2
+      }
+    },
+    {
+      "name": "unaryFunction-57",
+      "operation": "unaryFunction",
+      "args": [
+        "log",
+        1
+      ],
+      "input": "fixture-expression",
+      "outcome": {
+        "value": 0
+      }
+    },
+    {
+      "name": "unaryFunction-58",
+      "operation": "unaryFunction",
+      "args": [
+        "log",
+        2
+      ],
+      "input": "fixture-expression",
+      "outcome": {
+        "value": 0.69314718056
+      }
+    },
+    {
+      "name": "unaryFunction-59",
+      "operation": "unaryFunction",
+      "args": [
+        "log",
+        0
+      ],
+      "input": "fixture-expression",
+      "outcome": {
+        "error": {
+          "name": "DiceRollError",
+          "code": "NON_FINITE_RESULT",
+          "message": "Dice expression produced a non-finite result",
+          "span": null,
+          "input": "fixture-expression",
+          "details": {
+            "value": "-Infinity"
+          }
+        }
+      }
+    },
+    {
+      "name": "unaryFunction-60",
+      "operation": "unaryFunction",
+      "args": [
+        "log",
+        -1
+      ],
+      "input": "fixture-expression",
+      "outcome": {
+        "error": {
+          "name": "DiceRollError",
+          "code": "NON_FINITE_RESULT",
+          "message": "Dice expression produced a non-finite result",
+          "span": null,
+          "input": "fixture-expression",
+          "details": {
+            "value": "NaN"
+          }
+        }
+      }
+    },
+    {
+      "name": "unaryFunction-61",
+      "operation": "unaryFunction",
+      "args": [
+        "log",
+        5e-324
+      ],
+      "input": "fixture-expression",
+      "outcome": {
+        "value": -744.440071921
+      }
+    },
+    {
+      "name": "unaryFunction-62",
+      "operation": "unaryFunction",
+      "args": [
+        "log",
+        1e-320
+      ],
+      "input": "fixture-expression",
+      "outcome": {
+        "value": -736.827240891
+      }
+    },
+    {
+      "name": "unaryFunction-63",
+      "operation": "unaryFunction",
+      "args": [
+        "log",
+        1e-310
+      ],
+      "input": "fixture-expression",
+      "outcome": {
+        "value": -713.801378828
+      }
+    },
+    {
+      "name": "unaryFunction-64",
+      "operation": "unaryFunction",
+      "args": [
+        "log",
+        1e-309
+      ],
+      "input": "fixture-expression",
+      "outcome": {
+        "value": -711.498793735
+      }
+    },
+    {
+      "name": "unaryFunction-65",
+      "operation": "unaryFunction",
+      "args": [
+        "log",
+        1e-308
+      ],
+      "input": "fixture-expression",
+      "outcome": {
+        "value": -709.196208642
+      }
+    },
+    {
+      "name": "unaryFunction-66",
+      "operation": "unaryFunction",
+      "args": [
+        "log",
+        1.2729519621896365e-308
+      ],
+      "input": "fixture-expression",
+      "outcome": {
+        "value": -708.954870059
+      }
+    },
+    {
+      "name": "unaryFunction-67",
+      "operation": "unaryFunction",
+      "args": [
+        "log",
+        2.225073858507201e-308
+      ],
+      "input": "fixture-expression",
+      "outcome": {
+        "value": -708.396418532
+      }
+    },
+    {
+      "name": "unaryFunction-68",
+      "operation": "unaryFunction",
+      "args": [
+        "log",
+        2.2250738585072014e-308
+      ],
+      "input": "fixture-expression",
+      "outcome": {
+        "value": -708.396418532
+      }
+    },
+    {
+      "name": "unaryFunction-69",
+      "operation": "unaryFunction",
+      "args": [
+        "round",
+        1.5
+      ],
+      "input": "fixture-expression",
+      "outcome": {
+        "value": 2
+      }
+    },
+    {
+      "name": "unaryFunction-70",
+      "operation": "unaryFunction",
+      "args": [
+        "round",
+        -1.5
+      ],
+      "input": "fixture-expression",
+      "outcome": {
+        "value": -1
+      }
+    },
+    {
+      "name": "unaryFunction-71",
+      "operation": "unaryFunction",
+      "args": [
+        "round",
+        -0.5
+      ],
+      "input": "fixture-expression",
+      "outcome": {
+        "value": 0
+      }
+    },
+    {
+      "name": "unaryFunction-72",
+      "operation": "unaryFunction",
+      "args": [
+        "round",
+        -0.1
+      ],
+      "input": "fixture-expression",
+      "outcome": {
+        "value": 0
+      }
+    },
+    {
+      "name": "unaryFunction-73",
+      "operation": "unaryFunction",
+      "args": [
+        "sign",
+        -4
+      ],
+      "input": "fixture-expression",
+      "outcome": {
+        "value": -1
+      }
+    },
+    {
+      "name": "unaryFunction-74",
+      "operation": "unaryFunction",
+      "args": [
+        "sign",
+        0
+      ],
+      "input": "fixture-expression",
+      "outcome": {
+        "value": 0
+      }
+    },
+    {
+      "name": "unaryFunction-75",
+      "operation": "unaryFunction",
+      "args": [
+        "sign",
+        4
+      ],
+      "input": "fixture-expression",
+      "outcome": {
+        "value": 1
+      }
+    },
+    {
+      "name": "unaryFunction-76",
+      "operation": "unaryFunction",
+      "args": [
+        "sign",
+        "-0"
+      ],
+      "input": "fixture-expression",
+      "outcome": {
+        "value": 0
+      }
+    },
+    {
+      "name": "unaryFunction-77",
+      "operation": "unaryFunction",
+      "args": [
+        "sin",
+        0
+      ],
+      "input": "fixture-expression",
+      "outcome": {
+        "value": 0
+      }
+    },
+    {
+      "name": "unaryFunction-78",
+      "operation": "unaryFunction",
+      "args": [
+        "sin",
+        1
+      ],
+      "input": "fixture-expression",
+      "outcome": {
+        "value": 0.841470984808
+      }
+    },
+    {
+      "name": "unaryFunction-79",
+      "operation": "unaryFunction",
+      "args": [
+        "sqrt",
+        9
+      ],
+      "input": "fixture-expression",
+      "outcome": {
+        "value": 3
+      }
+    },
+    {
+      "name": "unaryFunction-80",
+      "operation": "unaryFunction",
+      "args": [
+        "sqrt",
+        2
+      ],
+      "input": "fixture-expression",
+      "outcome": {
+        "value": 1.41421356237
+      }
+    },
+    {
+      "name": "unaryFunction-81",
+      "operation": "unaryFunction",
+      "args": [
+        "sqrt",
+        -1
+      ],
+      "input": "fixture-expression",
+      "outcome": {
+        "error": {
+          "name": "DiceRollError",
+          "code": "NON_FINITE_RESULT",
+          "message": "Dice expression produced a non-finite result",
+          "span": null,
+          "input": "fixture-expression",
+          "details": {
+            "value": "NaN"
+          }
+        }
+      }
+    },
+    {
+      "name": "unaryFunction-82",
+      "operation": "unaryFunction",
+      "args": [
+        "tan",
+        0
+      ],
+      "input": "fixture-expression",
+      "outcome": {
+        "value": 0
+      }
+    },
+    {
+      "name": "unaryFunction-83",
+      "operation": "unaryFunction",
+      "args": [
+        "tan",
+        1
+      ],
+      "input": "fixture-expression",
+      "outcome": {
+        "value": 1.55740772465
+      }
+    },
+    {
+      "name": "binaryFunction-84",
+      "operation": "binaryFunction",
+      "args": [
+        "max",
+        2,
+        8
+      ],
+      "input": "fixture-expression",
+      "outcome": {
+        "value": 8
+      }
+    },
+    {
+      "name": "binaryFunction-85",
+      "operation": "binaryFunction",
+      "args": [
+        "max",
+        -2,
+        3
+      ],
+      "input": "fixture-expression",
+      "outcome": {
+        "value": 3
+      }
+    },
+    {
+      "name": "binaryFunction-86",
+      "operation": "binaryFunction",
+      "args": [
+        "max",
+        "-0",
+        0
+      ],
+      "input": "fixture-expression",
+      "outcome": {
+        "value": 0
+      }
+    },
+    {
+      "name": "binaryFunction-87",
+      "operation": "binaryFunction",
+      "args": [
+        "min",
+        2,
+        8
+      ],
+      "input": "fixture-expression",
+      "outcome": {
+        "value": 2
+      }
+    },
+    {
+      "name": "binaryFunction-88",
+      "operation": "binaryFunction",
+      "args": [
+        "min",
+        -2,
+        3
+      ],
+      "input": "fixture-expression",
+      "outcome": {
+        "value": -2
+      }
+    },
+    {
+      "name": "binaryFunction-89",
+      "operation": "binaryFunction",
+      "args": [
+        "min",
+        "-0",
+        0
+      ],
+      "input": "fixture-expression",
+      "outcome": {
+        "value": 0
+      }
+    },
+    {
+      "name": "binaryFunction-90",
+      "operation": "binaryFunction",
+      "args": [
+        "pow",
+        2,
+        8
+      ],
+      "input": "fixture-expression",
+      "outcome": {
+        "value": 256
+      }
+    },
+    {
+      "name": "binaryFunction-91",
+      "operation": "binaryFunction",
+      "args": [
+        "pow",
+        -2,
+        3
+      ],
+      "input": "fixture-expression",
+      "outcome": {
+        "value": -8
+      }
+    },
+    {
+      "name": "binaryFunction-92",
+      "operation": "binaryFunction",
+      "args": [
+        "pow",
+        "-0",
+        0
+      ],
+      "input": "fixture-expression",
+      "outcome": {
+        "value": 1
+      }
+    },
+    {
+      "name": "binaryFunction-93",
+      "operation": "binaryFunction",
+      "args": [
+        "max",
+        "Infinity",
+        "NaN"
+      ],
+      "input": "fixture-expression",
+      "outcome": {
+        "error": {
+          "name": "DiceRollError",
+          "code": "NON_FINITE_RESULT",
+          "message": "Dice expression produced a non-finite result",
+          "span": null,
+          "input": "fixture-expression",
+          "details": {
+            "value": "NaN"
+          }
+        }
+      }
+    },
+    {
+      "name": "binaryFunction-94",
+      "operation": "binaryFunction",
+      "args": [
+        "max",
+        "NaN",
+        "Infinity"
+      ],
+      "input": "fixture-expression",
+      "outcome": {
+        "error": {
+          "name": "DiceRollError",
+          "code": "NON_FINITE_RESULT",
+          "message": "Dice expression produced a non-finite result",
+          "span": null,
+          "input": "fixture-expression",
+          "details": {
+            "value": "NaN"
+          }
+        }
+      }
+    },
+    {
+      "name": "binaryFunction-95",
+      "operation": "binaryFunction",
+      "args": [
+        "max",
+        "-Infinity",
+        "NaN"
+      ],
+      "input": "fixture-expression",
+      "outcome": {
+        "error": {
+          "name": "DiceRollError",
+          "code": "NON_FINITE_RESULT",
+          "message": "Dice expression produced a non-finite result",
+          "span": null,
+          "input": "fixture-expression",
+          "details": {
+            "value": "NaN"
+          }
+        }
+      }
+    },
+    {
+      "name": "binaryFunction-96",
+      "operation": "binaryFunction",
+      "args": [
+        "max",
+        "NaN",
+        "-Infinity"
+      ],
+      "input": "fixture-expression",
+      "outcome": {
+        "error": {
+          "name": "DiceRollError",
+          "code": "NON_FINITE_RESULT",
+          "message": "Dice expression produced a non-finite result",
+          "span": null,
+          "input": "fixture-expression",
+          "details": {
+            "value": "NaN"
+          }
+        }
+      }
+    },
+    {
+      "name": "binaryFunction-97",
+      "operation": "binaryFunction",
+      "args": [
+        "min",
+        "Infinity",
+        "NaN"
+      ],
+      "input": "fixture-expression",
+      "outcome": {
+        "error": {
+          "name": "DiceRollError",
+          "code": "NON_FINITE_RESULT",
+          "message": "Dice expression produced a non-finite result",
+          "span": null,
+          "input": "fixture-expression",
+          "details": {
+            "value": "NaN"
+          }
+        }
+      }
+    },
+    {
+      "name": "binaryFunction-98",
+      "operation": "binaryFunction",
+      "args": [
+        "min",
+        "NaN",
+        "Infinity"
+      ],
+      "input": "fixture-expression",
+      "outcome": {
+        "error": {
+          "name": "DiceRollError",
+          "code": "NON_FINITE_RESULT",
+          "message": "Dice expression produced a non-finite result",
+          "span": null,
+          "input": "fixture-expression",
+          "details": {
+            "value": "NaN"
+          }
+        }
+      }
+    },
+    {
+      "name": "binaryFunction-99",
+      "operation": "binaryFunction",
+      "args": [
+        "min",
+        "-Infinity",
+        "NaN"
+      ],
+      "input": "fixture-expression",
+      "outcome": {
+        "error": {
+          "name": "DiceRollError",
+          "code": "NON_FINITE_RESULT",
+          "message": "Dice expression produced a non-finite result",
+          "span": null,
+          "input": "fixture-expression",
+          "details": {
+            "value": "NaN"
+          }
+        }
+      }
+    },
+    {
+      "name": "binaryFunction-100",
+      "operation": "binaryFunction",
+      "args": [
+        "min",
+        "NaN",
+        "-Infinity"
+      ],
+      "input": "fixture-expression",
+      "outcome": {
+        "error": {
+          "name": "DiceRollError",
+          "code": "NON_FINITE_RESULT",
+          "message": "Dice expression produced a non-finite result",
+          "span": null,
+          "input": "fixture-expression",
+          "details": {
+            "value": "NaN"
+          }
+        }
+      }
+    },
+    {
+      "name": "compare-101",
+      "operation": "compare",
+      "args": [
+        "=",
+        2,
+        2
+      ],
+      "input": "",
+      "outcome": {
+        "value": true
+      }
+    },
+    {
+      "name": "compare-102",
+      "operation": "compare",
+      "args": [
+        "=",
+        2,
+        3
+      ],
+      "input": "",
+      "outcome": {
+        "value": false
+      }
+    },
+    {
+      "name": "compare-103",
+      "operation": "compare",
+      "args": [
+        "=",
+        3,
+        2
+      ],
+      "input": "",
+      "outcome": {
+        "value": false
+      }
+    },
+    {
+      "name": "compare-104",
+      "operation": "compare",
+      "args": [
+        "!=",
+        2,
+        2
+      ],
+      "input": "",
+      "outcome": {
+        "value": false
+      }
+    },
+    {
+      "name": "compare-105",
+      "operation": "compare",
+      "args": [
+        "!=",
+        2,
+        3
+      ],
+      "input": "",
+      "outcome": {
+        "value": true
+      }
+    },
+    {
+      "name": "compare-106",
+      "operation": "compare",
+      "args": [
+        "!=",
+        3,
+        2
+      ],
+      "input": "",
+      "outcome": {
+        "value": true
+      }
+    },
+    {
+      "name": "compare-107",
+      "operation": "compare",
+      "args": [
+        "<>",
+        2,
+        2
+      ],
+      "input": "",
+      "outcome": {
+        "value": false
+      }
+    },
+    {
+      "name": "compare-108",
+      "operation": "compare",
+      "args": [
+        "<>",
+        2,
+        3
+      ],
+      "input": "",
+      "outcome": {
+        "value": true
+      }
+    },
+    {
+      "name": "compare-109",
+      "operation": "compare",
+      "args": [
+        "<>",
+        3,
+        2
+      ],
+      "input": "",
+      "outcome": {
+        "value": true
+      }
+    },
+    {
+      "name": "compare-110",
+      "operation": "compare",
+      "args": [
+        "<",
+        2,
+        2
+      ],
+      "input": "",
+      "outcome": {
+        "value": false
+      }
+    },
+    {
+      "name": "compare-111",
+      "operation": "compare",
+      "args": [
+        "<",
+        2,
+        3
+      ],
+      "input": "",
+      "outcome": {
+        "value": true
+      }
+    },
+    {
+      "name": "compare-112",
+      "operation": "compare",
+      "args": [
+        "<",
+        3,
+        2
+      ],
+      "input": "",
+      "outcome": {
+        "value": false
+      }
+    },
+    {
+      "name": "compare-113",
+      "operation": "compare",
+      "args": [
+        ">",
+        2,
+        2
+      ],
+      "input": "",
+      "outcome": {
+        "value": false
+      }
+    },
+    {
+      "name": "compare-114",
+      "operation": "compare",
+      "args": [
+        ">",
+        2,
+        3
+      ],
+      "input": "",
+      "outcome": {
+        "value": false
+      }
+    },
+    {
+      "name": "compare-115",
+      "operation": "compare",
+      "args": [
+        ">",
+        3,
+        2
+      ],
+      "input": "",
+      "outcome": {
+        "value": true
+      }
+    },
+    {
+      "name": "compare-116",
+      "operation": "compare",
+      "args": [
+        "<=",
+        2,
+        2
+      ],
+      "input": "",
+      "outcome": {
+        "value": true
+      }
+    },
+    {
+      "name": "compare-117",
+      "operation": "compare",
+      "args": [
+        "<=",
+        2,
+        3
+      ],
+      "input": "",
+      "outcome": {
+        "value": true
+      }
+    },
+    {
+      "name": "compare-118",
+      "operation": "compare",
+      "args": [
+        "<=",
+        3,
+        2
+      ],
+      "input": "",
+      "outcome": {
+        "value": false
+      }
+    },
+    {
+      "name": "compare-119",
+      "operation": "compare",
+      "args": [
+        ">=",
+        2,
+        2
+      ],
+      "input": "",
+      "outcome": {
+        "value": true
+      }
+    },
+    {
+      "name": "compare-120",
+      "operation": "compare",
+      "args": [
+        ">=",
+        2,
+        3
+      ],
+      "input": "",
+      "outcome": {
+        "value": false
+      }
+    },
+    {
+      "name": "compare-121",
+      "operation": "compare",
+      "args": [
+        ">=",
+        3,
+        2
+      ],
+      "input": "",
+      "outcome": {
+        "value": true
+      }
+    },
+    {
+      "name": "round-122",
+      "operation": "round",
+      "args": [
+        0
+      ],
+      "input": "",
+      "outcome": {
+        "value": 0
+      }
+    },
+    {
+      "name": "round-123",
+      "operation": "round",
+      "args": [
+        "-0"
+      ],
+      "input": "",
+      "outcome": {
+        "value": 0
+      }
+    },
+    {
+      "name": "round-124",
+      "operation": "round",
+      "args": [
+        1.234
+      ],
+      "input": "",
+      "outcome": {
+        "value": 1.23
+      }
+    },
+    {
+      "name": "round-125",
+      "operation": "round",
+      "args": [
+        -0.001
+      ],
+      "input": "",
+      "outcome": {
+        "value": 0
+      }
+    },
+    {
+      "name": "round-126",
+      "operation": "round",
+      "args": [
+        1.005
+      ],
+      "input": "",
+      "outcome": {
+        "value": 1
+      }
+    },
+    {
+      "name": "round-127",
+      "operation": "round",
+      "args": [
+        2.675
+      ],
+      "input": "",
+      "outcome": {
+        "value": 2.67
+      }
+    },
+    {
+      "name": "round-128",
+      "operation": "round",
+      "args": [
+        -2.675
+      ],
+      "input": "",
+      "outcome": {
+        "value": -2.67
+      }
+    },
+    {
+      "name": "round-129",
+      "operation": "round",
+      "args": [
+        1.125
+      ],
+      "input": "",
+      "outcome": {
+        "value": 1.13
+      }
+    },
+    {
+      "name": "round-130",
+      "operation": "round",
+      "args": [
+        -1.125
+      ],
+      "input": "",
+      "outcome": {
+        "value": -1.13
+      }
+    },
+    {
+      "name": "round-131",
+      "operation": "round",
+      "args": [
+        0.005
+      ],
+      "input": "",
+      "outcome": {
+        "value": 0.01
+      }
+    },
+    {
+      "name": "round-132",
+      "operation": "round",
+      "args": [
+        -0.005
+      ],
+      "input": "",
+      "outcome": {
+        "value": -0.01
+      }
+    },
+    {
+      "name": "round-133",
+      "operation": "round",
+      "args": [
+        999999999999.99
+      ],
+      "input": "",
+      "outcome": {
+        "value": 1000000000000
+      }
+    },
+    {
+      "name": "round-134",
+      "operation": "round",
+      "args": [
+        1e+21
+      ],
+      "input": "",
+      "outcome": {
+        "value": 1e+21
+      }
+    },
+    {
+      "name": "round-135",
+      "operation": "round",
+      "args": [
+        "Infinity"
+      ],
+      "input": "",
+      "outcome": {
+        "error": {
+          "name": "DiceRollError",
+          "code": "NON_FINITE_RESULT",
+          "message": "Dice expression produced a non-finite result",
+          "span": null,
+          "input": "",
+          "details": {
+            "value": "Infinity"
+          }
+        }
+      }
+    }
+  ]
+}

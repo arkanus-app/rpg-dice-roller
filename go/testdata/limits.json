@@ -1,0 +1,424 @@
+{
+  "schemaVersion": 1,
+  "provenance": {
+    "package": "@erpg/dicecore",
+    "version": "3.7.1",
+    "commit": "1940044"
+  },
+  "cases": [
+    {
+      "name": "defaults",
+      "operation": "create",
+      "overrides": {},
+      "outcome": {
+        "value": {
+          "maxInputLength": 4096,
+          "maxAstDepth": 64,
+          "maxAstNodes": 10000,
+          "maxRolls": 100,
+          "maxInitialDice": 10000,
+          "maxGeneratedDice": 20000,
+          "maxRandomCalls": 100000,
+          "maxEvents": 100000,
+          "maxSides": 4294967296,
+          "maxSeedLength": 1024,
+          "maxModifierSteps": 100000,
+          "maxResolvedGroups": 100000,
+          "maxResultItems": 250000,
+          "maxOutputLength": 1000000
+        }
+      }
+    },
+    {
+      "name": "preset-browser",
+      "operation": "preset",
+      "preset": "browser",
+      "outcome": {
+        "value": {
+          "maxInputLength": 4096,
+          "maxAstDepth": 64,
+          "maxAstNodes": 10000,
+          "maxRolls": 100,
+          "maxInitialDice": 10000,
+          "maxGeneratedDice": 20000,
+          "maxRandomCalls": 100000,
+          "maxEvents": 100000,
+          "maxSides": 4294967296,
+          "maxSeedLength": 1024,
+          "maxModifierSteps": 100000,
+          "maxResolvedGroups": 100000,
+          "maxResultItems": 250000,
+          "maxOutputLength": 1000000
+        }
+      }
+    },
+    {
+      "name": "preset-trustedServer",
+      "operation": "preset",
+      "preset": "trustedServer",
+      "outcome": {
+        "value": {
+          "maxInputLength": 2048,
+          "maxAstDepth": 64,
+          "maxAstNodes": 5000,
+          "maxRolls": 100,
+          "maxInitialDice": 5000,
+          "maxGeneratedDice": 10000,
+          "maxRandomCalls": 50000,
+          "maxEvents": 50000,
+          "maxSides": 4294967296,
+          "maxSeedLength": 1024,
+          "maxModifierSteps": 50000,
+          "maxResolvedGroups": 50000,
+          "maxResultItems": 125000,
+          "maxOutputLength": 500000
+        }
+      }
+    },
+    {
+      "name": "preset-untrustedServer",
+      "operation": "preset",
+      "preset": "untrustedServer",
+      "outcome": {
+        "value": {
+          "maxInputLength": 1000,
+          "maxAstDepth": 32,
+          "maxAstNodes": 1000,
+          "maxRolls": 50,
+          "maxInitialDice": 500,
+          "maxGeneratedDice": 1000,
+          "maxRandomCalls": 5000,
+          "maxEvents": 10000,
+          "maxSides": 1000000,
+          "maxSeedLength": 256,
+          "maxModifierSteps": 5000,
+          "maxResolvedGroups": 10000,
+          "maxResultItems": 25000,
+          "maxOutputLength": 100000
+        }
+      }
+    },
+    {
+      "name": "lower-caps",
+      "operation": "create",
+      "overrides": {
+        "maxRolls": 2,
+        "maxSides": 6
+      },
+      "outcome": {
+        "value": {
+          "maxInputLength": 4096,
+          "maxAstDepth": 64,
+          "maxAstNodes": 10000,
+          "maxRolls": 2,
+          "maxInitialDice": 10000,
+          "maxGeneratedDice": 20000,
+          "maxRandomCalls": 100000,
+          "maxEvents": 100000,
+          "maxSides": 6,
+          "maxSeedLength": 1024,
+          "maxModifierSteps": 100000,
+          "maxResolvedGroups": 100000,
+          "maxResultItems": 250000,
+          "maxOutputLength": 1000000
+        }
+      }
+    },
+    {
+      "name": "raise-engine-caps",
+      "operation": "create",
+      "overrides": {
+        "maxRolls": 1000
+      },
+      "outcome": {
+        "value": {
+          "maxInputLength": 4096,
+          "maxAstDepth": 64,
+          "maxAstNodes": 10000,
+          "maxRolls": 1000,
+          "maxInitialDice": 10000,
+          "maxGeneratedDice": 20000,
+          "maxRandomCalls": 100000,
+          "maxEvents": 100000,
+          "maxSides": 4294967296,
+          "maxSeedLength": 1024,
+          "maxModifierSteps": 100000,
+          "maxResolvedGroups": 100000,
+          "maxResultItems": 250000,
+          "maxOutputLength": 1000000
+        }
+      }
+    },
+    {
+      "name": "zero",
+      "operation": "create",
+      "overrides": {
+        "maxRolls": 0
+      },
+      "outcome": {
+        "error": {
+          "name": "DiceRollError",
+          "code": "INVALID_LIMIT",
+          "message": "maxRolls must be a positive safe integer",
+          "span": null,
+          "input": "",
+          "details": {
+            "limit": "maxRolls",
+            "value": 0
+          }
+        }
+      }
+    },
+    {
+      "name": "negative",
+      "operation": "create",
+      "overrides": {
+        "maxEvents": -1
+      },
+      "outcome": {
+        "error": {
+          "name": "DiceRollError",
+          "code": "INVALID_LIMIT",
+          "message": "maxEvents must be a positive safe integer",
+          "span": null,
+          "input": "",
+          "details": {
+            "limit": "maxEvents",
+            "value": -1
+          }
+        }
+      }
+    },
+    {
+      "name": "fraction",
+      "operation": "create",
+      "overrides": {
+        "maxSides": 1.5
+      },
+      "outcome": {
+        "error": {
+          "name": "DiceRollError",
+          "code": "INVALID_LIMIT",
+          "message": "maxSides must be a positive safe integer",
+          "span": null,
+          "input": "",
+          "details": {
+            "limit": "maxSides",
+            "value": 1.5
+          }
+        }
+      }
+    },
+    {
+      "name": "unsafe-integer",
+      "operation": "create",
+      "overrides": {
+        "maxSeedLength": 9007199254740992
+      },
+      "outcome": {
+        "error": {
+          "name": "DiceRollError",
+          "code": "INVALID_LIMIT",
+          "message": "maxSeedLength must be a positive safe integer",
+          "span": null,
+          "input": "",
+          "details": {
+            "limit": "maxSeedLength",
+            "value": 9007199254740992
+          }
+        }
+      }
+    },
+    {
+      "name": "wrong-type",
+      "operation": "create",
+      "overrides": {
+        "maxRolls": "2"
+      },
+      "outcome": {
+        "error": {
+          "name": "DiceRollError",
+          "code": "INVALID_LIMIT",
+          "message": "maxRolls must be a number",
+          "span": null,
+          "input": "",
+          "details": {
+            "limit": "maxRolls",
+            "valueType": "string"
+          }
+        }
+      }
+    },
+    {
+      "name": "null",
+      "operation": "create",
+      "overrides": null,
+      "outcome": {
+        "error": {
+          "name": "DiceRollError",
+          "code": "INVALID_LIMIT",
+          "message": "Dice limit overrides must be a non-null object",
+          "span": null,
+          "input": "",
+          "details": {}
+        }
+      }
+    },
+    {
+      "name": "array",
+      "operation": "create",
+      "overrides": [],
+      "outcome": {
+        "error": {
+          "name": "DiceRollError",
+          "code": "INVALID_LIMIT",
+          "message": "Dice limit overrides must be a non-null object",
+          "span": null,
+          "input": "",
+          "details": {}
+        }
+      }
+    },
+    {
+      "name": "resolve-defaults",
+      "operation": "resolve",
+      "engineOverrides": {},
+      "overrides": {},
+      "outcome": {
+        "value": {
+          "maxInputLength": 4096,
+          "maxAstDepth": 64,
+          "maxAstNodes": 10000,
+          "maxRolls": 100,
+          "maxInitialDice": 10000,
+          "maxGeneratedDice": 20000,
+          "maxRandomCalls": 100000,
+          "maxEvents": 100000,
+          "maxSides": 4294967296,
+          "maxSeedLength": 1024,
+          "maxModifierSteps": 100000,
+          "maxResolvedGroups": 100000,
+          "maxResultItems": 250000,
+          "maxOutputLength": 1000000
+        }
+      }
+    },
+    {
+      "name": "resolve-lowered",
+      "operation": "resolve",
+      "engineOverrides": {
+        "maxRolls": 10
+      },
+      "overrides": {
+        "maxRolls": 5
+      },
+      "outcome": {
+        "value": {
+          "maxInputLength": 4096,
+          "maxAstDepth": 64,
+          "maxAstNodes": 10000,
+          "maxRolls": 5,
+          "maxInitialDice": 10000,
+          "maxGeneratedDice": 20000,
+          "maxRandomCalls": 100000,
+          "maxEvents": 100000,
+          "maxSides": 4294967296,
+          "maxSeedLength": 1024,
+          "maxModifierSteps": 100000,
+          "maxResolvedGroups": 100000,
+          "maxResultItems": 250000,
+          "maxOutputLength": 1000000
+        }
+      }
+    },
+    {
+      "name": "resolve-same",
+      "operation": "resolve",
+      "engineOverrides": {
+        "maxRolls": 10
+      },
+      "overrides": {
+        "maxRolls": 10
+      },
+      "outcome": {
+        "value": {
+          "maxInputLength": 4096,
+          "maxAstDepth": 64,
+          "maxAstNodes": 10000,
+          "maxRolls": 10,
+          "maxInitialDice": 10000,
+          "maxGeneratedDice": 20000,
+          "maxRandomCalls": 100000,
+          "maxEvents": 100000,
+          "maxSides": 4294967296,
+          "maxSeedLength": 1024,
+          "maxModifierSteps": 100000,
+          "maxResolvedGroups": 100000,
+          "maxResultItems": 250000,
+          "maxOutputLength": 1000000
+        }
+      }
+    },
+    {
+      "name": "resolve-raise",
+      "operation": "resolve",
+      "engineOverrides": {
+        "maxRolls": 10
+      },
+      "overrides": {
+        "maxRolls": 11
+      },
+      "outcome": {
+        "error": {
+          "name": "DiceRollError",
+          "code": "INVALID_LIMIT",
+          "message": "maxRolls cannot exceed the engine cap",
+          "span": null,
+          "input": "",
+          "details": {
+            "limit": "maxRolls",
+            "requested": 11,
+            "engineCap": 10
+          }
+        }
+      }
+    },
+    {
+      "name": "resolve-invalid",
+      "operation": "resolve",
+      "engineOverrides": {},
+      "overrides": {
+        "maxRolls": 0
+      },
+      "outcome": {
+        "error": {
+          "name": "DiceRollError",
+          "code": "INVALID_LIMIT",
+          "message": "maxRolls must be a positive safe integer",
+          "span": null,
+          "input": "",
+          "details": {
+            "limit": "maxRolls",
+            "value": 0
+          }
+        }
+      }
+    },
+    {
+      "name": "resolve-null",
+      "operation": "resolve",
+      "engineOverrides": {},
+      "overrides": null,
+      "outcome": {
+        "error": {
+          "name": "DiceRollError",
+          "code": "INVALID_LIMIT",
+          "message": "Dice limit overrides must be a non-null object",
+          "span": null,
+          "input": "",
+          "details": {}
+        }
+      }
+    }
+  ]
+}

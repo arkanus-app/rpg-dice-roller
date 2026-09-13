@@ -1,0 +1,7172 @@
+{
+  "schemaVersion": 1,
+  "provenance": {
+    "package": "@erpg/dicecore",
+    "version": "3.7.1",
+    "commit": "1940044"
+  },
+  "cases": [
+    {
+      "name": "parser-1",
+      "input": "d20+2d20+4dF",
+      "outcome": {
+        "value": {
+          "kind": "binary",
+          "id": "binary@0:12",
+          "span": {
+            "start": 0,
+            "end": 12
+          },
+          "operator": "+",
+          "left": {
+            "kind": "binary",
+            "id": "binary@0:8",
+            "span": {
+              "start": 0,
+              "end": 8
+            },
+            "operator": "+",
+            "left": {
+              "kind": "dice",
+              "diceKind": "standard",
+              "id": "dice@0:3",
+              "span": {
+                "start": 0,
+                "end": 3
+              },
+              "quantity": {
+                "kind": "number",
+                "id": "implicit-number@0:0",
+                "span": {
+                  "start": 0,
+                  "end": 0
+                },
+                "value": 1,
+                "raw": "1",
+                "implicit": true
+              },
+              "sides": {
+                "kind": "number",
+                "id": "number@1:3",
+                "span": {
+                  "start": 1,
+                  "end": 3
+                },
+                "value": 20,
+                "raw": "20",
+                "implicit": false
+              },
+              "modifiers": []
+            },
+            "right": {
+              "kind": "dice",
+              "diceKind": "standard",
+              "id": "dice@4:8",
+              "span": {
+                "start": 4,
+                "end": 8
+              },
+              "quantity": {
+                "kind": "number",
+                "id": "number@4:5",
+                "span": {
+                  "start": 4,
+                  "end": 5
+                },
+                "value": 2,
+                "raw": "2",
+                "implicit": false
+              },
+              "sides": {
+                "kind": "number",
+                "id": "number@6:8",
+                "span": {
+                  "start": 6,
+                  "end": 8
+                },
+                "value": 20,
+                "raw": "20",
+                "implicit": false
+              },
+              "modifiers": []
+            }
+          },
+          "right": {
+            "kind": "dice",
+            "diceKind": "fudge",
+            "id": "dice@9:12",
+            "span": {
+              "start": 9,
+              "end": 12
+            },
+            "quantity": {
+              "kind": "number",
+              "id": "number@9:10",
+              "span": {
+                "start": 9,
+                "end": 10
+              },
+              "value": 4,
+              "raw": "4",
+              "implicit": false
+            },
+            "variant": 2,
+            "modifiers": []
+          }
+        }
+      }
+    },
+    {
+      "name": "parser-2",
+      "input": "2d6+3",
+      "outcome": {
+        "value": {
+          "kind": "binary",
+          "id": "binary@0:5",
+          "span": {
+            "start": 0,
+            "end": 5
+          },
+          "operator": "+",
+          "left": {
+            "kind": "dice",
+            "diceKind": "standard",
+            "id": "dice@0:3",
+            "span": {
+              "start": 0,
+              "end": 3
+            },
+            "quantity": {
+              "kind": "number",
+              "id": "number@0:1",
+              "span": {
+                "start": 0,
+                "end": 1
+              },
+              "value": 2,
+              "raw": "2",
+              "implicit": false
+            },
+            "sides": {
+              "kind": "number",
+              "id": "number@2:3",
+              "span": {
+                "start": 2,
+                "end": 3
+              },
+              "value": 6,
+              "raw": "6",
+              "implicit": false
+            },
+            "modifiers": []
+          },
+          "right": {
+            "kind": "number",
+            "id": "number@4:5",
+            "span": {
+              "start": 4,
+              "end": 5
+            },
+            "value": 3,
+            "raw": "3",
+            "implicit": false
+          }
+        }
+      }
+    },
+    {
+      "name": "parser-3",
+      "input": "2d6+1",
+      "outcome": {
+        "value": {
+          "kind": "binary",
+          "id": "binary@0:5",
+          "span": {
+            "start": 0,
+            "end": 5
+          },
+          "operator": "+",
+          "left": {
+            "kind": "dice",
+            "diceKind": "standard",
+            "id": "dice@0:3",
+            "span": {
+              "start": 0,
+              "end": 3
+            },
+            "quantity": {
+              "kind": "number",
+              "id": "number@0:1",
+              "span": {
+                "start": 0,
+                "end": 1
+              },
+              "value": 2,
+              "raw": "2",
+              "implicit": false
+            },
+            "sides": {
+              "kind": "number",
+              "id": "number@2:3",
+              "span": {
+                "start": 2,
+                "end": 3
+              },
+              "value": 6,
+              "raw": "6",
+              "implicit": false
+            },
+            "modifiers": []
+          },
+          "right": {
+            "kind": "number",
+            "id": "number@4:5",
+            "span": {
+              "start": 4,
+              "end": 5
+            },
+            "value": 1,
+            "raw": "1",
+            "implicit": false
+          }
+        }
+      }
+    },
+    {
+      "name": "parser-4",
+      "input": "d%",
+      "outcome": {
+        "value": {
+          "kind": "dice",
+          "diceKind": "percentile",
+          "id": "dice@0:2",
+          "span": {
+            "start": 0,
+            "end": 2
+          },
+          "quantity": {
+            "kind": "number",
+            "id": "implicit-number@0:0",
+            "span": {
+              "start": 0,
+              "end": 0
+            },
+            "value": 1,
+            "raw": "1",
+            "implicit": true
+          },
+          "modifiers": []
+        }
+      }
+    },
+    {
+      "name": "parser-5",
+      "input": "2dF.1+2dF.2",
+      "outcome": {
+        "value": {
+          "kind": "binary",
+          "id": "binary@0:11",
+          "span": {
+            "start": 0,
+            "end": 11
+          },
+          "operator": "+",
+          "left": {
+            "kind": "dice",
+            "diceKind": "fudge",
+            "id": "dice@0:5",
+            "span": {
+              "start": 0,
+              "end": 5
+            },
+            "quantity": {
+              "kind": "number",
+              "id": "number@0:1",
+              "span": {
+                "start": 0,
+                "end": 1
+              },
+              "value": 2,
+              "raw": "2",
+              "implicit": false
+            },
+            "variant": 1,
+            "modifiers": []
+          },
+          "right": {
+            "kind": "dice",
+            "diceKind": "fudge",
+            "id": "dice@6:11",
+            "span": {
+              "start": 6,
+              "end": 11
+            },
+            "quantity": {
+              "kind": "number",
+              "id": "number@6:7",
+              "span": {
+                "start": 6,
+                "end": 7
+              },
+              "value": 2,
+              "raw": "2",
+              "implicit": false
+            },
+            "variant": 2,
+            "modifiers": []
+          }
+        }
+      }
+    },
+    {
+      "name": "parser-6",
+      "input": "4d6kh3",
+      "outcome": {
+        "value": {
+          "kind": "dice",
+          "diceKind": "standard",
+          "id": "dice@0:6",
+          "span": {
+            "start": 0,
+            "end": 6
+          },
+          "quantity": {
+            "kind": "number",
+            "id": "number@0:1",
+            "span": {
+              "start": 0,
+              "end": 1
+            },
+            "value": 4,
+            "raw": "4",
+            "implicit": false
+          },
+          "sides": {
+            "kind": "number",
+            "id": "number@2:3",
+            "span": {
+              "start": 2,
+              "end": 3
+            },
+            "value": 6,
+            "raw": "6",
+            "implicit": false
+          },
+          "modifiers": [
+            {
+              "kind": "keep",
+              "id": "keep@3:6",
+              "span": {
+                "start": 3,
+                "end": 6
+              },
+              "selection": "highest",
+              "quantity": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "name": "parser-7",
+      "input": "4d6dl1",
+      "outcome": {
+        "value": {
+          "kind": "dice",
+          "diceKind": "standard",
+          "id": "dice@0:6",
+          "span": {
+            "start": 0,
+            "end": 6
+          },
+          "quantity": {
+            "kind": "number",
+            "id": "number@0:1",
+            "span": {
+              "start": 0,
+              "end": 1
+            },
+            "value": 4,
+            "raw": "4",
+            "implicit": false
+          },
+          "sides": {
+            "kind": "number",
+            "id": "number@2:3",
+            "span": {
+              "start": 2,
+              "end": 3
+            },
+            "value": 6,
+            "raw": "6",
+            "implicit": false
+          },
+          "modifiers": [
+            {
+              "kind": "drop",
+              "id": "drop@3:6",
+              "span": {
+                "start": 3,
+                "end": 6
+              },
+              "selection": "lowest",
+              "quantity": 1
+            }
+          ]
+        }
+      }
+    },
+    {
+      "name": "parser-8",
+      "input": "3d6min3max5",
+      "outcome": {
+        "value": {
+          "kind": "dice",
+          "diceKind": "standard",
+          "id": "dice@0:11",
+          "span": {
+            "start": 0,
+            "end": 11
+          },
+          "quantity": {
+            "kind": "number",
+            "id": "number@0:1",
+            "span": {
+              "start": 0,
+              "end": 1
+            },
+            "value": 3,
+            "raw": "3",
+            "implicit": false
+          },
+          "sides": {
+            "kind": "number",
+            "id": "number@2:3",
+            "span": {
+              "start": 2,
+              "end": 3
+            },
+            "value": 6,
+            "raw": "6",
+            "implicit": false
+          },
+          "modifiers": [
+            {
+              "kind": "min",
+              "id": "min@3:7",
+              "span": {
+                "start": 3,
+                "end": 7
+              },
+              "value": 3
+            },
+            {
+              "kind": "max",
+              "id": "max@7:11",
+              "span": {
+                "start": 7,
+                "end": 11
+              },
+              "value": 5
+            }
+          ]
+        }
+      }
+    },
+    {
+      "name": "parser-9",
+      "input": "2d6cs=6cf=1",
+      "outcome": {
+        "value": {
+          "kind": "dice",
+          "diceKind": "standard",
+          "id": "dice@0:11",
+          "span": {
+            "start": 0,
+            "end": 11
+          },
+          "quantity": {
+            "kind": "number",
+            "id": "number@0:1",
+            "span": {
+              "start": 0,
+              "end": 1
+            },
+            "value": 2,
+            "raw": "2",
+            "implicit": false
+          },
+          "sides": {
+            "kind": "number",
+            "id": "number@2:3",
+            "span": {
+              "start": 2,
+              "end": 3
+            },
+            "value": 6,
+            "raw": "6",
+            "implicit": false
+          },
+          "modifiers": [
+            {
+              "kind": "critical-success",
+              "id": "critical-success@3:7",
+              "span": {
+                "start": 3,
+                "end": 7
+              },
+              "compare": {
+                "kind": "compare-point",
+                "id": "compare-point@5:7",
+                "span": {
+                  "start": 5,
+                  "end": 7
+                },
+                "operator": "=",
+                "value": 6
+              }
+            },
+            {
+              "kind": "critical-failure",
+              "id": "critical-failure@7:11",
+              "span": {
+                "start": 7,
+                "end": 11
+              },
+              "compare": {
+                "kind": "compare-point",
+                "id": "compare-point@9:11",
+                "span": {
+                  "start": 9,
+                  "end": 11
+                },
+                "operator": "=",
+                "value": 1
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "name": "parser-10",
+      "input": "4d6sa",
+      "outcome": {
+        "value": {
+          "kind": "dice",
+          "diceKind": "standard",
+          "id": "dice@0:5",
+          "span": {
+            "start": 0,
+            "end": 5
+          },
+          "quantity": {
+            "kind": "number",
+            "id": "number@0:1",
+            "span": {
+              "start": 0,
+              "end": 1
+            },
+            "value": 4,
+            "raw": "4",
+            "implicit": false
+          },
+          "sides": {
+            "kind": "number",
+            "id": "number@2:3",
+            "span": {
+              "start": 2,
+              "end": 3
+            },
+            "value": 6,
+            "raw": "6",
+            "implicit": false
+          },
+          "modifiers": [
+            {
+              "kind": "sort",
+              "id": "sort@3:5",
+              "span": {
+                "start": 3,
+                "end": 5
+              },
+              "direction": "ascending"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "name": "parser-11",
+      "input": "5d10>=8f=1",
+      "outcome": {
+        "value": {
+          "kind": "dice",
+          "diceKind": "standard",
+          "id": "dice@0:10",
+          "span": {
+            "start": 0,
+            "end": 10
+          },
+          "quantity": {
+            "kind": "number",
+            "id": "number@0:1",
+            "span": {
+              "start": 0,
+              "end": 1
+            },
+            "value": 5,
+            "raw": "5",
+            "implicit": false
+          },
+          "sides": {
+            "kind": "number",
+            "id": "number@2:4",
+            "span": {
+              "start": 2,
+              "end": 4
+            },
+            "value": 10,
+            "raw": "10",
+            "implicit": false
+          },
+          "modifiers": [
+            {
+              "kind": "target",
+              "id": "target@4:10",
+              "span": {
+                "start": 4,
+                "end": 10
+              },
+              "success": {
+                "kind": "compare-point",
+                "id": "compare-point@4:7",
+                "span": {
+                  "start": 4,
+                  "end": 7
+                },
+                "operator": ">=",
+                "value": 8
+              },
+              "failure": {
+                "kind": "compare-point",
+                "id": "compare-point@8:10",
+                "span": {
+                  "start": 8,
+                  "end": 10
+                },
+                "operator": "=",
+                "value": 1
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "name": "parser-12",
+      "input": "{1d6,1d8}kh1",
+      "outcome": {
+        "value": {
+          "kind": "group",
+          "id": "group@0:12",
+          "span": {
+            "start": 0,
+            "end": 12
+          },
+          "expressions": [
+            {
+              "kind": "dice",
+              "diceKind": "standard",
+              "id": "dice@1:4",
+              "span": {
+                "start": 1,
+                "end": 4
+              },
+              "quantity": {
+                "kind": "number",
+                "id": "number@1:2",
+                "span": {
+                  "start": 1,
+                  "end": 2
+                },
+                "value": 1,
+                "raw": "1",
+                "implicit": false
+              },
+              "sides": {
+                "kind": "number",
+                "id": "number@3:4",
+                "span": {
+                  "start": 3,
+                  "end": 4
+                },
+                "value": 6,
+                "raw": "6",
+                "implicit": false
+              },
+              "modifiers": []
+            },
+            {
+              "kind": "dice",
+              "diceKind": "standard",
+              "id": "dice@5:8",
+              "span": {
+                "start": 5,
+                "end": 8
+              },
+              "quantity": {
+                "kind": "number",
+                "id": "number@5:6",
+                "span": {
+                  "start": 5,
+                  "end": 6
+                },
+                "value": 1,
+                "raw": "1",
+                "implicit": false
+              },
+              "sides": {
+                "kind": "number",
+                "id": "number@7:8",
+                "span": {
+                  "start": 7,
+                  "end": 8
+                },
+                "value": 8,
+                "raw": "8",
+                "implicit": false
+              },
+              "modifiers": []
+            }
+          ],
+          "modifiers": [
+            {
+              "kind": "keep",
+              "id": "keep@9:12",
+              "span": {
+                "start": 9,
+                "end": 12
+              },
+              "selection": "highest",
+              "quantity": 1
+            }
+          ]
+        }
+      }
+    },
+    {
+      "name": "parser-13",
+      "input": "ceil(1d6/2)+pow(2,3)",
+      "outcome": {
+        "value": {
+          "kind": "binary",
+          "id": "binary@0:20",
+          "span": {
+            "start": 0,
+            "end": 20
+          },
+          "operator": "+",
+          "left": {
+            "kind": "function",
+            "functionKind": "unary",
+            "name": "ceil",
+            "arguments": [
+              {
+                "kind": "binary",
+                "id": "binary@5:10",
+                "span": {
+                  "start": 5,
+                  "end": 10
+                },
+                "operator": "/",
+                "left": {
+                  "kind": "dice",
+                  "diceKind": "standard",
+                  "id": "dice@5:8",
+                  "span": {
+                    "start": 5,
+                    "end": 8
+                  },
+                  "quantity": {
+                    "kind": "number",
+                    "id": "number@5:6",
+                    "span": {
+                      "start": 5,
+                      "end": 6
+                    },
+                    "value": 1,
+                    "raw": "1",
+                    "implicit": false
+                  },
+                  "sides": {
+                    "kind": "number",
+                    "id": "number@7:8",
+                    "span": {
+                      "start": 7,
+                      "end": 8
+                    },
+                    "value": 6,
+                    "raw": "6",
+                    "implicit": false
+                  },
+                  "modifiers": []
+                },
+                "right": {
+                  "kind": "number",
+                  "id": "number@9:10",
+                  "span": {
+                    "start": 9,
+                    "end": 10
+                  },
+                  "value": 2,
+                  "raw": "2",
+                  "implicit": false
+                }
+              }
+            ],
+            "id": "function@0:11",
+            "span": {
+              "start": 0,
+              "end": 11
+            }
+          },
+          "right": {
+            "kind": "function",
+            "functionKind": "binary",
+            "name": "pow",
+            "arguments": [
+              {
+                "kind": "number",
+                "id": "number@16:17",
+                "span": {
+                  "start": 16,
+                  "end": 17
+                },
+                "value": 2,
+                "raw": "2",
+                "implicit": false
+              },
+              {
+                "kind": "number",
+                "id": "number@18:19",
+                "span": {
+                  "start": 18,
+                  "end": 19
+                },
+                "value": 3,
+                "raw": "3",
+                "implicit": false
+              }
+            ],
+            "id": "function@12:20",
+            "span": {
+              "start": 12,
+              "end": 20
+            }
+          }
+        }
+      }
+    },
+    {
+      "name": "parser-14",
+      "input": "(2d6+1)*2",
+      "outcome": {
+        "value": {
+          "kind": "binary",
+          "id": "binary@0:9",
+          "span": {
+            "start": 0,
+            "end": 9
+          },
+          "operator": "*",
+          "left": {
+            "kind": "parenthesized",
+            "id": "parenthesized@0:7",
+            "span": {
+              "start": 0,
+              "end": 7
+            },
+            "expression": {
+              "kind": "binary",
+              "id": "binary@1:6",
+              "span": {
+                "start": 1,
+                "end": 6
+              },
+              "operator": "+",
+              "left": {
+                "kind": "dice",
+                "diceKind": "standard",
+                "id": "dice@1:4",
+                "span": {
+                  "start": 1,
+                  "end": 4
+                },
+                "quantity": {
+                  "kind": "number",
+                  "id": "number@1:2",
+                  "span": {
+                    "start": 1,
+                    "end": 2
+                  },
+                  "value": 2,
+                  "raw": "2",
+                  "implicit": false
+                },
+                "sides": {
+                  "kind": "number",
+                  "id": "number@3:4",
+                  "span": {
+                    "start": 3,
+                    "end": 4
+                  },
+                  "value": 6,
+                  "raw": "6",
+                  "implicit": false
+                },
+                "modifiers": []
+              },
+              "right": {
+                "kind": "number",
+                "id": "number@5:6",
+                "span": {
+                  "start": 5,
+                  "end": 6
+                },
+                "value": 1,
+                "raw": "1",
+                "implicit": false
+              }
+            }
+          },
+          "right": {
+            "kind": "number",
+            "id": "number@8:9",
+            "span": {
+              "start": 8,
+              "end": 9
+            },
+            "value": 2,
+            "raw": "2",
+            "implicit": false
+          }
+        }
+      }
+    },
+    {
+      "name": "parser-15",
+      "input": "1d6!=1",
+      "outcome": {
+        "value": {
+          "kind": "dice",
+          "diceKind": "standard",
+          "id": "dice@0:6",
+          "span": {
+            "start": 0,
+            "end": 6
+          },
+          "quantity": {
+            "kind": "number",
+            "id": "number@0:1",
+            "span": {
+              "start": 0,
+              "end": 1
+            },
+            "value": 1,
+            "raw": "1",
+            "implicit": false
+          },
+          "sides": {
+            "kind": "number",
+            "id": "number@2:3",
+            "span": {
+              "start": 2,
+              "end": 3
+            },
+            "value": 6,
+            "raw": "6",
+            "implicit": false
+          },
+          "modifiers": [
+            {
+              "kind": "explode",
+              "id": "explode@3:6",
+              "span": {
+                "start": 3,
+                "end": 6
+              },
+              "compound": false,
+              "penetrate": false,
+              "maxExplosions": null,
+              "compare": {
+                "kind": "compare-point",
+                "id": "compare-point@4:6",
+                "span": {
+                  "start": 4,
+                  "end": 6
+                },
+                "operator": "=",
+                "value": 1
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "name": "parser-16",
+      "input": "2d6r<3",
+      "outcome": {
+        "value": {
+          "kind": "dice",
+          "diceKind": "standard",
+          "id": "dice@0:6",
+          "span": {
+            "start": 0,
+            "end": 6
+          },
+          "quantity": {
+            "kind": "number",
+            "id": "number@0:1",
+            "span": {
+              "start": 0,
+              "end": 1
+            },
+            "value": 2,
+            "raw": "2",
+            "implicit": false
+          },
+          "sides": {
+            "kind": "number",
+            "id": "number@2:3",
+            "span": {
+              "start": 2,
+              "end": 3
+            },
+            "value": 6,
+            "raw": "6",
+            "implicit": false
+          },
+          "modifiers": [
+            {
+              "kind": "reroll",
+              "id": "reroll@3:6",
+              "span": {
+                "start": 3,
+                "end": 6
+              },
+              "once": false,
+              "compare": {
+                "kind": "compare-point",
+                "id": "compare-point@4:6",
+                "span": {
+                  "start": 4,
+                  "end": 6
+                },
+                "operator": "<",
+                "value": 3
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "name": "parser-17",
+      "input": "4d6u",
+      "outcome": {
+        "value": {
+          "kind": "dice",
+          "diceKind": "standard",
+          "id": "dice@0:4",
+          "span": {
+            "start": 0,
+            "end": 4
+          },
+          "quantity": {
+            "kind": "number",
+            "id": "number@0:1",
+            "span": {
+              "start": 0,
+              "end": 1
+            },
+            "value": 4,
+            "raw": "4",
+            "implicit": false
+          },
+          "sides": {
+            "kind": "number",
+            "id": "number@2:3",
+            "span": {
+              "start": 2,
+              "end": 3
+            },
+            "value": 6,
+            "raw": "6",
+            "implicit": false
+          },
+          "modifiers": [
+            {
+              "kind": "unique",
+              "id": "unique@3:4",
+              "span": {
+                "start": 3,
+                "end": 4
+              },
+              "once": false,
+              "compare": null
+            }
+          ]
+        }
+      }
+    },
+    {
+      "name": "parser-18",
+      "input": "2d6!>=6",
+      "outcome": {
+        "value": {
+          "kind": "dice",
+          "diceKind": "standard",
+          "id": "dice@0:7",
+          "span": {
+            "start": 0,
+            "end": 7
+          },
+          "quantity": {
+            "kind": "number",
+            "id": "number@0:1",
+            "span": {
+              "start": 0,
+              "end": 1
+            },
+            "value": 2,
+            "raw": "2",
+            "implicit": false
+          },
+          "sides": {
+            "kind": "number",
+            "id": "number@2:3",
+            "span": {
+              "start": 2,
+              "end": 3
+            },
+            "value": 6,
+            "raw": "6",
+            "implicit": false
+          },
+          "modifiers": [
+            {
+              "kind": "explode",
+              "id": "explode@3:7",
+              "span": {
+                "start": 3,
+                "end": 7
+              },
+              "compound": false,
+              "penetrate": false,
+              "maxExplosions": null,
+              "compare": {
+                "kind": "compare-point",
+                "id": "compare-point@4:7",
+                "span": {
+                  "start": 4,
+                  "end": 7
+                },
+                "operator": ">=",
+                "value": 6
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "name": "parser-19",
+      "input": "4d6kl1",
+      "outcome": {
+        "value": {
+          "kind": "dice",
+          "diceKind": "standard",
+          "id": "dice@0:6",
+          "span": {
+            "start": 0,
+            "end": 6
+          },
+          "quantity": {
+            "kind": "number",
+            "id": "number@0:1",
+            "span": {
+              "start": 0,
+              "end": 1
+            },
+            "value": 4,
+            "raw": "4",
+            "implicit": false
+          },
+          "sides": {
+            "kind": "number",
+            "id": "number@2:3",
+            "span": {
+              "start": 2,
+              "end": 3
+            },
+            "value": 6,
+            "raw": "6",
+            "implicit": false
+          },
+          "modifiers": [
+            {
+              "kind": "keep",
+              "id": "keep@3:6",
+              "span": {
+                "start": 3,
+                "end": 6
+              },
+              "selection": "lowest",
+              "quantity": 1
+            }
+          ]
+        }
+      }
+    },
+    {
+      "name": "parser-20",
+      "input": "3d6kh2+2",
+      "outcome": {
+        "value": {
+          "kind": "binary",
+          "id": "binary@0:8",
+          "span": {
+            "start": 0,
+            "end": 8
+          },
+          "operator": "+",
+          "left": {
+            "kind": "dice",
+            "diceKind": "standard",
+            "id": "dice@0:6",
+            "span": {
+              "start": 0,
+              "end": 6
+            },
+            "quantity": {
+              "kind": "number",
+              "id": "number@0:1",
+              "span": {
+                "start": 0,
+                "end": 1
+              },
+              "value": 3,
+              "raw": "3",
+              "implicit": false
+            },
+            "sides": {
+              "kind": "number",
+              "id": "number@2:3",
+              "span": {
+                "start": 2,
+                "end": 3
+              },
+              "value": 6,
+              "raw": "6",
+              "implicit": false
+            },
+            "modifiers": [
+              {
+                "kind": "keep",
+                "id": "keep@3:6",
+                "span": {
+                  "start": 3,
+                  "end": 6
+                },
+                "selection": "highest",
+                "quantity": 2
+              }
+            ]
+          },
+          "right": {
+            "kind": "number",
+            "id": "number@7:8",
+            "span": {
+              "start": 7,
+              "end": 8
+            },
+            "value": 2,
+            "raw": "2",
+            "implicit": false
+          }
+        }
+      }
+    },
+    {
+      "name": "parser-21",
+      "input": "3d6dh1",
+      "outcome": {
+        "value": {
+          "kind": "dice",
+          "diceKind": "standard",
+          "id": "dice@0:6",
+          "span": {
+            "start": 0,
+            "end": 6
+          },
+          "quantity": {
+            "kind": "number",
+            "id": "number@0:1",
+            "span": {
+              "start": 0,
+              "end": 1
+            },
+            "value": 3,
+            "raw": "3",
+            "implicit": false
+          },
+          "sides": {
+            "kind": "number",
+            "id": "number@2:3",
+            "span": {
+              "start": 2,
+              "end": 3
+            },
+            "value": 6,
+            "raw": "6",
+            "implicit": false
+          },
+          "modifiers": [
+            {
+              "kind": "drop",
+              "id": "drop@3:6",
+              "span": {
+                "start": 3,
+                "end": 6
+              },
+              "selection": "highest",
+              "quantity": 1
+            }
+          ]
+        }
+      }
+    },
+    {
+      "name": "parser-22",
+      "input": "6d10>=7f=1",
+      "outcome": {
+        "value": {
+          "kind": "dice",
+          "diceKind": "standard",
+          "id": "dice@0:10",
+          "span": {
+            "start": 0,
+            "end": 10
+          },
+          "quantity": {
+            "kind": "number",
+            "id": "number@0:1",
+            "span": {
+              "start": 0,
+              "end": 1
+            },
+            "value": 6,
+            "raw": "6",
+            "implicit": false
+          },
+          "sides": {
+            "kind": "number",
+            "id": "number@2:4",
+            "span": {
+              "start": 2,
+              "end": 4
+            },
+            "value": 10,
+            "raw": "10",
+            "implicit": false
+          },
+          "modifiers": [
+            {
+              "kind": "target",
+              "id": "target@4:10",
+              "span": {
+                "start": 4,
+                "end": 10
+              },
+              "success": {
+                "kind": "compare-point",
+                "id": "compare-point@4:7",
+                "span": {
+                  "start": 4,
+                  "end": 7
+                },
+                "operator": ">=",
+                "value": 7
+              },
+              "failure": {
+                "kind": "compare-point",
+                "id": "compare-point@8:10",
+                "span": {
+                  "start": 8,
+                  "end": 10
+                },
+                "operator": "=",
+                "value": 1
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "name": "parser-23",
+      "input": "abs(1d6-6)+floor(1d8/3)",
+      "outcome": {
+        "value": {
+          "kind": "binary",
+          "id": "binary@0:23",
+          "span": {
+            "start": 0,
+            "end": 23
+          },
+          "operator": "+",
+          "left": {
+            "kind": "function",
+            "functionKind": "unary",
+            "name": "abs",
+            "arguments": [
+              {
+                "kind": "binary",
+                "id": "binary@4:9",
+                "span": {
+                  "start": 4,
+                  "end": 9
+                },
+                "operator": "-",
+                "left": {
+                  "kind": "dice",
+                  "diceKind": "standard",
+                  "id": "dice@4:7",
+                  "span": {
+                    "start": 4,
+                    "end": 7
+                  },
+                  "quantity": {
+                    "kind": "number",
+                    "id": "number@4:5",
+                    "span": {
+                      "start": 4,
+                      "end": 5
+                    },
+                    "value": 1,
+                    "raw": "1",
+                    "implicit": false
+                  },
+                  "sides": {
+                    "kind": "number",
+                    "id": "number@6:7",
+                    "span": {
+                      "start": 6,
+                      "end": 7
+                    },
+                    "value": 6,
+                    "raw": "6",
+                    "implicit": false
+                  },
+                  "modifiers": []
+                },
+                "right": {
+                  "kind": "number",
+                  "id": "number@8:9",
+                  "span": {
+                    "start": 8,
+                    "end": 9
+                  },
+                  "value": 6,
+                  "raw": "6",
+                  "implicit": false
+                }
+              }
+            ],
+            "id": "function@0:10",
+            "span": {
+              "start": 0,
+              "end": 10
+            }
+          },
+          "right": {
+            "kind": "function",
+            "functionKind": "unary",
+            "name": "floor",
+            "arguments": [
+              {
+                "kind": "binary",
+                "id": "binary@17:22",
+                "span": {
+                  "start": 17,
+                  "end": 22
+                },
+                "operator": "/",
+                "left": {
+                  "kind": "dice",
+                  "diceKind": "standard",
+                  "id": "dice@17:20",
+                  "span": {
+                    "start": 17,
+                    "end": 20
+                  },
+                  "quantity": {
+                    "kind": "number",
+                    "id": "number@17:18",
+                    "span": {
+                      "start": 17,
+                      "end": 18
+                    },
+                    "value": 1,
+                    "raw": "1",
+                    "implicit": false
+                  },
+                  "sides": {
+                    "kind": "number",
+                    "id": "number@19:20",
+                    "span": {
+                      "start": 19,
+                      "end": 20
+                    },
+                    "value": 8,
+                    "raw": "8",
+                    "implicit": false
+                  },
+                  "modifiers": []
+                },
+                "right": {
+                  "kind": "number",
+                  "id": "number@21:22",
+                  "span": {
+                    "start": 21,
+                    "end": 22
+                  },
+                  "value": 3,
+                  "raw": "3",
+                  "implicit": false
+                }
+              }
+            ],
+            "id": "function@11:23",
+            "span": {
+              "start": 11,
+              "end": 23
+            }
+          }
+        }
+      }
+    },
+    {
+      "name": "parser-24",
+      "input": "{1d4+1,1d6+2}dl1",
+      "outcome": {
+        "value": {
+          "kind": "group",
+          "id": "group@0:16",
+          "span": {
+            "start": 0,
+            "end": 16
+          },
+          "expressions": [
+            {
+              "kind": "binary",
+              "id": "binary@1:6",
+              "span": {
+                "start": 1,
+                "end": 6
+              },
+              "operator": "+",
+              "left": {
+                "kind": "dice",
+                "diceKind": "standard",
+                "id": "dice@1:4",
+                "span": {
+                  "start": 1,
+                  "end": 4
+                },
+                "quantity": {
+                  "kind": "number",
+                  "id": "number@1:2",
+                  "span": {
+                    "start": 1,
+                    "end": 2
+                  },
+                  "value": 1,
+                  "raw": "1",
+                  "implicit": false
+                },
+                "sides": {
+                  "kind": "number",
+                  "id": "number@3:4",
+                  "span": {
+                    "start": 3,
+                    "end": 4
+                  },
+                  "value": 4,
+                  "raw": "4",
+                  "implicit": false
+                },
+                "modifiers": []
+              },
+              "right": {
+                "kind": "number",
+                "id": "number@5:6",
+                "span": {
+                  "start": 5,
+                  "end": 6
+                },
+                "value": 1,
+                "raw": "1",
+                "implicit": false
+              }
+            },
+            {
+              "kind": "binary",
+              "id": "binary@7:12",
+              "span": {
+                "start": 7,
+                "end": 12
+              },
+              "operator": "+",
+              "left": {
+                "kind": "dice",
+                "diceKind": "standard",
+                "id": "dice@7:10",
+                "span": {
+                  "start": 7,
+                  "end": 10
+                },
+                "quantity": {
+                  "kind": "number",
+                  "id": "number@7:8",
+                  "span": {
+                    "start": 7,
+                    "end": 8
+                  },
+                  "value": 1,
+                  "raw": "1",
+                  "implicit": false
+                },
+                "sides": {
+                  "kind": "number",
+                  "id": "number@9:10",
+                  "span": {
+                    "start": 9,
+                    "end": 10
+                  },
+                  "value": 6,
+                  "raw": "6",
+                  "implicit": false
+                },
+                "modifiers": []
+              },
+              "right": {
+                "kind": "number",
+                "id": "number@11:12",
+                "span": {
+                  "start": 11,
+                  "end": 12
+                },
+                "value": 2,
+                "raw": "2",
+                "implicit": false
+              }
+            }
+          ],
+          "modifiers": [
+            {
+              "kind": "drop",
+              "id": "drop@13:16",
+              "span": {
+                "start": 13,
+                "end": 16
+              },
+              "selection": "lowest",
+              "quantity": 1
+            }
+          ]
+        }
+      }
+    },
+    {
+      "name": "parser-25",
+      "input": "1d20+5",
+      "outcome": {
+        "value": {
+          "kind": "binary",
+          "id": "binary@0:6",
+          "span": {
+            "start": 0,
+            "end": 6
+          },
+          "operator": "+",
+          "left": {
+            "kind": "dice",
+            "diceKind": "standard",
+            "id": "dice@0:4",
+            "span": {
+              "start": 0,
+              "end": 4
+            },
+            "quantity": {
+              "kind": "number",
+              "id": "number@0:1",
+              "span": {
+                "start": 0,
+                "end": 1
+              },
+              "value": 1,
+              "raw": "1",
+              "implicit": false
+            },
+            "sides": {
+              "kind": "number",
+              "id": "number@2:4",
+              "span": {
+                "start": 2,
+                "end": 4
+              },
+              "value": 20,
+              "raw": "20",
+              "implicit": false
+            },
+            "modifiers": []
+          },
+          "right": {
+            "kind": "number",
+            "id": "number@5:6",
+            "span": {
+              "start": 5,
+              "end": 6
+            },
+            "value": 5,
+            "raw": "5",
+            "implicit": false
+          }
+        }
+      }
+    },
+    {
+      "name": "parser-26",
+      "input": "2d6ro<3",
+      "outcome": {
+        "value": {
+          "kind": "dice",
+          "diceKind": "standard",
+          "id": "dice@0:7",
+          "span": {
+            "start": 0,
+            "end": 7
+          },
+          "quantity": {
+            "kind": "number",
+            "id": "number@0:1",
+            "span": {
+              "start": 0,
+              "end": 1
+            },
+            "value": 2,
+            "raw": "2",
+            "implicit": false
+          },
+          "sides": {
+            "kind": "number",
+            "id": "number@2:3",
+            "span": {
+              "start": 2,
+              "end": 3
+            },
+            "value": 6,
+            "raw": "6",
+            "implicit": false
+          },
+          "modifiers": [
+            {
+              "kind": "reroll",
+              "id": "reroll@3:7",
+              "span": {
+                "start": 3,
+                "end": 7
+              },
+              "once": true,
+              "compare": {
+                "kind": "compare-point",
+                "id": "compare-point@5:7",
+                "span": {
+                  "start": 5,
+                  "end": 7
+                },
+                "operator": "<",
+                "value": 3
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "name": "parser-27",
+      "input": "2d6!p=6",
+      "outcome": {
+        "value": {
+          "kind": "dice",
+          "diceKind": "standard",
+          "id": "dice@0:7",
+          "span": {
+            "start": 0,
+            "end": 7
+          },
+          "quantity": {
+            "kind": "number",
+            "id": "number@0:1",
+            "span": {
+              "start": 0,
+              "end": 1
+            },
+            "value": 2,
+            "raw": "2",
+            "implicit": false
+          },
+          "sides": {
+            "kind": "number",
+            "id": "number@2:3",
+            "span": {
+              "start": 2,
+              "end": 3
+            },
+            "value": 6,
+            "raw": "6",
+            "implicit": false
+          },
+          "modifiers": [
+            {
+              "kind": "explode",
+              "id": "explode@3:7",
+              "span": {
+                "start": 3,
+                "end": 7
+              },
+              "compound": false,
+              "penetrate": true,
+              "maxExplosions": null,
+              "compare": {
+                "kind": "compare-point",
+                "id": "compare-point@5:7",
+                "span": {
+                  "start": 5,
+                  "end": 7
+                },
+                "operator": "=",
+                "value": 6
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "name": "parser-28",
+      "input": "2d6!>=5",
+      "outcome": {
+        "value": {
+          "kind": "dice",
+          "diceKind": "standard",
+          "id": "dice@0:7",
+          "span": {
+            "start": 0,
+            "end": 7
+          },
+          "quantity": {
+            "kind": "number",
+            "id": "number@0:1",
+            "span": {
+              "start": 0,
+              "end": 1
+            },
+            "value": 2,
+            "raw": "2",
+            "implicit": false
+          },
+          "sides": {
+            "kind": "number",
+            "id": "number@2:3",
+            "span": {
+              "start": 2,
+              "end": 3
+            },
+            "value": 6,
+            "raw": "6",
+            "implicit": false
+          },
+          "modifiers": [
+            {
+              "kind": "explode",
+              "id": "explode@3:7",
+              "span": {
+                "start": 3,
+                "end": 7
+              },
+              "compound": false,
+              "penetrate": false,
+              "maxExplosions": null,
+              "compare": {
+                "kind": "compare-point",
+                "id": "compare-point@4:7",
+                "span": {
+                  "start": 4,
+                  "end": 7
+                },
+                "operator": ">=",
+                "value": 5
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "name": "parser-29",
+      "input": "2d8sd",
+      "outcome": {
+        "value": {
+          "kind": "dice",
+          "diceKind": "standard",
+          "id": "dice@0:5",
+          "span": {
+            "start": 0,
+            "end": 5
+          },
+          "quantity": {
+            "kind": "number",
+            "id": "number@0:1",
+            "span": {
+              "start": 0,
+              "end": 1
+            },
+            "value": 2,
+            "raw": "2",
+            "implicit": false
+          },
+          "sides": {
+            "kind": "number",
+            "id": "number@2:3",
+            "span": {
+              "start": 2,
+              "end": 3
+            },
+            "value": 8,
+            "raw": "8",
+            "implicit": false
+          },
+          "modifiers": [
+            {
+              "kind": "sort",
+              "id": "sort@3:5",
+              "span": {
+                "start": 3,
+                "end": 5
+              },
+              "direction": "descending"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "name": "parser-30",
+      "input": "sqrt(1d100)",
+      "outcome": {
+        "value": {
+          "kind": "function",
+          "functionKind": "unary",
+          "name": "sqrt",
+          "arguments": [
+            {
+              "kind": "dice",
+              "diceKind": "standard",
+              "id": "dice@5:10",
+              "span": {
+                "start": 5,
+                "end": 10
+              },
+              "quantity": {
+                "kind": "number",
+                "id": "number@5:6",
+                "span": {
+                  "start": 5,
+                  "end": 6
+                },
+                "value": 1,
+                "raw": "1",
+                "implicit": false
+              },
+              "sides": {
+                "kind": "number",
+                "id": "number@7:10",
+                "span": {
+                  "start": 7,
+                  "end": 10
+                },
+                "value": 100,
+                "raw": "100",
+                "implicit": false
+              },
+              "modifiers": []
+            }
+          ],
+          "id": "function@0:11",
+          "span": {
+            "start": 0,
+            "end": 11
+          }
+        }
+      }
+    },
+    {
+      "name": "parser-31",
+      "input": "2d%kh1",
+      "outcome": {
+        "value": {
+          "kind": "dice",
+          "diceKind": "percentile",
+          "id": "dice@0:6",
+          "span": {
+            "start": 0,
+            "end": 6
+          },
+          "quantity": {
+            "kind": "number",
+            "id": "number@0:1",
+            "span": {
+              "start": 0,
+              "end": 1
+            },
+            "value": 2,
+            "raw": "2",
+            "implicit": false
+          },
+          "modifiers": [
+            {
+              "kind": "keep",
+              "id": "keep@3:6",
+              "span": {
+                "start": 3,
+                "end": 6
+              },
+              "selection": "highest",
+              "quantity": 1
+            }
+          ]
+        }
+      }
+    },
+    {
+      "name": "parser-32",
+      "input": "",
+      "outcome": {
+        "error": {
+          "name": "DiceRollError",
+          "code": "INVALID_NOTATION",
+          "message": "Dice notation is required",
+          "span": {
+            "start": 0,
+            "end": 0
+          },
+          "input": "",
+          "details": {}
+        }
+      }
+    },
+    {
+      "name": "parser-33",
+      "input": "d20+2d20+4dF+2dF+dF+2d6!>=6+4d6kl1",
+      "outcome": {
+        "value": {
+          "kind": "binary",
+          "id": "binary@0:34",
+          "span": {
+            "start": 0,
+            "end": 34
+          },
+          "operator": "+",
+          "left": {
+            "kind": "binary",
+            "id": "binary@0:27",
+            "span": {
+              "start": 0,
+              "end": 27
+            },
+            "operator": "+",
+            "left": {
+              "kind": "binary",
+              "id": "binary@0:19",
+              "span": {
+                "start": 0,
+                "end": 19
+              },
+              "operator": "+",
+              "left": {
+                "kind": "binary",
+                "id": "binary@0:16",
+                "span": {
+                  "start": 0,
+                  "end": 16
+                },
+                "operator": "+",
+                "left": {
+                  "kind": "binary",
+                  "id": "binary@0:12",
+                  "span": {
+                    "start": 0,
+                    "end": 12
+                  },
+                  "operator": "+",
+                  "left": {
+                    "kind": "binary",
+                    "id": "binary@0:8",
+                    "span": {
+                      "start": 0,
+                      "end": 8
+                    },
+                    "operator": "+",
+                    "left": {
+                      "kind": "dice",
+                      "diceKind": "standard",
+                      "id": "dice@0:3",
+                      "span": {
+                        "start": 0,
+                        "end": 3
+                      },
+                      "quantity": {
+                        "kind": "number",
+                        "id": "implicit-number@0:0",
+                        "span": {
+                          "start": 0,
+                          "end": 0
+                        },
+                        "value": 1,
+                        "raw": "1",
+                        "implicit": true
+                      },
+                      "sides": {
+                        "kind": "number",
+                        "id": "number@1:3",
+                        "span": {
+                          "start": 1,
+                          "end": 3
+                        },
+                        "value": 20,
+                        "raw": "20",
+                        "implicit": false
+                      },
+                      "modifiers": []
+                    },
+                    "right": {
+                      "kind": "dice",
+                      "diceKind": "standard",
+                      "id": "dice@4:8",
+                      "span": {
+                        "start": 4,
+                        "end": 8
+                      },
+                      "quantity": {
+                        "kind": "number",
+                        "id": "number@4:5",
+                        "span": {
+                          "start": 4,
+                          "end": 5
+                        },
+                        "value": 2,
+                        "raw": "2",
+                        "implicit": false
+                      },
+                      "sides": {
+                        "kind": "number",
+                        "id": "number@6:8",
+                        "span": {
+                          "start": 6,
+                          "end": 8
+                        },
+                        "value": 20,
+                        "raw": "20",
+                        "implicit": false
+                      },
+                      "modifiers": []
+                    }
+                  },
+                  "right": {
+                    "kind": "dice",
+                    "diceKind": "fudge",
+                    "id": "dice@9:12",
+                    "span": {
+                      "start": 9,
+                      "end": 12
+                    },
+                    "quantity": {
+                      "kind": "number",
+                      "id": "number@9:10",
+                      "span": {
+                        "start": 9,
+                        "end": 10
+                      },
+                      "value": 4,
+                      "raw": "4",
+                      "implicit": false
+                    },
+                    "variant": 2,
+                    "modifiers": []
+                  }
+                },
+                "right": {
+                  "kind": "dice",
+                  "diceKind": "fudge",
+                  "id": "dice@13:16",
+                  "span": {
+                    "start": 13,
+                    "end": 16
+                  },
+                  "quantity": {
+                    "kind": "number",
+                    "id": "number@13:14",
+                    "span": {
+                      "start": 13,
+                      "end": 14
+                    },
+                    "value": 2,
+                    "raw": "2",
+                    "implicit": false
+                  },
+                  "variant": 2,
+                  "modifiers": []
+                }
+              },
+              "right": {
+                "kind": "dice",
+                "diceKind": "fudge",
+                "id": "dice@17:19",
+                "span": {
+                  "start": 17,
+                  "end": 19
+                },
+                "quantity": {
+                  "kind": "number",
+                  "id": "implicit-number@17:17",
+                  "span": {
+                    "start": 17,
+                    "end": 17
+                  },
+                  "value": 1,
+                  "raw": "1",
+                  "implicit": true
+                },
+                "variant": 2,
+                "modifiers": []
+              }
+            },
+            "right": {
+              "kind": "dice",
+              "diceKind": "standard",
+              "id": "dice@20:27",
+              "span": {
+                "start": 20,
+                "end": 27
+              },
+              "quantity": {
+                "kind": "number",
+                "id": "number@20:21",
+                "span": {
+                  "start": 20,
+                  "end": 21
+                },
+                "value": 2,
+                "raw": "2",
+                "implicit": false
+              },
+              "sides": {
+                "kind": "number",
+                "id": "number@22:23",
+                "span": {
+                  "start": 22,
+                  "end": 23
+                },
+                "value": 6,
+                "raw": "6",
+                "implicit": false
+              },
+              "modifiers": [
+                {
+                  "kind": "explode",
+                  "id": "explode@23:27",
+                  "span": {
+                    "start": 23,
+                    "end": 27
+                  },
+                  "compound": false,
+                  "penetrate": false,
+                  "maxExplosions": null,
+                  "compare": {
+                    "kind": "compare-point",
+                    "id": "compare-point@24:27",
+                    "span": {
+                      "start": 24,
+                      "end": 27
+                    },
+                    "operator": ">=",
+                    "value": 6
+                  }
+                }
+              ]
+            }
+          },
+          "right": {
+            "kind": "dice",
+            "diceKind": "standard",
+            "id": "dice@28:34",
+            "span": {
+              "start": 28,
+              "end": 34
+            },
+            "quantity": {
+              "kind": "number",
+              "id": "number@28:29",
+              "span": {
+                "start": 28,
+                "end": 29
+              },
+              "value": 4,
+              "raw": "4",
+              "implicit": false
+            },
+            "sides": {
+              "kind": "number",
+              "id": "number@30:31",
+              "span": {
+                "start": 30,
+                "end": 31
+              },
+              "value": 6,
+              "raw": "6",
+              "implicit": false
+            },
+            "modifiers": [
+              {
+                "kind": "keep",
+                "id": "keep@31:34",
+                "span": {
+                  "start": 31,
+                  "end": 34
+                },
+                "selection": "lowest",
+                "quantity": 1
+              }
+            ]
+          }
+        }
+      }
+    },
+    {
+      "name": "parser-34",
+      "input": "floor(1d6/2)+max(1d6,2)",
+      "outcome": {
+        "value": {
+          "kind": "binary",
+          "id": "binary@0:23",
+          "span": {
+            "start": 0,
+            "end": 23
+          },
+          "operator": "+",
+          "left": {
+            "kind": "function",
+            "functionKind": "unary",
+            "name": "floor",
+            "arguments": [
+              {
+                "kind": "binary",
+                "id": "binary@6:11",
+                "span": {
+                  "start": 6,
+                  "end": 11
+                },
+                "operator": "/",
+                "left": {
+                  "kind": "dice",
+                  "diceKind": "standard",
+                  "id": "dice@6:9",
+                  "span": {
+                    "start": 6,
+                    "end": 9
+                  },
+                  "quantity": {
+                    "kind": "number",
+                    "id": "number@6:7",
+                    "span": {
+                      "start": 6,
+                      "end": 7
+                    },
+                    "value": 1,
+                    "raw": "1",
+                    "implicit": false
+                  },
+                  "sides": {
+                    "kind": "number",
+                    "id": "number@8:9",
+                    "span": {
+                      "start": 8,
+                      "end": 9
+                    },
+                    "value": 6,
+                    "raw": "6",
+                    "implicit": false
+                  },
+                  "modifiers": []
+                },
+                "right": {
+                  "kind": "number",
+                  "id": "number@10:11",
+                  "span": {
+                    "start": 10,
+                    "end": 11
+                  },
+                  "value": 2,
+                  "raw": "2",
+                  "implicit": false
+                }
+              }
+            ],
+            "id": "function@0:12",
+            "span": {
+              "start": 0,
+              "end": 12
+            }
+          },
+          "right": {
+            "kind": "function",
+            "functionKind": "binary",
+            "name": "max",
+            "arguments": [
+              {
+                "kind": "dice",
+                "diceKind": "standard",
+                "id": "dice@17:20",
+                "span": {
+                  "start": 17,
+                  "end": 20
+                },
+                "quantity": {
+                  "kind": "number",
+                  "id": "number@17:18",
+                  "span": {
+                    "start": 17,
+                    "end": 18
+                  },
+                  "value": 1,
+                  "raw": "1",
+                  "implicit": false
+                },
+                "sides": {
+                  "kind": "number",
+                  "id": "number@19:20",
+                  "span": {
+                    "start": 19,
+                    "end": 20
+                  },
+                  "value": 6,
+                  "raw": "6",
+                  "implicit": false
+                },
+                "modifiers": []
+              },
+              {
+                "kind": "number",
+                "id": "number@21:22",
+                "span": {
+                  "start": 21,
+                  "end": 22
+                },
+                "value": 2,
+                "raw": "2",
+                "implicit": false
+              }
+            ],
+            "id": "function@13:23",
+            "span": {
+              "start": 13,
+              "end": 23
+            }
+          }
+        }
+      }
+    },
+    {
+      "name": "parser-35",
+      "input": "1d6",
+      "outcome": {
+        "value": {
+          "kind": "dice",
+          "diceKind": "standard",
+          "id": "dice@0:3",
+          "span": {
+            "start": 0,
+            "end": 3
+          },
+          "quantity": {
+            "kind": "number",
+            "id": "number@0:1",
+            "span": {
+              "start": 0,
+              "end": 1
+            },
+            "value": 1,
+            "raw": "1",
+            "implicit": false
+          },
+          "sides": {
+            "kind": "number",
+            "id": "number@2:3",
+            "span": {
+              "start": 2,
+              "end": 3
+            },
+            "value": 6,
+            "raw": "6",
+            "implicit": false
+          },
+          "modifiers": []
+        }
+      }
+    },
+    {
+      "name": "parser-36",
+      "input": "1d20",
+      "outcome": {
+        "value": {
+          "kind": "dice",
+          "diceKind": "standard",
+          "id": "dice@0:4",
+          "span": {
+            "start": 0,
+            "end": 4
+          },
+          "quantity": {
+            "kind": "number",
+            "id": "number@0:1",
+            "span": {
+              "start": 0,
+              "end": 1
+            },
+            "value": 1,
+            "raw": "1",
+            "implicit": false
+          },
+          "sides": {
+            "kind": "number",
+            "id": "number@2:4",
+            "span": {
+              "start": 2,
+              "end": 4
+            },
+            "value": 20,
+            "raw": "20",
+            "implicit": false
+          },
+          "modifiers": []
+        }
+      }
+    },
+    {
+      "name": "parser-37",
+      "input": "1d6+1+2",
+      "outcome": {
+        "value": {
+          "kind": "binary",
+          "id": "binary@0:7",
+          "span": {
+            "start": 0,
+            "end": 7
+          },
+          "operator": "+",
+          "left": {
+            "kind": "binary",
+            "id": "binary@0:5",
+            "span": {
+              "start": 0,
+              "end": 5
+            },
+            "operator": "+",
+            "left": {
+              "kind": "dice",
+              "diceKind": "standard",
+              "id": "dice@0:3",
+              "span": {
+                "start": 0,
+                "end": 3
+              },
+              "quantity": {
+                "kind": "number",
+                "id": "number@0:1",
+                "span": {
+                  "start": 0,
+                  "end": 1
+                },
+                "value": 1,
+                "raw": "1",
+                "implicit": false
+              },
+              "sides": {
+                "kind": "number",
+                "id": "number@2:3",
+                "span": {
+                  "start": 2,
+                  "end": 3
+                },
+                "value": 6,
+                "raw": "6",
+                "implicit": false
+              },
+              "modifiers": []
+            },
+            "right": {
+              "kind": "number",
+              "id": "number@4:5",
+              "span": {
+                "start": 4,
+                "end": 5
+              },
+              "value": 1,
+              "raw": "1",
+              "implicit": false
+            }
+          },
+          "right": {
+            "kind": "number",
+            "id": "number@6:7",
+            "span": {
+              "start": 6,
+              "end": 7
+            },
+            "value": 2,
+            "raw": "2",
+            "implicit": false
+          }
+        }
+      }
+    },
+    {
+      "name": "parser-38",
+      "input": "(2+1)d(3+3)",
+      "outcome": {
+        "value": {
+          "kind": "dice",
+          "diceKind": "standard",
+          "id": "dice@0:11",
+          "span": {
+            "start": 0,
+            "end": 11
+          },
+          "quantity": {
+            "kind": "parenthesized",
+            "id": "parenthesized@0:5",
+            "span": {
+              "start": 0,
+              "end": 5
+            },
+            "expression": {
+              "kind": "binary",
+              "id": "binary@1:4",
+              "span": {
+                "start": 1,
+                "end": 4
+              },
+              "operator": "+",
+              "left": {
+                "kind": "number",
+                "id": "number@1:2",
+                "span": {
+                  "start": 1,
+                  "end": 2
+                },
+                "value": 2,
+                "raw": "2",
+                "implicit": false
+              },
+              "right": {
+                "kind": "number",
+                "id": "number@3:4",
+                "span": {
+                  "start": 3,
+                  "end": 4
+                },
+                "value": 1,
+                "raw": "1",
+                "implicit": false
+              }
+            }
+          },
+          "sides": {
+            "kind": "parenthesized",
+            "id": "parenthesized@6:11",
+            "span": {
+              "start": 6,
+              "end": 11
+            },
+            "expression": {
+              "kind": "binary",
+              "id": "binary@7:10",
+              "span": {
+                "start": 7,
+                "end": 10
+              },
+              "operator": "+",
+              "left": {
+                "kind": "number",
+                "id": "number@7:8",
+                "span": {
+                  "start": 7,
+                  "end": 8
+                },
+                "value": 3,
+                "raw": "3",
+                "implicit": false
+              },
+              "right": {
+                "kind": "number",
+                "id": "number@9:10",
+                "span": {
+                  "start": 9,
+                  "end": 10
+                },
+                "value": 3,
+                "raw": "3",
+                "implicit": false
+              }
+            }
+          },
+          "modifiers": []
+        }
+      }
+    },
+    {
+      "name": "parser-39",
+      "input": "4d6kh3dl1",
+      "outcome": {
+        "value": {
+          "kind": "dice",
+          "diceKind": "standard",
+          "id": "dice@0:9",
+          "span": {
+            "start": 0,
+            "end": 9
+          },
+          "quantity": {
+            "kind": "number",
+            "id": "number@0:1",
+            "span": {
+              "start": 0,
+              "end": 1
+            },
+            "value": 4,
+            "raw": "4",
+            "implicit": false
+          },
+          "sides": {
+            "kind": "number",
+            "id": "number@2:3",
+            "span": {
+              "start": 2,
+              "end": 3
+            },
+            "value": 6,
+            "raw": "6",
+            "implicit": false
+          },
+          "modifiers": [
+            {
+              "kind": "keep",
+              "id": "keep@3:6",
+              "span": {
+                "start": 3,
+                "end": 6
+              },
+              "selection": "highest",
+              "quantity": 3
+            },
+            {
+              "kind": "drop",
+              "id": "drop@6:9",
+              "span": {
+                "start": 6,
+                "end": 9
+              },
+              "selection": "lowest",
+              "quantity": 1
+            }
+          ]
+        }
+      }
+    },
+    {
+      "name": "parser-40",
+      "input": "4d6kh3dis",
+      "outcome": {
+        "value": {
+          "kind": "dice",
+          "diceKind": "standard",
+          "id": "dice@0:9",
+          "span": {
+            "start": 0,
+            "end": 9
+          },
+          "quantity": {
+            "kind": "number",
+            "id": "number@0:1",
+            "span": {
+              "start": 0,
+              "end": 1
+            },
+            "value": 4,
+            "raw": "4",
+            "implicit": false
+          },
+          "sides": {
+            "kind": "number",
+            "id": "number@2:3",
+            "span": {
+              "start": 2,
+              "end": 3
+            },
+            "value": 6,
+            "raw": "6",
+            "implicit": false
+          },
+          "modifiers": [
+            {
+              "kind": "keep",
+              "id": "keep@3:6",
+              "span": {
+                "start": 3,
+                "end": 6
+              },
+              "selection": "highest",
+              "quantity": 3
+            },
+            {
+              "kind": "pool-selection",
+              "id": "pool-selection@6:9",
+              "span": {
+                "start": 6,
+                "end": 9
+              },
+              "selection": "lowest"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "name": "parser-41",
+      "input": "2d20pool(-1)",
+      "outcome": {
+        "value": {
+          "kind": "dice",
+          "diceKind": "standard",
+          "id": "dice@0:12",
+          "span": {
+            "start": 0,
+            "end": 12
+          },
+          "quantity": {
+            "kind": "number",
+            "id": "number@0:1",
+            "span": {
+              "start": 0,
+              "end": 1
+            },
+            "value": 2,
+            "raw": "2",
+            "implicit": false
+          },
+          "sides": {
+            "kind": "number",
+            "id": "number@2:4",
+            "span": {
+              "start": 2,
+              "end": 4
+            },
+            "value": 20,
+            "raw": "20",
+            "implicit": false
+          },
+          "modifiers": [
+            {
+              "kind": "pool-adjustment",
+              "id": "pool-adjustment@4:12",
+              "span": {
+                "start": 4,
+                "end": 12
+              },
+              "delta": -1
+            }
+          ]
+        }
+      }
+    },
+    {
+      "name": "parser-42",
+      "input": "2d20pool(+2)",
+      "outcome": {
+        "value": {
+          "kind": "dice",
+          "diceKind": "standard",
+          "id": "dice@0:12",
+          "span": {
+            "start": 0,
+            "end": 12
+          },
+          "quantity": {
+            "kind": "number",
+            "id": "number@0:1",
+            "span": {
+              "start": 0,
+              "end": 1
+            },
+            "value": 2,
+            "raw": "2",
+            "implicit": false
+          },
+          "sides": {
+            "kind": "number",
+            "id": "number@2:4",
+            "span": {
+              "start": 2,
+              "end": 4
+            },
+            "value": 20,
+            "raw": "20",
+            "implicit": false
+          },
+          "modifiers": [
+            {
+              "kind": "pool-adjustment",
+              "id": "pool-adjustment@4:12",
+              "span": {
+                "start": 4,
+                "end": 12
+              },
+              "delta": 2
+            }
+          ]
+        }
+      }
+    },
+    {
+      "name": "parser-43",
+      "input": "2d20pool(-3)",
+      "outcome": {
+        "value": {
+          "kind": "dice",
+          "diceKind": "standard",
+          "id": "dice@0:12",
+          "span": {
+            "start": 0,
+            "end": 12
+          },
+          "quantity": {
+            "kind": "number",
+            "id": "number@0:1",
+            "span": {
+              "start": 0,
+              "end": 1
+            },
+            "value": 2,
+            "raw": "2",
+            "implicit": false
+          },
+          "sides": {
+            "kind": "number",
+            "id": "number@2:4",
+            "span": {
+              "start": 2,
+              "end": 4
+            },
+            "value": 20,
+            "raw": "20",
+            "implicit": false
+          },
+          "modifiers": [
+            {
+              "kind": "pool-adjustment",
+              "id": "pool-adjustment@4:12",
+              "span": {
+                "start": 4,
+                "end": 12
+              },
+              "delta": -3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "name": "parser-44",
+      "input": "2d20pool(+4)",
+      "outcome": {
+        "value": {
+          "kind": "dice",
+          "diceKind": "standard",
+          "id": "dice@0:12",
+          "span": {
+            "start": 0,
+            "end": 12
+          },
+          "quantity": {
+            "kind": "number",
+            "id": "number@0:1",
+            "span": {
+              "start": 0,
+              "end": 1
+            },
+            "value": 2,
+            "raw": "2",
+            "implicit": false
+          },
+          "sides": {
+            "kind": "number",
+            "id": "number@2:4",
+            "span": {
+              "start": 2,
+              "end": 4
+            },
+            "value": 20,
+            "raw": "20",
+            "implicit": false
+          },
+          "modifiers": [
+            {
+              "kind": "pool-adjustment",
+              "id": "pool-adjustment@4:12",
+              "span": {
+                "start": 4,
+                "end": 12
+              },
+              "delta": 4
+            }
+          ]
+        }
+      }
+    },
+    {
+      "name": "parser-45",
+      "input": "d20advpool(-1)",
+      "outcome": {
+        "value": {
+          "kind": "dice",
+          "diceKind": "standard",
+          "id": "dice@0:14",
+          "span": {
+            "start": 0,
+            "end": 14
+          },
+          "quantity": {
+            "kind": "number",
+            "id": "implicit-number@0:0",
+            "span": {
+              "start": 0,
+              "end": 0
+            },
+            "value": 1,
+            "raw": "1",
+            "implicit": true
+          },
+          "sides": {
+            "kind": "number",
+            "id": "number@1:3",
+            "span": {
+              "start": 1,
+              "end": 3
+            },
+            "value": 20,
+            "raw": "20",
+            "implicit": false
+          },
+          "modifiers": [
+            {
+              "kind": "pool-selection",
+              "id": "pool-selection@3:6",
+              "span": {
+                "start": 3,
+                "end": 6
+              },
+              "selection": "highest"
+            },
+            {
+              "kind": "pool-adjustment",
+              "id": "pool-adjustment@6:14",
+              "span": {
+                "start": 6,
+                "end": 14
+              },
+              "delta": -1
+            }
+          ]
+        }
+      }
+    },
+    {
+      "name": "parser-46",
+      "input": "1d20+2pool(-1)",
+      "outcome": {
+        "value": {
+          "kind": "binary",
+          "id": "binary@0:14",
+          "span": {
+            "start": 0,
+            "end": 14
+          },
+          "operator": "+",
+          "left": {
+            "kind": "dice",
+            "diceKind": "standard",
+            "id": "dice@0:4",
+            "span": {
+              "start": 0,
+              "end": 4
+            },
+            "quantity": {
+              "kind": "number",
+              "id": "number@0:1",
+              "span": {
+                "start": 0,
+                "end": 1
+              },
+              "value": 1,
+              "raw": "1",
+              "implicit": false
+            },
+            "sides": {
+              "kind": "number",
+              "id": "number@2:4",
+              "span": {
+                "start": 2,
+                "end": 4
+              },
+              "value": 20,
+              "raw": "20",
+              "implicit": false
+            },
+            "modifiers": [
+              {
+                "kind": "pool-adjustment",
+                "id": "pool-adjustment@6:14",
+                "span": {
+                  "start": 6,
+                  "end": 14
+                },
+                "delta": -1
+              }
+            ]
+          },
+          "right": {
+            "kind": "number",
+            "id": "number@5:6",
+            "span": {
+              "start": 5,
+              "end": 6
+            },
+            "value": 2,
+            "raw": "2",
+            "implicit": false
+          }
+        }
+      }
+    },
+    {
+      "name": "parser-47",
+      "input": "1d20+2pool(-1)adv",
+      "outcome": {
+        "value": {
+          "kind": "binary",
+          "id": "binary@0:17",
+          "span": {
+            "start": 0,
+            "end": 17
+          },
+          "operator": "+",
+          "left": {
+            "kind": "dice",
+            "diceKind": "standard",
+            "id": "dice@0:4",
+            "span": {
+              "start": 0,
+              "end": 4
+            },
+            "quantity": {
+              "kind": "number",
+              "id": "number@0:1",
+              "span": {
+                "start": 0,
+                "end": 1
+              },
+              "value": 1,
+              "raw": "1",
+              "implicit": false
+            },
+            "sides": {
+              "kind": "number",
+              "id": "number@2:4",
+              "span": {
+                "start": 2,
+                "end": 4
+              },
+              "value": 20,
+              "raw": "20",
+              "implicit": false
+            },
+            "modifiers": [
+              {
+                "kind": "pool-adjustment",
+                "id": "pool-adjustment@6:14",
+                "span": {
+                  "start": 6,
+                  "end": 14
+                },
+                "delta": -1
+              },
+              {
+                "kind": "pool-selection",
+                "id": "pool-selection@14:17",
+                "span": {
+                  "start": 14,
+                  "end": 17
+                },
+                "selection": "highest"
+              }
+            ]
+          },
+          "right": {
+            "kind": "number",
+            "id": "number@5:6",
+            "span": {
+              "start": 5,
+              "end": 6
+            },
+            "value": 2,
+            "raw": "2",
+            "implicit": false
+          }
+        }
+      }
+    },
+    {
+      "name": "parser-48",
+      "input": "d20adv",
+      "outcome": {
+        "value": {
+          "kind": "dice",
+          "diceKind": "standard",
+          "id": "dice@0:6",
+          "span": {
+            "start": 0,
+            "end": 6
+          },
+          "quantity": {
+            "kind": "number",
+            "id": "implicit-number@0:0",
+            "span": {
+              "start": 0,
+              "end": 0
+            },
+            "value": 1,
+            "raw": "1",
+            "implicit": true
+          },
+          "sides": {
+            "kind": "number",
+            "id": "number@1:3",
+            "span": {
+              "start": 1,
+              "end": 3
+            },
+            "value": 20,
+            "raw": "20",
+            "implicit": false
+          },
+          "modifiers": [
+            {
+              "kind": "pool-selection",
+              "id": "pool-selection@3:6",
+              "span": {
+                "start": 3,
+                "end": 6
+              },
+              "selection": "highest"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "name": "parser-49",
+      "input": "d20dis",
+      "outcome": {
+        "value": {
+          "kind": "dice",
+          "diceKind": "standard",
+          "id": "dice@0:6",
+          "span": {
+            "start": 0,
+            "end": 6
+          },
+          "quantity": {
+            "kind": "number",
+            "id": "implicit-number@0:0",
+            "span": {
+              "start": 0,
+              "end": 0
+            },
+            "value": 1,
+            "raw": "1",
+            "implicit": true
+          },
+          "sides": {
+            "kind": "number",
+            "id": "number@1:3",
+            "span": {
+              "start": 1,
+              "end": 3
+            },
+            "value": 20,
+            "raw": "20",
+            "implicit": false
+          },
+          "modifiers": [
+            {
+              "kind": "pool-selection",
+              "id": "pool-selection@3:6",
+              "span": {
+                "start": 3,
+                "end": 6
+              },
+              "selection": "lowest"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "name": "parser-50",
+      "input": "1d5step(-1)",
+      "outcome": {
+        "value": {
+          "kind": "dice",
+          "diceKind": "standard",
+          "id": "dice@0:11",
+          "span": {
+            "start": 0,
+            "end": 11
+          },
+          "quantity": {
+            "kind": "number",
+            "id": "number@0:1",
+            "span": {
+              "start": 0,
+              "end": 1
+            },
+            "value": 1,
+            "raw": "1",
+            "implicit": false
+          },
+          "sides": {
+            "kind": "number",
+            "id": "number@2:3",
+            "span": {
+              "start": 2,
+              "end": 3
+            },
+            "value": 5,
+            "raw": "5",
+            "implicit": false
+          },
+          "modifiers": [
+            {
+              "kind": "dice-step",
+              "id": "dice-step@3:11",
+              "span": {
+                "start": 3,
+                "end": 11
+              },
+              "delta": -1
+            }
+          ]
+        }
+      }
+    },
+    {
+      "name": "parser-51",
+      "input": "1d5step(+2)",
+      "outcome": {
+        "value": {
+          "kind": "dice",
+          "diceKind": "standard",
+          "id": "dice@0:11",
+          "span": {
+            "start": 0,
+            "end": 11
+          },
+          "quantity": {
+            "kind": "number",
+            "id": "number@0:1",
+            "span": {
+              "start": 0,
+              "end": 1
+            },
+            "value": 1,
+            "raw": "1",
+            "implicit": false
+          },
+          "sides": {
+            "kind": "number",
+            "id": "number@2:3",
+            "span": {
+              "start": 2,
+              "end": 3
+            },
+            "value": 5,
+            "raw": "5",
+            "implicit": false
+          },
+          "modifiers": [
+            {
+              "kind": "dice-step",
+              "id": "dice-step@3:11",
+              "span": {
+                "start": 3,
+                "end": 11
+              },
+              "delta": 2
+            }
+          ]
+        }
+      }
+    },
+    {
+      "name": "parser-52",
+      "input": "1d5step(-3)",
+      "outcome": {
+        "value": {
+          "kind": "dice",
+          "diceKind": "standard",
+          "id": "dice@0:11",
+          "span": {
+            "start": 0,
+            "end": 11
+          },
+          "quantity": {
+            "kind": "number",
+            "id": "number@0:1",
+            "span": {
+              "start": 0,
+              "end": 1
+            },
+            "value": 1,
+            "raw": "1",
+            "implicit": false
+          },
+          "sides": {
+            "kind": "number",
+            "id": "number@2:3",
+            "span": {
+              "start": 2,
+              "end": 3
+            },
+            "value": 5,
+            "raw": "5",
+            "implicit": false
+          },
+          "modifiers": [
+            {
+              "kind": "dice-step",
+              "id": "dice-step@3:11",
+              "span": {
+                "start": 3,
+                "end": 11
+              },
+              "delta": -3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "name": "parser-53",
+      "input": "1d5+2step(-1)",
+      "outcome": {
+        "value": {
+          "kind": "binary",
+          "id": "binary@0:13",
+          "span": {
+            "start": 0,
+            "end": 13
+          },
+          "operator": "+",
+          "left": {
+            "kind": "dice",
+            "diceKind": "standard",
+            "id": "dice@0:3",
+            "span": {
+              "start": 0,
+              "end": 3
+            },
+            "quantity": {
+              "kind": "number",
+              "id": "number@0:1",
+              "span": {
+                "start": 0,
+                "end": 1
+              },
+              "value": 1,
+              "raw": "1",
+              "implicit": false
+            },
+            "sides": {
+              "kind": "number",
+              "id": "number@2:3",
+              "span": {
+                "start": 2,
+                "end": 3
+              },
+              "value": 5,
+              "raw": "5",
+              "implicit": false
+            },
+            "modifiers": [
+              {
+                "kind": "dice-step",
+                "id": "dice-step@5:13",
+                "span": {
+                  "start": 5,
+                  "end": 13
+                },
+                "delta": -1
+              }
+            ]
+          },
+          "right": {
+            "kind": "number",
+            "id": "number@4:5",
+            "span": {
+              "start": 4,
+              "end": 5
+            },
+            "value": 2,
+            "raw": "2",
+            "implicit": false
+          }
+        }
+      }
+    },
+    {
+      "name": "parser-54",
+      "input": "2d6",
+      "outcome": {
+        "value": {
+          "kind": "dice",
+          "diceKind": "standard",
+          "id": "dice@0:3",
+          "span": {
+            "start": 0,
+            "end": 3
+          },
+          "quantity": {
+            "kind": "number",
+            "id": "number@0:1",
+            "span": {
+              "start": 0,
+              "end": 1
+            },
+            "value": 2,
+            "raw": "2",
+            "implicit": false
+          },
+          "sides": {
+            "kind": "number",
+            "id": "number@2:3",
+            "span": {
+              "start": 2,
+              "end": 3
+            },
+            "value": 6,
+            "raw": "6",
+            "implicit": false
+          },
+          "modifiers": []
+        }
+      }
+    },
+    {
+      "name": "parser-55",
+      "input": "1d6+1",
+      "outcome": {
+        "value": {
+          "kind": "binary",
+          "id": "binary@0:5",
+          "span": {
+            "start": 0,
+            "end": 5
+          },
+          "operator": "+",
+          "left": {
+            "kind": "dice",
+            "diceKind": "standard",
+            "id": "dice@0:3",
+            "span": {
+              "start": 0,
+              "end": 3
+            },
+            "quantity": {
+              "kind": "number",
+              "id": "number@0:1",
+              "span": {
+                "start": 0,
+                "end": 1
+              },
+              "value": 1,
+              "raw": "1",
+              "implicit": false
+            },
+            "sides": {
+              "kind": "number",
+              "id": "number@2:3",
+              "span": {
+                "start": 2,
+                "end": 3
+              },
+              "value": 6,
+              "raw": "6",
+              "implicit": false
+            },
+            "modifiers": []
+          },
+          "right": {
+            "kind": "number",
+            "id": "number@4:5",
+            "span": {
+              "start": 4,
+              "end": 5
+            },
+            "value": 1,
+            "raw": "1",
+            "implicit": false
+          }
+        }
+      }
+    },
+    {
+      "name": "parser-56",
+      "input": "1d6+2",
+      "outcome": {
+        "value": {
+          "kind": "binary",
+          "id": "binary@0:5",
+          "span": {
+            "start": 0,
+            "end": 5
+          },
+          "operator": "+",
+          "left": {
+            "kind": "dice",
+            "diceKind": "standard",
+            "id": "dice@0:3",
+            "span": {
+              "start": 0,
+              "end": 3
+            },
+            "quantity": {
+              "kind": "number",
+              "id": "number@0:1",
+              "span": {
+                "start": 0,
+                "end": 1
+              },
+              "value": 1,
+              "raw": "1",
+              "implicit": false
+            },
+            "sides": {
+              "kind": "number",
+              "id": "number@2:3",
+              "span": {
+                "start": 2,
+                "end": 3
+              },
+              "value": 6,
+              "raw": "6",
+              "implicit": false
+            },
+            "modifiers": []
+          },
+          "right": {
+            "kind": "number",
+            "id": "number@4:5",
+            "span": {
+              "start": 4,
+              "end": 5
+            },
+            "value": 2,
+            "raw": "2",
+            "implicit": false
+          }
+        }
+      }
+    },
+    {
+      "name": "parser-57",
+      "input": "1.5",
+      "outcome": {
+        "value": {
+          "kind": "number",
+          "id": "number@0:3",
+          "span": {
+            "start": 0,
+            "end": 3
+          },
+          "value": 1.5,
+          "raw": "1.5",
+          "implicit": false
+        }
+      }
+    },
+    {
+      "name": "parser-58",
+      "input": "1/0",
+      "outcome": {
+        "value": {
+          "kind": "binary",
+          "id": "binary@0:3",
+          "span": {
+            "start": 0,
+            "end": 3
+          },
+          "operator": "/",
+          "left": {
+            "kind": "number",
+            "id": "number@0:1",
+            "span": {
+              "start": 0,
+              "end": 1
+            },
+            "value": 1,
+            "raw": "1",
+            "implicit": false
+          },
+          "right": {
+            "kind": "number",
+            "id": "number@2:3",
+            "span": {
+              "start": 2,
+              "end": 3
+            },
+            "value": 0,
+            "raw": "0",
+            "implicit": false
+          }
+        }
+      }
+    },
+    {
+      "name": "parser-59",
+      "input": "3",
+      "outcome": {
+        "value": {
+          "kind": "number",
+          "id": "number@0:1",
+          "span": {
+            "start": 0,
+            "end": 1
+          },
+          "value": 3,
+          "raw": "3",
+          "implicit": false
+        }
+      }
+    },
+    {
+      "name": "parser-60",
+      "input": "1+2*3^2^2",
+      "outcome": {
+        "value": {
+          "kind": "binary",
+          "id": "binary@0:9",
+          "span": {
+            "start": 0,
+            "end": 9
+          },
+          "operator": "+",
+          "left": {
+            "kind": "number",
+            "id": "number@0:1",
+            "span": {
+              "start": 0,
+              "end": 1
+            },
+            "value": 1,
+            "raw": "1",
+            "implicit": false
+          },
+          "right": {
+            "kind": "binary",
+            "id": "binary@2:9",
+            "span": {
+              "start": 2,
+              "end": 9
+            },
+            "operator": "*",
+            "left": {
+              "kind": "number",
+              "id": "number@2:3",
+              "span": {
+                "start": 2,
+                "end": 3
+              },
+              "value": 2,
+              "raw": "2",
+              "implicit": false
+            },
+            "right": {
+              "kind": "binary",
+              "id": "binary@4:9",
+              "span": {
+                "start": 4,
+                "end": 9
+              },
+              "operator": "^",
+              "left": {
+                "kind": "number",
+                "id": "number@4:5",
+                "span": {
+                  "start": 4,
+                  "end": 5
+                },
+                "value": 3,
+                "raw": "3",
+                "implicit": false
+              },
+              "right": {
+                "kind": "binary",
+                "id": "binary@6:9",
+                "span": {
+                  "start": 6,
+                  "end": 9
+                },
+                "operator": "^",
+                "left": {
+                  "kind": "number",
+                  "id": "number@6:7",
+                  "span": {
+                    "start": 6,
+                    "end": 7
+                  },
+                  "value": 2,
+                  "raw": "2",
+                  "implicit": false
+                },
+                "right": {
+                  "kind": "number",
+                  "id": "number@8:9",
+                  "span": {
+                    "start": 8,
+                    "end": 9
+                  },
+                  "value": 2,
+                  "raw": "2",
+                  "implicit": false
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    {
+      "name": "parser-61",
+      "input": "-2^2",
+      "outcome": {
+        "value": {
+          "kind": "unary",
+          "id": "unary@0:4",
+          "span": {
+            "start": 0,
+            "end": 4
+          },
+          "operator": "-",
+          "operand": {
+            "kind": "binary",
+            "id": "binary@1:4",
+            "span": {
+              "start": 1,
+              "end": 4
+            },
+            "operator": "^",
+            "left": {
+              "kind": "number",
+              "id": "number@1:2",
+              "span": {
+                "start": 1,
+                "end": 2
+              },
+              "value": 2,
+              "raw": "2",
+              "implicit": false
+            },
+            "right": {
+              "kind": "number",
+              "id": "number@3:4",
+              "span": {
+                "start": 3,
+                "end": 4
+              },
+              "value": 2,
+              "raw": "2",
+              "implicit": false
+            }
+          }
+        }
+      }
+    },
+    {
+      "name": "parser-62",
+      "input": "+2**3",
+      "outcome": {
+        "value": {
+          "kind": "unary",
+          "id": "unary@0:5",
+          "span": {
+            "start": 0,
+            "end": 5
+          },
+          "operator": "+",
+          "operand": {
+            "kind": "binary",
+            "id": "binary@1:5",
+            "span": {
+              "start": 1,
+              "end": 5
+            },
+            "operator": "**",
+            "left": {
+              "kind": "number",
+              "id": "number@1:2",
+              "span": {
+                "start": 1,
+                "end": 2
+              },
+              "value": 2,
+              "raw": "2",
+              "implicit": false
+            },
+            "right": {
+              "kind": "number",
+              "id": "number@4:5",
+              "span": {
+                "start": 4,
+                "end": 5
+              },
+              "value": 3,
+              "raw": "3",
+              "implicit": false
+            }
+          }
+        }
+      }
+    },
+    {
+      "name": "parser-63",
+      "input": "max(abs(-2),(1+2)d(3+3))",
+      "outcome": {
+        "value": {
+          "kind": "function",
+          "functionKind": "binary",
+          "name": "max",
+          "arguments": [
+            {
+              "kind": "function",
+              "functionKind": "unary",
+              "name": "abs",
+              "arguments": [
+                {
+                  "kind": "unary",
+                  "id": "unary@8:10",
+                  "span": {
+                    "start": 8,
+                    "end": 10
+                  },
+                  "operator": "-",
+                  "operand": {
+                    "kind": "number",
+                    "id": "number@9:10",
+                    "span": {
+                      "start": 9,
+                      "end": 10
+                    },
+                    "value": 2,
+                    "raw": "2",
+                    "implicit": false
+                  }
+                }
+              ],
+              "id": "function@4:11",
+              "span": {
+                "start": 4,
+                "end": 11
+              }
+            },
+            {
+              "kind": "dice",
+              "diceKind": "standard",
+              "id": "dice@12:23",
+              "span": {
+                "start": 12,
+                "end": 23
+              },
+              "quantity": {
+                "kind": "parenthesized",
+                "id": "parenthesized@12:17",
+                "span": {
+                  "start": 12,
+                  "end": 17
+                },
+                "expression": {
+                  "kind": "binary",
+                  "id": "binary@13:16",
+                  "span": {
+                    "start": 13,
+                    "end": 16
+                  },
+                  "operator": "+",
+                  "left": {
+                    "kind": "number",
+                    "id": "number@13:14",
+                    "span": {
+                      "start": 13,
+                      "end": 14
+                    },
+                    "value": 1,
+                    "raw": "1",
+                    "implicit": false
+                  },
+                  "right": {
+                    "kind": "number",
+                    "id": "number@15:16",
+                    "span": {
+                      "start": 15,
+                      "end": 16
+                    },
+                    "value": 2,
+                    "raw": "2",
+                    "implicit": false
+                  }
+                }
+              },
+              "sides": {
+                "kind": "parenthesized",
+                "id": "parenthesized@18:23",
+                "span": {
+                  "start": 18,
+                  "end": 23
+                },
+                "expression": {
+                  "kind": "binary",
+                  "id": "binary@19:22",
+                  "span": {
+                    "start": 19,
+                    "end": 22
+                  },
+                  "operator": "+",
+                  "left": {
+                    "kind": "number",
+                    "id": "number@19:20",
+                    "span": {
+                      "start": 19,
+                      "end": 20
+                    },
+                    "value": 3,
+                    "raw": "3",
+                    "implicit": false
+                  },
+                  "right": {
+                    "kind": "number",
+                    "id": "number@21:22",
+                    "span": {
+                      "start": 21,
+                      "end": 22
+                    },
+                    "value": 3,
+                    "raw": "3",
+                    "implicit": false
+                  }
+                }
+              },
+              "modifiers": []
+            }
+          ],
+          "id": "function@0:24",
+          "span": {
+            "start": 0,
+            "end": 24
+          }
+        }
+      }
+    },
+    {
+      "name": "parser-64",
+      "input": "dF",
+      "outcome": {
+        "value": {
+          "kind": "dice",
+          "diceKind": "fudge",
+          "id": "dice@0:2",
+          "span": {
+            "start": 0,
+            "end": 2
+          },
+          "quantity": {
+            "kind": "number",
+            "id": "implicit-number@0:0",
+            "span": {
+              "start": 0,
+              "end": 0
+            },
+            "value": 1,
+            "raw": "1",
+            "implicit": true
+          },
+          "variant": 2,
+          "modifiers": []
+        }
+      }
+    },
+    {
+      "name": "parser-65",
+      "input": "4dF.1",
+      "outcome": {
+        "value": {
+          "kind": "dice",
+          "diceKind": "fudge",
+          "id": "dice@0:5",
+          "span": {
+            "start": 0,
+            "end": 5
+          },
+          "quantity": {
+            "kind": "number",
+            "id": "number@0:1",
+            "span": {
+              "start": 0,
+              "end": 1
+            },
+            "value": 4,
+            "raw": "4",
+            "implicit": false
+          },
+          "variant": 1,
+          "modifiers": []
+        }
+      }
+    },
+    {
+      "name": "parser-66",
+      "input": "2d6!rukh1dl1min-1max+6cscfsa",
+      "outcome": {
+        "value": {
+          "kind": "dice",
+          "diceKind": "standard",
+          "id": "dice@0:28",
+          "span": {
+            "start": 0,
+            "end": 28
+          },
+          "quantity": {
+            "kind": "number",
+            "id": "number@0:1",
+            "span": {
+              "start": 0,
+              "end": 1
+            },
+            "value": 2,
+            "raw": "2",
+            "implicit": false
+          },
+          "sides": {
+            "kind": "number",
+            "id": "number@2:3",
+            "span": {
+              "start": 2,
+              "end": 3
+            },
+            "value": 6,
+            "raw": "6",
+            "implicit": false
+          },
+          "modifiers": [
+            {
+              "kind": "explode",
+              "id": "explode@3:4",
+              "span": {
+                "start": 3,
+                "end": 4
+              },
+              "compound": false,
+              "penetrate": false,
+              "maxExplosions": null,
+              "compare": null
+            },
+            {
+              "kind": "reroll",
+              "id": "reroll@4:5",
+              "span": {
+                "start": 4,
+                "end": 5
+              },
+              "once": false,
+              "compare": null
+            },
+            {
+              "kind": "unique",
+              "id": "unique@5:6",
+              "span": {
+                "start": 5,
+                "end": 6
+              },
+              "once": false,
+              "compare": null
+            },
+            {
+              "kind": "keep",
+              "id": "keep@6:9",
+              "span": {
+                "start": 6,
+                "end": 9
+              },
+              "selection": "highest",
+              "quantity": 1
+            },
+            {
+              "kind": "drop",
+              "id": "drop@9:12",
+              "span": {
+                "start": 9,
+                "end": 12
+              },
+              "selection": "lowest",
+              "quantity": 1
+            },
+            {
+              "kind": "min",
+              "id": "min@12:17",
+              "span": {
+                "start": 12,
+                "end": 17
+              },
+              "value": -1
+            },
+            {
+              "kind": "max",
+              "id": "max@17:22",
+              "span": {
+                "start": 17,
+                "end": 22
+              },
+              "value": 6
+            },
+            {
+              "kind": "critical-success",
+              "id": "critical-success@22:24",
+              "span": {
+                "start": 22,
+                "end": 24
+              },
+              "compare": null
+            },
+            {
+              "kind": "critical-failure",
+              "id": "critical-failure@24:26",
+              "span": {
+                "start": 24,
+                "end": 26
+              },
+              "compare": null
+            },
+            {
+              "kind": "sort",
+              "id": "sort@26:28",
+              "span": {
+                "start": 26,
+                "end": 28
+              },
+              "direction": "ascending"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "name": "parser-67",
+      "input": "8d10!!p>=10>=8f=1dl1kh2min1max10ro<2uo=3cs=10cf=1sd",
+      "outcome": {
+        "value": {
+          "kind": "dice",
+          "diceKind": "standard",
+          "id": "dice@0:51",
+          "span": {
+            "start": 0,
+            "end": 51
+          },
+          "quantity": {
+            "kind": "number",
+            "id": "number@0:1",
+            "span": {
+              "start": 0,
+              "end": 1
+            },
+            "value": 8,
+            "raw": "8",
+            "implicit": false
+          },
+          "sides": {
+            "kind": "number",
+            "id": "number@2:4",
+            "span": {
+              "start": 2,
+              "end": 4
+            },
+            "value": 10,
+            "raw": "10",
+            "implicit": false
+          },
+          "modifiers": [
+            {
+              "kind": "explode",
+              "id": "explode@4:11",
+              "span": {
+                "start": 4,
+                "end": 11
+              },
+              "compound": true,
+              "penetrate": true,
+              "maxExplosions": null,
+              "compare": {
+                "kind": "compare-point",
+                "id": "compare-point@7:11",
+                "span": {
+                  "start": 7,
+                  "end": 11
+                },
+                "operator": ">=",
+                "value": 10
+              }
+            },
+            {
+              "kind": "target",
+              "id": "target@11:17",
+              "span": {
+                "start": 11,
+                "end": 17
+              },
+              "success": {
+                "kind": "compare-point",
+                "id": "compare-point@11:14",
+                "span": {
+                  "start": 11,
+                  "end": 14
+                },
+                "operator": ">=",
+                "value": 8
+              },
+              "failure": {
+                "kind": "compare-point",
+                "id": "compare-point@15:17",
+                "span": {
+                  "start": 15,
+                  "end": 17
+                },
+                "operator": "=",
+                "value": 1
+              }
+            },
+            {
+              "kind": "drop",
+              "id": "drop@17:20",
+              "span": {
+                "start": 17,
+                "end": 20
+              },
+              "selection": "lowest",
+              "quantity": 1
+            },
+            {
+              "kind": "keep",
+              "id": "keep@20:23",
+              "span": {
+                "start": 20,
+                "end": 23
+              },
+              "selection": "highest",
+              "quantity": 2
+            },
+            {
+              "kind": "min",
+              "id": "min@23:27",
+              "span": {
+                "start": 23,
+                "end": 27
+              },
+              "value": 1
+            },
+            {
+              "kind": "max",
+              "id": "max@27:32",
+              "span": {
+                "start": 27,
+                "end": 32
+              },
+              "value": 10
+            },
+            {
+              "kind": "reroll",
+              "id": "reroll@32:36",
+              "span": {
+                "start": 32,
+                "end": 36
+              },
+              "once": true,
+              "compare": {
+                "kind": "compare-point",
+                "id": "compare-point@34:36",
+                "span": {
+                  "start": 34,
+                  "end": 36
+                },
+                "operator": "<",
+                "value": 2
+              }
+            },
+            {
+              "kind": "unique",
+              "id": "unique@36:40",
+              "span": {
+                "start": 36,
+                "end": 40
+              },
+              "once": true,
+              "compare": {
+                "kind": "compare-point",
+                "id": "compare-point@38:40",
+                "span": {
+                  "start": 38,
+                  "end": 40
+                },
+                "operator": "=",
+                "value": 3
+              }
+            },
+            {
+              "kind": "critical-success",
+              "id": "critical-success@40:45",
+              "span": {
+                "start": 40,
+                "end": 45
+              },
+              "compare": {
+                "kind": "compare-point",
+                "id": "compare-point@42:45",
+                "span": {
+                  "start": 42,
+                  "end": 45
+                },
+                "operator": "=",
+                "value": 10
+              }
+            },
+            {
+              "kind": "critical-failure",
+              "id": "critical-failure@45:49",
+              "span": {
+                "start": 45,
+                "end": 49
+              },
+              "compare": {
+                "kind": "compare-point",
+                "id": "compare-point@47:49",
+                "span": {
+                  "start": 47,
+                  "end": 49
+                },
+                "operator": "=",
+                "value": 1
+              }
+            },
+            {
+              "kind": "sort",
+              "id": "sort@49:51",
+              "span": {
+                "start": 49,
+                "end": 51
+              },
+              "direction": "descending"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "name": "parser-68",
+      "input": "1d6!2",
+      "outcome": {
+        "value": {
+          "kind": "dice",
+          "diceKind": "standard",
+          "id": "dice@0:5",
+          "span": {
+            "start": 0,
+            "end": 5
+          },
+          "quantity": {
+            "kind": "number",
+            "id": "number@0:1",
+            "span": {
+              "start": 0,
+              "end": 1
+            },
+            "value": 1,
+            "raw": "1",
+            "implicit": false
+          },
+          "sides": {
+            "kind": "number",
+            "id": "number@2:3",
+            "span": {
+              "start": 2,
+              "end": 3
+            },
+            "value": 6,
+            "raw": "6",
+            "implicit": false
+          },
+          "modifiers": [
+            {
+              "kind": "explode",
+              "id": "explode@3:5",
+              "span": {
+                "start": 3,
+                "end": 5
+              },
+              "compound": false,
+              "penetrate": false,
+              "maxExplosions": 2,
+              "compare": null
+            }
+          ]
+        }
+      }
+    },
+    {
+      "name": "parser-69",
+      "input": "1d6!!3",
+      "outcome": {
+        "value": {
+          "kind": "dice",
+          "diceKind": "standard",
+          "id": "dice@0:6",
+          "span": {
+            "start": 0,
+            "end": 6
+          },
+          "quantity": {
+            "kind": "number",
+            "id": "number@0:1",
+            "span": {
+              "start": 0,
+              "end": 1
+            },
+            "value": 1,
+            "raw": "1",
+            "implicit": false
+          },
+          "sides": {
+            "kind": "number",
+            "id": "number@2:3",
+            "span": {
+              "start": 2,
+              "end": 3
+            },
+            "value": 6,
+            "raw": "6",
+            "implicit": false
+          },
+          "modifiers": [
+            {
+              "kind": "explode",
+              "id": "explode@3:6",
+              "span": {
+                "start": 3,
+                "end": 6
+              },
+              "compound": true,
+              "penetrate": false,
+              "maxExplosions": 3,
+              "compare": null
+            }
+          ]
+        }
+      }
+    },
+    {
+      "name": "parser-70",
+      "input": "1d6!p4",
+      "outcome": {
+        "value": {
+          "kind": "dice",
+          "diceKind": "standard",
+          "id": "dice@0:6",
+          "span": {
+            "start": 0,
+            "end": 6
+          },
+          "quantity": {
+            "kind": "number",
+            "id": "number@0:1",
+            "span": {
+              "start": 0,
+              "end": 1
+            },
+            "value": 1,
+            "raw": "1",
+            "implicit": false
+          },
+          "sides": {
+            "kind": "number",
+            "id": "number@2:3",
+            "span": {
+              "start": 2,
+              "end": 3
+            },
+            "value": 6,
+            "raw": "6",
+            "implicit": false
+          },
+          "modifiers": [
+            {
+              "kind": "explode",
+              "id": "explode@3:6",
+              "span": {
+                "start": 3,
+                "end": 6
+              },
+              "compound": false,
+              "penetrate": true,
+              "maxExplosions": 4,
+              "compare": null
+            }
+          ]
+        }
+      }
+    },
+    {
+      "name": "parser-71",
+      "input": "1d6!!p5>=6",
+      "outcome": {
+        "value": {
+          "kind": "dice",
+          "diceKind": "standard",
+          "id": "dice@0:10",
+          "span": {
+            "start": 0,
+            "end": 10
+          },
+          "quantity": {
+            "kind": "number",
+            "id": "number@0:1",
+            "span": {
+              "start": 0,
+              "end": 1
+            },
+            "value": 1,
+            "raw": "1",
+            "implicit": false
+          },
+          "sides": {
+            "kind": "number",
+            "id": "number@2:3",
+            "span": {
+              "start": 2,
+              "end": 3
+            },
+            "value": 6,
+            "raw": "6",
+            "implicit": false
+          },
+          "modifiers": [
+            {
+              "kind": "explode",
+              "id": "explode@3:10",
+              "span": {
+                "start": 3,
+                "end": 10
+              },
+              "compound": true,
+              "penetrate": true,
+              "maxExplosions": 5,
+              "compare": {
+                "kind": "compare-point",
+                "id": "compare-point@7:10",
+                "span": {
+                  "start": 7,
+                  "end": 10
+                },
+                "operator": ">=",
+                "value": 6
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "name": "parser-72",
+      "input": "1d6!2!=5",
+      "outcome": {
+        "value": {
+          "kind": "dice",
+          "diceKind": "standard",
+          "id": "dice@0:8",
+          "span": {
+            "start": 0,
+            "end": 8
+          },
+          "quantity": {
+            "kind": "number",
+            "id": "number@0:1",
+            "span": {
+              "start": 0,
+              "end": 1
+            },
+            "value": 1,
+            "raw": "1",
+            "implicit": false
+          },
+          "sides": {
+            "kind": "number",
+            "id": "number@2:3",
+            "span": {
+              "start": 2,
+              "end": 3
+            },
+            "value": 6,
+            "raw": "6",
+            "implicit": false
+          },
+          "modifiers": [
+            {
+              "kind": "explode",
+              "id": "explode@3:8",
+              "span": {
+                "start": 3,
+                "end": 8
+              },
+              "compound": false,
+              "penetrate": false,
+              "maxExplosions": 2,
+              "compare": {
+                "kind": "compare-point",
+                "id": "compare-point@5:8",
+                "span": {
+                  "start": 5,
+                  "end": 8
+                },
+                "operator": "!=",
+                "value": 5
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "name": "parser-73",
+      "input": "2d20pool(+2)pool(-1)advdis",
+      "outcome": {
+        "value": {
+          "kind": "dice",
+          "diceKind": "standard",
+          "id": "dice@0:26",
+          "span": {
+            "start": 0,
+            "end": 26
+          },
+          "quantity": {
+            "kind": "number",
+            "id": "number@0:1",
+            "span": {
+              "start": 0,
+              "end": 1
+            },
+            "value": 2,
+            "raw": "2",
+            "implicit": false
+          },
+          "sides": {
+            "kind": "number",
+            "id": "number@2:4",
+            "span": {
+              "start": 2,
+              "end": 4
+            },
+            "value": 20,
+            "raw": "20",
+            "implicit": false
+          },
+          "modifiers": [
+            {
+              "kind": "pool-adjustment",
+              "id": "pool-adjustment@4:12",
+              "span": {
+                "start": 4,
+                "end": 12
+              },
+              "delta": 2
+            },
+            {
+              "kind": "pool-adjustment",
+              "id": "pool-adjustment@12:20",
+              "span": {
+                "start": 12,
+                "end": 20
+              },
+              "delta": -1
+            },
+            {
+              "kind": "pool-selection",
+              "id": "pool-selection@20:23",
+              "span": {
+                "start": 20,
+                "end": 23
+              },
+              "selection": "highest"
+            },
+            {
+              "kind": "pool-selection",
+              "id": "pool-selection@23:26",
+              "span": {
+                "start": 23,
+                "end": 26
+              },
+              "selection": "lowest"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "name": "parser-74",
+      "input": "2d20pool(0)",
+      "outcome": {
+        "value": {
+          "kind": "dice",
+          "diceKind": "standard",
+          "id": "dice@0:11",
+          "span": {
+            "start": 0,
+            "end": 11
+          },
+          "quantity": {
+            "kind": "number",
+            "id": "number@0:1",
+            "span": {
+              "start": 0,
+              "end": 1
+            },
+            "value": 2,
+            "raw": "2",
+            "implicit": false
+          },
+          "sides": {
+            "kind": "number",
+            "id": "number@2:4",
+            "span": {
+              "start": 2,
+              "end": 4
+            },
+            "value": 20,
+            "raw": "20",
+            "implicit": false
+          },
+          "modifiers": [
+            {
+              "kind": "pool-adjustment",
+              "id": "pool-adjustment@4:11",
+              "span": {
+                "start": 4,
+                "end": 11
+              },
+              "delta": 0
+            }
+          ]
+        }
+      }
+    },
+    {
+      "name": "parser-75",
+      "input": "2d20pool(+0)",
+      "outcome": {
+        "value": {
+          "kind": "dice",
+          "diceKind": "standard",
+          "id": "dice@0:12",
+          "span": {
+            "start": 0,
+            "end": 12
+          },
+          "quantity": {
+            "kind": "number",
+            "id": "number@0:1",
+            "span": {
+              "start": 0,
+              "end": 1
+            },
+            "value": 2,
+            "raw": "2",
+            "implicit": false
+          },
+          "sides": {
+            "kind": "number",
+            "id": "number@2:4",
+            "span": {
+              "start": 2,
+              "end": 4
+            },
+            "value": 20,
+            "raw": "20",
+            "implicit": false
+          },
+          "modifiers": [
+            {
+              "kind": "pool-adjustment",
+              "id": "pool-adjustment@4:12",
+              "span": {
+                "start": 4,
+                "end": 12
+              },
+              "delta": 0
+            }
+          ]
+        }
+      }
+    },
+    {
+      "name": "parser-76",
+      "input": "2d20pool(-0)",
+      "outcome": {
+        "value": {
+          "kind": "dice",
+          "diceKind": "standard",
+          "id": "dice@0:12",
+          "span": {
+            "start": 0,
+            "end": 12
+          },
+          "quantity": {
+            "kind": "number",
+            "id": "number@0:1",
+            "span": {
+              "start": 0,
+              "end": 1
+            },
+            "value": 2,
+            "raw": "2",
+            "implicit": false
+          },
+          "sides": {
+            "kind": "number",
+            "id": "number@2:4",
+            "span": {
+              "start": 2,
+              "end": 4
+            },
+            "value": 20,
+            "raw": "20",
+            "implicit": false
+          },
+          "modifiers": [
+            {
+              "kind": "pool-adjustment",
+              "id": "pool-adjustment@4:12",
+              "span": {
+                "start": 4,
+                "end": 12
+              },
+              "delta": 0
+            }
+          ]
+        }
+      }
+    },
+    {
+      "name": "parser-77",
+      "input": "1d5step(+2)step(-1)",
+      "outcome": {
+        "value": {
+          "kind": "dice",
+          "diceKind": "standard",
+          "id": "dice@0:19",
+          "span": {
+            "start": 0,
+            "end": 19
+          },
+          "quantity": {
+            "kind": "number",
+            "id": "number@0:1",
+            "span": {
+              "start": 0,
+              "end": 1
+            },
+            "value": 1,
+            "raw": "1",
+            "implicit": false
+          },
+          "sides": {
+            "kind": "number",
+            "id": "number@2:3",
+            "span": {
+              "start": 2,
+              "end": 3
+            },
+            "value": 5,
+            "raw": "5",
+            "implicit": false
+          },
+          "modifiers": [
+            {
+              "kind": "dice-step",
+              "id": "dice-step@3:11",
+              "span": {
+                "start": 3,
+                "end": 11
+              },
+              "delta": 2
+            },
+            {
+              "kind": "dice-step",
+              "id": "dice-step@11:19",
+              "span": {
+                "start": 11,
+                "end": 19
+              },
+              "delta": -1
+            }
+          ]
+        }
+      }
+    },
+    {
+      "name": "parser-78",
+      "input": "1d20+2adv",
+      "outcome": {
+        "value": {
+          "kind": "binary",
+          "id": "binary@0:9",
+          "span": {
+            "start": 0,
+            "end": 9
+          },
+          "operator": "+",
+          "left": {
+            "kind": "dice",
+            "diceKind": "standard",
+            "id": "dice@0:4",
+            "span": {
+              "start": 0,
+              "end": 4
+            },
+            "quantity": {
+              "kind": "number",
+              "id": "number@0:1",
+              "span": {
+                "start": 0,
+                "end": 1
+              },
+              "value": 1,
+              "raw": "1",
+              "implicit": false
+            },
+            "sides": {
+              "kind": "number",
+              "id": "number@2:4",
+              "span": {
+                "start": 2,
+                "end": 4
+              },
+              "value": 20,
+              "raw": "20",
+              "implicit": false
+            },
+            "modifiers": [
+              {
+                "kind": "pool-selection",
+                "id": "pool-selection@6:9",
+                "span": {
+                  "start": 6,
+                  "end": 9
+                },
+                "selection": "highest"
+              }
+            ]
+          },
+          "right": {
+            "kind": "number",
+            "id": "number@5:6",
+            "span": {
+              "start": 5,
+              "end": 6
+            },
+            "value": 2,
+            "raw": "2",
+            "implicit": false
+          }
+        }
+      }
+    },
+    {
+      "name": "parser-79",
+      "input": "1d20+2pool(+2)advdis",
+      "outcome": {
+        "value": {
+          "kind": "binary",
+          "id": "binary@0:20",
+          "span": {
+            "start": 0,
+            "end": 20
+          },
+          "operator": "+",
+          "left": {
+            "kind": "dice",
+            "diceKind": "standard",
+            "id": "dice@0:4",
+            "span": {
+              "start": 0,
+              "end": 4
+            },
+            "quantity": {
+              "kind": "number",
+              "id": "number@0:1",
+              "span": {
+                "start": 0,
+                "end": 1
+              },
+              "value": 1,
+              "raw": "1",
+              "implicit": false
+            },
+            "sides": {
+              "kind": "number",
+              "id": "number@2:4",
+              "span": {
+                "start": 2,
+                "end": 4
+              },
+              "value": 20,
+              "raw": "20",
+              "implicit": false
+            },
+            "modifiers": [
+              {
+                "kind": "pool-adjustment",
+                "id": "pool-adjustment@6:14",
+                "span": {
+                  "start": 6,
+                  "end": 14
+                },
+                "delta": 2
+              },
+              {
+                "kind": "pool-selection",
+                "id": "pool-selection@14:17",
+                "span": {
+                  "start": 14,
+                  "end": 17
+                },
+                "selection": "highest"
+              },
+              {
+                "kind": "pool-selection",
+                "id": "pool-selection@17:20",
+                "span": {
+                  "start": 17,
+                  "end": 20
+                },
+                "selection": "lowest"
+              }
+            ]
+          },
+          "right": {
+            "kind": "number",
+            "id": "number@5:6",
+            "span": {
+              "start": 5,
+              "end": 6
+            },
+            "value": 2,
+            "raw": "2",
+            "implicit": false
+          }
+        }
+      }
+    },
+    {
+      "name": "parser-80",
+      "input": "(1d20+2)adv",
+      "outcome": {
+        "value": {
+          "kind": "parenthesized",
+          "id": "parenthesized@0:11",
+          "span": {
+            "start": 0,
+            "end": 11
+          },
+          "expression": {
+            "kind": "binary",
+            "id": "binary@1:7",
+            "span": {
+              "start": 1,
+              "end": 7
+            },
+            "operator": "+",
+            "left": {
+              "kind": "dice",
+              "diceKind": "standard",
+              "id": "dice@1:5",
+              "span": {
+                "start": 1,
+                "end": 5
+              },
+              "quantity": {
+                "kind": "number",
+                "id": "number@1:2",
+                "span": {
+                  "start": 1,
+                  "end": 2
+                },
+                "value": 1,
+                "raw": "1",
+                "implicit": false
+              },
+              "sides": {
+                "kind": "number",
+                "id": "number@3:5",
+                "span": {
+                  "start": 3,
+                  "end": 5
+                },
+                "value": 20,
+                "raw": "20",
+                "implicit": false
+              },
+              "modifiers": [
+                {
+                  "kind": "pool-selection",
+                  "id": "pool-selection@8:11",
+                  "span": {
+                    "start": 8,
+                    "end": 11
+                  },
+                  "selection": "highest"
+                }
+              ]
+            },
+            "right": {
+              "kind": "number",
+              "id": "number@6:7",
+              "span": {
+                "start": 6,
+                "end": 7
+              },
+              "value": 2,
+              "raw": "2",
+              "implicit": false
+            }
+          }
+        }
+      }
+    },
+    {
+      "name": "parser-81",
+      "input": "1d5+2step(+1)",
+      "outcome": {
+        "value": {
+          "kind": "binary",
+          "id": "binary@0:13",
+          "span": {
+            "start": 0,
+            "end": 13
+          },
+          "operator": "+",
+          "left": {
+            "kind": "dice",
+            "diceKind": "standard",
+            "id": "dice@0:3",
+            "span": {
+              "start": 0,
+              "end": 3
+            },
+            "quantity": {
+              "kind": "number",
+              "id": "number@0:1",
+              "span": {
+                "start": 0,
+                "end": 1
+              },
+              "value": 1,
+              "raw": "1",
+              "implicit": false
+            },
+            "sides": {
+              "kind": "number",
+              "id": "number@2:3",
+              "span": {
+                "start": 2,
+                "end": 3
+              },
+              "value": 5,
+              "raw": "5",
+              "implicit": false
+            },
+            "modifiers": [
+              {
+                "kind": "dice-step",
+                "id": "dice-step@5:13",
+                "span": {
+                  "start": 5,
+                  "end": 13
+                },
+                "delta": 1
+              }
+            ]
+          },
+          "right": {
+            "kind": "number",
+            "id": "number@4:5",
+            "span": {
+              "start": 4,
+              "end": 5
+            },
+            "value": 2,
+            "raw": "2",
+            "implicit": false
+          }
+        }
+      }
+    },
+    {
+      "name": "parser-82",
+      "input": "1d20adv+2",
+      "outcome": {
+        "value": {
+          "kind": "binary",
+          "id": "binary@0:9",
+          "span": {
+            "start": 0,
+            "end": 9
+          },
+          "operator": "+",
+          "left": {
+            "kind": "dice",
+            "diceKind": "standard",
+            "id": "dice@0:7",
+            "span": {
+              "start": 0,
+              "end": 7
+            },
+            "quantity": {
+              "kind": "number",
+              "id": "number@0:1",
+              "span": {
+                "start": 0,
+                "end": 1
+              },
+              "value": 1,
+              "raw": "1",
+              "implicit": false
+            },
+            "sides": {
+              "kind": "number",
+              "id": "number@2:4",
+              "span": {
+                "start": 2,
+                "end": 4
+              },
+              "value": 20,
+              "raw": "20",
+              "implicit": false
+            },
+            "modifiers": [
+              {
+                "kind": "pool-selection",
+                "id": "pool-selection@4:7",
+                "span": {
+                  "start": 4,
+                  "end": 7
+                },
+                "selection": "highest"
+              }
+            ]
+          },
+          "right": {
+            "kind": "number",
+            "id": "number@8:9",
+            "span": {
+              "start": 8,
+              "end": 9
+            },
+            "value": 2,
+            "raw": "2",
+            "implicit": false
+          }
+        }
+      }
+    },
+    {
+      "name": "parser-83",
+      "input": "1d6!+1",
+      "outcome": {
+        "value": {
+          "kind": "binary",
+          "id": "binary@0:6",
+          "span": {
+            "start": 0,
+            "end": 6
+          },
+          "operator": "+",
+          "left": {
+            "kind": "dice",
+            "diceKind": "standard",
+            "id": "dice@0:4",
+            "span": {
+              "start": 0,
+              "end": 4
+            },
+            "quantity": {
+              "kind": "number",
+              "id": "number@0:1",
+              "span": {
+                "start": 0,
+                "end": 1
+              },
+              "value": 1,
+              "raw": "1",
+              "implicit": false
+            },
+            "sides": {
+              "kind": "number",
+              "id": "number@2:3",
+              "span": {
+                "start": 2,
+                "end": 3
+              },
+              "value": 6,
+              "raw": "6",
+              "implicit": false
+            },
+            "modifiers": [
+              {
+                "kind": "explode",
+                "id": "explode@3:4",
+                "span": {
+                  "start": 3,
+                  "end": 4
+                },
+                "compound": false,
+                "penetrate": false,
+                "maxExplosions": null,
+                "compare": null
+              }
+            ]
+          },
+          "right": {
+            "kind": "number",
+            "id": "number@5:6",
+            "span": {
+              "start": 5,
+              "end": 6
+            },
+            "value": 1,
+            "raw": "1",
+            "implicit": false
+          }
+        }
+      }
+    },
+    {
+      "name": "parser-84",
+      "input": "1d6!-1",
+      "outcome": {
+        "value": {
+          "kind": "binary",
+          "id": "binary@0:6",
+          "span": {
+            "start": 0,
+            "end": 6
+          },
+          "operator": "-",
+          "left": {
+            "kind": "dice",
+            "diceKind": "standard",
+            "id": "dice@0:4",
+            "span": {
+              "start": 0,
+              "end": 4
+            },
+            "quantity": {
+              "kind": "number",
+              "id": "number@0:1",
+              "span": {
+                "start": 0,
+                "end": 1
+              },
+              "value": 1,
+              "raw": "1",
+              "implicit": false
+            },
+            "sides": {
+              "kind": "number",
+              "id": "number@2:3",
+              "span": {
+                "start": 2,
+                "end": 3
+              },
+              "value": 6,
+              "raw": "6",
+              "implicit": false
+            },
+            "modifiers": [
+              {
+                "kind": "explode",
+                "id": "explode@3:4",
+                "span": {
+                  "start": 3,
+                  "end": 4
+                },
+                "compound": false,
+                "penetrate": false,
+                "maxExplosions": null,
+                "compare": null
+              }
+            ]
+          },
+          "right": {
+            "kind": "number",
+            "id": "number@5:6",
+            "span": {
+              "start": 5,
+              "end": 6
+            },
+            "value": 1,
+            "raw": "1",
+            "implicit": false
+          }
+        }
+      }
+    },
+    {
+      "name": "parser-85",
+      "input": "1d6r!=1",
+      "outcome": {
+        "value": {
+          "kind": "dice",
+          "diceKind": "standard",
+          "id": "dice@0:7",
+          "span": {
+            "start": 0,
+            "end": 7
+          },
+          "quantity": {
+            "kind": "number",
+            "id": "number@0:1",
+            "span": {
+              "start": 0,
+              "end": 1
+            },
+            "value": 1,
+            "raw": "1",
+            "implicit": false
+          },
+          "sides": {
+            "kind": "number",
+            "id": "number@2:3",
+            "span": {
+              "start": 2,
+              "end": 3
+            },
+            "value": 6,
+            "raw": "6",
+            "implicit": false
+          },
+          "modifiers": [
+            {
+              "kind": "reroll",
+              "id": "reroll@3:7",
+              "span": {
+                "start": 3,
+                "end": 7
+              },
+              "once": false,
+              "compare": {
+                "kind": "compare-point",
+                "id": "compare-point@4:7",
+                "span": {
+                  "start": 4,
+                  "end": 7
+                },
+                "operator": "!=",
+                "value": 1
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "name": "parser-86",
+      "input": "{1d6,2d8+3}kh1",
+      "outcome": {
+        "value": {
+          "kind": "group",
+          "id": "group@0:14",
+          "span": {
+            "start": 0,
+            "end": 14
+          },
+          "expressions": [
+            {
+              "kind": "dice",
+              "diceKind": "standard",
+              "id": "dice@1:4",
+              "span": {
+                "start": 1,
+                "end": 4
+              },
+              "quantity": {
+                "kind": "number",
+                "id": "number@1:2",
+                "span": {
+                  "start": 1,
+                  "end": 2
+                },
+                "value": 1,
+                "raw": "1",
+                "implicit": false
+              },
+              "sides": {
+                "kind": "number",
+                "id": "number@3:4",
+                "span": {
+                  "start": 3,
+                  "end": 4
+                },
+                "value": 6,
+                "raw": "6",
+                "implicit": false
+              },
+              "modifiers": []
+            },
+            {
+              "kind": "binary",
+              "id": "binary@5:10",
+              "span": {
+                "start": 5,
+                "end": 10
+              },
+              "operator": "+",
+              "left": {
+                "kind": "dice",
+                "diceKind": "standard",
+                "id": "dice@5:8",
+                "span": {
+                  "start": 5,
+                  "end": 8
+                },
+                "quantity": {
+                  "kind": "number",
+                  "id": "number@5:6",
+                  "span": {
+                    "start": 5,
+                    "end": 6
+                  },
+                  "value": 2,
+                  "raw": "2",
+                  "implicit": false
+                },
+                "sides": {
+                  "kind": "number",
+                  "id": "number@7:8",
+                  "span": {
+                    "start": 7,
+                    "end": 8
+                  },
+                  "value": 8,
+                  "raw": "8",
+                  "implicit": false
+                },
+                "modifiers": []
+              },
+              "right": {
+                "kind": "number",
+                "id": "number@9:10",
+                "span": {
+                  "start": 9,
+                  "end": 10
+                },
+                "value": 3,
+                "raw": "3",
+                "implicit": false
+              }
+            }
+          ],
+          "modifiers": [
+            {
+              "kind": "keep",
+              "id": "keep@11:14",
+              "span": {
+                "start": 11,
+                "end": 14
+              },
+              "selection": "highest",
+              "quantity": 1
+            }
+          ]
+        }
+      }
+    },
+    {
+      "name": "parser-87",
+      "input": "{1d6,{2d8,3d4}kl1}sd",
+      "outcome": {
+        "value": {
+          "kind": "group",
+          "id": "group@0:20",
+          "span": {
+            "start": 0,
+            "end": 20
+          },
+          "expressions": [
+            {
+              "kind": "dice",
+              "diceKind": "standard",
+              "id": "dice@1:4",
+              "span": {
+                "start": 1,
+                "end": 4
+              },
+              "quantity": {
+                "kind": "number",
+                "id": "number@1:2",
+                "span": {
+                  "start": 1,
+                  "end": 2
+                },
+                "value": 1,
+                "raw": "1",
+                "implicit": false
+              },
+              "sides": {
+                "kind": "number",
+                "id": "number@3:4",
+                "span": {
+                  "start": 3,
+                  "end": 4
+                },
+                "value": 6,
+                "raw": "6",
+                "implicit": false
+              },
+              "modifiers": []
+            },
+            {
+              "kind": "group",
+              "id": "group@5:17",
+              "span": {
+                "start": 5,
+                "end": 17
+              },
+              "expressions": [
+                {
+                  "kind": "dice",
+                  "diceKind": "standard",
+                  "id": "dice@6:9",
+                  "span": {
+                    "start": 6,
+                    "end": 9
+                  },
+                  "quantity": {
+                    "kind": "number",
+                    "id": "number@6:7",
+                    "span": {
+                      "start": 6,
+                      "end": 7
+                    },
+                    "value": 2,
+                    "raw": "2",
+                    "implicit": false
+                  },
+                  "sides": {
+                    "kind": "number",
+                    "id": "number@8:9",
+                    "span": {
+                      "start": 8,
+                      "end": 9
+                    },
+                    "value": 8,
+                    "raw": "8",
+                    "implicit": false
+                  },
+                  "modifiers": []
+                },
+                {
+                  "kind": "dice",
+                  "diceKind": "standard",
+                  "id": "dice@10:13",
+                  "span": {
+                    "start": 10,
+                    "end": 13
+                  },
+                  "quantity": {
+                    "kind": "number",
+                    "id": "number@10:11",
+                    "span": {
+                      "start": 10,
+                      "end": 11
+                    },
+                    "value": 3,
+                    "raw": "3",
+                    "implicit": false
+                  },
+                  "sides": {
+                    "kind": "number",
+                    "id": "number@12:13",
+                    "span": {
+                      "start": 12,
+                      "end": 13
+                    },
+                    "value": 4,
+                    "raw": "4",
+                    "implicit": false
+                  },
+                  "modifiers": []
+                }
+              ],
+              "modifiers": [
+                {
+                  "kind": "keep",
+                  "id": "keep@14:17",
+                  "span": {
+                    "start": 14,
+                    "end": 17
+                  },
+                  "selection": "lowest",
+                  "quantity": 1
+                }
+              ]
+            }
+          ],
+          "modifiers": [
+            {
+              "kind": "sort",
+              "id": "sort@18:20",
+              "span": {
+                "start": 18,
+                "end": 20
+              },
+              "direction": "descending"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "name": "parser-88",
+      "input": " 1d6 + 2 ",
+      "outcome": {
+        "value": {
+          "kind": "binary",
+          "id": "binary@1:8",
+          "span": {
+            "start": 1,
+            "end": 8
+          },
+          "operator": "+",
+          "left": {
+            "kind": "dice",
+            "diceKind": "standard",
+            "id": "dice@1:4",
+            "span": {
+              "start": 1,
+              "end": 4
+            },
+            "quantity": {
+              "kind": "number",
+              "id": "number@1:2",
+              "span": {
+                "start": 1,
+                "end": 2
+              },
+              "value": 1,
+              "raw": "1",
+              "implicit": false
+            },
+            "sides": {
+              "kind": "number",
+              "id": "number@3:4",
+              "span": {
+                "start": 3,
+                "end": 4
+              },
+              "value": 6,
+              "raw": "6",
+              "implicit": false
+            },
+            "modifiers": []
+          },
+          "right": {
+            "kind": "number",
+            "id": "number@7:8",
+            "span": {
+              "start": 7,
+              "end": 8
+            },
+            "value": 2,
+            "raw": "2",
+            "implicit": false
+          }
+        }
+      }
+    },
+    {
+      "name": "parser-89",
+      "input": ".5+1.25",
+      "outcome": {
+        "error": {
+          "name": "DiceRollError",
+          "code": "INVALID_NOTATION",
+          "message": "Expected an expression at offset 0",
+          "span": {
+            "start": 0,
+            "end": 1
+          },
+          "input": ".5+1.25",
+          "details": {
+            "found": ".",
+            "expected": "number, dice, group, parenthesis, or function"
+          }
+        }
+      }
+    },
+    {
+      "name": "parser-90",
+      "input": "@",
+      "outcome": {
+        "error": {
+          "name": "DiceRollError",
+          "code": "INVALID_NOTATION",
+          "message": "Unexpected character at offset 0",
+          "span": {
+            "start": 0,
+            "end": 1
+          },
+          "input": "@",
+          "details": {
+            "found": "@"
+          }
+        }
+      }
+    },
+    {
+      "name": "parser-91",
+      "input": "$",
+      "outcome": {
+        "error": {
+          "name": "DiceRollError",
+          "code": "INVALID_NOTATION",
+          "message": "Unexpected character at offset 0",
+          "span": {
+            "start": 0,
+            "end": 1
+          },
+          "input": "$",
+          "details": {
+            "found": "$"
+          }
+        }
+      }
+    },
+    {
+      "name": "parser-92",
+      "input": "?",
+      "outcome": {
+        "error": {
+          "name": "DiceRollError",
+          "code": "INVALID_NOTATION",
+          "message": "Unexpected character at offset 0",
+          "span": {
+            "start": 0,
+            "end": 1
+          },
+          "input": "?",
+          "details": {
+            "found": "?"
+          }
+        }
+      }
+    },
+    {
+      "name": "parser-93",
+      "input": "🎲",
+      "outcome": {
+        "error": {
+          "name": "DiceRollError",
+          "code": "INVALID_NOTATION",
+          "message": "Unexpected character at offset 0",
+          "span": {
+            "start": 0,
+            "end": 1
+          },
+          "input": "🎲",
+          "details": {
+            "found": "\ud83c"
+          }
+        }
+      }
+    },
+    {
+      "name": "parser-94",
+      "input": "1d6&2",
+      "outcome": {
+        "error": {
+          "name": "DiceRollError",
+          "code": "INVALID_NOTATION",
+          "message": "Unexpected character at offset 3",
+          "span": {
+            "start": 3,
+            "end": 4
+          },
+          "input": "1d6&2",
+          "details": {
+            "found": "&"
+          }
+        }
+      }
+    },
+    {
+      "name": "parser-95",
+      "input": "0d6",
+      "outcome": {
+        "error": {
+          "name": "DiceRollError",
+          "code": "INVALID_NOTATION",
+          "message": "Dice quantity must be a positive integer",
+          "span": {
+            "start": 0,
+            "end": 1
+          },
+          "input": "0d6",
+          "details": {
+            "value": 0,
+            "argument": "quantity"
+          }
+        }
+      }
+    },
+    {
+      "name": "parser-96",
+      "input": "01d6",
+      "outcome": {
+        "error": {
+          "name": "DiceRollError",
+          "code": "INVALID_NOTATION",
+          "message": "Dice quantity must be a positive integer",
+          "span": {
+            "start": 0,
+            "end": 2
+          },
+          "input": "01d6",
+          "details": {
+            "value": 1,
+            "argument": "quantity"
+          }
+        }
+      }
+    },
+    {
+      "name": "parser-97",
+      "input": "1d00",
+      "outcome": {
+        "error": {
+          "name": "DiceRollError",
+          "code": "INVALID_NOTATION",
+          "message": "Dice sides must be a non-negative integer",
+          "span": {
+            "start": 2,
+            "end": 4
+          },
+          "input": "1d00",
+          "details": {
+            "value": 0,
+            "argument": "sides"
+          }
+        }
+      }
+    },
+    {
+      "name": "parser-98",
+      "input": "1d01",
+      "outcome": {
+        "error": {
+          "name": "DiceRollError",
+          "code": "INVALID_NOTATION",
+          "message": "Dice sides must be a non-negative integer",
+          "span": {
+            "start": 2,
+            "end": 4
+          },
+          "input": "1d01",
+          "details": {
+            "value": 1,
+            "argument": "sides"
+          }
+        }
+      }
+    },
+    {
+      "name": "parser-99",
+      "input": "dF.3",
+      "outcome": {
+        "error": {
+          "name": "DiceRollError",
+          "code": "INVALID_NOTATION",
+          "message": "Fudge dice variant must be 1 or 2",
+          "span": {
+            "start": 3,
+            "end": 4
+          },
+          "input": "dF.3",
+          "details": {
+            "found": "3"
+          }
+        }
+      }
+    },
+    {
+      "name": "parser-100",
+      "input": "dF.01",
+      "outcome": {
+        "error": {
+          "name": "DiceRollError",
+          "code": "INVALID_NOTATION",
+          "message": "Fudge dice variant must be 1 or 2",
+          "span": {
+            "start": 3,
+            "end": 5
+          },
+          "input": "dF.01",
+          "details": {
+            "found": "01"
+          }
+        }
+      }
+    },
+    {
+      "name": "parser-101",
+      "input": "{}",
+      "outcome": {
+        "error": {
+          "name": "DiceRollError",
+          "code": "INVALID_NOTATION",
+          "message": "Expected an expression at offset 1",
+          "span": {
+            "start": 1,
+            "end": 2
+          },
+          "input": "{}",
+          "details": {
+            "found": "}",
+            "expected": "number, dice, group, parenthesis, or function"
+          }
+        }
+      }
+    },
+    {
+      "name": "parser-102",
+      "input": "foo(1)",
+      "outcome": {
+        "error": {
+          "name": "DiceRollError",
+          "code": "INVALID_NOTATION",
+          "message": "Expected an expression at offset 0",
+          "span": {
+            "start": 0,
+            "end": 1
+          },
+          "input": "foo(1)",
+          "details": {
+            "found": "f",
+            "expected": "number, dice, group, parenthesis, or function"
+          }
+        }
+      }
+    },
+    {
+      "name": "parser-103",
+      "input": "1d6kh0",
+      "outcome": {
+        "error": {
+          "name": "DiceRollError",
+          "code": "INVALID_NOTATION",
+          "message": "keep quantity must be a positive integer",
+          "span": {
+            "start": 5,
+            "end": 6
+          },
+          "input": "1d6kh0",
+          "details": {
+            "value": 0
+          }
+        }
+      }
+    },
+    {
+      "name": "parser-104",
+      "input": "1d6kh01",
+      "outcome": {
+        "error": {
+          "name": "DiceRollError",
+          "code": "INVALID_NOTATION",
+          "message": "keep quantity must be a positive integer",
+          "span": {
+            "start": 5,
+            "end": 7
+          },
+          "input": "1d6kh01",
+          "details": {
+            "value": 1
+          }
+        }
+      }
+    },
+    {
+      "name": "parser-105",
+      "input": "(1+2",
+      "outcome": {
+        "error": {
+          "name": "DiceRollError",
+          "code": "INVALID_NOTATION",
+          "message": "Expected \")\" at offset 4",
+          "span": {
+            "start": 4,
+            "end": 4
+          },
+          "input": "(1+2",
+          "details": {
+            "found": "",
+            "expected": "\")\""
+          }
+        }
+      }
+    },
+    {
+      "name": "parser-106",
+      "input": "1+2)",
+      "outcome": {
+        "error": {
+          "name": "DiceRollError",
+          "code": "INVALID_NOTATION",
+          "message": "Unexpected token \")\" at offset 3",
+          "span": {
+            "start": 3,
+            "end": 4
+          },
+          "input": "1+2)",
+          "details": {
+            "found": ")",
+            "expected": "end of notation"
+          }
+        }
+      }
+    },
+    {
+      "name": "parser-107",
+      "input": "{1d6,}",
+      "outcome": {
+        "error": {
+          "name": "DiceRollError",
+          "code": "INVALID_NOTATION",
+          "message": "Expected an expression at offset 5",
+          "span": {
+            "start": 5,
+            "end": 6
+          },
+          "input": "{1d6,}",
+          "details": {
+            "found": "}",
+            "expected": "number, dice, group, parenthesis, or function"
+          }
+        }
+      }
+    },
+    {
+      "name": "parser-108",
+      "input": "{,1d6}",
+      "outcome": {
+        "error": {
+          "name": "DiceRollError",
+          "code": "INVALID_NOTATION",
+          "message": "Expected an expression at offset 1",
+          "span": {
+            "start": 1,
+            "end": 2
+          },
+          "input": "{,1d6}",
+          "details": {
+            "found": ",",
+            "expected": "number, dice, group, parenthesis, or function"
+          }
+        }
+      }
+    },
+    {
+      "name": "parser-109",
+      "input": "abs(1,2)",
+      "outcome": {
+        "error": {
+          "name": "DiceRollError",
+          "code": "INVALID_NOTATION",
+          "message": "Expected \")\" at offset 5",
+          "span": {
+            "start": 5,
+            "end": 6
+          },
+          "input": "abs(1,2)",
+          "details": {
+            "found": ",",
+            "expected": "\")\""
+          }
+        }
+      }
+    },
+    {
+      "name": "parser-110",
+      "input": "max(1)",
+      "outcome": {
+        "error": {
+          "name": "DiceRollError",
+          "code": "INVALID_NOTATION",
+          "message": "Expected \",\" at offset 5",
+          "span": {
+            "start": 5,
+            "end": 6
+          },
+          "input": "max(1)",
+          "details": {
+            "found": ")",
+            "expected": "\",\""
+          }
+        }
+      }
+    },
+    {
+      "name": "parser-111",
+      "input": "1d6xyz",
+      "outcome": {
+        "error": {
+          "name": "DiceRollError",
+          "code": "INVALID_NOTATION",
+          "message": "Unexpected identifier at offset 3",
+          "span": {
+            "start": 3,
+            "end": 4
+          },
+          "input": "1d6xyz",
+          "details": {
+            "found": "x"
+          }
+        }
+      }
+    },
+    {
+      "name": "parser-112",
+      "input": "1d6sfoo",
+      "outcome": {
+        "error": {
+          "name": "DiceRollError",
+          "code": "INVALID_NOTATION",
+          "message": "Unexpected token \"f\" at offset 4",
+          "span": {
+            "start": 4,
+            "end": 5
+          },
+          "input": "1d6sfoo",
+          "details": {
+            "found": "f",
+            "expected": "end of notation"
+          }
+        }
+      }
+    },
+    {
+      "name": "parser-113",
+      "input": "1d6>=",
+      "outcome": {
+        "error": {
+          "name": "DiceRollError",
+          "code": "INVALID_NOTATION",
+          "message": "Expected a number at offset 5",
+          "span": {
+            "start": 5,
+            "end": 5
+          },
+          "input": "1d6>=",
+          "details": {
+            "found": "",
+            "expected": "a number"
+          }
+        }
+      }
+    },
+    {
+      "name": "parser-114",
+      "input": ".",
+      "outcome": {
+        "error": {
+          "name": "DiceRollError",
+          "code": "INVALID_NOTATION",
+          "message": "Expected an expression at offset 0",
+          "span": {
+            "start": 0,
+            "end": 1
+          },
+          "input": ".",
+          "details": {
+            "found": ".",
+            "expected": "number, dice, group, parenthesis, or function"
+          }
+        }
+      }
+    },
+    {
+      "name": "parser-115",
+      "input": "1..2",
+      "outcome": {
+        "error": {
+          "name": "DiceRollError",
+          "code": "INVALID_NOTATION",
+          "message": "Unexpected token \".\" at offset 1",
+          "span": {
+            "start": 1,
+            "end": 2
+          },
+          "input": "1..2",
+          "details": {
+            "found": ".",
+            "expected": "end of notation"
+          }
+        }
+      }
+    },
+    {
+      "name": "parser-116",
+      "input": "1d6min",
+      "outcome": {
+        "error": {
+          "name": "DiceRollError",
+          "code": "INVALID_NOTATION",
+          "message": "Expected a number at offset 6",
+          "span": {
+            "start": 6,
+            "end": 6
+          },
+          "input": "1d6min",
+          "details": {
+            "found": "",
+            "expected": "a number"
+          }
+        }
+      }
+    },
+    {
+      "name": "parser-117",
+      "input": "1d6max",
+      "outcome": {
+        "error": {
+          "name": "DiceRollError",
+          "code": "INVALID_NOTATION",
+          "message": "Expected a number at offset 6",
+          "span": {
+            "start": 6,
+            "end": 6
+          },
+          "input": "1d6max",
+          "details": {
+            "found": "",
+            "expected": "a number"
+          }
+        }
+      }
+    },
+    {
+      "name": "parser-118",
+      "input": "1d6d",
+      "outcome": {
+        "error": {
+          "name": "DiceRollError",
+          "code": "INVALID_NOTATION",
+          "message": "Expected a number at offset 4",
+          "span": {
+            "start": 4,
+            "end": 4
+          },
+          "input": "1d6d",
+          "details": {
+            "found": "",
+            "expected": "a number"
+          }
+        }
+      }
+    },
+    {
+      "name": "parser-119",
+      "input": "1d6!0",
+      "outcome": {
+        "error": {
+          "name": "DiceRollError",
+          "code": "INVALID_NOTATION",
+          "message": "Invalid explosion limit",
+          "span": {
+            "start": 4,
+            "end": 5
+          },
+          "input": "1d6!0",
+          "details": {}
+        }
+      }
+    },
+    {
+      "name": "parser-120",
+      "input": "1d6!01",
+      "outcome": {
+        "error": {
+          "name": "DiceRollError",
+          "code": "INVALID_NOTATION",
+          "message": "Invalid explosion limit",
+          "span": {
+            "start": 4,
+            "end": 6
+          },
+          "input": "1d6!01",
+          "details": {}
+        }
+      }
+    },
+    {
+      "name": "parser-121",
+      "input": "1d6!1.0",
+      "outcome": {
+        "error": {
+          "name": "DiceRollError",
+          "code": "INVALID_NOTATION",
+          "message": "Invalid explosion limit",
+          "span": {
+            "start": 4,
+            "end": 7
+          },
+          "input": "1d6!1.0",
+          "details": {}
+        }
+      }
+    },
+    {
+      "name": "parser-122",
+      "input": "1d6!1.5",
+      "outcome": {
+        "error": {
+          "name": "DiceRollError",
+          "code": "INVALID_NOTATION",
+          "message": "Invalid explosion limit",
+          "span": {
+            "start": 4,
+            "end": 7
+          },
+          "input": "1d6!1.5",
+          "details": {}
+        }
+      }
+    },
+    {
+      "name": "parser-123",
+      "input": "1d6!9007199254740992",
+      "outcome": {
+        "error": {
+          "name": "DiceRollError",
+          "code": "INVALID_NOTATION",
+          "message": "Invalid explosion limit",
+          "span": {
+            "start": 4,
+            "end": 20
+          },
+          "input": "1d6!9007199254740992",
+          "details": {}
+        }
+      }
+    },
+    {
+      "name": "parser-124",
+      "input": "1d6!2p",
+      "outcome": {
+        "error": {
+          "name": "DiceRollError",
+          "code": "INVALID_NOTATION",
+          "message": "Unexpected token \"p\" at offset 5",
+          "span": {
+            "start": 5,
+            "end": 6
+          },
+          "input": "1d6!2p",
+          "details": {
+            "found": "p",
+            "expected": "end of notation"
+          }
+        }
+      }
+    },
+    {
+      "name": "parser-125",
+      "input": "1d6pool(1)",
+      "outcome": {
+        "error": {
+          "name": "DiceRollError",
+          "code": "INVALID_NOTATION",
+          "message": "Pool adjustment requires an explicit sign",
+          "span": {
+            "start": 8,
+            "end": 9
+          },
+          "input": "1d6pool(1)",
+          "details": {
+            "found": "1",
+            "expected": "\"+\" or \"-\""
+          }
+        }
+      }
+    },
+    {
+      "name": "parser-126",
+      "input": "1d6pool(00)",
+      "outcome": {
+        "error": {
+          "name": "DiceRollError",
+          "code": "INVALID_NOTATION",
+          "message": "Pool adjustment requires an explicit sign",
+          "span": {
+            "start": 8,
+            "end": 10
+          },
+          "input": "1d6pool(00)",
+          "details": {
+            "found": "00",
+            "expected": "\"+\" or \"-\""
+          }
+        }
+      }
+    },
+    {
+      "name": "parser-127",
+      "input": "1d6pool(+0.0)",
+      "outcome": {
+        "error": {
+          "name": "DiceRollError",
+          "code": "INVALID_NOTATION",
+          "message": "Pool adjustment must be a safe integer",
+          "span": {
+            "start": 9,
+            "end": 12
+          },
+          "input": "1d6pool(+0.0)",
+          "details": {
+            "value": 0
+          }
+        }
+      }
+    },
+    {
+      "name": "parser-128",
+      "input": "1d6pool(+01)",
+      "outcome": {
+        "error": {
+          "name": "DiceRollError",
+          "code": "INVALID_NOTATION",
+          "message": "Pool adjustment must be a safe integer",
+          "span": {
+            "start": 9,
+            "end": 11
+          },
+          "input": "1d6pool(+01)",
+          "details": {
+            "value": 1
+          }
+        }
+      }
+    },
+    {
+      "name": "parser-129",
+      "input": "1d6pool(+1.5)",
+      "outcome": {
+        "error": {
+          "name": "DiceRollError",
+          "code": "INVALID_NOTATION",
+          "message": "Pool adjustment must be a safe integer",
+          "span": {
+            "start": 9,
+            "end": 12
+          },
+          "input": "1d6pool(+1.5)",
+          "details": {
+            "value": 1.5
+          }
+        }
+      }
+    },
+    {
+      "name": "parser-130",
+      "input": "1d6pool(+9007199254740992)",
+      "outcome": {
+        "error": {
+          "name": "DiceRollError",
+          "code": "INVALID_NOTATION",
+          "message": "Pool adjustment must be a safe integer",
+          "span": {
+            "start": 9,
+            "end": 25
+          },
+          "input": "1d6pool(+9007199254740992)",
+          "details": {
+            "value": 9007199254740992
+          }
+        }
+      }
+    },
+    {
+      "name": "parser-131",
+      "input": "1d6pool(+)",
+      "outcome": {
+        "error": {
+          "name": "DiceRollError",
+          "code": "INVALID_NOTATION",
+          "message": "Expected a safe integer pool adjustment at offset 9",
+          "span": {
+            "start": 9,
+            "end": 10
+          },
+          "input": "1d6pool(+)",
+          "details": {
+            "found": ")",
+            "expected": "a safe integer pool adjustment"
+          }
+        }
+      }
+    },
+    {
+      "name": "parser-132",
+      "input": "1d6step(1)",
+      "outcome": {
+        "error": {
+          "name": "DiceRollError",
+          "code": "INVALID_NOTATION",
+          "message": "Dice step requires an explicit sign",
+          "span": {
+            "start": 8,
+            "end": 9
+          },
+          "input": "1d6step(1)",
+          "details": {
+            "found": "1",
+            "expected": "\"+\" or \"-\""
+          }
+        }
+      }
+    },
+    {
+      "name": "parser-133",
+      "input": "1d6step(+0)",
+      "outcome": {
+        "error": {
+          "name": "DiceRollError",
+          "code": "INVALID_NOTATION",
+          "message": "Dice step must be a non-zero safe integer",
+          "span": {
+            "start": 9,
+            "end": 10
+          },
+          "input": "1d6step(+0)",
+          "details": {
+            "value": 0
+          }
+        }
+      }
+    },
+    {
+      "name": "parser-134",
+      "input": "1d6step(-0)",
+      "outcome": {
+        "error": {
+          "name": "DiceRollError",
+          "code": "INVALID_NOTATION",
+          "message": "Dice step must be a non-zero safe integer",
+          "span": {
+            "start": 9,
+            "end": 10
+          },
+          "input": "1d6step(-0)",
+          "details": {
+            "value": 0
+          }
+        }
+      }
+    },
+    {
+      "name": "parser-135",
+      "input": "1d6step(+01)",
+      "outcome": {
+        "error": {
+          "name": "DiceRollError",
+          "code": "INVALID_NOTATION",
+          "message": "Dice step must be a non-zero safe integer",
+          "span": {
+            "start": 9,
+            "end": 11
+          },
+          "input": "1d6step(+01)",
+          "details": {
+            "value": 1
+          }
+        }
+      }
+    },
+    {
+      "name": "parser-136",
+      "input": "1d6step(+1.5)",
+      "outcome": {
+        "error": {
+          "name": "DiceRollError",
+          "code": "INVALID_NOTATION",
+          "message": "Dice step must be a non-zero safe integer",
+          "span": {
+            "start": 9,
+            "end": 12
+          },
+          "input": "1d6step(+1.5)",
+          "details": {
+            "value": 1.5
+          }
+        }
+      }
+    },
+    {
+      "name": "parser-137",
+      "input": "1d6step(+9007199254740992)",
+      "outcome": {
+        "error": {
+          "name": "DiceRollError",
+          "code": "INVALID_NOTATION",
+          "message": "Dice step must be a non-zero safe integer",
+          "span": {
+            "start": 9,
+            "end": 25
+          },
+          "input": "1d6step(+9007199254740992)",
+          "details": {
+            "value": 9007199254740992
+          }
+        }
+      }
+    },
+    {
+      "name": "parser-138",
+      "input": "1d6step(+)",
+      "outcome": {
+        "error": {
+          "name": "DiceRollError",
+          "code": "INVALID_NOTATION",
+          "message": "Expected a non-zero safe integer dice step at offset 9",
+          "span": {
+            "start": 9,
+            "end": 10
+          },
+          "input": "1d6step(+)",
+          "details": {
+            "found": ")",
+            "expected": "a non-zero safe integer dice step"
+          }
+        }
+      }
+    },
+    {
+      "name": "parser-139",
+      "input": "1+2adv",
+      "outcome": {
+        "error": {
+          "name": "DiceRollError",
+          "code": "INVALID_NOTATION",
+          "message": "Structural modifier needs one dice node",
+          "span": {
+            "start": 3,
+            "end": 6
+          },
+          "input": "1+2adv",
+          "details": {
+            "reason": "ambiguous-structural-modifier-target",
+            "diceCount": 0
+          }
+        }
+      }
+    },
+    {
+      "name": "parser-140",
+      "input": "1d20+1d6+2adv",
+      "outcome": {
+        "error": {
+          "name": "DiceRollError",
+          "code": "INVALID_NOTATION",
+          "message": "Structural modifier needs one dice node",
+          "span": {
+            "start": 10,
+            "end": 13
+          },
+          "input": "1d20+1d6+2adv",
+          "details": {
+            "reason": "ambiguous-structural-modifier-target",
+            "diceCount": 2
+          }
+        }
+      }
+    },
+    {
+      "name": "parser-141",
+      "input": "max(1d20,1d6)+2pool(-1)",
+      "outcome": {
+        "error": {
+          "name": "DiceRollError",
+          "code": "INVALID_NOTATION",
+          "message": "Structural modifier needs one dice node",
+          "span": {
+            "start": 15,
+            "end": 23
+          },
+          "input": "max(1d20,1d6)+2pool(-1)",
+          "details": {
+            "reason": "ambiguous-structural-modifier-target",
+            "diceCount": 2
+          }
+        }
+      }
+    },
+    {
+      "name": "parser-142",
+      "input": "1d5+1d6+2step(+1)",
+      "outcome": {
+        "error": {
+          "name": "DiceRollError",
+          "code": "INVALID_NOTATION",
+          "message": "Structural modifier needs one dice node",
+          "span": {
+            "start": 9,
+            "end": 17
+          },
+          "input": "1d5+1d6+2step(+1)",
+          "details": {
+            "reason": "ambiguous-structural-modifier-target",
+            "diceCount": 2
+          }
+        }
+      }
+    },
+    {
+      "name": "parser-limit-143",
+      "input": "1+2",
+      "limits": {
+        "maxDepth": 10,
+        "maxNodes": 2
+      },
+      "outcome": {
+        "error": {
+          "name": "DiceRollError",
+          "code": "TOO_MANY_NODES",
+          "message": "AST node count exceeds the parser limit",
+          "span": {
+            "start": 2,
+            "end": 3
+          },
+          "input": "1+2",
+          "details": {
+            "limit": 2,
+            "actual": 3
+          }
+        }
+      }
+    },
+    {
+      "name": "parser-limit-144",
+      "input": "(((1)))",
+      "limits": {
+        "maxDepth": 3,
+        "maxNodes": 100
+      },
+      "outcome": {
+        "error": {
+          "name": "DiceRollError",
+          "code": "AST_TOO_DEEP",
+          "message": "AST depth exceeds the parser limit",
+          "span": {
+            "start": 3,
+            "end": 4
+          },
+          "input": "(((1)))",
+          "details": {
+            "limit": 3,
+            "actual": 4
+          }
+        }
+      }
+    },
+    {
+      "name": "parser-limit-145",
+      "input": "1d5step(+1)",
+      "limits": {
+        "maxDepth": 10,
+        "maxNodes": 3
+      },
+      "outcome": {
+        "error": {
+          "name": "DiceRollError",
+          "code": "TOO_MANY_NODES",
+          "message": "AST node count exceeds the parser limit",
+          "span": {
+            "start": 3,
+            "end": 11
+          },
+          "input": "1d5step(+1)",
+          "details": {
+            "limit": 3,
+            "actual": 4
+          }
+        }
+      }
+    },
+    {
+      "name": "parser-limit-146",
+      "input": "1d5step(+1)",
+      "limits": {
+        "maxDepth": 10,
+        "maxNodes": 4
+      },
+      "outcome": {
+        "value": {
+          "kind": "dice",
+          "diceKind": "standard",
+          "id": "dice@0:11",
+          "span": {
+            "start": 0,
+            "end": 11
+          },
+          "quantity": {
+            "kind": "number",
+            "id": "number@0:1",
+            "span": {
+              "start": 0,
+              "end": 1
+            },
+            "value": 1,
+            "raw": "1",
+            "implicit": false
+          },
+          "sides": {
+            "kind": "number",
+            "id": "number@2:3",
+            "span": {
+              "start": 2,
+              "end": 3
+            },
+            "value": 5,
+            "raw": "5",
+            "implicit": false
+          },
+          "modifiers": [
+            {
+              "kind": "dice-step",
+              "id": "dice-step@3:11",
+              "span": {
+                "start": 3,
+                "end": 11
+              },
+              "delta": 1
+            }
+          ]
+        }
+      }
+    },
+    {
+      "name": "parser-limit-147",
+      "input": "1d6>=4f=1",
+      "limits": {
+        "maxDepth": 10,
+        "maxNodes": 4
+      },
+      "outcome": {
+        "error": {
+          "name": "DiceRollError",
+          "code": "TOO_MANY_NODES",
+          "message": "AST node count exceeds the parser limit",
+          "span": {
+            "start": 3,
+            "end": 6
+          },
+          "input": "1d6>=4f=1",
+          "details": {
+            "limit": 4,
+            "actual": 5
+          }
+        }
+      }
+    },
+    {
+      "name": "parser-limit-148",
+      "input": "(1)",
+      "limits": {
+        "maxDepth": 1,
+        "maxNodes": 100
+      },
+      "outcome": {
+        "error": {
+          "name": "DiceRollError",
+          "code": "AST_TOO_DEEP",
+          "message": "AST depth exceeds the parser limit",
+          "span": {
+            "start": 1,
+            "end": 2
+          },
+          "input": "(1)",
+          "details": {
+            "limit": 1,
+            "actual": 2
+          }
+        }
+      }
+    }
+  ]
+}

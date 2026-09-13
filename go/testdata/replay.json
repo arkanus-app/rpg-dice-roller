@@ -1,0 +1,837 @@
+{
+  "schemaVersion": 1,
+  "provenance": {
+    "package": "@erpg/dicecore",
+    "version": "3.7.1",
+    "commit": "1940044"
+  },
+  "cases": [
+    {
+      "name": "valid-mt19937",
+      "descriptor": {
+        "schemaVersion": 2,
+        "algorithm": "mt19937",
+        "algorithmVersion": 1,
+        "executionVersion": 1,
+        "mathProfile": "decimal12-v1",
+        "origin": "provided-string",
+        "seedMaterial": "46fea678a5f39c4596d7acb46ce0c349",
+        "planFingerprint": "00000000000000000000000000000000"
+      },
+      "isReplayDescriptor": true,
+      "outcome": {
+        "value": {
+          "schemaVersion": 2,
+          "algorithm": "mt19937",
+          "algorithmVersion": 1,
+          "executionVersion": 1,
+          "mathProfile": "decimal12-v1",
+          "origin": "provided-string",
+          "seedMaterial": "46fea678a5f39c4596d7acb46ce0c349",
+          "planFingerprint": "00000000000000000000000000000000"
+        }
+      },
+      "seedOutcome": {
+        "value": {
+          "canonicalSeed": "replay:46fea678a5f39c4596d7acb46ce0c349",
+          "seedMaterial": "46fea678a5f39c4596d7acb46ce0c349",
+          "origin": "provided-string",
+          "words": [
+            1191093880,
+            2784205893,
+            2530716852,
+            1826669385
+          ]
+        }
+      }
+    },
+    {
+      "name": "valid-xoshiro",
+      "descriptor": {
+        "schemaVersion": 2,
+        "algorithm": "xoshiro128ss",
+        "algorithmVersion": 1,
+        "executionVersion": 1,
+        "mathProfile": "decimal12-v1",
+        "origin": "provided-string",
+        "seedMaterial": "46fea678a5f39c4596d7acb46ce0c349",
+        "planFingerprint": "00000000000000000000000000000000"
+      },
+      "isReplayDescriptor": true,
+      "outcome": {
+        "value": {
+          "schemaVersion": 2,
+          "algorithm": "xoshiro128ss",
+          "algorithmVersion": 1,
+          "executionVersion": 1,
+          "mathProfile": "decimal12-v1",
+          "origin": "provided-string",
+          "seedMaterial": "46fea678a5f39c4596d7acb46ce0c349",
+          "planFingerprint": "00000000000000000000000000000000"
+        }
+      },
+      "seedOutcome": {
+        "value": {
+          "canonicalSeed": "replay:46fea678a5f39c4596d7acb46ce0c349",
+          "seedMaterial": "46fea678a5f39c4596d7acb46ce0c349",
+          "origin": "provided-string",
+          "words": [
+            1191093880,
+            2784205893,
+            2530716852,
+            1826669385
+          ]
+        }
+      }
+    },
+    {
+      "name": "valid-plan-binding",
+      "descriptor": {
+        "schemaVersion": 2,
+        "algorithm": "mt19937",
+        "algorithmVersion": 1,
+        "executionVersion": 1,
+        "mathProfile": "decimal12-v1",
+        "origin": "provided-string",
+        "seedMaterial": "46fea678a5f39c4596d7acb46ce0c349",
+        "planFingerprint": "00000000000000000000000000000000"
+      },
+      "expectedPlanFingerprint": "00000000000000000000000000000000",
+      "isReplayDescriptor": true,
+      "outcome": {
+        "value": {
+          "schemaVersion": 2,
+          "algorithm": "mt19937",
+          "algorithmVersion": 1,
+          "executionVersion": 1,
+          "mathProfile": "decimal12-v1",
+          "origin": "provided-string",
+          "seedMaterial": "46fea678a5f39c4596d7acb46ce0c349",
+          "planFingerprint": "00000000000000000000000000000000"
+        }
+      },
+      "seedOutcome": {
+        "value": {
+          "canonicalSeed": "replay:46fea678a5f39c4596d7acb46ce0c349",
+          "seedMaterial": "46fea678a5f39c4596d7acb46ce0c349",
+          "origin": "provided-string",
+          "words": [
+            1191093880,
+            2784205893,
+            2530716852,
+            1826669385
+          ]
+        }
+      }
+    },
+    {
+      "name": "wrong-plan-binding",
+      "descriptor": {
+        "schemaVersion": 2,
+        "algorithm": "mt19937",
+        "algorithmVersion": 1,
+        "executionVersion": 1,
+        "mathProfile": "decimal12-v1",
+        "origin": "provided-string",
+        "seedMaterial": "46fea678a5f39c4596d7acb46ce0c349",
+        "planFingerprint": "00000000000000000000000000000000"
+      },
+      "expectedPlanFingerprint": "11111111111111111111111111111111",
+      "isReplayDescriptor": true,
+      "outcome": {
+        "error": {
+          "name": "DiceRollError",
+          "code": "REPLAY_PLAN_MISMATCH",
+          "message": "Replay descriptor belongs to a different roll plan",
+          "span": null,
+          "input": "",
+          "details": {
+            "expectedPlanFingerprint": "11111111111111111111111111111111",
+            "actualPlanFingerprint": "00000000000000000000000000000000"
+          }
+        }
+      },
+      "seedOutcome": {
+        "error": {
+          "name": "DiceRollError",
+          "code": "REPLAY_PLAN_MISMATCH",
+          "message": "Replay descriptor belongs to a different roll plan",
+          "span": null,
+          "input": "",
+          "details": {
+            "expectedPlanFingerprint": "11111111111111111111111111111111",
+            "actualPlanFingerprint": "00000000000000000000000000000000"
+          }
+        }
+      }
+    },
+    {
+      "name": "null",
+      "descriptor": null,
+      "isReplayDescriptor": false,
+      "outcome": {
+        "error": {
+          "name": "DiceRollError",
+          "code": "INVALID_REPLAY",
+          "message": "Replay descriptor must be a non-null object",
+          "span": null,
+          "input": "",
+          "details": {}
+        }
+      },
+      "seedOutcome": {
+        "error": {
+          "name": "DiceRollError",
+          "code": "INVALID_REPLAY",
+          "message": "Replay descriptor must be a non-null object",
+          "span": null,
+          "input": "",
+          "details": {}
+        }
+      }
+    },
+    {
+      "name": "array",
+      "descriptor": [],
+      "isReplayDescriptor": false,
+      "outcome": {
+        "error": {
+          "name": "DiceRollError",
+          "code": "INVALID_REPLAY",
+          "message": "Replay descriptor must be a non-null object",
+          "span": null,
+          "input": "",
+          "details": {}
+        }
+      },
+      "seedOutcome": {
+        "error": {
+          "name": "DiceRollError",
+          "code": "INVALID_REPLAY",
+          "message": "Replay descriptor must be a non-null object",
+          "span": null,
+          "input": "",
+          "details": {}
+        }
+      }
+    },
+    {
+      "name": "empty",
+      "descriptor": {},
+      "isReplayDescriptor": false,
+      "outcome": {
+        "error": {
+          "name": "DiceRollError",
+          "code": "UNSUPPORTED_REPLAY_VERSION",
+          "message": "The replay algorithm or version is not supported",
+          "span": null,
+          "input": "",
+          "details": {}
+        }
+      },
+      "seedOutcome": {
+        "error": {
+          "name": "DiceRollError",
+          "code": "UNSUPPORTED_REPLAY_VERSION",
+          "message": "The replay algorithm or version is not supported",
+          "span": null,
+          "input": "",
+          "details": {}
+        }
+      }
+    },
+    {
+      "name": "extra-key",
+      "descriptor": {
+        "schemaVersion": 2,
+        "algorithm": "mt19937",
+        "algorithmVersion": 1,
+        "executionVersion": 1,
+        "mathProfile": "decimal12-v1",
+        "origin": "provided-string",
+        "seedMaterial": "46fea678a5f39c4596d7acb46ce0c349",
+        "planFingerprint": "00000000000000000000000000000000",
+        "unexpected": true
+      },
+      "isReplayDescriptor": false,
+      "outcome": {
+        "error": {
+          "name": "DiceRollError",
+          "code": "INVALID_REPLAY",
+          "message": "Replay descriptor contains malformed or unexpected fields",
+          "span": null,
+          "input": "",
+          "details": {}
+        }
+      },
+      "seedOutcome": {
+        "error": {
+          "name": "DiceRollError",
+          "code": "INVALID_REPLAY",
+          "message": "Replay descriptor contains malformed or unexpected fields",
+          "span": null,
+          "input": "",
+          "details": {}
+        }
+      }
+    },
+    {
+      "name": "missing-origin",
+      "descriptor": {
+        "schemaVersion": 2,
+        "algorithm": "mt19937",
+        "algorithmVersion": 1,
+        "executionVersion": 1,
+        "mathProfile": "decimal12-v1",
+        "seedMaterial": "46fea678a5f39c4596d7acb46ce0c349",
+        "planFingerprint": "00000000000000000000000000000000"
+      },
+      "isReplayDescriptor": false,
+      "outcome": {
+        "error": {
+          "name": "DiceRollError",
+          "code": "INVALID_REPLAY",
+          "message": "Replay descriptor contains malformed or unexpected fields",
+          "span": null,
+          "input": "",
+          "details": {}
+        }
+      },
+      "seedOutcome": {
+        "error": {
+          "name": "DiceRollError",
+          "code": "INVALID_REPLAY",
+          "message": "Replay descriptor contains malformed or unexpected fields",
+          "span": null,
+          "input": "",
+          "details": {}
+        }
+      }
+    },
+    {
+      "name": "schemaVersion-1",
+      "descriptor": {
+        "schemaVersion": 1,
+        "algorithm": "mt19937",
+        "algorithmVersion": 1,
+        "executionVersion": 1,
+        "mathProfile": "decimal12-v1",
+        "origin": "provided-string",
+        "seedMaterial": "46fea678a5f39c4596d7acb46ce0c349",
+        "planFingerprint": "00000000000000000000000000000000"
+      },
+      "isReplayDescriptor": false,
+      "outcome": {
+        "error": {
+          "name": "DiceRollError",
+          "code": "UNSUPPORTED_REPLAY_VERSION",
+          "message": "The replay algorithm or version is not supported",
+          "span": null,
+          "input": "",
+          "details": {}
+        }
+      },
+      "seedOutcome": {
+        "error": {
+          "name": "DiceRollError",
+          "code": "UNSUPPORTED_REPLAY_VERSION",
+          "message": "The replay algorithm or version is not supported",
+          "span": null,
+          "input": "",
+          "details": {}
+        }
+      }
+    },
+    {
+      "name": "schemaVersion-2",
+      "descriptor": {
+        "schemaVersion": "2",
+        "algorithm": "mt19937",
+        "algorithmVersion": 1,
+        "executionVersion": 1,
+        "mathProfile": "decimal12-v1",
+        "origin": "provided-string",
+        "seedMaterial": "46fea678a5f39c4596d7acb46ce0c349",
+        "planFingerprint": "00000000000000000000000000000000"
+      },
+      "isReplayDescriptor": false,
+      "outcome": {
+        "error": {
+          "name": "DiceRollError",
+          "code": "UNSUPPORTED_REPLAY_VERSION",
+          "message": "The replay algorithm or version is not supported",
+          "span": null,
+          "input": "",
+          "details": {}
+        }
+      },
+      "seedOutcome": {
+        "error": {
+          "name": "DiceRollError",
+          "code": "UNSUPPORTED_REPLAY_VERSION",
+          "message": "The replay algorithm or version is not supported",
+          "span": null,
+          "input": "",
+          "details": {}
+        }
+      }
+    },
+    {
+      "name": "algorithm-other",
+      "descriptor": {
+        "schemaVersion": 2,
+        "algorithm": "other",
+        "algorithmVersion": 1,
+        "executionVersion": 1,
+        "mathProfile": "decimal12-v1",
+        "origin": "provided-string",
+        "seedMaterial": "46fea678a5f39c4596d7acb46ce0c349",
+        "planFingerprint": "00000000000000000000000000000000"
+      },
+      "isReplayDescriptor": false,
+      "outcome": {
+        "error": {
+          "name": "DiceRollError",
+          "code": "UNSUPPORTED_REPLAY_VERSION",
+          "message": "The replay algorithm or version is not supported",
+          "span": null,
+          "input": "",
+          "details": {}
+        }
+      },
+      "seedOutcome": {
+        "error": {
+          "name": "DiceRollError",
+          "code": "UNSUPPORTED_REPLAY_VERSION",
+          "message": "The replay algorithm or version is not supported",
+          "span": null,
+          "input": "",
+          "details": {}
+        }
+      }
+    },
+    {
+      "name": "algorithmVersion-2",
+      "descriptor": {
+        "schemaVersion": 2,
+        "algorithm": "mt19937",
+        "algorithmVersion": 2,
+        "executionVersion": 1,
+        "mathProfile": "decimal12-v1",
+        "origin": "provided-string",
+        "seedMaterial": "46fea678a5f39c4596d7acb46ce0c349",
+        "planFingerprint": "00000000000000000000000000000000"
+      },
+      "isReplayDescriptor": false,
+      "outcome": {
+        "error": {
+          "name": "DiceRollError",
+          "code": "UNSUPPORTED_REPLAY_VERSION",
+          "message": "The replay algorithm or version is not supported",
+          "span": null,
+          "input": "",
+          "details": {}
+        }
+      },
+      "seedOutcome": {
+        "error": {
+          "name": "DiceRollError",
+          "code": "UNSUPPORTED_REPLAY_VERSION",
+          "message": "The replay algorithm or version is not supported",
+          "span": null,
+          "input": "",
+          "details": {}
+        }
+      }
+    },
+    {
+      "name": "executionVersion-2",
+      "descriptor": {
+        "schemaVersion": 2,
+        "algorithm": "mt19937",
+        "algorithmVersion": 1,
+        "executionVersion": 2,
+        "mathProfile": "decimal12-v1",
+        "origin": "provided-string",
+        "seedMaterial": "46fea678a5f39c4596d7acb46ce0c349",
+        "planFingerprint": "00000000000000000000000000000000"
+      },
+      "isReplayDescriptor": false,
+      "outcome": {
+        "error": {
+          "name": "DiceRollError",
+          "code": "UNSUPPORTED_REPLAY_VERSION",
+          "message": "The replay algorithm or version is not supported",
+          "span": null,
+          "input": "",
+          "details": {}
+        }
+      },
+      "seedOutcome": {
+        "error": {
+          "name": "DiceRollError",
+          "code": "UNSUPPORTED_REPLAY_VERSION",
+          "message": "The replay algorithm or version is not supported",
+          "span": null,
+          "input": "",
+          "details": {}
+        }
+      }
+    },
+    {
+      "name": "mathProfile-native",
+      "descriptor": {
+        "schemaVersion": 2,
+        "algorithm": "mt19937",
+        "algorithmVersion": 1,
+        "executionVersion": 1,
+        "mathProfile": "native",
+        "origin": "provided-string",
+        "seedMaterial": "46fea678a5f39c4596d7acb46ce0c349",
+        "planFingerprint": "00000000000000000000000000000000"
+      },
+      "isReplayDescriptor": false,
+      "outcome": {
+        "error": {
+          "name": "DiceRollError",
+          "code": "UNSUPPORTED_REPLAY_VERSION",
+          "message": "The replay algorithm or version is not supported",
+          "span": null,
+          "input": "",
+          "details": {}
+        }
+      },
+      "seedOutcome": {
+        "error": {
+          "name": "DiceRollError",
+          "code": "UNSUPPORTED_REPLAY_VERSION",
+          "message": "The replay algorithm or version is not supported",
+          "span": null,
+          "input": "",
+          "details": {}
+        }
+      }
+    },
+    {
+      "name": "origin-crypto",
+      "descriptor": {
+        "schemaVersion": 2,
+        "algorithm": "mt19937",
+        "algorithmVersion": 1,
+        "executionVersion": 1,
+        "mathProfile": "decimal12-v1",
+        "origin": "crypto",
+        "seedMaterial": "46fea678a5f39c4596d7acb46ce0c349",
+        "planFingerprint": "00000000000000000000000000000000"
+      },
+      "isReplayDescriptor": true,
+      "outcome": {
+        "value": {
+          "schemaVersion": 2,
+          "algorithm": "mt19937",
+          "algorithmVersion": 1,
+          "executionVersion": 1,
+          "mathProfile": "decimal12-v1",
+          "origin": "crypto",
+          "seedMaterial": "46fea678a5f39c4596d7acb46ce0c349",
+          "planFingerprint": "00000000000000000000000000000000"
+        }
+      },
+      "seedOutcome": {
+        "value": {
+          "canonicalSeed": "replay:46fea678a5f39c4596d7acb46ce0c349",
+          "seedMaterial": "46fea678a5f39c4596d7acb46ce0c349",
+          "origin": "crypto",
+          "words": [
+            1191093880,
+            2784205893,
+            2530716852,
+            1826669385
+          ]
+        }
+      }
+    },
+    {
+      "name": "origin-provided-number",
+      "descriptor": {
+        "schemaVersion": 2,
+        "algorithm": "mt19937",
+        "algorithmVersion": 1,
+        "executionVersion": 1,
+        "mathProfile": "decimal12-v1",
+        "origin": "provided-number",
+        "seedMaterial": "46fea678a5f39c4596d7acb46ce0c349",
+        "planFingerprint": "00000000000000000000000000000000"
+      },
+      "isReplayDescriptor": true,
+      "outcome": {
+        "value": {
+          "schemaVersion": 2,
+          "algorithm": "mt19937",
+          "algorithmVersion": 1,
+          "executionVersion": 1,
+          "mathProfile": "decimal12-v1",
+          "origin": "provided-number",
+          "seedMaterial": "46fea678a5f39c4596d7acb46ce0c349",
+          "planFingerprint": "00000000000000000000000000000000"
+        }
+      },
+      "seedOutcome": {
+        "value": {
+          "canonicalSeed": "replay:46fea678a5f39c4596d7acb46ce0c349",
+          "seedMaterial": "46fea678a5f39c4596d7acb46ce0c349",
+          "origin": "provided-number",
+          "words": [
+            1191093880,
+            2784205893,
+            2530716852,
+            1826669385
+          ]
+        }
+      }
+    },
+    {
+      "name": "origin-unknown",
+      "descriptor": {
+        "schemaVersion": 2,
+        "algorithm": "mt19937",
+        "algorithmVersion": 1,
+        "executionVersion": 1,
+        "mathProfile": "decimal12-v1",
+        "origin": "unknown",
+        "seedMaterial": "46fea678a5f39c4596d7acb46ce0c349",
+        "planFingerprint": "00000000000000000000000000000000"
+      },
+      "isReplayDescriptor": false,
+      "outcome": {
+        "error": {
+          "name": "DiceRollError",
+          "code": "INVALID_REPLAY",
+          "message": "Replay descriptor contains malformed or unexpected fields",
+          "span": null,
+          "input": "",
+          "details": {}
+        }
+      },
+      "seedOutcome": {
+        "error": {
+          "name": "DiceRollError",
+          "code": "INVALID_REPLAY",
+          "message": "Replay descriptor contains malformed or unexpected fields",
+          "span": null,
+          "input": "",
+          "details": {}
+        }
+      }
+    },
+    {
+      "name": "seedMaterial-ABCDEF0123456789ABCDEF0123456789",
+      "descriptor": {
+        "schemaVersion": 2,
+        "algorithm": "mt19937",
+        "algorithmVersion": 1,
+        "executionVersion": 1,
+        "mathProfile": "decimal12-v1",
+        "origin": "provided-string",
+        "seedMaterial": "ABCDEF0123456789ABCDEF0123456789",
+        "planFingerprint": "00000000000000000000000000000000"
+      },
+      "isReplayDescriptor": false,
+      "outcome": {
+        "error": {
+          "name": "DiceRollError",
+          "code": "INVALID_REPLAY",
+          "message": "Replay descriptor contains malformed or unexpected fields",
+          "span": null,
+          "input": "",
+          "details": {}
+        }
+      },
+      "seedOutcome": {
+        "error": {
+          "name": "DiceRollError",
+          "code": "INVALID_REPLAY",
+          "message": "Replay descriptor contains malformed or unexpected fields",
+          "span": null,
+          "input": "",
+          "details": {}
+        }
+      }
+    },
+    {
+      "name": "seedMaterial-abc",
+      "descriptor": {
+        "schemaVersion": 2,
+        "algorithm": "mt19937",
+        "algorithmVersion": 1,
+        "executionVersion": 1,
+        "mathProfile": "decimal12-v1",
+        "origin": "provided-string",
+        "seedMaterial": "abc",
+        "planFingerprint": "00000000000000000000000000000000"
+      },
+      "isReplayDescriptor": false,
+      "outcome": {
+        "error": {
+          "name": "DiceRollError",
+          "code": "INVALID_REPLAY",
+          "message": "Replay descriptor contains malformed or unexpected fields",
+          "span": null,
+          "input": "",
+          "details": {}
+        }
+      },
+      "seedOutcome": {
+        "error": {
+          "name": "DiceRollError",
+          "code": "INVALID_REPLAY",
+          "message": "Replay descriptor contains malformed or unexpected fields",
+          "span": null,
+          "input": "",
+          "details": {}
+        }
+      }
+    },
+    {
+      "name": "seedMaterial-1",
+      "descriptor": {
+        "schemaVersion": 2,
+        "algorithm": "mt19937",
+        "algorithmVersion": 1,
+        "executionVersion": 1,
+        "mathProfile": "decimal12-v1",
+        "origin": "provided-string",
+        "seedMaterial": 1,
+        "planFingerprint": "00000000000000000000000000000000"
+      },
+      "isReplayDescriptor": false,
+      "outcome": {
+        "error": {
+          "name": "DiceRollError",
+          "code": "INVALID_REPLAY",
+          "message": "Replay descriptor contains malformed or unexpected fields",
+          "span": null,
+          "input": "",
+          "details": {}
+        }
+      },
+      "seedOutcome": {
+        "error": {
+          "name": "DiceRollError",
+          "code": "INVALID_REPLAY",
+          "message": "Replay descriptor contains malformed or unexpected fields",
+          "span": null,
+          "input": "",
+          "details": {}
+        }
+      }
+    },
+    {
+      "name": "seedMaterial-00000000000000000000000000000000",
+      "descriptor": {
+        "schemaVersion": 2,
+        "algorithm": "mt19937",
+        "algorithmVersion": 1,
+        "executionVersion": 1,
+        "mathProfile": "decimal12-v1",
+        "origin": "provided-string",
+        "seedMaterial": "00000000000000000000000000000000",
+        "planFingerprint": "00000000000000000000000000000000"
+      },
+      "isReplayDescriptor": true,
+      "outcome": {
+        "value": {
+          "schemaVersion": 2,
+          "algorithm": "mt19937",
+          "algorithmVersion": 1,
+          "executionVersion": 1,
+          "mathProfile": "decimal12-v1",
+          "origin": "provided-string",
+          "seedMaterial": "00000000000000000000000000000000",
+          "planFingerprint": "00000000000000000000000000000000"
+        }
+      },
+      "seedOutcome": {
+        "value": {
+          "canonicalSeed": "replay:00000000000000000000000000000000",
+          "seedMaterial": "00000000000000000000000000000000",
+          "origin": "provided-string",
+          "words": [
+            0,
+            0,
+            0,
+            0
+          ]
+        }
+      }
+    },
+    {
+      "name": "planFingerprint-ABCDEF0123456789ABCDEF0123456789",
+      "descriptor": {
+        "schemaVersion": 2,
+        "algorithm": "mt19937",
+        "algorithmVersion": 1,
+        "executionVersion": 1,
+        "mathProfile": "decimal12-v1",
+        "origin": "provided-string",
+        "seedMaterial": "46fea678a5f39c4596d7acb46ce0c349",
+        "planFingerprint": "ABCDEF0123456789ABCDEF0123456789"
+      },
+      "isReplayDescriptor": false,
+      "outcome": {
+        "error": {
+          "name": "DiceRollError",
+          "code": "INVALID_REPLAY",
+          "message": "Replay descriptor contains malformed or unexpected fields",
+          "span": null,
+          "input": "",
+          "details": {}
+        }
+      },
+      "seedOutcome": {
+        "error": {
+          "name": "DiceRollError",
+          "code": "INVALID_REPLAY",
+          "message": "Replay descriptor contains malformed or unexpected fields",
+          "span": null,
+          "input": "",
+          "details": {}
+        }
+      }
+    },
+    {
+      "name": "planFingerprint-abc",
+      "descriptor": {
+        "schemaVersion": 2,
+        "algorithm": "mt19937",
+        "algorithmVersion": 1,
+        "executionVersion": 1,
+        "mathProfile": "decimal12-v1",
+        "origin": "provided-string",
+        "seedMaterial": "46fea678a5f39c4596d7acb46ce0c349",
+        "planFingerprint": "abc"
+      },
+      "isReplayDescriptor": false,
+      "outcome": {
+        "error": {
+          "name": "DiceRollError",
+          "code": "INVALID_REPLAY",
+          "message": "Replay descriptor contains malformed or unexpected fields",
+          "span": null,
+          "input": "",
+          "details": {}
+        }
+      },
+      "seedOutcome": {
+        "error": {
+          "name": "DiceRollError",
+          "code": "INVALID_REPLAY",
+          "message": "Replay descriptor contains malformed or unexpected fields",
+          "span": null,
+          "input": "",
+          "details": {}
+        }
+      }
+    }
+  ]
+}

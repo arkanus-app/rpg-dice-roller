@@ -2,6 +2,10 @@
 
 Núcleo de dados do ERPG para compilar, inspecionar e resolver notações de dados. A V3 é escrita em TypeScript estrito, não mantém estado global de RNG e entrega resultados `readonly`, JSON-safe e próprios para frontend, backend, automações e visualização 3D.
 
+A versão nativa em Go está em desenvolvimento em [`go/`](go/README.md), com
+parser e fundamentos do runtime implementados. O [acompanhamento da migração](go/MIGRATION.md)
+registra o que já foi validado e o que falta para executar rolagens completas.
+
 **Licença Arkanus:** uso não comercial e projetos abertos elegíveis dispensam
 autorização individual; demais usos comerciais exigem autorização prévia,
 que pode ser concedida por e-mail, sem contrato separado.
