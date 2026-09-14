@@ -1,35 +1,23 @@
-# Dicecore for Go — migration in progress
+# Dicecore para Go
 
-This directory is the native Go implementation of `@erpg/dicecore`, developed
-alongside the TypeScript library for a future Go server. It is an independent Go
-module with no external runtime dependencies:
+Implementação nativa de `@erpg/dicecore` 3.7.1, com compilador, executor,
+replay determinístico e sistemas de RPG. O módulo usa apenas a biblioteca padrão
+de Go; não executa JavaScript, Node.js ou código C para resolver rolagens.
 
 ```text
 github.com/arkanus-app/rpg-dice-roller/go
 ```
 
-**The first migration milestone contains syntax and runtime foundations. There
-is no complete `Roll` engine yet.** The compiler, execution of modifiers, result
-materialization, and RPG system adapters are the next stages. See
-[MIGRATION.md](MIGRATION.md) for the implementation and validation status.
+O código está na branch `Go-Version`, na pasta `go/` deste repositório. Para
+integrar um projeto local antes de publicar uma versão do módulo, adicione um
+`replace` no `go.mod` do consumidor apontando para este diretório:
 
-Implemented surfaces include:
+```sh
+go mod edit -replace github.com/arkanus-app/rpg-dice-roller/go=/caminho/rpg-dice-roller/go
+go get github.com/arkanus-app/rpg-dice-roller/go
+```
 
-- Tokenization, expression AST, notation normalization, comments and roll counts.
-- Structured errors, limit presets, and per-execution resource counters.
-- Seed canonicalization, MT19937, Xoshiro128**, and replay descriptor validation
-  and RNG restoration.
-- Decimal12 normalization and math primitives. Exact `sin`/`cos`/`tan` parity is
-  still pending; the outstanding reference cases are tracked explicitly.
-
-The public API follows Go conventions (`value, error`, native integer types,
-per-execution state). API stability is not promised during migration. The future
-server will import this module directly; frontend integration is outside its
-scope.
-
-## Parse a formula
-
-From a Go program using this module:
+## Rolar e reproduzir
 
 ```go
 package main
@@ -41,35 +29,66 @@ import (
 )
 
 func main() {
-    input := "4d6kh3 + 2"
-    limits := dicecore.UntrustedServerDiceLimits()
-    budget := dicecore.NewExecutionBudget(limits)
-    if err := budget.AssertInputLength(input); err != nil {
-        panic(err)
-    }
-    normalized := dicecore.ParseNormalizedInput(input)
-    tree, err := dicecore.ParseNotation(normalized.NormalizedNotation, limits)
-    if err != nil {
-        panic(err)
-    }
-    fmt.Println(tree.Kind) // binary; parsing does not execute the dice
+    result, err := dicecore.RollRPGDice("4d6kh3+2", dicecore.RollOptions{
+        Seed: "personagem-42",
+    })
+    if err != nil { panic(err) }
+    replayed, err := dicecore.RollRPGDice("4d6kh3+2", dicecore.RollOptions{
+        Replay: result.Replay,
+    })
+    if err != nil { panic(err) }
+    fmt.Println(result.Total, replayed.Total)
 }
 ```
 
-The raw-input check precedes normalization because normalization itself is a
-low-level, unbounded operation. `ParseNotation` then applies input, AST depth and
-node limits to the formula. Use `CreateDiceLimits` for custom overrides, or call
-`Validate` on manually constructed limits. A future HTTP adapter must also bound
-request bytes before decoding input.
+`RollRPGDice` entrega dados, grupos, eventos e texto completo.
+`RollRPGDiceDetails` preserva os detalhes sem materializar o diário completo;
+`RollRPGDiceSummary` entrega o resumo. Semente, consumo aleatório, total, limites
+e replay seguem o contrato de cada projeção TypeScript.
 
-Random generators and execution budgets belong to one execution. Independent
-executions can run concurrently with separate instances. String and numeric
-seeds have distinct identities, matching the TypeScript implementation.
+## Engine e sistemas
 
-## Develop and verify
+Crie uma engine para compartilhar limites e caches entre chamadas. Ela pode ser
+usada concorrentemente; cada rolagem tem seu próprio estado de execução.
 
-Go 1.26 or newer is required; this milestone was tested with Go 1.26.2. From this
-directory:
+```go
+engine, err := dicecore.CreateDiceEngine(dicecore.DiceEngineOptions{
+    Limits: dicecore.DiceLimitOverrides{"maxInitialDice": 100},
+    Cache: dicecore.DiceCacheOptions{"maxInputEntries": 200},
+})
+if err != nil { panic(err) }
+plan, err := engine.Compile("2d6+3")
+if err != nil { panic(err) }
+result, err := engine.RollSummary(plan, dicecore.RollOptions{Seed: "encontro-1"})
+if err != nil { panic(err) }
+fmt.Println(result.Total, engine.GetCacheStats())
+
+fate, err := dicecore.RollFateDice(nil, dicecore.SystemRollOptions{
+    RollOptions: dicecore.RollOptions{Seed: "fate-1"},
+    Detail: "compact",
+})
+if err != nil { panic(err) }
+fmt.Println(fate.Total)
+```
+
+Também estão disponíveis `RollAssimilation`, `EvaluateAssimilationSelection`,
+`RollDaggerheart`, `RollVampireV5`, `RollMixedDice` e `CreateSystemRoller`.
+`nil` usa a entrada padrão em Fate e Daggerheart. As entradas dos sistemas aceitam
+seus structs Go ou objetos `map[string]any`, com validação de valores e campos.
+
+Resultados e campos do envelope dos planos públicos pertencem ao chamador.
+Alterá-los não modifica o cache nem uma rolagem futura. Os getters de baixo
+nível `GetPlanProgram` e `GetPlanAST` expõem estruturas internas compartilhadas
+para leitura: essas estruturas e seus descendentes não devem ser alterados.
+Go não oferece o `Object.freeze` de JavaScript:
+as opções de congelamento são aceitas, e o isolamento é feito por propriedade
+dos dados e cópias. Geradores aleatórios e budgets de baixo nível pertencem a
+uma execução; não compartilhe essas instâncias mutáveis entre goroutines.
+
+## Validar
+
+Requer Go 1.26 ou mais recente; a referência de desenvolvimento é Go 1.26.2.
+Na pasta `go/`:
 
 ```sh
 go test ./...
@@ -77,41 +96,19 @@ go vet ./...
 go test -coverpkg=./... -coverprofile=coverage.out ./...
 go tool cover -func=coverage.out
 node ../scripts/check-go-coverage.mjs coverage.out
+# Com uma toolchain C disponível para instrumentação:
+go test -race ./...
 ```
 
-The required coverage is **100% of Go statements**, across all packages in this
-module. The gate reads the raw profile and rejects any uncovered statement; a
-rounded display of `100.0%` is insufficient. It also rejects empty or malformed
-profiles. Node.js is used only for this development check, not by the Go runtime.
+A exigência é **100% dos statements Go**, sem excluir arquivos de produção.
+O verificador lê contagens exatas e rejeita qualquer statement sem execução,
+inclusive quando o percentual arredondado aparece como `100.0%`.
+Node.js é necessário somente para ferramentas de desenvolvimento e comparação.
 
-The GitHub Actions workflow enforces the same gate after running the suite with
-the race detector on Linux. Race detection requires a compatible platform and C
-toolchain. Go's native coverage metric counts statements; the TypeScript suite
-separately measures statements, branches, functions, and lines. Coverage remains
-distinct from the cross-language conformance checks below.
+O [relatório da migração](MIGRATION.md) descreve a equivalência funcional e as
+adaptações de linguagem. A [documentação das referências](testdata/README.md)
+explica como reproduzir as comparações TypeScript. O [benchmark](BENCHMARK.md)
+compara as duas implementações com entradas idênticas e mantém os dados brutos.
 
-To regenerate or verify the TypeScript oracle, run from the **repository root**
-with the existing npm development dependencies installed:
-
-```sh
-npm run build
-node scripts/generate-go-fixtures.mjs --check
-# Deliberate reference updates only:
-node scripts/generate-go-fixtures.mjs
-```
-
-See [testdata/README.md](testdata/README.md) for fixture provenance, special
-numbers, UTF-16 handling, and future execution vectors. Stored fixtures include
-later migration stages and are not all passing Go conformance tests yet.
-
-To reproduce the known transcendental conformance failures rather than skip them:
-
-```sh
-DICECORE_STRICT_MATH=1 go test -run TestTypeScriptMathPendingConformance -v
-```
-
-On PowerShell, set `$env:DICECORE_STRICT_MATH = '1'`, run the same `go test`
-command without the prefix, and remove the variable afterwards. This check is
-expected to fail at this milestone and is a gate for the later full-parity stage.
-
-The repository's [license](../licence.txt) applies to this implementation.
+A [licença do projeto](../licence.txt) e os
+[avisos dos kernels matemáticos](THIRD_PARTY_NOTICES.md) se aplicam a este código.

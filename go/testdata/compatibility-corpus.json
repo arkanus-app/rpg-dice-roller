@@ -5,7 +5,7 @@
     "version": "3.7.1",
     "commit": "1940044"
   },
-  "purpose": "Historical V2/V3 reference for the future Go executor; not evidence of current Go roll support.",
+  "purpose": "Historical V2/V3 reference exercised by the native Go executor with both recorded seeds.",
   "seeds": [
     {
       "name": "low-words",

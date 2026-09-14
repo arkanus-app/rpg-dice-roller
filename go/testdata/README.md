@@ -1,65 +1,71 @@
-# TypeScript oracle fixtures
+# Referências TypeScript
 
-These files record the behavior of `@erpg/dicecore` 3.7.1 at source commit
-`1940044`. They are generated independently of the Go implementation, from the
-TypeScript implementation and the existing compatibility corpus. There are no
-timestamps or automatically generated seeds.
+Os arquivos registram o comportamento de `@erpg/dicecore` 3.7.1, fonte
+`1940044`. Os geradores usam o TypeScript e o corpus histórico, independentemente
+da implementação Go. Sementes são fixas e os arquivos não têm timestamps.
 
-From the repository root, with its existing development dependencies installed:
+Na raiz do repositório, com Node 24.18.0 e as dependências de desenvolvimento:
 
 ```sh
 npm run build
-node scripts/generate-go-fixtures.mjs
 node scripts/generate-go-fixtures.mjs --check
+node scripts/generate-go-compiler-fixtures.mjs --check
+node scripts/generate-go-executor-fixtures.mjs --check
+node scripts/generate-go-engine-fixtures.mjs --check
+node scripts/generate-go-system-fixtures.mjs --check
+# Regeneração matemática: Windows, mesma versão Node/V8 da provenance.
+node scripts/generate-go-math-conformance.mjs --check
 ```
 
-`--check` recomputes the oracle and compares the committed bytes without rewriting
-them. The generator imports public functions from `dist`, and uses the existing
-`tsx/esm/api` development dependency for internal TypeScript functions. Build
-first so public outputs and source belong to the same revision. Review provenance
-and semantic changes deliberately before updating these references.
+`--check` recalcula e compara os bytes sem reescrever os arquivos. Para atualizar
+deliberadamente uma referência, remova essa opção. Faça o build antes: alguns
+geradores usam `dist` e outros importam internos TypeScript via `tsx/esm/api`.
 
-Every JSON file has `schemaVersion`, `provenance`, and `cases`. Ordinary cases have
-`name`, their operation inputs, and `outcome`: either `{ "value": ... }` or
-`{ "error": ... }`. Dice errors use the original `toJSON()` representation,
-including code, message, input, half-open UTF-16 source span, and details. Native
-errors retain their name and message.
-
-JSON cannot represent non-finite numbers or preserve negative zero. Numeric input
-positions encode those values as the strings `NaN`, `Infinity`, `-Infinity`, and
-`-0`. In seed cases, `seedType` distinguishes encoded numbers from literal string
-seeds. String seeds also include `seedUTF16` so runtimes with UTF-8 strings can
-reconstruct Unicode and unpaired UTF-16 surrogates without losing the original
-JavaScript input semantics. Success outputs follow ordinary JavaScript JSON wire
-semantics: negative zero becomes zero, as in the existing replay checks.
-
-| File | Reference surface |
+| Arquivo | Contrato |
 | --- | --- |
-| `normalization.json` | Public normalized string in `outcome`; parsed input, comments, count, and notation in `parsedOutcome` |
-| `parser.json` | AST including IDs, spans, modifiers, and parser errors; optional `limits` uses `maxDepth` and `maxNodes` |
-| `math.json` | `operation`, `args`, and `input`; decimal12 normalization, operators, functions, comparisons, final rounding |
-| `math-transcendental-pending.json` | Eight TypeScript oracle cases documenting known pending exact conformance for sine, cosine, and tangent; explicitly skipped by initial Go conformance tests |
-| `rng.json` | Algorithm, numeric/word-array seed, operation and count; `value` contains `values` plus consumed `randomCalls` |
-| `seeds.json` | Seed type/value and optional `maxSeedLength`; canonical seed, material, origin, and four words |
-| `replay.json` | Descriptor validation in `outcome`, restored seed in `seedOutcome`, and `isReplayDescriptor` |
-| `limits.json` | `create`, `preset`, or `resolve`, with overrides and optional engine overrides |
-| `budget.json` | Per-operation outcomes, then final `snapshot` and `stats`; rejected consumption does not alter counters |
-| `compatibility-corpus.json` | Existing frozen V2/V3 corpus copied without recalculating its expected values |
-| `full-roll-replay.json` | Complete current TypeScript generic/mixed roll outputs from existing cross-runtime replay vectors |
+| `normalization.json` | Texto normalizado, comentários, contagem e parsing da entrada |
+| `parser.json` | AST completa, IDs, modificadores, spans UTF-16 e erros |
+| `math.json` | Decimal12, operadores, funções, comparações, arredondamento e não finitos |
+| `math-transcendental.json` | Oito regressões trigonométricas obrigatórias, sem opt-in ou skips |
+| `math-conformance.json` | Sin/cos/tan/exp/log/pow: fronteiras, subnormais, grandes argumentos e amostragem determinística; igualdade de bits |
+| `rng.json`, `seeds.json` | MT19937/Xoshiro, rejeições, draws, material e hashing UTF-16 |
+| `replay.json` | Descritores, validação e restauração de sementes |
+| `limits.json`, `budget.json` | Presets, overrides, operações aceitas/rejeitadas e estado posterior |
+| `compiler.json` | Planos, AST/IR, constantes, custos, semântica, inspeção e erros |
+| `executor.json` | Execução de modificadores e projeções full/details/summary |
+| `engine.json` | Sequências de chamadas, opções, caches, planos externos e replay |
+| `systems-rolls.json` | Resultados/erros de sistemas e rolagens mistas |
+| `systems-contracts.json` | Contratos dos adapters com a engine |
+| `systems-selection.json` | Seleção de dados de Assimilação |
+| `systems-names.json` | Unicode 17, NFD e aliases; o gerador também verifica `system_unicode.go` |
+| `compatibility-corpus.json` | Corpus histórico V2/V3 preservado, incluindo divergências deliberadas da V3 |
+| `full-roll-replay.json` | Vetores de replay genérico e misto da suíte TypeScript original |
 
-The budget fixture intentionally has outcomes per operation rather than per case
-so that errors and subsequent state can both be checked. RNG fixtures cross the
-MT19937 624-word twist boundary and include ranges that require rejected samples;
-`randomCalls` detects differences hidden by checking returned values alone.
+JSON não representa NaN/infinito nem preserva zero negativo. Os fundamentos
+codificam números especiais nas entradas como strings, distinguindo o tipo das
+sementes; o corpus matemático maior usa bits IEEE 754 em hexadecimal. Resultados
+JSON seguem JavaScript, inclusive a conversão de -0 para 0. `seedUTF16` permite
+preservar as unidades originais de strings com surrogates.
 
-The historical compatibility and full-roll replay files prepare later migration
-stages. Their presence does not mean that Go already supports the compiler,
-executor, modifiers, or RPG system adapters. Cross-runtime fixtures supplement
-the original TypeScript test suite; they do not establish exhaustive Go coverage.
+O leitor Go compara resultados estruturados e erros completos. Testes específicos
+também conferem o JSON bruto dos diagnósticos UTF-16, pois decodificar uma unidade
+isolada em uma string Go poderia ocultar uma diferença. Alguns casos negativos
+dos fundamentos são marcados como inaplicáveis: por exemplo, receber `NaN` onde
+a assinatura exige `int64`, ou uma palavra negativa em `[]uint32`. Não são
+falhas funcionais ignoradas. O worker de benchmark só executa no harness próprio.
 
-The pending transcendental cases include ordinary decimal inputs, not only large
-magnitudes. Standard-library function approximations can land on different sides
-of a decimal12 rounding boundary. These references deliberately retain the
-TypeScript result and must not be rewritten to match the current Go result. Exact
-transcendental behavior remains required before claiming unrestricted arithmetic
-or replay compatibility.
+## Auditoria matemática ampliada
+
+```sh
+node scripts/generate-go-math-conformance.mjs --audit
+cd go
+DICECORE_MATH_CONFORMANCE_FIXTURE=../.artifacts/math-conformance-audit.json go test -run '^TestMathConformance$' -v
+```
+
+No PowerShell, defina a variável com
+`$env:DICECORE_MATH_CONFORMANCE_FIXTURE = '../.artifacts/math-conformance-audit.json'`
+antes de executar `go test`, removendo-a ao terminar. A auditoria usa uma amostra
+maior que a suíte regular e exige a mesma igualdade exata. O oráculo é a versão
+Windows de Node 24.18.0; a biblioteca Go pode executar os vetores armazenados sem
+Node em outros sistemas. Mudanças na libm de outra plataforma não devem
+reescrever silenciosamente a referência.

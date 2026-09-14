@@ -1,135 +1,113 @@
-# Native Go migration
+# Migração nativa para Go
 
-## Target and baseline
+## Referência e escopo
 
-The target is the same dice language, domain rules, deterministic seeds, and
-results as `@erpg/dicecore`, exposed through an idiomatic Go library for the
-future server. The migration starts from TypeScript version **3.7.1**, source
-commit **1940044**, on branch **Go-Version**. Git does not permit spaces in branch
-names.
+O porte implementa a biblioteca de rolagem `@erpg/dicecore` **3.7.1**, tomando
+como referência o código TypeScript do commit **1940044**. Está na branch
+**Go-Version**; Git não aceita espaços no nome de uma branch.
 
-The TypeScript suite was rerun on 2026-09-13: **548 passing tests, with 100%
-statement, branch, function, and line coverage**. Its build, typechecks, and lint
-also passed. These tests are a reference for behavior; their coverage does not
-transfer automatically to a port in another language.
+A migração inclui linguagem de dados, compilação e inspeção sem rolar, execução
+de modificadores, resultados completos/detalhados/resumidos, limites, caches,
+sementes, replay e sistemas de RPG. O runtime é Go nativo, sem dependências
+externas. A migração do servidor Fortuna HTTP e sua integração com o frontend
+ficam fora deste módulo.
 
-## Stage 1: syntax and foundations
+## Correspondência da API
 
-| Area | Current state |
+| TypeScript | Go |
 | --- | --- |
-| Module | Independent Go module, standard library only |
-| Errors | Structured codes, input, source spans, details, JSON validation |
-| Limits and budget | Presets, override caps, work counters, failure without consuming budget |
-| Syntax | Scanner, parser, expression and modifier AST, node IDs and UTF-16 spans |
-| Normalization | RPG notation aliases, comments, grouped/multiple roll input, computed counts |
-| Randomness | MT19937, Xoshiro128**, bounded integer sampling, draw budgeting |
-| Seeds | String/number canonicalization, UTF-16 hashing, automatic seed material |
-| Replay foundations | Schema validation, seed restoration, deterministic generator restoration |
-| Math | Decimal12 rounding, arithmetic and functions; exact transcendental parity incomplete |
-| Reference tests | Versioned TypeScript JSON oracle plus native Go tests and parser fuzz target |
-| Automation | Go format/vet/tests/race, exact 100% statement coverage gate, and TypeScript fixture reproduction |
+| `createDiceEngine` | `CreateDiceEngine` |
+| `compileRpgDice` | `CompileRPGDice` |
+| `inspectRpgDiceNotation` | `InspectRPGDiceNotation` |
+| `normalizeRpgDiceNotation` | `NormalizeRPGDiceNotation` |
+| `verifyRpgDiceNotation` | `VerifyRPGDiceNotation` |
+| `rollRpgDice` | `RollRPGDice` |
+| `rollRpgDiceDetails` | `RollRPGDiceDetails` |
+| `rollRpgDiceSummary` | `RollRPGDiceSummary` |
+| `createSystemRoller` | `CreateSystemRoller` |
+| `rollAssimilation`, `evaluateAssimilationSelection` | `RollAssimilation`, `EvaluateAssimilationSelection` |
+| `rollDaggerheart`, `rollFateDice`, `rollVampireV5` | `RollDaggerheart`, `RollFateDice`, `RollVampireV5` |
+| `rollMixedDice` | `RollMixedDice` |
+| `DiceRollError`, `isDiceRollError`, `isDiceRollErrorData` | `DiceRollError`, `IsDiceRollError`, `IsDiceRollErrorData` |
+| `DiceRollError.fromJSON` | `DiceRollErrorFromJSON` |
+| `DICE_LIMIT_PRESETS` | `DefaultDiceLimits`, `TrustedBatchDiceLimits`, `UntrustedServerDiceLimits` |
 
-Replay support here means descriptors and RNG restoration. A caller currently
-supplies the plan fingerprint. Compiling a formula and replaying its **complete
-roll result** are not implemented yet. Likewise, parsing a modifier records its
-syntax; it does not execute or semantically validate every modifier combination.
+A engine oferece `Compile`, `Inspect`, `Normalize`, `Verify`, `Roll`,
+`RollDetails`, `RollSummary`, `Limits`, `GetCacheStats` e `ClearCache`.
 
-## Validation boundaries
+## Contratos portados
 
-The Go suite now passes with **100% statement coverage**, using
-`go test -coverpkg=./... -coverprofile=coverage.out ./...`. `go vet` and `gofmt`
-checks also pass. The CI gate requires every measured statement to be covered
-and rejects empty or malformed profiles. It reads exact counts, so an uncovered
-statement cannot hide behind a rounded `100.0%` display. No source files are
-excluded from measurement.
+| Área | Implementação e validação |
+| --- | --- |
+| Sintaxe | Scanner, AST, normalização, aliases, comentários, contagem de rolagens e spans UTF-16 |
+| Compilador | Semântica, constantes, ordem dos modificadores, detecção de operações impossíveis, planos e fingerprints |
+| Execução | Dados/grupos, explosão, reroll, unique, keep/drop, ordenação, sucesso/falha, estatísticas e eventos |
+| Resultados | Projeções full/details/summary, IDs, estados, relações, texto, limites e materialização |
+| Engine | Opções, limites por chamada, caches LRU limitados, planos externos validados e isolamento de dados |
+| Aleatoriedade | MT19937 e Xoshiro128**, amostragem limitada, rejeições e contagem de draws |
+| Replay | Descritores completos, seeds derivadas, schema/algoritmo/fingerprint e reprodução de resultados |
+| Sistemas | Assimilação, seleção, Daggerheart, Fate, Vampiro V5 e rolagens mistas; full e compact |
+| Unicode | Classificação Unicode 17 e NFD para aliases dos sistemas, geradas pela referência TypeScript |
+| Matemática | Decimal12, kernels trigonométricos, exp/log e potenciação refinada nas fronteiras de inteiros |
 
-The new tests cover native integer seeds, UTF-16 size boundaries, malformed
-replay data, rejection before drawing randomness, unexpected parser panics, EOF
-lookahead, malformed delimiters, and numeric diagnostic formatting. The parser's
-recovery boundary was extracted into a private helper to test panic propagation.
-One unreachable duplicate seed-length check was removed; both string forms retain
-their earlier checks, with exact-limit and over-limit tests confirming rejection.
+Os oito casos trigonométricos que falhavam no primeiro estágio estão na suíte
+obrigatória. Não há tolerância numérica para aceitar resultados diferentes:
+os testes matemáticos comparam os bits IEEE 754 do resultado normalizado.
 
-This coverage requirement applies to all implemented Go code. It does not measure
-how much of the TypeScript engine has been migrated, and Go's native statement
-metric is distinct from TypeScript's branch/function/line metrics. The regular
-suite still explicitly skips the known conformance cases described below. The
-strict math check previously reproduced all eight pending failures; statement
-coverage does not close those semantic gaps.
+## Evidências e reprodução
 
-The oracle contains **539 cases in 11 JSON files**:
+A suíte Go passou com **4.106 de 4.106 statements cobertos (100%)**, com o perfil de todos os
+pacotes. A cobertura mede a execução do código; as comparações com TypeScript
+verificam seu comportamento de forma independente. Nenhum arquivo de produção é
+removido da medição. Go não oferece nativamente as quatro métricas de cobertura
+de TypeScript, cuja referência tem **548 testes e 100% de statements, branches,
+funções e linhas**.
 
-| Reference | Cases | Current Go use |
-| --- | ---: | --- |
-| Normalization | 72 | Compare normalized text and parsed input |
-| Parser | 148 | Compare complete AST or structured error |
-| Math | 135 | Compare outcomes, including decimal and non-finite boundaries |
-| Pending transcendental math | 8 | Explicit skips; strict opt-in reproduces failures |
-| RNG | 52 | Compare native-representable cases, draw counts and rejection behavior |
-| Seeds | 33 | Compare native-representable cases and seed material |
-| Replay descriptors | 24 | Validate descriptors and restored seeds |
-| Limits | 19 | Compare native-representable limit operations |
-| Budget | 12 | Compare each operation and subsequent state |
-| Historical compatibility corpus | 31 | Reserved for compiler/executor stages |
-| Full-roll replay | 5 | Reserved for compiler/executor and mixed-system stages |
+As referências versionadas verificam fundamentos, ASTs, planos, resultados e
+erros completos, projeções, sistemas, cache e replay. A auditoria matemática
+ampliada verificou **425.512 casos** sem diferenças; **12.680** permanecem na suíte
+normal, além das referências matemáticas iniciais. Há testes de concorrência,
+mutação de resultados/planos, limites e falhas, além do alvo de fuzzing do parser.
+Consulte [testdata/README.md](testdata/README.md) para os geradores e comandos.
 
-Cases with malformed JavaScript numeric/structural inputs that cannot be passed
-to a typed Go API are explicitly skipped, rather than silently coerced. These
-exclusions differ from the eight known math failures. In particular, a native
-`int64` counter cannot receive a fractional number, and a `[]uint32` seed cannot
-contain a negative or fractional word. Future JSON-facing adapters will need
-their own boundary validation.
+Os corpora históricos também são executados: 31 notações com duas sementes
+(62 resultados) e cinco resultados JSON completos, incluindo rolagens mistas.
+Compilador: 468 casos; executor: 238 casos em três projeções; sistemas: 1.014
+casos; engine: 24 sequências com 91 operações e verificação de cache por chamada.
 
-The parser fuzz target completed **1,224,975 executions in 30 seconds** without a
-failure on the development machine. This explores malformed input; it is not a
-proof of exhaustive grammar coverage or of readiness for arbitrary request sizes.
+A validação local em Windows passou também com `go test -race ./... -count=1`,
+usando Go 1.26.2 e GCC 16.2 (w64devkit 2.9.1 portátil, apenas para instrumentação).
+O CI verifica formatação, vet, testes com detector de races, cobertura exata e
+regeneração das referências. A geração do corpus matemático fica em Windows com
+Node **24.18.0**, V8 **13.6.233.17-node.50**, pois `Math.pow` depende da biblioteca
+matemática da plataforma. Os testes Go leem esse corpus congelado sem Node.
 
-The local toolchain has CGO disabled and no C compiler, so local race-detector
-validation was unavailable. The workflow is configured to perform that check on
-Ubuntu; it has not been run remotely during this initial local migration.
+O [benchmark comparativo](BENCHMARK.md) apresenta medições locais, metodologia,
+dispersão, comandos e resultados brutos. Não se pressupõe que a troca de
+linguagem acelere todas as operações.
 
-## Known differences to resolve
+## Adaptações de linguagem
 
-1. **Canonical transcendental math.** Go's `sin`, `cos`, and `tan` approximations
-   can cross a decimal12 rounding boundary relative to the TypeScript reference,
-   even for ordinary inputs. For example, `sin(1.4293)` currently normalizes to
-   `0.990006085646` in Go versus `0.990006085645` in the reference. The eight
-   failing oracle cases remain unchanged in `math-transcendental-pending.json`.
-   Run the strict check documented in README.md to enforce them. Passing the
-   regular suite does not establish unrestricted math or full replay parity.
-2. **String boundaries.** Normal Go strings use UTF-8. Syntax spans count UTF-16
-   units, but invalid UTF-8 or isolated JavaScript surrogates cannot round-trip
-   through an ordinary Go string. For an invalid astral notation character,
-   diagnostic text may contain U+FFFD where TypeScript has an isolated surrogate.
-   Seeds provide `UTF16Seed` to preserve original code units for hashing and
-   replay; their display string still uses replacement characters.
-3. **Server entry point.** Low-level scanner/parser/normalization APIs mirror the
-   TypeScript internals and are not independently bounded by default. Check raw
-   input before normalization and use validated limits with `ParseNotation`.
-   AST node totals are checked after construction, as in TypeScript. Some scanner
-   and normalization paths can be quadratic, so request and input caps remain
-   relevant. Only deliberate parser `DiceRollError` panics are converted to errors;
-   unexpected panics remain visible as bugs.
+- Erros retornam como `(valor, error)`; nomes e tipos seguem as convenções Go.
+  Opções omitidas usam o valor zero/nil apropriado. Contadores são inteiros
+  nativos, sem a possibilidade de receber frações ou `NaN`.
+- Resultados e planos públicos são valores do chamador. Cópias protegem estado
+  interno e caches; `freezeResults` não torna structs Go imutáveis. Os getters
+  de baixo nível `GetPlanProgram` e `GetPlanAST` emprestam o IR/AST internos para
+  leitura; o chamador não pode modificar essas estruturas compartilhadas.
+- Strings Go usam UTF-8; spans e hashing seguem unidades UTF-16. `UTF16Seed`
+  preserva sementes JavaScript com surrogates isolados. Diagnósticos do scanner
+  preservam a unidade isolada em JSON quando apontam para parte de um caractere
+  astral. Entradas JavaScript malformadas impossíveis em parâmetros tipados Go
+  não criam APIs artificiais para aceitar esses valores.
+  Chaves de objetos JSON externos com surrogates isolados não são representáveis
+  por `map[string]any` e são decodificadas com U+FFFD; os valores de string de
+  erros preservam esses escapes ao fazer roundtrip JSON.
+- Os entrypoints da engine verificam limites antes da compilação/execução.
+  APIs de baixo nível de normalização e scanner espelham os internos TypeScript;
+  um futuro adaptador HTTP deve aplicar também seus limites de request.
 
-No Go performance improvement is claimed yet. Compare performance only after
-the same roll operations and result modes exist in both implementations.
-
-## Next implementation stages
-
-1. **Compiler and numeric contract:** semantic validation, constant evaluation,
-   modifier ordering, impossible reroll/unique detection, execution plans and
-   fingerprints. Resolve canonical transcendental behavior without rewriting
-   oracle expectations or loosening equality checks.
-2. **Generic executor:** dice/group execution, modifiers, random/budget ordering,
-   detailed and summary results, event journal, output formatting and limits.
-   Activate the historical compatibility and generic full-replay vectors.
-3. **Public engine:** ergonomic parse/compile/roll APIs, per-engine configuration,
-   plan cache ownership, replay operations and deterministic concurrency tests.
-4. **RPG systems:** Assimilation, Daggerheart, Fate, Vampire V5, and mixed notation.
-   Match their domain rules and activate all full-roll reference vectors.
-5. **Release gate:** expand the original test cases across the implemented Go
-   surfaces, close the eight math gaps, add end-to-end differential tests and
-   benchmarks for equal workloads, validate races in CI, then version the Go API.
-
-Until these stages pass, this module is a migration work area rather than a
-replacement for the production TypeScript library.
+Equivalência 1:1 significa os contratos funcionais da versão de referência para
+entradas representáveis nas duas linguagens. Os testes não constituem prova de
+todos os números binários possíveis nem de todas as versões de V8/plataformas.
+Mudanças no TypeScript devem passar novamente pelos geradores e testes.

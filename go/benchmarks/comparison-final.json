@@ -1,0 +1,3528 @@
+{
+  "schemaVersion": 1,
+  "status": "complete",
+  "mode": "final",
+  "startedAt": "2026-09-14T00:32:53.639Z",
+  "commands": [
+    {
+      "executable": "C:\\Users\\quira\\AppData\\Local\\Microsoft\\WinGet\\Packages\\OpenJS.NodeJS.LTS_Microsoft.Winget.Source_8wekyb3d8bbwe\\node-v24.18.0-win-x64\\node.exe",
+      "args": [
+        "node_modules/rollup/dist/bin/rollup",
+        "--config=./rollup.config.mjs"
+      ]
+    },
+    {
+      "executable": "C:\\Users\\quira\\.codex\\visualizations\\2026\\07\\21\\019f8591-c4eb-7913-9683-054308852112\\go-runtime-full\\go\\bin\\go.exe",
+      "args": [
+        "test",
+        "-c",
+        "-o",
+        "D:\\Projetos\\ERPG\\rpg-dice-roller\\.artifacts\\dicecore-comparison.exe"
+      ],
+      "cwd": "go"
+    }
+  ],
+  "samples": [
+    {
+      "sample": 1,
+      "runtime": "typescript",
+      "workloadOrder": [
+        "normalize",
+        "compile-cold",
+        "compile-hot",
+        "d20-full",
+        "100d6-full",
+        "d20-details",
+        "100d6-details",
+        "d20-summary",
+        "100d6-summary",
+        "pool-full",
+        "pool-summary",
+        "fate-full",
+        "v5-full",
+        "fate-compact",
+        "v5-compact",
+        "mixed-compact",
+        "d20-changing-seed"
+      ],
+      "workerWallMilliseconds": 3248,
+      "output": {
+        "runtime": "v24.18.0",
+        "phase": "measure",
+        "cases": {
+          "normalize": {
+            "iterations": 18365,
+            "warmupIterations": 18365,
+            "durationNs": 36818800,
+            "nsPerOp": 2004.835284508576
+          },
+          "compile-cold": {
+            "iterations": 3802,
+            "warmupIterations": 5000,
+            "durationNs": 50688200,
+            "nsPerOp": 13331.98316675434
+          },
+          "compile-hot": {
+            "iterations": 500000,
+            "warmupIterations": 20000,
+            "durationNs": 203877900,
+            "nsPerOp": 407.7558
+          },
+          "d20-full": {
+            "iterations": 7046,
+            "warmupIterations": 7046,
+            "durationNs": 53159100,
+            "nsPerOp": 7544.578484246381
+          },
+          "100d6-full": {
+            "iterations": 986,
+            "warmupIterations": 5000,
+            "durationNs": 50600700,
+            "nsPerOp": 51319.16835699797
+          },
+          "d20-details": {
+            "iterations": 9323,
+            "warmupIterations": 9323,
+            "durationNs": 51877200,
+            "nsPerOp": 5564.432049769388
+          },
+          "100d6-details": {
+            "iterations": 1980,
+            "warmupIterations": 5000,
+            "durationNs": 49652200,
+            "nsPerOp": 25076.868686868685
+          },
+          "d20-summary": {
+            "iterations": 9075,
+            "warmupIterations": 9075,
+            "durationNs": 46277200,
+            "nsPerOp": 5099.415977961433
+          },
+          "100d6-summary": {
+            "iterations": 8472,
+            "warmupIterations": 8472,
+            "durationNs": 103167900,
+            "nsPerOp": 12177.514164305949
+          },
+          "pool-full": {
+            "iterations": 2446,
+            "warmupIterations": 5000,
+            "durationNs": 53167300,
+            "nsPerOp": 21736.426819296812
+          },
+          "pool-summary": {
+            "iterations": 3395,
+            "warmupIterations": 5000,
+            "durationNs": 44342000,
+            "nsPerOp": 13060.972017673048
+          },
+          "fate-full": {
+            "iterations": 3210,
+            "warmupIterations": 5000,
+            "durationNs": 53238700,
+            "nsPerOp": 16585.26479750779
+          },
+          "v5-full": {
+            "iterations": 3915,
+            "warmupIterations": 5000,
+            "durationNs": 50946800,
+            "nsPerOp": 13013.23116219668
+          },
+          "fate-compact": {
+            "iterations": 4960,
+            "warmupIterations": 5000,
+            "durationNs": 52140200,
+            "nsPerOp": 10512.137096774193
+          },
+          "v5-compact": {
+            "iterations": 5917,
+            "warmupIterations": 5917,
+            "durationNs": 54598800,
+            "nsPerOp": 9227.446341051209
+          },
+          "mixed-compact": {
+            "iterations": 382,
+            "warmupIterations": 5000,
+            "durationNs": 56088000,
+            "nsPerOp": 146827.22513089006
+          },
+          "d20-changing-seed": {
+            "iterations": 5056,
+            "warmupIterations": 5056,
+            "durationNs": 93225500,
+            "nsPerOp": 18438.587816455696
+          }
+        }
+      }
+    },
+    {
+      "sample": 1,
+      "runtime": "go",
+      "workloadOrder": [
+        "normalize",
+        "compile-cold",
+        "compile-hot",
+        "d20-full",
+        "100d6-full",
+        "d20-details",
+        "100d6-details",
+        "d20-summary",
+        "100d6-summary",
+        "pool-full",
+        "pool-summary",
+        "fate-full",
+        "v5-full",
+        "fate-compact",
+        "v5-compact",
+        "mixed-compact",
+        "d20-changing-seed"
+      ],
+      "workerWallMilliseconds": 7800,
+      "output": {
+        "cases": {
+          "100d6-details": {
+            "durationNs": 283815500,
+            "iterations": 1980,
+            "nsPerOp": 143341.1616161616,
+            "warmupIterations": 5000
+          },
+          "100d6-full": {
+            "durationNs": 214153500,
+            "iterations": 986,
+            "nsPerOp": 217194.21906693713,
+            "warmupIterations": 5000
+          },
+          "100d6-summary": {
+            "durationNs": 111025300,
+            "iterations": 8472,
+            "nsPerOp": 13104.969310670444,
+            "warmupIterations": 8472
+          },
+          "compile-cold": {
+            "durationNs": 48216000,
+            "iterations": 3802,
+            "nsPerOp": 12681.746449237244,
+            "warmupIterations": 5000
+          },
+          "compile-hot": {
+            "durationNs": 696645600,
+            "iterations": 500000,
+            "nsPerOp": 1393.2912,
+            "warmupIterations": 20000
+          },
+          "d20-changing-seed": {
+            "durationNs": 54124500,
+            "iterations": 5056,
+            "nsPerOp": 10705.003955696202,
+            "warmupIterations": 5056
+          },
+          "d20-details": {
+            "durationNs": 127644900,
+            "iterations": 9323,
+            "nsPerOp": 13691.397618792234,
+            "warmupIterations": 9323
+          },
+          "d20-full": {
+            "durationNs": 139572100,
+            "iterations": 7046,
+            "nsPerOp": 19808.6999716151,
+            "warmupIterations": 7046
+          },
+          "d20-summary": {
+            "durationNs": 105572400,
+            "iterations": 9075,
+            "nsPerOp": 11633.322314049587,
+            "warmupIterations": 9075
+          },
+          "fate-compact": {
+            "durationNs": 207708900,
+            "iterations": 4960,
+            "nsPerOp": 41876.79435483871,
+            "warmupIterations": 5000
+          },
+          "fate-full": {
+            "durationNs": 200417900,
+            "iterations": 3210,
+            "nsPerOp": 62435.48286604361,
+            "warmupIterations": 5000
+          },
+          "mixed-compact": {
+            "durationNs": 59060200,
+            "iterations": 382,
+            "nsPerOp": 154607.85340314137,
+            "warmupIterations": 5000
+          },
+          "normalize": {
+            "durationNs": 57883000,
+            "iterations": 18365,
+            "nsPerOp": 3151.81050912061,
+            "warmupIterations": 18365
+          },
+          "pool-full": {
+            "durationNs": 185391000,
+            "iterations": 2446,
+            "nsPerOp": 75793.54047424367,
+            "warmupIterations": 5000
+          },
+          "pool-summary": {
+            "durationNs": 140874300,
+            "iterations": 3395,
+            "nsPerOp": 41494.63917525773,
+            "warmupIterations": 5000
+          },
+          "v5-compact": {
+            "durationNs": 193627700,
+            "iterations": 5917,
+            "nsPerOp": 32723.96484705087,
+            "warmupIterations": 5917
+          },
+          "v5-full": {
+            "durationNs": 165669700,
+            "iterations": 3915,
+            "nsPerOp": 42316.65389527458,
+            "warmupIterations": 5000
+          }
+        },
+        "phase": "measure",
+        "runtime": "go1.26.2"
+      }
+    },
+    {
+      "sample": 2,
+      "runtime": "go",
+      "workloadOrder": [
+        "d20-changing-seed",
+        "mixed-compact",
+        "v5-compact",
+        "fate-compact",
+        "v5-full",
+        "fate-full",
+        "pool-summary",
+        "pool-full",
+        "100d6-summary",
+        "d20-summary",
+        "100d6-details",
+        "d20-details",
+        "100d6-full",
+        "d20-full",
+        "compile-hot",
+        "compile-cold",
+        "normalize"
+      ],
+      "workerWallMilliseconds": 7219,
+      "output": {
+        "cases": {
+          "100d6-details": {
+            "durationNs": 230457200,
+            "iterations": 1980,
+            "nsPerOp": 116392.52525252526,
+            "warmupIterations": 5000
+          },
+          "100d6-full": {
+            "durationNs": 195629600,
+            "iterations": 986,
+            "nsPerOp": 198407.30223123732,
+            "warmupIterations": 5000
+          },
+          "100d6-summary": {
+            "durationNs": 110519800,
+            "iterations": 8472,
+            "nsPerOp": 13045.302171860245,
+            "warmupIterations": 8472
+          },
+          "compile-cold": {
+            "durationNs": 53024500,
+            "iterations": 3802,
+            "nsPerOp": 13946.4755391899,
+            "warmupIterations": 5000
+          },
+          "compile-hot": {
+            "durationNs": 622702500,
+            "iterations": 500000,
+            "nsPerOp": 1245.405,
+            "warmupIterations": 20000
+          },
+          "d20-changing-seed": {
+            "durationNs": 48801300,
+            "iterations": 5056,
+            "nsPerOp": 9652.155854430379,
+            "warmupIterations": 5056
+          },
+          "d20-details": {
+            "durationNs": 138554000,
+            "iterations": 9323,
+            "nsPerOp": 14861.525260109407,
+            "warmupIterations": 9323
+          },
+          "d20-full": {
+            "durationNs": 131501400,
+            "iterations": 7046,
+            "nsPerOp": 18663.26994039171,
+            "warmupIterations": 7046
+          },
+          "d20-summary": {
+            "durationNs": 97248400,
+            "iterations": 9075,
+            "nsPerOp": 10716.077134986226,
+            "warmupIterations": 9075
+          },
+          "fate-compact": {
+            "durationNs": 187715400,
+            "iterations": 4960,
+            "nsPerOp": 37845.846774193546,
+            "warmupIterations": 5000
+          },
+          "fate-full": {
+            "durationNs": 162908100,
+            "iterations": 3210,
+            "nsPerOp": 50750.18691588785,
+            "warmupIterations": 5000
+          },
+          "mixed-compact": {
+            "durationNs": 56911400,
+            "iterations": 382,
+            "nsPerOp": 148982.72251308901,
+            "warmupIterations": 5000
+          },
+          "normalize": {
+            "durationNs": 61211300,
+            "iterations": 18365,
+            "nsPerOp": 3333.041110808603,
+            "warmupIterations": 18365
+          },
+          "pool-full": {
+            "durationNs": 182639800,
+            "iterations": 2446,
+            "nsPerOp": 74668.7653311529,
+            "warmupIterations": 5000
+          },
+          "pool-summary": {
+            "durationNs": 131368800,
+            "iterations": 3395,
+            "nsPerOp": 38694.78645066274,
+            "warmupIterations": 5000
+          },
+          "v5-compact": {
+            "durationNs": 168153100,
+            "iterations": 5917,
+            "nsPerOp": 28418.64120331249,
+            "warmupIterations": 5917
+          },
+          "v5-full": {
+            "durationNs": 160868700,
+            "iterations": 3915,
+            "nsPerOp": 41090.34482758621,
+            "warmupIterations": 5000
+          }
+        },
+        "phase": "measure",
+        "runtime": "go1.26.2"
+      }
+    },
+    {
+      "sample": 2,
+      "runtime": "typescript",
+      "workloadOrder": [
+        "d20-changing-seed",
+        "mixed-compact",
+        "v5-compact",
+        "fate-compact",
+        "v5-full",
+        "fate-full",
+        "pool-summary",
+        "pool-full",
+        "100d6-summary",
+        "d20-summary",
+        "100d6-details",
+        "d20-details",
+        "100d6-full",
+        "d20-full",
+        "compile-hot",
+        "compile-cold",
+        "normalize"
+      ],
+      "workerWallMilliseconds": 3231,
+      "output": {
+        "runtime": "v24.18.0",
+        "phase": "measure",
+        "cases": {
+          "d20-changing-seed": {
+            "iterations": 5056,
+            "warmupIterations": 5056,
+            "durationNs": 80542900,
+            "nsPerOp": 15930.162183544304
+          },
+          "mixed-compact": {
+            "iterations": 382,
+            "warmupIterations": 5000,
+            "durationNs": 49078900,
+            "nsPerOp": 128478.79581151833
+          },
+          "v5-compact": {
+            "iterations": 5917,
+            "warmupIterations": 5917,
+            "durationNs": 52097300,
+            "nsPerOp": 8804.681426398512
+          },
+          "fate-compact": {
+            "iterations": 4960,
+            "warmupIterations": 5000,
+            "durationNs": 52023300,
+            "nsPerOp": 10488.568548387097
+          },
+          "v5-full": {
+            "iterations": 3915,
+            "warmupIterations": 5000,
+            "durationNs": 50861400,
+            "nsPerOp": 12991.417624521073
+          },
+          "fate-full": {
+            "iterations": 3210,
+            "warmupIterations": 5000,
+            "durationNs": 48652200,
+            "nsPerOp": 15156.44859813084
+          },
+          "pool-summary": {
+            "iterations": 3395,
+            "warmupIterations": 5000,
+            "durationNs": 40145200,
+            "nsPerOp": 11824.80117820324
+          },
+          "pool-full": {
+            "iterations": 2446,
+            "warmupIterations": 5000,
+            "durationNs": 48484800,
+            "nsPerOp": 19822.076860179885
+          },
+          "100d6-summary": {
+            "iterations": 8472,
+            "warmupIterations": 8472,
+            "durationNs": 98827300,
+            "nsPerOp": 11665.16761095373
+          },
+          "d20-summary": {
+            "iterations": 9075,
+            "warmupIterations": 9075,
+            "durationNs": 39127100,
+            "nsPerOp": 4311.526170798898
+          },
+          "100d6-details": {
+            "iterations": 1980,
+            "warmupIterations": 5000,
+            "durationNs": 48710700,
+            "nsPerOp": 24601.363636363636
+          },
+          "d20-details": {
+            "iterations": 9323,
+            "warmupIterations": 9323,
+            "durationNs": 51182700,
+            "nsPerOp": 5489.938860881691
+          },
+          "100d6-full": {
+            "iterations": 986,
+            "warmupIterations": 5000,
+            "durationNs": 49317900,
+            "nsPerOp": 50018.15415821501
+          },
+          "d20-full": {
+            "iterations": 7046,
+            "warmupIterations": 7046,
+            "durationNs": 45984800,
+            "nsPerOp": 6526.3695713880215
+          },
+          "compile-hot": {
+            "iterations": 500000,
+            "warmupIterations": 20000,
+            "durationNs": 199501400,
+            "nsPerOp": 399.0028
+          },
+          "compile-cold": {
+            "iterations": 3802,
+            "warmupIterations": 5000,
+            "durationNs": 81342500,
+            "nsPerOp": 21394.66070489216
+          },
+          "normalize": {
+            "iterations": 18365,
+            "warmupIterations": 18365,
+            "durationNs": 50890800,
+            "nsPerOp": 2771.0754151919414
+          }
+        }
+      }
+    },
+    {
+      "sample": 3,
+      "runtime": "typescript",
+      "workloadOrder": [
+        "normalize",
+        "compile-cold",
+        "compile-hot",
+        "d20-full",
+        "100d6-full",
+        "d20-details",
+        "100d6-details",
+        "d20-summary",
+        "100d6-summary",
+        "pool-full",
+        "pool-summary",
+        "fate-full",
+        "v5-full",
+        "fate-compact",
+        "v5-compact",
+        "mixed-compact",
+        "d20-changing-seed"
+      ],
+      "workerWallMilliseconds": 3232,
+      "output": {
+        "runtime": "v24.18.0",
+        "phase": "measure",
+        "cases": {
+          "normalize": {
+            "iterations": 18365,
+            "warmupIterations": 18365,
+            "durationNs": 37980800,
+            "nsPerOp": 2068.1078137762047
+          },
+          "compile-cold": {
+            "iterations": 3802,
+            "warmupIterations": 5000,
+            "durationNs": 52964600,
+            "nsPerOp": 13930.720673329826
+          },
+          "compile-hot": {
+            "iterations": 500000,
+            "warmupIterations": 20000,
+            "durationNs": 205126300,
+            "nsPerOp": 410.2526
+          },
+          "d20-full": {
+            "iterations": 7046,
+            "warmupIterations": 7046,
+            "durationNs": 53806100,
+            "nsPerOp": 7636.403633267102
+          },
+          "100d6-full": {
+            "iterations": 986,
+            "warmupIterations": 5000,
+            "durationNs": 49660300,
+            "nsPerOp": 50365.41582150102
+          },
+          "d20-details": {
+            "iterations": 9323,
+            "warmupIterations": 9323,
+            "durationNs": 49526200,
+            "nsPerOp": 5312.260002145233
+          },
+          "100d6-details": {
+            "iterations": 1980,
+            "warmupIterations": 5000,
+            "durationNs": 48059400,
+            "nsPerOp": 24272.424242424244
+          },
+          "d20-summary": {
+            "iterations": 9075,
+            "warmupIterations": 9075,
+            "durationNs": 45787400,
+            "nsPerOp": 5045.443526170799
+          },
+          "100d6-summary": {
+            "iterations": 8472,
+            "warmupIterations": 8472,
+            "durationNs": 104520600,
+            "nsPerOp": 12337.181303116147
+          },
+          "pool-full": {
+            "iterations": 2446,
+            "warmupIterations": 5000,
+            "durationNs": 58956400,
+            "nsPerOp": 24103.18887980376
+          },
+          "pool-summary": {
+            "iterations": 3395,
+            "warmupIterations": 5000,
+            "durationNs": 50018900,
+            "nsPerOp": 14733.107511045655
+          },
+          "fate-full": {
+            "iterations": 3210,
+            "warmupIterations": 5000,
+            "durationNs": 50931400,
+            "nsPerOp": 15866.479750778817
+          },
+          "v5-full": {
+            "iterations": 3915,
+            "warmupIterations": 5000,
+            "durationNs": 47866000,
+            "nsPerOp": 12226.309067688378
+          },
+          "fate-compact": {
+            "iterations": 4960,
+            "warmupIterations": 5000,
+            "durationNs": 57661700,
+            "nsPerOp": 11625.342741935483
+          },
+          "v5-compact": {
+            "iterations": 5917,
+            "warmupIterations": 5917,
+            "durationNs": 50471800,
+            "nsPerOp": 8529.964509041743
+          },
+          "mixed-compact": {
+            "iterations": 382,
+            "warmupIterations": 5000,
+            "durationNs": 50056200,
+            "nsPerOp": 131037.1727748691
+          },
+          "d20-changing-seed": {
+            "iterations": 5056,
+            "warmupIterations": 5056,
+            "durationNs": 88242400,
+            "nsPerOp": 17453.006329113923
+          }
+        }
+      }
+    },
+    {
+      "sample": 3,
+      "runtime": "go",
+      "workloadOrder": [
+        "normalize",
+        "compile-cold",
+        "compile-hot",
+        "d20-full",
+        "100d6-full",
+        "d20-details",
+        "100d6-details",
+        "d20-summary",
+        "100d6-summary",
+        "pool-full",
+        "pool-summary",
+        "fate-full",
+        "v5-full",
+        "fate-compact",
+        "v5-compact",
+        "mixed-compact",
+        "d20-changing-seed"
+      ],
+      "workerWallMilliseconds": 8084,
+      "output": {
+        "cases": {
+          "100d6-details": {
+            "durationNs": 278908100,
+            "iterations": 1980,
+            "nsPerOp": 140862.67676767678,
+            "warmupIterations": 5000
+          },
+          "100d6-full": {
+            "durationNs": 211197700,
+            "iterations": 986,
+            "nsPerOp": 214196.45030425963,
+            "warmupIterations": 5000
+          },
+          "100d6-summary": {
+            "durationNs": 119286200,
+            "iterations": 8472,
+            "nsPerOp": 14080.05193578848,
+            "warmupIterations": 8472
+          },
+          "compile-cold": {
+            "durationNs": 77661400,
+            "iterations": 3802,
+            "nsPerOp": 20426.459758022094,
+            "warmupIterations": 5000
+          },
+          "compile-hot": {
+            "durationNs": 873566600,
+            "iterations": 500000,
+            "nsPerOp": 1747.1332,
+            "warmupIterations": 20000
+          },
+          "d20-changing-seed": {
+            "durationNs": 63384700,
+            "iterations": 5056,
+            "nsPerOp": 12536.530854430379,
+            "warmupIterations": 5056
+          },
+          "d20-details": {
+            "durationNs": 143438500,
+            "iterations": 9323,
+            "nsPerOp": 15385.444599377883,
+            "warmupIterations": 9323
+          },
+          "d20-full": {
+            "durationNs": 134763300,
+            "iterations": 7046,
+            "nsPerOp": 19126.213454442237,
+            "warmupIterations": 7046
+          },
+          "d20-summary": {
+            "durationNs": 105091500,
+            "iterations": 9075,
+            "nsPerOp": 11580.330578512398,
+            "warmupIterations": 9075
+          },
+          "fate-compact": {
+            "durationNs": 200902000,
+            "iterations": 4960,
+            "nsPerOp": 40504.43548387097,
+            "warmupIterations": 5000
+          },
+          "fate-full": {
+            "durationNs": 194474200,
+            "iterations": 3210,
+            "nsPerOp": 60583.862928348906,
+            "warmupIterations": 5000
+          },
+          "mixed-compact": {
+            "durationNs": 60467200,
+            "iterations": 382,
+            "nsPerOp": 158291.0994764398,
+            "warmupIterations": 5000
+          },
+          "normalize": {
+            "durationNs": 57002400,
+            "iterations": 18365,
+            "nsPerOp": 3103.8606044105636,
+            "warmupIterations": 18365
+          },
+          "pool-full": {
+            "durationNs": 221200900,
+            "iterations": 2446,
+            "nsPerOp": 90433.72853638594,
+            "warmupIterations": 5000
+          },
+          "pool-summary": {
+            "durationNs": 140704900,
+            "iterations": 3395,
+            "nsPerOp": 41444.742268041235,
+            "warmupIterations": 5000
+          },
+          "v5-compact": {
+            "durationNs": 180033600,
+            "iterations": 5917,
+            "nsPerOp": 30426.49991549772,
+            "warmupIterations": 5917
+          },
+          "v5-full": {
+            "durationNs": 168311500,
+            "iterations": 3915,
+            "nsPerOp": 42991.44316730524,
+            "warmupIterations": 5000
+          }
+        },
+        "phase": "measure",
+        "runtime": "go1.26.2"
+      }
+    },
+    {
+      "sample": 4,
+      "runtime": "go",
+      "workloadOrder": [
+        "d20-changing-seed",
+        "mixed-compact",
+        "v5-compact",
+        "fate-compact",
+        "v5-full",
+        "fate-full",
+        "pool-summary",
+        "pool-full",
+        "100d6-summary",
+        "d20-summary",
+        "100d6-details",
+        "d20-details",
+        "100d6-full",
+        "d20-full",
+        "compile-hot",
+        "compile-cold",
+        "normalize"
+      ],
+      "workerWallMilliseconds": 7421,
+      "output": {
+        "cases": {
+          "100d6-details": {
+            "durationNs": 230601200,
+            "iterations": 1980,
+            "nsPerOp": 116465.25252525252,
+            "warmupIterations": 5000
+          },
+          "100d6-full": {
+            "durationNs": 201211300,
+            "iterations": 986,
+            "nsPerOp": 204068.25557809332,
+            "warmupIterations": 5000
+          },
+          "100d6-summary": {
+            "durationNs": 108408100,
+            "iterations": 8472,
+            "nsPerOp": 12796.045797922568,
+            "warmupIterations": 8472
+          },
+          "compile-cold": {
+            "durationNs": 53798800,
+            "iterations": 3802,
+            "nsPerOp": 14150.13150973172,
+            "warmupIterations": 5000
+          },
+          "compile-hot": {
+            "durationNs": 585561600,
+            "iterations": 500000,
+            "nsPerOp": 1171.1232,
+            "warmupIterations": 20000
+          },
+          "d20-changing-seed": {
+            "durationNs": 49561600,
+            "iterations": 5056,
+            "nsPerOp": 9802.531645569621,
+            "warmupIterations": 5056
+          },
+          "d20-details": {
+            "durationNs": 140908100,
+            "iterations": 9323,
+            "nsPerOp": 15114.029818727877,
+            "warmupIterations": 9323
+          },
+          "d20-full": {
+            "durationNs": 136213700,
+            "iterations": 7046,
+            "nsPerOp": 19332.06074368436,
+            "warmupIterations": 7046
+          },
+          "d20-summary": {
+            "durationNs": 99403200,
+            "iterations": 9075,
+            "nsPerOp": 10953.520661157025,
+            "warmupIterations": 9075
+          },
+          "fate-compact": {
+            "durationNs": 235085700,
+            "iterations": 4960,
+            "nsPerOp": 47396.31048387097,
+            "warmupIterations": 5000
+          },
+          "fate-full": {
+            "durationNs": 184115900,
+            "iterations": 3210,
+            "nsPerOp": 57356.97819314642,
+            "warmupIterations": 5000
+          },
+          "mixed-compact": {
+            "durationNs": 56722800,
+            "iterations": 382,
+            "nsPerOp": 148489.0052356021,
+            "warmupIterations": 5000
+          },
+          "normalize": {
+            "durationNs": 63023800,
+            "iterations": 18365,
+            "nsPerOp": 3431.734277157637,
+            "warmupIterations": 18365
+          },
+          "pool-full": {
+            "durationNs": 174943100,
+            "iterations": 2446,
+            "nsPerOp": 71522.11774325429,
+            "warmupIterations": 5000
+          },
+          "pool-summary": {
+            "durationNs": 131522700,
+            "iterations": 3395,
+            "nsPerOp": 38740.117820324005,
+            "warmupIterations": 5000
+          },
+          "v5-compact": {
+            "durationNs": 192028500,
+            "iterations": 5917,
+            "nsPerOp": 32453.69274970424,
+            "warmupIterations": 5917
+          },
+          "v5-full": {
+            "durationNs": 162015000,
+            "iterations": 3915,
+            "nsPerOp": 41383.141762452105,
+            "warmupIterations": 5000
+          }
+        },
+        "phase": "measure",
+        "runtime": "go1.26.2"
+      }
+    },
+    {
+      "sample": 4,
+      "runtime": "typescript",
+      "workloadOrder": [
+        "d20-changing-seed",
+        "mixed-compact",
+        "v5-compact",
+        "fate-compact",
+        "v5-full",
+        "fate-full",
+        "pool-summary",
+        "pool-full",
+        "100d6-summary",
+        "d20-summary",
+        "100d6-details",
+        "d20-details",
+        "100d6-full",
+        "d20-full",
+        "compile-hot",
+        "compile-cold",
+        "normalize"
+      ],
+      "workerWallMilliseconds": 3270,
+      "output": {
+        "runtime": "v24.18.0",
+        "phase": "measure",
+        "cases": {
+          "d20-changing-seed": {
+            "iterations": 5056,
+            "warmupIterations": 5056,
+            "durationNs": 82382200,
+            "nsPerOp": 16293.947784810127
+          },
+          "mixed-compact": {
+            "iterations": 382,
+            "warmupIterations": 5000,
+            "durationNs": 49024400,
+            "nsPerOp": 128336.12565445027
+          },
+          "v5-compact": {
+            "iterations": 5917,
+            "warmupIterations": 5917,
+            "durationNs": 52030300,
+            "nsPerOp": 8793.358120669258
+          },
+          "fate-compact": {
+            "iterations": 4960,
+            "warmupIterations": 5000,
+            "durationNs": 49705100,
+            "nsPerOp": 10021.189516129032
+          },
+          "v5-full": {
+            "iterations": 3915,
+            "warmupIterations": 5000,
+            "durationNs": 50770800,
+            "nsPerOp": 12968.275862068966
+          },
+          "fate-full": {
+            "iterations": 3210,
+            "warmupIterations": 5000,
+            "durationNs": 49550700,
+            "nsPerOp": 15436.355140186915
+          },
+          "pool-summary": {
+            "iterations": 3395,
+            "warmupIterations": 5000,
+            "durationNs": 41015900,
+            "nsPerOp": 12081.266568483063
+          },
+          "pool-full": {
+            "iterations": 2446,
+            "warmupIterations": 5000,
+            "durationNs": 48392800,
+            "nsPerOp": 19784.464431725264
+          },
+          "100d6-summary": {
+            "iterations": 8472,
+            "warmupIterations": 8472,
+            "durationNs": 101626500,
+            "nsPerOp": 11995.573654390935
+          },
+          "d20-summary": {
+            "iterations": 9075,
+            "warmupIterations": 9075,
+            "durationNs": 38501900,
+            "nsPerOp": 4242.633608815427
+          },
+          "100d6-details": {
+            "iterations": 1980,
+            "warmupIterations": 5000,
+            "durationNs": 46689100,
+            "nsPerOp": 23580.353535353537
+          },
+          "d20-details": {
+            "iterations": 9323,
+            "warmupIterations": 9323,
+            "durationNs": 48226900,
+            "nsPerOp": 5172.894990882763
+          },
+          "100d6-full": {
+            "iterations": 986,
+            "warmupIterations": 5000,
+            "durationNs": 48973100,
+            "nsPerOp": 49668.4584178499
+          },
+          "d20-full": {
+            "iterations": 7046,
+            "warmupIterations": 7046,
+            "durationNs": 48105600,
+            "nsPerOp": 6827.363042861198
+          },
+          "compile-hot": {
+            "iterations": 500000,
+            "warmupIterations": 20000,
+            "durationNs": 202497900,
+            "nsPerOp": 404.9958
+          },
+          "compile-cold": {
+            "iterations": 3802,
+            "warmupIterations": 5000,
+            "durationNs": 82411600,
+            "nsPerOp": 21675.85481325618
+          },
+          "normalize": {
+            "iterations": 18365,
+            "warmupIterations": 18365,
+            "durationNs": 51988400,
+            "nsPerOp": 2830.84127416281
+          }
+        }
+      }
+    },
+    {
+      "sample": 5,
+      "runtime": "typescript",
+      "workloadOrder": [
+        "normalize",
+        "compile-cold",
+        "compile-hot",
+        "d20-full",
+        "100d6-full",
+        "d20-details",
+        "100d6-details",
+        "d20-summary",
+        "100d6-summary",
+        "pool-full",
+        "pool-summary",
+        "fate-full",
+        "v5-full",
+        "fate-compact",
+        "v5-compact",
+        "mixed-compact",
+        "d20-changing-seed"
+      ],
+      "workerWallMilliseconds": 3228,
+      "output": {
+        "runtime": "v24.18.0",
+        "phase": "measure",
+        "cases": {
+          "normalize": {
+            "iterations": 18365,
+            "warmupIterations": 18365,
+            "durationNs": 44555300,
+            "nsPerOp": 2426.098557037844
+          },
+          "compile-cold": {
+            "iterations": 3802,
+            "warmupIterations": 5000,
+            "durationNs": 50448100,
+            "nsPerOp": 13268.832193582326
+          },
+          "compile-hot": {
+            "iterations": 500000,
+            "warmupIterations": 20000,
+            "durationNs": 215410200,
+            "nsPerOp": 430.8204
+          },
+          "d20-full": {
+            "iterations": 7046,
+            "warmupIterations": 7046,
+            "durationNs": 51922000,
+            "nsPerOp": 7369.0036900369005
+          },
+          "100d6-full": {
+            "iterations": 986,
+            "warmupIterations": 5000,
+            "durationNs": 51224300,
+            "nsPerOp": 51951.622718052735
+          },
+          "d20-details": {
+            "iterations": 9323,
+            "warmupIterations": 9323,
+            "durationNs": 55023000,
+            "nsPerOp": 5901.855625871501
+          },
+          "100d6-details": {
+            "iterations": 1980,
+            "warmupIterations": 5000,
+            "durationNs": 48194300,
+            "nsPerOp": 24340.555555555555
+          },
+          "d20-summary": {
+            "iterations": 9075,
+            "warmupIterations": 9075,
+            "durationNs": 41324100,
+            "nsPerOp": 4553.619834710744
+          },
+          "100d6-summary": {
+            "iterations": 8472,
+            "warmupIterations": 8472,
+            "durationNs": 102623700,
+            "nsPerOp": 12113.279036827196
+          },
+          "pool-full": {
+            "iterations": 2446,
+            "warmupIterations": 5000,
+            "durationNs": 51263100,
+            "nsPerOp": 20957.931316434995
+          },
+          "pool-summary": {
+            "iterations": 3395,
+            "warmupIterations": 5000,
+            "durationNs": 39201800,
+            "nsPerOp": 11546.921944035346
+          },
+          "fate-full": {
+            "iterations": 3210,
+            "warmupIterations": 5000,
+            "durationNs": 49572000,
+            "nsPerOp": 15442.990654205607
+          },
+          "v5-full": {
+            "iterations": 3915,
+            "warmupIterations": 5000,
+            "durationNs": 50258700,
+            "nsPerOp": 12837.471264367816
+          },
+          "fate-compact": {
+            "iterations": 4960,
+            "warmupIterations": 5000,
+            "durationNs": 51501600,
+            "nsPerOp": 10383.387096774193
+          },
+          "v5-compact": {
+            "iterations": 5917,
+            "warmupIterations": 5917,
+            "durationNs": 53242500,
+            "nsPerOp": 8998.225452087207
+          },
+          "mixed-compact": {
+            "iterations": 382,
+            "warmupIterations": 5000,
+            "durationNs": 51134900,
+            "nsPerOp": 133860.9947643979
+          },
+          "d20-changing-seed": {
+            "iterations": 5056,
+            "warmupIterations": 5056,
+            "durationNs": 95899400,
+            "nsPerOp": 18967.444620253165
+          }
+        }
+      }
+    },
+    {
+      "sample": 5,
+      "runtime": "go",
+      "workloadOrder": [
+        "normalize",
+        "compile-cold",
+        "compile-hot",
+        "d20-full",
+        "100d6-full",
+        "d20-details",
+        "100d6-details",
+        "d20-summary",
+        "100d6-summary",
+        "pool-full",
+        "pool-summary",
+        "fate-full",
+        "v5-full",
+        "fate-compact",
+        "v5-compact",
+        "mixed-compact",
+        "d20-changing-seed"
+      ],
+      "workerWallMilliseconds": 7825,
+      "output": {
+        "cases": {
+          "100d6-details": {
+            "durationNs": 263420600,
+            "iterations": 1980,
+            "nsPerOp": 133040.70707070708,
+            "warmupIterations": 5000
+          },
+          "100d6-full": {
+            "durationNs": 226181000,
+            "iterations": 986,
+            "nsPerOp": 229392.4949290061,
+            "warmupIterations": 5000
+          },
+          "100d6-summary": {
+            "durationNs": 111544400,
+            "iterations": 8472,
+            "nsPerOp": 13166.241737488197,
+            "warmupIterations": 8472
+          },
+          "compile-cold": {
+            "durationNs": 48163800,
+            "iterations": 3802,
+            "nsPerOp": 12668.01683324566,
+            "warmupIterations": 5000
+          },
+          "compile-hot": {
+            "durationNs": 787107100,
+            "iterations": 500000,
+            "nsPerOp": 1574.2142,
+            "warmupIterations": 20000
+          },
+          "d20-changing-seed": {
+            "durationNs": 55154400,
+            "iterations": 5056,
+            "nsPerOp": 10908.70253164557,
+            "warmupIterations": 5056
+          },
+          "d20-details": {
+            "durationNs": 126147300,
+            "iterations": 9323,
+            "nsPerOp": 13530.762630054704,
+            "warmupIterations": 9323
+          },
+          "d20-full": {
+            "durationNs": 132578400,
+            "iterations": 7046,
+            "nsPerOp": 18816.122622764688,
+            "warmupIterations": 7046
+          },
+          "d20-summary": {
+            "durationNs": 108778200,
+            "iterations": 9075,
+            "nsPerOp": 11986.578512396694,
+            "warmupIterations": 9075
+          },
+          "fate-compact": {
+            "durationNs": 211437500,
+            "iterations": 4960,
+            "nsPerOp": 42628.528225806454,
+            "warmupIterations": 5000
+          },
+          "fate-full": {
+            "durationNs": 196977900,
+            "iterations": 3210,
+            "nsPerOp": 61363.831775700935,
+            "warmupIterations": 5000
+          },
+          "mixed-compact": {
+            "durationNs": 60118300,
+            "iterations": 382,
+            "nsPerOp": 157377.74869109946,
+            "warmupIterations": 5000
+          },
+          "normalize": {
+            "durationNs": 55152100,
+            "iterations": 18365,
+            "nsPerOp": 3003.1091750612577,
+            "warmupIterations": 18365
+          },
+          "pool-full": {
+            "durationNs": 183665300,
+            "iterations": 2446,
+            "nsPerOp": 75088.0212591987,
+            "warmupIterations": 5000
+          },
+          "pool-summary": {
+            "durationNs": 159459800,
+            "iterations": 3395,
+            "nsPerOp": 46969.01325478645,
+            "warmupIterations": 5000
+          },
+          "v5-compact": {
+            "durationNs": 179865400,
+            "iterations": 5917,
+            "nsPerOp": 30398.073347980397,
+            "warmupIterations": 5917
+          },
+          "v5-full": {
+            "durationNs": 170003900,
+            "iterations": 3915,
+            "nsPerOp": 43423.72924648787,
+            "warmupIterations": 5000
+          }
+        },
+        "phase": "measure",
+        "runtime": "go1.26.2"
+      }
+    },
+    {
+      "sample": 6,
+      "runtime": "go",
+      "workloadOrder": [
+        "d20-changing-seed",
+        "mixed-compact",
+        "v5-compact",
+        "fate-compact",
+        "v5-full",
+        "fate-full",
+        "pool-summary",
+        "pool-full",
+        "100d6-summary",
+        "d20-summary",
+        "100d6-details",
+        "d20-details",
+        "100d6-full",
+        "d20-full",
+        "compile-hot",
+        "compile-cold",
+        "normalize"
+      ],
+      "workerWallMilliseconds": 7227,
+      "output": {
+        "cases": {
+          "100d6-details": {
+            "durationNs": 274012700,
+            "iterations": 1980,
+            "nsPerOp": 138390.25252525252,
+            "warmupIterations": 5000
+          },
+          "100d6-full": {
+            "durationNs": 201798500,
+            "iterations": 986,
+            "nsPerOp": 204663.7931034483,
+            "warmupIterations": 5000
+          },
+          "100d6-summary": {
+            "durationNs": 109052100,
+            "iterations": 8472,
+            "nsPerOp": 12872.06090651558,
+            "warmupIterations": 8472
+          },
+          "compile-cold": {
+            "durationNs": 54708900,
+            "iterations": 3802,
+            "nsPerOp": 14389.505523408732,
+            "warmupIterations": 5000
+          },
+          "compile-hot": {
+            "durationNs": 561901700,
+            "iterations": 500000,
+            "nsPerOp": 1123.8034,
+            "warmupIterations": 20000
+          },
+          "d20-changing-seed": {
+            "durationNs": 57102700,
+            "iterations": 5056,
+            "nsPerOp": 11294.04667721519,
+            "warmupIterations": 5056
+          },
+          "d20-details": {
+            "durationNs": 144119700,
+            "iterations": 9323,
+            "nsPerOp": 15458.511208838358,
+            "warmupIterations": 9323
+          },
+          "d20-full": {
+            "durationNs": 128388100,
+            "iterations": 7046,
+            "nsPerOp": 18221.41640647176,
+            "warmupIterations": 7046
+          },
+          "d20-summary": {
+            "durationNs": 97362000,
+            "iterations": 9075,
+            "nsPerOp": 10728.595041322315,
+            "warmupIterations": 9075
+          },
+          "fate-compact": {
+            "durationNs": 208538700,
+            "iterations": 4960,
+            "nsPerOp": 42044.092741935485,
+            "warmupIterations": 5000
+          },
+          "fate-full": {
+            "durationNs": 167438800,
+            "iterations": 3210,
+            "nsPerOp": 52161.619937694704,
+            "warmupIterations": 5000
+          },
+          "mixed-compact": {
+            "durationNs": 65493500,
+            "iterations": 382,
+            "nsPerOp": 171448.95287958116,
+            "warmupIterations": 5000
+          },
+          "normalize": {
+            "durationNs": 63263700,
+            "iterations": 18365,
+            "nsPerOp": 3444.7971685270895,
+            "warmupIterations": 18365
+          },
+          "pool-full": {
+            "durationNs": 176495400,
+            "iterations": 2446,
+            "nsPerOp": 72156.7457072772,
+            "warmupIterations": 5000
+          },
+          "pool-summary": {
+            "durationNs": 131757000,
+            "iterations": 3395,
+            "nsPerOp": 38809.131075110454,
+            "warmupIterations": 5000
+          },
+          "v5-compact": {
+            "durationNs": 176966400,
+            "iterations": 5917,
+            "nsPerOp": 29908.129119486228,
+            "warmupIterations": 5917
+          },
+          "v5-full": {
+            "durationNs": 146574900,
+            "iterations": 3915,
+            "nsPerOp": 37439.31034482759,
+            "warmupIterations": 5000
+          }
+        },
+        "phase": "measure",
+        "runtime": "go1.26.2"
+      }
+    },
+    {
+      "sample": 6,
+      "runtime": "typescript",
+      "workloadOrder": [
+        "d20-changing-seed",
+        "mixed-compact",
+        "v5-compact",
+        "fate-compact",
+        "v5-full",
+        "fate-full",
+        "pool-summary",
+        "pool-full",
+        "100d6-summary",
+        "d20-summary",
+        "100d6-details",
+        "d20-details",
+        "100d6-full",
+        "d20-full",
+        "compile-hot",
+        "compile-cold",
+        "normalize"
+      ],
+      "workerWallMilliseconds": 3216,
+      "output": {
+        "runtime": "v24.18.0",
+        "phase": "measure",
+        "cases": {
+          "d20-changing-seed": {
+            "iterations": 5056,
+            "warmupIterations": 5056,
+            "durationNs": 83698300,
+            "nsPerOp": 16554.252373417723
+          },
+          "mixed-compact": {
+            "iterations": 382,
+            "warmupIterations": 5000,
+            "durationNs": 49536300,
+            "nsPerOp": 129676.17801047121
+          },
+          "v5-compact": {
+            "iterations": 5917,
+            "warmupIterations": 5917,
+            "durationNs": 50004900,
+            "nsPerOp": 8451.05627851952
+          },
+          "fate-compact": {
+            "iterations": 4960,
+            "warmupIterations": 5000,
+            "durationNs": 49850200,
+            "nsPerOp": 10050.443548387097
+          },
+          "v5-full": {
+            "iterations": 3915,
+            "warmupIterations": 5000,
+            "durationNs": 48909000,
+            "nsPerOp": 12492.72030651341
+          },
+          "fate-full": {
+            "iterations": 3210,
+            "warmupIterations": 5000,
+            "durationNs": 49461700,
+            "nsPerOp": 15408.629283489097
+          },
+          "pool-summary": {
+            "iterations": 3395,
+            "warmupIterations": 5000,
+            "durationNs": 40395800,
+            "nsPerOp": 11898.61561119293
+          },
+          "pool-full": {
+            "iterations": 2446,
+            "warmupIterations": 5000,
+            "durationNs": 49336700,
+            "nsPerOp": 20170.359771054784
+          },
+          "100d6-summary": {
+            "iterations": 8472,
+            "warmupIterations": 8472,
+            "durationNs": 98034100,
+            "nsPerOp": 11571.541548630783
+          },
+          "d20-summary": {
+            "iterations": 9075,
+            "warmupIterations": 9075,
+            "durationNs": 38797400,
+            "nsPerOp": 4275.195592286502
+          },
+          "100d6-details": {
+            "iterations": 1980,
+            "warmupIterations": 5000,
+            "durationNs": 48963200,
+            "nsPerOp": 24728.88888888889
+          },
+          "d20-details": {
+            "iterations": 9323,
+            "warmupIterations": 9323,
+            "durationNs": 48928400,
+            "nsPerOp": 5248.139011047946
+          },
+          "100d6-full": {
+            "iterations": 986,
+            "warmupIterations": 5000,
+            "durationNs": 48853900,
+            "nsPerOp": 49547.56592292089
+          },
+          "d20-full": {
+            "iterations": 7046,
+            "warmupIterations": 7046,
+            "durationNs": 46388900,
+            "nsPerOp": 6583.721260289526
+          },
+          "compile-hot": {
+            "iterations": 500000,
+            "warmupIterations": 20000,
+            "durationNs": 200362800,
+            "nsPerOp": 400.7256
+          },
+          "compile-cold": {
+            "iterations": 3802,
+            "warmupIterations": 5000,
+            "durationNs": 77657600,
+            "nsPerOp": 20425.46028406102
+          },
+          "normalize": {
+            "iterations": 18365,
+            "warmupIterations": 18365,
+            "durationNs": 45329200,
+            "nsPerOp": 2468.238497141301
+          }
+        }
+      }
+    },
+    {
+      "sample": 7,
+      "runtime": "typescript",
+      "workloadOrder": [
+        "normalize",
+        "compile-cold",
+        "compile-hot",
+        "d20-full",
+        "100d6-full",
+        "d20-details",
+        "100d6-details",
+        "d20-summary",
+        "100d6-summary",
+        "pool-full",
+        "pool-summary",
+        "fate-full",
+        "v5-full",
+        "fate-compact",
+        "v5-compact",
+        "mixed-compact",
+        "d20-changing-seed"
+      ],
+      "workerWallMilliseconds": 3229,
+      "output": {
+        "runtime": "v24.18.0",
+        "phase": "measure",
+        "cases": {
+          "normalize": {
+            "iterations": 18365,
+            "warmupIterations": 18365,
+            "durationNs": 37461200,
+            "nsPerOp": 2039.8148652327798
+          },
+          "compile-cold": {
+            "iterations": 3802,
+            "warmupIterations": 5000,
+            "durationNs": 53196200,
+            "nsPerOp": 13991.635981062598
+          },
+          "compile-hot": {
+            "iterations": 500000,
+            "warmupIterations": 20000,
+            "durationNs": 208636700,
+            "nsPerOp": 417.2734
+          },
+          "d20-full": {
+            "iterations": 7046,
+            "warmupIterations": 7046,
+            "durationNs": 55947000,
+            "nsPerOp": 7940.2497871132555
+          },
+          "100d6-full": {
+            "iterations": 986,
+            "warmupIterations": 5000,
+            "durationNs": 52320100,
+            "nsPerOp": 53062.98174442191
+          },
+          "d20-details": {
+            "iterations": 9323,
+            "warmupIterations": 9323,
+            "durationNs": 49504800,
+            "nsPerOp": 5309.964603668347
+          },
+          "100d6-details": {
+            "iterations": 1980,
+            "warmupIterations": 5000,
+            "durationNs": 54499800,
+            "nsPerOp": 27525.151515151516
+          },
+          "d20-summary": {
+            "iterations": 9075,
+            "warmupIterations": 9075,
+            "durationNs": 46849400,
+            "nsPerOp": 5162.468319559229
+          },
+          "100d6-summary": {
+            "iterations": 8472,
+            "warmupIterations": 8472,
+            "durationNs": 104508500,
+            "nsPerOp": 12335.753068932956
+          },
+          "pool-full": {
+            "iterations": 2446,
+            "warmupIterations": 5000,
+            "durationNs": 51647500,
+            "nsPerOp": 21115.085854456254
+          },
+          "pool-summary": {
+            "iterations": 3395,
+            "warmupIterations": 5000,
+            "durationNs": 39052500,
+            "nsPerOp": 11502.945508100147
+          },
+          "fate-full": {
+            "iterations": 3210,
+            "warmupIterations": 5000,
+            "durationNs": 51521800,
+            "nsPerOp": 16050.404984423676
+          },
+          "v5-full": {
+            "iterations": 3915,
+            "warmupIterations": 5000,
+            "durationNs": 48191200,
+            "nsPerOp": 12309.374201787994
+          },
+          "fate-compact": {
+            "iterations": 4960,
+            "warmupIterations": 5000,
+            "durationNs": 49646500,
+            "nsPerOp": 10009.375
+          },
+          "v5-compact": {
+            "iterations": 5917,
+            "warmupIterations": 5917,
+            "durationNs": 53410800,
+            "nsPerOp": 9026.668920060842
+          },
+          "mixed-compact": {
+            "iterations": 382,
+            "warmupIterations": 5000,
+            "durationNs": 51661000,
+            "nsPerOp": 135238.21989528797
+          },
+          "d20-changing-seed": {
+            "iterations": 5056,
+            "warmupIterations": 5056,
+            "durationNs": 93580200,
+            "nsPerOp": 18508.742088607596
+          }
+        }
+      }
+    },
+    {
+      "sample": 7,
+      "runtime": "go",
+      "workloadOrder": [
+        "normalize",
+        "compile-cold",
+        "compile-hot",
+        "d20-full",
+        "100d6-full",
+        "d20-details",
+        "100d6-details",
+        "d20-summary",
+        "100d6-summary",
+        "pool-full",
+        "pool-summary",
+        "fate-full",
+        "v5-full",
+        "fate-compact",
+        "v5-compact",
+        "mixed-compact",
+        "d20-changing-seed"
+      ],
+      "workerWallMilliseconds": 7744,
+      "output": {
+        "cases": {
+          "100d6-details": {
+            "durationNs": 257382700,
+            "iterations": 1980,
+            "nsPerOp": 129991.26262626263,
+            "warmupIterations": 5000
+          },
+          "100d6-full": {
+            "durationNs": 219948200,
+            "iterations": 986,
+            "nsPerOp": 223071.1967545639,
+            "warmupIterations": 5000
+          },
+          "100d6-summary": {
+            "durationNs": 120490500,
+            "iterations": 8472,
+            "nsPerOp": 14222.202549575071,
+            "warmupIterations": 8472
+          },
+          "compile-cold": {
+            "durationNs": 50694400,
+            "iterations": 3802,
+            "nsPerOp": 13333.61388742767,
+            "warmupIterations": 5000
+          },
+          "compile-hot": {
+            "durationNs": 627666200,
+            "iterations": 500000,
+            "nsPerOp": 1255.3324,
+            "warmupIterations": 20000
+          },
+          "d20-changing-seed": {
+            "durationNs": 57437000,
+            "iterations": 5056,
+            "nsPerOp": 11360.166139240506,
+            "warmupIterations": 5056
+          },
+          "d20-details": {
+            "durationNs": 126693100,
+            "iterations": 9323,
+            "nsPerOp": 13589.30601737638,
+            "warmupIterations": 9323
+          },
+          "d20-full": {
+            "durationNs": 139503500,
+            "iterations": 7046,
+            "nsPerOp": 19798.963951177975,
+            "warmupIterations": 7046
+          },
+          "d20-summary": {
+            "durationNs": 96153700,
+            "iterations": 9075,
+            "nsPerOp": 10595.449035812671,
+            "warmupIterations": 9075
+          },
+          "fate-compact": {
+            "durationNs": 201837900,
+            "iterations": 4960,
+            "nsPerOp": 40693.125,
+            "warmupIterations": 5000
+          },
+          "fate-full": {
+            "durationNs": 200863700,
+            "iterations": 3210,
+            "nsPerOp": 62574.36137071651,
+            "warmupIterations": 5000
+          },
+          "mixed-compact": {
+            "durationNs": 60600600,
+            "iterations": 382,
+            "nsPerOp": 158640.31413612564,
+            "warmupIterations": 5000
+          },
+          "normalize": {
+            "durationNs": 55868300,
+            "iterations": 18365,
+            "nsPerOp": 3042.1072692621833,
+            "warmupIterations": 18365
+          },
+          "pool-full": {
+            "durationNs": 199726200,
+            "iterations": 2446,
+            "nsPerOp": 81654.21095666394,
+            "warmupIterations": 5000
+          },
+          "pool-summary": {
+            "durationNs": 152208900,
+            "iterations": 3395,
+            "nsPerOp": 44833.25478645066,
+            "warmupIterations": 5000
+          },
+          "v5-compact": {
+            "durationNs": 181763200,
+            "iterations": 5917,
+            "nsPerOp": 30718.810207875613,
+            "warmupIterations": 5917
+          },
+          "v5-full": {
+            "durationNs": 172305900,
+            "iterations": 3915,
+            "nsPerOp": 44011.724137931036,
+            "warmupIterations": 5000
+          }
+        },
+        "phase": "measure",
+        "runtime": "go1.26.2"
+      }
+    }
+  ],
+  "workloads": [
+    {
+      "id": "normalize",
+      "label": "Normalização — ciclo de quatro entradas",
+      "kind": "normalize",
+      "input": null,
+      "mode": "",
+      "cache": true,
+      "algorithm": "mt19937",
+      "seeds": [
+        "dicecore-comparison/v3.7.1"
+      ],
+      "validationCount": 4,
+      "inputs": [
+        " d + 2d + f ",
+        "2#4d6kh3+1d8 [ataque]",
+        "1d20+2-pool(1)adv",
+        "2 D 6 [ação 🎲] // descrição"
+      ]
+    },
+    {
+      "id": "compile-cold",
+      "label": "Compilar fórmula, cache desativado",
+      "kind": "compile",
+      "input": "2#4d6kh3+1d8",
+      "mode": "",
+      "cache": false,
+      "algorithm": "mt19937",
+      "seeds": [
+        "dicecore-comparison/v3.7.1"
+      ],
+      "validationCount": 1
+    },
+    {
+      "id": "compile-hot",
+      "label": "Compilar fórmula, cache aquecido",
+      "kind": "compile",
+      "input": "2#4d6kh3+1d8",
+      "mode": "",
+      "cache": true,
+      "algorithm": "mt19937",
+      "seeds": [
+        "dicecore-comparison/v3.7.1"
+      ],
+      "validationCount": 1
+    },
+    {
+      "id": "d20-full",
+      "label": "1d20+5 — full",
+      "kind": "roll",
+      "input": "1d20+5",
+      "mode": "full",
+      "cache": true,
+      "algorithm": "mt19937",
+      "seeds": [
+        "dicecore-comparison/v3.7.1"
+      ],
+      "validationCount": 1
+    },
+    {
+      "id": "100d6-full",
+      "label": "100d6 — full",
+      "kind": "roll",
+      "input": "100d6",
+      "mode": "full",
+      "cache": true,
+      "algorithm": "mt19937",
+      "seeds": [
+        "dicecore-comparison/v3.7.1"
+      ],
+      "validationCount": 1
+    },
+    {
+      "id": "d20-details",
+      "label": "1d20+5 — details",
+      "kind": "roll",
+      "input": "1d20+5",
+      "mode": "details",
+      "cache": true,
+      "algorithm": "mt19937",
+      "seeds": [
+        "dicecore-comparison/v3.7.1"
+      ],
+      "validationCount": 1
+    },
+    {
+      "id": "100d6-details",
+      "label": "100d6 — details",
+      "kind": "roll",
+      "input": "100d6",
+      "mode": "details",
+      "cache": true,
+      "algorithm": "mt19937",
+      "seeds": [
+        "dicecore-comparison/v3.7.1"
+      ],
+      "validationCount": 1
+    },
+    {
+      "id": "d20-summary",
+      "label": "1d20+5 — summary",
+      "kind": "roll",
+      "input": "1d20+5",
+      "mode": "summary",
+      "cache": true,
+      "algorithm": "mt19937",
+      "seeds": [
+        "dicecore-comparison/v3.7.1"
+      ],
+      "validationCount": 1
+    },
+    {
+      "id": "100d6-summary",
+      "label": "100d6 — summary",
+      "kind": "roll",
+      "input": "100d6",
+      "mode": "summary",
+      "cache": true,
+      "algorithm": "mt19937",
+      "seeds": [
+        "dicecore-comparison/v3.7.1"
+      ],
+      "validationCount": 1
+    },
+    {
+      "id": "pool-full",
+      "label": "Pool com explosão limitada — full",
+      "kind": "roll",
+      "input": "20d6!2ro=1kh10",
+      "mode": "full",
+      "cache": true,
+      "algorithm": "mt19937",
+      "seeds": [
+        "dicecore-comparison/v3.7.1"
+      ],
+      "validationCount": 1
+    },
+    {
+      "id": "pool-summary",
+      "label": "Pool com explosão limitada — summary",
+      "kind": "roll",
+      "input": "20d6!2ro=1kh10",
+      "mode": "summary",
+      "cache": true,
+      "algorithm": "mt19937",
+      "seeds": [
+        "dicecore-comparison/v3.7.1"
+      ],
+      "validationCount": 1
+    },
+    {
+      "id": "fate-full",
+      "label": "Fate, 20 dados — full",
+      "kind": "fate",
+      "input": {
+        "dice": 20
+      },
+      "mode": "full",
+      "cache": true,
+      "algorithm": "mt19937",
+      "seeds": [
+        "dicecore-comparison/v3.7.1"
+      ],
+      "validationCount": 1
+    },
+    {
+      "id": "v5-full",
+      "label": "V5, pool 10/fome 3 — full",
+      "kind": "vampire-v5",
+      "input": {
+        "pool": 10,
+        "hunger": 3,
+        "difficulty": 4
+      },
+      "mode": "full",
+      "cache": true,
+      "algorithm": "mt19937",
+      "seeds": [
+        "dicecore-comparison/v3.7.1"
+      ],
+      "validationCount": 1
+    },
+    {
+      "id": "fate-compact",
+      "label": "Fate, 20 dados — compact",
+      "kind": "fate",
+      "input": {
+        "dice": 20
+      },
+      "mode": "compact",
+      "cache": true,
+      "algorithm": "mt19937",
+      "seeds": [
+        "dicecore-comparison/v3.7.1"
+      ],
+      "validationCount": 1
+    },
+    {
+      "id": "v5-compact",
+      "label": "V5, pool 10/fome 3 — compact",
+      "kind": "vampire-v5",
+      "input": {
+        "pool": 10,
+        "hunger": 3,
+        "difficulty": 4
+      },
+      "mode": "compact",
+      "cache": true,
+      "algorithm": "mt19937",
+      "seeds": [
+        "dicecore-comparison/v3.7.1"
+      ],
+      "validationCount": 1
+    },
+    {
+      "id": "mixed-compact",
+      "label": "Misto, todos os sistemas — compact",
+      "kind": "mixed",
+      "input": "2d20kh1; fate(4); v5(7,3,4); assim(d6=2,d10=1,d12=1,keep=1); dh(2,15)",
+      "mode": "compact",
+      "cache": true,
+      "algorithm": "mt19937",
+      "seeds": [
+        "dicecore-comparison/v3.7.1"
+      ],
+      "validationCount": 1
+    },
+    {
+      "id": "d20-changing-seed",
+      "label": "1d20+5 — summary, 16 seeds alternadas",
+      "kind": "roll",
+      "input": "1d20+5",
+      "mode": "summary",
+      "cache": true,
+      "algorithm": "mt19937",
+      "seeds": [
+        "dicecore-comparison/v3.7.1/0",
+        "dicecore-comparison/v3.7.1/1",
+        "dicecore-comparison/v3.7.1/2",
+        "dicecore-comparison/v3.7.1/3",
+        "dicecore-comparison/v3.7.1/4",
+        "dicecore-comparison/v3.7.1/5",
+        "dicecore-comparison/v3.7.1/6",
+        "dicecore-comparison/v3.7.1/7",
+        "dicecore-comparison/v3.7.1/8",
+        "dicecore-comparison/v3.7.1/9",
+        "dicecore-comparison/v3.7.1/10",
+        "dicecore-comparison/v3.7.1/11",
+        "dicecore-comparison/v3.7.1/12",
+        "dicecore-comparison/v3.7.1/13",
+        "dicecore-comparison/v3.7.1/14",
+        "dicecore-comparison/v3.7.1/15"
+      ],
+      "validationCount": 16
+    }
+  ],
+  "environment": {
+    "cpuModel": "AMD Ryzen 5 5500                               ",
+    "logicalCPUs": 12,
+    "osVersion": "Windows 11 Pro",
+    "osRelease": "10.0.26200",
+    "arch": "x64",
+    "totalMemoryBytes": 34220920832,
+    "freeMemoryBytesAtStart": 14382166016,
+    "node": "v24.18.0",
+    "go": "go version go1.26.2 windows/amd64",
+    "runtimeEnvironment": {
+      "NODE_OPTIONS": null,
+      "GOMAXPROCS": null,
+      "GOGC": null,
+      "GOMEMLIMIT": null
+    }
+  },
+  "git": {
+    "commit": "79c34f98fe512d8cd0d9d42c53dc587e6907a580",
+    "statusLines": [
+      "M .github/workflows/go.yml",
+      " M go/MIGRATION.md",
+      " M go/README.md",
+      " M go/doc.go",
+      " M go/errors.go",
+      " M go/errors_test.go",
+      " M go/foundations_fixtures_test.go",
+      " M go/math.go",
+      " M go/scanner.go",
+      " M go/testdata/README.md",
+      " D go/testdata/math-transcendental-pending.json",
+      " M readme.md",
+      " M scripts/generate-go-fixtures.mjs",
+      "?? go/THIRD_PARTY_NOTICES.md",
+      "?? go/benchmark_test.go",
+      "?? go/benchmarks/",
+      "?? go/cache.go",
+      "?? go/cache_test.go",
+      "?? go/compiler.go",
+      "?? go/compiler_boundaries_test.go",
+      "?? go/compiler_plan.go",
+      "?? go/compiler_semantics.go",
+      "?? go/compiler_snapshot_test.go",
+      "?? go/compiler_test.go",
+      "?? go/compiler_types.go",
+      "?? go/context.go",
+      "?? go/context_test.go",
+      "?? go/engine.go",
+      "?? go/engine_fixtures_test.go",
+      "?? go/engine_test.go",
+      "?? go/error_utf16.go",
+      "?? go/error_utf16_test.go",
+      "?? go/executor.go",
+      "?? go/executor_summary.go",
+      "?? go/executor_test.go",
+      "?? go/journal.go",
+      "?? go/journal_test.go",
+      "?? go/legacy_fixtures_test.go",
+      "?? go/math_conformance_test.go",
+      "?? go/math_kernels_test.go",
+      "?? go/math_pow.go",
+      "?? go/math_pow_refine.go",
+      "?? go/math_transcendental.go",
+      "?? go/math_trig.go",
+      "?? go/scanner_unicode_test.go",
+      "?? go/system_unicode.go",
+      "?? go/systems.go",
+      "?? go/systems_fixtures_test.go",
+      "?? go/systems_mixed.go",
+      "?? go/systems_test.go",
+      "?? go/testdata/compiler.json",
+      "?? go/testdata/engine.json",
+      "?? go/testdata/executor.json",
+      "?? go/testdata/math-conformance.json",
+      "?? go/testdata/math-transcendental.json",
+      "?? go/testdata/systems-contracts.json",
+      "?? go/testdata/systems-names.json",
+      "?? go/testdata/systems-rolls.json",
+      "?? go/testdata/systems-selection.json",
+      "?? go/types.go",
+      "?? scripts/benchmark-go-reference.mjs",
+      "?? scripts/compare-go-typescript.mjs",
+      "?? scripts/generate-go-compiler-fixtures.mjs",
+      "?? scripts/generate-go-engine-fixtures.mjs",
+      "?? scripts/generate-go-executor-fixtures.mjs",
+      "?? scripts/generate-go-executor-oracle.ts",
+      "?? scripts/generate-go-math-conformance.mjs",
+      "?? scripts/generate-go-system-fixtures.mjs"
+    ]
+  },
+  "configuration": {
+    "samples": 7,
+    "targetBatchMs": 50,
+    "freezeResults": "never",
+    "warmupFloor": 5000,
+    "warmupCap": 20000,
+    "maximumIterations": 500000,
+    "wallBudgetMs": 600000
+  },
+  "source": {
+    "sha256": "032cb389a7e29b579a6855ef360081338950cfec8dd556751de3a019665c7697",
+    "files": [
+      {
+        "path": "dist/chunks/common-BD_2ikUL.js",
+        "sha256": "6d6a944e66f77d64f22c79dfe8939326335b95c094cc35525621d1d8b36c8db5"
+      },
+      {
+        "path": "dist/chunks/core-BgwMxRi8.js",
+        "sha256": "68cfa89cd641be13d5b1af49cfa9ae7eb1b6c31f08789fd25d384d217e10bba3"
+      },
+      {
+        "path": "dist/core.js",
+        "sha256": "6204d325cbd410c1f6f0c3646f35fbf0fd775560037b3fa8e1e401438e4123c5"
+      },
+      {
+        "path": "dist/index.js",
+        "sha256": "ff35b8ad07c9bfdb9063cecae0f2de5901102a9a7b3769ed8c52cb28d218e132"
+      },
+      {
+        "path": "dist/systems/assimilation.js",
+        "sha256": "b5e00ecfcb15424f666dcaf04afa058cd9abad493170ead06559415697981c3f"
+      },
+      {
+        "path": "dist/systems/daggerheart.js",
+        "sha256": "c81e02857830b247fc4274339b6e0e70178472a6d6c2d071a634b6554d90def9"
+      },
+      {
+        "path": "dist/systems/fate.js",
+        "sha256": "175129b1a0cca1c43a9ea4b23f3cf2e36b10219ad01d3613d687e189b480af6f"
+      },
+      {
+        "path": "dist/systems/index.js",
+        "sha256": "1ac1bd05b757198078badd282245de7015ccf426c3d9abffc135bbdeed09f35e"
+      },
+      {
+        "path": "dist/systems/mixed.js",
+        "sha256": "25c4214e5a133e33b79fbecbd00f85517149a91d410d8ceecb2524757687896f"
+      },
+      {
+        "path": "dist/systems/vampire-v5.js",
+        "sha256": "8dd901059b213b040da4451e1224e35dba9de8002a44bc673faeefd86c2917c1"
+      },
+      {
+        "path": "go/benchmark_test.go",
+        "sha256": "2dfdb690f6dfddc2151453cd3fba15f4cc944681a9f00870994389c7ef7c70c7"
+      },
+      {
+        "path": "go/go.mod",
+        "sha256": "6176f43cc3c8805dd71b9819687efbe2ac4240bb2284f64e466fd47ec13a6c1b"
+      },
+      {
+        "path": "go/budget.go",
+        "sha256": "ece1d18d5e46a472ef1c544dd0b4d425ebf79631afec330c53376ed896ec0609"
+      },
+      {
+        "path": "go/cache.go",
+        "sha256": "bc72fedcb0e1fc928d2bed11161b578b3f1b828530148eefcda00b7d7422832a"
+      },
+      {
+        "path": "go/compiler.go",
+        "sha256": "d88ffe71296acdd06942b899896f691c50f4382dfb4a9b6c27528019687862c3"
+      },
+      {
+        "path": "go/compiler_plan.go",
+        "sha256": "cdcda478d75bc41996867063d693f452e45b78f597a54a9a19cf24880561667f"
+      },
+      {
+        "path": "go/compiler_semantics.go",
+        "sha256": "c46547890f3113e7a32b7729a10d93f541390441f4e4bdaea20197d65aec512a"
+      },
+      {
+        "path": "go/compiler_types.go",
+        "sha256": "578d0a4d5a09dba9e294efa14b2d51382a817126121645c9caf8018b7a5846e9"
+      },
+      {
+        "path": "go/context.go",
+        "sha256": "65255bcb084c5cc9c0151f6df6b9886d53932639070435bf5fc19a92c2101ec1"
+      },
+      {
+        "path": "go/doc.go",
+        "sha256": "656bd408bdcd739bc21df7dd5c96cd5301d6c4498c601c4cb0d0f2c0a7403e3e"
+      },
+      {
+        "path": "go/engine.go",
+        "sha256": "20537f02abc29ff4b88cd2bce90306f6fea1e435ae6a4c0583985b39ac369efe"
+      },
+      {
+        "path": "go/error_utf16.go",
+        "sha256": "ceb096dea18374dcaddc61fdf12fcb548bbcef3277b94eb997665a8bd312f6bd"
+      },
+      {
+        "path": "go/errors.go",
+        "sha256": "a7f1db56a341f7b5618f0a77b57d1c8dc878c9034e32e7cd1236a121a81a3a37"
+      },
+      {
+        "path": "go/executor.go",
+        "sha256": "758eb084d77ce411753373e332a75c0a8e62b051faf8a08a254279663fe8122d"
+      },
+      {
+        "path": "go/executor_summary.go",
+        "sha256": "1f9586a613d7b7bb91b7932ad094f447b9b33c8e21922d938379387b50e6a6df"
+      },
+      {
+        "path": "go/journal.go",
+        "sha256": "9ddd3256e966a1f6ac8915a06a58e417e17c0633d0d6ca140f6d7c111908ee97"
+      },
+      {
+        "path": "go/limits.go",
+        "sha256": "25141b044a5106a0744708decd23d6f71aa12fbcf37da9b1dc82c83c2cd1ad80"
+      },
+      {
+        "path": "go/math.go",
+        "sha256": "7295f94d78ee4ac0181f51c204a8df2834b10f9efb0aa66bee06c78355be5f4d"
+      },
+      {
+        "path": "go/math_pow.go",
+        "sha256": "07a43032a8bc17d7b1c8ed1abc42f87fd07ddfb33d5aa1fe53aced3a8eb776b0"
+      },
+      {
+        "path": "go/math_pow_refine.go",
+        "sha256": "0decf4b3ac5498c878e81c862dad841c140174f5204630d4eb48e0adeb4bd312"
+      },
+      {
+        "path": "go/math_transcendental.go",
+        "sha256": "6fbab20a6edff34ac71dd614af40f4ca47fa394cf52d9cf4cba85991ddf2798a"
+      },
+      {
+        "path": "go/math_trig.go",
+        "sha256": "d13187a24cb08c989513bf0b5b1eabf51e65f8d9d0fc85093280dfbbcb87f010"
+      },
+      {
+        "path": "go/normalization.go",
+        "sha256": "1524e4931a632058687dcf1bc906f7e37a68dc6d970ff9b71fda326b1489a406"
+      },
+      {
+        "path": "go/parser.go",
+        "sha256": "d70a3ebe5ddc7c756c1a8299b25d4d618cdec70d0302dfc8c22a2708e0768dad"
+      },
+      {
+        "path": "go/random.go",
+        "sha256": "493b2a20626a87cf751e8bb78c5a35d5a48bfdf96f1213c9cda837272ca0feb6"
+      },
+      {
+        "path": "go/replay.go",
+        "sha256": "24bf583748534472f6e484269976bd33cc34cc4a0db7ef2eb24638ee05c78229"
+      },
+      {
+        "path": "go/roll_count.go",
+        "sha256": "07e2b5dc1ff3a685701d99ac65f5810077014a1d6ff38c4ccd93914349d4b75c"
+      },
+      {
+        "path": "go/scanner.go",
+        "sha256": "f02b97a565f6e9c9f44bb4a57cfec66fb54fe684d080afe11453c2ec040c7dd5"
+      },
+      {
+        "path": "go/seed.go",
+        "sha256": "af8806500a842f165fcfc5393e93eee9c8919887de401b471d8ad25d764959fe"
+      },
+      {
+        "path": "go/syntax.go",
+        "sha256": "b8c46647fa19b01a482e907a0d25da525dc637d9d19315e291703156b1c1ec74"
+      },
+      {
+        "path": "go/system_unicode.go",
+        "sha256": "6b9b527ab4f5a67938087d361d85a175dfc7f52c425c4905413e9ed3c7529e0e"
+      },
+      {
+        "path": "go/systems.go",
+        "sha256": "d26dd5065e964426869aa5c9d2770f120593bde3ba11c3a8e67a901ad46ec4c9"
+      },
+      {
+        "path": "go/systems_mixed.go",
+        "sha256": "8bb490f3b50e5e9f92cd8de6ea50d652fe57628d05313d639f6afc01829943ca"
+      },
+      {
+        "path": "go/types.go",
+        "sha256": "2fccf0bad096bc4a10708c751e9cb76063f5a7904ae9ba61e8da980acf68b39c"
+      },
+      {
+        "path": "package-lock.json",
+        "sha256": "1b023b9bcc6e58c4c7bcb7e70ea45a914fd79e09e98ca8550940c92d82936a28"
+      },
+      {
+        "path": "package.json",
+        "sha256": "7a697d3832f6af94f8eab364147a05c3e13438a0b0c6d0c3f58e3d3cf6dc9504"
+      },
+      {
+        "path": "rollup.config.mjs",
+        "sha256": "4c6d0f06c1a5b7a3fb95061aba97f52d4aa1a8e1fa77e32931569ecddcea4bcd"
+      },
+      {
+        "path": "scripts/benchmark-go-reference.mjs",
+        "sha256": "8282b0ae61241e12f353153ff60589902fa81842f1ab6a637cc0cbf8b7257a0a"
+      },
+      {
+        "path": "scripts/compare-go-typescript.mjs",
+        "sha256": "d275eb675bd5a60b7e236ba196cb1b9bf86e77c7deebe5e87fe5369018b683af"
+      },
+      {
+        "path": "src/index.ts",
+        "sha256": "e6248ca68143cc1f4cedebf19a7a0cc40dbedf1f084eebefebdd625be8bc2ac9"
+      },
+      {
+        "path": "src/v3/cache.ts",
+        "sha256": "e1eecc07237bb7f5c3b6b8c132630897925ccbfebd0abff14017f87014e57654"
+      },
+      {
+        "path": "src/v3/compiler.ts",
+        "sha256": "f676854e61ac831df51dc83e5cc512b3029b21ecf756f151915d8c4a7541667d"
+      },
+      {
+        "path": "src/v3/core.ts",
+        "sha256": "a2aff05791b55b3009cd8683fed536e1d181b188f58f538c1e0e34451444d691"
+      },
+      {
+        "path": "src/v3/engine.ts",
+        "sha256": "03536d7d109007aa807af816ae69953e8ee422b4c3b9e0a1d0113067370992b5"
+      },
+      {
+        "path": "src/v3/errors.ts",
+        "sha256": "1cc67c4ee5c2daa0a767a97ac19305cad9bd1e49e6a0fa8519f2ff510eb5f53e"
+      },
+      {
+        "path": "src/v3/executor.ts",
+        "sha256": "438af933fb31c356305d03326fd89b96af55e904837f40c11641f368ed622af3"
+      },
+      {
+        "path": "src/v3/freeze.ts",
+        "sha256": "d39f00023fd81968fbfdf6c5fe3d2ba76b0e981df45cebfaaa34ec586212e1f0"
+      },
+      {
+        "path": "src/v3/index.ts",
+        "sha256": "70bd7800236c5c024365c232a8adb19393a1516ee3134581053c26417210adc2"
+      },
+      {
+        "path": "src/v3/math.ts",
+        "sha256": "a2d118ec27539010a84d1995ae659217dfb5f261104a8fbe9da1319129e6be92"
+      },
+      {
+        "path": "src/v3/normalization.ts",
+        "sha256": "db235e562d52f3df2ea2273dbaf35bdda93e78d1a875c2dcfe3a9ffc33352a3e"
+      },
+      {
+        "path": "src/v3/roll-count-expression.ts",
+        "sha256": "059d5ec171c6830eefeaeab454fb60f8ee6be358057f44fd4bf341de3cda0984"
+      },
+      {
+        "path": "src/v3/runtime/budget.ts",
+        "sha256": "bcd667dc2a2e54f119c926731c592d565d185d615770006128d93b49f14caed8"
+      },
+      {
+        "path": "src/v3/runtime/context.ts",
+        "sha256": "de0738df0170d9fda5f4bb166cb6ae97fa7f5b15adda9fa286ac6171deb50e60"
+      },
+      {
+        "path": "src/v3/runtime/index.ts",
+        "sha256": "0c247e3ec29dff0c846f1d4931ae9d6e0f78b94901fff30e7f0122c1d78052ff"
+      },
+      {
+        "path": "src/v3/runtime/journal.ts",
+        "sha256": "3da96b3c1c7fcae8a94948564b54667b2eae3ff56970e5bb1523fc396e0f7847"
+      },
+      {
+        "path": "src/v3/runtime/limits.ts",
+        "sha256": "7c1fb84eb2c85f20bceb2f9345d402f87c28c79ee882cfd133c8f9eae851b98b"
+      },
+      {
+        "path": "src/v3/runtime/mt19937.ts",
+        "sha256": "ab69b15adb1dba5c18b80ed67ec83e8a68083b335104086736235bcdbe81dffc"
+      },
+      {
+        "path": "src/v3/runtime/replay.ts",
+        "sha256": "eb11febf46042402ee16e3ef6e869efdcc45109c46732a38ecd52b5f0a2775dc"
+      },
+      {
+        "path": "src/v3/runtime/xoshiro128ss.ts",
+        "sha256": "638c4377153ee9a4ba221d7ce5d287451a47358b4ec69163c65a21cdabaa2f69"
+      },
+      {
+        "path": "src/v3/syntax/ast.ts",
+        "sha256": "7d5a2b16dda816b02d17a6bc0d4d775da31bf2aee5b08825818a64bf7c5d20e5"
+      },
+      {
+        "path": "src/v3/syntax/index.ts",
+        "sha256": "666d69684d5bf50cabd9426fbb81404942912d584811acd57bb85965ed70663d"
+      },
+      {
+        "path": "src/v3/syntax/parser.ts",
+        "sha256": "03316de5ba906c8c90dbe76a1b0558e52c6a76f9f7da3d9717e0c2cac1b0ed82"
+      },
+      {
+        "path": "src/v3/syntax/scanner.ts",
+        "sha256": "c7259299ce74cec4312bc1cbf60c0d0dc139744708686d4b42982294fe33dd97"
+      },
+      {
+        "path": "src/v3/syntax/tokens.ts",
+        "sha256": "1fe33b50452d641c3277940ec80a8a3d68f61714765b95384d83b9bbc763216d"
+      },
+      {
+        "path": "src/v3/systems/assimilation.ts",
+        "sha256": "37c12180ee45aa6aa6facf2950d293e80a6c0034111bdf363dba78828681c57c"
+      },
+      {
+        "path": "src/v3/systems/common.ts",
+        "sha256": "6846ed9770b9f30dd80622efb5e25a1506e696cba57b7af6125c5b6d8879dbe5"
+      },
+      {
+        "path": "src/v3/systems/daggerheart.ts",
+        "sha256": "4edc235f02d1af9688b38491f4a499aea560b35c8b447a8279e495a2e864cb83"
+      },
+      {
+        "path": "src/v3/systems/fate.ts",
+        "sha256": "b8d08a348b76eac09832910cbca1222177c5a3ae31503d349275260ff9fa1bba"
+      },
+      {
+        "path": "src/v3/systems/index.ts",
+        "sha256": "f970a828aa6aaacbecd081fb317c137d10b2a45935337d6682637388a02decd1"
+      },
+      {
+        "path": "src/v3/systems/mixed.ts",
+        "sha256": "d5e2ef573038a12c36eaa9f09f7ce05d0609340122748eba729d7be5385d1f0b"
+      },
+      {
+        "path": "src/v3/systems/system-roller.ts",
+        "sha256": "800b37e4d5cc38506dc0eaeb624a94b84a99807ee1cba6162d2afe160e940fbd"
+      },
+      {
+        "path": "src/v3/systems/vampire-v5.ts",
+        "sha256": "e429a2b8aa0a37093ce15d357cc7316e8ca39149e08d0002fd727d2b55e5d63d"
+      },
+      {
+        "path": "src/v3/types.ts",
+        "sha256": "3d3eef638b8e11b34941d0ed41d5000d714b827c6ce521233e44db828a487300"
+      },
+      {
+        "path": "tsconfig.build.json",
+        "sha256": "5574381876f6ded561c5ca3b51f612086a75da6f085fd7d4f63b43ebec5eef9d"
+      },
+      {
+        "path": "tsconfig.json",
+        "sha256": "7143b1b940f802eacf401b3d4a1e17a2e211f5d22a18d0b88fa253fa3c4da439"
+      }
+    ]
+  },
+  "goWorkerBinary": {
+    "path": ".artifacts/dicecore-comparison.exe",
+    "sha256": "03f576903c4a22be35d01ede75a0426b3e36d84eff5b0a46eb8218b9e4becfde"
+  },
+  "preflight": {
+    "passed": true,
+    "validatedOutputs": 35,
+    "file": "go/benchmarks/preflight-final.json"
+  },
+  "calibration": {
+    "typescript": {
+      "workerWallMilliseconds": 2104,
+      "output": {
+        "runtime": "v24.18.0",
+        "phase": "measure",
+        "cases": {
+          "normalize": {
+            "iterations": 256,
+            "warmupIterations": 5000,
+            "durationNs": 697000,
+            "nsPerOp": 2722.65625
+          },
+          "compile-cold": {
+            "iterations": 256,
+            "warmupIterations": 5000,
+            "durationNs": 3367200,
+            "nsPerOp": 13153.125
+          },
+          "compile-hot": {
+            "iterations": 256,
+            "warmupIterations": 5000,
+            "durationNs": 105900,
+            "nsPerOp": 413.671875
+          },
+          "d20-full": {
+            "iterations": 256,
+            "warmupIterations": 5000,
+            "durationNs": 1816800,
+            "nsPerOp": 7096.875
+          },
+          "100d6-full": {
+            "iterations": 256,
+            "warmupIterations": 5000,
+            "durationNs": 12989500,
+            "nsPerOp": 50740.234375
+          },
+          "d20-details": {
+            "iterations": 256,
+            "warmupIterations": 5000,
+            "durationNs": 1373000,
+            "nsPerOp": 5363.28125
+          },
+          "100d6-details": {
+            "iterations": 256,
+            "warmupIterations": 5000,
+            "durationNs": 6466700,
+            "nsPerOp": 25260.546875
+          },
+          "d20-summary": {
+            "iterations": 256,
+            "warmupIterations": 5000,
+            "durationNs": 1410500,
+            "nsPerOp": 5509.765625
+          },
+          "100d6-summary": {
+            "iterations": 256,
+            "warmupIterations": 5000,
+            "durationNs": 2999500,
+            "nsPerOp": 11716.796875
+          },
+          "pool-full": {
+            "iterations": 256,
+            "warmupIterations": 5000,
+            "durationNs": 5234200,
+            "nsPerOp": 20446.09375
+          },
+          "pool-summary": {
+            "iterations": 256,
+            "warmupIterations": 5000,
+            "durationNs": 3770300,
+            "nsPerOp": 14727.734375
+          },
+          "fate-full": {
+            "iterations": 256,
+            "warmupIterations": 5000,
+            "durationNs": 3988600,
+            "nsPerOp": 15580.46875
+          },
+          "v5-full": {
+            "iterations": 256,
+            "warmupIterations": 5000,
+            "durationNs": 3269500,
+            "nsPerOp": 12771.484375
+          },
+          "fate-compact": {
+            "iterations": 256,
+            "warmupIterations": 5000,
+            "durationNs": 2580800,
+            "nsPerOp": 10081.25
+          },
+          "v5-compact": {
+            "iterations": 256,
+            "warmupIterations": 5000,
+            "durationNs": 2163400,
+            "nsPerOp": 8450.78125
+          },
+          "mixed-compact": {
+            "iterations": 256,
+            "warmupIterations": 5000,
+            "durationNs": 33541600,
+            "nsPerOp": 131021.875
+          },
+          "d20-changing-seed": {
+            "iterations": 256,
+            "warmupIterations": 5000,
+            "durationNs": 4185400,
+            "nsPerOp": 16349.21875
+          }
+        }
+      }
+    },
+    "go": {
+      "workerWallMilliseconds": 4902,
+      "output": {
+        "cases": {
+          "100d6-details": {
+            "durationNs": 36227800,
+            "iterations": 256,
+            "nsPerOp": 141514.84375,
+            "warmupIterations": 5000
+          },
+          "100d6-full": {
+            "durationNs": 54838400,
+            "iterations": 256,
+            "nsPerOp": 214212.5,
+            "warmupIterations": 5000
+          },
+          "100d6-summary": {
+            "durationNs": 1511000,
+            "iterations": 256,
+            "nsPerOp": 5902.34375,
+            "warmupIterations": 5000
+          },
+          "compile-cold": {
+            "durationNs": 4046200,
+            "iterations": 256,
+            "nsPerOp": 15805.46875,
+            "warmupIterations": 5000
+          },
+          "compile-hot": {
+            "durationNs": 0,
+            "iterations": 256,
+            "nsPerOp": 0,
+            "warmupIterations": 5000
+          },
+          "d20-changing-seed": {
+            "durationNs": 2531900,
+            "iterations": 256,
+            "nsPerOp": 9890.234375,
+            "warmupIterations": 5000
+          },
+          "d20-details": {
+            "durationNs": 3601500,
+            "iterations": 256,
+            "nsPerOp": 14068.359375,
+            "warmupIterations": 5000
+          },
+          "d20-full": {
+            "durationNs": 5043300,
+            "iterations": 256,
+            "nsPerOp": 19700.390625,
+            "warmupIterations": 5000
+          },
+          "d20-summary": {
+            "durationNs": 3086600,
+            "iterations": 256,
+            "nsPerOp": 12057.03125,
+            "warmupIterations": 5000
+          },
+          "fate-compact": {
+            "durationNs": 13208200,
+            "iterations": 256,
+            "nsPerOp": 51594.53125,
+            "warmupIterations": 5000
+          },
+          "fate-full": {
+            "durationNs": 24782100,
+            "iterations": 256,
+            "nsPerOp": 96805.078125,
+            "warmupIterations": 5000
+          },
+          "mixed-compact": {
+            "durationNs": 37606300,
+            "iterations": 256,
+            "nsPerOp": 146899.609375,
+            "warmupIterations": 5000
+          },
+          "normalize": {
+            "durationNs": 1029500,
+            "iterations": 256,
+            "nsPerOp": 4021.484375,
+            "warmupIterations": 5000
+          },
+          "pool-full": {
+            "durationNs": 20610200,
+            "iterations": 256,
+            "nsPerOp": 80508.59375,
+            "warmupIterations": 5000
+          },
+          "pool-summary": {
+            "durationNs": 10640000,
+            "iterations": 256,
+            "nsPerOp": 41562.5,
+            "warmupIterations": 5000
+          },
+          "v5-compact": {
+            "durationNs": 8069700,
+            "iterations": 256,
+            "nsPerOp": 31522.265625,
+            "warmupIterations": 5000
+          },
+          "v5-full": {
+            "durationNs": 11735000,
+            "iterations": 256,
+            "nsPerOp": 45839.84375,
+            "warmupIterations": 5000
+          }
+        },
+        "phase": "measure",
+        "runtime": "go1.26.2"
+      }
+    }
+  },
+  "iterations": {
+    "normalize": 18365,
+    "compile-cold": 3802,
+    "compile-hot": 500000,
+    "d20-full": 7046,
+    "100d6-full": 986,
+    "d20-details": 9323,
+    "100d6-details": 1980,
+    "d20-summary": 9075,
+    "100d6-summary": 8472,
+    "pool-full": 2446,
+    "pool-summary": 3395,
+    "fate-full": 3210,
+    "v5-full": 3915,
+    "fate-compact": 4960,
+    "v5-compact": 5917,
+    "mixed-compact": 382,
+    "d20-changing-seed": 5056
+  },
+  "summary": [
+    {
+      "id": "normalize",
+      "label": "Normalização — ciclo de quatro entradas",
+      "typescript": {
+        "medianNsPerOp": 2426.098557037844,
+        "medianMsPerOp": 0.002426098557037844,
+        "opsPerSecond": 412184.40903775755,
+        "q1NsPerOp": 2053.961339504492,
+        "q3NsPerOp": 2619.656956166621,
+        "minimumNsPerOp": 2004.835284508576,
+        "maximumNsPerOp": 2830.84127416281,
+        "samples": [
+          2004.835284508576,
+          2771.0754151919414,
+          2068.1078137762047,
+          2830.84127416281,
+          2426.098557037844,
+          2468.238497141301,
+          2039.8148652327798
+        ]
+      },
+      "go": {
+        "medianNsPerOp": 3151.81050912061,
+        "medianMsPerOp": 0.00315181050912061,
+        "opsPerSecond": 317277.9572586079,
+        "q1NsPerOp": 3072.9839368363737,
+        "q3NsPerOp": 3382.38769398312,
+        "minimumNsPerOp": 3003.1091750612577,
+        "maximumNsPerOp": 3444.7971685270895,
+        "samples": [
+          3151.81050912061,
+          3333.041110808603,
+          3103.8606044105636,
+          3431.734277157637,
+          3003.1091750612577,
+          3444.7971685270895,
+          3042.1072692621833
+        ]
+      },
+      "typescriptOverGo": 0.7697475942850233
+    },
+    {
+      "id": "compile-cold",
+      "label": "Compilar fórmula, cache desativado",
+      "typescript": {
+        "medianNsPerOp": 13991.635981062598,
+        "medianMsPerOp": 0.013991635981062598,
+        "opsPerSecond": 71471.27050428414,
+        "q1NsPerOp": 13631.351920042083,
+        "q3NsPerOp": 20910.06049447659,
+        "minimumNsPerOp": 13268.832193582326,
+        "maximumNsPerOp": 21675.85481325618,
+        "samples": [
+          13331.98316675434,
+          21394.66070489216,
+          13930.720673329826,
+          21675.85481325618,
+          13268.832193582326,
+          20425.46028406102,
+          13991.635981062598
+        ]
+      },
+      "go": {
+        "medianNsPerOp": 13946.4755391899,
+        "medianMsPerOp": 0.0139464755391899,
+        "opsPerSecond": 71702.70346726514,
+        "q1NsPerOp": 13007.680168332456,
+        "q3NsPerOp": 14269.818516570227,
+        "minimumNsPerOp": 12668.01683324566,
+        "maximumNsPerOp": 20426.459758022094,
+        "samples": [
+          12681.746449237244,
+          13946.4755391899,
+          20426.459758022094,
+          14150.13150973172,
+          12668.01683324566,
+          14389.505523408732,
+          13333.61388742767
+        ]
+      },
+      "typescriptOverGo": 1.0032381257720488
+    },
+    {
+      "id": "compile-hot",
+      "label": "Compilar fórmula, cache aquecido",
+      "typescript": {
+        "medianNsPerOp": 407.7558,
+        "medianMsPerOp": 0.00040775580000000004,
+        "opsPerSecond": 2452448.2545680525,
+        "q1NsPerOp": 402.86069999999995,
+        "q3NsPerOp": 413.763,
+        "minimumNsPerOp": 399.0028,
+        "maximumNsPerOp": 430.8204,
+        "samples": [
+          407.7558,
+          399.0028,
+          410.2526,
+          404.9958,
+          430.8204,
+          400.7256,
+          417.2734
+        ]
+      },
+      "go": {
+        "medianNsPerOp": 1255.3324,
+        "medianMsPerOp": 0.0012553324,
+        "opsPerSecond": 796601.7606173472,
+        "q1NsPerOp": 1208.2640999999999,
+        "q3NsPerOp": 1483.7527,
+        "minimumNsPerOp": 1123.8034,
+        "maximumNsPerOp": 1747.1332,
+        "samples": [
+          1393.2912,
+          1245.405,
+          1747.1332,
+          1171.1232,
+          1574.2142,
+          1123.8034,
+          1255.3324
+        ]
+      },
+      "typescriptOverGo": 0.32481898818193494
+    },
+    {
+      "id": "d20-full",
+      "label": "1d20+5 — full",
+      "typescript": {
+        "medianNsPerOp": 7369.0036900369005,
+        "medianMsPerOp": 0.007369003690036901,
+        "opsPerSecond": 135703.5553329995,
+        "q1NsPerOp": 6705.542151575362,
+        "q3NsPerOp": 7590.491058756741,
+        "minimumNsPerOp": 6526.3695713880215,
+        "maximumNsPerOp": 7940.2497871132555,
+        "samples": [
+          7544.578484246381,
+          6526.3695713880215,
+          7636.403633267102,
+          6827.363042861198,
+          7369.0036900369005,
+          6583.721260289526,
+          7940.2497871132555
+        ]
+      },
+      "go": {
+        "medianNsPerOp": 19126.213454442237,
+        "medianMsPerOp": 0.019126213454442237,
+        "opsPerSecond": 52284.26433606182,
+        "q1NsPerOp": 18739.6962815782,
+        "q3NsPerOp": 19565.51234743117,
+        "minimumNsPerOp": 18221.41640647176,
+        "maximumNsPerOp": 19808.6999716151,
+        "samples": [
+          19808.6999716151,
+          18663.26994039171,
+          19126.213454442237,
+          19332.06074368436,
+          18816.122622764688,
+          18221.41640647176,
+          19798.963951177975
+        ]
+      },
+      "typescriptOverGo": 0.3852829368233043
+    },
+    {
+      "id": "100d6-full",
+      "label": "100d6 — full",
+      "typescript": {
+        "medianNsPerOp": 50365.41582150102,
+        "medianMsPerOp": 0.05036541582150102,
+        "opsPerSecond": 19854.89415086095,
+        "q1NsPerOp": 49843.30628803246,
+        "q3NsPerOp": 51635.39553752536,
+        "minimumNsPerOp": 49547.56592292089,
+        "maximumNsPerOp": 53062.98174442191,
+        "samples": [
+          51319.16835699797,
+          50018.15415821501,
+          50365.41582150102,
+          49668.4584178499,
+          51951.622718052735,
+          49547.56592292089,
+          53062.98174442191
+        ]
+      },
+      "go": {
+        "medianNsPerOp": 214196.45030425963,
+        "medianMsPerOp": 0.21419645030425963,
+        "opsPerSecond": 4668.61144794664,
+        "q1NsPerOp": 204366.0243407708,
+        "q3NsPerOp": 220132.70791075053,
+        "minimumNsPerOp": 198407.30223123732,
+        "maximumNsPerOp": 229392.4949290061,
+        "samples": [
+          217194.21906693713,
+          198407.30223123732,
+          214196.45030425963,
+          204068.25557809332,
+          229392.4949290061,
+          204663.7931034483,
+          223071.1967545639
+        ]
+      },
+      "typescriptOverGo": 0.23513655688485247
+    },
+    {
+      "id": "d20-details",
+      "label": "1d20+5 — details",
+      "typescript": {
+        "medianNsPerOp": 5312.260002145233,
+        "medianMsPerOp": 0.005312260002145233,
+        "opsPerSecond": 188243.79823204686,
+        "q1NsPerOp": 5279.051807358146,
+        "q3NsPerOp": 5527.18545532554,
+        "minimumNsPerOp": 5172.894990882763,
+        "maximumNsPerOp": 5901.855625871501,
+        "samples": [
+          5564.432049769388,
+          5489.938860881691,
+          5312.260002145233,
+          5172.894990882763,
+          5901.855625871501,
+          5248.139011047946,
+          5309.964603668347
+        ]
+      },
+      "go": {
+        "medianNsPerOp": 14861.525260109407,
+        "medianMsPerOp": 0.014861525260109407,
+        "opsPerSecond": 67287.84445053914,
+        "q1NsPerOp": 13640.351818084308,
+        "q3NsPerOp": 15249.73720905288,
+        "minimumNsPerOp": 13530.762630054704,
+        "maximumNsPerOp": 15458.511208838358,
+        "samples": [
+          13691.397618792234,
+          14861.525260109407,
+          15385.444599377883,
+          15114.029818727877,
+          13530.762630054704,
+          15458.511208838358,
+          13589.30601737638
+        ]
+      },
+      "typescriptOverGo": 0.35745052470516914
+    },
+    {
+      "id": "100d6-details",
+      "label": "100d6 — details",
+      "typescript": {
+        "medianNsPerOp": 24601.363636363636,
+        "medianMsPerOp": 0.024601363636363636,
+        "opsPerSecond": 40648.15328049073,
+        "q1NsPerOp": 24306.4898989899,
+        "q3NsPerOp": 24902.878787878788,
+        "minimumNsPerOp": 23580.353535353537,
+        "maximumNsPerOp": 27525.151515151516,
+        "samples": [
+          25076.868686868685,
+          24601.363636363636,
+          24272.424242424244,
+          23580.353535353537,
+          24340.555555555555,
+          24728.88888888889,
+          27525.151515151516
+        ]
+      },
+      "go": {
+        "medianNsPerOp": 133040.70707070708,
+        "medianMsPerOp": 0.1330407070707071,
+        "opsPerSecond": 7516.4964319419205,
+        "q1NsPerOp": 123228.25757575757,
+        "q3NsPerOp": 139626.46464646465,
+        "minimumNsPerOp": 116392.52525252526,
+        "maximumNsPerOp": 143341.1616161616,
+        "samples": [
+          143341.1616161616,
+          116392.52525252526,
+          140862.67676767678,
+          116465.25252525252,
+          133040.70707070708,
+          138390.25252525252,
+          129991.26262626263
+        ]
+      },
+      "typescriptOverGo": 0.18491606199363297
+    },
+    {
+      "id": "d20-summary",
+      "label": "1d20+5 — summary",
+      "typescript": {
+        "medianNsPerOp": 4553.619834710744,
+        "medianMsPerOp": 0.004553619834710744,
+        "opsPerSecond": 219605.50864991616,
+        "q1NsPerOp": 4293.3608815427,
+        "q3NsPerOp": 5072.429752066116,
+        "minimumNsPerOp": 4242.633608815427,
+        "maximumNsPerOp": 5162.468319559229,
+        "samples": [
+          5099.415977961433,
+          4311.526170798898,
+          5045.443526170799,
+          4242.633608815427,
+          4553.619834710744,
+          4275.195592286502,
+          5162.468319559229
+        ]
+      },
+      "go": {
+        "medianNsPerOp": 10953.520661157025,
+        "medianMsPerOp": 0.010953520661157025,
+        "opsPerSecond": 91294.84765077985,
+        "q1NsPerOp": 10722.33608815427,
+        "q3NsPerOp": 11606.826446280993,
+        "minimumNsPerOp": 10595.449035812671,
+        "maximumNsPerOp": 11986.578512396694,
+        "samples": [
+          11633.322314049587,
+          10716.077134986226,
+          11580.330578512398,
+          10953.520661157025,
+          11986.578512396694,
+          10728.595041322315,
+          10595.449035812671
+        ]
+      },
+      "typescriptOverGo": 0.4157220290694867
+    },
+    {
+      "id": "100d6-summary",
+      "label": "100d6 — summary",
+      "typescript": {
+        "medianNsPerOp": 12113.279036827196,
+        "medianMsPerOp": 0.012113279036827197,
+        "opsPerSecond": 82554.02991706594,
+        "q1NsPerOp": 11830.370632672333,
+        "q3NsPerOp": 12256.633616619452,
+        "minimumNsPerOp": 11571.541548630783,
+        "maximumNsPerOp": 12337.181303116147,
+        "samples": [
+          12177.514164305949,
+          11665.16761095373,
+          12337.181303116147,
+          11995.573654390935,
+          12113.279036827196,
+          11571.541548630783,
+          12335.753068932956
+        ]
+      },
+      "go": {
+        "medianNsPerOp": 13104.969310670444,
+        "medianMsPerOp": 0.013104969310670444,
+        "opsPerSecond": 76306.9318434627,
+        "q1NsPerOp": 12958.681539187914,
+        "q3NsPerOp": 13623.146836638338,
+        "minimumNsPerOp": 12796.045797922568,
+        "maximumNsPerOp": 14222.202549575071,
+        "samples": [
+          13104.969310670444,
+          13045.302171860245,
+          14080.05193578848,
+          12796.045797922568,
+          13166.241737488197,
+          12872.06090651558,
+          14222.202549575071
+        ]
+      },
+      "typescriptOverGo": 0.9243271578640184
+    },
+    {
+      "id": "pool-full",
+      "label": "Pool com explosão limitada — full",
+      "typescript": {
+        "medianNsPerOp": 20957.931316434995,
+        "medianMsPerOp": 0.020957931316434995,
+        "opsPerSecond": 47714.632942603945,
+        "q1NsPerOp": 19996.218315617334,
+        "q3NsPerOp": 21425.756336876533,
+        "minimumNsPerOp": 19784.464431725264,
+        "maximumNsPerOp": 24103.18887980376,
+        "samples": [
+          21736.426819296812,
+          19822.076860179885,
+          24103.18887980376,
+          19784.464431725264,
+          20957.931316434995,
+          20170.359771054784,
+          21115.085854456254
+        ]
+      },
+      "go": {
+        "medianNsPerOp": 75088.0212591987,
+        "medianMsPerOp": 0.0750880212591987,
+        "opsPerSecond": 13317.703452965803,
+        "q1NsPerOp": 73412.75551921505,
+        "q3NsPerOp": 78723.8757154538,
+        "minimumNsPerOp": 71522.11774325429,
+        "maximumNsPerOp": 90433.72853638594,
+        "samples": [
+          75793.54047424367,
+          74668.7653311529,
+          90433.72853638594,
+          71522.11774325429,
+          75088.0212591987,
+          72156.7457072772,
+          81654.21095666394
+        ]
+      },
+      "typescriptOverGo": 0.27911151425990643
+    },
+    {
+      "id": "pool-summary",
+      "label": "Pool com explosão limitada — summary",
+      "typescript": {
+        "medianNsPerOp": 11898.61561119293,
+        "medianMsPerOp": 0.011898615611192931,
+        "opsPerSecond": 84043.39064952297,
+        "q1NsPerOp": 11685.861561119294,
+        "q3NsPerOp": 12571.119293078056,
+        "minimumNsPerOp": 11502.945508100147,
+        "maximumNsPerOp": 14733.107511045655,
+        "samples": [
+          13060.972017673048,
+          11824.80117820324,
+          14733.107511045655,
+          12081.266568483063,
+          11546.921944035346,
+          11898.61561119293,
+          11502.945508100147
+        ]
+      },
+      "go": {
+        "medianNsPerOp": 41444.742268041235,
+        "medianMsPerOp": 0.041444742268041235,
+        "opsPerSecond": 24128.512937360392,
+        "q1NsPerOp": 38774.62444771723,
+        "q3NsPerOp": 43163.9469808542,
+        "minimumNsPerOp": 38694.78645066274,
+        "maximumNsPerOp": 46969.01325478645,
+        "samples": [
+          41494.63917525773,
+          38694.78645066274,
+          41444.742268041235,
+          38740.117820324005,
+          46969.01325478645,
+          38809.131075110454,
+          44833.25478645066
+        ]
+      },
+      "typescriptOverGo": 0.28709590071134694
+    },
+    {
+      "id": "fate-full",
+      "label": "Fate, 20 dados — full",
+      "typescript": {
+        "medianNsPerOp": 15442.990654205607,
+        "medianMsPerOp": 0.015442990654205607,
+        "opsPerSecond": 64754.29678044057,
+        "q1NsPerOp": 15422.492211838005,
+        "q3NsPerOp": 15958.442367601247,
+        "minimumNsPerOp": 15156.44859813084,
+        "maximumNsPerOp": 16585.26479750779,
+        "samples": [
+          16585.26479750779,
+          15156.44859813084,
+          15866.479750778817,
+          15436.355140186915,
+          15442.990654205607,
+          15408.629283489097,
+          16050.404984423676
+        ]
+      },
+      "go": {
+        "medianNsPerOp": 60583.862928348906,
+        "medianMsPerOp": 0.06058386292834891,
+        "opsPerSecond": 16506.045532003733,
+        "q1NsPerOp": 54759.299065420564,
+        "q3NsPerOp": 61899.65732087227,
+        "minimumNsPerOp": 50750.18691588785,
+        "maximumNsPerOp": 62574.36137071651,
+        "samples": [
+          62435.48286604361,
+          50750.18691588785,
+          60583.862928348906,
+          57356.97819314642,
+          61363.831775700935,
+          52161.619937694704,
+          62574.36137071651
+        ]
+      },
+      "typescriptOverGo": 0.2549027068886259
+    },
+    {
+      "id": "v5-full",
+      "label": "V5, pool 10/fome 3 — full",
+      "typescript": {
+        "medianNsPerOp": 12837.471264367816,
+        "medianMsPerOp": 0.012837471264367815,
+        "opsPerSecond": 77896.96112314882,
+        "q1NsPerOp": 12401.047254150702,
+        "q3NsPerOp": 12979.84674329502,
+        "minimumNsPerOp": 12226.309067688378,
+        "maximumNsPerOp": 13013.23116219668,
+        "samples": [
+          13013.23116219668,
+          12991.417624521073,
+          12226.309067688378,
+          12968.275862068966,
+          12837.471264367816,
+          12492.72030651341,
+          12309.374201787994
+        ]
+      },
+      "go": {
+        "medianNsPerOp": 42316.65389527458,
+        "medianMsPerOp": 0.042316653895274586,
+        "opsPerSecond": 23631.358057629128,
+        "q1NsPerOp": 41236.74329501916,
+        "q3NsPerOp": 43207.58620689655,
+        "minimumNsPerOp": 37439.31034482759,
+        "maximumNsPerOp": 44011.724137931036,
+        "samples": [
+          42316.65389527458,
+          41090.34482758621,
+          42991.44316730524,
+          41383.141762452105,
+          43423.72924648787,
+          37439.31034482759,
+          44011.724137931036
+        ]
+      },
+      "typescriptOverGo": 0.30336688000280077
+    },
+    {
+      "id": "fate-compact",
+      "label": "Fate, 20 dados — compact",
+      "typescript": {
+        "medianNsPerOp": 10383.387096774193,
+        "medianMsPerOp": 0.010383387096774194,
+        "opsPerSecond": 96307.68752815446,
+        "q1NsPerOp": 10035.816532258064,
+        "q3NsPerOp": 10500.352822580644,
+        "minimumNsPerOp": 10009.375,
+        "maximumNsPerOp": 11625.342741935483,
+        "samples": [
+          10512.137096774193,
+          10488.568548387097,
+          11625.342741935483,
+          10021.189516129032,
+          10383.387096774193,
+          10050.443548387097,
+          10009.375
+        ]
+      },
+      "go": {
+        "medianNsPerOp": 41876.79435483871,
+        "medianMsPerOp": 0.04187679435483871,
+        "opsPerSecond": 23879.573768865946,
+        "q1NsPerOp": 40598.780241935485,
+        "q3NsPerOp": 42336.31048387097,
+        "minimumNsPerOp": 37845.846774193546,
+        "maximumNsPerOp": 47396.31048387097,
+        "samples": [
+          41876.79435483871,
+          37845.846774193546,
+          40504.43548387097,
+          47396.31048387097,
+          42628.528225806454,
+          42044.092741935485,
+          40693.125
+        ]
+      },
+      "typescriptOverGo": 0.24795085814811013
+    },
+    {
+      "id": "v5-compact",
+      "label": "V5, pool 10/fome 3 — compact",
+      "typescript": {
+        "medianNsPerOp": 8804.681426398512,
+        "medianMsPerOp": 0.008804681426398512,
+        "opsPerSecond": 113575.94347499775,
+        "q1NsPerOp": 8661.6613148555,
+        "q3NsPerOp": 9012.447186074023,
+        "minimumNsPerOp": 8451.05627851952,
+        "maximumNsPerOp": 9227.446341051209,
+        "samples": [
+          9227.446341051209,
+          8804.681426398512,
+          8529.964509041743,
+          8793.358120669258,
+          8998.225452087207,
+          8451.05627851952,
+          9026.668920060842
+        ]
+      },
+      "go": {
+        "medianNsPerOp": 30426.49991549772,
+        "medianMsPerOp": 0.03042649991549772,
+        "opsPerSecond": 32866.087219274625,
+        "q1NsPerOp": 30153.101233733312,
+        "q3NsPerOp": 31586.251478789927,
+        "minimumNsPerOp": 28418.64120331249,
+        "maximumNsPerOp": 32723.96484705087,
+        "samples": [
+          32723.96484705087,
+          28418.64120331249,
+          30426.49991549772,
+          32453.69274970424,
+          30398.073347980397,
+          29908.129119486228,
+          30718.810207875613
+        ]
+      },
+      "typescriptOverGo": 0.28937542769794083
+    },
+    {
+      "id": "mixed-compact",
+      "label": "Misto, todos os sistemas — compact",
+      "typescript": {
+        "medianNsPerOp": 131037.1727748691,
+        "medianMsPerOp": 0.1310371727748691,
+        "opsPerSecond": 7631.422281355756,
+        "q1NsPerOp": 129077.48691099478,
+        "q3NsPerOp": 134549.60732984293,
+        "minimumNsPerOp": 128336.12565445027,
+        "maximumNsPerOp": 146827.22513089006,
+        "samples": [
+          146827.22513089006,
+          128478.79581151833,
+          131037.1727748691,
+          128336.12565445027,
+          133860.9947643979,
+          129676.17801047121,
+          135238.21989528797
+        ]
+      },
+      "go": {
+        "medianNsPerOp": 157377.74869109946,
+        "medianMsPerOp": 0.15737774869109947,
+        "opsPerSecond": 6354.138423741191,
+        "q1NsPerOp": 151795.2879581152,
+        "q3NsPerOp": 158465.70680628272,
+        "minimumNsPerOp": 148489.0052356021,
+        "maximumNsPerOp": 171448.95287958116,
+        "samples": [
+          154607.85340314137,
+          148982.72251308901,
+          158291.0994764398,
+          148489.0052356021,
+          157377.74869109946,
+          171448.95287958116,
+          158640.31413612564
+        ]
+      },
+      "typescriptOverGo": 0.8326283344672089
+    },
+    {
+      "id": "d20-changing-seed",
+      "label": "1d20+5 — summary, 16 seeds alternadas",
+      "typescript": {
+        "medianNsPerOp": 17453.006329113923,
+        "medianMsPerOp": 0.017453006329113924,
+        "opsPerSecond": 57296.71903756018,
+        "q1NsPerOp": 16424.100079113923,
+        "q3NsPerOp": 18473.664952531646,
+        "minimumNsPerOp": 15930.162183544304,
+        "maximumNsPerOp": 18967.444620253165,
+        "samples": [
+          18438.587816455696,
+          15930.162183544304,
+          17453.006329113923,
+          16293.947784810127,
+          18967.444620253165,
+          16554.252373417723,
+          18508.742088607596
+        ]
+      },
+      "go": {
+        "medianNsPerOp": 10908.70253164557,
+        "medianMsPerOp": 0.010908702531645569,
+        "opsPerSecond": 91669.93023222082,
+        "q1NsPerOp": 10253.767800632912,
+        "q3NsPerOp": 11327.106408227848,
+        "minimumNsPerOp": 9652.155854430379,
+        "maximumNsPerOp": 12536.530854430379,
+        "samples": [
+          10705.003955696202,
+          9652.155854430379,
+          12536.530854430379,
+          9802.531645569621,
+          10908.70253164557,
+          11294.04667721519,
+          11360.166139240506
+        ]
+      },
+      "typescriptOverGo": 1.5999158725323819
+    }
+  ],
+  "finishedAt": "2026-09-14T00:34:23.958Z",
+  "wallMilliseconds": 90319
+}

@@ -6,11 +6,10 @@
     "commit": "1940044"
   },
   "mathProfile": "decimal12-v1",
-  "status": "pending-conformance",
-  "reason": "The Go standard-library sin/cos/tan implementations differ from the TypeScript reference at decimal12 rounding boundaries. These TypeScript oracle cases must pass before claiming exact transcendental or unrestricted arithmetic replay compatibility. Go conformance tests explicitly skip them in this initial migration milestone.",
+  "reason": "Regression vectors for decimal12 rounding boundaries in sine, cosine, and tangent. Go uses the reference fdlibm kernels and enforces these cases unconditionally.",
   "cases": [
     {
-      "name": "pending-sin-1",
+      "name": "rounding-boundary-sin-1",
       "operation": "unaryFunction",
       "args": [
         "sin",
@@ -22,7 +21,7 @@
       }
     },
     {
-      "name": "pending-tan-2",
+      "name": "rounding-boundary-tan-2",
       "operation": "unaryFunction",
       "args": [
         "tan",
@@ -34,7 +33,7 @@
       }
     },
     {
-      "name": "pending-cos-3",
+      "name": "rounding-boundary-cos-3",
       "operation": "unaryFunction",
       "args": [
         "cos",
@@ -46,7 +45,7 @@
       }
     },
     {
-      "name": "pending-cos-4",
+      "name": "rounding-boundary-cos-4",
       "operation": "unaryFunction",
       "args": [
         "cos",
@@ -58,7 +57,7 @@
       }
     },
     {
-      "name": "pending-tan-5",
+      "name": "rounding-boundary-tan-5",
       "operation": "unaryFunction",
       "args": [
         "tan",
@@ -70,7 +69,7 @@
       }
     },
     {
-      "name": "pending-sin-6",
+      "name": "rounding-boundary-sin-6",
       "operation": "unaryFunction",
       "args": [
         "sin",
@@ -82,7 +81,7 @@
       }
     },
     {
-      "name": "pending-cos-7",
+      "name": "rounding-boundary-cos-7",
       "operation": "unaryFunction",
       "args": [
         "cos",
@@ -94,7 +93,7 @@
       }
     },
     {
-      "name": "pending-tan-8",
+      "name": "rounding-boundary-tan-8",
       "operation": "unaryFunction",
       "args": [
         "tan",

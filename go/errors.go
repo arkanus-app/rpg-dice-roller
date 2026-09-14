@@ -14,11 +14,13 @@ type SourceSpan struct {
 
 // DiceRollError preserves the stable error codes used by the TypeScript engine.
 type DiceRollError struct {
-	Code    string         `json:"code"`
-	Message string         `json:"message"`
-	Input   string         `json:"input"`
-	Span    *SourceSpan    `json:"span"`
-	Details map[string]any `json:"details"`
+	Code        string         `json:"code"`
+	Message     string         `json:"message"`
+	Input       string         `json:"input"`
+	Span        *SourceSpan    `json:"span"`
+	Details     map[string]any `json:"details"`
+	inputJSON   *errorJSONString
+	messageJSON *errorJSONString
 }
 
 func (e *DiceRollError) Error() string { return e.Message }
@@ -37,9 +39,12 @@ func (e *DiceRollError) MarshalJSON() ([]byte, error) {
 		copy.Details = map[string]any{}
 	}
 	return json.Marshal(struct {
-		Name string `json:"name"`
+		Name    string `json:"name"`
+		Message any    `json:"message"`
+		Input   any    `json:"input"`
 		errorFields
-	}{Name: "DiceRollError", errorFields: copy})
+	}{Name: "DiceRollError", Message: errorStringJSON(e.Message, e.messageJSON),
+		Input: errorStringJSON(e.Input, e.inputJSON), errorFields: copy})
 }
 
 var diceErrorCodes = map[string]bool{
@@ -63,6 +68,57 @@ var diceErrorCodes = map[string]bool{
 func IsDiceRollError(err error) bool {
 	var diceErr *DiceRollError
 	return errors.As(err, &diceErr) && diceErr != nil
+}
+
+// IsDiceRollErrorData recognizes a JSON-safe error object across process
+// boundaries. It accepts decoded map[string]any objects and native DiceRollError
+// values. Unrelated object fields do not participate in validation.
+func IsDiceRollErrorData(value any) bool {
+	var raw map[string]any
+	switch data := value.(type) {
+	case map[string]any:
+		raw = data
+	case DiceRollError:
+		return IsDiceRollErrorData(map[string]any{"name": "DiceRollError", "code": data.Code,
+			"message": data.Message, "input": data.Input, "span": data.Span, "details": data.Details})
+	case *DiceRollError:
+		return data != nil && IsDiceRollErrorData(*data)
+	default:
+		return false
+	}
+	code, codeOK := raw["code"].(string)
+	_, messageOK := raw["message"].(string)
+	_, inputOK := raw["input"].(string)
+	details, detailsOK := raw["details"].(map[string]any)
+	span, spanPresent := raw["span"]
+	if raw["name"] != "DiceRollError" || !codeOK || !diceErrorCodes[code] || !messageOK || !inputOK ||
+		!detailsOK || details == nil || !spanPresent || !isDiceErrorDataSpan(span) {
+		return false
+	}
+	_, err := json.Marshal(details)
+	return err == nil
+}
+
+func isDiceErrorDataSpan(value any) bool {
+	var start, end float64
+	switch span := value.(type) {
+	case nil:
+		return true
+	case SourceSpan:
+		start, end = float64(span.Start), float64(span.End)
+	case *SourceSpan:
+		return span == nil || isDiceErrorDataSpan(*span)
+	case map[string]any:
+		var startOK, endOK bool
+		start, startOK = seedNumber(span["start"])
+		end, endOK = seedNumber(span["end"])
+		if !startOK || !endOK {
+			return false
+		}
+	default:
+		return false
+	}
+	return start >= 0 && end >= start && end <= float64(maxSafeInteger) && math.Trunc(start) == start && math.Trunc(end) == end
 }
 
 // DiceRollErrorFromJSON validates an error crossing a process boundary.
@@ -97,5 +153,10 @@ func DiceRollErrorFromJSON(data []byte) (*DiceRollError, error) {
 		}
 		result.Span = &SourceSpan{Start: int(start), End: int(end)}
 	}
+	var wire map[string]json.RawMessage
+	_ = json.Unmarshal(data, &wire) // The full envelope was already validated above.
+	result.inputJSON = preserveErrorString(wire["input"], input)
+	result.messageJSON = preserveErrorString(wire["message"], message)
+	result.Details = restoreErrorJSONStrings(wire["details"], details).(map[string]any)
 	return result, nil
 }

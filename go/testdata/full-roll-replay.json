@@ -5,7 +5,7 @@
     "version": "3.7.1",
     "commit": "1940044"
   },
-  "purpose": "Full TypeScript execution outputs reserved for later Go compiler/executor/system adapters.",
+  "purpose": "Complete TypeScript roll and replay outputs exercised by the native Go engine and system adapters.",
   "cases": [
     {
       "input": "2#4d6kh3+1d8",

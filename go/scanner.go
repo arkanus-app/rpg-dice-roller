@@ -20,6 +20,21 @@ var syntaxPunctuationKinds = map[uint16]string{
 
 func syntaxUnits(input string) []uint16  { return utf16.Encode([]rune(input)) }
 func syntaxString(input []uint16) string { return string(utf16.Decode(input)) }
+
+// A diagnostic may point at just the first UTF-16 unit of an astral character.
+// Encoding that unit as a Go string would replace it and change the JSON error.
+type utf16DiagnosticUnit uint16
+
+func (unit utf16DiagnosticUnit) MarshalJSON() ([]byte, error) {
+	return []byte(fmt.Sprintf(`"\u%04x"`, uint16(unit))), nil
+}
+
+func syntaxDiagnosticCharacter(unit uint16) any {
+	if unit >= 0xd800 && unit <= 0xdfff {
+		return utf16DiagnosticUnit(unit)
+	}
+	return string(rune(unit))
+}
 func syntaxChar(input []uint16, i int) uint16 {
 	if i < 0 || i >= len(input) {
 		return 0
@@ -99,7 +114,7 @@ func TokenizeDiceNotation(input string) ([]SyntaxToken, error) {
 		default:
 			kind, ok := syntaxPunctuationKinds[c]
 			if !ok {
-				return nil, syntaxInvalid(input, fmt.Sprintf("Unexpected character at offset %d", start), SourceSpan{Start: start, End: start + 1}, map[string]any{"found": syntaxString(units[start : start+1])})
+				return nil, syntaxInvalid(input, fmt.Sprintf("Unexpected character at offset %d", start), SourceSpan{Start: start, End: start + 1}, map[string]any{"found": syntaxDiagnosticCharacter(c)})
 			}
 			token.Kind, token.Lexeme = kind, string(rune(c))
 			cursor++

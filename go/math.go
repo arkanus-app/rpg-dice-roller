@@ -85,7 +85,7 @@ func jsMathPow(left, right float64) float64 {
 	if math.IsNaN(right) || (math.Abs(left) == 1 && math.IsInf(right, 0)) {
 		return math.NaN()
 	}
-	return math.Pow(left, right)
+	return refinePowIntegerBoundary(left, right, fdPow(left, right))
 }
 
 func EvaluateBinary(operator string, left, right float64, input string) (float64, error) {
@@ -110,8 +110,7 @@ func EvaluateBinary(operator string, left, right float64, input string) (float64
 }
 
 // EvaluateUnaryFunction evaluates a math function with decimal12 normalization.
-// Sin, cos, and tan currently use Go's approximations: some normalized results
-// differ from the TypeScript reference. See MIGRATION.md before using for replay.
+// Transcendental functions use the reference runtime's portable fdlibm kernels.
 func EvaluateUnaryFunction(name string, value float64, input string) (float64, error) {
 	var result float64
 	switch name {
@@ -120,19 +119,13 @@ func EvaluateUnaryFunction(name string, value float64, input string) (float64, e
 	case "ceil":
 		result = math.Ceil(value)
 	case "cos":
-		result = math.Cos(value)
+		result = fdCos(value)
 	case "exp":
-		result = math.Exp(value)
+		result = fdExp(value)
 	case "floor":
 		result = math.Floor(value)
 	case "log":
-		// Normalize subnormals before the platform libm's argument reduction.
-		// The Go 1.26 amd64 assembly path otherwise loses their exponent.
-		if value > 0 && value < 0x1p-1022 {
-			result = math.Log(value*0x1p52) - 52*math.Ln2
-		} else {
-			result = math.Log(value)
-		}
+		result = fdLog(value)
 	case "round":
 		result = math.Floor(value)
 		if value-result >= 0.5 {
@@ -148,11 +141,11 @@ func EvaluateUnaryFunction(name string, value float64, input string) (float64, e
 			result = -1
 		}
 	case "sin":
-		result = math.Sin(value)
+		result = fdSin(value)
 	case "sqrt":
 		result = math.Sqrt(value)
 	case "tan":
-		result = math.Tan(value)
+		result = fdTan(value)
 	default:
 		return 0, newDiceError("INVALID_NOTATION", "Unknown unary math function", input, map[string]any{"name": name})
 	}

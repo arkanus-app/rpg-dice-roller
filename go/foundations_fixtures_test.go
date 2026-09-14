@@ -5,7 +5,6 @@ import (
 	"encoding/json"
 	"fmt"
 	"math"
-	"os"
 	"testing"
 )
 
@@ -35,16 +34,14 @@ func foundationFixtureNumber(t *testing.T, raw json.RawMessage) float64 {
 }
 
 func TestTypeScriptMathFixtures(t *testing.T) {
-	testTypeScriptMathFixtures(t, "math.json", false)
+	testTypeScriptMathFixtures(t, "math.json")
 }
 
-// Keep the oracle unchanged while the canonical transcendental implementation
-// is pending. Opt in to strict conformance to reproduce the outstanding failures.
-func TestTypeScriptMathPendingConformance(t *testing.T) {
-	testTypeScriptMathFixtures(t, "math-transcendental-pending.json", os.Getenv("DICECORE_STRICT_MATH") != "1")
+func TestTypeScriptMathTranscendentalConformance(t *testing.T) {
+	testTypeScriptMathFixtures(t, "math-transcendental.json")
 }
 
-func testTypeScriptMathFixtures(t *testing.T, filename string, pending bool) {
+func testTypeScriptMathFixtures(t *testing.T, filename string) {
 	t.Helper()
 	for _, raw := range loadFixtureCases(t, filename) {
 		var tc struct {
@@ -56,9 +53,6 @@ func testTypeScriptMathFixtures(t *testing.T, filename string, pending bool) {
 			t.Fatal(err)
 		}
 		t.Run(tc.Name, func(t *testing.T) {
-			if pending {
-				t.Skip("pending exact TypeScript transcendental conformance; set DICECORE_STRICT_MATH=1 to enforce (see MIGRATION.md)")
-			}
 			var value any
 			var err error
 			number := func(index int) float64 { return foundationFixtureNumber(t, tc.Args[index]) }

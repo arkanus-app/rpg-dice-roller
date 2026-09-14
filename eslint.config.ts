@@ -10,6 +10,7 @@ const typedV3Configs = tseslint.configs.recommendedTypeChecked.map((config) => (
 export default tseslint.config(
   {
     ignores: [
+      '.artifacts/**',
       'coverage/**',
       'dist/**',
       'lib/**',

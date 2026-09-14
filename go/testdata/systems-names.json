@@ -1,0 +1,3517 @@
+{
+  "schemaVersion": 1,
+  "provenance": {
+    "package": "@erpg/dicecore",
+    "version": "3.7.1",
+    "commit": "1940044"
+  },
+  "cases": [
+    {
+      "name": "unicode-name-c0",
+      "input": "À",
+      "outcome": {
+        "value": "a"
+      }
+    },
+    {
+      "name": "unicode-name-c1",
+      "input": "Á",
+      "outcome": {
+        "value": "a"
+      }
+    },
+    {
+      "name": "unicode-name-c2",
+      "input": "Â",
+      "outcome": {
+        "value": "a"
+      }
+    },
+    {
+      "name": "unicode-name-c3",
+      "input": "Ã",
+      "outcome": {
+        "value": "a"
+      }
+    },
+    {
+      "name": "unicode-name-c4",
+      "input": "Ä",
+      "outcome": {
+        "value": "a"
+      }
+    },
+    {
+      "name": "unicode-name-c5",
+      "input": "Å",
+      "outcome": {
+        "value": "a"
+      }
+    },
+    {
+      "name": "unicode-name-c7",
+      "input": "Ç",
+      "outcome": {
+        "value": "c"
+      }
+    },
+    {
+      "name": "unicode-name-c8",
+      "input": "È",
+      "outcome": {
+        "value": "e"
+      }
+    },
+    {
+      "name": "unicode-name-c9",
+      "input": "É",
+      "outcome": {
+        "value": "e"
+      }
+    },
+    {
+      "name": "unicode-name-ca",
+      "input": "Ê",
+      "outcome": {
+        "value": "e"
+      }
+    },
+    {
+      "name": "unicode-name-cb",
+      "input": "Ë",
+      "outcome": {
+        "value": "e"
+      }
+    },
+    {
+      "name": "unicode-name-cc",
+      "input": "Ì",
+      "outcome": {
+        "value": "i"
+      }
+    },
+    {
+      "name": "unicode-name-cd",
+      "input": "Í",
+      "outcome": {
+        "value": "i"
+      }
+    },
+    {
+      "name": "unicode-name-ce",
+      "input": "Î",
+      "outcome": {
+        "value": "i"
+      }
+    },
+    {
+      "name": "unicode-name-cf",
+      "input": "Ï",
+      "outcome": {
+        "value": "i"
+      }
+    },
+    {
+      "name": "unicode-name-d1",
+      "input": "Ñ",
+      "outcome": {
+        "value": "n"
+      }
+    },
+    {
+      "name": "unicode-name-d2",
+      "input": "Ò",
+      "outcome": {
+        "value": "o"
+      }
+    },
+    {
+      "name": "unicode-name-d3",
+      "input": "Ó",
+      "outcome": {
+        "value": "o"
+      }
+    },
+    {
+      "name": "unicode-name-d4",
+      "input": "Ô",
+      "outcome": {
+        "value": "o"
+      }
+    },
+    {
+      "name": "unicode-name-d5",
+      "input": "Õ",
+      "outcome": {
+        "value": "o"
+      }
+    },
+    {
+      "name": "unicode-name-d6",
+      "input": "Ö",
+      "outcome": {
+        "value": "o"
+      }
+    },
+    {
+      "name": "unicode-name-d9",
+      "input": "Ù",
+      "outcome": {
+        "value": "u"
+      }
+    },
+    {
+      "name": "unicode-name-da",
+      "input": "Ú",
+      "outcome": {
+        "value": "u"
+      }
+    },
+    {
+      "name": "unicode-name-db",
+      "input": "Û",
+      "outcome": {
+        "value": "u"
+      }
+    },
+    {
+      "name": "unicode-name-dc",
+      "input": "Ü",
+      "outcome": {
+        "value": "u"
+      }
+    },
+    {
+      "name": "unicode-name-dd",
+      "input": "Ý",
+      "outcome": {
+        "value": "y"
+      }
+    },
+    {
+      "name": "unicode-name-e0",
+      "input": "à",
+      "outcome": {
+        "value": "a"
+      }
+    },
+    {
+      "name": "unicode-name-e1",
+      "input": "á",
+      "outcome": {
+        "value": "a"
+      }
+    },
+    {
+      "name": "unicode-name-e2",
+      "input": "â",
+      "outcome": {
+        "value": "a"
+      }
+    },
+    {
+      "name": "unicode-name-e3",
+      "input": "ã",
+      "outcome": {
+        "value": "a"
+      }
+    },
+    {
+      "name": "unicode-name-e4",
+      "input": "ä",
+      "outcome": {
+        "value": "a"
+      }
+    },
+    {
+      "name": "unicode-name-e5",
+      "input": "å",
+      "outcome": {
+        "value": "a"
+      }
+    },
+    {
+      "name": "unicode-name-e7",
+      "input": "ç",
+      "outcome": {
+        "value": "c"
+      }
+    },
+    {
+      "name": "unicode-name-e8",
+      "input": "è",
+      "outcome": {
+        "value": "e"
+      }
+    },
+    {
+      "name": "unicode-name-e9",
+      "input": "é",
+      "outcome": {
+        "value": "e"
+      }
+    },
+    {
+      "name": "unicode-name-ea",
+      "input": "ê",
+      "outcome": {
+        "value": "e"
+      }
+    },
+    {
+      "name": "unicode-name-eb",
+      "input": "ë",
+      "outcome": {
+        "value": "e"
+      }
+    },
+    {
+      "name": "unicode-name-ec",
+      "input": "ì",
+      "outcome": {
+        "value": "i"
+      }
+    },
+    {
+      "name": "unicode-name-ed",
+      "input": "í",
+      "outcome": {
+        "value": "i"
+      }
+    },
+    {
+      "name": "unicode-name-ee",
+      "input": "î",
+      "outcome": {
+        "value": "i"
+      }
+    },
+    {
+      "name": "unicode-name-ef",
+      "input": "ï",
+      "outcome": {
+        "value": "i"
+      }
+    },
+    {
+      "name": "unicode-name-f1",
+      "input": "ñ",
+      "outcome": {
+        "value": "n"
+      }
+    },
+    {
+      "name": "unicode-name-f2",
+      "input": "ò",
+      "outcome": {
+        "value": "o"
+      }
+    },
+    {
+      "name": "unicode-name-f3",
+      "input": "ó",
+      "outcome": {
+        "value": "o"
+      }
+    },
+    {
+      "name": "unicode-name-f4",
+      "input": "ô",
+      "outcome": {
+        "value": "o"
+      }
+    },
+    {
+      "name": "unicode-name-f5",
+      "input": "õ",
+      "outcome": {
+        "value": "o"
+      }
+    },
+    {
+      "name": "unicode-name-f6",
+      "input": "ö",
+      "outcome": {
+        "value": "o"
+      }
+    },
+    {
+      "name": "unicode-name-f9",
+      "input": "ù",
+      "outcome": {
+        "value": "u"
+      }
+    },
+    {
+      "name": "unicode-name-fa",
+      "input": "ú",
+      "outcome": {
+        "value": "u"
+      }
+    },
+    {
+      "name": "unicode-name-fb",
+      "input": "û",
+      "outcome": {
+        "value": "u"
+      }
+    },
+    {
+      "name": "unicode-name-fc",
+      "input": "ü",
+      "outcome": {
+        "value": "u"
+      }
+    },
+    {
+      "name": "unicode-name-fd",
+      "input": "ý",
+      "outcome": {
+        "value": "y"
+      }
+    },
+    {
+      "name": "unicode-name-ff",
+      "input": "ÿ",
+      "outcome": {
+        "value": "y"
+      }
+    },
+    {
+      "name": "unicode-name-100",
+      "input": "Ā",
+      "outcome": {
+        "value": "a"
+      }
+    },
+    {
+      "name": "unicode-name-101",
+      "input": "ā",
+      "outcome": {
+        "value": "a"
+      }
+    },
+    {
+      "name": "unicode-name-102",
+      "input": "Ă",
+      "outcome": {
+        "value": "a"
+      }
+    },
+    {
+      "name": "unicode-name-103",
+      "input": "ă",
+      "outcome": {
+        "value": "a"
+      }
+    },
+    {
+      "name": "unicode-name-104",
+      "input": "Ą",
+      "outcome": {
+        "value": "a"
+      }
+    },
+    {
+      "name": "unicode-name-105",
+      "input": "ą",
+      "outcome": {
+        "value": "a"
+      }
+    },
+    {
+      "name": "unicode-name-106",
+      "input": "Ć",
+      "outcome": {
+        "value": "c"
+      }
+    },
+    {
+      "name": "unicode-name-107",
+      "input": "ć",
+      "outcome": {
+        "value": "c"
+      }
+    },
+    {
+      "name": "unicode-name-108",
+      "input": "Ĉ",
+      "outcome": {
+        "value": "c"
+      }
+    },
+    {
+      "name": "unicode-name-109",
+      "input": "ĉ",
+      "outcome": {
+        "value": "c"
+      }
+    },
+    {
+      "name": "unicode-name-10a",
+      "input": "Ċ",
+      "outcome": {
+        "value": "c"
+      }
+    },
+    {
+      "name": "unicode-name-10b",
+      "input": "ċ",
+      "outcome": {
+        "value": "c"
+      }
+    },
+    {
+      "name": "unicode-name-10c",
+      "input": "Č",
+      "outcome": {
+        "value": "c"
+      }
+    },
+    {
+      "name": "unicode-name-10d",
+      "input": "č",
+      "outcome": {
+        "value": "c"
+      }
+    },
+    {
+      "name": "unicode-name-10e",
+      "input": "Ď",
+      "outcome": {
+        "value": "d"
+      }
+    },
+    {
+      "name": "unicode-name-10f",
+      "input": "ď",
+      "outcome": {
+        "value": "d"
+      }
+    },
+    {
+      "name": "unicode-name-112",
+      "input": "Ē",
+      "outcome": {
+        "value": "e"
+      }
+    },
+    {
+      "name": "unicode-name-113",
+      "input": "ē",
+      "outcome": {
+        "value": "e"
+      }
+    },
+    {
+      "name": "unicode-name-114",
+      "input": "Ĕ",
+      "outcome": {
+        "value": "e"
+      }
+    },
+    {
+      "name": "unicode-name-115",
+      "input": "ĕ",
+      "outcome": {
+        "value": "e"
+      }
+    },
+    {
+      "name": "unicode-name-116",
+      "input": "Ė",
+      "outcome": {
+        "value": "e"
+      }
+    },
+    {
+      "name": "unicode-name-117",
+      "input": "ė",
+      "outcome": {
+        "value": "e"
+      }
+    },
+    {
+      "name": "unicode-name-118",
+      "input": "Ę",
+      "outcome": {
+        "value": "e"
+      }
+    },
+    {
+      "name": "unicode-name-119",
+      "input": "ę",
+      "outcome": {
+        "value": "e"
+      }
+    },
+    {
+      "name": "unicode-name-11a",
+      "input": "Ě",
+      "outcome": {
+        "value": "e"
+      }
+    },
+    {
+      "name": "unicode-name-11b",
+      "input": "ě",
+      "outcome": {
+        "value": "e"
+      }
+    },
+    {
+      "name": "unicode-name-11c",
+      "input": "Ĝ",
+      "outcome": {
+        "value": "g"
+      }
+    },
+    {
+      "name": "unicode-name-11d",
+      "input": "ĝ",
+      "outcome": {
+        "value": "g"
+      }
+    },
+    {
+      "name": "unicode-name-11e",
+      "input": "Ğ",
+      "outcome": {
+        "value": "g"
+      }
+    },
+    {
+      "name": "unicode-name-11f",
+      "input": "ğ",
+      "outcome": {
+        "value": "g"
+      }
+    },
+    {
+      "name": "unicode-name-120",
+      "input": "Ġ",
+      "outcome": {
+        "value": "g"
+      }
+    },
+    {
+      "name": "unicode-name-121",
+      "input": "ġ",
+      "outcome": {
+        "value": "g"
+      }
+    },
+    {
+      "name": "unicode-name-122",
+      "input": "Ģ",
+      "outcome": {
+        "value": "g"
+      }
+    },
+    {
+      "name": "unicode-name-123",
+      "input": "ģ",
+      "outcome": {
+        "value": "g"
+      }
+    },
+    {
+      "name": "unicode-name-124",
+      "input": "Ĥ",
+      "outcome": {
+        "value": "h"
+      }
+    },
+    {
+      "name": "unicode-name-125",
+      "input": "ĥ",
+      "outcome": {
+        "value": "h"
+      }
+    },
+    {
+      "name": "unicode-name-128",
+      "input": "Ĩ",
+      "outcome": {
+        "value": "i"
+      }
+    },
+    {
+      "name": "unicode-name-129",
+      "input": "ĩ",
+      "outcome": {
+        "value": "i"
+      }
+    },
+    {
+      "name": "unicode-name-12a",
+      "input": "Ī",
+      "outcome": {
+        "value": "i"
+      }
+    },
+    {
+      "name": "unicode-name-12b",
+      "input": "ī",
+      "outcome": {
+        "value": "i"
+      }
+    },
+    {
+      "name": "unicode-name-12c",
+      "input": "Ĭ",
+      "outcome": {
+        "value": "i"
+      }
+    },
+    {
+      "name": "unicode-name-12d",
+      "input": "ĭ",
+      "outcome": {
+        "value": "i"
+      }
+    },
+    {
+      "name": "unicode-name-12e",
+      "input": "Į",
+      "outcome": {
+        "value": "i"
+      }
+    },
+    {
+      "name": "unicode-name-12f",
+      "input": "į",
+      "outcome": {
+        "value": "i"
+      }
+    },
+    {
+      "name": "unicode-name-130",
+      "input": "İ",
+      "outcome": {
+        "value": "i"
+      }
+    },
+    {
+      "name": "unicode-name-134",
+      "input": "Ĵ",
+      "outcome": {
+        "value": "j"
+      }
+    },
+    {
+      "name": "unicode-name-135",
+      "input": "ĵ",
+      "outcome": {
+        "value": "j"
+      }
+    },
+    {
+      "name": "unicode-name-136",
+      "input": "Ķ",
+      "outcome": {
+        "value": "k"
+      }
+    },
+    {
+      "name": "unicode-name-137",
+      "input": "ķ",
+      "outcome": {
+        "value": "k"
+      }
+    },
+    {
+      "name": "unicode-name-139",
+      "input": "Ĺ",
+      "outcome": {
+        "value": "l"
+      }
+    },
+    {
+      "name": "unicode-name-13a",
+      "input": "ĺ",
+      "outcome": {
+        "value": "l"
+      }
+    },
+    {
+      "name": "unicode-name-13b",
+      "input": "Ļ",
+      "outcome": {
+        "value": "l"
+      }
+    },
+    {
+      "name": "unicode-name-13c",
+      "input": "ļ",
+      "outcome": {
+        "value": "l"
+      }
+    },
+    {
+      "name": "unicode-name-13d",
+      "input": "Ľ",
+      "outcome": {
+        "value": "l"
+      }
+    },
+    {
+      "name": "unicode-name-13e",
+      "input": "ľ",
+      "outcome": {
+        "value": "l"
+      }
+    },
+    {
+      "name": "unicode-name-143",
+      "input": "Ń",
+      "outcome": {
+        "value": "n"
+      }
+    },
+    {
+      "name": "unicode-name-144",
+      "input": "ń",
+      "outcome": {
+        "value": "n"
+      }
+    },
+    {
+      "name": "unicode-name-145",
+      "input": "Ņ",
+      "outcome": {
+        "value": "n"
+      }
+    },
+    {
+      "name": "unicode-name-146",
+      "input": "ņ",
+      "outcome": {
+        "value": "n"
+      }
+    },
+    {
+      "name": "unicode-name-147",
+      "input": "Ň",
+      "outcome": {
+        "value": "n"
+      }
+    },
+    {
+      "name": "unicode-name-148",
+      "input": "ň",
+      "outcome": {
+        "value": "n"
+      }
+    },
+    {
+      "name": "unicode-name-14c",
+      "input": "Ō",
+      "outcome": {
+        "value": "o"
+      }
+    },
+    {
+      "name": "unicode-name-14d",
+      "input": "ō",
+      "outcome": {
+        "value": "o"
+      }
+    },
+    {
+      "name": "unicode-name-14e",
+      "input": "Ŏ",
+      "outcome": {
+        "value": "o"
+      }
+    },
+    {
+      "name": "unicode-name-14f",
+      "input": "ŏ",
+      "outcome": {
+        "value": "o"
+      }
+    },
+    {
+      "name": "unicode-name-150",
+      "input": "Ő",
+      "outcome": {
+        "value": "o"
+      }
+    },
+    {
+      "name": "unicode-name-151",
+      "input": "ő",
+      "outcome": {
+        "value": "o"
+      }
+    },
+    {
+      "name": "unicode-name-154",
+      "input": "Ŕ",
+      "outcome": {
+        "value": "r"
+      }
+    },
+    {
+      "name": "unicode-name-155",
+      "input": "ŕ",
+      "outcome": {
+        "value": "r"
+      }
+    },
+    {
+      "name": "unicode-name-156",
+      "input": "Ŗ",
+      "outcome": {
+        "value": "r"
+      }
+    },
+    {
+      "name": "unicode-name-157",
+      "input": "ŗ",
+      "outcome": {
+        "value": "r"
+      }
+    },
+    {
+      "name": "unicode-name-158",
+      "input": "Ř",
+      "outcome": {
+        "value": "r"
+      }
+    },
+    {
+      "name": "unicode-name-159",
+      "input": "ř",
+      "outcome": {
+        "value": "r"
+      }
+    },
+    {
+      "name": "unicode-name-15a",
+      "input": "Ś",
+      "outcome": {
+        "value": "s"
+      }
+    },
+    {
+      "name": "unicode-name-15b",
+      "input": "ś",
+      "outcome": {
+        "value": "s"
+      }
+    },
+    {
+      "name": "unicode-name-15c",
+      "input": "Ŝ",
+      "outcome": {
+        "value": "s"
+      }
+    },
+    {
+      "name": "unicode-name-15d",
+      "input": "ŝ",
+      "outcome": {
+        "value": "s"
+      }
+    },
+    {
+      "name": "unicode-name-15e",
+      "input": "Ş",
+      "outcome": {
+        "value": "s"
+      }
+    },
+    {
+      "name": "unicode-name-15f",
+      "input": "ş",
+      "outcome": {
+        "value": "s"
+      }
+    },
+    {
+      "name": "unicode-name-160",
+      "input": "Š",
+      "outcome": {
+        "value": "s"
+      }
+    },
+    {
+      "name": "unicode-name-161",
+      "input": "š",
+      "outcome": {
+        "value": "s"
+      }
+    },
+    {
+      "name": "unicode-name-162",
+      "input": "Ţ",
+      "outcome": {
+        "value": "t"
+      }
+    },
+    {
+      "name": "unicode-name-163",
+      "input": "ţ",
+      "outcome": {
+        "value": "t"
+      }
+    },
+    {
+      "name": "unicode-name-164",
+      "input": "Ť",
+      "outcome": {
+        "value": "t"
+      }
+    },
+    {
+      "name": "unicode-name-165",
+      "input": "ť",
+      "outcome": {
+        "value": "t"
+      }
+    },
+    {
+      "name": "unicode-name-168",
+      "input": "Ũ",
+      "outcome": {
+        "value": "u"
+      }
+    },
+    {
+      "name": "unicode-name-169",
+      "input": "ũ",
+      "outcome": {
+        "value": "u"
+      }
+    },
+    {
+      "name": "unicode-name-16a",
+      "input": "Ū",
+      "outcome": {
+        "value": "u"
+      }
+    },
+    {
+      "name": "unicode-name-16b",
+      "input": "ū",
+      "outcome": {
+        "value": "u"
+      }
+    },
+    {
+      "name": "unicode-name-16c",
+      "input": "Ŭ",
+      "outcome": {
+        "value": "u"
+      }
+    },
+    {
+      "name": "unicode-name-16d",
+      "input": "ŭ",
+      "outcome": {
+        "value": "u"
+      }
+    },
+    {
+      "name": "unicode-name-16e",
+      "input": "Ů",
+      "outcome": {
+        "value": "u"
+      }
+    },
+    {
+      "name": "unicode-name-16f",
+      "input": "ů",
+      "outcome": {
+        "value": "u"
+      }
+    },
+    {
+      "name": "unicode-name-170",
+      "input": "Ű",
+      "outcome": {
+        "value": "u"
+      }
+    },
+    {
+      "name": "unicode-name-171",
+      "input": "ű",
+      "outcome": {
+        "value": "u"
+      }
+    },
+    {
+      "name": "unicode-name-172",
+      "input": "Ų",
+      "outcome": {
+        "value": "u"
+      }
+    },
+    {
+      "name": "unicode-name-173",
+      "input": "ų",
+      "outcome": {
+        "value": "u"
+      }
+    },
+    {
+      "name": "unicode-name-174",
+      "input": "Ŵ",
+      "outcome": {
+        "value": "w"
+      }
+    },
+    {
+      "name": "unicode-name-175",
+      "input": "ŵ",
+      "outcome": {
+        "value": "w"
+      }
+    },
+    {
+      "name": "unicode-name-176",
+      "input": "Ŷ",
+      "outcome": {
+        "value": "y"
+      }
+    },
+    {
+      "name": "unicode-name-177",
+      "input": "ŷ",
+      "outcome": {
+        "value": "y"
+      }
+    },
+    {
+      "name": "unicode-name-178",
+      "input": "Ÿ",
+      "outcome": {
+        "value": "y"
+      }
+    },
+    {
+      "name": "unicode-name-179",
+      "input": "Ź",
+      "outcome": {
+        "value": "z"
+      }
+    },
+    {
+      "name": "unicode-name-17a",
+      "input": "ź",
+      "outcome": {
+        "value": "z"
+      }
+    },
+    {
+      "name": "unicode-name-17b",
+      "input": "Ż",
+      "outcome": {
+        "value": "z"
+      }
+    },
+    {
+      "name": "unicode-name-17c",
+      "input": "ż",
+      "outcome": {
+        "value": "z"
+      }
+    },
+    {
+      "name": "unicode-name-17d",
+      "input": "Ž",
+      "outcome": {
+        "value": "z"
+      }
+    },
+    {
+      "name": "unicode-name-17e",
+      "input": "ž",
+      "outcome": {
+        "value": "z"
+      }
+    },
+    {
+      "name": "unicode-name-17f",
+      "input": "ſ",
+      "outcome": {
+        "value": "ſ"
+      }
+    },
+    {
+      "name": "unicode-name-1a0",
+      "input": "Ơ",
+      "outcome": {
+        "value": "o"
+      }
+    },
+    {
+      "name": "unicode-name-1a1",
+      "input": "ơ",
+      "outcome": {
+        "value": "o"
+      }
+    },
+    {
+      "name": "unicode-name-1af",
+      "input": "Ư",
+      "outcome": {
+        "value": "u"
+      }
+    },
+    {
+      "name": "unicode-name-1b0",
+      "input": "ư",
+      "outcome": {
+        "value": "u"
+      }
+    },
+    {
+      "name": "unicode-name-1cd",
+      "input": "Ǎ",
+      "outcome": {
+        "value": "a"
+      }
+    },
+    {
+      "name": "unicode-name-1ce",
+      "input": "ǎ",
+      "outcome": {
+        "value": "a"
+      }
+    },
+    {
+      "name": "unicode-name-1cf",
+      "input": "Ǐ",
+      "outcome": {
+        "value": "i"
+      }
+    },
+    {
+      "name": "unicode-name-1d0",
+      "input": "ǐ",
+      "outcome": {
+        "value": "i"
+      }
+    },
+    {
+      "name": "unicode-name-1d1",
+      "input": "Ǒ",
+      "outcome": {
+        "value": "o"
+      }
+    },
+    {
+      "name": "unicode-name-1d2",
+      "input": "ǒ",
+      "outcome": {
+        "value": "o"
+      }
+    },
+    {
+      "name": "unicode-name-1d3",
+      "input": "Ǔ",
+      "outcome": {
+        "value": "u"
+      }
+    },
+    {
+      "name": "unicode-name-1d4",
+      "input": "ǔ",
+      "outcome": {
+        "value": "u"
+      }
+    },
+    {
+      "name": "unicode-name-1d5",
+      "input": "Ǖ",
+      "outcome": {
+        "value": "u"
+      }
+    },
+    {
+      "name": "unicode-name-1d6",
+      "input": "ǖ",
+      "outcome": {
+        "value": "u"
+      }
+    },
+    {
+      "name": "unicode-name-1d7",
+      "input": "Ǘ",
+      "outcome": {
+        "value": "u"
+      }
+    },
+    {
+      "name": "unicode-name-1d8",
+      "input": "ǘ",
+      "outcome": {
+        "value": "u"
+      }
+    },
+    {
+      "name": "unicode-name-1d9",
+      "input": "Ǚ",
+      "outcome": {
+        "value": "u"
+      }
+    },
+    {
+      "name": "unicode-name-1da",
+      "input": "ǚ",
+      "outcome": {
+        "value": "u"
+      }
+    },
+    {
+      "name": "unicode-name-1db",
+      "input": "Ǜ",
+      "outcome": {
+        "value": "u"
+      }
+    },
+    {
+      "name": "unicode-name-1dc",
+      "input": "ǜ",
+      "outcome": {
+        "value": "u"
+      }
+    },
+    {
+      "name": "unicode-name-1de",
+      "input": "Ǟ",
+      "outcome": {
+        "value": "a"
+      }
+    },
+    {
+      "name": "unicode-name-1df",
+      "input": "ǟ",
+      "outcome": {
+        "value": "a"
+      }
+    },
+    {
+      "name": "unicode-name-1e0",
+      "input": "Ǡ",
+      "outcome": {
+        "value": "a"
+      }
+    },
+    {
+      "name": "unicode-name-1e1",
+      "input": "ǡ",
+      "outcome": {
+        "value": "a"
+      }
+    },
+    {
+      "name": "unicode-name-1e6",
+      "input": "Ǧ",
+      "outcome": {
+        "value": "g"
+      }
+    },
+    {
+      "name": "unicode-name-1e7",
+      "input": "ǧ",
+      "outcome": {
+        "value": "g"
+      }
+    },
+    {
+      "name": "unicode-name-1e8",
+      "input": "Ǩ",
+      "outcome": {
+        "value": "k"
+      }
+    },
+    {
+      "name": "unicode-name-1e9",
+      "input": "ǩ",
+      "outcome": {
+        "value": "k"
+      }
+    },
+    {
+      "name": "unicode-name-1ea",
+      "input": "Ǫ",
+      "outcome": {
+        "value": "o"
+      }
+    },
+    {
+      "name": "unicode-name-1eb",
+      "input": "ǫ",
+      "outcome": {
+        "value": "o"
+      }
+    },
+    {
+      "name": "unicode-name-1ec",
+      "input": "Ǭ",
+      "outcome": {
+        "value": "o"
+      }
+    },
+    {
+      "name": "unicode-name-1ed",
+      "input": "ǭ",
+      "outcome": {
+        "value": "o"
+      }
+    },
+    {
+      "name": "unicode-name-1f0",
+      "input": "ǰ",
+      "outcome": {
+        "value": "j"
+      }
+    },
+    {
+      "name": "unicode-name-1f4",
+      "input": "Ǵ",
+      "outcome": {
+        "value": "g"
+      }
+    },
+    {
+      "name": "unicode-name-1f5",
+      "input": "ǵ",
+      "outcome": {
+        "value": "g"
+      }
+    },
+    {
+      "name": "unicode-name-1f8",
+      "input": "Ǹ",
+      "outcome": {
+        "value": "n"
+      }
+    },
+    {
+      "name": "unicode-name-1f9",
+      "input": "ǹ",
+      "outcome": {
+        "value": "n"
+      }
+    },
+    {
+      "name": "unicode-name-1fa",
+      "input": "Ǻ",
+      "outcome": {
+        "value": "a"
+      }
+    },
+    {
+      "name": "unicode-name-1fb",
+      "input": "ǻ",
+      "outcome": {
+        "value": "a"
+      }
+    },
+    {
+      "name": "unicode-name-200",
+      "input": "Ȁ",
+      "outcome": {
+        "value": "a"
+      }
+    },
+    {
+      "name": "unicode-name-201",
+      "input": "ȁ",
+      "outcome": {
+        "value": "a"
+      }
+    },
+    {
+      "name": "unicode-name-202",
+      "input": "Ȃ",
+      "outcome": {
+        "value": "a"
+      }
+    },
+    {
+      "name": "unicode-name-203",
+      "input": "ȃ",
+      "outcome": {
+        "value": "a"
+      }
+    },
+    {
+      "name": "unicode-name-204",
+      "input": "Ȅ",
+      "outcome": {
+        "value": "e"
+      }
+    },
+    {
+      "name": "unicode-name-205",
+      "input": "ȅ",
+      "outcome": {
+        "value": "e"
+      }
+    },
+    {
+      "name": "unicode-name-206",
+      "input": "Ȇ",
+      "outcome": {
+        "value": "e"
+      }
+    },
+    {
+      "name": "unicode-name-207",
+      "input": "ȇ",
+      "outcome": {
+        "value": "e"
+      }
+    },
+    {
+      "name": "unicode-name-208",
+      "input": "Ȉ",
+      "outcome": {
+        "value": "i"
+      }
+    },
+    {
+      "name": "unicode-name-209",
+      "input": "ȉ",
+      "outcome": {
+        "value": "i"
+      }
+    },
+    {
+      "name": "unicode-name-20a",
+      "input": "Ȋ",
+      "outcome": {
+        "value": "i"
+      }
+    },
+    {
+      "name": "unicode-name-20b",
+      "input": "ȋ",
+      "outcome": {
+        "value": "i"
+      }
+    },
+    {
+      "name": "unicode-name-20c",
+      "input": "Ȍ",
+      "outcome": {
+        "value": "o"
+      }
+    },
+    {
+      "name": "unicode-name-20d",
+      "input": "ȍ",
+      "outcome": {
+        "value": "o"
+      }
+    },
+    {
+      "name": "unicode-name-20e",
+      "input": "Ȏ",
+      "outcome": {
+        "value": "o"
+      }
+    },
+    {
+      "name": "unicode-name-20f",
+      "input": "ȏ",
+      "outcome": {
+        "value": "o"
+      }
+    },
+    {
+      "name": "unicode-name-210",
+      "input": "Ȑ",
+      "outcome": {
+        "value": "r"
+      }
+    },
+    {
+      "name": "unicode-name-211",
+      "input": "ȑ",
+      "outcome": {
+        "value": "r"
+      }
+    },
+    {
+      "name": "unicode-name-212",
+      "input": "Ȓ",
+      "outcome": {
+        "value": "r"
+      }
+    },
+    {
+      "name": "unicode-name-213",
+      "input": "ȓ",
+      "outcome": {
+        "value": "r"
+      }
+    },
+    {
+      "name": "unicode-name-214",
+      "input": "Ȕ",
+      "outcome": {
+        "value": "u"
+      }
+    },
+    {
+      "name": "unicode-name-215",
+      "input": "ȕ",
+      "outcome": {
+        "value": "u"
+      }
+    },
+    {
+      "name": "unicode-name-216",
+      "input": "Ȗ",
+      "outcome": {
+        "value": "u"
+      }
+    },
+    {
+      "name": "unicode-name-217",
+      "input": "ȗ",
+      "outcome": {
+        "value": "u"
+      }
+    },
+    {
+      "name": "unicode-name-218",
+      "input": "Ș",
+      "outcome": {
+        "value": "s"
+      }
+    },
+    {
+      "name": "unicode-name-219",
+      "input": "ș",
+      "outcome": {
+        "value": "s"
+      }
+    },
+    {
+      "name": "unicode-name-21a",
+      "input": "Ț",
+      "outcome": {
+        "value": "t"
+      }
+    },
+    {
+      "name": "unicode-name-21b",
+      "input": "ț",
+      "outcome": {
+        "value": "t"
+      }
+    },
+    {
+      "name": "unicode-name-21e",
+      "input": "Ȟ",
+      "outcome": {
+        "value": "h"
+      }
+    },
+    {
+      "name": "unicode-name-21f",
+      "input": "ȟ",
+      "outcome": {
+        "value": "h"
+      }
+    },
+    {
+      "name": "unicode-name-226",
+      "input": "Ȧ",
+      "outcome": {
+        "value": "a"
+      }
+    },
+    {
+      "name": "unicode-name-227",
+      "input": "ȧ",
+      "outcome": {
+        "value": "a"
+      }
+    },
+    {
+      "name": "unicode-name-228",
+      "input": "Ȩ",
+      "outcome": {
+        "value": "e"
+      }
+    },
+    {
+      "name": "unicode-name-229",
+      "input": "ȩ",
+      "outcome": {
+        "value": "e"
+      }
+    },
+    {
+      "name": "unicode-name-22a",
+      "input": "Ȫ",
+      "outcome": {
+        "value": "o"
+      }
+    },
+    {
+      "name": "unicode-name-22b",
+      "input": "ȫ",
+      "outcome": {
+        "value": "o"
+      }
+    },
+    {
+      "name": "unicode-name-22c",
+      "input": "Ȭ",
+      "outcome": {
+        "value": "o"
+      }
+    },
+    {
+      "name": "unicode-name-22d",
+      "input": "ȭ",
+      "outcome": {
+        "value": "o"
+      }
+    },
+    {
+      "name": "unicode-name-22e",
+      "input": "Ȯ",
+      "outcome": {
+        "value": "o"
+      }
+    },
+    {
+      "name": "unicode-name-22f",
+      "input": "ȯ",
+      "outcome": {
+        "value": "o"
+      }
+    },
+    {
+      "name": "unicode-name-230",
+      "input": "Ȱ",
+      "outcome": {
+        "value": "o"
+      }
+    },
+    {
+      "name": "unicode-name-231",
+      "input": "ȱ",
+      "outcome": {
+        "value": "o"
+      }
+    },
+    {
+      "name": "unicode-name-232",
+      "input": "Ȳ",
+      "outcome": {
+        "value": "y"
+      }
+    },
+    {
+      "name": "unicode-name-233",
+      "input": "ȳ",
+      "outcome": {
+        "value": "y"
+      }
+    },
+    {
+      "name": "unicode-name-1e00",
+      "input": "Ḁ",
+      "outcome": {
+        "value": "a"
+      }
+    },
+    {
+      "name": "unicode-name-1e01",
+      "input": "ḁ",
+      "outcome": {
+        "value": "a"
+      }
+    },
+    {
+      "name": "unicode-name-1e02",
+      "input": "Ḃ",
+      "outcome": {
+        "value": "b"
+      }
+    },
+    {
+      "name": "unicode-name-1e03",
+      "input": "ḃ",
+      "outcome": {
+        "value": "b"
+      }
+    },
+    {
+      "name": "unicode-name-1e04",
+      "input": "Ḅ",
+      "outcome": {
+        "value": "b"
+      }
+    },
+    {
+      "name": "unicode-name-1e05",
+      "input": "ḅ",
+      "outcome": {
+        "value": "b"
+      }
+    },
+    {
+      "name": "unicode-name-1e06",
+      "input": "Ḇ",
+      "outcome": {
+        "value": "b"
+      }
+    },
+    {
+      "name": "unicode-name-1e07",
+      "input": "ḇ",
+      "outcome": {
+        "value": "b"
+      }
+    },
+    {
+      "name": "unicode-name-1e08",
+      "input": "Ḉ",
+      "outcome": {
+        "value": "c"
+      }
+    },
+    {
+      "name": "unicode-name-1e09",
+      "input": "ḉ",
+      "outcome": {
+        "value": "c"
+      }
+    },
+    {
+      "name": "unicode-name-1e0a",
+      "input": "Ḋ",
+      "outcome": {
+        "value": "d"
+      }
+    },
+    {
+      "name": "unicode-name-1e0b",
+      "input": "ḋ",
+      "outcome": {
+        "value": "d"
+      }
+    },
+    {
+      "name": "unicode-name-1e0c",
+      "input": "Ḍ",
+      "outcome": {
+        "value": "d"
+      }
+    },
+    {
+      "name": "unicode-name-1e0d",
+      "input": "ḍ",
+      "outcome": {
+        "value": "d"
+      }
+    },
+    {
+      "name": "unicode-name-1e0e",
+      "input": "Ḏ",
+      "outcome": {
+        "value": "d"
+      }
+    },
+    {
+      "name": "unicode-name-1e0f",
+      "input": "ḏ",
+      "outcome": {
+        "value": "d"
+      }
+    },
+    {
+      "name": "unicode-name-1e10",
+      "input": "Ḑ",
+      "outcome": {
+        "value": "d"
+      }
+    },
+    {
+      "name": "unicode-name-1e11",
+      "input": "ḑ",
+      "outcome": {
+        "value": "d"
+      }
+    },
+    {
+      "name": "unicode-name-1e12",
+      "input": "Ḓ",
+      "outcome": {
+        "value": "d"
+      }
+    },
+    {
+      "name": "unicode-name-1e13",
+      "input": "ḓ",
+      "outcome": {
+        "value": "d"
+      }
+    },
+    {
+      "name": "unicode-name-1e14",
+      "input": "Ḕ",
+      "outcome": {
+        "value": "e"
+      }
+    },
+    {
+      "name": "unicode-name-1e15",
+      "input": "ḕ",
+      "outcome": {
+        "value": "e"
+      }
+    },
+    {
+      "name": "unicode-name-1e16",
+      "input": "Ḗ",
+      "outcome": {
+        "value": "e"
+      }
+    },
+    {
+      "name": "unicode-name-1e17",
+      "input": "ḗ",
+      "outcome": {
+        "value": "e"
+      }
+    },
+    {
+      "name": "unicode-name-1e18",
+      "input": "Ḙ",
+      "outcome": {
+        "value": "e"
+      }
+    },
+    {
+      "name": "unicode-name-1e19",
+      "input": "ḙ",
+      "outcome": {
+        "value": "e"
+      }
+    },
+    {
+      "name": "unicode-name-1e1a",
+      "input": "Ḛ",
+      "outcome": {
+        "value": "e"
+      }
+    },
+    {
+      "name": "unicode-name-1e1b",
+      "input": "ḛ",
+      "outcome": {
+        "value": "e"
+      }
+    },
+    {
+      "name": "unicode-name-1e1c",
+      "input": "Ḝ",
+      "outcome": {
+        "value": "e"
+      }
+    },
+    {
+      "name": "unicode-name-1e1d",
+      "input": "ḝ",
+      "outcome": {
+        "value": "e"
+      }
+    },
+    {
+      "name": "unicode-name-1e1e",
+      "input": "Ḟ",
+      "outcome": {
+        "value": "f"
+      }
+    },
+    {
+      "name": "unicode-name-1e1f",
+      "input": "ḟ",
+      "outcome": {
+        "value": "f"
+      }
+    },
+    {
+      "name": "unicode-name-1e20",
+      "input": "Ḡ",
+      "outcome": {
+        "value": "g"
+      }
+    },
+    {
+      "name": "unicode-name-1e21",
+      "input": "ḡ",
+      "outcome": {
+        "value": "g"
+      }
+    },
+    {
+      "name": "unicode-name-1e22",
+      "input": "Ḣ",
+      "outcome": {
+        "value": "h"
+      }
+    },
+    {
+      "name": "unicode-name-1e23",
+      "input": "ḣ",
+      "outcome": {
+        "value": "h"
+      }
+    },
+    {
+      "name": "unicode-name-1e24",
+      "input": "Ḥ",
+      "outcome": {
+        "value": "h"
+      }
+    },
+    {
+      "name": "unicode-name-1e25",
+      "input": "ḥ",
+      "outcome": {
+        "value": "h"
+      }
+    },
+    {
+      "name": "unicode-name-1e26",
+      "input": "Ḧ",
+      "outcome": {
+        "value": "h"
+      }
+    },
+    {
+      "name": "unicode-name-1e27",
+      "input": "ḧ",
+      "outcome": {
+        "value": "h"
+      }
+    },
+    {
+      "name": "unicode-name-1e28",
+      "input": "Ḩ",
+      "outcome": {
+        "value": "h"
+      }
+    },
+    {
+      "name": "unicode-name-1e29",
+      "input": "ḩ",
+      "outcome": {
+        "value": "h"
+      }
+    },
+    {
+      "name": "unicode-name-1e2a",
+      "input": "Ḫ",
+      "outcome": {
+        "value": "h"
+      }
+    },
+    {
+      "name": "unicode-name-1e2b",
+      "input": "ḫ",
+      "outcome": {
+        "value": "h"
+      }
+    },
+    {
+      "name": "unicode-name-1e2c",
+      "input": "Ḭ",
+      "outcome": {
+        "value": "i"
+      }
+    },
+    {
+      "name": "unicode-name-1e2d",
+      "input": "ḭ",
+      "outcome": {
+        "value": "i"
+      }
+    },
+    {
+      "name": "unicode-name-1e2e",
+      "input": "Ḯ",
+      "outcome": {
+        "value": "i"
+      }
+    },
+    {
+      "name": "unicode-name-1e2f",
+      "input": "ḯ",
+      "outcome": {
+        "value": "i"
+      }
+    },
+    {
+      "name": "unicode-name-1e30",
+      "input": "Ḱ",
+      "outcome": {
+        "value": "k"
+      }
+    },
+    {
+      "name": "unicode-name-1e31",
+      "input": "ḱ",
+      "outcome": {
+        "value": "k"
+      }
+    },
+    {
+      "name": "unicode-name-1e32",
+      "input": "Ḳ",
+      "outcome": {
+        "value": "k"
+      }
+    },
+    {
+      "name": "unicode-name-1e33",
+      "input": "ḳ",
+      "outcome": {
+        "value": "k"
+      }
+    },
+    {
+      "name": "unicode-name-1e34",
+      "input": "Ḵ",
+      "outcome": {
+        "value": "k"
+      }
+    },
+    {
+      "name": "unicode-name-1e35",
+      "input": "ḵ",
+      "outcome": {
+        "value": "k"
+      }
+    },
+    {
+      "name": "unicode-name-1e36",
+      "input": "Ḷ",
+      "outcome": {
+        "value": "l"
+      }
+    },
+    {
+      "name": "unicode-name-1e37",
+      "input": "ḷ",
+      "outcome": {
+        "value": "l"
+      }
+    },
+    {
+      "name": "unicode-name-1e38",
+      "input": "Ḹ",
+      "outcome": {
+        "value": "l"
+      }
+    },
+    {
+      "name": "unicode-name-1e39",
+      "input": "ḹ",
+      "outcome": {
+        "value": "l"
+      }
+    },
+    {
+      "name": "unicode-name-1e3a",
+      "input": "Ḻ",
+      "outcome": {
+        "value": "l"
+      }
+    },
+    {
+      "name": "unicode-name-1e3b",
+      "input": "ḻ",
+      "outcome": {
+        "value": "l"
+      }
+    },
+    {
+      "name": "unicode-name-1e3c",
+      "input": "Ḽ",
+      "outcome": {
+        "value": "l"
+      }
+    },
+    {
+      "name": "unicode-name-1e3d",
+      "input": "ḽ",
+      "outcome": {
+        "value": "l"
+      }
+    },
+    {
+      "name": "unicode-name-1e3e",
+      "input": "Ḿ",
+      "outcome": {
+        "value": "m"
+      }
+    },
+    {
+      "name": "unicode-name-1e3f",
+      "input": "ḿ",
+      "outcome": {
+        "value": "m"
+      }
+    },
+    {
+      "name": "unicode-name-1e40",
+      "input": "Ṁ",
+      "outcome": {
+        "value": "m"
+      }
+    },
+    {
+      "name": "unicode-name-1e41",
+      "input": "ṁ",
+      "outcome": {
+        "value": "m"
+      }
+    },
+    {
+      "name": "unicode-name-1e42",
+      "input": "Ṃ",
+      "outcome": {
+        "value": "m"
+      }
+    },
+    {
+      "name": "unicode-name-1e43",
+      "input": "ṃ",
+      "outcome": {
+        "value": "m"
+      }
+    },
+    {
+      "name": "unicode-name-1e44",
+      "input": "Ṅ",
+      "outcome": {
+        "value": "n"
+      }
+    },
+    {
+      "name": "unicode-name-1e45",
+      "input": "ṅ",
+      "outcome": {
+        "value": "n"
+      }
+    },
+    {
+      "name": "unicode-name-1e46",
+      "input": "Ṇ",
+      "outcome": {
+        "value": "n"
+      }
+    },
+    {
+      "name": "unicode-name-1e47",
+      "input": "ṇ",
+      "outcome": {
+        "value": "n"
+      }
+    },
+    {
+      "name": "unicode-name-1e48",
+      "input": "Ṉ",
+      "outcome": {
+        "value": "n"
+      }
+    },
+    {
+      "name": "unicode-name-1e49",
+      "input": "ṉ",
+      "outcome": {
+        "value": "n"
+      }
+    },
+    {
+      "name": "unicode-name-1e4a",
+      "input": "Ṋ",
+      "outcome": {
+        "value": "n"
+      }
+    },
+    {
+      "name": "unicode-name-1e4b",
+      "input": "ṋ",
+      "outcome": {
+        "value": "n"
+      }
+    },
+    {
+      "name": "unicode-name-1e4c",
+      "input": "Ṍ",
+      "outcome": {
+        "value": "o"
+      }
+    },
+    {
+      "name": "unicode-name-1e4d",
+      "input": "ṍ",
+      "outcome": {
+        "value": "o"
+      }
+    },
+    {
+      "name": "unicode-name-1e4e",
+      "input": "Ṏ",
+      "outcome": {
+        "value": "o"
+      }
+    },
+    {
+      "name": "unicode-name-1e4f",
+      "input": "ṏ",
+      "outcome": {
+        "value": "o"
+      }
+    },
+    {
+      "name": "unicode-name-1e50",
+      "input": "Ṑ",
+      "outcome": {
+        "value": "o"
+      }
+    },
+    {
+      "name": "unicode-name-1e51",
+      "input": "ṑ",
+      "outcome": {
+        "value": "o"
+      }
+    },
+    {
+      "name": "unicode-name-1e52",
+      "input": "Ṓ",
+      "outcome": {
+        "value": "o"
+      }
+    },
+    {
+      "name": "unicode-name-1e53",
+      "input": "ṓ",
+      "outcome": {
+        "value": "o"
+      }
+    },
+    {
+      "name": "unicode-name-1e54",
+      "input": "Ṕ",
+      "outcome": {
+        "value": "p"
+      }
+    },
+    {
+      "name": "unicode-name-1e55",
+      "input": "ṕ",
+      "outcome": {
+        "value": "p"
+      }
+    },
+    {
+      "name": "unicode-name-1e56",
+      "input": "Ṗ",
+      "outcome": {
+        "value": "p"
+      }
+    },
+    {
+      "name": "unicode-name-1e57",
+      "input": "ṗ",
+      "outcome": {
+        "value": "p"
+      }
+    },
+    {
+      "name": "unicode-name-1e58",
+      "input": "Ṙ",
+      "outcome": {
+        "value": "r"
+      }
+    },
+    {
+      "name": "unicode-name-1e59",
+      "input": "ṙ",
+      "outcome": {
+        "value": "r"
+      }
+    },
+    {
+      "name": "unicode-name-1e5a",
+      "input": "Ṛ",
+      "outcome": {
+        "value": "r"
+      }
+    },
+    {
+      "name": "unicode-name-1e5b",
+      "input": "ṛ",
+      "outcome": {
+        "value": "r"
+      }
+    },
+    {
+      "name": "unicode-name-1e5c",
+      "input": "Ṝ",
+      "outcome": {
+        "value": "r"
+      }
+    },
+    {
+      "name": "unicode-name-1e5d",
+      "input": "ṝ",
+      "outcome": {
+        "value": "r"
+      }
+    },
+    {
+      "name": "unicode-name-1e5e",
+      "input": "Ṟ",
+      "outcome": {
+        "value": "r"
+      }
+    },
+    {
+      "name": "unicode-name-1e5f",
+      "input": "ṟ",
+      "outcome": {
+        "value": "r"
+      }
+    },
+    {
+      "name": "unicode-name-1e60",
+      "input": "Ṡ",
+      "outcome": {
+        "value": "s"
+      }
+    },
+    {
+      "name": "unicode-name-1e61",
+      "input": "ṡ",
+      "outcome": {
+        "value": "s"
+      }
+    },
+    {
+      "name": "unicode-name-1e62",
+      "input": "Ṣ",
+      "outcome": {
+        "value": "s"
+      }
+    },
+    {
+      "name": "unicode-name-1e63",
+      "input": "ṣ",
+      "outcome": {
+        "value": "s"
+      }
+    },
+    {
+      "name": "unicode-name-1e64",
+      "input": "Ṥ",
+      "outcome": {
+        "value": "s"
+      }
+    },
+    {
+      "name": "unicode-name-1e65",
+      "input": "ṥ",
+      "outcome": {
+        "value": "s"
+      }
+    },
+    {
+      "name": "unicode-name-1e66",
+      "input": "Ṧ",
+      "outcome": {
+        "value": "s"
+      }
+    },
+    {
+      "name": "unicode-name-1e67",
+      "input": "ṧ",
+      "outcome": {
+        "value": "s"
+      }
+    },
+    {
+      "name": "unicode-name-1e68",
+      "input": "Ṩ",
+      "outcome": {
+        "value": "s"
+      }
+    },
+    {
+      "name": "unicode-name-1e69",
+      "input": "ṩ",
+      "outcome": {
+        "value": "s"
+      }
+    },
+    {
+      "name": "unicode-name-1e6a",
+      "input": "Ṫ",
+      "outcome": {
+        "value": "t"
+      }
+    },
+    {
+      "name": "unicode-name-1e6b",
+      "input": "ṫ",
+      "outcome": {
+        "value": "t"
+      }
+    },
+    {
+      "name": "unicode-name-1e6c",
+      "input": "Ṭ",
+      "outcome": {
+        "value": "t"
+      }
+    },
+    {
+      "name": "unicode-name-1e6d",
+      "input": "ṭ",
+      "outcome": {
+        "value": "t"
+      }
+    },
+    {
+      "name": "unicode-name-1e6e",
+      "input": "Ṯ",
+      "outcome": {
+        "value": "t"
+      }
+    },
+    {
+      "name": "unicode-name-1e6f",
+      "input": "ṯ",
+      "outcome": {
+        "value": "t"
+      }
+    },
+    {
+      "name": "unicode-name-1e70",
+      "input": "Ṱ",
+      "outcome": {
+        "value": "t"
+      }
+    },
+    {
+      "name": "unicode-name-1e71",
+      "input": "ṱ",
+      "outcome": {
+        "value": "t"
+      }
+    },
+    {
+      "name": "unicode-name-1e72",
+      "input": "Ṳ",
+      "outcome": {
+        "value": "u"
+      }
+    },
+    {
+      "name": "unicode-name-1e73",
+      "input": "ṳ",
+      "outcome": {
+        "value": "u"
+      }
+    },
+    {
+      "name": "unicode-name-1e74",
+      "input": "Ṵ",
+      "outcome": {
+        "value": "u"
+      }
+    },
+    {
+      "name": "unicode-name-1e75",
+      "input": "ṵ",
+      "outcome": {
+        "value": "u"
+      }
+    },
+    {
+      "name": "unicode-name-1e76",
+      "input": "Ṷ",
+      "outcome": {
+        "value": "u"
+      }
+    },
+    {
+      "name": "unicode-name-1e77",
+      "input": "ṷ",
+      "outcome": {
+        "value": "u"
+      }
+    },
+    {
+      "name": "unicode-name-1e78",
+      "input": "Ṹ",
+      "outcome": {
+        "value": "u"
+      }
+    },
+    {
+      "name": "unicode-name-1e79",
+      "input": "ṹ",
+      "outcome": {
+        "value": "u"
+      }
+    },
+    {
+      "name": "unicode-name-1e7a",
+      "input": "Ṻ",
+      "outcome": {
+        "value": "u"
+      }
+    },
+    {
+      "name": "unicode-name-1e7b",
+      "input": "ṻ",
+      "outcome": {
+        "value": "u"
+      }
+    },
+    {
+      "name": "unicode-name-1e7c",
+      "input": "Ṽ",
+      "outcome": {
+        "value": "v"
+      }
+    },
+    {
+      "name": "unicode-name-1e7d",
+      "input": "ṽ",
+      "outcome": {
+        "value": "v"
+      }
+    },
+    {
+      "name": "unicode-name-1e7e",
+      "input": "Ṿ",
+      "outcome": {
+        "value": "v"
+      }
+    },
+    {
+      "name": "unicode-name-1e7f",
+      "input": "ṿ",
+      "outcome": {
+        "value": "v"
+      }
+    },
+    {
+      "name": "unicode-name-1e80",
+      "input": "Ẁ",
+      "outcome": {
+        "value": "w"
+      }
+    },
+    {
+      "name": "unicode-name-1e81",
+      "input": "ẁ",
+      "outcome": {
+        "value": "w"
+      }
+    },
+    {
+      "name": "unicode-name-1e82",
+      "input": "Ẃ",
+      "outcome": {
+        "value": "w"
+      }
+    },
+    {
+      "name": "unicode-name-1e83",
+      "input": "ẃ",
+      "outcome": {
+        "value": "w"
+      }
+    },
+    {
+      "name": "unicode-name-1e84",
+      "input": "Ẅ",
+      "outcome": {
+        "value": "w"
+      }
+    },
+    {
+      "name": "unicode-name-1e85",
+      "input": "ẅ",
+      "outcome": {
+        "value": "w"
+      }
+    },
+    {
+      "name": "unicode-name-1e86",
+      "input": "Ẇ",
+      "outcome": {
+        "value": "w"
+      }
+    },
+    {
+      "name": "unicode-name-1e87",
+      "input": "ẇ",
+      "outcome": {
+        "value": "w"
+      }
+    },
+    {
+      "name": "unicode-name-1e88",
+      "input": "Ẉ",
+      "outcome": {
+        "value": "w"
+      }
+    },
+    {
+      "name": "unicode-name-1e89",
+      "input": "ẉ",
+      "outcome": {
+        "value": "w"
+      }
+    },
+    {
+      "name": "unicode-name-1e8a",
+      "input": "Ẋ",
+      "outcome": {
+        "value": "x"
+      }
+    },
+    {
+      "name": "unicode-name-1e8b",
+      "input": "ẋ",
+      "outcome": {
+        "value": "x"
+      }
+    },
+    {
+      "name": "unicode-name-1e8c",
+      "input": "Ẍ",
+      "outcome": {
+        "value": "x"
+      }
+    },
+    {
+      "name": "unicode-name-1e8d",
+      "input": "ẍ",
+      "outcome": {
+        "value": "x"
+      }
+    },
+    {
+      "name": "unicode-name-1e8e",
+      "input": "Ẏ",
+      "outcome": {
+        "value": "y"
+      }
+    },
+    {
+      "name": "unicode-name-1e8f",
+      "input": "ẏ",
+      "outcome": {
+        "value": "y"
+      }
+    },
+    {
+      "name": "unicode-name-1e90",
+      "input": "Ẑ",
+      "outcome": {
+        "value": "z"
+      }
+    },
+    {
+      "name": "unicode-name-1e91",
+      "input": "ẑ",
+      "outcome": {
+        "value": "z"
+      }
+    },
+    {
+      "name": "unicode-name-1e92",
+      "input": "Ẓ",
+      "outcome": {
+        "value": "z"
+      }
+    },
+    {
+      "name": "unicode-name-1e93",
+      "input": "ẓ",
+      "outcome": {
+        "value": "z"
+      }
+    },
+    {
+      "name": "unicode-name-1e94",
+      "input": "Ẕ",
+      "outcome": {
+        "value": "z"
+      }
+    },
+    {
+      "name": "unicode-name-1e95",
+      "input": "ẕ",
+      "outcome": {
+        "value": "z"
+      }
+    },
+    {
+      "name": "unicode-name-1e96",
+      "input": "ẖ",
+      "outcome": {
+        "value": "h"
+      }
+    },
+    {
+      "name": "unicode-name-1e97",
+      "input": "ẗ",
+      "outcome": {
+        "value": "t"
+      }
+    },
+    {
+      "name": "unicode-name-1e98",
+      "input": "ẘ",
+      "outcome": {
+        "value": "w"
+      }
+    },
+    {
+      "name": "unicode-name-1e99",
+      "input": "ẙ",
+      "outcome": {
+        "value": "y"
+      }
+    },
+    {
+      "name": "unicode-name-1e9b",
+      "input": "ẛ",
+      "outcome": {
+        "value": "ſ"
+      }
+    },
+    {
+      "name": "unicode-name-1ea0",
+      "input": "Ạ",
+      "outcome": {
+        "value": "a"
+      }
+    },
+    {
+      "name": "unicode-name-1ea1",
+      "input": "ạ",
+      "outcome": {
+        "value": "a"
+      }
+    },
+    {
+      "name": "unicode-name-1ea2",
+      "input": "Ả",
+      "outcome": {
+        "value": "a"
+      }
+    },
+    {
+      "name": "unicode-name-1ea3",
+      "input": "ả",
+      "outcome": {
+        "value": "a"
+      }
+    },
+    {
+      "name": "unicode-name-1ea4",
+      "input": "Ấ",
+      "outcome": {
+        "value": "a"
+      }
+    },
+    {
+      "name": "unicode-name-1ea5",
+      "input": "ấ",
+      "outcome": {
+        "value": "a"
+      }
+    },
+    {
+      "name": "unicode-name-1ea6",
+      "input": "Ầ",
+      "outcome": {
+        "value": "a"
+      }
+    },
+    {
+      "name": "unicode-name-1ea7",
+      "input": "ầ",
+      "outcome": {
+        "value": "a"
+      }
+    },
+    {
+      "name": "unicode-name-1ea8",
+      "input": "Ẩ",
+      "outcome": {
+        "value": "a"
+      }
+    },
+    {
+      "name": "unicode-name-1ea9",
+      "input": "ẩ",
+      "outcome": {
+        "value": "a"
+      }
+    },
+    {
+      "name": "unicode-name-1eaa",
+      "input": "Ẫ",
+      "outcome": {
+        "value": "a"
+      }
+    },
+    {
+      "name": "unicode-name-1eab",
+      "input": "ẫ",
+      "outcome": {
+        "value": "a"
+      }
+    },
+    {
+      "name": "unicode-name-1eac",
+      "input": "Ậ",
+      "outcome": {
+        "value": "a"
+      }
+    },
+    {
+      "name": "unicode-name-1ead",
+      "input": "ậ",
+      "outcome": {
+        "value": "a"
+      }
+    },
+    {
+      "name": "unicode-name-1eae",
+      "input": "Ắ",
+      "outcome": {
+        "value": "a"
+      }
+    },
+    {
+      "name": "unicode-name-1eaf",
+      "input": "ắ",
+      "outcome": {
+        "value": "a"
+      }
+    },
+    {
+      "name": "unicode-name-1eb0",
+      "input": "Ằ",
+      "outcome": {
+        "value": "a"
+      }
+    },
+    {
+      "name": "unicode-name-1eb1",
+      "input": "ằ",
+      "outcome": {
+        "value": "a"
+      }
+    },
+    {
+      "name": "unicode-name-1eb2",
+      "input": "Ẳ",
+      "outcome": {
+        "value": "a"
+      }
+    },
+    {
+      "name": "unicode-name-1eb3",
+      "input": "ẳ",
+      "outcome": {
+        "value": "a"
+      }
+    },
+    {
+      "name": "unicode-name-1eb4",
+      "input": "Ẵ",
+      "outcome": {
+        "value": "a"
+      }
+    },
+    {
+      "name": "unicode-name-1eb5",
+      "input": "ẵ",
+      "outcome": {
+        "value": "a"
+      }
+    },
+    {
+      "name": "unicode-name-1eb6",
+      "input": "Ặ",
+      "outcome": {
+        "value": "a"
+      }
+    },
+    {
+      "name": "unicode-name-1eb7",
+      "input": "ặ",
+      "outcome": {
+        "value": "a"
+      }
+    },
+    {
+      "name": "unicode-name-1eb8",
+      "input": "Ẹ",
+      "outcome": {
+        "value": "e"
+      }
+    },
+    {
+      "name": "unicode-name-1eb9",
+      "input": "ẹ",
+      "outcome": {
+        "value": "e"
+      }
+    },
+    {
+      "name": "unicode-name-1eba",
+      "input": "Ẻ",
+      "outcome": {
+        "value": "e"
+      }
+    },
+    {
+      "name": "unicode-name-1ebb",
+      "input": "ẻ",
+      "outcome": {
+        "value": "e"
+      }
+    },
+    {
+      "name": "unicode-name-1ebc",
+      "input": "Ẽ",
+      "outcome": {
+        "value": "e"
+      }
+    },
+    {
+      "name": "unicode-name-1ebd",
+      "input": "ẽ",
+      "outcome": {
+        "value": "e"
+      }
+    },
+    {
+      "name": "unicode-name-1ebe",
+      "input": "Ế",
+      "outcome": {
+        "value": "e"
+      }
+    },
+    {
+      "name": "unicode-name-1ebf",
+      "input": "ế",
+      "outcome": {
+        "value": "e"
+      }
+    },
+    {
+      "name": "unicode-name-1ec0",
+      "input": "Ề",
+      "outcome": {
+        "value": "e"
+      }
+    },
+    {
+      "name": "unicode-name-1ec1",
+      "input": "ề",
+      "outcome": {
+        "value": "e"
+      }
+    },
+    {
+      "name": "unicode-name-1ec2",
+      "input": "Ể",
+      "outcome": {
+        "value": "e"
+      }
+    },
+    {
+      "name": "unicode-name-1ec3",
+      "input": "ể",
+      "outcome": {
+        "value": "e"
+      }
+    },
+    {
+      "name": "unicode-name-1ec4",
+      "input": "Ễ",
+      "outcome": {
+        "value": "e"
+      }
+    },
+    {
+      "name": "unicode-name-1ec5",
+      "input": "ễ",
+      "outcome": {
+        "value": "e"
+      }
+    },
+    {
+      "name": "unicode-name-1ec6",
+      "input": "Ệ",
+      "outcome": {
+        "value": "e"
+      }
+    },
+    {
+      "name": "unicode-name-1ec7",
+      "input": "ệ",
+      "outcome": {
+        "value": "e"
+      }
+    },
+    {
+      "name": "unicode-name-1ec8",
+      "input": "Ỉ",
+      "outcome": {
+        "value": "i"
+      }
+    },
+    {
+      "name": "unicode-name-1ec9",
+      "input": "ỉ",
+      "outcome": {
+        "value": "i"
+      }
+    },
+    {
+      "name": "unicode-name-1eca",
+      "input": "Ị",
+      "outcome": {
+        "value": "i"
+      }
+    },
+    {
+      "name": "unicode-name-1ecb",
+      "input": "ị",
+      "outcome": {
+        "value": "i"
+      }
+    },
+    {
+      "name": "unicode-name-1ecc",
+      "input": "Ọ",
+      "outcome": {
+        "value": "o"
+      }
+    },
+    {
+      "name": "unicode-name-1ecd",
+      "input": "ọ",
+      "outcome": {
+        "value": "o"
+      }
+    },
+    {
+      "name": "unicode-name-1ece",
+      "input": "Ỏ",
+      "outcome": {
+        "value": "o"
+      }
+    },
+    {
+      "name": "unicode-name-1ecf",
+      "input": "ỏ",
+      "outcome": {
+        "value": "o"
+      }
+    },
+    {
+      "name": "unicode-name-1ed0",
+      "input": "Ố",
+      "outcome": {
+        "value": "o"
+      }
+    },
+    {
+      "name": "unicode-name-1ed1",
+      "input": "ố",
+      "outcome": {
+        "value": "o"
+      }
+    },
+    {
+      "name": "unicode-name-1ed2",
+      "input": "Ồ",
+      "outcome": {
+        "value": "o"
+      }
+    },
+    {
+      "name": "unicode-name-1ed3",
+      "input": "ồ",
+      "outcome": {
+        "value": "o"
+      }
+    },
+    {
+      "name": "unicode-name-1ed4",
+      "input": "Ổ",
+      "outcome": {
+        "value": "o"
+      }
+    },
+    {
+      "name": "unicode-name-1ed5",
+      "input": "ổ",
+      "outcome": {
+        "value": "o"
+      }
+    },
+    {
+      "name": "unicode-name-1ed6",
+      "input": "Ỗ",
+      "outcome": {
+        "value": "o"
+      }
+    },
+    {
+      "name": "unicode-name-1ed7",
+      "input": "ỗ",
+      "outcome": {
+        "value": "o"
+      }
+    },
+    {
+      "name": "unicode-name-1ed8",
+      "input": "Ộ",
+      "outcome": {
+        "value": "o"
+      }
+    },
+    {
+      "name": "unicode-name-1ed9",
+      "input": "ộ",
+      "outcome": {
+        "value": "o"
+      }
+    },
+    {
+      "name": "unicode-name-1eda",
+      "input": "Ớ",
+      "outcome": {
+        "value": "o"
+      }
+    },
+    {
+      "name": "unicode-name-1edb",
+      "input": "ớ",
+      "outcome": {
+        "value": "o"
+      }
+    },
+    {
+      "name": "unicode-name-1edc",
+      "input": "Ờ",
+      "outcome": {
+        "value": "o"
+      }
+    },
+    {
+      "name": "unicode-name-1edd",
+      "input": "ờ",
+      "outcome": {
+        "value": "o"
+      }
+    },
+    {
+      "name": "unicode-name-1ede",
+      "input": "Ở",
+      "outcome": {
+        "value": "o"
+      }
+    },
+    {
+      "name": "unicode-name-1edf",
+      "input": "ở",
+      "outcome": {
+        "value": "o"
+      }
+    },
+    {
+      "name": "unicode-name-1ee0",
+      "input": "Ỡ",
+      "outcome": {
+        "value": "o"
+      }
+    },
+    {
+      "name": "unicode-name-1ee1",
+      "input": "ỡ",
+      "outcome": {
+        "value": "o"
+      }
+    },
+    {
+      "name": "unicode-name-1ee2",
+      "input": "Ợ",
+      "outcome": {
+        "value": "o"
+      }
+    },
+    {
+      "name": "unicode-name-1ee3",
+      "input": "ợ",
+      "outcome": {
+        "value": "o"
+      }
+    },
+    {
+      "name": "unicode-name-1ee4",
+      "input": "Ụ",
+      "outcome": {
+        "value": "u"
+      }
+    },
+    {
+      "name": "unicode-name-1ee5",
+      "input": "ụ",
+      "outcome": {
+        "value": "u"
+      }
+    },
+    {
+      "name": "unicode-name-1ee6",
+      "input": "Ủ",
+      "outcome": {
+        "value": "u"
+      }
+    },
+    {
+      "name": "unicode-name-1ee7",
+      "input": "ủ",
+      "outcome": {
+        "value": "u"
+      }
+    },
+    {
+      "name": "unicode-name-1ee8",
+      "input": "Ứ",
+      "outcome": {
+        "value": "u"
+      }
+    },
+    {
+      "name": "unicode-name-1ee9",
+      "input": "ứ",
+      "outcome": {
+        "value": "u"
+      }
+    },
+    {
+      "name": "unicode-name-1eea",
+      "input": "Ừ",
+      "outcome": {
+        "value": "u"
+      }
+    },
+    {
+      "name": "unicode-name-1eeb",
+      "input": "ừ",
+      "outcome": {
+        "value": "u"
+      }
+    },
+    {
+      "name": "unicode-name-1eec",
+      "input": "Ử",
+      "outcome": {
+        "value": "u"
+      }
+    },
+    {
+      "name": "unicode-name-1eed",
+      "input": "ử",
+      "outcome": {
+        "value": "u"
+      }
+    },
+    {
+      "name": "unicode-name-1eee",
+      "input": "Ữ",
+      "outcome": {
+        "value": "u"
+      }
+    },
+    {
+      "name": "unicode-name-1eef",
+      "input": "ữ",
+      "outcome": {
+        "value": "u"
+      }
+    },
+    {
+      "name": "unicode-name-1ef0",
+      "input": "Ự",
+      "outcome": {
+        "value": "u"
+      }
+    },
+    {
+      "name": "unicode-name-1ef1",
+      "input": "ự",
+      "outcome": {
+        "value": "u"
+      }
+    },
+    {
+      "name": "unicode-name-1ef2",
+      "input": "Ỳ",
+      "outcome": {
+        "value": "y"
+      }
+    },
+    {
+      "name": "unicode-name-1ef3",
+      "input": "ỳ",
+      "outcome": {
+        "value": "y"
+      }
+    },
+    {
+      "name": "unicode-name-1ef4",
+      "input": "Ỵ",
+      "outcome": {
+        "value": "y"
+      }
+    },
+    {
+      "name": "unicode-name-1ef5",
+      "input": "ỵ",
+      "outcome": {
+        "value": "y"
+      }
+    },
+    {
+      "name": "unicode-name-1ef6",
+      "input": "Ỷ",
+      "outcome": {
+        "value": "y"
+      }
+    },
+    {
+      "name": "unicode-name-1ef7",
+      "input": "ỷ",
+      "outcome": {
+        "value": "y"
+      }
+    },
+    {
+      "name": "unicode-name-1ef8",
+      "input": "Ỹ",
+      "outcome": {
+        "value": "y"
+      }
+    },
+    {
+      "name": "unicode-name-1ef9",
+      "input": "ỹ",
+      "outcome": {
+        "value": "y"
+      }
+    },
+    {
+      "name": "unicode-name-212a",
+      "input": "K",
+      "outcome": {
+        "value": "k"
+      }
+    },
+    {
+      "name": "unicode-name-212b",
+      "input": "Å",
+      "outcome": {
+        "value": "a"
+      }
+    },
+    {
+      "name": "name-493",
+      "input": "fate",
+      "outcome": {
+        "value": "fate"
+      }
+    },
+    {
+      "name": "name-494",
+      "input": "ASSIMILAÇÃO",
+      "outcome": {
+        "value": "assimilacao"
+      }
+    },
+    {
+      "name": "name-495",
+      "input": "ás",
+      "outcome": {
+        "value": "as"
+      }
+    },
+    {
+      "name": "name-496",
+      "input": "Keep",
+      "outcome": {
+        "value": "keep"
+      }
+    },
+    {
+      "name": "name-497",
+      "input": "ſẛ",
+      "outcome": {
+        "value": "ſſ"
+      }
+    },
+    {
+      "name": "name-498",
+      "input": "ＦＡＴＥ",
+      "outcome": {
+        "value": ""
+      }
+    },
+    {
+      "name": "name-499",
+      "input": "Ᲊfate",
+      "outcome": {
+        "value": "fate"
+      }
+    },
+    {
+      "name": "name-500",
+      "input": "fate𐵀",
+      "outcome": {
+        "value": "fate"
+      }
+    },
+    {
+      "name": "name-501",
+      "input": "ligature-ﬁ",
+      "outcome": {
+        "value": "ligature"
+      }
+    }
+  ]
+}

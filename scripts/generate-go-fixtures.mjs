@@ -169,19 +169,18 @@ for (const value of [0, -0, 1.234, -0.001, 1.005, 2.675, -2.675, 1.125, -1.125,
   0.005, -0.005, 999999999999.99, 1e21, Infinity]) addMath('round', [value]);
 emit('math', mathCases, { mathProfile: math.MATH_PROFILE });
 
-const pendingTranscendentals = [
+const transcendentalRegressions = [
   ['sin', 1.4293], ['tan', 3.3315], ['cos', 4.6702], ['cos', 9.0805],
   ['tan', 4.8115743527127792e26], ['sin', 5.1100438385391316e140],
   ['cos', 1.7072285362519324e99], ['tan', 8.576470182742924e99],
 ];
-emit('math-transcendental-pending', pendingTranscendentals.map(([name, value], index) => ({
-  name: `pending-${name}-${index + 1}`,
+emit('math-transcendental', transcendentalRegressions.map(([name, value], index) => ({
+  name: `rounding-boundary-${name}-${index + 1}`,
   operation: 'unaryFunction', args: [name, value], input: 'fixture-expression',
   outcome: capture(() => math.evaluateUnaryFunction(name, value, 'fixture-expression')),
 })), {
   mathProfile: math.MATH_PROFILE,
-  status: 'pending-conformance',
-  reason: 'The Go standard-library sin/cos/tan implementations differ from the TypeScript reference at decimal12 rounding boundaries. These TypeScript oracle cases must pass before claiming exact transcendental or unrestricted arithmetic replay compatibility. Go conformance tests explicitly skip them in this initial migration milestone.',
+  reason: 'Regression vectors for decimal12 rounding boundaries in sine, cosine, and tangent. Go uses the reference fdlibm kernels and enforces these cases unconditionally.',
 });
 
 const rngCases = [];
@@ -317,7 +316,7 @@ emit('budget', budgetCases);
 
 // Preserve these historic values verbatim rather than regenerate them from today's engine.
 emit('compatibility-corpus', compatibility.compatibilityCorpus, {
-  purpose: 'Historical V2/V3 reference for the future Go executor; not evidence of current Go roll support.',
+  purpose: 'Historical V2/V3 reference exercised by the native Go executor with both recorded seeds.',
   seeds: compatibility.compatibilitySeeds,
 });
 emit('full-roll-replay', replayVectors.crossRuntimeReplayVectors.map((vector) => ({
@@ -325,5 +324,5 @@ emit('full-roll-replay', replayVectors.crossRuntimeReplayVectors.map((vector) =>
   outcome: capture(() => vector.kind === 'mixed'
     ? mixed.rollMixedDice(vector.input, vector.options)
     : core.rollRpgDice(vector.input, vector.options)),
-})), { purpose: 'Full TypeScript execution outputs reserved for later Go compiler/executor/system adapters.' });
+})), { purpose: 'Complete TypeScript roll and replay outputs exercised by the native Go engine and system adapters.' });
 process.stdout.write(`${mode === '--check' ? 'Verified' : 'Generated'} ${totalCases} deterministic fixture cases.\n`);
