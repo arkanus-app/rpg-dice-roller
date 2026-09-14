@@ -54,6 +54,42 @@ os campos aplicáveis. Essa representação substitui o acesso anterior por mapa
 do resultado TypeScript. O journal público de baixo nível ainda aceita e retorna
 `DiceEvent` como mapa.
 
+## Serializar para o backend
+
+Use `dicecore.MarshalJSON(result)` para codificar diretamente um resultado
+full, details ou summary. A função entrega os mesmos bytes e erros de
+`encoding/json.Marshal`, lendo os campos atuais a cada chamada. A API de
+rolagem e o comportamento de `json.Marshal(result)` permanecem iguais;
+o uso do encoder direto é explícito.
+
+```go
+result, err := dicecore.RollRPGDice("100d6", dicecore.RollOptions{Seed: "encontro-1"})
+if err != nil { panic(err) }
+payload, err := dicecore.MarshalJSON(result)
+if err != nil { panic(err) }
+fmt.Println(string(payload))
+
+// Também é possível montar um envelope em um buffer pertencente ao chamador.
+buffer := []byte(`{"roll":`)
+buffer, err = dicecore.AppendJSON(buffer, result)
+if err != nil { panic(err) }
+buffer = append(buffer, '}')
+```
+
+O encoder tipado atende `DiceRollResult`, `DiceRollDetails` e
+`DiceRollSummary`, por valor ou ponteiro. Outros tipos, inclusive envelopes
+externos e resultados de sistemas, usam a biblioteca padrão. Um resultado com
+`Sides` diferente de `int64`, `string` ou `nil`, ou com eventos do journal
+legado, também é delegado integralmente à biblioteca padrão. Isso conserva
+marshalers personalizados, ciclos, mutações feitas por callbacks e erros.
+
+`AppendJSON` reaproveita a capacidade disponível e preserva o prefixo de `dst`.
+Em erro, devolve o `dst` original; a capacidade além de seu comprimento pode
+ter sido usada como temporário. Não há cache de JSON nem mudança no resultado.
+Os bytes retornados pertencem ao chamador; reutilize um buffer somente depois
+que seu consumidor terminar. Resultados podem ser codificados em paralelo para
+buffers independentes, desde que não sejam alterados durante a codificação.
+
 ## Engine e sistemas
 
 Crie uma engine para compartilhar limites e caches entre chamadas. Ela pode ser
@@ -137,12 +173,20 @@ Os novos confrontos da [API nativa](BACKEND_ROUND4_BENCHMARK.md) e de
 [rolagem com JSON](JSON_ROUND4_BENCHMARK.md) medem Go anterior/atual, Node e Bun
 com GC padrão e configurado, incluindo os casos em que Go perde.
 
-Na confirmação da segunda rodada com seis workers e uma engine por worker, `GOGC=500` e `GOMEMLIMIT=96MiB` deram maior
-vazão que Node e Bun nas nove cargas da API nativa sem JSON, com RSS amostrado até 78,44 MiB.
+Na segunda rodada, em 13/09/2026, seis workers e uma engine por worker com
+`GOGC=500` e `GOMEMLIMIT=96MiB` deram maior vazão que Node e Bun nas nove cargas
+da API nativa sem JSON, com RSS amostrado até 78,44 MiB. Naquele ensaio,
+incluindo `encoding/json.Marshal`, Go venceu uma das três cargas e perdeu
+as duas maiores. Esses resultados históricos não medem o encoder direto.
+
 Essas variáveis configuram o processo Go inteiro; a biblioteca não as altera.
 O orçamento de memória de um futuro backend deve considerar também os demais
-componentes desse processo. Incluindo JSON, Go venceu uma das três cargas;
-Node e Bun continuam mais rápidos nas duas cargas com resultados maiores.
+componentes desse processo. O [comparativo da quinta rodada](JSON_ROUND5_BENCHMARK.md)
+mede `encoding/json.Marshal` e `dicecore.MarshalJSON` no mesmo binário Go,
+frente a Node e Bun. O [holdout da quinta rodada](JSON_ROUND5_HOLDOUT.md)
+verifica expressões adicionais em um ensaio separado.
+O [relatório da quinta rodada](OPTIMIZATION_ROUND5.md) reúne os resultados,
+os custos de memória e a adoção explícita do encoder direto no backend.
 
 A [licença do projeto](../licence.txt) e os
 [avisos dos kernels matemáticos](THIRD_PARTY_NOTICES.md) se aplicam a este código.

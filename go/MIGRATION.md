@@ -56,7 +56,7 @@ os testes matemáticos comparam os bits IEEE 754 do resultado normalizado.
 
 ## Evidências e reprodução
 
-A suíte Go passou com **4.585 de 4.585 statements cobertos (100%)**, com o perfil de todos os
+A suíte Go passou com **4.802 de 4.802 statements cobertos (100%)**, com o perfil de todos os
 pacotes. A cobertura mede a execução do código; as comparações com TypeScript
 verificam seu comportamento de forma independente. Nenhum arquivo de produção é
 removido da medição. Go não oferece nativamente as quatro métricas de cobertura
@@ -88,6 +88,13 @@ mede lotes de 10.000 chamadas, concorrência e memória residente; o
 [teste com JSON](JSON_BENCHMARK.md) inclui a serialização. O
 [registro da segunda rodada](OPTIMIZATION_ROUND2.md) documenta as mudanças,
 variantes rejeitadas e evidências anteriores preservadas.
+
+A [quinta rodada](OPTIMIZATION_ROUND5.md) adiciona `MarshalJSON` e `AppendJSON`
+para serializar resultados Go diretamente. Os confrontos de
+[rolagem completa + JSON](JSON_ROUND5_BENCHMARK.md) e
+[expressões adicionais](JSON_ROUND5_HOLDOUT.md) incluem Node, Bun, Go padrão
+e Go configurado. A [validação atual](benchmarks/optimization-round5/VALIDATION.md)
+registra cobertura, paridade, concorrência e fontes das medições.
 
 ## Adaptações de linguagem
 

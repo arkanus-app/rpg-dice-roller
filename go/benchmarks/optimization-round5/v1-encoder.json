@@ -1,0 +1,1101 @@
+{
+  "status": "complete",
+  "label": "v1-encoder",
+  "startedAt": "2026-09-14T04:24:37.001Z",
+  "budgetMs": 120000,
+  "rounds": 10,
+  "order": [
+    [
+      "before",
+      "after"
+    ],
+    [
+      "after",
+      "before"
+    ],
+    [
+      "before",
+      "after"
+    ],
+    [
+      "after",
+      "before"
+    ],
+    [
+      "before",
+      "after"
+    ],
+    [
+      "after",
+      "before"
+    ],
+    [
+      "before",
+      "after"
+    ],
+    [
+      "after",
+      "before"
+    ],
+    [
+      "before",
+      "after"
+    ],
+    [
+      "after",
+      "before"
+    ]
+  ],
+  "filter": "^BenchmarkRollJSON$",
+  "invocation": {
+    "executable": "C:\\Users\\quira\\AppData\\Local\\Microsoft\\WinGet\\Packages\\OpenJS.NodeJS.LTS_Microsoft.Winget.Source_8wekyb3d8bbwe\\node-v24.18.0-win-x64\\node.exe",
+    "args": [
+      "scripts/compare-go-round5-micro.mjs",
+      ".artifacts/optimization-round5/current.exe"
+    ]
+  },
+  "cpu": "AMD Ryzen 5 5500",
+  "os": "Windows 11 Pro",
+  "arch": "x64",
+  "logicalCPUs": 12,
+  "env": {
+    "GOMAXPROCS": "1",
+    "GOGC": "100",
+    "GOMEMLIMIT": "off"
+  },
+  "inheritedEnvironment": {
+    "GOMAXPROCS": null,
+    "GOGC": null,
+    "GOMEMLIMIT": null,
+    "DICECORE_JSON_ENCODER": null,
+    "GODEBUG": null,
+    "GOEXPERIMENT": null,
+    "GOFLAGS": null
+  },
+  "variants": {
+    "before": "std",
+    "after": "direct"
+  },
+  "binary": {
+    "file": "D:\\Projetos\\ERPG\\rpg-dice-roller\\.artifacts\\optimization-round5\\current.exe",
+    "sha256": "1c29de174454624906dffb7d104ab076b96e5630b1db6f8141b122140556f348"
+  },
+  "source": {
+    "sha256": "0bc65ccd97a01799c0cd11907a50d05996bc7173135dde6063567e2cf7b312ee",
+    "files": [
+      {
+        "path": "go/backend_benchmark_test.go",
+        "sha256": "8caeb34d29638fb07ee6cffd048870d050e3ddaf2a90e0527693c39f47275151"
+      },
+      {
+        "path": "go/backend_rss_linux_test.go",
+        "sha256": "13bdd743d3e7a00f2d35ed698f7ba8729b8cb3a71451a9666722bdbac43c3ec0"
+      },
+      {
+        "path": "go/backend_rss_other_test.go",
+        "sha256": "c2e53b664c9299b200b6fe277e87645a5d4dd7a84d413a7eac939d139588881a"
+      },
+      {
+        "path": "go/backend_rss_windows_test.go",
+        "sha256": "f5a18d13ce1153a1688d77e2bf580e2fc0695a509bc630cc9c85aaa55a9ce974"
+      },
+      {
+        "path": "go/benchmark_test.go",
+        "sha256": "2dfdb690f6dfddc2151453cd3fba15f4cc944681a9f00870994389c7ef7c70c7"
+      },
+      {
+        "path": "go/budget.go",
+        "sha256": "ece1d18d5e46a472ef1c544dd0b4d425ebf79631afec330c53376ed896ec0609"
+      },
+      {
+        "path": "go/cache.go",
+        "sha256": "bc72fedcb0e1fc928d2bed11161b578b3f1b828530148eefcda00b7d7422832a"
+      },
+      {
+        "path": "go/cache_test.go",
+        "sha256": "7df1881e33a0c17735914aa467dd12f861cc8de3671dc5b292e9f61fcdb6906a"
+      },
+      {
+        "path": "go/compiler.go",
+        "sha256": "d88ffe71296acdd06942b899896f691c50f4382dfb4a9b6c27528019687862c3"
+      },
+      {
+        "path": "go/compiler_boundaries_test.go",
+        "sha256": "512564e90a2903f6a394917c1d91942875c2ccb9164fa0646f4fce6f6f0f68cd"
+      },
+      {
+        "path": "go/compiler_plan.go",
+        "sha256": "cdcda478d75bc41996867063d693f452e45b78f597a54a9a19cf24880561667f"
+      },
+      {
+        "path": "go/compiler_semantics.go",
+        "sha256": "c46547890f3113e7a32b7729a10d93f541390441f4e4bdaea20197d65aec512a"
+      },
+      {
+        "path": "go/compiler_snapshot_test.go",
+        "sha256": "d8de4168668bd17e8bb54f691e8bf82c6ac23558aa77afb847608e61437b2c04"
+      },
+      {
+        "path": "go/compiler_test.go",
+        "sha256": "f35a5a73e427c20fff5448bf38ff945d9da7030424e1c8b2d422e07c08a5df72"
+      },
+      {
+        "path": "go/compiler_types.go",
+        "sha256": "578d0a4d5a09dba9e294efa14b2d51382a817126121645c9caf8018b7a5846e9"
+      },
+      {
+        "path": "go/context.go",
+        "sha256": "bfeed3c341446b38aab0b78a6ef43051b37fb6fa039d6f90b080261d4f97afb2"
+      },
+      {
+        "path": "go/context_test.go",
+        "sha256": "42e57b0d4a37cf9b5737a9155073dd7bbbae077205e55c9ecb23788be648aee5"
+      },
+      {
+        "path": "go/doc.go",
+        "sha256": "656bd408bdcd739bc21df7dd5c96cd5301d6c4498c601c4cb0d0f2c0a7403e3e"
+      },
+      {
+        "path": "go/engine.go",
+        "sha256": "507d7951b48e34935907c0c22044ae706c43e1c0de1c3b35634cb8ba3065a3ca"
+      },
+      {
+        "path": "go/engine_fixtures_test.go",
+        "sha256": "f7b0a380eb2d98c2bc432cf8be77c1cccee0d606b19cc9e6de5e7655cabcb01f"
+      },
+      {
+        "path": "go/engine_optimization_test.go",
+        "sha256": "a52ccfc2aa2129210191d5808e5d44aeb7ae10dd102213913a07cd34eb627e4b"
+      },
+      {
+        "path": "go/engine_performance_test.go",
+        "sha256": "d816264c9f78e3bc8bd5652d4a5e4063cbdfc141eccb703a1a804476c1f8acc2"
+      },
+      {
+        "path": "go/engine_test.go",
+        "sha256": "9fbae15c69f62f70ea7ee49a887f208c07c515f36391945ee5a312b3938c32b0"
+      },
+      {
+        "path": "go/error_utf16.go",
+        "sha256": "ceb096dea18374dcaddc61fdf12fcb548bbcef3277b94eb997665a8bd312f6bd"
+      },
+      {
+        "path": "go/error_utf16_test.go",
+        "sha256": "c48d5ddb77fcf6646acbc3012195878acc01e37082bd178a457983635866ce7a"
+      },
+      {
+        "path": "go/errors.go",
+        "sha256": "a7f1db56a341f7b5618f0a77b57d1c8dc878c9034e32e7cd1236a121a81a3a37"
+      },
+      {
+        "path": "go/errors_test.go",
+        "sha256": "a6f635e4c98cd58a6ad177f92d9989365160f8fc40997796904802e0776e2098"
+      },
+      {
+        "path": "go/event.go",
+        "sha256": "da1031828ce2f392754cc9e93942ba68fd6df63664b088a385fc274d5fc5a7af"
+      },
+      {
+        "path": "go/event_bench_test.go",
+        "sha256": "e3e93ad10d926e6d7fb725f663dff3f772486bae57df77a0072d7140f91d9bbe"
+      },
+      {
+        "path": "go/event_collection.go",
+        "sha256": "59fe23558572efaac83f50491362f9194d81ab2b21c7ae7872663e1eca9aa796"
+      },
+      {
+        "path": "go/event_collection_test.go",
+        "sha256": "0b039e30347fdfcb7656116b7d04ab0ee6fd68613f8ce7f82dc20f272972be80"
+      },
+      {
+        "path": "go/event_decode.go",
+        "sha256": "e2a24d8fab55422e5aa202ce14173038064790b4ed0908914317a1684666aa55"
+      },
+      {
+        "path": "go/event_performance_test.go",
+        "sha256": "3f54fa17d327bf6970883606043bd34ab55c1dbeb6cdb3414ed1205c2c725c5b"
+      },
+      {
+        "path": "go/event_prefix_test.go",
+        "sha256": "9a553ac33cb73265d62ae8a1061b2c6de1c8b987a4e2a769176bc13830c15413"
+      },
+      {
+        "path": "go/event_test.go",
+        "sha256": "5a8e3d64f7ea981a91614593135f8d1fee18559ec72892f5d44e5b1fb76128a6"
+      },
+      {
+        "path": "go/example_test.go",
+        "sha256": "7bdc25ab6eb33b276de1aaf03fcf698e189ab8013815d98cbdadc4175193acac"
+      },
+      {
+        "path": "go/execution_ids.go",
+        "sha256": "fc3a1402204c57eebd7bce8b85a6094886263006f8c51b07c95d9969b6b66fea"
+      },
+      {
+        "path": "go/execution_ids_test.go",
+        "sha256": "1ef7a949daf89a823df18ea267209d09037972ada53dbed1daee756bda761c0a"
+      },
+      {
+        "path": "go/execution_rng_cache.go",
+        "sha256": "1f89fcc1bcf1e541a2365fbf101d05a0f5fa8bb9b742dbf74ee92eeb924f1050"
+      },
+      {
+        "path": "go/execution_rng_cache_test.go",
+        "sha256": "71b9167388fe299564fea57936e22c943cce4b34fa12f886760e97cbab4403d5"
+      },
+      {
+        "path": "go/executor.go",
+        "sha256": "42066b2db869980d672216c83dcbd975890e1240ec0316464d65d0b7c6fa0354"
+      },
+      {
+        "path": "go/executor_compact_summary.go",
+        "sha256": "42194a9082259f070511e459e64715d16f44cf92b962acbfbf1b5053a2ac4a2c"
+      },
+      {
+        "path": "go/executor_compact_summary_test.go",
+        "sha256": "c52243070aed5e8ef43538c9c9ed3effcbc2db5a457f98f60b79f752174fa070"
+      },
+      {
+        "path": "go/executor_layout_test.go",
+        "sha256": "e544430586223679454f9a2d5d7982b7cad4c43bbbf806449e48ed2323f1adf9"
+      },
+      {
+        "path": "go/executor_reserve_test.go",
+        "sha256": "eb719ed094412b2a80fec0aca4bb11ba128b190b382fc74f04f630e791681ab9"
+      },
+      {
+        "path": "go/executor_selection_bench_test.go",
+        "sha256": "431eecebeda6f638829121c6f6400870dd07617dfc518019c694c497d8383c64"
+      },
+      {
+        "path": "go/executor_selection_test.go",
+        "sha256": "d0255c017a7dd093748c5238514a5f7433fe07228eb46fc539305730850509d3"
+      },
+      {
+        "path": "go/executor_states_test.go",
+        "sha256": "af728c68e232011aa85368d38c51d56065ff53ba001fbf3326e0f654c816dc8c"
+      },
+      {
+        "path": "go/executor_summary.go",
+        "sha256": "1f9586a613d7b7bb91b7932ad094f447b9b33c8e21922d938379387b50e6a6df"
+      },
+      {
+        "path": "go/executor_test.go",
+        "sha256": "3014b034dac3b0e9d323eb12187e5fb0b623682a1bf361505179014456eb1159"
+      },
+      {
+        "path": "go/fixtures_test.go",
+        "sha256": "fd572e6605c433f5b436c069f07985d762d5f1f3870253c0a784244ed8a80c53"
+      },
+      {
+        "path": "go/foundations_fixtures_test.go",
+        "sha256": "c08431e68dec3409faac4a223a820956d4a781c88d4aa3dca29e09dd1fc3fe82"
+      },
+      {
+        "path": "go/go.mod",
+        "sha256": "6176f43cc3c8805dd71b9819687efbe2ac4240bb2284f64e466fd47ec13a6c1b"
+      },
+      {
+        "path": "go/journal.go",
+        "sha256": "57066655afb9f43feb1a76a5c7f9e19393af1a802e4890512784f46cd9e48832"
+      },
+      {
+        "path": "go/journal_test.go",
+        "sha256": "794903332e2c60d6ab5ffdcde7b5905655e0339979e272ef08323bba02123c68"
+      },
+      {
+        "path": "go/json.go",
+        "sha256": "3c98feeffa1b6a5149ad212d37946a9265942a51274314ed850c4ba469a99459"
+      },
+      {
+        "path": "go/json_bench_test.go",
+        "sha256": "d6cd98a25f7777532197266a8d9680c1f0c78f10248336aadf368c2a1cc8afe6"
+      },
+      {
+        "path": "go/json_benchmark_test.go",
+        "sha256": "a3fad7fcd62c57294eeb65b6b9d598777edb1f4ae9e05bf6a3057c10b40a0b55"
+      },
+      {
+        "path": "go/json_encoder_bench_test.go",
+        "sha256": "fadc32fb062a09c32056ad536939f19a4a7dd40f4424763f563ece11c2b0588f"
+      },
+      {
+        "path": "go/json_test.go",
+        "sha256": "8e5f9810b494956ad06ef036973a183635bc4e0d99fa6f3082234beb8d9ba407"
+      },
+      {
+        "path": "go/legacy_fixtures_test.go",
+        "sha256": "64e5673947368626c64f7fd73d9522a59fb65baa93f7124386f2fdfeac12ffb8"
+      },
+      {
+        "path": "go/limits.go",
+        "sha256": "25141b044a5106a0744708decd23d6f71aa12fbcf37da9b1dc82c83c2cd1ad80"
+      },
+      {
+        "path": "go/limits_test.go",
+        "sha256": "acc825feedc97b69fa648ad2264bed05ba029fd80476782da80bfedc379c1192"
+      },
+      {
+        "path": "go/math.go",
+        "sha256": "3f4711d07a8fad87d5848799895adeb85a54d4f4b993741808d499391f012dcf"
+      },
+      {
+        "path": "go/math_conformance_test.go",
+        "sha256": "c1af5a7c1ebe8057948d8e6c84c6dca3d94c10b1dc76fd8867641177587b6183"
+      },
+      {
+        "path": "go/math_kernels_test.go",
+        "sha256": "9d37575d88ee397e89ee98be05a88b2f9382ecc46c980a20670276babb6d509c"
+      },
+      {
+        "path": "go/math_pow.go",
+        "sha256": "07a43032a8bc17d7b1c8ed1abc42f87fd07ddfb33d5aa1fe53aced3a8eb776b0"
+      },
+      {
+        "path": "go/math_pow_refine.go",
+        "sha256": "0decf4b3ac5498c878e81c862dad841c140174f5204630d4eb48e0adeb4bd312"
+      },
+      {
+        "path": "go/math_test.go",
+        "sha256": "da116d9e1eb2350077bffcc7a29ab48416d1c50cb10e7b5bbd1c3bbbff1dcfb3"
+      },
+      {
+        "path": "go/math_transcendental.go",
+        "sha256": "6fbab20a6edff34ac71dd614af40f4ca47fa394cf52d9cf4cba85991ddf2798a"
+      },
+      {
+        "path": "go/math_trig.go",
+        "sha256": "d13187a24cb08c989513bf0b5b1eabf51e65f8d9d0fc85093280dfbbcb87f010"
+      },
+      {
+        "path": "go/normalization.go",
+        "sha256": "1524e4931a632058687dcf1bc906f7e37a68dc6d970ff9b71fda326b1489a406"
+      },
+      {
+        "path": "go/normalization_test.go",
+        "sha256": "b43ab73597d05988b6b3c95bc4995b49b067a66447f62ced47a0518e8937039e"
+      },
+      {
+        "path": "go/parser.go",
+        "sha256": "d70a3ebe5ddc7c756c1a8299b25d4d618cdec70d0302dfc8c22a2708e0768dad"
+      },
+      {
+        "path": "go/parser_test.go",
+        "sha256": "ba390d714fdc81b51f64da95463c062addc297696a24f0b738a400a64ee5c68a"
+      },
+      {
+        "path": "go/performance_test.go",
+        "sha256": "af3e60d5780029256bf8d9a6130779379a7020715981a5bca0dbad3ba9ab3f0f"
+      },
+      {
+        "path": "go/random.go",
+        "sha256": "06a7fb5d2b62d4905dcba2544873605ca8cdecae0b1a246a891e263462860bf9"
+      },
+      {
+        "path": "go/random_fixtures_test.go",
+        "sha256": "cc77e9c4feb3b4be5f8d2c007004c857bab1bf69c7a6d4fc346846717cf61463"
+      },
+      {
+        "path": "go/random_optimization_test.go",
+        "sha256": "449fcaf2ca51208a5c539debdfed85b4da68f8d7c0c5d1524b1038af2991d412"
+      },
+      {
+        "path": "go/random_performance_test.go",
+        "sha256": "6da724ba17fce1d49651643f94bd94dd274647b900770bf388104c2ca17731ac"
+      },
+      {
+        "path": "go/random_test.go",
+        "sha256": "a538ec83e89caf1d4873b60ca49a5ac61f3a69518defef645c8ede54f4a2affd"
+      },
+      {
+        "path": "go/replay.go",
+        "sha256": "7f315138836afc32bb992c7599d2364946bc6357300dbea6477a574110b4c148"
+      },
+      {
+        "path": "go/replay_fixtures_test.go",
+        "sha256": "f9e311208f68f4e3509961723dcf30f4e5118368bbd9251146543110417bac54"
+      },
+      {
+        "path": "go/replay_test.go",
+        "sha256": "3ad2e424a1c582ec76419fde05400580e681186fa0028ad24552322bf2b771bf"
+      },
+      {
+        "path": "go/roll_count.go",
+        "sha256": "07e2b5dc1ff3a685701d99ac65f5810077014a1d6ff38c4ccd93914349d4b75c"
+      },
+      {
+        "path": "go/roll_count_test.go",
+        "sha256": "642f9f712b6f36ca3e1af51fd74b09e277bcb12de95dcee4254fd920bb96cabd"
+      },
+      {
+        "path": "go/scanner.go",
+        "sha256": "c11ebd8f99d055e2a00da6f5f290aed91a461d6475fd47796a06f1a5a1fbd09a"
+      },
+      {
+        "path": "go/scanner_bench_test.go",
+        "sha256": "6383dbcb9e3d7496b6e59f2f6b70c4a58129291597768a33d8a0d4262143d175"
+      },
+      {
+        "path": "go/scanner_length_test.go",
+        "sha256": "3fc618133c9f8f0342760f2721ae420e170dc44e69371cead68c4482a987bdaf"
+      },
+      {
+        "path": "go/scanner_test.go",
+        "sha256": "13b928ab69847a7b0e2abb8cc9b041669f79dce541f4729d98d80acf11d893b9"
+      },
+      {
+        "path": "go/scanner_unicode_test.go",
+        "sha256": "6828d3a00545ceaaccaa97aff626dfe2f0e71d4bdcbc150618049b6d109cdea6"
+      },
+      {
+        "path": "go/seed.go",
+        "sha256": "234b0ea8ad1d6aa9f713a077ee3cd3bedbe5a524a765370e07b813030be1e6ff"
+      },
+      {
+        "path": "go/seed_fixtures_test.go",
+        "sha256": "334261a98a39fd9fdd244793333d334cdc421ea52c82a9ebbaa4b3890fd6367c"
+      },
+      {
+        "path": "go/seed_optimization_test.go",
+        "sha256": "fb260c2f5ab6af417c8433d8723823f3eab3f629d45eb68dd0b4b421d005d791"
+      },
+      {
+        "path": "go/seed_replay_coverage_test.go",
+        "sha256": "a55c17a2e4603d83c461f4756ac6b780c5bc379c985cd24a350eff710036eeb2"
+      },
+      {
+        "path": "go/seed_test.go",
+        "sha256": "b407c2bbf217f3ca1ea9de1d0e756ab13a006fa80a1b3745d7bd5fd0367d2890"
+      },
+      {
+        "path": "go/syntax.go",
+        "sha256": "b8c46647fa19b01a482e907a0d25da525dc637d9d19315e291703156b1c1ec74"
+      },
+      {
+        "path": "go/system_performance_test.go",
+        "sha256": "a0c5398fb27b5584b226cff1ba0fe1ea35111402e1d6f1e774724d3af5ebb352"
+      },
+      {
+        "path": "go/system_unicode.go",
+        "sha256": "6b9b527ab4f5a67938087d361d85a175dfc7f52c425c4905413e9ed3c7529e0e"
+      },
+      {
+        "path": "go/systems.go",
+        "sha256": "3a4438e0f1793c0128a3be8957a5d8c141b9074ce787890905a454ca5e7515b0"
+      },
+      {
+        "path": "go/systems_fixtures_test.go",
+        "sha256": "edb71594d7451c52f959db553b2229ca8bf3e342e82b415ce4116a0dae6176b6"
+      },
+      {
+        "path": "go/systems_mixed.go",
+        "sha256": "152e3b59dd8fa2b1e1722ee26026dce19c79942c2447663ac591126d63fc2033"
+      },
+      {
+        "path": "go/systems_test.go",
+        "sha256": "08d5407a3e859cf27ae5680efe06cdc240515f81d455ddf226bee03c5eb19360"
+      },
+      {
+        "path": "go/types.go",
+        "sha256": "9c357968e1e36d233825a4532189e172195f0658ae944dd06e49495b1f4179f2"
+      },
+      {
+        "path": "scripts/compare-go-round5-micro.mjs",
+        "sha256": "7454adcee7af2c092f56667096b91eca527536b98e81c293477b7a89438448f7"
+      }
+    ]
+  },
+  "runs": [
+    {
+      "round": 0,
+      "variant": "before",
+      "encoder": "std",
+      "args": [
+        "-test.run=^$",
+        "-test.bench=^BenchmarkRollJSON$",
+        "-test.benchtime=100ms",
+        "-test.count=1",
+        "-test.benchmem"
+      ],
+      "wallMs": 1306,
+      "exitCode": 0,
+      "error": null,
+      "stderr": "",
+      "stdoutSha256": "d6221b17b34200aa4a405858fe6031126bd19d5d5589b074f6308ee11cf61870",
+      "cases": [
+        "100d6/details",
+        "100d6/full",
+        "100d6/summary",
+        "d20/details",
+        "d20/full",
+        "d20/summary",
+        "pool/details",
+        "pool/full",
+        "pool/summary"
+      ]
+    },
+    {
+      "round": 0,
+      "variant": "after",
+      "encoder": "direct",
+      "args": [
+        "-test.run=^$",
+        "-test.bench=^BenchmarkRollJSON$",
+        "-test.benchtime=100ms",
+        "-test.count=1",
+        "-test.benchmem"
+      ],
+      "wallMs": 1200,
+      "exitCode": 0,
+      "error": null,
+      "stderr": "",
+      "stdoutSha256": "503149e2b68cb5a1d2851b0184c19b4b44516799ef32a325bc74526297b0df1b",
+      "cases": [
+        "100d6/details",
+        "100d6/full",
+        "100d6/summary",
+        "d20/details",
+        "d20/full",
+        "d20/summary",
+        "pool/details",
+        "pool/full",
+        "pool/summary"
+      ]
+    },
+    {
+      "round": 1,
+      "variant": "after",
+      "encoder": "direct",
+      "args": [
+        "-test.run=^$",
+        "-test.bench=^BenchmarkRollJSON$",
+        "-test.benchtime=100ms",
+        "-test.count=1",
+        "-test.benchmem"
+      ],
+      "wallMs": 1111,
+      "exitCode": 0,
+      "error": null,
+      "stderr": "",
+      "stdoutSha256": "6157fb97f156ad06a167590e02821e77e60dcd491b17ee45a9c503393772350e",
+      "cases": [
+        "100d6/details",
+        "100d6/full",
+        "100d6/summary",
+        "d20/details",
+        "d20/full",
+        "d20/summary",
+        "pool/details",
+        "pool/full",
+        "pool/summary"
+      ]
+    },
+    {
+      "round": 1,
+      "variant": "before",
+      "encoder": "std",
+      "args": [
+        "-test.run=^$",
+        "-test.bench=^BenchmarkRollJSON$",
+        "-test.benchtime=100ms",
+        "-test.count=1",
+        "-test.benchmem"
+      ],
+      "wallMs": 1135,
+      "exitCode": 0,
+      "error": null,
+      "stderr": "",
+      "stdoutSha256": "721b85279944a8c471e55af3149315495c197105a3a61389560da2853dad9f4c",
+      "cases": [
+        "100d6/details",
+        "100d6/full",
+        "100d6/summary",
+        "d20/details",
+        "d20/full",
+        "d20/summary",
+        "pool/details",
+        "pool/full",
+        "pool/summary"
+      ]
+    },
+    {
+      "round": 2,
+      "variant": "before",
+      "encoder": "std",
+      "args": [
+        "-test.run=^$",
+        "-test.bench=^BenchmarkRollJSON$",
+        "-test.benchtime=100ms",
+        "-test.count=1",
+        "-test.benchmem"
+      ],
+      "wallMs": 1153,
+      "exitCode": 0,
+      "error": null,
+      "stderr": "",
+      "stdoutSha256": "e20f6bafb5593a73220570e6d605f8ab17f2311a813ffc98b792aebee02c139e",
+      "cases": [
+        "100d6/details",
+        "100d6/full",
+        "100d6/summary",
+        "d20/details",
+        "d20/full",
+        "d20/summary",
+        "pool/details",
+        "pool/full",
+        "pool/summary"
+      ]
+    },
+    {
+      "round": 2,
+      "variant": "after",
+      "encoder": "direct",
+      "args": [
+        "-test.run=^$",
+        "-test.bench=^BenchmarkRollJSON$",
+        "-test.benchtime=100ms",
+        "-test.count=1",
+        "-test.benchmem"
+      ],
+      "wallMs": 1194,
+      "exitCode": 0,
+      "error": null,
+      "stderr": "",
+      "stdoutSha256": "e5e043303db0827065e721d8b4ef107889c6ee4f8502c118da4487c68c5bb5de",
+      "cases": [
+        "100d6/details",
+        "100d6/full",
+        "100d6/summary",
+        "d20/details",
+        "d20/full",
+        "d20/summary",
+        "pool/details",
+        "pool/full",
+        "pool/summary"
+      ]
+    },
+    {
+      "round": 3,
+      "variant": "after",
+      "encoder": "direct",
+      "args": [
+        "-test.run=^$",
+        "-test.bench=^BenchmarkRollJSON$",
+        "-test.benchtime=100ms",
+        "-test.count=1",
+        "-test.benchmem"
+      ],
+      "wallMs": 1196,
+      "exitCode": 0,
+      "error": null,
+      "stderr": "",
+      "stdoutSha256": "88877ea06e51d7b188417099dfc1bccdb3fdb5d06c343d429af8b38cfc39c966",
+      "cases": [
+        "100d6/details",
+        "100d6/full",
+        "100d6/summary",
+        "d20/details",
+        "d20/full",
+        "d20/summary",
+        "pool/details",
+        "pool/full",
+        "pool/summary"
+      ]
+    },
+    {
+      "round": 3,
+      "variant": "before",
+      "encoder": "std",
+      "args": [
+        "-test.run=^$",
+        "-test.bench=^BenchmarkRollJSON$",
+        "-test.benchtime=100ms",
+        "-test.count=1",
+        "-test.benchmem"
+      ],
+      "wallMs": 1111,
+      "exitCode": 0,
+      "error": null,
+      "stderr": "",
+      "stdoutSha256": "dad4bd9cc6fc83f59ddb5a157f3be874e5b052f6fa5282e6fb402d4b48104955",
+      "cases": [
+        "100d6/details",
+        "100d6/full",
+        "100d6/summary",
+        "d20/details",
+        "d20/full",
+        "d20/summary",
+        "pool/details",
+        "pool/full",
+        "pool/summary"
+      ]
+    },
+    {
+      "round": 4,
+      "variant": "before",
+      "encoder": "std",
+      "args": [
+        "-test.run=^$",
+        "-test.bench=^BenchmarkRollJSON$",
+        "-test.benchtime=100ms",
+        "-test.count=1",
+        "-test.benchmem"
+      ],
+      "wallMs": 1174,
+      "exitCode": 0,
+      "error": null,
+      "stderr": "",
+      "stdoutSha256": "24564684bbd0197e71dce4c5af107d535b56dd39ea1bf366827f010a57640b9f",
+      "cases": [
+        "100d6/details",
+        "100d6/full",
+        "100d6/summary",
+        "d20/details",
+        "d20/full",
+        "d20/summary",
+        "pool/details",
+        "pool/full",
+        "pool/summary"
+      ]
+    },
+    {
+      "round": 4,
+      "variant": "after",
+      "encoder": "direct",
+      "args": [
+        "-test.run=^$",
+        "-test.bench=^BenchmarkRollJSON$",
+        "-test.benchtime=100ms",
+        "-test.count=1",
+        "-test.benchmem"
+      ],
+      "wallMs": 1214,
+      "exitCode": 0,
+      "error": null,
+      "stderr": "",
+      "stdoutSha256": "4e10bc20269fa1a337c43c4e2e454e832463e33b0319b4686e045b4cadcd8949",
+      "cases": [
+        "100d6/details",
+        "100d6/full",
+        "100d6/summary",
+        "d20/details",
+        "d20/full",
+        "d20/summary",
+        "pool/details",
+        "pool/full",
+        "pool/summary"
+      ]
+    },
+    {
+      "round": 5,
+      "variant": "after",
+      "encoder": "direct",
+      "args": [
+        "-test.run=^$",
+        "-test.bench=^BenchmarkRollJSON$",
+        "-test.benchtime=100ms",
+        "-test.count=1",
+        "-test.benchmem"
+      ],
+      "wallMs": 1187,
+      "exitCode": 0,
+      "error": null,
+      "stderr": "",
+      "stdoutSha256": "53ee0a6c15d159c54da6af29b3d0751cbb47f6ba6004b8c975d532c5801274e1",
+      "cases": [
+        "100d6/details",
+        "100d6/full",
+        "100d6/summary",
+        "d20/details",
+        "d20/full",
+        "d20/summary",
+        "pool/details",
+        "pool/full",
+        "pool/summary"
+      ]
+    },
+    {
+      "round": 5,
+      "variant": "before",
+      "encoder": "std",
+      "args": [
+        "-test.run=^$",
+        "-test.bench=^BenchmarkRollJSON$",
+        "-test.benchtime=100ms",
+        "-test.count=1",
+        "-test.benchmem"
+      ],
+      "wallMs": 1101,
+      "exitCode": 0,
+      "error": null,
+      "stderr": "",
+      "stdoutSha256": "e3ec4ab9ffe3081aac4204df9af8e0c94862a2955d21ae1c751e87d49b28fe62",
+      "cases": [
+        "100d6/details",
+        "100d6/full",
+        "100d6/summary",
+        "d20/details",
+        "d20/full",
+        "d20/summary",
+        "pool/details",
+        "pool/full",
+        "pool/summary"
+      ]
+    },
+    {
+      "round": 6,
+      "variant": "before",
+      "encoder": "std",
+      "args": [
+        "-test.run=^$",
+        "-test.bench=^BenchmarkRollJSON$",
+        "-test.benchtime=100ms",
+        "-test.count=1",
+        "-test.benchmem"
+      ],
+      "wallMs": 1118,
+      "exitCode": 0,
+      "error": null,
+      "stderr": "",
+      "stdoutSha256": "b7b191155a8fa17a113d48fdc967986e1dae73547095a996d3a5bc0e744f6640",
+      "cases": [
+        "100d6/details",
+        "100d6/full",
+        "100d6/summary",
+        "d20/details",
+        "d20/full",
+        "d20/summary",
+        "pool/details",
+        "pool/full",
+        "pool/summary"
+      ]
+    },
+    {
+      "round": 6,
+      "variant": "after",
+      "encoder": "direct",
+      "args": [
+        "-test.run=^$",
+        "-test.bench=^BenchmarkRollJSON$",
+        "-test.benchtime=100ms",
+        "-test.count=1",
+        "-test.benchmem"
+      ],
+      "wallMs": 1260,
+      "exitCode": 0,
+      "error": null,
+      "stderr": "",
+      "stdoutSha256": "a2271b9bea432c0443aa474507b04e91e57fac320876c323c132f4d6121ddfa5",
+      "cases": [
+        "100d6/details",
+        "100d6/full",
+        "100d6/summary",
+        "d20/details",
+        "d20/full",
+        "d20/summary",
+        "pool/details",
+        "pool/full",
+        "pool/summary"
+      ]
+    },
+    {
+      "round": 7,
+      "variant": "after",
+      "encoder": "direct",
+      "args": [
+        "-test.run=^$",
+        "-test.bench=^BenchmarkRollJSON$",
+        "-test.benchtime=100ms",
+        "-test.count=1",
+        "-test.benchmem"
+      ],
+      "wallMs": 1139,
+      "exitCode": 0,
+      "error": null,
+      "stderr": "",
+      "stdoutSha256": "59cece2f7497a7c2be9ce1841d262e9f42721d441d1812b8db66c738d9e19a65",
+      "cases": [
+        "100d6/details",
+        "100d6/full",
+        "100d6/summary",
+        "d20/details",
+        "d20/full",
+        "d20/summary",
+        "pool/details",
+        "pool/full",
+        "pool/summary"
+      ]
+    },
+    {
+      "round": 7,
+      "variant": "before",
+      "encoder": "std",
+      "args": [
+        "-test.run=^$",
+        "-test.bench=^BenchmarkRollJSON$",
+        "-test.benchtime=100ms",
+        "-test.count=1",
+        "-test.benchmem"
+      ],
+      "wallMs": 1115,
+      "exitCode": 0,
+      "error": null,
+      "stderr": "",
+      "stdoutSha256": "b5fc41270926ef9fdff39254238623aeea971d5e1ac0173eff7653007003f6c8",
+      "cases": [
+        "100d6/details",
+        "100d6/full",
+        "100d6/summary",
+        "d20/details",
+        "d20/full",
+        "d20/summary",
+        "pool/details",
+        "pool/full",
+        "pool/summary"
+      ]
+    },
+    {
+      "round": 8,
+      "variant": "before",
+      "encoder": "std",
+      "args": [
+        "-test.run=^$",
+        "-test.bench=^BenchmarkRollJSON$",
+        "-test.benchtime=100ms",
+        "-test.count=1",
+        "-test.benchmem"
+      ],
+      "wallMs": 1146,
+      "exitCode": 0,
+      "error": null,
+      "stderr": "",
+      "stdoutSha256": "9c0f927ff370b0f2c4683fb185d8b266e8e48d62b28ac5d38fb984412a74e6cb",
+      "cases": [
+        "100d6/details",
+        "100d6/full",
+        "100d6/summary",
+        "d20/details",
+        "d20/full",
+        "d20/summary",
+        "pool/details",
+        "pool/full",
+        "pool/summary"
+      ]
+    },
+    {
+      "round": 8,
+      "variant": "after",
+      "encoder": "direct",
+      "args": [
+        "-test.run=^$",
+        "-test.bench=^BenchmarkRollJSON$",
+        "-test.benchtime=100ms",
+        "-test.count=1",
+        "-test.benchmem"
+      ],
+      "wallMs": 1198,
+      "exitCode": 0,
+      "error": null,
+      "stderr": "",
+      "stdoutSha256": "dfb0d3e6f0198e32ff4324de595f45f681cbc5e1f9562815d4b3d8b1675db919",
+      "cases": [
+        "100d6/details",
+        "100d6/full",
+        "100d6/summary",
+        "d20/details",
+        "d20/full",
+        "d20/summary",
+        "pool/details",
+        "pool/full",
+        "pool/summary"
+      ]
+    },
+    {
+      "round": 9,
+      "variant": "after",
+      "encoder": "direct",
+      "args": [
+        "-test.run=^$",
+        "-test.bench=^BenchmarkRollJSON$",
+        "-test.benchtime=100ms",
+        "-test.count=1",
+        "-test.benchmem"
+      ],
+      "wallMs": 1149,
+      "exitCode": 0,
+      "error": null,
+      "stderr": "",
+      "stdoutSha256": "090efd9ca67ee00ea9337565c5a697a60406643ffcd496497de3ed4f63460c2e",
+      "cases": [
+        "100d6/details",
+        "100d6/full",
+        "100d6/summary",
+        "d20/details",
+        "d20/full",
+        "d20/summary",
+        "pool/details",
+        "pool/full",
+        "pool/summary"
+      ]
+    },
+    {
+      "round": 9,
+      "variant": "before",
+      "encoder": "std",
+      "args": [
+        "-test.run=^$",
+        "-test.bench=^BenchmarkRollJSON$",
+        "-test.benchtime=100ms",
+        "-test.count=1",
+        "-test.benchmem"
+      ],
+      "wallMs": 1101,
+      "exitCode": 0,
+      "error": null,
+      "stderr": "",
+      "stdoutSha256": "04a02f16af7dc7e17f77d5687934efe30f86d9b274314d5f364051416cd7ec9c",
+      "cases": [
+        "100d6/details",
+        "100d6/full",
+        "100d6/summary",
+        "d20/details",
+        "d20/full",
+        "d20/summary",
+        "pool/details",
+        "pool/full",
+        "pool/summary"
+      ]
+    }
+  ],
+  "methodology": {
+    "operation": "encoding-only",
+    "benchtime": "100ms",
+    "samplesPerCasePerEncoder": 10,
+    "ownedBytes": true,
+    "preparedResultSeed": "event-json-throughput",
+    "preparedResultAlgorithm": "mt19937",
+    "workloadOrder": [
+      "d20",
+      "100d6",
+      "pool"
+    ],
+    "modeOrder": [
+      "summary",
+      "details",
+      "full"
+    ],
+    "note": "Each fresh process uses the same binary and benchmark function; only DICECORE_JSON_ENCODER changes. Rolling and stdlib byte equality run before b.Loop."
+  },
+  "wallMs": 23719,
+  "finishedAt": "2026-09-14T04:25:00.720Z",
+  "outputs": {
+    "before": {
+      "file": "D:\\Projetos\\ERPG\\rpg-dice-roller\\go\\benchmarks\\optimization-round5\\v1-encoder-before.txt",
+      "sha256": "39e10802d3ee2b372a640218ff5295ee812654d6a164ee83976460c8492cfa01"
+    },
+    "after": {
+      "file": "D:\\Projetos\\ERPG\\rpg-dice-roller\\go\\benchmarks\\optimization-round5\\v1-encoder-after.txt",
+      "sha256": "de7cb8203970aeec6bba771f2f61c9f64e7a5a3d910c743a3b5f0281eabf8208"
+    }
+  }
+}

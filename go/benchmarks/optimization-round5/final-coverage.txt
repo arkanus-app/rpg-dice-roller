@@ -1,0 +1,1 @@
+4802/4802 Go statements covered in go/benchmarks/optimization-round5/final-coverage.out (100%).

@@ -1,0 +1,29 @@
+File: baseline.exe
+Build ID: D:\Projetos\ERPG\rpg-dice-roller\.artifacts\optimization-round5\baseline.exe2026-09-14 01:15:03.2158638 -0300 -03
+Type: cpu
+Time: 2026-09-14 01:15:03 -03
+Duration: 2.83s, Total samples = 2.77s (97.76%)
+Showing nodes accounting for 2.29s, 82.67% of 2.77s total
+Dropped 79 nodes (cum <= 0.01s)
+Showing top 20 nodes out of 88
+      flat  flat%   sum%        cum   cum%
+     0.97s 35.02% 35.02%      1.71s 61.73%  encoding/json.appendCompact
+     0.26s  9.39% 44.40%      0.32s 11.55%  encoding/json.stateInString
+     0.18s  6.50% 50.90%      0.24s  8.66%  encoding/json.stateEndValue
+     0.10s  3.61% 54.51%      0.12s  4.33%  bytes.(*Buffer).Write
+     0.10s  3.61% 58.12%      2.59s 93.50%  encoding/json.structEncoder.encode
+     0.10s  3.61% 61.73%      0.10s  3.61%  runtime.memmove
+     0.06s  2.17% 63.90%      0.06s  2.17%  encoding/json.appendString[go.shape.string]
+     0.06s  2.17% 66.06%      0.12s  4.33%  internal/strconv.genericFtoa
+     0.06s  2.17% 68.23%      0.08s  2.89%  reflect.Value.Field
+     0.06s  2.17% 70.40%      0.14s  5.05%  runtime.wbBufFlush1
+     0.04s  1.44% 71.84%      0.05s  1.81%  bytes.(*Buffer).WriteString
+     0.04s  1.44% 73.29%      0.09s  3.25%  encoding/json.stateBeginValue
+     0.04s  1.44% 74.73%      0.18s  6.50%  gcWriteBarrier
+     0.04s  1.44% 76.17%      0.04s  1.44%  runtime.step
+     0.04s  1.44% 77.62%      0.06s  2.17%  runtime.tryDeferToSpanScan
+     0.03s  1.08% 78.70%      0.03s  1.08%  bytes.(*Buffer).tryGrowByReslice (inline)
+     0.03s  1.08% 79.78%      0.07s  2.53%  encoding/json.intEncoder
+     0.03s  1.08% 80.87%      0.04s  1.44%  github.com/arkanus-app/rpg-dice-roller/go.(*eventJSON).number
+     0.03s  1.08% 81.95%      0.18s  6.50%  github.com/arkanus-app/rpg-dice-roller/go.ResolvedEvents.MarshalJSON
+     0.02s  0.72% 82.67%      0.03s  1.08%  encoding/json.stateBeginString

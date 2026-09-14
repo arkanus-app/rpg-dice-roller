@@ -1,0 +1,29 @@
+File: capacity.exe
+Build ID: D:\Projetos\ERPG\rpg-dice-roller\.artifacts\optimization-round5\capacity.exe2026-09-14 01:26:04.8674652 -0300 -03
+Type: cpu
+Time: 2026-09-14 01:27:08 -03
+Duration: 2.70s, Total samples = 2.64s (97.73%)
+Showing nodes accounting for 2.27s, 85.98% of 2.64s total
+Dropped 51 nodes (cum <= 0.01s)
+Showing top 20 nodes out of 66
+      flat  flat%   sum%        cum   cum%
+     0.54s 20.45% 20.45%      0.60s 22.73%  github.com/arkanus-app/rpg-dice-roller/go.appendEventString
+     0.27s 10.23% 30.68%      0.55s 20.83%  github.com/arkanus-app/rpg-dice-roller/go.(*eventJSON).key (inline)
+     0.18s  6.82% 37.50%      0.48s 18.18%  github.com/arkanus-app/rpg-dice-roller/go.(*eventJSON).number
+     0.18s  6.82% 44.32%      0.18s  6.82%  runtime.memmove
+     0.14s  5.30% 49.62%      0.80s 30.30%  github.com/arkanus-app/rpg-dice-roller/go.(*eventJSON).events
+     0.14s  5.30% 54.92%      0.18s  6.82%  runtime.findObject
+     0.11s  4.17% 59.09%      0.19s  7.20%  runtime.tryDeferToSpanScan
+     0.10s  3.79% 62.88%      0.18s  6.82%  internal/strconv.AppendUint
+     0.09s  3.41% 66.29%      0.45s 17.05%  gcWriteBarrier
+     0.09s  3.41% 69.70%      0.09s  3.41%  runtime.memclrNoHeapPointers
+     0.08s  3.03% 72.73%      0.10s  3.79%  runtime.scanblock
+     0.07s  2.65% 75.38%      0.08s  3.03%  runtime.heapArenaOf (inline)
+     0.06s  2.27% 77.65%      0.60s 22.73%  github.com/arkanus-app/rpg-dice-roller/go.(*ResolvedEvent).appendDieValueJSON
+     0.05s  1.89% 79.55%      0.36s 13.64%  runtime.wbBufFlush1
+     0.03s  1.14% 80.68%      1.17s 44.32%  github.com/arkanus-app/rpg-dice-roller/go.(*eventJSON).dice
+     0.03s  1.14% 81.82%      0.14s  5.30%  github.com/arkanus-app/rpg-dice-roller/go.(*eventJSON).strings
+     0.03s  1.14% 82.95%      0.21s  7.95%  internal/strconv.AppendInt
+     0.03s  1.14% 84.09%      0.03s  1.14%  runtime.spanOf (inline)
+     0.03s  1.14% 85.23%      0.03s  1.14%  runtime.typePointers.nextFast
+     0.02s  0.76% 85.98%      0.28s 10.61%  github.com/arkanus-app/rpg-dice-roller/go.(*eventJSON).integer
