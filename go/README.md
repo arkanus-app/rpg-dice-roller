@@ -124,7 +124,13 @@ resumos compactos e menos alocações. Consulte o [confronto atualizado de backe
 o [teste com serialização JSON](JSON_BENCHMARK.md) e o [experimento de GC atualizado](GC_ROUND2_TUNING.md).
 Os resultados anteriores permanecem disponíveis para comparação.
 
-Na confirmação com seis workers e uma engine por worker, `GOGC=500` e `GOMEMLIMIT=96MiB` deram maior
+A [terceira rodada, guiada por skills e perfis](OPTIMIZATION_ROUND3.md) reduz as
+alocações nas nove cargas nativas. Em `100d6` completo, são 55→34 alocações e
+10,60% menos bytes por chamada, preservando o contrato e a cobertura de 100%.
+O [comparativo JSON da rodada 3](JSON_ROUND3_BENCHMARK.md) inclui a versão
+anterior e a atual medidas na mesma sessão.
+
+Na confirmação da segunda rodada com seis workers e uma engine por worker, `GOGC=500` e `GOMEMLIMIT=96MiB` deram maior
 vazão que Node e Bun nas nove cargas da API nativa sem JSON, com RSS amostrado até 78,44 MiB.
 Essas variáveis configuram o processo Go inteiro; a biblioteca não as altera.
 O orçamento de memória de um futuro backend deve considerar também os demais

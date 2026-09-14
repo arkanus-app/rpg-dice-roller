@@ -156,7 +156,7 @@ func (engine *Engine) resolveLimits(overrides DiceLimitOverrides) (DiceLimits, e
 }
 
 func (engine *Engine) compileResolved(input string, limits DiceLimits) (*RollPlan, error) {
-	length := int64(len(syntaxUnits(input)))
+	length := int64(syntaxLength(input))
 	if length > limits.MaxInputLength {
 		return nil, newDiceError("INPUT_TOO_LONG", "Dice input exceeds the configured length limit", input,
 			map[string]any{"actual": length, "limit": limits.MaxInputLength})

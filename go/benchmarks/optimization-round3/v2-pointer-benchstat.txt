@@ -1,0 +1,26 @@
+goos: windows
+goarch: amd64
+pkg: github.com/arkanus-app/rpg-dice-roller/go
+cpu: AMD Ryzen 5 5500
+                                  │    before    │                after                │
+                                  │    sec/op    │    sec/op     vs base               │
+ResolvedEventsJSON/1d20+5           20.85µ ± 19%   18.77µ ± 22%       ~ (p=0.315 n=10)
+ResolvedEventsJSON/100d6            544.8µ ± 11%   515.5µ ± 23%       ~ (p=0.739 n=10)
+ResolvedEventsJSON/20d6!2ro=1kh10   180.6µ ± 11%   183.3µ ± 16%       ~ (p=1.000 n=10)
+geomean                             127.1µ         121.0µ        -4.75%
+
+                                  │    before    │                 after                 │
+                                  │     B/op     │     B/op      vs base                 │
+ResolvedEventsJSON/1d20+5           3.625Ki ± 0%   3.625Ki ± 0%       ~ (p=1.000 n=10) ¹
+ResolvedEventsJSON/100d6            96.01Ki ± 0%   96.01Ki ± 0%       ~ (p=0.473 n=10)
+ResolvedEventsJSON/20d6!2ro=1kh10   31.25Ki ± 0%   31.25Ki ± 0%       ~ (p=0.474 n=10)
+geomean                             22.16Ki        22.16Ki       -0.00%
+¹ all samples are equal
+
+                                  │   before   │                after                │
+                                  │ allocs/op  │ allocs/op   vs base                 │
+ResolvedEventsJSON/1d20+5           2.000 ± 0%   2.000 ± 0%       ~ (p=1.000 n=10) ¹
+ResolvedEventsJSON/100d6            2.000 ± 0%   2.000 ± 0%       ~ (p=1.000 n=10) ¹
+ResolvedEventsJSON/20d6!2ro=1kh10   2.000 ± 0%   2.000 ± 0%       ~ (p=1.000 n=10) ¹
+geomean                             2.000        2.000       +0.00%
+¹ all samples are equal

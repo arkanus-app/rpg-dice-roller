@@ -1,0 +1,350 @@
+{
+  "status": "complete",
+  "label": "v3-utf16",
+  "startedAt": "2026-09-14T03:10:08.457Z",
+  "budgetMs": 90000,
+  "rounds": 10,
+  "order": [
+    [
+      "before",
+      "after"
+    ],
+    [
+      "after",
+      "before"
+    ],
+    [
+      "before",
+      "after"
+    ],
+    [
+      "after",
+      "before"
+    ],
+    [
+      "before",
+      "after"
+    ],
+    [
+      "after",
+      "before"
+    ],
+    [
+      "before",
+      "after"
+    ],
+    [
+      "after",
+      "before"
+    ],
+    [
+      "before",
+      "after"
+    ],
+    [
+      "after",
+      "before"
+    ]
+  ],
+  "filter": "^BenchmarkBackendOperation$/(1d20.5|100d6|20d6.2ro=1kh10)$/(full|details|summary)$/changing=true$",
+  "cpu": "AMD Ryzen 5 5500",
+  "os": "Windows 11 Pro",
+  "env": {
+    "GOMAXPROCS": "1",
+    "GOGC": "100",
+    "GOMEMLIMIT": "off"
+  },
+  "binaries": {
+    "before": {
+      "file": "D:\\Projetos\\ERPG\\rpg-dice-roller\\.artifacts\\optimization-round3\\baseline.exe",
+      "sha256": "e6fe7c1f75bc271d1ee6056792f5d81a08e4e8de696259d97800893f334c45ac"
+    },
+    "after": {
+      "file": "D:\\Projetos\\ERPG\\rpg-dice-roller\\.artifacts\\optimization-round3\\v3-utf16.exe",
+      "sha256": "afa9a706b6b54c95274d37bc6c21f36ed5578a681157552b53798a9b807ba4dc"
+    }
+  },
+  "runs": [
+    {
+      "round": 0,
+      "variant": "before",
+      "args": [
+        "-test.run=^$",
+        "-test.bench=^BenchmarkBackendOperation$/(1d20.5|100d6|20d6.2ro=1kh10)$/(full|details|summary)$/changing=true$",
+        "-test.benchtime=100ms",
+        "-test.count=1",
+        "-test.benchmem"
+      ],
+      "wallMs": 1541,
+      "exitCode": 0,
+      "error": null
+    },
+    {
+      "round": 0,
+      "variant": "after",
+      "args": [
+        "-test.run=^$",
+        "-test.bench=^BenchmarkBackendOperation$/(1d20.5|100d6|20d6.2ro=1kh10)$/(full|details|summary)$/changing=true$",
+        "-test.benchtime=100ms",
+        "-test.count=1",
+        "-test.benchmem"
+      ],
+      "wallMs": 1848,
+      "exitCode": 0,
+      "error": null
+    },
+    {
+      "round": 1,
+      "variant": "after",
+      "args": [
+        "-test.run=^$",
+        "-test.bench=^BenchmarkBackendOperation$/(1d20.5|100d6|20d6.2ro=1kh10)$/(full|details|summary)$/changing=true$",
+        "-test.benchtime=100ms",
+        "-test.count=1",
+        "-test.benchmem"
+      ],
+      "wallMs": 1698,
+      "exitCode": 0,
+      "error": null
+    },
+    {
+      "round": 1,
+      "variant": "before",
+      "args": [
+        "-test.run=^$",
+        "-test.bench=^BenchmarkBackendOperation$/(1d20.5|100d6|20d6.2ro=1kh10)$/(full|details|summary)$/changing=true$",
+        "-test.benchtime=100ms",
+        "-test.count=1",
+        "-test.benchmem"
+      ],
+      "wallMs": 1507,
+      "exitCode": 0,
+      "error": null
+    },
+    {
+      "round": 2,
+      "variant": "before",
+      "args": [
+        "-test.run=^$",
+        "-test.bench=^BenchmarkBackendOperation$/(1d20.5|100d6|20d6.2ro=1kh10)$/(full|details|summary)$/changing=true$",
+        "-test.benchtime=100ms",
+        "-test.count=1",
+        "-test.benchmem"
+      ],
+      "wallMs": 1862,
+      "exitCode": 0,
+      "error": null
+    },
+    {
+      "round": 2,
+      "variant": "after",
+      "args": [
+        "-test.run=^$",
+        "-test.bench=^BenchmarkBackendOperation$/(1d20.5|100d6|20d6.2ro=1kh10)$/(full|details|summary)$/changing=true$",
+        "-test.benchtime=100ms",
+        "-test.count=1",
+        "-test.benchmem"
+      ],
+      "wallMs": 1706,
+      "exitCode": 0,
+      "error": null
+    },
+    {
+      "round": 3,
+      "variant": "after",
+      "args": [
+        "-test.run=^$",
+        "-test.bench=^BenchmarkBackendOperation$/(1d20.5|100d6|20d6.2ro=1kh10)$/(full|details|summary)$/changing=true$",
+        "-test.benchtime=100ms",
+        "-test.count=1",
+        "-test.benchmem"
+      ],
+      "wallMs": 1631,
+      "exitCode": 0,
+      "error": null
+    },
+    {
+      "round": 3,
+      "variant": "before",
+      "args": [
+        "-test.run=^$",
+        "-test.bench=^BenchmarkBackendOperation$/(1d20.5|100d6|20d6.2ro=1kh10)$/(full|details|summary)$/changing=true$",
+        "-test.benchtime=100ms",
+        "-test.count=1",
+        "-test.benchmem"
+      ],
+      "wallMs": 1504,
+      "exitCode": 0,
+      "error": null
+    },
+    {
+      "round": 4,
+      "variant": "before",
+      "args": [
+        "-test.run=^$",
+        "-test.bench=^BenchmarkBackendOperation$/(1d20.5|100d6|20d6.2ro=1kh10)$/(full|details|summary)$/changing=true$",
+        "-test.benchtime=100ms",
+        "-test.count=1",
+        "-test.benchmem"
+      ],
+      "wallMs": 1476,
+      "exitCode": 0,
+      "error": null
+    },
+    {
+      "round": 4,
+      "variant": "after",
+      "args": [
+        "-test.run=^$",
+        "-test.bench=^BenchmarkBackendOperation$/(1d20.5|100d6|20d6.2ro=1kh10)$/(full|details|summary)$/changing=true$",
+        "-test.benchtime=100ms",
+        "-test.count=1",
+        "-test.benchmem"
+      ],
+      "wallMs": 1569,
+      "exitCode": 0,
+      "error": null
+    },
+    {
+      "round": 5,
+      "variant": "after",
+      "args": [
+        "-test.run=^$",
+        "-test.bench=^BenchmarkBackendOperation$/(1d20.5|100d6|20d6.2ro=1kh10)$/(full|details|summary)$/changing=true$",
+        "-test.benchtime=100ms",
+        "-test.count=1",
+        "-test.benchmem"
+      ],
+      "wallMs": 1355,
+      "exitCode": 0,
+      "error": null
+    },
+    {
+      "round": 5,
+      "variant": "before",
+      "args": [
+        "-test.run=^$",
+        "-test.bench=^BenchmarkBackendOperation$/(1d20.5|100d6|20d6.2ro=1kh10)$/(full|details|summary)$/changing=true$",
+        "-test.benchtime=100ms",
+        "-test.count=1",
+        "-test.benchmem"
+      ],
+      "wallMs": 1488,
+      "exitCode": 0,
+      "error": null
+    },
+    {
+      "round": 6,
+      "variant": "before",
+      "args": [
+        "-test.run=^$",
+        "-test.bench=^BenchmarkBackendOperation$/(1d20.5|100d6|20d6.2ro=1kh10)$/(full|details|summary)$/changing=true$",
+        "-test.benchtime=100ms",
+        "-test.count=1",
+        "-test.benchmem"
+      ],
+      "wallMs": 1715,
+      "exitCode": 0,
+      "error": null
+    },
+    {
+      "round": 6,
+      "variant": "after",
+      "args": [
+        "-test.run=^$",
+        "-test.bench=^BenchmarkBackendOperation$/(1d20.5|100d6|20d6.2ro=1kh10)$/(full|details|summary)$/changing=true$",
+        "-test.benchtime=100ms",
+        "-test.count=1",
+        "-test.benchmem"
+      ],
+      "wallMs": 1579,
+      "exitCode": 0,
+      "error": null
+    },
+    {
+      "round": 7,
+      "variant": "after",
+      "args": [
+        "-test.run=^$",
+        "-test.bench=^BenchmarkBackendOperation$/(1d20.5|100d6|20d6.2ro=1kh10)$/(full|details|summary)$/changing=true$",
+        "-test.benchtime=100ms",
+        "-test.count=1",
+        "-test.benchmem"
+      ],
+      "wallMs": 1571,
+      "exitCode": 0,
+      "error": null
+    },
+    {
+      "round": 7,
+      "variant": "before",
+      "args": [
+        "-test.run=^$",
+        "-test.bench=^BenchmarkBackendOperation$/(1d20.5|100d6|20d6.2ro=1kh10)$/(full|details|summary)$/changing=true$",
+        "-test.benchtime=100ms",
+        "-test.count=1",
+        "-test.benchmem"
+      ],
+      "wallMs": 1596,
+      "exitCode": 0,
+      "error": null
+    },
+    {
+      "round": 8,
+      "variant": "before",
+      "args": [
+        "-test.run=^$",
+        "-test.bench=^BenchmarkBackendOperation$/(1d20.5|100d6|20d6.2ro=1kh10)$/(full|details|summary)$/changing=true$",
+        "-test.benchtime=100ms",
+        "-test.count=1",
+        "-test.benchmem"
+      ],
+      "wallMs": 1613,
+      "exitCode": 0,
+      "error": null
+    },
+    {
+      "round": 8,
+      "variant": "after",
+      "args": [
+        "-test.run=^$",
+        "-test.bench=^BenchmarkBackendOperation$/(1d20.5|100d6|20d6.2ro=1kh10)$/(full|details|summary)$/changing=true$",
+        "-test.benchtime=100ms",
+        "-test.count=1",
+        "-test.benchmem"
+      ],
+      "wallMs": 1559,
+      "exitCode": 0,
+      "error": null
+    },
+    {
+      "round": 9,
+      "variant": "after",
+      "args": [
+        "-test.run=^$",
+        "-test.bench=^BenchmarkBackendOperation$/(1d20.5|100d6|20d6.2ro=1kh10)$/(full|details|summary)$/changing=true$",
+        "-test.benchtime=100ms",
+        "-test.count=1",
+        "-test.benchmem"
+      ],
+      "wallMs": 1595,
+      "exitCode": 0,
+      "error": null
+    },
+    {
+      "round": 9,
+      "variant": "before",
+      "args": [
+        "-test.run=^$",
+        "-test.bench=^BenchmarkBackendOperation$/(1d20.5|100d6|20d6.2ro=1kh10)$/(full|details|summary)$/changing=true$",
+        "-test.benchtime=100ms",
+        "-test.count=1",
+        "-test.benchmem"
+      ],
+      "wallMs": 1594,
+      "exitCode": 0,
+      "error": null
+    }
+  ],
+  "wallMs": 32052
+}

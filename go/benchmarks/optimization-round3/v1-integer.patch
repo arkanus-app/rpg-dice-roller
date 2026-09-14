@@ -1,0 +1,21 @@
+diff --git a/go/event.go b/go/event.go
+index a7bf85c..66694ad 100644
+--- a/go/event.go
++++ b/go/event.go
+@@ -190,6 +190,16 @@ func (output *eventJSON) number(key string, value float64) {
+ 		return
+ 	}
+ 	output.key(key)
++	// Dice values and contributions are usually small integers. Avoid the
++	// general float formatter for exact integers; retain its handling of -0,
++	// fractions, exponent notation and values outside the safe integer range.
++	if value >= -9007199254740991 && value <= 9007199254740991 && (value != 0 || !math.Signbit(value)) {
++		integer := int64(value)
++		if float64(integer) == value {
++			output.data = strconv.AppendInt(output.data, integer, 10)
++			return
++		}
++	}
+ 	format := byte('f')
+ 	absolute := math.Abs(value)
+ 	if absolute != 0 && (absolute < 1e-6 || absolute >= 1e21) {

@@ -56,7 +56,7 @@ os testes matemáticos comparam os bits IEEE 754 do resultado normalizado.
 
 ## Evidências e reprodução
 
-A suíte Go passou com **4.531 de 4.531 statements cobertos (100%)**, com o perfil de todos os
+A suíte Go passou com **4.551 de 4.551 statements cobertos (100%)**, com o perfil de todos os
 pacotes. A cobertura mede a execução do código; as comparações com TypeScript
 verificam seu comportamento de forma independente. Nenhum arquivo de produção é
 removido da medição. Go não oferece nativamente as quatro métricas de cobertura

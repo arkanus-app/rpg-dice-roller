@@ -1,0 +1,68 @@
+diff --git a/go/engine.go b/go/engine.go
+index 8b978b8..7ae2707 100644
+--- a/go/engine.go
++++ b/go/engine.go
+@@ -156,7 +156,7 @@ func (engine *Engine) resolveLimits(overrides DiceLimitOverrides) (DiceLimits, e
+ }
+ 
+ func (engine *Engine) compileResolved(input string, limits DiceLimits) (*RollPlan, error) {
+-	length := int64(len(syntaxUnits(input)))
++	length := int64(syntaxLength(input))
+ 	if length > limits.MaxInputLength {
+ 		return nil, newDiceError("INPUT_TOO_LONG", "Dice input exceeds the configured length limit", input,
+ 			map[string]any{"actual": length, "limit": limits.MaxInputLength})
+diff --git a/go/executor.go b/go/executor.go
+index cc605db..3cf9533 100644
+--- a/go/executor.go
++++ b/go/executor.go
+@@ -753,13 +753,13 @@ func executorNumberString(value float64) string {
+ }
+ func formatExecutionOutput(outputs []string, total float64, context *ExecutionContext) string {
+ 	if len(outputs) == 1 {
+-		executorCheck(context.Budget.AssertOutputLength(int64(len(syntaxUnits(outputs[0])))))
++		executorCheck(context.Budget.AssertOutputLength(int64(syntaxLength(outputs[0]))))
+ 		return outputs[0]
+ 	}
+ 	line := "Total: " + executorNumberString(total)
+-	length := len(syntaxUnits(line))
++	length := syntaxLength(line)
+ 	for i, output := range outputs {
+-		length += len(strconv.Itoa(i+1)) + 2 + len(syntaxUnits(output)) + 1
++		length += len(strconv.Itoa(i+1)) + 2 + syntaxLength(output) + 1
+ 	}
+ 	executorCheck(context.Budget.AssertOutputLength(int64(length)))
+ 	lines := make([]string, 0, len(outputs)+1)
+@@ -821,7 +821,7 @@ func executeGeneralPlan(plan *RollPlan, program *CompiledDiceProgram, options Ex
+ 				groups = append(groups, resolvedGroups...)
+ 			}
+ 			rollOutput := plan.Notation + ": " + evaluation.rendered + " = " + executorNumberString(total)
+-			executorCheck(context.Budget.AssertOutputLength(int64(len(syntaxUnits(rollOutput)))))
++			executorCheck(context.Budget.AssertOutputLength(int64(syntaxLength(rollOutput))))
+ 			outputs = append(outputs, rollOutput)
+ 			rolls = append(rolls, ResolvedRoll{Index: rollIndex, Total: total, Pool: pool, DiceRange: EntityRange{Start: diceStart, Count: int64(len(resolvedDice))}, GroupRange: EntityRange{Start: groupStart, Count: int64(len(resolvedGroups))}, EventRange: EntityRange{Start: eventStart, Count: context.Journal.Length() - eventStart}})
+ 		}
+diff --git a/go/scanner.go b/go/scanner.go
+index 0650d61..ecf3d54 100644
+--- a/go/scanner.go
++++ b/go/scanner.go
+@@ -21,6 +21,20 @@ var syntaxPunctuationKinds = map[uint16]string{
+ func syntaxUnits(input string) []uint16  { return utf16.Encode([]rune(input)) }
+ func syntaxString(input []uint16) string { return string(utf16.Decode(input)) }
+ 
++// syntaxLength counts the UTF-16 units used by the public length limits without
++// allocating the scanner's unit slice. Range replaces invalid UTF-8 in the same
++// way as []rune; supplementary code points require a surrogate pair.
++func syntaxLength(input string) int {
++	length := 0
++	for _, character := range input {
++		length++
++		if character > 0xffff {
++			length++
++		}
++	}
++	return length
++}
++
+ // A diagnostic may point at just the first UTF-16 unit of an astral character.
+ // Encoding that unit as a Go string would replace it and change the JSON error.
+ type utf16DiagnosticUnit uint16

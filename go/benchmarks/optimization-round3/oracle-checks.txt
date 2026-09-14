@@ -1,0 +1,20 @@
+Verified normalization.json (72 cases)
+Verified parser.json (148 cases)
+Verified math.json (135 cases)
+Verified math-transcendental.json (8 cases)
+Verified rng.json (52 cases)
+Verified seeds.json (33 cases)
+Verified replay.json (24 cases)
+Verified limits.json (19 cases)
+Verified budget.json (12 cases)
+Verified compatibility-corpus.json (31 cases)
+Verified full-roll-replay.json (5 cases)
+Verified 539 deterministic fixture cases.
+Verified compiler.json (468 cases)
+Verified executor.json (238 cases, three projections each)
+Engine oracle: 24 scenarios, 91 operations.
+Verified systems-rolls: 388 cases
+Verified systems-contracts: 115 cases
+Verified systems-selection: 10 cases
+Verified systems-names: 501 cases
+Verified 12680 exact math cases (2002 unary inputs).

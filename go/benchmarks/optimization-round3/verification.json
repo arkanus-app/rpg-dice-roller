@@ -1,0 +1,64 @@
+{
+  "verifiedAt": "2026-09-14T03:38:40.744Z",
+  "sourceFiles": 146,
+  "sourceManifest": "dc6415b0ab8d643d5ffb27ee7d3e1482bc280f8a8b22e6b69e7bef4521bd329a",
+  "sourceStableAfterFinalValidation": true,
+  "coverage": {
+    "covered": "4551",
+    "total": "4551",
+    "profileSha256": "3ade3778fa3df9bde43309213178753d070b33b4a47791afb3b1642daeb93917"
+  },
+  "preflightArchiveVerified": true,
+  "chartRecordsChecked": 14,
+  "decisions": [
+    {
+      "label": "v1-integer",
+      "decision": "accepted: faster exact integer formatter; full JSON timing inconclusive",
+      "wallMs": 24302,
+      "budgetMs": 90000
+    },
+    {
+      "label": "v2-pointer",
+      "decision": "rejected: no demonstrated benefit",
+      "wallMs": 13341,
+      "budgetMs": 90000
+    },
+    {
+      "label": "v3-utf16",
+      "decision": "accepted: fewer temporary allocations",
+      "wallMs": 32052,
+      "budgetMs": 90000
+    },
+    {
+      "label": "v4-pointers",
+      "decision": "refined: first d20 time regression retained",
+      "wallMs": 36207,
+      "budgetMs": 90000
+    },
+    {
+      "label": "v4b-pointers",
+      "decision": "accepted: fewer allocations, bypass single die",
+      "wallMs": 35325,
+      "budgetMs": 90000
+    },
+    {
+      "label": "v5-render",
+      "decision": "accepted: fewer string temporaries",
+      "wallMs": 14413,
+      "budgetMs": 90000
+    },
+    {
+      "label": "integrated",
+      "decision": "confirmed against ca34ff9 with ten alternating pairs",
+      "wallMs": 34398,
+      "budgetMs": 90000
+    }
+  ],
+  "validation": {
+    "race": "ok  \tgithub.com/arkanus-app/rpg-dice-roller/go\t40.615s\tcoverage: 100.0% of statements in ./...",
+    "fuzz": "fuzz: elapsed: 0s, gathering baseline coverage: 0/6 completed\r\nfuzz: elapsed: 1s, gathering baseline coverage: 6/6 completed, now fuzzing with 2 workers\r\nfuzz: elapsed: 3s, execs: 22005 (7330/sec), new interesting: 8 (total: 14)\r\nfuzz: elapsed: 6s, execs: 44986 (7777/sec), new interesting: 10 (total: 16)\r\nPASS\r\nok  \tgithub.com/arkanus-app/rpg-dice-roller/go\t7.317s",
+    "other": "vet and linux/amd64 compilation passed",
+    "eslint": "both new JavaScript scripts passed; full build:prepare also passed before final assertion",
+    "gofmt": "no files reported"
+  }
+}

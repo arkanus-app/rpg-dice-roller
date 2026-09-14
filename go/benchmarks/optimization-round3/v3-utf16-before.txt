@@ -1,0 +1,140 @@
+goos: windows
+goarch: amd64
+pkg: github.com/arkanus-app/rpg-dice-roller/go
+cpu: AMD Ryzen 5 5500
+BenchmarkBackendOperation/1d20+5/full/changing=true         	    8365	     13088 ns/op	    7319 B/op	      48 allocs/op
+BenchmarkBackendOperation/1d20+5/details/changing=true      	   12285	     10051 ns/op	    5167 B/op	      37 allocs/op
+BenchmarkBackendOperation/1d20+5/summary/changing=true      	   17155	      7216 ns/op	    3815 B/op	      12 allocs/op
+BenchmarkBackendOperation/100d6/full/changing=true          	    2500	     57471 ns/op	   80335 B/op	      55 allocs/op
+BenchmarkBackendOperation/100d6/details/changing=true       	    4501	     33902 ns/op	   44639 B/op	      42 allocs/op
+BenchmarkBackendOperation/100d6/summary/changing=true       	   10000	     11374 ns/op	    3815 B/op	      12 allocs/op
+BenchmarkBackendOperation/20d6!2ro=1kh10/full/changing=true 	    3344	     47864 ns/op	   40357 B/op	     156 allocs/op
+BenchmarkBackendOperation/20d6!2ro=1kh10/details/changing=true         	    5820	     26828 ns/op	   15815 B/op	     120 allocs/op
+BenchmarkBackendOperation/20d6!2ro=1kh10/summary/changing=true         	   10000	     10351 ns/op	    3848 B/op	      12 allocs/op
+PASS
+goos: windows
+goarch: amd64
+pkg: github.com/arkanus-app/rpg-dice-roller/go
+cpu: AMD Ryzen 5 5500
+BenchmarkBackendOperation/1d20+5/full/changing=true         	   11370	     10254 ns/op	    7319 B/op	      48 allocs/op
+BenchmarkBackendOperation/1d20+5/details/changing=true      	   13700	      8622 ns/op	    5167 B/op	      37 allocs/op
+BenchmarkBackendOperation/1d20+5/summary/changing=true      	   18853	      6999 ns/op	    3815 B/op	      12 allocs/op
+BenchmarkBackendOperation/100d6/full/changing=true          	    1629	     70245 ns/op	   80335 B/op	      55 allocs/op
+BenchmarkBackendOperation/100d6/details/changing=true       	    3316	     35468 ns/op	   44639 B/op	      42 allocs/op
+BenchmarkBackendOperation/100d6/summary/changing=true       	   10000	     10216 ns/op	    3815 B/op	      12 allocs/op
+BenchmarkBackendOperation/20d6!2ro=1kh10/full/changing=true 	    3813	     32783 ns/op	   40362 B/op	     156 allocs/op
+BenchmarkBackendOperation/20d6!2ro=1kh10/details/changing=true         	    8394	     22876 ns/op	   15814 B/op	     120 allocs/op
+BenchmarkBackendOperation/20d6!2ro=1kh10/summary/changing=true         	   10000	     11062 ns/op	    3848 B/op	      12 allocs/op
+PASS
+goos: windows
+goarch: amd64
+pkg: github.com/arkanus-app/rpg-dice-roller/go
+cpu: AMD Ryzen 5 5500
+BenchmarkBackendOperation/1d20+5/full/changing=true         	   11004	     11015 ns/op	    7319 B/op	      48 allocs/op
+BenchmarkBackendOperation/1d20+5/details/changing=true      	   13089	      9144 ns/op	    5167 B/op	      37 allocs/op
+BenchmarkBackendOperation/1d20+5/summary/changing=true      	   18373	      6743 ns/op	    3815 B/op	      12 allocs/op
+BenchmarkBackendOperation/100d6/full/changing=true          	    2228	     64241 ns/op	   80335 B/op	      55 allocs/op
+BenchmarkBackendOperation/100d6/details/changing=true       	    2876	     35402 ns/op	   44639 B/op	      42 allocs/op
+BenchmarkBackendOperation/100d6/summary/changing=true       	   12337	     10210 ns/op	    3815 B/op	      12 allocs/op
+BenchmarkBackendOperation/20d6!2ro=1kh10/full/changing=true 	    3351	     39296 ns/op	   40354 B/op	     156 allocs/op
+BenchmarkBackendOperation/20d6!2ro=1kh10/details/changing=true         	    9211	     23453 ns/op	   15813 B/op	     120 allocs/op
+BenchmarkBackendOperation/20d6!2ro=1kh10/summary/changing=true         	   10000	     10432 ns/op	    3848 B/op	      12 allocs/op
+PASS
+goos: windows
+goarch: amd64
+pkg: github.com/arkanus-app/rpg-dice-roller/go
+cpu: AMD Ryzen 5 5500
+BenchmarkBackendOperation/1d20+5/full/changing=true         	   10669	     12468 ns/op	    7319 B/op	      48 allocs/op
+BenchmarkBackendOperation/1d20+5/details/changing=true      	   12271	      9175 ns/op	    5167 B/op	      37 allocs/op
+BenchmarkBackendOperation/1d20+5/summary/changing=true      	   18147	      6754 ns/op	    3815 B/op	      12 allocs/op
+BenchmarkBackendOperation/100d6/full/changing=true          	    1956	     57504 ns/op	   80335 B/op	      55 allocs/op
+BenchmarkBackendOperation/100d6/details/changing=true       	    3219	     49084 ns/op	   44639 B/op	      42 allocs/op
+BenchmarkBackendOperation/100d6/summary/changing=true       	   10000	     10462 ns/op	    3815 B/op	      12 allocs/op
+BenchmarkBackendOperation/20d6!2ro=1kh10/full/changing=true 	    3673	     35859 ns/op	   40361 B/op	     156 allocs/op
+BenchmarkBackendOperation/20d6!2ro=1kh10/details/changing=true         	    5248	     25620 ns/op	   15814 B/op	     120 allocs/op
+BenchmarkBackendOperation/20d6!2ro=1kh10/summary/changing=true         	   10000	     10400 ns/op	    3848 B/op	      12 allocs/op
+PASS
+goos: windows
+goarch: amd64
+pkg: github.com/arkanus-app/rpg-dice-roller/go
+cpu: AMD Ryzen 5 5500
+BenchmarkBackendOperation/1d20+5/full/changing=true         	   10400	     11343 ns/op	    7319 B/op	      48 allocs/op
+BenchmarkBackendOperation/1d20+5/details/changing=true      	   12108	      9940 ns/op	    5167 B/op	      37 allocs/op
+BenchmarkBackendOperation/1d20+5/summary/changing=true      	   16556	      6586 ns/op	    3815 B/op	      12 allocs/op
+BenchmarkBackendOperation/100d6/full/changing=true          	    1461	     82410 ns/op	   80335 B/op	      55 allocs/op
+BenchmarkBackendOperation/100d6/details/changing=true       	    2953	     37765 ns/op	   44639 B/op	      42 allocs/op
+BenchmarkBackendOperation/100d6/summary/changing=true       	   10000	     10524 ns/op	    3815 B/op	      12 allocs/op
+BenchmarkBackendOperation/20d6!2ro=1kh10/full/changing=true 	    2731	     44144 ns/op	   40352 B/op	     156 allocs/op
+BenchmarkBackendOperation/20d6!2ro=1kh10/details/changing=true         	    7494	     23012 ns/op	   15814 B/op	     120 allocs/op
+BenchmarkBackendOperation/20d6!2ro=1kh10/summary/changing=true         	   10000	     10070 ns/op	    3848 B/op	      12 allocs/op
+PASS
+goos: windows
+goarch: amd64
+pkg: github.com/arkanus-app/rpg-dice-roller/go
+cpu: AMD Ryzen 5 5500
+BenchmarkBackendOperation/1d20+5/full/changing=true         	    8575	     13536 ns/op	    7319 B/op	      48 allocs/op
+BenchmarkBackendOperation/1d20+5/details/changing=true      	   11194	      9324 ns/op	    5167 B/op	      37 allocs/op
+BenchmarkBackendOperation/1d20+5/summary/changing=true      	   18678	      6742 ns/op	    3815 B/op	      12 allocs/op
+BenchmarkBackendOperation/100d6/full/changing=true          	    1884	     60020 ns/op	   80335 B/op	      55 allocs/op
+BenchmarkBackendOperation/100d6/details/changing=true       	    3403	     34116 ns/op	   44639 B/op	      42 allocs/op
+BenchmarkBackendOperation/100d6/summary/changing=true       	   10000	     10043 ns/op	    3815 B/op	      12 allocs/op
+BenchmarkBackendOperation/20d6!2ro=1kh10/full/changing=true 	    3465	     38515 ns/op	   40361 B/op	     156 allocs/op
+BenchmarkBackendOperation/20d6!2ro=1kh10/details/changing=true         	    8787	     25159 ns/op	   15814 B/op	     120 allocs/op
+BenchmarkBackendOperation/20d6!2ro=1kh10/summary/changing=true         	   10000	     10065 ns/op	    3848 B/op	      12 allocs/op
+PASS
+goos: windows
+goarch: amd64
+pkg: github.com/arkanus-app/rpg-dice-roller/go
+cpu: AMD Ryzen 5 5500
+BenchmarkBackendOperation/1d20+5/full/changing=true         	   11017	     11220 ns/op	    7319 B/op	      48 allocs/op
+BenchmarkBackendOperation/1d20+5/details/changing=true      	   12159	      9414 ns/op	    5167 B/op	      37 allocs/op
+BenchmarkBackendOperation/1d20+5/summary/changing=true      	   18222	      6809 ns/op	    3815 B/op	      12 allocs/op
+BenchmarkBackendOperation/100d6/full/changing=true          	    2047	     49996 ns/op	   80335 B/op	      55 allocs/op
+BenchmarkBackendOperation/100d6/details/changing=true       	    4332	     32886 ns/op	   44639 B/op	      42 allocs/op
+BenchmarkBackendOperation/100d6/summary/changing=true       	   11380	     10156 ns/op	    3815 B/op	      12 allocs/op
+BenchmarkBackendOperation/20d6!2ro=1kh10/full/changing=true 	    2946	     36082 ns/op	   40358 B/op	     156 allocs/op
+BenchmarkBackendOperation/20d6!2ro=1kh10/details/changing=true         	    4808	     23781 ns/op	   15814 B/op	     120 allocs/op
+BenchmarkBackendOperation/20d6!2ro=1kh10/summary/changing=true         	   12337	     10293 ns/op	    3848 B/op	      12 allocs/op
+PASS
+goos: windows
+goarch: amd64
+pkg: github.com/arkanus-app/rpg-dice-roller/go
+cpu: AMD Ryzen 5 5500
+BenchmarkBackendOperation/1d20+5/full/changing=true         	   10000	     11558 ns/op	    7319 B/op	      48 allocs/op
+BenchmarkBackendOperation/1d20+5/details/changing=true      	   17055	      6958 ns/op	    5167 B/op	      37 allocs/op
+BenchmarkBackendOperation/1d20+5/summary/changing=true      	   21057	      5381 ns/op	    3815 B/op	      12 allocs/op
+BenchmarkBackendOperation/100d6/full/changing=true          	    3693	     34934 ns/op	   80335 B/op	      55 allocs/op
+BenchmarkBackendOperation/100d6/details/changing=true       	    7078	     21001 ns/op	   44639 B/op	      42 allocs/op
+BenchmarkBackendOperation/100d6/summary/changing=true       	   15832	      7958 ns/op	    3815 B/op	      12 allocs/op
+BenchmarkBackendOperation/20d6!2ro=1kh10/full/changing=true 	    5618	     27859 ns/op	   40355 B/op	     156 allocs/op
+BenchmarkBackendOperation/20d6!2ro=1kh10/details/changing=true         	    9842	     18978 ns/op	   15813 B/op	     120 allocs/op
+BenchmarkBackendOperation/20d6!2ro=1kh10/summary/changing=true         	   13170	      8870 ns/op	    3848 B/op	      12 allocs/op
+PASS
+goos: windows
+goarch: amd64
+pkg: github.com/arkanus-app/rpg-dice-roller/go
+cpu: AMD Ryzen 5 5500
+BenchmarkBackendOperation/1d20+5/full/changing=true         	   13833	      9418 ns/op	    7319 B/op	      48 allocs/op
+BenchmarkBackendOperation/1d20+5/details/changing=true      	   15964	      6875 ns/op	    5167 B/op	      37 allocs/op
+BenchmarkBackendOperation/1d20+5/summary/changing=true      	   23100	      5343 ns/op	    3815 B/op	      12 allocs/op
+BenchmarkBackendOperation/100d6/full/changing=true          	    3832	     37950 ns/op	   80335 B/op	      55 allocs/op
+BenchmarkBackendOperation/100d6/details/changing=true       	    6223	     20543 ns/op	   44639 B/op	      42 allocs/op
+BenchmarkBackendOperation/100d6/summary/changing=true       	   15967	      7518 ns/op	    3815 B/op	      12 allocs/op
+BenchmarkBackendOperation/20d6!2ro=1kh10/full/changing=true 	    5565	     20852 ns/op	   40356 B/op	     156 allocs/op
+BenchmarkBackendOperation/20d6!2ro=1kh10/details/changing=true         	   10000	     16769 ns/op	   15814 B/op	     120 allocs/op
+BenchmarkBackendOperation/20d6!2ro=1kh10/summary/changing=true         	   15692	      7426 ns/op	    3848 B/op	      12 allocs/op
+PASS
+goos: windows
+goarch: amd64
+pkg: github.com/arkanus-app/rpg-dice-roller/go
+cpu: AMD Ryzen 5 5500
+BenchmarkBackendOperation/1d20+5/full/changing=true         	   14461	      8143 ns/op	    7319 B/op	      48 allocs/op
+BenchmarkBackendOperation/1d20+5/details/changing=true      	   17792	      6494 ns/op	    5167 B/op	      37 allocs/op
+BenchmarkBackendOperation/1d20+5/summary/changing=true      	   23779	      5182 ns/op	    3815 B/op	      12 allocs/op
+BenchmarkBackendOperation/100d6/full/changing=true          	    3472	     32171 ns/op	   80335 B/op	      55 allocs/op
+BenchmarkBackendOperation/100d6/details/changing=true       	    6010	     20056 ns/op	   44639 B/op	      42 allocs/op
+BenchmarkBackendOperation/100d6/summary/changing=true       	   16004	      7904 ns/op	    3815 B/op	      12 allocs/op
+BenchmarkBackendOperation/20d6!2ro=1kh10/full/changing=true 	    5319	     26372 ns/op	   40357 B/op	     156 allocs/op
+BenchmarkBackendOperation/20d6!2ro=1kh10/details/changing=true         	   10000	     17625 ns/op	   15814 B/op	     120 allocs/op
+BenchmarkBackendOperation/20d6!2ro=1kh10/summary/changing=true         	   15955	      7817 ns/op	    3848 B/op	      12 allocs/op
+PASS

@@ -21,6 +21,20 @@ var syntaxPunctuationKinds = map[uint16]string{
 func syntaxUnits(input string) []uint16  { return utf16.Encode([]rune(input)) }
 func syntaxString(input []uint16) string { return string(utf16.Decode(input)) }
 
+// syntaxLength counts the UTF-16 units used by the public length limits without
+// allocating the scanner's unit slice. Range replaces invalid UTF-8 in the same
+// way as []rune; supplementary code points require a surrogate pair.
+func syntaxLength(input string) int {
+	length := 0
+	for _, character := range input {
+		length++
+		if character > 0xffff {
+			length++
+		}
+	}
+	return length
+}
+
 // A diagnostic may point at just the first UTF-16 unit of an astral character.
 // Encoding that unit as a Go string would replace it and change the JSON error.
 type utf16DiagnosticUnit uint16

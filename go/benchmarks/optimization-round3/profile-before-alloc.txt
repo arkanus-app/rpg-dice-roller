@@ -1,0 +1,18 @@
+File: baseline.exe
+Build ID: D:\Projetos\ERPG\rpg-dice-roller\.artifacts\optimization-round3\baseline.exe2026-09-14 00:02:26.4411172 -0300 -03
+Type: alloc_space
+Time: 2026-09-14 00:02:33 -03
+Showing nodes accounting for 563.81MB, 98.51% of 572.36MB total
+Dropped 79 nodes (cum <= 2.86MB)
+      flat  flat%   sum%        cum   cum%
+  330.43MB 57.73% 57.73%   565.82MB 98.86%  encoding/json.Marshal
+  233.38MB 40.78% 98.51%   233.38MB 40.78%  github.com/arkanus-app/rpg-dice-roller/go.ResolvedEvents.MarshalJSON
+         0     0% 98.51%   234.38MB 40.95%  encoding/json.(*encodeState).marshal
+         0     0% 98.51%   234.38MB 40.95%  encoding/json.(*encodeState).reflectValue
+         0     0% 98.51%   234.38MB 40.95%  encoding/json.addrMarshalerEncoder
+         0     0% 98.51%   234.38MB 40.95%  encoding/json.condAddrEncoder.encode
+         0     0% 98.51%   234.38MB 40.95%  encoding/json.ptrEncoder.encode
+         0     0% 98.51%   234.38MB 40.95%  encoding/json.structEncoder.encode
+         0     0% 98.51%   565.82MB 98.86%  github.com/arkanus-app/rpg-dice-roller/go.BenchmarkResolvedEventsJSON.func1
+         0     0% 98.51%   565.29MB 98.76%  testing.(*B).launch
+         0     0% 98.51%   566.82MB 99.03%  testing.(*B).runN

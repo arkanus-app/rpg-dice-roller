@@ -1,0 +1,4 @@
+# Preserve the exact bytes used by benchmark and chart SHA-256 manifests.
+* -text whitespace=blank-at-eol,blank-at-eof,space-before-tab,cr-at-eol
+# Unified diff context intentionally prefixes Go tabs and empty lines with a space.
+*.patch -whitespace

@@ -1,0 +1,1 @@
+vet and linux/amd64 compilation passed

@@ -1,0 +1,70 @@
+diff --git a/go/executor.go b/go/executor.go
+index cc605db..25810a5 100644
+--- a/go/executor.go
++++ b/go/executor.go
+@@ -108,6 +108,21 @@ func executorRollFace(node *ExpressionNode, spec *CompiledDiceSpec, context *Exe
+ 		return 0
+ 	}
+ }
++
++// reserveWorkingDicePointers reserves only a bounded initial prefix. Each call
++// owns its index array; local modifier pools must not share the roll's index
++// because explosions append to both. Reservation never consumes a budget.
++func reserveWorkingDicePointers(quantity int64, budget *ExecutionBudget) []*workingDie {
++	// One append already allocates exactly once; no reservation is needed.
++	if quantity <= 1 {
++		return []*workingDie{}
++	}
++	capacity := max(int64(0), min(quantity, 256,
++		budget.limits.MaxInitialDice-budget.snapshot.InitialDice,
++		budget.limits.MaxResultItems-budget.snapshot.ResultItems))
++	return make([]*workingDie, 0, capacity)
++}
++
+ func createWorkingDie(node *ExpressionNode, spec *CompiledDiceSpec, state *rollState, groupID string, parent *string, generated bool) *workingDie {
+ 	if generated {
+ 		executorCheck(state.context.Budget.ConsumeGeneratedDice(1))
+@@ -466,7 +481,7 @@ func evaluateWorkingDice(node *ExpressionNode, state *rollState) rollEvaluation
+ 	}
+ 	start := int64(len(state.dice))
+ 	groupID := resolvedGroupID(node, state.rollIndex)
+-	dice := []*workingDie{}
++	dice := reserveWorkingDicePointers(spec.Quantity, state.context.Budget)
+ 	for index := int64(0); index < spec.Quantity; index++ {
+ 		dice = append(dice, createWorkingDie(node, spec, state, groupID, nil, false))
+ 	}
+@@ -753,13 +768,13 @@ func executorNumberString(value float64) string {
+ }
+ func formatExecutionOutput(outputs []string, total float64, context *ExecutionContext) string {
+ 	if len(outputs) == 1 {
+-		executorCheck(context.Budget.AssertOutputLength(int64(len(syntaxUnits(outputs[0])))))
++		executorCheck(context.Budget.AssertOutputLength(int64(syntaxLength(outputs[0]))))
+ 		return outputs[0]
+ 	}
+ 	line := "Total: " + executorNumberString(total)
+-	length := len(syntaxUnits(line))
++	length := syntaxLength(line)
+ 	for i, output := range outputs {
+-		length += len(strconv.Itoa(i+1)) + 2 + len(syntaxUnits(output)) + 1
++		length += len(strconv.Itoa(i+1)) + 2 + syntaxLength(output) + 1
+ 	}
+ 	executorCheck(context.Budget.AssertOutputLength(int64(length)))
+ 	lines := make([]string, 0, len(outputs)+1)
+@@ -800,7 +815,7 @@ func executeGeneralPlan(plan *RollPlan, program *CompiledDiceProgram, options Ex
+ 		executorCheck(context.Budget.ConsumeResultItems(1))
+ 		eventStart := context.Journal.Length()
+ 		diceStart, groupStart := int64(len(dice)), int64(len(groups))
+-		state := &rollState{context: context, plan: plan, program: program, rollIndex: rollIndex, dice: []*workingDie{}, groups: []*workingGroup{}, groupByID: map[string]*workingGroup{}, renderOutput: full}
++		state := &rollState{context: context, plan: plan, program: program, rollIndex: rollIndex, dice: reserveWorkingDicePointers(program.StaticDice, context.Budget), groups: []*workingGroup{}, groupByID: map[string]*workingGroup{}, renderOutput: full}
+ 		evaluation := evaluateWorkingNode(program.AST, state)
+ 		total := executorValue(RoundResult(evaluation.value))
+ 		resolvedDice := finalizeWorkingDice(state, materializeDice)
+@@ -821,7 +836,7 @@ func executeGeneralPlan(plan *RollPlan, program *CompiledDiceProgram, options Ex
+ 				groups = append(groups, resolvedGroups...)
+ 			}
+ 			rollOutput := plan.Notation + ": " + evaluation.rendered + " = " + executorNumberString(total)
+-			executorCheck(context.Budget.AssertOutputLength(int64(len(syntaxUnits(rollOutput)))))
++			executorCheck(context.Budget.AssertOutputLength(int64(syntaxLength(rollOutput))))
+ 			outputs = append(outputs, rollOutput)
+ 			rolls = append(rolls, ResolvedRoll{Index: rollIndex, Total: total, Pool: pool, DiceRange: EntityRange{Start: diceStart, Count: int64(len(resolvedDice))}, GroupRange: EntityRange{Start: groupStart, Count: int64(len(resolvedGroups))}, EventRange: EntityRange{Start: eventStart, Count: context.Journal.Length() - eventStart}})
+ 		}

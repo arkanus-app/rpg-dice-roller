@@ -1,0 +1,1 @@
+4551/4551 Go statements covered in ../.artifacts/optimization-round3/final-coverage.out (100%).

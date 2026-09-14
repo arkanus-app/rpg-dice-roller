@@ -1,0 +1,80 @@
+goos: windows
+goarch: amd64
+pkg: github.com/arkanus-app/rpg-dice-roller/go
+cpu: AMD Ryzen 5 5500
+BenchmarkResolvedEventsJSON/1d20+5         	   10000	     21094 ns/op	    3712 B/op	       2 allocs/op
+BenchmarkResolvedEventsJSON/100d6          	     210	    571815 ns/op	   98313 B/op	       2 allocs/op
+BenchmarkResolvedEventsJSON/20d6!2ro=1kh10 	     684	    174955 ns/op	   32002 B/op	       2 allocs/op
+PASS
+goos: windows
+goarch: amd64
+pkg: github.com/arkanus-app/rpg-dice-roller/go
+cpu: AMD Ryzen 5 5500
+BenchmarkResolvedEventsJSON/1d20+5         	    9842	     20245 ns/op	    3712 B/op	       2 allocs/op
+BenchmarkResolvedEventsJSON/100d6          	     211	    577090 ns/op	   98314 B/op	       2 allocs/op
+BenchmarkResolvedEventsJSON/20d6!2ro=1kh10 	     501	    201028 ns/op	   32003 B/op	       2 allocs/op
+PASS
+goos: windows
+goarch: amd64
+pkg: github.com/arkanus-app/rpg-dice-roller/go
+cpu: AMD Ryzen 5 5500
+BenchmarkResolvedEventsJSON/1d20+5         	    5496	     21221 ns/op	    3712 B/op	       2 allocs/op
+BenchmarkResolvedEventsJSON/100d6          	     166	    718034 ns/op	   98314 B/op	       2 allocs/op
+BenchmarkResolvedEventsJSON/20d6!2ro=1kh10 	     636	    182117 ns/op	   32003 B/op	       2 allocs/op
+PASS
+goos: windows
+goarch: amd64
+pkg: github.com/arkanus-app/rpg-dice-roller/go
+cpu: AMD Ryzen 5 5500
+BenchmarkResolvedEventsJSON/1d20+5         	    8016	     14742 ns/op	    3712 B/op	       2 allocs/op
+BenchmarkResolvedEventsJSON/100d6          	     270	    483079 ns/op	   98312 B/op	       2 allocs/op
+BenchmarkResolvedEventsJSON/20d6!2ro=1kh10 	     727	    179117 ns/op	   32002 B/op	       2 allocs/op
+PASS
+goos: windows
+goarch: amd64
+pkg: github.com/arkanus-app/rpg-dice-roller/go
+cpu: AMD Ryzen 5 5500
+BenchmarkResolvedEventsJSON/1d20+5         	    7495	     23379 ns/op	    3712 B/op	       2 allocs/op
+BenchmarkResolvedEventsJSON/100d6          	     199	    570644 ns/op	   98313 B/op	       2 allocs/op
+BenchmarkResolvedEventsJSON/20d6!2ro=1kh10 	     676	    208749 ns/op	   32003 B/op	       2 allocs/op
+PASS
+goos: windows
+goarch: amd64
+pkg: github.com/arkanus-app/rpg-dice-roller/go
+cpu: AMD Ryzen 5 5500
+BenchmarkResolvedEventsJSON/1d20+5         	    6230	     21657 ns/op	    3712 B/op	       2 allocs/op
+BenchmarkResolvedEventsJSON/100d6          	     240	    551319 ns/op	   98314 B/op	       2 allocs/op
+BenchmarkResolvedEventsJSON/20d6!2ro=1kh10 	     651	    199205 ns/op	   32003 B/op	       2 allocs/op
+PASS
+goos: windows
+goarch: amd64
+pkg: github.com/arkanus-app/rpg-dice-roller/go
+cpu: AMD Ryzen 5 5500
+BenchmarkResolvedEventsJSON/1d20+5         	    6376	     20610 ns/op	    3712 B/op	       2 allocs/op
+BenchmarkResolvedEventsJSON/100d6          	     217	    538275 ns/op	   98314 B/op	       2 allocs/op
+BenchmarkResolvedEventsJSON/20d6!2ro=1kh10 	     776	    174921 ns/op	   32003 B/op	       2 allocs/op
+PASS
+goos: windows
+goarch: amd64
+pkg: github.com/arkanus-app/rpg-dice-roller/go
+cpu: AMD Ryzen 5 5500
+BenchmarkResolvedEventsJSON/1d20+5         	    6675	     22645 ns/op	    3712 B/op	       2 allocs/op
+BenchmarkResolvedEventsJSON/100d6          	     261	    485334 ns/op	   98313 B/op	       2 allocs/op
+BenchmarkResolvedEventsJSON/20d6!2ro=1kh10 	     758	    170695 ns/op	   32003 B/op	       2 allocs/op
+PASS
+goos: windows
+goarch: amd64
+pkg: github.com/arkanus-app/rpg-dice-roller/go
+cpu: AMD Ryzen 5 5500
+BenchmarkResolvedEventsJSON/1d20+5         	   10000	     19267 ns/op	    3712 B/op	       2 allocs/op
+BenchmarkResolvedEventsJSON/100d6          	     216	    492309 ns/op	   98314 B/op	       2 allocs/op
+BenchmarkResolvedEventsJSON/20d6!2ro=1kh10 	     818	    170294 ns/op	   32003 B/op	       2 allocs/op
+PASS
+goos: windows
+goarch: amd64
+pkg: github.com/arkanus-app/rpg-dice-roller/go
+cpu: AMD Ryzen 5 5500
+BenchmarkResolvedEventsJSON/1d20+5         	    6999	     16971 ns/op	    3712 B/op	       2 allocs/op
+BenchmarkResolvedEventsJSON/100d6          	     262	    521221 ns/op	   98313 B/op	       2 allocs/op
+BenchmarkResolvedEventsJSON/20d6!2ro=1kh10 	     625	    200941 ns/op	   32003 B/op	       2 allocs/op
+PASS

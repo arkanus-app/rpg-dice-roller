@@ -1,0 +1,44 @@
+goos: windows
+goarch: amd64
+pkg: github.com/arkanus-app/rpg-dice-roller/go
+cpu: AMD Ryzen 5 5500
+                                                      │    before    │                after                 │
+                                                      │    sec/op    │    sec/op      vs base               │
+BackendOperation/1d20+5/full/changing=true              18.91µ ± 45%    19.50µ ± 24%       ~ (p=0.912 n=10)
+BackendOperation/1d20+5/details/changing=true           16.20µ ± 28%    16.56µ ± 21%       ~ (p=0.739 n=10)
+BackendOperation/1d20+5/summary/changing=true           11.32µ ± 17%    11.03µ ± 38%       ~ (p=0.739 n=10)
+BackendOperation/100d6/full/changing=true               99.37µ ± 16%   108.44µ ± 24%       ~ (p=0.529 n=10)
+BackendOperation/100d6/details/changing=true            74.24µ ± 22%    66.68µ ± 18%       ~ (p=0.247 n=10)
+BackendOperation/100d6/summary/changing=true            15.11µ ± 42%    18.02µ ± 18%       ~ (p=0.353 n=10)
+BackendOperation/20d6!2ro=1kh10/full/changing=true      63.56µ ± 19%    70.59µ ± 22%       ~ (p=0.218 n=10)
+BackendOperation/20d6!2ro=1kh10/details/changing=true   41.09µ ± 35%    45.96µ ± 21%       ~ (p=0.971 n=10)
+BackendOperation/20d6!2ro=1kh10/summary/changing=true   15.46µ ± 19%    17.02µ ± 25%       ~ (p=0.436 n=10)
+geomean                                                 29.24µ          30.89µ        +5.66%
+
+                                                      │    before    │                 after                 │
+                                                      │     B/op     │     B/op      vs base                 │
+BackendOperation/1d20+5/full/changing=true              7.038Ki ± 0%   7.038Ki ± 0%       ~ (p=1.000 n=10) ¹
+BackendOperation/1d20+5/details/changing=true           5.030Ki ± 0%   5.030Ki ± 0%       ~ (p=1.000 n=10) ¹
+BackendOperation/1d20+5/summary/changing=true           3.711Ki ± 0%   3.711Ki ± 0%       ~ (p=1.000 n=10) ¹
+BackendOperation/100d6/full/changing=true               74.69Ki ± 0%   72.20Ki ± 0%  -3.33% (p=0.000 n=10)
+BackendOperation/100d6/details/changing=true            43.58Ki ± 0%   41.09Ki ± 0%  -5.70% (p=0.000 n=10)
+BackendOperation/100d6/summary/changing=true            3.711Ki ± 0%   3.711Ki ± 0%       ~ (p=1.000 n=10) ¹
+BackendOperation/20d6!2ro=1kh10/full/changing=true      38.25Ki ± 0%   38.18Ki ± 0%  -0.17% (p=0.000 n=10)
+BackendOperation/20d6!2ro=1kh10/details/changing=true   15.41Ki ± 0%   15.34Ki ± 0%  -0.46% (p=0.000 n=10)
+BackendOperation/20d6!2ro=1kh10/summary/changing=true   3.727Ki ± 0%   3.727Ki ± 0%       ~ (p=1.000 n=10)
+geomean                                                 11.49Ki        11.36Ki       -1.09%
+¹ all samples are equal
+
+                                                      │   before   │                after                 │
+                                                      │ allocs/op  │ allocs/op   vs base                  │
+BackendOperation/1d20+5/full/changing=true              45.00 ± 0%   45.00 ± 0%        ~ (p=1.000 n=10) ¹
+BackendOperation/1d20+5/details/changing=true           36.00 ± 0%   36.00 ± 0%        ~ (p=1.000 n=10) ¹
+BackendOperation/1d20+5/summary/changing=true           11.00 ± 0%   11.00 ± 0%        ~ (p=1.000 n=10) ¹
+BackendOperation/100d6/full/changing=true               50.00 ± 0%   36.00 ± 0%  -28.00% (p=0.000 n=10)
+BackendOperation/100d6/details/changing=true            41.00 ± 0%   27.00 ± 0%  -34.15% (p=0.000 n=10)
+BackendOperation/100d6/summary/changing=true            11.00 ± 0%   11.00 ± 0%        ~ (p=1.000 n=10) ¹
+BackendOperation/20d6!2ro=1kh10/full/changing=true      151.0 ± 0%   143.0 ± 0%   -5.30% (p=0.000 n=10)
+BackendOperation/20d6!2ro=1kh10/details/changing=true   119.0 ± 0%   111.0 ± 0%   -6.72% (p=0.000 n=10)
+BackendOperation/20d6!2ro=1kh10/summary/changing=true   11.00 ± 0%   11.00 ± 0%        ~ (p=1.000 n=10) ¹
+geomean                                                 35.03        31.80        -9.22%
+¹ all samples are equal

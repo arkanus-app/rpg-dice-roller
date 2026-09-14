@@ -1,0 +1,23 @@
+goos: windows
+goarch: amd64
+pkg: github.com/arkanus-app/rpg-dice-roller/go
+cpu: AMD Ryzen 5 5500
+BenchmarkResolvedEventsJSON/1d20+5-12         	   17432	     17895 ns/op	    3715 B/op	       2 allocs/op
+BenchmarkResolvedEventsJSON/1d20+5-12         	   10000	     29249 ns/op	    3716 B/op	       2 allocs/op
+BenchmarkResolvedEventsJSON/1d20+5-12         	   11017	     23788 ns/op	    3717 B/op	       2 allocs/op
+BenchmarkResolvedEventsJSON/1d20+5-12         	   15196	     21464 ns/op	    3716 B/op	       2 allocs/op
+BenchmarkResolvedEventsJSON/1d20+5-12         	   14917	     21481 ns/op	    3716 B/op	       2 allocs/op
+BenchmarkResolvedEventsJSON/1d20+5-12         	   16129	     23788 ns/op	    3716 B/op	       2 allocs/op
+BenchmarkResolvedEventsJSON/100d6-12          	     452	   1414574 ns/op	   98725 B/op	       2 allocs/op
+BenchmarkResolvedEventsJSON/100d6-12          	     303	   2074735 ns/op	   98858 B/op	       2 allocs/op
+BenchmarkResolvedEventsJSON/100d6-12          	     505	    566397 ns/op	   98413 B/op	       2 allocs/op
+BenchmarkResolvedEventsJSON/100d6-12          	     558	    591828 ns/op	   98416 B/op	       2 allocs/op
+BenchmarkResolvedEventsJSON/100d6-12          	     489	    597180 ns/op	   98964 B/op	       2 allocs/op
+BenchmarkResolvedEventsJSON/100d6-12          	     606	    570598 ns/op	   98636 B/op	       2 allocs/op
+BenchmarkResolvedEventsJSON/20d6!2ro=1kh10-12 	    1386	    220140 ns/op	   32059 B/op	       2 allocs/op
+BenchmarkResolvedEventsJSON/20d6!2ro=1kh10-12 	    1356	    239364 ns/op	   32060 B/op	       2 allocs/op
+BenchmarkResolvedEventsJSON/20d6!2ro=1kh10-12 	    1191	    238271 ns/op	   32095 B/op	       2 allocs/op
+BenchmarkResolvedEventsJSON/20d6!2ro=1kh10-12 	    1237	    272145 ns/op	   32066 B/op	       2 allocs/op
+BenchmarkResolvedEventsJSON/20d6!2ro=1kh10-12 	    1455	    237281 ns/op	   32059 B/op	       2 allocs/op
+BenchmarkResolvedEventsJSON/20d6!2ro=1kh10-12 	    1108	    230549 ns/op	   32036 B/op	       2 allocs/op
+PASS

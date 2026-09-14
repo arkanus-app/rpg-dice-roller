@@ -1,0 +1,37 @@
+goos: windows
+goarch: amd64
+pkg: github.com/arkanus-app/rpg-dice-roller/go
+cpu: AMD Ryzen 5 5500
+                                  │    before     │                after                 │
+                                  │    sec/op     │    sec/op     vs base                │
+EventNumber/integer                  77.29n ± 30%   22.76n ± 56%  -70.55% (p=0.000 n=10)
+EventNumber/fraction                103.65n ± 32%   89.11n ± 18%        ~ (p=0.529 n=10)
+EventNumber/large                    84.81n ± 44%   73.66n ± 41%        ~ (p=0.247 n=10)
+ResolvedEventsJSON/1d20+5            27.44µ ± 35%   22.36µ ± 33%        ~ (p=0.684 n=10)
+ResolvedEventsJSON/100d6             701.3µ ± 34%   591.8µ ± 17%        ~ (p=0.315 n=10)
+ResolvedEventsJSON/20d6!2ro=1kh10    215.6µ ± 58%   215.4µ ± 37%        ~ (p=0.853 n=10)
+geomean                              3.759µ         2.743µ        -27.03%
+
+                                  │     before     │                 after                 │
+                                  │      B/op      │     B/op      vs base                 │
+EventNumber/integer                   0.000 ± 0%       0.000 ± 0%       ~ (p=1.000 n=10) ¹
+EventNumber/fraction                  0.000 ± 0%       0.000 ± 0%       ~ (p=1.000 n=10) ¹
+EventNumber/large                     0.000 ± 0%       0.000 ± 0%       ~ (p=1.000 n=10) ¹
+ResolvedEventsJSON/1d20+5           3.625Ki ± 0%     3.625Ki ± 0%       ~ (p=1.000 n=10) ¹
+ResolvedEventsJSON/100d6            96.01Ki ± 0%     96.01Ki ± 0%       ~ (p=0.976 n=10)
+ResolvedEventsJSON/20d6!2ro=1kh10   31.25Ki ± 0%     31.25Ki ± 0%       ~ (p=1.000 n=10)
+geomean                                          ²                 +0.00%                ²
+¹ all samples are equal
+² summaries must be >0 to compute geomean
+
+                                  │    before    │                after                │
+                                  │  allocs/op   │ allocs/op   vs base                 │
+EventNumber/integer                 0.000 ± 0%     0.000 ± 0%       ~ (p=1.000 n=10) ¹
+EventNumber/fraction                0.000 ± 0%     0.000 ± 0%       ~ (p=1.000 n=10) ¹
+EventNumber/large                   0.000 ± 0%     0.000 ± 0%       ~ (p=1.000 n=10) ¹
+ResolvedEventsJSON/1d20+5           2.000 ± 0%     2.000 ± 0%       ~ (p=1.000 n=10) ¹
+ResolvedEventsJSON/100d6            2.000 ± 0%     2.000 ± 0%       ~ (p=1.000 n=10) ¹
+ResolvedEventsJSON/20d6!2ro=1kh10   2.000 ± 0%     2.000 ± 0%       ~ (p=1.000 n=10) ¹
+geomean                                        ²               +0.00%                ²
+¹ all samples are equal
+² summaries must be >0 to compute geomean
