@@ -1,0 +1,23 @@
+diff --git a/go/executor.go b/go/executor.go
+index 5217acb..e88ad36 100644
+--- a/go/executor.go
++++ b/go/executor.go
+@@ -706,7 +706,8 @@ func finalizeWorkingDice(state *rollState, materialize bool) []ResolvedDie {
+ 			copy := die.ResolvedDie
+ 			copy.RollDieIndex = int64(index + 1)
+ 			copy.Included = die.Included && die.active
+-			copy.States = append([]string{}, die.States...)
++			// States belongs to this die alone. Execution only reads it after
++			// finalization, so the result can own it without another allocation.
+ 			resolved[index] = copy
+ 		}
+ 	}
+@@ -723,7 +724,7 @@ func finalizeWorkingGroups(state *rollState, materialize bool) []ResolvedGroup {
+ 		}
+ 		if materialize {
+ 			copy := group.ResolvedGroup
+-			copy.States = append([]string{}, group.States...)
++			// addWorkingGroup owns this slice; no modifier runs after finalization.
+ 			resolved[index] = copy
+ 		}
+ 	}

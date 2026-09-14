@@ -1,0 +1,28 @@
+File: baseline.exe
+Build ID: D:\Projetos\ERPG\rpg-dice-roller\.artifacts\optimization-round4\baseline.exe2026-09-14 00:44:23.5888311 -0300 -03
+Type: alloc_objects
+Time: 2026-09-14 00:46:59 -03
+Showing nodes accounting for 313067, 92.73% of 337605 total
+Dropped 295 nodes (cum <= 1688)
+Showing top 20 nodes out of 53
+      flat  flat%   sum%        cum   cum%
+     56861 16.84% 16.84%      56861 16.84%  github.com/arkanus-app/rpg-dice-roller/go.(*executionIDs).dieID
+     52567 15.57% 32.41%      52567 15.57%  github.com/arkanus-app/rpg-dice-roller/go.appendDieState (inline)
+     52567 15.57% 47.98%      54712 16.21%  github.com/arkanus-app/rpg-dice-roller/go.recordDieEvent
+     48612 14.40% 62.38%      49811 14.75%  github.com/arkanus-app/rpg-dice-roller/go.finalizeWorkingDice
+     21494  6.37% 68.75%      69288 20.52%  github.com/arkanus-app/rpg-dice-roller/go.applyDieExplode
+     14266  4.23% 72.97%      71127 21.07%  github.com/arkanus-app/rpg-dice-roller/go.createWorkingDie
+     14209  4.21% 77.18%      14209  4.21%  github.com/arkanus-app/rpg-dice-roller/go.activeWorkingDice (inline)
+     14190  4.20% 81.39%     329083 97.48%  github.com/arkanus-app/rpg-dice-roller/go.executeGeneralPlan
+      7095  2.10% 83.49%      14190  4.20%  github.com/arkanus-app/rpg-dice-roller/go.addWorkingGroup
+      4730  1.40% 84.89%       4730  1.40%  github.com/arkanus-app/rpg-dice-roller/go.reserveWorkingDicePointers (inline)
+      4730  1.40% 86.29%       4730  1.40%  github.com/arkanus-app/rpg-dice-roller/go.resolvedGroupID (inline)
+      2749  0.81% 87.10%     332609 98.52%  github.com/arkanus-app/rpg-dice-roller/go.BenchmarkBackendOperation.func1
+      2397  0.71% 87.81%      16587  4.91%  github.com/arkanus-app/rpg-dice-roller/go.executorCreateContext
+      2386  0.71% 88.52%       2386  0.71%  unicode/utf16.Encode
+      2383  0.71% 89.23%       2383  0.71%  github.com/arkanus-app/rpg-dice-roller/go.syntaxString (inline)
+      2371   0.7% 89.93%       2371   0.7%  encoding/hex.EncodeToString (inline)
+      2365   0.7% 90.63%      14190  4.20%  github.com/arkanus-app/rpg-dice-roller/go.CreateExecutionContext
+      2365   0.7% 91.33%       2365   0.7%  github.com/arkanus-app/rpg-dice-roller/go.NewExecutionBudget (inline)
+      2365   0.7% 92.03%       2365   0.7%  github.com/arkanus-app/rpg-dice-roller/go.NewExecutionJournal (inline)
+      2365   0.7% 92.73%       2365   0.7%  github.com/arkanus-app/rpg-dice-roller/go.NewMersenneTwister19937FromWords

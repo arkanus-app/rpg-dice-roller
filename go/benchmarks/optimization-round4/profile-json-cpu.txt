@@ -1,0 +1,34 @@
+File: baseline.exe
+Build ID: D:\Projetos\ERPG\rpg-dice-roller\.artifacts\optimization-round4\baseline.exe2026-09-14 00:44:23.5888311 -0300 -03
+Type: cpu
+Time: 2026-09-14 00:44:42 -03
+Duration: 4.01s, Total samples = 3.86s (96.21%)
+Showing nodes accounting for 3.30s, 85.49% of 3.86s total
+Dropped 63 nodes (cum <= 0.02s)
+Showing top 25 nodes out of 121
+      flat  flat%   sum%        cum   cum%
+     1.35s 34.97% 34.97%      2.31s 59.84%  encoding/json.appendCompact
+     0.36s  9.33% 44.30%      0.44s 11.40%  encoding/json.stateInString
+     0.17s  4.40% 48.70%      0.26s  6.74%  encoding/json.stateEndValue
+     0.16s  4.15% 52.85%      3.64s 94.30%  encoding/json.structEncoder.encode
+     0.12s  3.11% 55.96%      0.19s  4.92%  github.com/arkanus-app/rpg-dice-roller/go.(*eventJSON).key (inline)
+     0.11s  2.85% 58.81%      0.12s  3.11%  github.com/arkanus-app/rpg-dice-roller/go.appendEventString
+     0.11s  2.85% 61.66%      0.37s  9.59%  runtime.wbBufFlush1
+     0.10s  2.59% 64.25%      0.15s  3.89%  runtime.findObject
+     0.08s  2.07% 66.32%      0.08s  2.07%  encoding/json.appendString[go.shape.string]
+     0.08s  2.07% 68.39%      0.08s  2.07%  runtime.memmove
+     0.08s  2.07% 70.47%      0.13s  3.37%  runtime.tryDeferToSpanScan
+     0.07s  1.81% 72.28%      0.44s 11.40%  gcWriteBarrier
+     0.06s  1.55% 73.83%      0.56s 14.51%  github.com/arkanus-app/rpg-dice-roller/go.ResolvedEvent.appendJSON
+     0.05s  1.30% 75.13%      0.07s  1.81%  bytes.(*Buffer).WriteByte
+     0.05s  1.30% 76.42%      0.05s  1.30%  runtime.cgocall
+     0.05s  1.30% 77.72%      0.05s  1.30%  runtime.heapArenaOf (inline)
+     0.04s  1.04% 78.76%      0.11s  2.85%  encoding/json.stateBeginValue
+     0.04s  1.04% 79.79%      0.31s  8.03%  github.com/arkanus-app/rpg-dice-roller/go.(*eventJSON).text
+     0.04s  1.04% 80.83%      0.06s  1.55%  reflect.Value.Field
+     0.04s  1.04% 81.87%      0.04s  1.04%  runtime.memclrNoHeapPointers
+     0.03s  0.78% 82.64%      0.03s  0.78%  bytes.(*Buffer).tryGrowByReslice (inline)
+     0.03s  0.78% 83.42%      0.11s  2.85%  internal/strconv.genericFtoa
+     0.03s  0.78% 84.20%      0.06s  1.55%  runtime.scanObject
+     0.03s  0.78% 84.97%      0.05s  1.30%  runtime.spanOf (inline)
+     0.02s  0.52% 85.49%      0.04s  1.04%  bytes.(*Buffer).WriteString

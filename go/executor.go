@@ -17,8 +17,20 @@ type ExecuteRollPlanOptions struct {
 }
 
 type workingDie struct {
-	ResolvedDie
-	active bool
+	// The immutable compiled spec already owns Sides. Roll indices are assigned
+	// from the roll state when materializing the public result, so neither needs
+	// a per-die working copy. SourceNodeID still snapshots the actual AST node.
+	ID           string
+	SourceNodeID string
+	GroupID      string
+	ParentDieID  *string
+	spec         *CompiledDiceSpec
+	RawValue     float64
+	Value        float64
+	Contribution float64
+	States       []DiceState
+	Included     bool
+	active       bool
 }
 type workingGroup struct{ ResolvedGroup }
 type rollEvaluation struct {
@@ -151,8 +163,8 @@ func createWorkingDie(node *ExpressionNode, spec *CompiledDiceSpec, state *rollS
 		state.dieArenaUsed++
 		state.initialDice++
 	}
-	*die = workingDie{ResolvedDie: ResolvedDie{ID: state.ids.dieID(state.rollIndex, state.nextDieIndex, min(state.program.StaticDice,
-		budget.limits.MaxInitialDice-budget.snapshot.InitialDice+1, budget.limits.MaxResultItems-budget.snapshot.ResultItems+1)), SourceNodeID: node.ID, ParentDieID: parent, RollIndex: state.rollIndex, GroupID: groupID, Sides: spec.Sides, RawValue: value, Value: value, Contribution: value, Included: true, States: []string{}}, active: true}
+	*die = workingDie{ID: state.ids.dieID(state.rollIndex, state.nextDieIndex, min(state.program.StaticDice,
+		budget.limits.MaxInitialDice-budget.snapshot.InitialDice+1, budget.limits.MaxResultItems-budget.snapshot.ResultItems+1)), SourceNodeID: node.ID, ParentDieID: parent, GroupID: groupID, spec: spec, RawValue: value, Value: value, Contribution: value, Included: true, States: []string{}, active: true}
 	state.dice = append(state.dice, die)
 	if state.context.Journal.materialize {
 		recordDieEvent(state, die, ResolvedEvent{Type: "roll", Value: value})
@@ -361,13 +373,40 @@ func executorIndexesToExclude(values []float64, kind, selection string, quantity
 	return ranked[boundary:]
 }
 func applyDieSelection(dice []*workingDie, modifier *ModifierNode, state *rollState) {
-	active := activeWorkingDice(dice)
-	values := make([]float64, len(active))
-	for i, die := range active {
-		values[i] = die.Value
+	var local [32]compactSummaryRank
+	active := local[:0]
+	if len(dice) > len(local) {
+		count := 0
+		for _, die := range dice {
+			if die.active {
+				count++
+			}
+		}
+		// Compound explosions can retain many inactive dice. Only the active
+		// population determines whether selection needs a heap buffer.
+		if count > len(local) {
+			active = make([]compactSummaryRank, 0, count)
+		}
 	}
-	for _, index := range executorIndexesToExclude(values, modifier.Kind, modifier.Selection, modifier.Quantity) {
-		die := active[index]
+	for index, die := range dice {
+		if die.active {
+			active = append(active, compactSummaryRank{value: die.Value, index: index})
+		}
+	}
+	// Original indices define the same total tie order as indices into the
+	// old active-dice slice, preserving the order of exclusion events.
+	slices.SortFunc(active, compactSummaryRankOrder)
+	boundary := int(min(float64(len(active)), modifier.Quantity))
+	if modifier.Selection != "lowest" {
+		boundary = len(active) - boundary
+	}
+	if (modifier.Selection == "lowest") == (modifier.Kind == "drop") {
+		active = active[:boundary]
+	} else {
+		active = active[boundary:]
+	}
+	for _, rank := range active {
+		die := dice[rank.index]
 		if !die.Included {
 			continue
 		}
@@ -703,11 +742,14 @@ func finalizeWorkingDice(state *rollState, materialize bool) []ResolvedDie {
 			}
 		}
 		if materialize {
-			copy := die.ResolvedDie
-			copy.RollDieIndex = int64(index + 1)
-			copy.Included = die.Included && die.active
-			copy.States = append([]string{}, die.States...)
-			resolved[index] = copy
+			// States belongs to this die alone. Execution only reads it after
+			// finalization, so the result can own it without another allocation.
+			resolved[index] = ResolvedDie{
+				ID: die.ID, SourceNodeID: die.SourceNodeID, ParentDieID: die.ParentDieID,
+				RollIndex: state.rollIndex, RollDieIndex: int64(index + 1), GroupID: die.GroupID,
+				Sides: die.spec.Sides, RawValue: die.RawValue, Value: die.Value, Contribution: die.Contribution,
+				Included: die.Included && die.active, States: die.States,
+			}
 		}
 	}
 	return resolved
@@ -723,7 +765,7 @@ func finalizeWorkingGroups(state *rollState, materialize bool) []ResolvedGroup {
 		}
 		if materialize {
 			copy := group.ResolvedGroup
-			copy.States = append([]string{}, group.States...)
+			// addWorkingGroup owns this slice; no modifier runs after finalization.
 			resolved[index] = copy
 		}
 	}

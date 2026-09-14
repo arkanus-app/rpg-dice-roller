@@ -1,0 +1,6 @@
+goos: windows
+goarch: amd64
+pkg: github.com/arkanus-app/rpg-dice-roller/go
+cpu: AMD Ryzen 5 5500
+BenchmarkResolvedEventsJSON/100d6         	    3567	    641172 ns/op	   98315 B/op	       2 allocs/op
+PASS

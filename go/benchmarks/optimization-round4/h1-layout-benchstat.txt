@@ -1,0 +1,44 @@
+goos: windows
+goarch: amd64
+pkg: github.com/arkanus-app/rpg-dice-roller/go
+cpu: AMD Ryzen 5 5500
+                                                      │ go/benchmarks/optimization-round4/h1-layout-before.txt │ go/benchmarks/optimization-round4/h1-layout-after.txt │
+                                                      │                         sec/op                         │             sec/op              vs base               │
+BackendOperation/1d20+5/full/changing=true                                                        7.355µ ±  3%                     8.228µ ± 12%       ~ (p=0.052 n=10)
+BackendOperation/1d20+5/details/changing=true                                                     6.520µ ±  6%                     6.545µ ± 11%       ~ (p=0.436 n=10)
+BackendOperation/1d20+5/summary/changing=true                                                     4.672µ ±  3%                     4.709µ ± 10%       ~ (p=0.353 n=10)
+BackendOperation/100d6/full/changing=true                                                         27.39µ ±  5%                     26.24µ ± 18%       ~ (p=0.436 n=10)
+BackendOperation/100d6/details/changing=true                                                      18.77µ ±  9%                     17.48µ ± 16%       ~ (p=0.353 n=10)
+BackendOperation/100d6/summary/changing=true                                                      7.021µ ±  4%                     6.959µ ± 10%       ~ (p=0.971 n=10)
+BackendOperation/20d6!2ro=1kh10/full/changing=true                                                18.87µ ± 11%                     19.47µ ±  9%       ~ (p=0.579 n=10)
+BackendOperation/20d6!2ro=1kh10/details/changing=true                                             15.13µ ±  6%                     14.58µ ± 20%       ~ (p=0.315 n=10)
+BackendOperation/20d6!2ro=1kh10/summary/changing=true                                             7.318µ ±  5%                     7.327µ ±  5%       ~ (p=0.986 n=10)
+geomean                                                                                           10.60µ                           10.60µ        -0.05%
+
+                                                      │ go/benchmarks/optimization-round4/h1-layout-before.txt │ go/benchmarks/optimization-round4/h1-layout-after.txt │
+                                                      │                          B/op                          │             B/op              vs base                 │
+BackendOperation/1d20+5/full/changing=true                                                        7.038Ki ± 0%                   7.007Ki ± 0%  -0.44% (p=0.000 n=10)
+BackendOperation/1d20+5/details/changing=true                                                     5.030Ki ± 0%                   4.999Ki ± 0%  -0.62% (p=0.000 n=10)
+BackendOperation/1d20+5/summary/changing=true                                                     3.711Ki ± 0%                   3.711Ki ± 0%       ~ (p=1.000 n=10) ¹
+BackendOperation/100d6/full/changing=true                                                         70.14Ki ± 0%                   66.14Ki ± 0%  -5.70% (p=0.000 n=10)
+BackendOperation/100d6/details/changing=true                                                      41.09Ki ± 0%                   37.09Ki ± 0%  -9.73% (p=0.000 n=10)
+BackendOperation/100d6/summary/changing=true                                                      3.711Ki ± 0%                   3.711Ki ± 0%       ~ (p=1.000 n=10) ¹
+BackendOperation/20d6!2ro=1kh10/full/changing=true                                                37.72Ki ± 0%                   37.22Ki ± 0%  -1.33% (p=0.000 n=10)
+BackendOperation/20d6!2ro=1kh10/details/changing=true                                             15.34Ki ± 0%                   14.84Ki ± 0%  -3.27% (p=0.000 n=10)
+BackendOperation/20d6!2ro=1kh10/summary/changing=true                                             3.727Ki ± 0%                   3.727Ki ± 0%       ~ (p=1.000 n=10) ¹
+geomean                                                                                           11.31Ki                        11.04Ki       -2.40%
+¹ all samples are equal
+
+                                                      │ go/benchmarks/optimization-round4/h1-layout-before.txt │ go/benchmarks/optimization-round4/h1-layout-after.txt │
+                                                      │                       allocs/op                        │          allocs/op            vs base                 │
+BackendOperation/1d20+5/full/changing=true                                                          45.00 ± 0%                     45.00 ± 0%       ~ (p=1.000 n=10) ¹
+BackendOperation/1d20+5/details/changing=true                                                       36.00 ± 0%                     36.00 ± 0%       ~ (p=1.000 n=10) ¹
+BackendOperation/1d20+5/summary/changing=true                                                       11.00 ± 0%                     11.00 ± 0%       ~ (p=1.000 n=10) ¹
+BackendOperation/100d6/full/changing=true                                                           34.00 ± 0%                     34.00 ± 0%       ~ (p=1.000 n=10) ¹
+BackendOperation/100d6/details/changing=true                                                        27.00 ± 0%                     27.00 ± 0%       ~ (p=1.000 n=10) ¹
+BackendOperation/100d6/summary/changing=true                                                        11.00 ± 0%                     11.00 ± 0%       ~ (p=1.000 n=10) ¹
+BackendOperation/20d6!2ro=1kh10/full/changing=true                                                  141.0 ± 0%                     141.0 ± 0%       ~ (p=1.000 n=10) ¹
+BackendOperation/20d6!2ro=1kh10/details/changing=true                                               111.0 ± 0%                     111.0 ± 0%       ~ (p=1.000 n=10) ¹
+BackendOperation/20d6!2ro=1kh10/summary/changing=true                                               11.00 ± 0%                     11.00 ± 0%       ~ (p=1.000 n=10) ¹
+geomean                                                                                             31.55                          31.55       +0.00%
+¹ all samples are equal

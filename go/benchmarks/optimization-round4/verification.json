@@ -1,0 +1,72 @@
+{
+  "verifiedAt": "2026-09-14T04:06:15.557Z",
+  "sourceStableAfterFinalValidation": true,
+  "comparisons": [
+    {
+      "kind": "backend",
+      "sourceManifest": "1f8ae906a5434cccf230d95e30a7d22e9da333c220305b8ecc6463a6cbc51220",
+      "sourceFiles": 151,
+      "baselineBinary": "ac158c77c539bdec46f5776738532bf77804cfdaf12a52480ee1ef0d99af7df5",
+      "finalBinary": "b65c967f70cdb7995ba4dc8449e34ae73597bed5d3cec096d987fa5f7bab2142",
+      "uniqueOutputs": 54,
+      "rawFile": "go/benchmarks/optimization-round4/backend-round4.json",
+      "rawSha256": "ccb6092db9269bdcd7cc225f9f49c6df60b6d84aae577daf1864a26fdf12229d",
+      "wallMs": 23406
+    },
+    {
+      "kind": "json",
+      "sourceManifest": "04058439f51f2495537844cc7318c3222144c41639819a8ec55b7d1cf67c6a04",
+      "sourceFiles": 151,
+      "baselineBinary": "ac158c77c539bdec46f5776738532bf77804cfdaf12a52480ee1ef0d99af7df5",
+      "finalBinary": "b65c967f70cdb7995ba4dc8449e34ae73597bed5d3cec096d987fa5f7bab2142",
+      "uniqueOutputs": 18,
+      "rawFile": "go/benchmarks/optimization-round4/json-round4.json",
+      "rawSha256": "e7e4d96454cfc9d13b8b5991f98efc1578b088e7fe27f62bb7ee8df884228512",
+      "wallMs": 37563
+    }
+  ],
+  "coverage": {
+    "covered": "4585",
+    "total": "4585",
+    "profileSha256": "a82c56e86db4e4c534c726b0157045d1ade19e3117208ee37fd899d750890ea9"
+  },
+  "preflightArchivesVerified": true,
+  "chartRecordsChecked": 14,
+  "decisions": [
+    {
+      "label": "h1-layout",
+      "decision": "accepted: smaller private dice; timing inconclusive",
+      "wallMs": 31607,
+      "budgetMs": 120000
+    },
+    {
+      "label": "h2-states",
+      "decision": "accepted: transfer individually owned states; fewer allocations",
+      "wallMs": 31349,
+      "budgetMs": 120000
+    },
+    {
+      "label": "h3-selection",
+      "decision": "accepted: single rank vector; fewer allocations",
+      "wallMs": 29950,
+      "budgetMs": 120000
+    },
+    {
+      "label": "h4-events",
+      "decision": "accepted: common envelope faster; full JSON timing inconclusive",
+      "wallMs": 18216,
+      "budgetMs": 120000
+    },
+    {
+      "label": "integrated",
+      "decision": "confirmed: lower memory, faster modified pool; 100d6 summary +1.59% observed",
+      "wallMs": 30140,
+      "budgetMs": 120000
+    }
+  ],
+  "validation": {
+    "race": "ok  \tgithub.com/arkanus-app/rpg-dice-roller/go\t27.264s\tcoverage: 100.0% of statements in ./...",
+    "other": "go vet passed; new JavaScript scripts lint passed; Linux/amd64 test cross-compilation passed (not executed on Linux)\r\ngofmt: no files reported",
+    "oracles": "Verified normalization.json (72 cases)\r\nVerified parser.json (148 cases)\r\nVerified math.json (135 cases)\r\nVerified math-transcendental.json (8 cases)\r\nVerified rng.json (52 cases)\r\nVerified seeds.json (33 cases)\r\nVerified replay.json (24 cases)\r\nVerified limits.json (19 cases)\r\nVerified budget.json (12 cases)\r\nVerified compatibility-corpus.json (31 cases)\r\nVerified full-roll-replay.json (5 cases)\r\nVerified 539 deterministic fixture cases.\r\nVerified compiler.json (468 cases)\r\nVerified executor.json (238 cases, three projections each)\r\nEngine oracle: 24 scenarios, 91 operations.\r\nVerified systems-rolls: 388 cases\r\nVerified systems-contracts: 115 cases\r\nVerified systems-selection: 10 cases\r\nVerified systems-names: 501 cases\r\nVerified 12680 exact math cases (2002 unary inputs)."
+  }
+}

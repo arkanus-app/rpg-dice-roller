@@ -1,0 +1,44 @@
+goos: windows
+goarch: amd64
+pkg: github.com/arkanus-app/rpg-dice-roller/go
+cpu: AMD Ryzen 5 5500
+                                                      │ go/benchmarks/optimization-round4/h3-selection-before.txt │ go/benchmarks/optimization-round4/h3-selection-after.txt │
+                                                      │                          sec/op                           │              sec/op                vs base               │
+BackendOperation/1d20+5/full/changing=true                                                            6.957µ ± 6%                         6.984µ ± 7%       ~ (p=0.739 n=10)
+BackendOperation/1d20+5/details/changing=true                                                         6.047µ ± 5%                         6.203µ ± 2%       ~ (p=0.075 n=10)
+BackendOperation/1d20+5/summary/changing=true                                                         4.522µ ± 4%                         4.476µ ± 4%       ~ (p=0.105 n=10)
+BackendOperation/100d6/full/changing=true                                                             25.63µ ± 5%                         25.17µ ± 5%       ~ (p=0.481 n=10)
+BackendOperation/100d6/details/changing=true                                                          17.24µ ± 2%                         17.48µ ± 7%       ~ (p=0.436 n=10)
+BackendOperation/100d6/summary/changing=true                                                          6.683µ ± 2%                         6.759µ ± 3%       ~ (p=0.481 n=10)
+BackendOperation/20d6!2ro=1kh10/full/changing=true                                                    17.95µ ± 2%                         17.80µ ± 2%       ~ (p=0.796 n=10)
+BackendOperation/20d6!2ro=1kh10/details/changing=true                                                 13.70µ ± 8%                         13.93µ ± 5%       ~ (p=0.796 n=10)
+BackendOperation/20d6!2ro=1kh10/summary/changing=true                                                 6.992µ ± 2%                         7.110µ ± 3%       ~ (p=0.052 n=10)
+geomean                                                                                               9.961µ                              10.02µ       +0.56%
+
+                                                      │ go/benchmarks/optimization-round4/h3-selection-before.txt │ go/benchmarks/optimization-round4/h3-selection-after.txt │
+                                                      │                           B/op                            │              B/op                vs base                 │
+BackendOperation/1d20+5/full/changing=true                                                           7.038Ki ± 0%                      7.038Ki ± 0%       ~ (p=1.000 n=10) ¹
+BackendOperation/1d20+5/details/changing=true                                                        5.030Ki ± 0%                      5.030Ki ± 0%       ~ (p=1.000 n=10) ¹
+BackendOperation/1d20+5/summary/changing=true                                                        3.711Ki ± 0%                      3.711Ki ± 0%       ~ (p=1.000 n=10) ¹
+BackendOperation/100d6/full/changing=true                                                            70.14Ki ± 0%                      70.14Ki ± 0%       ~ (p=1.000 n=10) ¹
+BackendOperation/100d6/details/changing=true                                                         41.09Ki ± 0%                      41.09Ki ± 0%       ~ (p=1.000 n=10) ¹
+BackendOperation/100d6/summary/changing=true                                                         3.711Ki ± 0%                      3.711Ki ± 0%       ~ (p=1.000 n=10) ¹
+BackendOperation/20d6!2ro=1kh10/full/changing=true                                                   37.72Ki ± 0%                      36.90Ki ± 0%  -2.18% (p=0.000 n=10)
+BackendOperation/20d6!2ro=1kh10/details/changing=true                                                15.34Ki ± 0%                      14.52Ki ± 0%  -5.36% (p=0.000 n=10)
+BackendOperation/20d6!2ro=1kh10/summary/changing=true                                                3.727Ki ± 0%                      3.727Ki ± 0%       ~ (p=1.000 n=10) ¹
+geomean                                                                                              11.31Ki                           11.21Ki       -0.85%
+¹ all samples are equal
+
+                                                      │ go/benchmarks/optimization-round4/h3-selection-before.txt │ go/benchmarks/optimization-round4/h3-selection-after.txt │
+                                                      │                         allocs/op                         │            allocs/op             vs base                 │
+BackendOperation/1d20+5/full/changing=true                                                             45.00 ± 0%                        45.00 ± 0%       ~ (p=1.000 n=10) ¹
+BackendOperation/1d20+5/details/changing=true                                                          36.00 ± 0%                        36.00 ± 0%       ~ (p=1.000 n=10) ¹
+BackendOperation/1d20+5/summary/changing=true                                                          11.00 ± 0%                        11.00 ± 0%       ~ (p=1.000 n=10) ¹
+BackendOperation/100d6/full/changing=true                                                              34.00 ± 0%                        34.00 ± 0%       ~ (p=1.000 n=10) ¹
+BackendOperation/100d6/details/changing=true                                                           27.00 ± 0%                        27.00 ± 0%       ~ (p=1.000 n=10) ¹
+BackendOperation/100d6/summary/changing=true                                                           11.00 ± 0%                        11.00 ± 0%       ~ (p=1.000 n=10) ¹
+BackendOperation/20d6!2ro=1kh10/full/changing=true                                                     141.0 ± 0%                        136.0 ± 0%  -3.55% (p=0.000 n=10)
+BackendOperation/20d6!2ro=1kh10/details/changing=true                                                  111.0 ± 0%                        106.0 ± 0%  -4.50% (p=0.000 n=10)
+BackendOperation/20d6!2ro=1kh10/summary/changing=true                                                  11.00 ± 0%                        11.00 ± 0%       ~ (p=1.000 n=10) ¹
+geomean                                                                                                31.55                             31.26       -0.91%
+¹ all samples are equal

@@ -1,0 +1,56 @@
+diff --git a/go/event.go b/go/event.go
+index 66694ad..98dea20 100644
+--- a/go/event.go
++++ b/go/event.go
+@@ -105,6 +105,9 @@ func (event ResolvedEvent) appendJSON(data []byte) ([]byte, error) {
+ 		encoded, err := json.Marshal(event.legacy)
+ 		return append(data, encoded...), err
+ 	}
++	if event.Subject == "die" && (event.Type == "roll" || event.Type == "include") {
++		return event.appendDieValueJSON(data)
++	}
+ 	details := event.resolvedDetails()
+ 	output := eventJSON{data: data, start: len(data)}
+ 	output.data = append(output.data, '{')
+@@ -159,6 +162,41 @@ func (event ResolvedEvent) appendJSON(data []byte) ([]byte, error) {
+ 	return append(output.data, '}'), nil
+ }
+ 
++// Ordinary rolls and inclusions share a fixed envelope. Writing its literal
++// keys together avoids repeatedly checking separators and escaping known type
++// names. Caller-owned strings and numbers still use the ordinary encoders.
++func (event *ResolvedEvent) appendDieValueJSON(data []byte) ([]byte, error) {
++	start := len(data)
++	data = append(data, `{"sequence":`...)
++	data = strconv.AppendInt(data, event.Sequence, 10)
++	if event.Type == "roll" {
++		data = append(data, `,"type":"roll","subject":"die","dieId":`...)
++	} else {
++		data = append(data, `,"type":"include","subject":"die","dieId":`...)
++	}
++	data = appendEventString(data, event.DieID)
++	data = append(data, `,"parentDieId":`...)
++	if event.HasParent {
++		data = appendEventString(data, event.ParentDieID)
++	} else {
++		data = append(data, "null"...)
++	}
++	data = append(data, `,"rollIndex":`...)
++	data = strconv.AppendInt(data, event.RollIndex, 10)
++	data = append(data, `,"sourceNodeId":`...)
++	data = appendEventString(data, event.SourceNodeID)
++	output := eventJSON{data: data, start: start}
++	if event.Type == "roll" {
++		output.number("value", event.Value)
++	} else {
++		output.number("contribution", event.Contribution)
++	}
++	if output.err != nil {
++		return nil, output.err
++	}
++	return append(output.data, '}'), nil
++}
++
+ type eventJSON struct {
+ 	data  []byte
+ 	err   error

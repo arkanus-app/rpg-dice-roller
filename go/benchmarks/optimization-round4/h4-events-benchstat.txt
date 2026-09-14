@@ -1,0 +1,37 @@
+goos: windows
+goarch: amd64
+pkg: github.com/arkanus-app/rpg-dice-roller/go
+cpu: AMD Ryzen 5 5500
+                                  │ go/benchmarks/optimization-round4/h4-events-before.txt │ go/benchmarks/optimization-round4/h4-events-after.txt │
+                                  │                         sec/op                         │            sec/op              vs base                │
+EventEnvelope/roll                                                           110.20n ±  4%                    57.57n ± 14%  -47.76% (p=0.000 n=10)
+EventEnvelope/include                                                        112.55n ±  2%                    58.75n ±  6%  -47.80% (p=0.000 n=10)
+EventEnvelope/transform                                                       138.2n ± 16%                    141.2n ±  5%        ~ (p=0.353 n=10)
+ResolvedEventsJSON/1d20+5                                                     9.289µ ± 16%                    9.190µ ±  6%        ~ (p=0.393 n=10)
+ResolvedEventsJSON/100d6                                                      256.6µ ± 12%                    247.5µ ±  6%        ~ (p=0.105 n=10)
+ResolvedEventsJSON/20d6!2ro=1kh10                                             92.75µ ± 13%                    90.09µ ±  8%        ~ (p=0.315 n=10)
+geomean                                                                       2.690µ                          2.146µ        -20.20%
+
+                                  │ go/benchmarks/optimization-round4/h4-events-before.txt │ go/benchmarks/optimization-round4/h4-events-after.txt │
+                                  │                          B/op                          │             B/op              vs base                 │
+EventEnvelope/roll                                                            0.000 ± 0%                       0.000 ± 0%       ~ (p=1.000 n=10) ¹
+EventEnvelope/include                                                         0.000 ± 0%                       0.000 ± 0%       ~ (p=1.000 n=10) ¹
+EventEnvelope/transform                                                       0.000 ± 0%                       0.000 ± 0%       ~ (p=1.000 n=10) ¹
+ResolvedEventsJSON/1d20+5                                                   3.625Ki ± 0%                     3.625Ki ± 0%       ~ (p=1.000 n=10) ¹
+ResolvedEventsJSON/100d6                                                    96.01Ki ± 0%                     96.01Ki ± 0%       ~ (p=0.979 n=10)
+ResolvedEventsJSON/20d6!2ro=1kh10                                           31.25Ki ± 0%                     31.25Ki ± 0%       ~ (p=1.000 n=10)
+geomean                                                                                  ²                                 +0.00%                ²
+¹ all samples are equal
+² summaries must be >0 to compute geomean
+
+                                  │ go/benchmarks/optimization-round4/h4-events-before.txt │ go/benchmarks/optimization-round4/h4-events-after.txt │
+                                  │                       allocs/op                        │          allocs/op            vs base                 │
+EventEnvelope/roll                                                            0.000 ± 0%                       0.000 ± 0%       ~ (p=1.000 n=10) ¹
+EventEnvelope/include                                                         0.000 ± 0%                       0.000 ± 0%       ~ (p=1.000 n=10) ¹
+EventEnvelope/transform                                                       0.000 ± 0%                       0.000 ± 0%       ~ (p=1.000 n=10) ¹
+ResolvedEventsJSON/1d20+5                                                     2.000 ± 0%                       2.000 ± 0%       ~ (p=1.000 n=10) ¹
+ResolvedEventsJSON/100d6                                                      2.000 ± 0%                       2.000 ± 0%       ~ (p=1.000 n=10) ¹
+ResolvedEventsJSON/20d6!2ro=1kh10                                             2.000 ± 0%                       2.000 ± 0%       ~ (p=1.000 n=10) ¹
+geomean                                                                                  ²                                 +0.00%                ²
+¹ all samples are equal
+² summaries must be >0 to compute geomean

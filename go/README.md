@@ -130,6 +130,13 @@ alocações nas nove cargas nativas. Em `100d6` completo, são 55→34 alocaçõ
 O [comparativo JSON da rodada 3](JSON_ROUND3_BENCHMARK.md) inclui a versão
 anterior e a atual medidas na mesma sessão.
 
+A [quarta rodada](OPTIMIZATION_ROUND4.md) compacta os dados privados, transfere
+os estados e reduz os temporários da seleção. O pool completo passa de 141 para
+116 alocações, e `100d6` aloca 4 KiB a menos por chamada em full/details.
+Os novos confrontos da [API nativa](BACKEND_ROUND4_BENCHMARK.md) e de
+[rolagem com JSON](JSON_ROUND4_BENCHMARK.md) medem Go anterior/atual, Node e Bun
+com GC padrão e configurado, incluindo os casos em que Go perde.
+
 Na confirmação da segunda rodada com seis workers e uma engine por worker, `GOGC=500` e `GOMEMLIMIT=96MiB` deram maior
 vazão que Node e Bun nas nove cargas da API nativa sem JSON, com RSS amostrado até 78,44 MiB.
 Essas variáveis configuram o processo Go inteiro; a biblioteca não as altera.

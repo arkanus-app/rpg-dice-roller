@@ -1,0 +1,731 @@
+{
+  "schemaVersion": 1,
+  "baselineReference": "8432345",
+  "renderer": {
+    "path": "scripts/plot-go-round4.py",
+    "sha256": "c3381e83cb2ef909550be834bd57c3fc0661a54f9fd0c4e3527f6b34ad1f8f1f",
+    "bytes": 17348
+  },
+  "matplotlib": "3.10.8",
+  "charts": {
+    "allocations": {
+      "inputs": [
+        {
+          "path": "go/benchmarks/optimization-round4/integrated-before.txt",
+          "sha256": "f11a07cc9c1989ccaff0b72ba0e7230e15aa13a419dc6d4aab87353b5029291b",
+          "bytes": 12040
+        },
+        {
+          "path": "go/benchmarks/optimization-round4/integrated-after.txt",
+          "sha256": "30d323b75415428bc3fea7c194f99bd7cb2ac7e61421d8b909816c4956a76cb2",
+          "bytes": 12040
+        }
+      ],
+      "displayedValues": [
+        {
+          "workload": "1d20+5",
+          "mode": "full",
+          "benchmark": "BenchmarkBackendOperation/1d20+5/full/changing=true",
+          "before": {
+            "allocs": 45.0,
+            "kib": 7.0380859375
+          },
+          "after": {
+            "allocs": 45.0,
+            "kib": 7.0068359375
+          }
+        },
+        {
+          "workload": "1d20+5",
+          "mode": "details",
+          "benchmark": "BenchmarkBackendOperation/1d20+5/details/changing=true",
+          "before": {
+            "allocs": 36.0,
+            "kib": 5.0302734375
+          },
+          "after": {
+            "allocs": 36.0,
+            "kib": 4.9990234375
+          }
+        },
+        {
+          "workload": "1d20+5",
+          "mode": "summary",
+          "benchmark": "BenchmarkBackendOperation/1d20+5/summary/changing=true",
+          "before": {
+            "allocs": 11.0,
+            "kib": 3.7109375
+          },
+          "after": {
+            "allocs": 11.0,
+            "kib": 3.7109375
+          }
+        },
+        {
+          "workload": "100d6",
+          "mode": "full",
+          "benchmark": "BenchmarkBackendOperation/100d6/full/changing=true",
+          "before": {
+            "allocs": 34.0,
+            "kib": 70.1396484375
+          },
+          "after": {
+            "allocs": 34.0,
+            "kib": 66.1396484375
+          }
+        },
+        {
+          "workload": "100d6",
+          "mode": "details",
+          "benchmark": "BenchmarkBackendOperation/100d6/details/changing=true",
+          "before": {
+            "allocs": 27.0,
+            "kib": 41.0927734375
+          },
+          "after": {
+            "allocs": 27.0,
+            "kib": 37.0927734375
+          }
+        },
+        {
+          "workload": "100d6",
+          "mode": "summary",
+          "benchmark": "BenchmarkBackendOperation/100d6/summary/changing=true",
+          "before": {
+            "allocs": 11.0,
+            "kib": 3.7109375
+          },
+          "after": {
+            "allocs": 11.0,
+            "kib": 3.7109375
+          }
+        },
+        {
+          "workload": "20d6!2ro=1kh10",
+          "mode": "full",
+          "benchmark": "BenchmarkBackendOperation/20d6!2ro=1kh10/full/changing=true",
+          "before": {
+            "allocs": 141.0,
+            "kib": 37.720703125
+          },
+          "after": {
+            "allocs": 116.0,
+            "kib": 36.0498046875
+          }
+        },
+        {
+          "workload": "20d6!2ro=1kh10",
+          "mode": "details",
+          "benchmark": "BenchmarkBackendOperation/20d6!2ro=1kh10/details/changing=true",
+          "before": {
+            "allocs": 111.0,
+            "kib": 15.3427734375
+          },
+          "after": {
+            "allocs": 87.0,
+            "kib": 13.671875
+          }
+        },
+        {
+          "workload": "20d6!2ro=1kh10",
+          "mode": "summary",
+          "benchmark": "BenchmarkBackendOperation/20d6!2ro=1kh10/summary/changing=true",
+          "before": {
+            "allocs": 11.0,
+            "kib": 3.7265625
+          },
+          "after": {
+            "allocs": 11.0,
+            "kib": 3.7265625
+          }
+        }
+      ],
+      "outputs": [
+        {
+          "path": "go/benchmarks/optimization-round4/native-round4-allocations.png",
+          "sha256": "b759fb51b1ec73f8bbe61fe592fb1f78eaef7fff1ca754525bf80c403b6572a3",
+          "bytes": 231490
+        },
+        {
+          "path": "go/benchmarks/optimization-round4/native-round4-allocations.svg",
+          "sha256": "d3d2f23484039fe9991b418701d3c5e7ecf04e12c1e6ce9b7a04e3333e9c5b81",
+          "bytes": 38750
+        }
+      ]
+    },
+    "backend": {
+      "inputs": [
+        {
+          "path": "go/benchmarks/optimization-round4/backend-round4.json",
+          "sha256": "ccb6092db9269bdcd7cc225f9f49c6df60b6d84aae577daf1864a26fdf12229d",
+          "bytes": 321366
+        }
+      ],
+      "displayedValues": [
+        {
+          "workload": "d20-full",
+          "configuration": "node",
+          "thousandsPerSecond": 166.52456570393264,
+          "lower": 165.49578399490272,
+          "upper": 179.03644376331022
+        },
+        {
+          "workload": "d20-full",
+          "configuration": "bun",
+          "thousandsPerSecond": 136.8805470841706,
+          "lower": 119.45483203754704,
+          "upper": 140.36644062990845
+        },
+        {
+          "workload": "d20-full",
+          "configuration": "go-baseline-default",
+          "thousandsPerSecond": 232.77738334943376,
+          "lower": 230.37573129896202,
+          "upper": 247.3423069122281
+        },
+        {
+          "workload": "d20-full",
+          "configuration": "go-final-default",
+          "thousandsPerSecond": 243.35992446107943,
+          "lower": 241.7049869781438,
+          "upper": 249.31345307858487
+        },
+        {
+          "workload": "d20-full",
+          "configuration": "go-baseline-tuned",
+          "thousandsPerSecond": 519.8396814422432,
+          "lower": 517.4885246919649,
+          "upper": 524.3233607030128
+        },
+        {
+          "workload": "d20-full",
+          "configuration": "go-final-tuned",
+          "thousandsPerSecond": 509.8997027284733,
+          "lower": 473.32124786413783,
+          "upper": 590.505265830708
+        },
+        {
+          "workload": "d20-details",
+          "configuration": "node",
+          "thousandsPerSecond": 192.81382860778777,
+          "lower": 183.1173159396299,
+          "upper": 195.95221509282746
+        },
+        {
+          "workload": "d20-details",
+          "configuration": "bun",
+          "thousandsPerSecond": 142.83918593091153,
+          "lower": 139.22215191503548,
+          "upper": 152.1105722171561
+        },
+        {
+          "workload": "d20-details",
+          "configuration": "go-baseline-default",
+          "thousandsPerSecond": 321.2098046080759,
+          "lower": 298.82680595980185,
+          "upper": 331.4759630205416
+        },
+        {
+          "workload": "d20-details",
+          "configuration": "go-final-default",
+          "thousandsPerSecond": 328.59931257023806,
+          "lower": 317.39834921118575,
+          "upper": 332.9709499494717
+        },
+        {
+          "workload": "d20-details",
+          "configuration": "go-baseline-tuned",
+          "thousandsPerSecond": 633.8420972567313,
+          "lower": 621.2974554762711,
+          "upper": 641.1612712945687
+        },
+        {
+          "workload": "d20-details",
+          "configuration": "go-final-tuned",
+          "thousandsPerSecond": 606.9065970747101,
+          "lower": 575.8428179444139,
+          "upper": 644.7266197950414
+        },
+        {
+          "workload": "d20-summary",
+          "configuration": "node",
+          "thousandsPerSecond": 199.97920216297504,
+          "lower": 191.65808198174454,
+          "upper": 207.2850324660182
+        },
+        {
+          "workload": "d20-summary",
+          "configuration": "bun",
+          "thousandsPerSecond": 151.27860678454297,
+          "lower": 148.89992733683547,
+          "upper": 154.79325039510977
+        },
+        {
+          "workload": "d20-summary",
+          "configuration": "go-baseline-default",
+          "thousandsPerSecond": 489.1099665937893,
+          "lower": 474.17860411302524,
+          "upper": 510.6756749855734
+        },
+        {
+          "workload": "d20-summary",
+          "configuration": "go-final-default",
+          "thousandsPerSecond": 465.67292065399107,
+          "lower": 457.85659015883044,
+          "upper": 482.7419744146754
+        },
+        {
+          "workload": "d20-summary",
+          "configuration": "go-baseline-tuned",
+          "thousandsPerSecond": 938.1919165384471,
+          "lower": 841.7047888793963,
+          "upper": 1037.9365820748353
+        },
+        {
+          "workload": "d20-summary",
+          "configuration": "go-final-tuned",
+          "thousandsPerSecond": 971.0529126732115,
+          "lower": 849.7584561588368,
+          "upper": 1071.0307600034273
+        },
+        {
+          "workload": "100d6-full",
+          "configuration": "node",
+          "thousandsPerSecond": 56.297747527121444,
+          "lower": 55.12708032373929,
+          "upper": 57.04465883728724
+        },
+        {
+          "workload": "100d6-full",
+          "configuration": "bun",
+          "thousandsPerSecond": 41.75879701257566,
+          "lower": 39.26905368845386,
+          "upper": 44.982363539815125
+        },
+        {
+          "workload": "100d6-full",
+          "configuration": "go-baseline-default",
+          "thousandsPerSecond": 31.044042182644517,
+          "lower": 30.68343045661854,
+          "upper": 31.319622542173043
+        },
+        {
+          "workload": "100d6-full",
+          "configuration": "go-final-default",
+          "thousandsPerSecond": 31.93908577560876,
+          "lower": 30.414813960947075,
+          "upper": 32.836468313054354
+        },
+        {
+          "workload": "100d6-full",
+          "configuration": "go-baseline-tuned",
+          "thousandsPerSecond": 70.07679014664268,
+          "lower": 67.63023977963363,
+          "upper": 73.6025001297244
+        },
+        {
+          "workload": "100d6-full",
+          "configuration": "go-final-tuned",
+          "thousandsPerSecond": 72.65255947701782,
+          "lower": 69.62498590094036,
+          "upper": 74.37238999393865
+        },
+        {
+          "workload": "100d6-details",
+          "configuration": "node",
+          "thousandsPerSecond": 78.70873596131308,
+          "lower": 63.500449583183055,
+          "upper": 80.23196666201322
+        },
+        {
+          "workload": "100d6-details",
+          "configuration": "bun",
+          "thousandsPerSecond": 77.69893062961773,
+          "lower": 75.02815431490667,
+          "upper": 78.83379589063073
+        },
+        {
+          "workload": "100d6-details",
+          "configuration": "go-baseline-default",
+          "thousandsPerSecond": 56.8106608613746,
+          "lower": 55.12843270968375,
+          "upper": 57.5543212072134
+        },
+        {
+          "workload": "100d6-details",
+          "configuration": "go-final-default",
+          "thousandsPerSecond": 58.89316191497006,
+          "lower": 58.71014975197897,
+          "upper": 59.991871101465755
+        },
+        {
+          "workload": "100d6-details",
+          "configuration": "go-baseline-tuned",
+          "thousandsPerSecond": 130.17816183228365,
+          "lower": 126.70360921566031,
+          "upper": 141.53049663758924
+        },
+        {
+          "workload": "100d6-details",
+          "configuration": "go-final-tuned",
+          "thousandsPerSecond": 130.48340185886656,
+          "lower": 122.41527791634508,
+          "upper": 139.92990910852754
+        },
+        {
+          "workload": "100d6-summary",
+          "configuration": "node",
+          "thousandsPerSecond": 179.13410157978362,
+          "lower": 169.9814465251118,
+          "upper": 185.04965344826152
+        },
+        {
+          "workload": "100d6-summary",
+          "configuration": "bun",
+          "thousandsPerSecond": 155.59697892905712,
+          "lower": 147.09613835862774,
+          "upper": 168.01569266569496
+        },
+        {
+          "workload": "100d6-summary",
+          "configuration": "go-baseline-default",
+          "thousandsPerSecond": 350.73197763732907,
+          "lower": 338.2795440668305,
+          "upper": 356.44968979965745
+        },
+        {
+          "workload": "100d6-summary",
+          "configuration": "go-final-default",
+          "thousandsPerSecond": 339.01752720615656,
+          "lower": 256.46516625995565,
+          "upper": 354.30274106315625
+        },
+        {
+          "workload": "100d6-summary",
+          "configuration": "go-baseline-tuned",
+          "thousandsPerSecond": 575.188661881097,
+          "lower": 560.1158319540482,
+          "upper": 591.2104738847554
+        },
+        {
+          "workload": "100d6-summary",
+          "configuration": "go-final-tuned",
+          "thousandsPerSecond": 604.858221232943,
+          "lower": 557.332828018236,
+          "upper": 661.5988197077056
+        },
+        {
+          "workload": "pool-full",
+          "configuration": "node",
+          "thousandsPerSecond": 93.58564021936473,
+          "lower": 91.18238939804122,
+          "upper": 95.38107601299471
+        },
+        {
+          "workload": "pool-full",
+          "configuration": "bun",
+          "thousandsPerSecond": 76.75380526178036,
+          "lower": 72.93395429302018,
+          "upper": 79.32758763616084
+        },
+        {
+          "workload": "pool-full",
+          "configuration": "go-baseline-default",
+          "thousandsPerSecond": 49.03948806697617,
+          "lower": 48.6887747786304,
+          "upper": 49.562966155185116
+        },
+        {
+          "workload": "pool-full",
+          "configuration": "go-final-default",
+          "thousandsPerSecond": 52.410104877860874,
+          "lower": 51.48182717241727,
+          "upper": 53.78181631412237
+        },
+        {
+          "workload": "pool-full",
+          "configuration": "go-baseline-tuned",
+          "thousandsPerSecond": 123.58128682722348,
+          "lower": 96.50991205051716,
+          "upper": 152.12167908866942
+        },
+        {
+          "workload": "pool-full",
+          "configuration": "go-final-tuned",
+          "thousandsPerSecond": 141.16976087254207,
+          "lower": 109.93505037224008,
+          "upper": 164.38594861788403
+        },
+        {
+          "workload": "pool-details",
+          "configuration": "node",
+          "thousandsPerSecond": 143.24143917538768,
+          "lower": 129.13865165042426,
+          "upper": 146.904250013405
+        },
+        {
+          "workload": "pool-details",
+          "configuration": "bun",
+          "thousandsPerSecond": 85.8092888555186,
+          "lower": 83.95361059293077,
+          "upper": 93.96857972599702
+        },
+        {
+          "workload": "pool-details",
+          "configuration": "go-baseline-default",
+          "thousandsPerSecond": 98.29951666127657,
+          "lower": 96.82487043622024,
+          "upper": 99.2243139258844
+        },
+        {
+          "workload": "pool-details",
+          "configuration": "go-final-default",
+          "thousandsPerSecond": 100.87488790278081,
+          "lower": 84.11475944861093,
+          "upper": 112.22072469899595
+        },
+        {
+          "workload": "pool-details",
+          "configuration": "go-baseline-tuned",
+          "thousandsPerSecond": 263.4171526713133,
+          "lower": 255.64528705131056,
+          "upper": 267.75159613420243
+        },
+        {
+          "workload": "pool-details",
+          "configuration": "go-final-tuned",
+          "thousandsPerSecond": 300.7129905004766,
+          "lower": 295.6270841709434,
+          "upper": 317.48853866375424
+        },
+        {
+          "workload": "pool-summary",
+          "configuration": "node",
+          "thousandsPerSecond": 154.3133672411239,
+          "lower": 146.6572414946133,
+          "upper": 156.0633336220505
+        },
+        {
+          "workload": "pool-summary",
+          "configuration": "bun",
+          "thousandsPerSecond": 115.98250519891579,
+          "lower": 110.2781435336205,
+          "upper": 122.71015187221946
+        },
+        {
+          "workload": "pool-summary",
+          "configuration": "go-baseline-default",
+          "thousandsPerSecond": 353.0986169127176,
+          "lower": 239.1103183275668,
+          "upper": 360.12481926235637
+        },
+        {
+          "workload": "pool-summary",
+          "configuration": "go-final-default",
+          "thousandsPerSecond": 344.15825773323604,
+          "lower": 342.91847627604255,
+          "upper": 362.1476077434401
+        },
+        {
+          "workload": "pool-summary",
+          "configuration": "go-baseline-tuned",
+          "thousandsPerSecond": 631.6959773600162,
+          "lower": 630.0839901958931,
+          "upper": 671.9888181060667
+        },
+        {
+          "workload": "pool-summary",
+          "configuration": "go-final-tuned",
+          "thousandsPerSecond": 627.2187864570919,
+          "lower": 595.0291266757507,
+          "upper": 666.97125020426
+        }
+      ],
+      "outputs": [
+        {
+          "path": "go/benchmarks/optimization-round4/backend-round4-throughput.png",
+          "sha256": "99793c08c93c9f5d0353614344cbb9e7f61118234e7fd277767e9e4aa1d2e5b4",
+          "bytes": 385293
+        },
+        {
+          "path": "go/benchmarks/optimization-round4/backend-round4-throughput.svg",
+          "sha256": "ac3094ad5b1d753ad8b0136274aeb07a91d9f629eb67bc8fba40d72932179c32",
+          "bytes": 130106
+        }
+      ]
+    },
+    "json": {
+      "inputs": [
+        {
+          "path": "go/benchmarks/optimization-round4/json-round4.json",
+          "sha256": "e7e4d96454cfc9d13b8b5991f98efc1578b088e7fe27f62bb7ee8df884228512",
+          "bytes": 144268
+        }
+      ],
+      "displayedValues": [
+        {
+          "workload": "d20",
+          "configuration": "node",
+          "thousandsPerSecond": 137.33151140194872,
+          "lower": 133.45584579977753,
+          "upper": 140.99510112521142
+        },
+        {
+          "workload": "d20",
+          "configuration": "bun",
+          "thousandsPerSecond": 120.18754063841217,
+          "lower": 111.3523745893881,
+          "upper": 124.63054831832885
+        },
+        {
+          "workload": "d20",
+          "configuration": "go-baseline-default",
+          "thousandsPerSecond": 112.78827272655498,
+          "lower": 110.86867826796517,
+          "upper": 113.87115820063073
+        },
+        {
+          "workload": "d20",
+          "configuration": "go-final-default",
+          "thousandsPerSecond": 114.85486938704254,
+          "lower": 110.85263970619616,
+          "upper": 116.87472315299952
+        },
+        {
+          "workload": "d20",
+          "configuration": "go-baseline-tuned",
+          "thousandsPerSecond": 194.22567080691056,
+          "lower": 158.89775803208306,
+          "upper": 234.41519854381278
+        },
+        {
+          "workload": "d20",
+          "configuration": "go-final-tuned",
+          "thousandsPerSecond": 239.72881876021845,
+          "lower": 232.9696289143266,
+          "upper": 245.2480131845332
+        },
+        {
+          "workload": "100d6",
+          "configuration": "node",
+          "thousandsPerSecond": 22.51632039192808,
+          "lower": 16.642062763709085,
+          "upper": 22.68674852272401
+        },
+        {
+          "workload": "100d6",
+          "configuration": "bun",
+          "thousandsPerSecond": 26.874084433535955,
+          "lower": 26.437488887992952,
+          "upper": 27.268452323088074
+        },
+        {
+          "workload": "100d6",
+          "configuration": "go-baseline-default",
+          "thousandsPerSecond": 7.059418846050453,
+          "lower": 6.919750066931283,
+          "upper": 7.320542929530477
+        },
+        {
+          "workload": "100d6",
+          "configuration": "go-final-default",
+          "thousandsPerSecond": 7.250259903691897,
+          "lower": 7.161402361565527,
+          "upper": 7.5073902749866965
+        },
+        {
+          "workload": "100d6",
+          "configuration": "go-baseline-tuned",
+          "thousandsPerSecond": 15.137687103704813,
+          "lower": 15.070669004328371,
+          "upper": 15.383863942030525
+        },
+        {
+          "workload": "100d6",
+          "configuration": "go-final-tuned",
+          "thousandsPerSecond": 15.465897001147106,
+          "lower": 15.278104665558853,
+          "upper": 15.574429341228116
+        },
+        {
+          "workload": "pool",
+          "configuration": "node",
+          "thousandsPerSecond": 54.25965414896445,
+          "lower": 50.99215434713215,
+          "upper": 56.09163578354687
+        },
+        {
+          "workload": "pool",
+          "configuration": "bun",
+          "thousandsPerSecond": 47.48527481627947,
+          "lower": 47.28901532920721,
+          "upper": 48.22289005566851
+        },
+        {
+          "workload": "pool",
+          "configuration": "go-baseline-default",
+          "thousandsPerSecond": 11.61540690803095,
+          "lower": 11.343037150374983,
+          "upper": 11.780613175025453
+        },
+        {
+          "workload": "pool",
+          "configuration": "go-final-default",
+          "thousandsPerSecond": 12.7227126757277,
+          "lower": 12.55233224215909,
+          "upper": 12.816021462222182
+        },
+        {
+          "workload": "pool",
+          "configuration": "go-baseline-tuned",
+          "thousandsPerSecond": 43.08116491469929,
+          "lower": 42.58782354501895,
+          "upper": 44.34364640908477
+        },
+        {
+          "workload": "pool",
+          "configuration": "go-final-tuned",
+          "thousandsPerSecond": 43.004445369517846,
+          "lower": 42.16928945590653,
+          "upper": 45.38076046355539
+        }
+      ],
+      "outputs": [
+        {
+          "path": "go/benchmarks/optimization-round4/json-round4-throughput.png",
+          "sha256": "a14ad9053de6889145dd783c496c55b7923eaaf9b907ccb01acca53cc4b4753b",
+          "bytes": 283248
+        },
+        {
+          "path": "go/benchmarks/optimization-round4/json-round4-throughput.svg",
+          "sha256": "da6f4abcec3aa7aa9ff7a8a3b430bd690d603ddfdf3d441be01801c950816475",
+          "bytes": 45099
+        }
+      ]
+    }
+  },
+  "verification": "Raw measurements, sample counts, baseline, runtime settings, quartiles and throughput validated by renderer. Three PNGs visually inspected; six output hashes verified and three SVGs parsed as XML.",
+  "visualReview": {
+    "inspected": [
+      {
+        "path": "go/benchmarks/optimization-round4/native-round4-allocations.png",
+        "sha256": "b759fb51b1ec73f8bbe61fe592fb1f78eaef7fff1ca754525bf80c403b6572a3"
+      },
+      {
+        "path": "go/benchmarks/optimization-round4/backend-round4-throughput.png",
+        "sha256": "99793c08c93c9f5d0353614344cbb9e7f61118234e7fd277767e9e4aa1d2e5b4"
+      },
+      {
+        "path": "go/benchmarks/optimization-round4/json-round4-throughput.png",
+        "sha256": "a14ad9053de6889145dd783c496c55b7923eaaf9b907ccb01acca53cc4b4753b"
+      }
+    ],
+    "status": "passed",
+    "notes": [
+      "Titles, series, numeric labels, units and source notes are legible without clipping or overlaps.",
+      "All native API and JSON controls and Q1-Q3 intervals remain visible; independent scales are declared.",
+      "Allocation figure shows unchanged 100d6 allocation counts alongside fewer allocated bytes, and both pool reductions."
+    ],
+    "inspectedAt": "2026-09-14T04:05:42.3761748Z"
+  }
+}

@@ -1,0 +1,44 @@
+goos: windows
+goarch: amd64
+pkg: github.com/arkanus-app/rpg-dice-roller/go
+cpu: AMD Ryzen 5 5500
+                                                      │ go/benchmarks/optimization-round4/integrated-before.txt │ go/benchmarks/optimization-round4/integrated-after.txt │
+                                                      │                         sec/op                          │             sec/op              vs base                │
+BackendOperation/1d20+5/full/changing=true                                                         7.008µ ±  3%                      7.106µ ± 6%        ~ (p=0.190 n=10)
+BackendOperation/1d20+5/details/changing=true                                                      6.242µ ±  4%                      6.211µ ± 3%        ~ (p=0.481 n=10)
+BackendOperation/1d20+5/summary/changing=true                                                      4.505µ ±  3%                      4.557µ ± 2%        ~ (p=0.184 n=10)
+BackendOperation/100d6/full/changing=true                                                          25.54µ ±  3%                      25.07µ ± 3%        ~ (p=0.075 n=10)
+BackendOperation/100d6/details/changing=true                                                       17.22µ ±  5%                      16.69µ ± 9%        ~ (p=0.089 n=10)
+BackendOperation/100d6/summary/changing=true                                                       6.715µ ±  1%                      6.822µ ± 2%   +1.59% (p=0.022 n=10)
+BackendOperation/20d6!2ro=1kh10/full/changing=true                                                 17.95µ ± 13%                      17.05µ ± 6%   -5.04% (p=0.005 n=10)
+BackendOperation/20d6!2ro=1kh10/details/changing=true                                              14.65µ ±  7%                      12.30µ ± 9%  -16.06% (p=0.000 n=10)
+BackendOperation/20d6!2ro=1kh10/summary/changing=true                                              7.022µ ±  2%                      7.006µ ± 2%        ~ (p=0.631 n=10)
+geomean                                                                                            10.08µ                            9.812µ        -2.67%
+
+                                                      │ go/benchmarks/optimization-round4/integrated-before.txt │ go/benchmarks/optimization-round4/integrated-after.txt │
+                                                      │                          B/op                           │             B/op              vs base                  │
+BackendOperation/1d20+5/full/changing=true                                                         7.038Ki ± 0%                   7.007Ki ± 0%   -0.44% (p=0.000 n=10)
+BackendOperation/1d20+5/details/changing=true                                                      5.030Ki ± 0%                   4.999Ki ± 0%   -0.62% (p=0.000 n=10)
+BackendOperation/1d20+5/summary/changing=true                                                      3.711Ki ± 0%                   3.711Ki ± 0%        ~ (p=1.000 n=10) ¹
+BackendOperation/100d6/full/changing=true                                                          70.14Ki ± 0%                   66.14Ki ± 0%   -5.70% (p=0.000 n=10)
+BackendOperation/100d6/details/changing=true                                                       41.09Ki ± 0%                   37.09Ki ± 0%   -9.73% (p=0.000 n=10)
+BackendOperation/100d6/summary/changing=true                                                       3.711Ki ± 0%                   3.711Ki ± 0%        ~ (p=1.000 n=10) ¹
+BackendOperation/20d6!2ro=1kh10/full/changing=true                                                 37.72Ki ± 0%                   36.05Ki ± 0%   -4.43% (p=0.000 n=10)
+BackendOperation/20d6!2ro=1kh10/details/changing=true                                              15.34Ki ± 0%                   13.67Ki ± 0%  -10.89% (p=0.000 n=10)
+BackendOperation/20d6!2ro=1kh10/summary/changing=true                                              3.727Ki ± 0%                   3.727Ki ± 0%        ~ (p=1.000 n=10) ¹
+geomean                                                                                            11.31Ki                        10.90Ki        -3.63%
+¹ all samples are equal
+
+                                                      │ go/benchmarks/optimization-round4/integrated-before.txt │ go/benchmarks/optimization-round4/integrated-after.txt │
+                                                      │                        allocs/op                        │          allocs/op            vs base                  │
+BackendOperation/1d20+5/full/changing=true                                                           45.00 ± 0%                     45.00 ± 0%        ~ (p=1.000 n=10) ¹
+BackendOperation/1d20+5/details/changing=true                                                        36.00 ± 0%                     36.00 ± 0%        ~ (p=1.000 n=10) ¹
+BackendOperation/1d20+5/summary/changing=true                                                        11.00 ± 0%                     11.00 ± 0%        ~ (p=1.000 n=10) ¹
+BackendOperation/100d6/full/changing=true                                                            34.00 ± 0%                     34.00 ± 0%        ~ (p=1.000 n=10) ¹
+BackendOperation/100d6/details/changing=true                                                         27.00 ± 0%                     27.00 ± 0%        ~ (p=1.000 n=10) ¹
+BackendOperation/100d6/summary/changing=true                                                         11.00 ± 0%                     11.00 ± 0%        ~ (p=1.000 n=10) ¹
+BackendOperation/20d6!2ro=1kh10/full/changing=true                                                   141.0 ± 0%                     116.0 ± 0%  -17.73% (p=0.000 n=10)
+BackendOperation/20d6!2ro=1kh10/details/changing=true                                               111.00 ± 0%                     87.00 ± 0%  -21.62% (p=0.000 n=10)
+BackendOperation/20d6!2ro=1kh10/summary/changing=true                                                11.00 ± 0%                     11.00 ± 0%        ~ (p=1.000 n=10) ¹
+geomean                                                                                              31.55                          30.05        -4.76%
+¹ all samples are equal

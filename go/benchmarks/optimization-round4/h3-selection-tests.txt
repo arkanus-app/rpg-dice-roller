@@ -1,0 +1,2 @@
+PASS
+ok  	github.com/arkanus-app/rpg-dice-roller/go	0.820s

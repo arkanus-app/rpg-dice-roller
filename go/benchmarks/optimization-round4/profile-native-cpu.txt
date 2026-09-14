@@ -1,0 +1,34 @@
+File: baseline.exe
+Build ID: D:\Projetos\ERPG\rpg-dice-roller\.artifacts\optimization-round4\baseline.exe2026-09-14 00:44:23.5888311 -0300 -03
+Type: cpu
+Time: 2026-09-14 00:44:38 -03
+Duration: 3.52s, Total samples = 3320ms (94.28%)
+Showing nodes accounting for 2200ms, 66.27% of 3320ms total
+Dropped 69 nodes (cum <= 16.60ms)
+Showing top 25 nodes out of 168
+      flat  flat%   sum%        cum   cum%
+     230ms  6.93%  6.93%      230ms  6.93%  runtime.memclrNoHeapPointers
+     190ms  5.72% 12.65%      210ms  6.33%  runtime.scanblock
+     170ms  5.12% 17.77%      250ms  7.53%  github.com/arkanus-app/rpg-dice-roller/go.NewMersenneTwister19937FromWords
+     130ms  3.92% 21.69%      190ms  5.72%  runtime.typePointers.next
+     120ms  3.61% 25.30%      630ms 18.98%  runtime.bulkBarrierPreWrite
+     120ms  3.61% 28.92%      150ms  4.52%  runtime.findObject
+     110ms  3.31% 32.23%      170ms  5.12%  runtime.tryDeferToSpanScan
+     110ms  3.31% 35.54%      380ms 11.45%  runtime.wbBufFlush1
+      90ms  2.71% 38.25%      490ms 14.76%  github.com/arkanus-app/rpg-dice-roller/go.recordDieEvent
+      80ms  2.41% 40.66%      400ms 12.05%  github.com/arkanus-app/rpg-dice-roller/go.(*ExecutionJournal).recordResolved
+      80ms  2.41% 43.07%      820ms 24.70%  github.com/arkanus-app/rpg-dice-roller/go.finalizeWorkingDice
+      70ms  2.11% 45.18%       70ms  2.11%  github.com/arkanus-app/rpg-dice-roller/go.(*MersenneTwister19937).twist
+      70ms  2.11% 47.29%      980ms 29.52%  github.com/arkanus-app/rpg-dice-roller/go.createWorkingDie
+      70ms  2.11% 49.40%       70ms  2.11%  runtime.typePointers.nextFast (inline)
+      60ms  1.81% 51.20%       60ms  1.81%  github.com/arkanus-app/rpg-dice-roller/go.syntaxLength
+      60ms  1.81% 53.01%      390ms 11.75%  runtime.(*wbBuf).get2 (inline)
+      60ms  1.81% 54.82%       60ms  1.81%  runtime.asyncPreempt
+      60ms  1.81% 56.63%       60ms  1.81%  runtime.cgocall
+      60ms  1.81% 58.43%      200ms  6.02%  runtime.scanObject
+      50ms  1.51% 59.94%       50ms  1.51%  runtime.memmove
+      50ms  1.51% 61.45%       50ms  1.51%  runtime.spanOf (inline)
+      40ms  1.20% 62.65%       50ms  1.51%  github.com/arkanus-app/rpg-dice-roller/go.(*ExecutionBudget).consume
+      40ms  1.20% 63.86%      130ms  3.92%  github.com/arkanus-app/rpg-dice-roller/go.randomInteger
+      40ms  1.20% 65.06%       40ms  1.20%  runtime.heapArenaOf (inline)
+      40ms  1.20% 66.27%       40ms  1.20%  runtime.sysUnusedOS

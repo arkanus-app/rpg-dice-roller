@@ -1,0 +1,1925 @@
+=== RUN   TestWorkingDieLayoutSizeDiagnostic
+    executor_layout_test.go:15: working die bytes: previous=152 compact=120; public resolved die=144
+--- PASS: TestWorkingDieLayoutSizeDiagnostic (0.00s)
+=== RUN   TestWorkingDieCompactMetadataAcrossKindsAndRolls
+--- PASS: TestWorkingDieCompactMetadataAcrossKindsAndRolls (0.00s)
+=== RUN   TestWorkingDieSourceSnapshotsASTIdentity
+--- PASS: TestWorkingDieSourceSnapshotsASTIdentity (0.00s)
+=== RUN   TestWorkingDiePublicResultOwnsMaterializedMetadata
+--- PASS: TestWorkingDiePublicResultOwnsMaterializedMetadata (0.00s)
+=== RUN   TestExecutorTypeScriptFixtures
+=== RUN   TestExecutorTypeScriptFixtures/mt19937-1
+=== RUN   TestExecutorTypeScriptFixtures/mt19937-1/full
+=== RUN   TestExecutorTypeScriptFixtures/mt19937-1/details
+=== RUN   TestExecutorTypeScriptFixtures/mt19937-1/summary
+=== RUN   TestExecutorTypeScriptFixtures/mt19937-2
+=== RUN   TestExecutorTypeScriptFixtures/mt19937-2/full
+=== RUN   TestExecutorTypeScriptFixtures/mt19937-2/details
+=== RUN   TestExecutorTypeScriptFixtures/mt19937-2/summary
+=== RUN   TestExecutorTypeScriptFixtures/mt19937-3
+=== RUN   TestExecutorTypeScriptFixtures/mt19937-3/full
+=== RUN   TestExecutorTypeScriptFixtures/mt19937-3/details
+=== RUN   TestExecutorTypeScriptFixtures/mt19937-3/summary
+=== RUN   TestExecutorTypeScriptFixtures/mt19937-4
+=== RUN   TestExecutorTypeScriptFixtures/mt19937-4/full
+=== RUN   TestExecutorTypeScriptFixtures/mt19937-4/details
+=== RUN   TestExecutorTypeScriptFixtures/mt19937-4/summary
+=== RUN   TestExecutorTypeScriptFixtures/mt19937-5
+=== RUN   TestExecutorTypeScriptFixtures/mt19937-5/full
+=== RUN   TestExecutorTypeScriptFixtures/mt19937-5/details
+=== RUN   TestExecutorTypeScriptFixtures/mt19937-5/summary
+=== RUN   TestExecutorTypeScriptFixtures/mt19937-6
+=== RUN   TestExecutorTypeScriptFixtures/mt19937-6/full
+=== RUN   TestExecutorTypeScriptFixtures/mt19937-6/details
+=== RUN   TestExecutorTypeScriptFixtures/mt19937-6/summary
+=== RUN   TestExecutorTypeScriptFixtures/mt19937-7
+=== RUN   TestExecutorTypeScriptFixtures/mt19937-7/full
+=== RUN   TestExecutorTypeScriptFixtures/mt19937-7/details
+=== RUN   TestExecutorTypeScriptFixtures/mt19937-7/summary
+=== RUN   TestExecutorTypeScriptFixtures/mt19937-8
+=== RUN   TestExecutorTypeScriptFixtures/mt19937-8/full
+=== RUN   TestExecutorTypeScriptFixtures/mt19937-8/details
+=== RUN   TestExecutorTypeScriptFixtures/mt19937-8/summary
+=== RUN   TestExecutorTypeScriptFixtures/mt19937-9
+=== RUN   TestExecutorTypeScriptFixtures/mt19937-9/full
+=== RUN   TestExecutorTypeScriptFixtures/mt19937-9/details
+=== RUN   TestExecutorTypeScriptFixtures/mt19937-9/summary
+=== RUN   TestExecutorTypeScriptFixtures/mt19937-10
+=== RUN   TestExecutorTypeScriptFixtures/mt19937-10/full
+=== RUN   TestExecutorTypeScriptFixtures/mt19937-10/details
+=== RUN   TestExecutorTypeScriptFixtures/mt19937-10/summary
+=== RUN   TestExecutorTypeScriptFixtures/mt19937-11
+=== RUN   TestExecutorTypeScriptFixtures/mt19937-11/full
+=== RUN   TestExecutorTypeScriptFixtures/mt19937-11/details
+=== RUN   TestExecutorTypeScriptFixtures/mt19937-11/summary
+=== RUN   TestExecutorTypeScriptFixtures/mt19937-12
+=== RUN   TestExecutorTypeScriptFixtures/mt19937-12/full
+=== RUN   TestExecutorTypeScriptFixtures/mt19937-12/details
+=== RUN   TestExecutorTypeScriptFixtures/mt19937-12/summary
+=== RUN   TestExecutorTypeScriptFixtures/mt19937-13
+=== RUN   TestExecutorTypeScriptFixtures/mt19937-13/full
+=== RUN   TestExecutorTypeScriptFixtures/mt19937-13/details
+=== RUN   TestExecutorTypeScriptFixtures/mt19937-13/summary
+=== RUN   TestExecutorTypeScriptFixtures/mt19937-14
+=== RUN   TestExecutorTypeScriptFixtures/mt19937-14/full
+=== RUN   TestExecutorTypeScriptFixtures/mt19937-14/details
+=== RUN   TestExecutorTypeScriptFixtures/mt19937-14/summary
+=== RUN   TestExecutorTypeScriptFixtures/mt19937-15
+=== RUN   TestExecutorTypeScriptFixtures/mt19937-15/full
+=== RUN   TestExecutorTypeScriptFixtures/mt19937-15/details
+=== RUN   TestExecutorTypeScriptFixtures/mt19937-15/summary
+=== RUN   TestExecutorTypeScriptFixtures/mt19937-16
+=== RUN   TestExecutorTypeScriptFixtures/mt19937-16/full
+=== RUN   TestExecutorTypeScriptFixtures/mt19937-16/details
+=== RUN   TestExecutorTypeScriptFixtures/mt19937-16/summary
+=== RUN   TestExecutorTypeScriptFixtures/mt19937-17
+=== RUN   TestExecutorTypeScriptFixtures/mt19937-17/full
+=== RUN   TestExecutorTypeScriptFixtures/mt19937-17/details
+=== RUN   TestExecutorTypeScriptFixtures/mt19937-17/summary
+=== RUN   TestExecutorTypeScriptFixtures/mt19937-18
+=== RUN   TestExecutorTypeScriptFixtures/mt19937-18/full
+=== RUN   TestExecutorTypeScriptFixtures/mt19937-18/details
+=== RUN   TestExecutorTypeScriptFixtures/mt19937-18/summary
+=== RUN   TestExecutorTypeScriptFixtures/mt19937-19
+=== RUN   TestExecutorTypeScriptFixtures/mt19937-19/full
+=== RUN   TestExecutorTypeScriptFixtures/mt19937-19/details
+=== RUN   TestExecutorTypeScriptFixtures/mt19937-19/summary
+=== RUN   TestExecutorTypeScriptFixtures/mt19937-20
+=== RUN   TestExecutorTypeScriptFixtures/mt19937-20/full
+=== RUN   TestExecutorTypeScriptFixtures/mt19937-20/details
+=== RUN   TestExecutorTypeScriptFixtures/mt19937-20/summary
+=== RUN   TestExecutorTypeScriptFixtures/mt19937-21
+=== RUN   TestExecutorTypeScriptFixtures/mt19937-21/full
+=== RUN   TestExecutorTypeScriptFixtures/mt19937-21/details
+=== RUN   TestExecutorTypeScriptFixtures/mt19937-21/summary
+=== RUN   TestExecutorTypeScriptFixtures/mt19937-22
+=== RUN   TestExecutorTypeScriptFixtures/mt19937-22/full
+=== RUN   TestExecutorTypeScriptFixtures/mt19937-22/details
+=== RUN   TestExecutorTypeScriptFixtures/mt19937-22/summary
+=== RUN   TestExecutorTypeScriptFixtures/mt19937-23
+=== RUN   TestExecutorTypeScriptFixtures/mt19937-23/full
+=== RUN   TestExecutorTypeScriptFixtures/mt19937-23/details
+=== RUN   TestExecutorTypeScriptFixtures/mt19937-23/summary
+=== RUN   TestExecutorTypeScriptFixtures/mt19937-24
+=== RUN   TestExecutorTypeScriptFixtures/mt19937-24/full
+=== RUN   TestExecutorTypeScriptFixtures/mt19937-24/details
+=== RUN   TestExecutorTypeScriptFixtures/mt19937-24/summary
+=== RUN   TestExecutorTypeScriptFixtures/mt19937-25
+=== RUN   TestExecutorTypeScriptFixtures/mt19937-25/full
+=== RUN   TestExecutorTypeScriptFixtures/mt19937-25/details
+=== RUN   TestExecutorTypeScriptFixtures/mt19937-25/summary
+=== RUN   TestExecutorTypeScriptFixtures/mt19937-26
+=== RUN   TestExecutorTypeScriptFixtures/mt19937-26/full
+=== RUN   TestExecutorTypeScriptFixtures/mt19937-26/details
+=== RUN   TestExecutorTypeScriptFixtures/mt19937-26/summary
+=== RUN   TestExecutorTypeScriptFixtures/mt19937-27
+=== RUN   TestExecutorTypeScriptFixtures/mt19937-27/full
+=== RUN   TestExecutorTypeScriptFixtures/mt19937-27/details
+=== RUN   TestExecutorTypeScriptFixtures/mt19937-27/summary
+=== RUN   TestExecutorTypeScriptFixtures/mt19937-28
+=== RUN   TestExecutorTypeScriptFixtures/mt19937-28/full
+=== RUN   TestExecutorTypeScriptFixtures/mt19937-28/details
+=== RUN   TestExecutorTypeScriptFixtures/mt19937-28/summary
+=== RUN   TestExecutorTypeScriptFixtures/mt19937-29
+=== RUN   TestExecutorTypeScriptFixtures/mt19937-29/full
+=== RUN   TestExecutorTypeScriptFixtures/mt19937-29/details
+=== RUN   TestExecutorTypeScriptFixtures/mt19937-29/summary
+=== RUN   TestExecutorTypeScriptFixtures/mt19937-30
+=== RUN   TestExecutorTypeScriptFixtures/mt19937-30/full
+=== RUN   TestExecutorTypeScriptFixtures/mt19937-30/details
+=== RUN   TestExecutorTypeScriptFixtures/mt19937-30/summary
+=== RUN   TestExecutorTypeScriptFixtures/mt19937-31
+=== RUN   TestExecutorTypeScriptFixtures/mt19937-31/full
+=== RUN   TestExecutorTypeScriptFixtures/mt19937-31/details
+=== RUN   TestExecutorTypeScriptFixtures/mt19937-31/summary
+=== RUN   TestExecutorTypeScriptFixtures/mt19937-32
+=== RUN   TestExecutorTypeScriptFixtures/mt19937-32/full
+=== RUN   TestExecutorTypeScriptFixtures/mt19937-32/details
+=== RUN   TestExecutorTypeScriptFixtures/mt19937-32/summary
+=== RUN   TestExecutorTypeScriptFixtures/mt19937-33
+=== RUN   TestExecutorTypeScriptFixtures/mt19937-33/full
+=== RUN   TestExecutorTypeScriptFixtures/mt19937-33/details
+=== RUN   TestExecutorTypeScriptFixtures/mt19937-33/summary
+=== RUN   TestExecutorTypeScriptFixtures/mt19937-34
+=== RUN   TestExecutorTypeScriptFixtures/mt19937-34/full
+=== RUN   TestExecutorTypeScriptFixtures/mt19937-34/details
+=== RUN   TestExecutorTypeScriptFixtures/mt19937-34/summary
+=== RUN   TestExecutorTypeScriptFixtures/mt19937-35
+=== RUN   TestExecutorTypeScriptFixtures/mt19937-35/full
+=== RUN   TestExecutorTypeScriptFixtures/mt19937-35/details
+=== RUN   TestExecutorTypeScriptFixtures/mt19937-35/summary
+=== RUN   TestExecutorTypeScriptFixtures/mt19937-36
+=== RUN   TestExecutorTypeScriptFixtures/mt19937-36/full
+=== RUN   TestExecutorTypeScriptFixtures/mt19937-36/details
+=== RUN   TestExecutorTypeScriptFixtures/mt19937-36/summary
+=== RUN   TestExecutorTypeScriptFixtures/mt19937-37
+=== RUN   TestExecutorTypeScriptFixtures/mt19937-37/full
+=== RUN   TestExecutorTypeScriptFixtures/mt19937-37/details
+=== RUN   TestExecutorTypeScriptFixtures/mt19937-37/summary
+=== RUN   TestExecutorTypeScriptFixtures/mt19937-38
+=== RUN   TestExecutorTypeScriptFixtures/mt19937-38/full
+=== RUN   TestExecutorTypeScriptFixtures/mt19937-38/details
+=== RUN   TestExecutorTypeScriptFixtures/mt19937-38/summary
+=== RUN   TestExecutorTypeScriptFixtures/mt19937-39
+=== RUN   TestExecutorTypeScriptFixtures/mt19937-39/full
+=== RUN   TestExecutorTypeScriptFixtures/mt19937-39/details
+=== RUN   TestExecutorTypeScriptFixtures/mt19937-39/summary
+=== RUN   TestExecutorTypeScriptFixtures/mt19937-40
+=== RUN   TestExecutorTypeScriptFixtures/mt19937-40/full
+=== RUN   TestExecutorTypeScriptFixtures/mt19937-40/details
+=== RUN   TestExecutorTypeScriptFixtures/mt19937-40/summary
+=== RUN   TestExecutorTypeScriptFixtures/mt19937-41
+=== RUN   TestExecutorTypeScriptFixtures/mt19937-41/full
+=== RUN   TestExecutorTypeScriptFixtures/mt19937-41/details
+=== RUN   TestExecutorTypeScriptFixtures/mt19937-41/summary
+=== RUN   TestExecutorTypeScriptFixtures/mt19937-42
+=== RUN   TestExecutorTypeScriptFixtures/mt19937-42/full
+=== RUN   TestExecutorTypeScriptFixtures/mt19937-42/details
+=== RUN   TestExecutorTypeScriptFixtures/mt19937-42/summary
+=== RUN   TestExecutorTypeScriptFixtures/mt19937-43
+=== RUN   TestExecutorTypeScriptFixtures/mt19937-43/full
+=== RUN   TestExecutorTypeScriptFixtures/mt19937-43/details
+=== RUN   TestExecutorTypeScriptFixtures/mt19937-43/summary
+=== RUN   TestExecutorTypeScriptFixtures/mt19937-44
+=== RUN   TestExecutorTypeScriptFixtures/mt19937-44/full
+=== RUN   TestExecutorTypeScriptFixtures/mt19937-44/details
+=== RUN   TestExecutorTypeScriptFixtures/mt19937-44/summary
+=== RUN   TestExecutorTypeScriptFixtures/mt19937-45
+=== RUN   TestExecutorTypeScriptFixtures/mt19937-45/full
+=== RUN   TestExecutorTypeScriptFixtures/mt19937-45/details
+=== RUN   TestExecutorTypeScriptFixtures/mt19937-45/summary
+=== RUN   TestExecutorTypeScriptFixtures/mt19937-46
+=== RUN   TestExecutorTypeScriptFixtures/mt19937-46/full
+=== RUN   TestExecutorTypeScriptFixtures/mt19937-46/details
+=== RUN   TestExecutorTypeScriptFixtures/mt19937-46/summary
+=== RUN   TestExecutorTypeScriptFixtures/mt19937-47
+=== RUN   TestExecutorTypeScriptFixtures/mt19937-47/full
+=== RUN   TestExecutorTypeScriptFixtures/mt19937-47/details
+=== RUN   TestExecutorTypeScriptFixtures/mt19937-47/summary
+=== RUN   TestExecutorTypeScriptFixtures/mt19937-48
+=== RUN   TestExecutorTypeScriptFixtures/mt19937-48/full
+=== RUN   TestExecutorTypeScriptFixtures/mt19937-48/details
+=== RUN   TestExecutorTypeScriptFixtures/mt19937-48/summary
+=== RUN   TestExecutorTypeScriptFixtures/mt19937-49
+=== RUN   TestExecutorTypeScriptFixtures/mt19937-49/full
+=== RUN   TestExecutorTypeScriptFixtures/mt19937-49/details
+=== RUN   TestExecutorTypeScriptFixtures/mt19937-49/summary
+=== RUN   TestExecutorTypeScriptFixtures/mt19937-50
+=== RUN   TestExecutorTypeScriptFixtures/mt19937-50/full
+=== RUN   TestExecutorTypeScriptFixtures/mt19937-50/details
+=== RUN   TestExecutorTypeScriptFixtures/mt19937-50/summary
+=== RUN   TestExecutorTypeScriptFixtures/mt19937-51
+=== RUN   TestExecutorTypeScriptFixtures/mt19937-51/full
+=== RUN   TestExecutorTypeScriptFixtures/mt19937-51/details
+=== RUN   TestExecutorTypeScriptFixtures/mt19937-51/summary
+=== RUN   TestExecutorTypeScriptFixtures/mt19937-52
+=== RUN   TestExecutorTypeScriptFixtures/mt19937-52/full
+=== RUN   TestExecutorTypeScriptFixtures/mt19937-52/details
+=== RUN   TestExecutorTypeScriptFixtures/mt19937-52/summary
+=== RUN   TestExecutorTypeScriptFixtures/mt19937-53
+=== RUN   TestExecutorTypeScriptFixtures/mt19937-53/full
+=== RUN   TestExecutorTypeScriptFixtures/mt19937-53/details
+=== RUN   TestExecutorTypeScriptFixtures/mt19937-53/summary
+=== RUN   TestExecutorTypeScriptFixtures/mt19937-54
+=== RUN   TestExecutorTypeScriptFixtures/mt19937-54/full
+=== RUN   TestExecutorTypeScriptFixtures/mt19937-54/details
+=== RUN   TestExecutorTypeScriptFixtures/mt19937-54/summary
+=== RUN   TestExecutorTypeScriptFixtures/mt19937-55
+=== RUN   TestExecutorTypeScriptFixtures/mt19937-55/full
+=== RUN   TestExecutorTypeScriptFixtures/mt19937-55/details
+=== RUN   TestExecutorTypeScriptFixtures/mt19937-55/summary
+=== RUN   TestExecutorTypeScriptFixtures/mt19937-56
+=== RUN   TestExecutorTypeScriptFixtures/mt19937-56/full
+=== RUN   TestExecutorTypeScriptFixtures/mt19937-56/details
+=== RUN   TestExecutorTypeScriptFixtures/mt19937-56/summary
+=== RUN   TestExecutorTypeScriptFixtures/mt19937-57
+=== RUN   TestExecutorTypeScriptFixtures/mt19937-57/full
+=== RUN   TestExecutorTypeScriptFixtures/mt19937-57/details
+=== RUN   TestExecutorTypeScriptFixtures/mt19937-57/summary
+=== RUN   TestExecutorTypeScriptFixtures/mt19937-58
+=== RUN   TestExecutorTypeScriptFixtures/mt19937-58/full
+=== RUN   TestExecutorTypeScriptFixtures/mt19937-58/details
+=== RUN   TestExecutorTypeScriptFixtures/mt19937-58/summary
+=== RUN   TestExecutorTypeScriptFixtures/mt19937-59
+=== RUN   TestExecutorTypeScriptFixtures/mt19937-59/full
+=== RUN   TestExecutorTypeScriptFixtures/mt19937-59/details
+=== RUN   TestExecutorTypeScriptFixtures/mt19937-59/summary
+=== RUN   TestExecutorTypeScriptFixtures/mt19937-60
+=== RUN   TestExecutorTypeScriptFixtures/mt19937-60/full
+=== RUN   TestExecutorTypeScriptFixtures/mt19937-60/details
+=== RUN   TestExecutorTypeScriptFixtures/mt19937-60/summary
+=== RUN   TestExecutorTypeScriptFixtures/mt19937-61
+=== RUN   TestExecutorTypeScriptFixtures/mt19937-61/full
+=== RUN   TestExecutorTypeScriptFixtures/mt19937-61/details
+=== RUN   TestExecutorTypeScriptFixtures/mt19937-61/summary
+=== RUN   TestExecutorTypeScriptFixtures/mt19937-62
+=== RUN   TestExecutorTypeScriptFixtures/mt19937-62/full
+=== RUN   TestExecutorTypeScriptFixtures/mt19937-62/details
+=== RUN   TestExecutorTypeScriptFixtures/mt19937-62/summary
+=== RUN   TestExecutorTypeScriptFixtures/mt19937-63
+=== RUN   TestExecutorTypeScriptFixtures/mt19937-63/full
+=== RUN   TestExecutorTypeScriptFixtures/mt19937-63/details
+=== RUN   TestExecutorTypeScriptFixtures/mt19937-63/summary
+=== RUN   TestExecutorTypeScriptFixtures/mt19937-64
+=== RUN   TestExecutorTypeScriptFixtures/mt19937-64/full
+=== RUN   TestExecutorTypeScriptFixtures/mt19937-64/details
+=== RUN   TestExecutorTypeScriptFixtures/mt19937-64/summary
+=== RUN   TestExecutorTypeScriptFixtures/mt19937-65
+=== RUN   TestExecutorTypeScriptFixtures/mt19937-65/full
+=== RUN   TestExecutorTypeScriptFixtures/mt19937-65/details
+=== RUN   TestExecutorTypeScriptFixtures/mt19937-65/summary
+=== RUN   TestExecutorTypeScriptFixtures/mt19937-66
+=== RUN   TestExecutorTypeScriptFixtures/mt19937-66/full
+=== RUN   TestExecutorTypeScriptFixtures/mt19937-66/details
+=== RUN   TestExecutorTypeScriptFixtures/mt19937-66/summary
+=== RUN   TestExecutorTypeScriptFixtures/mt19937-67
+=== RUN   TestExecutorTypeScriptFixtures/mt19937-67/full
+=== RUN   TestExecutorTypeScriptFixtures/mt19937-67/details
+=== RUN   TestExecutorTypeScriptFixtures/mt19937-67/summary
+=== RUN   TestExecutorTypeScriptFixtures/mt19937-68
+=== RUN   TestExecutorTypeScriptFixtures/mt19937-68/full
+=== RUN   TestExecutorTypeScriptFixtures/mt19937-68/details
+=== RUN   TestExecutorTypeScriptFixtures/mt19937-68/summary
+=== RUN   TestExecutorTypeScriptFixtures/mt19937-69
+=== RUN   TestExecutorTypeScriptFixtures/mt19937-69/full
+=== RUN   TestExecutorTypeScriptFixtures/mt19937-69/details
+=== RUN   TestExecutorTypeScriptFixtures/mt19937-69/summary
+=== RUN   TestExecutorTypeScriptFixtures/mt19937-70
+=== RUN   TestExecutorTypeScriptFixtures/mt19937-70/full
+=== RUN   TestExecutorTypeScriptFixtures/mt19937-70/details
+=== RUN   TestExecutorTypeScriptFixtures/mt19937-70/summary
+=== RUN   TestExecutorTypeScriptFixtures/mt19937-71
+=== RUN   TestExecutorTypeScriptFixtures/mt19937-71/full
+=== RUN   TestExecutorTypeScriptFixtures/mt19937-71/details
+=== RUN   TestExecutorTypeScriptFixtures/mt19937-71/summary
+=== RUN   TestExecutorTypeScriptFixtures/mt19937-72
+=== RUN   TestExecutorTypeScriptFixtures/mt19937-72/full
+=== RUN   TestExecutorTypeScriptFixtures/mt19937-72/details
+=== RUN   TestExecutorTypeScriptFixtures/mt19937-72/summary
+=== RUN   TestExecutorTypeScriptFixtures/mt19937-73
+=== RUN   TestExecutorTypeScriptFixtures/mt19937-73/full
+=== RUN   TestExecutorTypeScriptFixtures/mt19937-73/details
+=== RUN   TestExecutorTypeScriptFixtures/mt19937-73/summary
+=== RUN   TestExecutorTypeScriptFixtures/mt19937-74
+=== RUN   TestExecutorTypeScriptFixtures/mt19937-74/full
+=== RUN   TestExecutorTypeScriptFixtures/mt19937-74/details
+=== RUN   TestExecutorTypeScriptFixtures/mt19937-74/summary
+=== RUN   TestExecutorTypeScriptFixtures/mt19937-75
+=== RUN   TestExecutorTypeScriptFixtures/mt19937-75/full
+=== RUN   TestExecutorTypeScriptFixtures/mt19937-75/details
+=== RUN   TestExecutorTypeScriptFixtures/mt19937-75/summary
+=== RUN   TestExecutorTypeScriptFixtures/mt19937-76
+=== RUN   TestExecutorTypeScriptFixtures/mt19937-76/full
+=== RUN   TestExecutorTypeScriptFixtures/mt19937-76/details
+=== RUN   TestExecutorTypeScriptFixtures/mt19937-76/summary
+=== RUN   TestExecutorTypeScriptFixtures/mt19937-77
+=== RUN   TestExecutorTypeScriptFixtures/mt19937-77/full
+=== RUN   TestExecutorTypeScriptFixtures/mt19937-77/details
+=== RUN   TestExecutorTypeScriptFixtures/mt19937-77/summary
+=== RUN   TestExecutorTypeScriptFixtures/mt19937-78
+=== RUN   TestExecutorTypeScriptFixtures/mt19937-78/full
+=== RUN   TestExecutorTypeScriptFixtures/mt19937-78/details
+=== RUN   TestExecutorTypeScriptFixtures/mt19937-78/summary
+=== RUN   TestExecutorTypeScriptFixtures/mt19937-79
+=== RUN   TestExecutorTypeScriptFixtures/mt19937-79/full
+=== RUN   TestExecutorTypeScriptFixtures/mt19937-79/details
+=== RUN   TestExecutorTypeScriptFixtures/mt19937-79/summary
+=== RUN   TestExecutorTypeScriptFixtures/mt19937-80
+=== RUN   TestExecutorTypeScriptFixtures/mt19937-80/full
+=== RUN   TestExecutorTypeScriptFixtures/mt19937-80/details
+=== RUN   TestExecutorTypeScriptFixtures/mt19937-80/summary
+=== RUN   TestExecutorTypeScriptFixtures/mt19937-81
+=== RUN   TestExecutorTypeScriptFixtures/mt19937-81/full
+=== RUN   TestExecutorTypeScriptFixtures/mt19937-81/details
+=== RUN   TestExecutorTypeScriptFixtures/mt19937-81/summary
+=== RUN   TestExecutorTypeScriptFixtures/mt19937-82
+=== RUN   TestExecutorTypeScriptFixtures/mt19937-82/full
+=== RUN   TestExecutorTypeScriptFixtures/mt19937-82/details
+=== RUN   TestExecutorTypeScriptFixtures/mt19937-82/summary
+=== RUN   TestExecutorTypeScriptFixtures/mt19937-83
+=== RUN   TestExecutorTypeScriptFixtures/mt19937-83/full
+=== RUN   TestExecutorTypeScriptFixtures/mt19937-83/details
+=== RUN   TestExecutorTypeScriptFixtures/mt19937-83/summary
+=== RUN   TestExecutorTypeScriptFixtures/mt19937-84
+=== RUN   TestExecutorTypeScriptFixtures/mt19937-84/full
+=== RUN   TestExecutorTypeScriptFixtures/mt19937-84/details
+=== RUN   TestExecutorTypeScriptFixtures/mt19937-84/summary
+=== RUN   TestExecutorTypeScriptFixtures/mt19937-85
+=== RUN   TestExecutorTypeScriptFixtures/mt19937-85/full
+=== RUN   TestExecutorTypeScriptFixtures/mt19937-85/details
+=== RUN   TestExecutorTypeScriptFixtures/mt19937-85/summary
+=== RUN   TestExecutorTypeScriptFixtures/mt19937-86
+=== RUN   TestExecutorTypeScriptFixtures/mt19937-86/full
+=== RUN   TestExecutorTypeScriptFixtures/mt19937-86/details
+=== RUN   TestExecutorTypeScriptFixtures/mt19937-86/summary
+=== RUN   TestExecutorTypeScriptFixtures/mt19937-87
+=== RUN   TestExecutorTypeScriptFixtures/mt19937-87/full
+=== RUN   TestExecutorTypeScriptFixtures/mt19937-87/details
+=== RUN   TestExecutorTypeScriptFixtures/mt19937-87/summary
+=== RUN   TestExecutorTypeScriptFixtures/mt19937-88
+=== RUN   TestExecutorTypeScriptFixtures/mt19937-88/full
+=== RUN   TestExecutorTypeScriptFixtures/mt19937-88/details
+=== RUN   TestExecutorTypeScriptFixtures/mt19937-88/summary
+=== RUN   TestExecutorTypeScriptFixtures/mt19937-89
+=== RUN   TestExecutorTypeScriptFixtures/mt19937-89/full
+=== RUN   TestExecutorTypeScriptFixtures/mt19937-89/details
+=== RUN   TestExecutorTypeScriptFixtures/mt19937-89/summary
+=== RUN   TestExecutorTypeScriptFixtures/mt19937-90
+=== RUN   TestExecutorTypeScriptFixtures/mt19937-90/full
+=== RUN   TestExecutorTypeScriptFixtures/mt19937-90/details
+=== RUN   TestExecutorTypeScriptFixtures/mt19937-90/summary
+=== RUN   TestExecutorTypeScriptFixtures/mt19937-91
+=== RUN   TestExecutorTypeScriptFixtures/mt19937-91/full
+=== RUN   TestExecutorTypeScriptFixtures/mt19937-91/details
+=== RUN   TestExecutorTypeScriptFixtures/mt19937-91/summary
+=== RUN   TestExecutorTypeScriptFixtures/mt19937-92
+=== RUN   TestExecutorTypeScriptFixtures/mt19937-92/full
+=== RUN   TestExecutorTypeScriptFixtures/mt19937-92/details
+=== RUN   TestExecutorTypeScriptFixtures/mt19937-92/summary
+=== RUN   TestExecutorTypeScriptFixtures/mt19937-93
+=== RUN   TestExecutorTypeScriptFixtures/mt19937-93/full
+=== RUN   TestExecutorTypeScriptFixtures/mt19937-93/details
+=== RUN   TestExecutorTypeScriptFixtures/mt19937-93/summary
+=== RUN   TestExecutorTypeScriptFixtures/xoshiro128ss-1
+=== RUN   TestExecutorTypeScriptFixtures/xoshiro128ss-1/full
+=== RUN   TestExecutorTypeScriptFixtures/xoshiro128ss-1/details
+=== RUN   TestExecutorTypeScriptFixtures/xoshiro128ss-1/summary
+=== RUN   TestExecutorTypeScriptFixtures/xoshiro128ss-2
+=== RUN   TestExecutorTypeScriptFixtures/xoshiro128ss-2/full
+=== RUN   TestExecutorTypeScriptFixtures/xoshiro128ss-2/details
+=== RUN   TestExecutorTypeScriptFixtures/xoshiro128ss-2/summary
+=== RUN   TestExecutorTypeScriptFixtures/xoshiro128ss-3
+=== RUN   TestExecutorTypeScriptFixtures/xoshiro128ss-3/full
+=== RUN   TestExecutorTypeScriptFixtures/xoshiro128ss-3/details
+=== RUN   TestExecutorTypeScriptFixtures/xoshiro128ss-3/summary
+=== RUN   TestExecutorTypeScriptFixtures/xoshiro128ss-4
+=== RUN   TestExecutorTypeScriptFixtures/xoshiro128ss-4/full
+=== RUN   TestExecutorTypeScriptFixtures/xoshiro128ss-4/details
+=== RUN   TestExecutorTypeScriptFixtures/xoshiro128ss-4/summary
+=== RUN   TestExecutorTypeScriptFixtures/xoshiro128ss-5
+=== RUN   TestExecutorTypeScriptFixtures/xoshiro128ss-5/full
+=== RUN   TestExecutorTypeScriptFixtures/xoshiro128ss-5/details
+=== RUN   TestExecutorTypeScriptFixtures/xoshiro128ss-5/summary
+=== RUN   TestExecutorTypeScriptFixtures/xoshiro128ss-6
+=== RUN   TestExecutorTypeScriptFixtures/xoshiro128ss-6/full
+=== RUN   TestExecutorTypeScriptFixtures/xoshiro128ss-6/details
+=== RUN   TestExecutorTypeScriptFixtures/xoshiro128ss-6/summary
+=== RUN   TestExecutorTypeScriptFixtures/xoshiro128ss-7
+=== RUN   TestExecutorTypeScriptFixtures/xoshiro128ss-7/full
+=== RUN   TestExecutorTypeScriptFixtures/xoshiro128ss-7/details
+=== RUN   TestExecutorTypeScriptFixtures/xoshiro128ss-7/summary
+=== RUN   TestExecutorTypeScriptFixtures/xoshiro128ss-8
+=== RUN   TestExecutorTypeScriptFixtures/xoshiro128ss-8/full
+=== RUN   TestExecutorTypeScriptFixtures/xoshiro128ss-8/details
+=== RUN   TestExecutorTypeScriptFixtures/xoshiro128ss-8/summary
+=== RUN   TestExecutorTypeScriptFixtures/xoshiro128ss-9
+=== RUN   TestExecutorTypeScriptFixtures/xoshiro128ss-9/full
+=== RUN   TestExecutorTypeScriptFixtures/xoshiro128ss-9/details
+=== RUN   TestExecutorTypeScriptFixtures/xoshiro128ss-9/summary
+=== RUN   TestExecutorTypeScriptFixtures/xoshiro128ss-10
+=== RUN   TestExecutorTypeScriptFixtures/xoshiro128ss-10/full
+=== RUN   TestExecutorTypeScriptFixtures/xoshiro128ss-10/details
+=== RUN   TestExecutorTypeScriptFixtures/xoshiro128ss-10/summary
+=== RUN   TestExecutorTypeScriptFixtures/xoshiro128ss-11
+=== RUN   TestExecutorTypeScriptFixtures/xoshiro128ss-11/full
+=== RUN   TestExecutorTypeScriptFixtures/xoshiro128ss-11/details
+=== RUN   TestExecutorTypeScriptFixtures/xoshiro128ss-11/summary
+=== RUN   TestExecutorTypeScriptFixtures/xoshiro128ss-12
+=== RUN   TestExecutorTypeScriptFixtures/xoshiro128ss-12/full
+=== RUN   TestExecutorTypeScriptFixtures/xoshiro128ss-12/details
+=== RUN   TestExecutorTypeScriptFixtures/xoshiro128ss-12/summary
+=== RUN   TestExecutorTypeScriptFixtures/xoshiro128ss-13
+=== RUN   TestExecutorTypeScriptFixtures/xoshiro128ss-13/full
+=== RUN   TestExecutorTypeScriptFixtures/xoshiro128ss-13/details
+=== RUN   TestExecutorTypeScriptFixtures/xoshiro128ss-13/summary
+=== RUN   TestExecutorTypeScriptFixtures/xoshiro128ss-14
+=== RUN   TestExecutorTypeScriptFixtures/xoshiro128ss-14/full
+=== RUN   TestExecutorTypeScriptFixtures/xoshiro128ss-14/details
+=== RUN   TestExecutorTypeScriptFixtures/xoshiro128ss-14/summary
+=== RUN   TestExecutorTypeScriptFixtures/xoshiro128ss-15
+=== RUN   TestExecutorTypeScriptFixtures/xoshiro128ss-15/full
+=== RUN   TestExecutorTypeScriptFixtures/xoshiro128ss-15/details
+=== RUN   TestExecutorTypeScriptFixtures/xoshiro128ss-15/summary
+=== RUN   TestExecutorTypeScriptFixtures/xoshiro128ss-16
+=== RUN   TestExecutorTypeScriptFixtures/xoshiro128ss-16/full
+=== RUN   TestExecutorTypeScriptFixtures/xoshiro128ss-16/details
+=== RUN   TestExecutorTypeScriptFixtures/xoshiro128ss-16/summary
+=== RUN   TestExecutorTypeScriptFixtures/xoshiro128ss-17
+=== RUN   TestExecutorTypeScriptFixtures/xoshiro128ss-17/full
+=== RUN   TestExecutorTypeScriptFixtures/xoshiro128ss-17/details
+=== RUN   TestExecutorTypeScriptFixtures/xoshiro128ss-17/summary
+=== RUN   TestExecutorTypeScriptFixtures/xoshiro128ss-18
+=== RUN   TestExecutorTypeScriptFixtures/xoshiro128ss-18/full
+=== RUN   TestExecutorTypeScriptFixtures/xoshiro128ss-18/details
+=== RUN   TestExecutorTypeScriptFixtures/xoshiro128ss-18/summary
+=== RUN   TestExecutorTypeScriptFixtures/xoshiro128ss-19
+=== RUN   TestExecutorTypeScriptFixtures/xoshiro128ss-19/full
+=== RUN   TestExecutorTypeScriptFixtures/xoshiro128ss-19/details
+=== RUN   TestExecutorTypeScriptFixtures/xoshiro128ss-19/summary
+=== RUN   TestExecutorTypeScriptFixtures/xoshiro128ss-20
+=== RUN   TestExecutorTypeScriptFixtures/xoshiro128ss-20/full
+=== RUN   TestExecutorTypeScriptFixtures/xoshiro128ss-20/details
+=== RUN   TestExecutorTypeScriptFixtures/xoshiro128ss-20/summary
+=== RUN   TestExecutorTypeScriptFixtures/xoshiro128ss-21
+=== RUN   TestExecutorTypeScriptFixtures/xoshiro128ss-21/full
+=== RUN   TestExecutorTypeScriptFixtures/xoshiro128ss-21/details
+=== RUN   TestExecutorTypeScriptFixtures/xoshiro128ss-21/summary
+=== RUN   TestExecutorTypeScriptFixtures/xoshiro128ss-22
+=== RUN   TestExecutorTypeScriptFixtures/xoshiro128ss-22/full
+=== RUN   TestExecutorTypeScriptFixtures/xoshiro128ss-22/details
+=== RUN   TestExecutorTypeScriptFixtures/xoshiro128ss-22/summary
+=== RUN   TestExecutorTypeScriptFixtures/xoshiro128ss-23
+=== RUN   TestExecutorTypeScriptFixtures/xoshiro128ss-23/full
+=== RUN   TestExecutorTypeScriptFixtures/xoshiro128ss-23/details
+=== RUN   TestExecutorTypeScriptFixtures/xoshiro128ss-23/summary
+=== RUN   TestExecutorTypeScriptFixtures/xoshiro128ss-24
+=== RUN   TestExecutorTypeScriptFixtures/xoshiro128ss-24/full
+=== RUN   TestExecutorTypeScriptFixtures/xoshiro128ss-24/details
+=== RUN   TestExecutorTypeScriptFixtures/xoshiro128ss-24/summary
+=== RUN   TestExecutorTypeScriptFixtures/xoshiro128ss-25
+=== RUN   TestExecutorTypeScriptFixtures/xoshiro128ss-25/full
+=== RUN   TestExecutorTypeScriptFixtures/xoshiro128ss-25/details
+=== RUN   TestExecutorTypeScriptFixtures/xoshiro128ss-25/summary
+=== RUN   TestExecutorTypeScriptFixtures/xoshiro128ss-26
+=== RUN   TestExecutorTypeScriptFixtures/xoshiro128ss-26/full
+=== RUN   TestExecutorTypeScriptFixtures/xoshiro128ss-26/details
+=== RUN   TestExecutorTypeScriptFixtures/xoshiro128ss-26/summary
+=== RUN   TestExecutorTypeScriptFixtures/xoshiro128ss-27
+=== RUN   TestExecutorTypeScriptFixtures/xoshiro128ss-27/full
+=== RUN   TestExecutorTypeScriptFixtures/xoshiro128ss-27/details
+=== RUN   TestExecutorTypeScriptFixtures/xoshiro128ss-27/summary
+=== RUN   TestExecutorTypeScriptFixtures/xoshiro128ss-28
+=== RUN   TestExecutorTypeScriptFixtures/xoshiro128ss-28/full
+=== RUN   TestExecutorTypeScriptFixtures/xoshiro128ss-28/details
+=== RUN   TestExecutorTypeScriptFixtures/xoshiro128ss-28/summary
+=== RUN   TestExecutorTypeScriptFixtures/xoshiro128ss-29
+=== RUN   TestExecutorTypeScriptFixtures/xoshiro128ss-29/full
+=== RUN   TestExecutorTypeScriptFixtures/xoshiro128ss-29/details
+=== RUN   TestExecutorTypeScriptFixtures/xoshiro128ss-29/summary
+=== RUN   TestExecutorTypeScriptFixtures/xoshiro128ss-30
+=== RUN   TestExecutorTypeScriptFixtures/xoshiro128ss-30/full
+=== RUN   TestExecutorTypeScriptFixtures/xoshiro128ss-30/details
+=== RUN   TestExecutorTypeScriptFixtures/xoshiro128ss-30/summary
+=== RUN   TestExecutorTypeScriptFixtures/xoshiro128ss-31
+=== RUN   TestExecutorTypeScriptFixtures/xoshiro128ss-31/full
+=== RUN   TestExecutorTypeScriptFixtures/xoshiro128ss-31/details
+=== RUN   TestExecutorTypeScriptFixtures/xoshiro128ss-31/summary
+=== RUN   TestExecutorTypeScriptFixtures/xoshiro128ss-32
+=== RUN   TestExecutorTypeScriptFixtures/xoshiro128ss-32/full
+=== RUN   TestExecutorTypeScriptFixtures/xoshiro128ss-32/details
+=== RUN   TestExecutorTypeScriptFixtures/xoshiro128ss-32/summary
+=== RUN   TestExecutorTypeScriptFixtures/xoshiro128ss-33
+=== RUN   TestExecutorTypeScriptFixtures/xoshiro128ss-33/full
+=== RUN   TestExecutorTypeScriptFixtures/xoshiro128ss-33/details
+=== RUN   TestExecutorTypeScriptFixtures/xoshiro128ss-33/summary
+=== RUN   TestExecutorTypeScriptFixtures/xoshiro128ss-34
+=== RUN   TestExecutorTypeScriptFixtures/xoshiro128ss-34/full
+=== RUN   TestExecutorTypeScriptFixtures/xoshiro128ss-34/details
+=== RUN   TestExecutorTypeScriptFixtures/xoshiro128ss-34/summary
+=== RUN   TestExecutorTypeScriptFixtures/xoshiro128ss-35
+=== RUN   TestExecutorTypeScriptFixtures/xoshiro128ss-35/full
+=== RUN   TestExecutorTypeScriptFixtures/xoshiro128ss-35/details
+=== RUN   TestExecutorTypeScriptFixtures/xoshiro128ss-35/summary
+=== RUN   TestExecutorTypeScriptFixtures/xoshiro128ss-36
+=== RUN   TestExecutorTypeScriptFixtures/xoshiro128ss-36/full
+=== RUN   TestExecutorTypeScriptFixtures/xoshiro128ss-36/details
+=== RUN   TestExecutorTypeScriptFixtures/xoshiro128ss-36/summary
+=== RUN   TestExecutorTypeScriptFixtures/xoshiro128ss-37
+=== RUN   TestExecutorTypeScriptFixtures/xoshiro128ss-37/full
+=== RUN   TestExecutorTypeScriptFixtures/xoshiro128ss-37/details
+=== RUN   TestExecutorTypeScriptFixtures/xoshiro128ss-37/summary
+=== RUN   TestExecutorTypeScriptFixtures/xoshiro128ss-38
+=== RUN   TestExecutorTypeScriptFixtures/xoshiro128ss-38/full
+=== RUN   TestExecutorTypeScriptFixtures/xoshiro128ss-38/details
+=== RUN   TestExecutorTypeScriptFixtures/xoshiro128ss-38/summary
+=== RUN   TestExecutorTypeScriptFixtures/xoshiro128ss-39
+=== RUN   TestExecutorTypeScriptFixtures/xoshiro128ss-39/full
+=== RUN   TestExecutorTypeScriptFixtures/xoshiro128ss-39/details
+=== RUN   TestExecutorTypeScriptFixtures/xoshiro128ss-39/summary
+=== RUN   TestExecutorTypeScriptFixtures/xoshiro128ss-40
+=== RUN   TestExecutorTypeScriptFixtures/xoshiro128ss-40/full
+=== RUN   TestExecutorTypeScriptFixtures/xoshiro128ss-40/details
+=== RUN   TestExecutorTypeScriptFixtures/xoshiro128ss-40/summary
+=== RUN   TestExecutorTypeScriptFixtures/xoshiro128ss-41
+=== RUN   TestExecutorTypeScriptFixtures/xoshiro128ss-41/full
+=== RUN   TestExecutorTypeScriptFixtures/xoshiro128ss-41/details
+=== RUN   TestExecutorTypeScriptFixtures/xoshiro128ss-41/summary
+=== RUN   TestExecutorTypeScriptFixtures/xoshiro128ss-42
+=== RUN   TestExecutorTypeScriptFixtures/xoshiro128ss-42/full
+=== RUN   TestExecutorTypeScriptFixtures/xoshiro128ss-42/details
+=== RUN   TestExecutorTypeScriptFixtures/xoshiro128ss-42/summary
+=== RUN   TestExecutorTypeScriptFixtures/xoshiro128ss-43
+=== RUN   TestExecutorTypeScriptFixtures/xoshiro128ss-43/full
+=== RUN   TestExecutorTypeScriptFixtures/xoshiro128ss-43/details
+=== RUN   TestExecutorTypeScriptFixtures/xoshiro128ss-43/summary
+=== RUN   TestExecutorTypeScriptFixtures/xoshiro128ss-44
+=== RUN   TestExecutorTypeScriptFixtures/xoshiro128ss-44/full
+=== RUN   TestExecutorTypeScriptFixtures/xoshiro128ss-44/details
+=== RUN   TestExecutorTypeScriptFixtures/xoshiro128ss-44/summary
+=== RUN   TestExecutorTypeScriptFixtures/xoshiro128ss-45
+=== RUN   TestExecutorTypeScriptFixtures/xoshiro128ss-45/full
+=== RUN   TestExecutorTypeScriptFixtures/xoshiro128ss-45/details
+=== RUN   TestExecutorTypeScriptFixtures/xoshiro128ss-45/summary
+=== RUN   TestExecutorTypeScriptFixtures/xoshiro128ss-46
+=== RUN   TestExecutorTypeScriptFixtures/xoshiro128ss-46/full
+=== RUN   TestExecutorTypeScriptFixtures/xoshiro128ss-46/details
+=== RUN   TestExecutorTypeScriptFixtures/xoshiro128ss-46/summary
+=== RUN   TestExecutorTypeScriptFixtures/xoshiro128ss-47
+=== RUN   TestExecutorTypeScriptFixtures/xoshiro128ss-47/full
+=== RUN   TestExecutorTypeScriptFixtures/xoshiro128ss-47/details
+=== RUN   TestExecutorTypeScriptFixtures/xoshiro128ss-47/summary
+=== RUN   TestExecutorTypeScriptFixtures/xoshiro128ss-48
+=== RUN   TestExecutorTypeScriptFixtures/xoshiro128ss-48/full
+=== RUN   TestExecutorTypeScriptFixtures/xoshiro128ss-48/details
+=== RUN   TestExecutorTypeScriptFixtures/xoshiro128ss-48/summary
+=== RUN   TestExecutorTypeScriptFixtures/xoshiro128ss-49
+=== RUN   TestExecutorTypeScriptFixtures/xoshiro128ss-49/full
+=== RUN   TestExecutorTypeScriptFixtures/xoshiro128ss-49/details
+=== RUN   TestExecutorTypeScriptFixtures/xoshiro128ss-49/summary
+=== RUN   TestExecutorTypeScriptFixtures/xoshiro128ss-50
+=== RUN   TestExecutorTypeScriptFixtures/xoshiro128ss-50/full
+=== RUN   TestExecutorTypeScriptFixtures/xoshiro128ss-50/details
+=== RUN   TestExecutorTypeScriptFixtures/xoshiro128ss-50/summary
+=== RUN   TestExecutorTypeScriptFixtures/xoshiro128ss-51
+=== RUN   TestExecutorTypeScriptFixtures/xoshiro128ss-51/full
+=== RUN   TestExecutorTypeScriptFixtures/xoshiro128ss-51/details
+=== RUN   TestExecutorTypeScriptFixtures/xoshiro128ss-51/summary
+=== RUN   TestExecutorTypeScriptFixtures/xoshiro128ss-52
+=== RUN   TestExecutorTypeScriptFixtures/xoshiro128ss-52/full
+=== RUN   TestExecutorTypeScriptFixtures/xoshiro128ss-52/details
+=== RUN   TestExecutorTypeScriptFixtures/xoshiro128ss-52/summary
+=== RUN   TestExecutorTypeScriptFixtures/xoshiro128ss-53
+=== RUN   TestExecutorTypeScriptFixtures/xoshiro128ss-53/full
+=== RUN   TestExecutorTypeScriptFixtures/xoshiro128ss-53/details
+=== RUN   TestExecutorTypeScriptFixtures/xoshiro128ss-53/summary
+=== RUN   TestExecutorTypeScriptFixtures/xoshiro128ss-54
+=== RUN   TestExecutorTypeScriptFixtures/xoshiro128ss-54/full
+=== RUN   TestExecutorTypeScriptFixtures/xoshiro128ss-54/details
+=== RUN   TestExecutorTypeScriptFixtures/xoshiro128ss-54/summary
+=== RUN   TestExecutorTypeScriptFixtures/xoshiro128ss-55
+=== RUN   TestExecutorTypeScriptFixtures/xoshiro128ss-55/full
+=== RUN   TestExecutorTypeScriptFixtures/xoshiro128ss-55/details
+=== RUN   TestExecutorTypeScriptFixtures/xoshiro128ss-55/summary
+=== RUN   TestExecutorTypeScriptFixtures/xoshiro128ss-56
+=== RUN   TestExecutorTypeScriptFixtures/xoshiro128ss-56/full
+=== RUN   TestExecutorTypeScriptFixtures/xoshiro128ss-56/details
+=== RUN   TestExecutorTypeScriptFixtures/xoshiro128ss-56/summary
+=== RUN   TestExecutorTypeScriptFixtures/xoshiro128ss-57
+=== RUN   TestExecutorTypeScriptFixtures/xoshiro128ss-57/full
+=== RUN   TestExecutorTypeScriptFixtures/xoshiro128ss-57/details
+=== RUN   TestExecutorTypeScriptFixtures/xoshiro128ss-57/summary
+=== RUN   TestExecutorTypeScriptFixtures/xoshiro128ss-58
+=== RUN   TestExecutorTypeScriptFixtures/xoshiro128ss-58/full
+=== RUN   TestExecutorTypeScriptFixtures/xoshiro128ss-58/details
+=== RUN   TestExecutorTypeScriptFixtures/xoshiro128ss-58/summary
+=== RUN   TestExecutorTypeScriptFixtures/xoshiro128ss-59
+=== RUN   TestExecutorTypeScriptFixtures/xoshiro128ss-59/full
+=== RUN   TestExecutorTypeScriptFixtures/xoshiro128ss-59/details
+=== RUN   TestExecutorTypeScriptFixtures/xoshiro128ss-59/summary
+=== RUN   TestExecutorTypeScriptFixtures/xoshiro128ss-60
+=== RUN   TestExecutorTypeScriptFixtures/xoshiro128ss-60/full
+=== RUN   TestExecutorTypeScriptFixtures/xoshiro128ss-60/details
+=== RUN   TestExecutorTypeScriptFixtures/xoshiro128ss-60/summary
+=== RUN   TestExecutorTypeScriptFixtures/xoshiro128ss-61
+=== RUN   TestExecutorTypeScriptFixtures/xoshiro128ss-61/full
+=== RUN   TestExecutorTypeScriptFixtures/xoshiro128ss-61/details
+=== RUN   TestExecutorTypeScriptFixtures/xoshiro128ss-61/summary
+=== RUN   TestExecutorTypeScriptFixtures/xoshiro128ss-62
+=== RUN   TestExecutorTypeScriptFixtures/xoshiro128ss-62/full
+=== RUN   TestExecutorTypeScriptFixtures/xoshiro128ss-62/details
+=== RUN   TestExecutorTypeScriptFixtures/xoshiro128ss-62/summary
+=== RUN   TestExecutorTypeScriptFixtures/xoshiro128ss-63
+=== RUN   TestExecutorTypeScriptFixtures/xoshiro128ss-63/full
+=== RUN   TestExecutorTypeScriptFixtures/xoshiro128ss-63/details
+=== RUN   TestExecutorTypeScriptFixtures/xoshiro128ss-63/summary
+=== RUN   TestExecutorTypeScriptFixtures/xoshiro128ss-64
+=== RUN   TestExecutorTypeScriptFixtures/xoshiro128ss-64/full
+=== RUN   TestExecutorTypeScriptFixtures/xoshiro128ss-64/details
+=== RUN   TestExecutorTypeScriptFixtures/xoshiro128ss-64/summary
+=== RUN   TestExecutorTypeScriptFixtures/xoshiro128ss-65
+=== RUN   TestExecutorTypeScriptFixtures/xoshiro128ss-65/full
+=== RUN   TestExecutorTypeScriptFixtures/xoshiro128ss-65/details
+=== RUN   TestExecutorTypeScriptFixtures/xoshiro128ss-65/summary
+=== RUN   TestExecutorTypeScriptFixtures/xoshiro128ss-66
+=== RUN   TestExecutorTypeScriptFixtures/xoshiro128ss-66/full
+=== RUN   TestExecutorTypeScriptFixtures/xoshiro128ss-66/details
+=== RUN   TestExecutorTypeScriptFixtures/xoshiro128ss-66/summary
+=== RUN   TestExecutorTypeScriptFixtures/xoshiro128ss-67
+=== RUN   TestExecutorTypeScriptFixtures/xoshiro128ss-67/full
+=== RUN   TestExecutorTypeScriptFixtures/xoshiro128ss-67/details
+=== RUN   TestExecutorTypeScriptFixtures/xoshiro128ss-67/summary
+=== RUN   TestExecutorTypeScriptFixtures/xoshiro128ss-68
+=== RUN   TestExecutorTypeScriptFixtures/xoshiro128ss-68/full
+=== RUN   TestExecutorTypeScriptFixtures/xoshiro128ss-68/details
+=== RUN   TestExecutorTypeScriptFixtures/xoshiro128ss-68/summary
+=== RUN   TestExecutorTypeScriptFixtures/xoshiro128ss-69
+=== RUN   TestExecutorTypeScriptFixtures/xoshiro128ss-69/full
+=== RUN   TestExecutorTypeScriptFixtures/xoshiro128ss-69/details
+=== RUN   TestExecutorTypeScriptFixtures/xoshiro128ss-69/summary
+=== RUN   TestExecutorTypeScriptFixtures/xoshiro128ss-70
+=== RUN   TestExecutorTypeScriptFixtures/xoshiro128ss-70/full
+=== RUN   TestExecutorTypeScriptFixtures/xoshiro128ss-70/details
+=== RUN   TestExecutorTypeScriptFixtures/xoshiro128ss-70/summary
+=== RUN   TestExecutorTypeScriptFixtures/xoshiro128ss-71
+=== RUN   TestExecutorTypeScriptFixtures/xoshiro128ss-71/full
+=== RUN   TestExecutorTypeScriptFixtures/xoshiro128ss-71/details
+=== RUN   TestExecutorTypeScriptFixtures/xoshiro128ss-71/summary
+=== RUN   TestExecutorTypeScriptFixtures/xoshiro128ss-72
+=== RUN   TestExecutorTypeScriptFixtures/xoshiro128ss-72/full
+=== RUN   TestExecutorTypeScriptFixtures/xoshiro128ss-72/details
+=== RUN   TestExecutorTypeScriptFixtures/xoshiro128ss-72/summary
+=== RUN   TestExecutorTypeScriptFixtures/xoshiro128ss-73
+=== RUN   TestExecutorTypeScriptFixtures/xoshiro128ss-73/full
+=== RUN   TestExecutorTypeScriptFixtures/xoshiro128ss-73/details
+=== RUN   TestExecutorTypeScriptFixtures/xoshiro128ss-73/summary
+=== RUN   TestExecutorTypeScriptFixtures/xoshiro128ss-74
+=== RUN   TestExecutorTypeScriptFixtures/xoshiro128ss-74/full
+=== RUN   TestExecutorTypeScriptFixtures/xoshiro128ss-74/details
+=== RUN   TestExecutorTypeScriptFixtures/xoshiro128ss-74/summary
+=== RUN   TestExecutorTypeScriptFixtures/xoshiro128ss-75
+=== RUN   TestExecutorTypeScriptFixtures/xoshiro128ss-75/full
+=== RUN   TestExecutorTypeScriptFixtures/xoshiro128ss-75/details
+=== RUN   TestExecutorTypeScriptFixtures/xoshiro128ss-75/summary
+=== RUN   TestExecutorTypeScriptFixtures/xoshiro128ss-76
+=== RUN   TestExecutorTypeScriptFixtures/xoshiro128ss-76/full
+=== RUN   TestExecutorTypeScriptFixtures/xoshiro128ss-76/details
+=== RUN   TestExecutorTypeScriptFixtures/xoshiro128ss-76/summary
+=== RUN   TestExecutorTypeScriptFixtures/xoshiro128ss-77
+=== RUN   TestExecutorTypeScriptFixtures/xoshiro128ss-77/full
+=== RUN   TestExecutorTypeScriptFixtures/xoshiro128ss-77/details
+=== RUN   TestExecutorTypeScriptFixtures/xoshiro128ss-77/summary
+=== RUN   TestExecutorTypeScriptFixtures/xoshiro128ss-78
+=== RUN   TestExecutorTypeScriptFixtures/xoshiro128ss-78/full
+=== RUN   TestExecutorTypeScriptFixtures/xoshiro128ss-78/details
+=== RUN   TestExecutorTypeScriptFixtures/xoshiro128ss-78/summary
+=== RUN   TestExecutorTypeScriptFixtures/xoshiro128ss-79
+=== RUN   TestExecutorTypeScriptFixtures/xoshiro128ss-79/full
+=== RUN   TestExecutorTypeScriptFixtures/xoshiro128ss-79/details
+=== RUN   TestExecutorTypeScriptFixtures/xoshiro128ss-79/summary
+=== RUN   TestExecutorTypeScriptFixtures/xoshiro128ss-80
+=== RUN   TestExecutorTypeScriptFixtures/xoshiro128ss-80/full
+=== RUN   TestExecutorTypeScriptFixtures/xoshiro128ss-80/details
+=== RUN   TestExecutorTypeScriptFixtures/xoshiro128ss-80/summary
+=== RUN   TestExecutorTypeScriptFixtures/xoshiro128ss-81
+=== RUN   TestExecutorTypeScriptFixtures/xoshiro128ss-81/full
+=== RUN   TestExecutorTypeScriptFixtures/xoshiro128ss-81/details
+=== RUN   TestExecutorTypeScriptFixtures/xoshiro128ss-81/summary
+=== RUN   TestExecutorTypeScriptFixtures/xoshiro128ss-82
+=== RUN   TestExecutorTypeScriptFixtures/xoshiro128ss-82/full
+=== RUN   TestExecutorTypeScriptFixtures/xoshiro128ss-82/details
+=== RUN   TestExecutorTypeScriptFixtures/xoshiro128ss-82/summary
+=== RUN   TestExecutorTypeScriptFixtures/xoshiro128ss-83
+=== RUN   TestExecutorTypeScriptFixtures/xoshiro128ss-83/full
+=== RUN   TestExecutorTypeScriptFixtures/xoshiro128ss-83/details
+=== RUN   TestExecutorTypeScriptFixtures/xoshiro128ss-83/summary
+=== RUN   TestExecutorTypeScriptFixtures/xoshiro128ss-84
+=== RUN   TestExecutorTypeScriptFixtures/xoshiro128ss-84/full
+=== RUN   TestExecutorTypeScriptFixtures/xoshiro128ss-84/details
+=== RUN   TestExecutorTypeScriptFixtures/xoshiro128ss-84/summary
+=== RUN   TestExecutorTypeScriptFixtures/xoshiro128ss-85
+=== RUN   TestExecutorTypeScriptFixtures/xoshiro128ss-85/full
+=== RUN   TestExecutorTypeScriptFixtures/xoshiro128ss-85/details
+=== RUN   TestExecutorTypeScriptFixtures/xoshiro128ss-85/summary
+=== RUN   TestExecutorTypeScriptFixtures/xoshiro128ss-86
+=== RUN   TestExecutorTypeScriptFixtures/xoshiro128ss-86/full
+=== RUN   TestExecutorTypeScriptFixtures/xoshiro128ss-86/details
+=== RUN   TestExecutorTypeScriptFixtures/xoshiro128ss-86/summary
+=== RUN   TestExecutorTypeScriptFixtures/xoshiro128ss-87
+=== RUN   TestExecutorTypeScriptFixtures/xoshiro128ss-87/full
+=== RUN   TestExecutorTypeScriptFixtures/xoshiro128ss-87/details
+=== RUN   TestExecutorTypeScriptFixtures/xoshiro128ss-87/summary
+=== RUN   TestExecutorTypeScriptFixtures/xoshiro128ss-88
+=== RUN   TestExecutorTypeScriptFixtures/xoshiro128ss-88/full
+=== RUN   TestExecutorTypeScriptFixtures/xoshiro128ss-88/details
+=== RUN   TestExecutorTypeScriptFixtures/xoshiro128ss-88/summary
+=== RUN   TestExecutorTypeScriptFixtures/xoshiro128ss-89
+=== RUN   TestExecutorTypeScriptFixtures/xoshiro128ss-89/full
+=== RUN   TestExecutorTypeScriptFixtures/xoshiro128ss-89/details
+=== RUN   TestExecutorTypeScriptFixtures/xoshiro128ss-89/summary
+=== RUN   TestExecutorTypeScriptFixtures/xoshiro128ss-90
+=== RUN   TestExecutorTypeScriptFixtures/xoshiro128ss-90/full
+=== RUN   TestExecutorTypeScriptFixtures/xoshiro128ss-90/details
+=== RUN   TestExecutorTypeScriptFixtures/xoshiro128ss-90/summary
+=== RUN   TestExecutorTypeScriptFixtures/xoshiro128ss-91
+=== RUN   TestExecutorTypeScriptFixtures/xoshiro128ss-91/full
+=== RUN   TestExecutorTypeScriptFixtures/xoshiro128ss-91/details
+=== RUN   TestExecutorTypeScriptFixtures/xoshiro128ss-91/summary
+=== RUN   TestExecutorTypeScriptFixtures/xoshiro128ss-92
+=== RUN   TestExecutorTypeScriptFixtures/xoshiro128ss-92/full
+=== RUN   TestExecutorTypeScriptFixtures/xoshiro128ss-92/details
+=== RUN   TestExecutorTypeScriptFixtures/xoshiro128ss-92/summary
+=== RUN   TestExecutorTypeScriptFixtures/xoshiro128ss-93
+=== RUN   TestExecutorTypeScriptFixtures/xoshiro128ss-93/full
+=== RUN   TestExecutorTypeScriptFixtures/xoshiro128ss-93/details
+=== RUN   TestExecutorTypeScriptFixtures/xoshiro128ss-93/summary
+=== RUN   TestExecutorTypeScriptFixtures/execution-budget-0
+=== RUN   TestExecutorTypeScriptFixtures/execution-budget-0/full
+=== RUN   TestExecutorTypeScriptFixtures/execution-budget-0/details
+=== RUN   TestExecutorTypeScriptFixtures/execution-budget-0/summary
+=== RUN   TestExecutorTypeScriptFixtures/execution-budget-1
+=== RUN   TestExecutorTypeScriptFixtures/execution-budget-1/full
+=== RUN   TestExecutorTypeScriptFixtures/execution-budget-1/details
+=== RUN   TestExecutorTypeScriptFixtures/execution-budget-1/summary
+=== RUN   TestExecutorTypeScriptFixtures/execution-budget-2
+=== RUN   TestExecutorTypeScriptFixtures/execution-budget-2/full
+=== RUN   TestExecutorTypeScriptFixtures/execution-budget-2/details
+=== RUN   TestExecutorTypeScriptFixtures/execution-budget-2/summary
+=== RUN   TestExecutorTypeScriptFixtures/execution-budget-3
+=== RUN   TestExecutorTypeScriptFixtures/execution-budget-3/full
+=== RUN   TestExecutorTypeScriptFixtures/execution-budget-3/details
+=== RUN   TestExecutorTypeScriptFixtures/execution-budget-3/summary
+=== RUN   TestExecutorTypeScriptFixtures/execution-budget-4
+=== RUN   TestExecutorTypeScriptFixtures/execution-budget-4/full
+=== RUN   TestExecutorTypeScriptFixtures/execution-budget-4/details
+=== RUN   TestExecutorTypeScriptFixtures/execution-budget-4/summary
+=== RUN   TestExecutorTypeScriptFixtures/execution-budget-5
+=== RUN   TestExecutorTypeScriptFixtures/execution-budget-5/full
+=== RUN   TestExecutorTypeScriptFixtures/execution-budget-5/details
+=== RUN   TestExecutorTypeScriptFixtures/execution-budget-5/summary
+=== RUN   TestExecutorTypeScriptFixtures/execution-budget-6
+=== RUN   TestExecutorTypeScriptFixtures/execution-budget-6/full
+=== RUN   TestExecutorTypeScriptFixtures/execution-budget-6/details
+=== RUN   TestExecutorTypeScriptFixtures/execution-budget-6/summary
+=== RUN   TestExecutorTypeScriptFixtures/execution-budget-7
+=== RUN   TestExecutorTypeScriptFixtures/execution-budget-7/full
+=== RUN   TestExecutorTypeScriptFixtures/execution-budget-7/details
+=== RUN   TestExecutorTypeScriptFixtures/execution-budget-7/summary
+=== RUN   TestExecutorTypeScriptFixtures/execution-budget-8
+=== RUN   TestExecutorTypeScriptFixtures/execution-budget-8/full
+=== RUN   TestExecutorTypeScriptFixtures/execution-budget-8/details
+=== RUN   TestExecutorTypeScriptFixtures/execution-budget-8/summary
+=== RUN   TestExecutorTypeScriptFixtures/execution-budget-9
+=== RUN   TestExecutorTypeScriptFixtures/execution-budget-9/full
+=== RUN   TestExecutorTypeScriptFixtures/execution-budget-9/details
+=== RUN   TestExecutorTypeScriptFixtures/execution-budget-9/summary
+=== RUN   TestExecutorTypeScriptFixtures/fast-budget-0-1
+=== RUN   TestExecutorTypeScriptFixtures/fast-budget-0-1/full
+=== RUN   TestExecutorTypeScriptFixtures/fast-budget-0-1/details
+=== RUN   TestExecutorTypeScriptFixtures/fast-budget-0-1/summary
+=== RUN   TestExecutorTypeScriptFixtures/fast-budget-0-3
+=== RUN   TestExecutorTypeScriptFixtures/fast-budget-0-3/full
+=== RUN   TestExecutorTypeScriptFixtures/fast-budget-0-3/details
+=== RUN   TestExecutorTypeScriptFixtures/fast-budget-0-3/summary
+=== RUN   TestExecutorTypeScriptFixtures/fast-budget-0-5
+=== RUN   TestExecutorTypeScriptFixtures/fast-budget-0-5/full
+=== RUN   TestExecutorTypeScriptFixtures/fast-budget-0-5/details
+=== RUN   TestExecutorTypeScriptFixtures/fast-budget-0-5/summary
+=== RUN   TestExecutorTypeScriptFixtures/fast-budget-0-8
+=== RUN   TestExecutorTypeScriptFixtures/fast-budget-0-8/full
+=== RUN   TestExecutorTypeScriptFixtures/fast-budget-0-8/details
+=== RUN   TestExecutorTypeScriptFixtures/fast-budget-0-8/summary
+=== RUN   TestExecutorTypeScriptFixtures/fast-budget-0-10
+=== RUN   TestExecutorTypeScriptFixtures/fast-budget-0-10/full
+=== RUN   TestExecutorTypeScriptFixtures/fast-budget-0-10/details
+=== RUN   TestExecutorTypeScriptFixtures/fast-budget-0-10/summary
+=== RUN   TestExecutorTypeScriptFixtures/fast-budget-0-14
+=== RUN   TestExecutorTypeScriptFixtures/fast-budget-0-14/full
+=== RUN   TestExecutorTypeScriptFixtures/fast-budget-0-14/details
+=== RUN   TestExecutorTypeScriptFixtures/fast-budget-0-14/summary
+=== RUN   TestExecutorTypeScriptFixtures/fast-budget-0-18
+=== RUN   TestExecutorTypeScriptFixtures/fast-budget-0-18/full
+=== RUN   TestExecutorTypeScriptFixtures/fast-budget-0-18/details
+=== RUN   TestExecutorTypeScriptFixtures/fast-budget-0-18/summary
+=== RUN   TestExecutorTypeScriptFixtures/fast-budget-1-1
+=== RUN   TestExecutorTypeScriptFixtures/fast-budget-1-1/full
+=== RUN   TestExecutorTypeScriptFixtures/fast-budget-1-1/details
+=== RUN   TestExecutorTypeScriptFixtures/fast-budget-1-1/summary
+=== RUN   TestExecutorTypeScriptFixtures/fast-budget-1-3
+=== RUN   TestExecutorTypeScriptFixtures/fast-budget-1-3/full
+=== RUN   TestExecutorTypeScriptFixtures/fast-budget-1-3/details
+=== RUN   TestExecutorTypeScriptFixtures/fast-budget-1-3/summary
+=== RUN   TestExecutorTypeScriptFixtures/fast-budget-1-5
+=== RUN   TestExecutorTypeScriptFixtures/fast-budget-1-5/full
+=== RUN   TestExecutorTypeScriptFixtures/fast-budget-1-5/details
+=== RUN   TestExecutorTypeScriptFixtures/fast-budget-1-5/summary
+=== RUN   TestExecutorTypeScriptFixtures/fast-budget-1-8
+=== RUN   TestExecutorTypeScriptFixtures/fast-budget-1-8/full
+=== RUN   TestExecutorTypeScriptFixtures/fast-budget-1-8/details
+=== RUN   TestExecutorTypeScriptFixtures/fast-budget-1-8/summary
+=== RUN   TestExecutorTypeScriptFixtures/fast-budget-1-10
+=== RUN   TestExecutorTypeScriptFixtures/fast-budget-1-10/full
+=== RUN   TestExecutorTypeScriptFixtures/fast-budget-1-10/details
+=== RUN   TestExecutorTypeScriptFixtures/fast-budget-1-10/summary
+=== RUN   TestExecutorTypeScriptFixtures/fast-budget-1-14
+=== RUN   TestExecutorTypeScriptFixtures/fast-budget-1-14/full
+=== RUN   TestExecutorTypeScriptFixtures/fast-budget-1-14/details
+=== RUN   TestExecutorTypeScriptFixtures/fast-budget-1-14/summary
+=== RUN   TestExecutorTypeScriptFixtures/fast-budget-1-18
+=== RUN   TestExecutorTypeScriptFixtures/fast-budget-1-18/full
+=== RUN   TestExecutorTypeScriptFixtures/fast-budget-1-18/details
+=== RUN   TestExecutorTypeScriptFixtures/fast-budget-1-18/summary
+=== RUN   TestExecutorTypeScriptFixtures/fast-budget-2-1
+=== RUN   TestExecutorTypeScriptFixtures/fast-budget-2-1/full
+=== RUN   TestExecutorTypeScriptFixtures/fast-budget-2-1/details
+=== RUN   TestExecutorTypeScriptFixtures/fast-budget-2-1/summary
+=== RUN   TestExecutorTypeScriptFixtures/fast-budget-2-3
+=== RUN   TestExecutorTypeScriptFixtures/fast-budget-2-3/full
+=== RUN   TestExecutorTypeScriptFixtures/fast-budget-2-3/details
+=== RUN   TestExecutorTypeScriptFixtures/fast-budget-2-3/summary
+=== RUN   TestExecutorTypeScriptFixtures/fast-budget-2-5
+=== RUN   TestExecutorTypeScriptFixtures/fast-budget-2-5/full
+=== RUN   TestExecutorTypeScriptFixtures/fast-budget-2-5/details
+=== RUN   TestExecutorTypeScriptFixtures/fast-budget-2-5/summary
+=== RUN   TestExecutorTypeScriptFixtures/fast-budget-2-8
+=== RUN   TestExecutorTypeScriptFixtures/fast-budget-2-8/full
+=== RUN   TestExecutorTypeScriptFixtures/fast-budget-2-8/details
+=== RUN   TestExecutorTypeScriptFixtures/fast-budget-2-8/summary
+=== RUN   TestExecutorTypeScriptFixtures/fast-budget-2-10
+=== RUN   TestExecutorTypeScriptFixtures/fast-budget-2-10/full
+=== RUN   TestExecutorTypeScriptFixtures/fast-budget-2-10/details
+=== RUN   TestExecutorTypeScriptFixtures/fast-budget-2-10/summary
+=== RUN   TestExecutorTypeScriptFixtures/fast-budget-2-14
+=== RUN   TestExecutorTypeScriptFixtures/fast-budget-2-14/full
+=== RUN   TestExecutorTypeScriptFixtures/fast-budget-2-14/details
+=== RUN   TestExecutorTypeScriptFixtures/fast-budget-2-14/summary
+=== RUN   TestExecutorTypeScriptFixtures/fast-budget-2-18
+=== RUN   TestExecutorTypeScriptFixtures/fast-budget-2-18/full
+=== RUN   TestExecutorTypeScriptFixtures/fast-budget-2-18/details
+=== RUN   TestExecutorTypeScriptFixtures/fast-budget-2-18/summary
+=== RUN   TestExecutorTypeScriptFixtures/fast-budget-3-1
+=== RUN   TestExecutorTypeScriptFixtures/fast-budget-3-1/full
+=== RUN   TestExecutorTypeScriptFixtures/fast-budget-3-1/details
+=== RUN   TestExecutorTypeScriptFixtures/fast-budget-3-1/summary
+=== RUN   TestExecutorTypeScriptFixtures/fast-budget-3-3
+=== RUN   TestExecutorTypeScriptFixtures/fast-budget-3-3/full
+=== RUN   TestExecutorTypeScriptFixtures/fast-budget-3-3/details
+=== RUN   TestExecutorTypeScriptFixtures/fast-budget-3-3/summary
+=== RUN   TestExecutorTypeScriptFixtures/fast-budget-3-5
+=== RUN   TestExecutorTypeScriptFixtures/fast-budget-3-5/full
+=== RUN   TestExecutorTypeScriptFixtures/fast-budget-3-5/details
+=== RUN   TestExecutorTypeScriptFixtures/fast-budget-3-5/summary
+=== RUN   TestExecutorTypeScriptFixtures/fast-budget-3-8
+=== RUN   TestExecutorTypeScriptFixtures/fast-budget-3-8/full
+=== RUN   TestExecutorTypeScriptFixtures/fast-budget-3-8/details
+=== RUN   TestExecutorTypeScriptFixtures/fast-budget-3-8/summary
+=== RUN   TestExecutorTypeScriptFixtures/fast-budget-3-10
+=== RUN   TestExecutorTypeScriptFixtures/fast-budget-3-10/full
+=== RUN   TestExecutorTypeScriptFixtures/fast-budget-3-10/details
+=== RUN   TestExecutorTypeScriptFixtures/fast-budget-3-10/summary
+=== RUN   TestExecutorTypeScriptFixtures/fast-budget-3-14
+=== RUN   TestExecutorTypeScriptFixtures/fast-budget-3-14/full
+=== RUN   TestExecutorTypeScriptFixtures/fast-budget-3-14/details
+=== RUN   TestExecutorTypeScriptFixtures/fast-budget-3-14/summary
+=== RUN   TestExecutorTypeScriptFixtures/fast-budget-3-18
+=== RUN   TestExecutorTypeScriptFixtures/fast-budget-3-18/full
+=== RUN   TestExecutorTypeScriptFixtures/fast-budget-3-18/details
+=== RUN   TestExecutorTypeScriptFixtures/fast-budget-3-18/summary
+=== RUN   TestExecutorTypeScriptFixtures/fast-budget-4-1
+=== RUN   TestExecutorTypeScriptFixtures/fast-budget-4-1/full
+=== RUN   TestExecutorTypeScriptFixtures/fast-budget-4-1/details
+=== RUN   TestExecutorTypeScriptFixtures/fast-budget-4-1/summary
+=== RUN   TestExecutorTypeScriptFixtures/fast-budget-4-3
+=== RUN   TestExecutorTypeScriptFixtures/fast-budget-4-3/full
+=== RUN   TestExecutorTypeScriptFixtures/fast-budget-4-3/details
+=== RUN   TestExecutorTypeScriptFixtures/fast-budget-4-3/summary
+=== RUN   TestExecutorTypeScriptFixtures/fast-budget-4-5
+=== RUN   TestExecutorTypeScriptFixtures/fast-budget-4-5/full
+=== RUN   TestExecutorTypeScriptFixtures/fast-budget-4-5/details
+=== RUN   TestExecutorTypeScriptFixtures/fast-budget-4-5/summary
+=== RUN   TestExecutorTypeScriptFixtures/fast-budget-4-8
+=== RUN   TestExecutorTypeScriptFixtures/fast-budget-4-8/full
+=== RUN   TestExecutorTypeScriptFixtures/fast-budget-4-8/details
+=== RUN   TestExecutorTypeScriptFixtures/fast-budget-4-8/summary
+=== RUN   TestExecutorTypeScriptFixtures/fast-budget-4-10
+=== RUN   TestExecutorTypeScriptFixtures/fast-budget-4-10/full
+=== RUN   TestExecutorTypeScriptFixtures/fast-budget-4-10/details
+=== RUN   TestExecutorTypeScriptFixtures/fast-budget-4-10/summary
+=== RUN   TestExecutorTypeScriptFixtures/fast-budget-4-14
+=== RUN   TestExecutorTypeScriptFixtures/fast-budget-4-14/full
+=== RUN   TestExecutorTypeScriptFixtures/fast-budget-4-14/details
+=== RUN   TestExecutorTypeScriptFixtures/fast-budget-4-14/summary
+=== RUN   TestExecutorTypeScriptFixtures/fast-budget-4-18
+=== RUN   TestExecutorTypeScriptFixtures/fast-budget-4-18/full
+=== RUN   TestExecutorTypeScriptFixtures/fast-budget-4-18/details
+=== RUN   TestExecutorTypeScriptFixtures/fast-budget-4-18/summary
+=== RUN   TestExecutorTypeScriptFixtures/fast-budget-5-1
+=== RUN   TestExecutorTypeScriptFixtures/fast-budget-5-1/full
+=== RUN   TestExecutorTypeScriptFixtures/fast-budget-5-1/details
+=== RUN   TestExecutorTypeScriptFixtures/fast-budget-5-1/summary
+=== RUN   TestExecutorTypeScriptFixtures/fast-budget-5-3
+=== RUN   TestExecutorTypeScriptFixtures/fast-budget-5-3/full
+=== RUN   TestExecutorTypeScriptFixtures/fast-budget-5-3/details
+=== RUN   TestExecutorTypeScriptFixtures/fast-budget-5-3/summary
+=== RUN   TestExecutorTypeScriptFixtures/fast-budget-5-5
+=== RUN   TestExecutorTypeScriptFixtures/fast-budget-5-5/full
+=== RUN   TestExecutorTypeScriptFixtures/fast-budget-5-5/details
+=== RUN   TestExecutorTypeScriptFixtures/fast-budget-5-5/summary
+=== RUN   TestExecutorTypeScriptFixtures/fast-budget-5-8
+=== RUN   TestExecutorTypeScriptFixtures/fast-budget-5-8/full
+=== RUN   TestExecutorTypeScriptFixtures/fast-budget-5-8/details
+=== RUN   TestExecutorTypeScriptFixtures/fast-budget-5-8/summary
+=== RUN   TestExecutorTypeScriptFixtures/fast-budget-5-10
+=== RUN   TestExecutorTypeScriptFixtures/fast-budget-5-10/full
+=== RUN   TestExecutorTypeScriptFixtures/fast-budget-5-10/details
+=== RUN   TestExecutorTypeScriptFixtures/fast-budget-5-10/summary
+=== RUN   TestExecutorTypeScriptFixtures/fast-budget-5-14
+=== RUN   TestExecutorTypeScriptFixtures/fast-budget-5-14/full
+=== RUN   TestExecutorTypeScriptFixtures/fast-budget-5-14/details
+=== RUN   TestExecutorTypeScriptFixtures/fast-budget-5-14/summary
+=== RUN   TestExecutorTypeScriptFixtures/fast-budget-5-18
+=== RUN   TestExecutorTypeScriptFixtures/fast-budget-5-18/full
+=== RUN   TestExecutorTypeScriptFixtures/fast-budget-5-18/details
+=== RUN   TestExecutorTypeScriptFixtures/fast-budget-5-18/summary
+--- PASS: TestExecutorTypeScriptFixtures (0.23s)
+    --- PASS: TestExecutorTypeScriptFixtures/mt19937-1 (0.00s)
+        --- PASS: TestExecutorTypeScriptFixtures/mt19937-1/full (0.00s)
+        --- PASS: TestExecutorTypeScriptFixtures/mt19937-1/details (0.00s)
+        --- PASS: TestExecutorTypeScriptFixtures/mt19937-1/summary (0.00s)
+    --- PASS: TestExecutorTypeScriptFixtures/mt19937-2 (0.00s)
+        --- PASS: TestExecutorTypeScriptFixtures/mt19937-2/full (0.00s)
+        --- PASS: TestExecutorTypeScriptFixtures/mt19937-2/details (0.00s)
+        --- PASS: TestExecutorTypeScriptFixtures/mt19937-2/summary (0.00s)
+    --- PASS: TestExecutorTypeScriptFixtures/mt19937-3 (0.00s)
+        --- PASS: TestExecutorTypeScriptFixtures/mt19937-3/full (0.00s)
+        --- PASS: TestExecutorTypeScriptFixtures/mt19937-3/details (0.00s)
+        --- PASS: TestExecutorTypeScriptFixtures/mt19937-3/summary (0.00s)
+    --- PASS: TestExecutorTypeScriptFixtures/mt19937-4 (0.00s)
+        --- PASS: TestExecutorTypeScriptFixtures/mt19937-4/full (0.00s)
+        --- PASS: TestExecutorTypeScriptFixtures/mt19937-4/details (0.00s)
+        --- PASS: TestExecutorTypeScriptFixtures/mt19937-4/summary (0.00s)
+    --- PASS: TestExecutorTypeScriptFixtures/mt19937-5 (0.00s)
+        --- PASS: TestExecutorTypeScriptFixtures/mt19937-5/full (0.00s)
+        --- PASS: TestExecutorTypeScriptFixtures/mt19937-5/details (0.00s)
+        --- PASS: TestExecutorTypeScriptFixtures/mt19937-5/summary (0.00s)
+    --- PASS: TestExecutorTypeScriptFixtures/mt19937-6 (0.00s)
+        --- PASS: TestExecutorTypeScriptFixtures/mt19937-6/full (0.00s)
+        --- PASS: TestExecutorTypeScriptFixtures/mt19937-6/details (0.00s)
+        --- PASS: TestExecutorTypeScriptFixtures/mt19937-6/summary (0.00s)
+    --- PASS: TestExecutorTypeScriptFixtures/mt19937-7 (0.00s)
+        --- PASS: TestExecutorTypeScriptFixtures/mt19937-7/full (0.00s)
+        --- PASS: TestExecutorTypeScriptFixtures/mt19937-7/details (0.00s)
+        --- PASS: TestExecutorTypeScriptFixtures/mt19937-7/summary (0.00s)
+    --- PASS: TestExecutorTypeScriptFixtures/mt19937-8 (0.00s)
+        --- PASS: TestExecutorTypeScriptFixtures/mt19937-8/full (0.00s)
+        --- PASS: TestExecutorTypeScriptFixtures/mt19937-8/details (0.00s)
+        --- PASS: TestExecutorTypeScriptFixtures/mt19937-8/summary (0.00s)
+    --- PASS: TestExecutorTypeScriptFixtures/mt19937-9 (0.00s)
+        --- PASS: TestExecutorTypeScriptFixtures/mt19937-9/full (0.00s)
+        --- PASS: TestExecutorTypeScriptFixtures/mt19937-9/details (0.00s)
+        --- PASS: TestExecutorTypeScriptFixtures/mt19937-9/summary (0.00s)
+    --- PASS: TestExecutorTypeScriptFixtures/mt19937-10 (0.00s)
+        --- PASS: TestExecutorTypeScriptFixtures/mt19937-10/full (0.00s)
+        --- PASS: TestExecutorTypeScriptFixtures/mt19937-10/details (0.00s)
+        --- PASS: TestExecutorTypeScriptFixtures/mt19937-10/summary (0.00s)
+    --- PASS: TestExecutorTypeScriptFixtures/mt19937-11 (0.00s)
+        --- PASS: TestExecutorTypeScriptFixtures/mt19937-11/full (0.00s)
+        --- PASS: TestExecutorTypeScriptFixtures/mt19937-11/details (0.00s)
+        --- PASS: TestExecutorTypeScriptFixtures/mt19937-11/summary (0.00s)
+    --- PASS: TestExecutorTypeScriptFixtures/mt19937-12 (0.00s)
+        --- PASS: TestExecutorTypeScriptFixtures/mt19937-12/full (0.00s)
+        --- PASS: TestExecutorTypeScriptFixtures/mt19937-12/details (0.00s)
+        --- PASS: TestExecutorTypeScriptFixtures/mt19937-12/summary (0.00s)
+    --- PASS: TestExecutorTypeScriptFixtures/mt19937-13 (0.00s)
+        --- PASS: TestExecutorTypeScriptFixtures/mt19937-13/full (0.00s)
+        --- PASS: TestExecutorTypeScriptFixtures/mt19937-13/details (0.00s)
+        --- PASS: TestExecutorTypeScriptFixtures/mt19937-13/summary (0.00s)
+    --- PASS: TestExecutorTypeScriptFixtures/mt19937-14 (0.00s)
+        --- PASS: TestExecutorTypeScriptFixtures/mt19937-14/full (0.00s)
+        --- PASS: TestExecutorTypeScriptFixtures/mt19937-14/details (0.00s)
+        --- PASS: TestExecutorTypeScriptFixtures/mt19937-14/summary (0.00s)
+    --- PASS: TestExecutorTypeScriptFixtures/mt19937-15 (0.00s)
+        --- PASS: TestExecutorTypeScriptFixtures/mt19937-15/full (0.00s)
+        --- PASS: TestExecutorTypeScriptFixtures/mt19937-15/details (0.00s)
+        --- PASS: TestExecutorTypeScriptFixtures/mt19937-15/summary (0.00s)
+    --- PASS: TestExecutorTypeScriptFixtures/mt19937-16 (0.00s)
+        --- PASS: TestExecutorTypeScriptFixtures/mt19937-16/full (0.00s)
+        --- PASS: TestExecutorTypeScriptFixtures/mt19937-16/details (0.00s)
+        --- PASS: TestExecutorTypeScriptFixtures/mt19937-16/summary (0.00s)
+    --- PASS: TestExecutorTypeScriptFixtures/mt19937-17 (0.00s)
+        --- PASS: TestExecutorTypeScriptFixtures/mt19937-17/full (0.00s)
+        --- PASS: TestExecutorTypeScriptFixtures/mt19937-17/details (0.00s)
+        --- PASS: TestExecutorTypeScriptFixtures/mt19937-17/summary (0.00s)
+    --- PASS: TestExecutorTypeScriptFixtures/mt19937-18 (0.00s)
+        --- PASS: TestExecutorTypeScriptFixtures/mt19937-18/full (0.00s)
+        --- PASS: TestExecutorTypeScriptFixtures/mt19937-18/details (0.00s)
+        --- PASS: TestExecutorTypeScriptFixtures/mt19937-18/summary (0.00s)
+    --- PASS: TestExecutorTypeScriptFixtures/mt19937-19 (0.00s)
+        --- PASS: TestExecutorTypeScriptFixtures/mt19937-19/full (0.00s)
+        --- PASS: TestExecutorTypeScriptFixtures/mt19937-19/details (0.00s)
+        --- PASS: TestExecutorTypeScriptFixtures/mt19937-19/summary (0.00s)
+    --- PASS: TestExecutorTypeScriptFixtures/mt19937-20 (0.00s)
+        --- PASS: TestExecutorTypeScriptFixtures/mt19937-20/full (0.00s)
+        --- PASS: TestExecutorTypeScriptFixtures/mt19937-20/details (0.00s)
+        --- PASS: TestExecutorTypeScriptFixtures/mt19937-20/summary (0.00s)
+    --- PASS: TestExecutorTypeScriptFixtures/mt19937-21 (0.00s)
+        --- PASS: TestExecutorTypeScriptFixtures/mt19937-21/full (0.00s)
+        --- PASS: TestExecutorTypeScriptFixtures/mt19937-21/details (0.00s)
+        --- PASS: TestExecutorTypeScriptFixtures/mt19937-21/summary (0.00s)
+    --- PASS: TestExecutorTypeScriptFixtures/mt19937-22 (0.00s)
+        --- PASS: TestExecutorTypeScriptFixtures/mt19937-22/full (0.00s)
+        --- PASS: TestExecutorTypeScriptFixtures/mt19937-22/details (0.00s)
+        --- PASS: TestExecutorTypeScriptFixtures/mt19937-22/summary (0.00s)
+    --- PASS: TestExecutorTypeScriptFixtures/mt19937-23 (0.00s)
+        --- PASS: TestExecutorTypeScriptFixtures/mt19937-23/full (0.00s)
+        --- PASS: TestExecutorTypeScriptFixtures/mt19937-23/details (0.00s)
+        --- PASS: TestExecutorTypeScriptFixtures/mt19937-23/summary (0.00s)
+    --- PASS: TestExecutorTypeScriptFixtures/mt19937-24 (0.00s)
+        --- PASS: TestExecutorTypeScriptFixtures/mt19937-24/full (0.00s)
+        --- PASS: TestExecutorTypeScriptFixtures/mt19937-24/details (0.00s)
+        --- PASS: TestExecutorTypeScriptFixtures/mt19937-24/summary (0.00s)
+    --- PASS: TestExecutorTypeScriptFixtures/mt19937-25 (0.00s)
+        --- PASS: TestExecutorTypeScriptFixtures/mt19937-25/full (0.00s)
+        --- PASS: TestExecutorTypeScriptFixtures/mt19937-25/details (0.00s)
+        --- PASS: TestExecutorTypeScriptFixtures/mt19937-25/summary (0.00s)
+    --- PASS: TestExecutorTypeScriptFixtures/mt19937-26 (0.00s)
+        --- PASS: TestExecutorTypeScriptFixtures/mt19937-26/full (0.00s)
+        --- PASS: TestExecutorTypeScriptFixtures/mt19937-26/details (0.00s)
+        --- PASS: TestExecutorTypeScriptFixtures/mt19937-26/summary (0.00s)
+    --- PASS: TestExecutorTypeScriptFixtures/mt19937-27 (0.00s)
+        --- PASS: TestExecutorTypeScriptFixtures/mt19937-27/full (0.00s)
+        --- PASS: TestExecutorTypeScriptFixtures/mt19937-27/details (0.00s)
+        --- PASS: TestExecutorTypeScriptFixtures/mt19937-27/summary (0.00s)
+    --- PASS: TestExecutorTypeScriptFixtures/mt19937-28 (0.00s)
+        --- PASS: TestExecutorTypeScriptFixtures/mt19937-28/full (0.00s)
+        --- PASS: TestExecutorTypeScriptFixtures/mt19937-28/details (0.00s)
+        --- PASS: TestExecutorTypeScriptFixtures/mt19937-28/summary (0.00s)
+    --- PASS: TestExecutorTypeScriptFixtures/mt19937-29 (0.00s)
+        --- PASS: TestExecutorTypeScriptFixtures/mt19937-29/full (0.00s)
+        --- PASS: TestExecutorTypeScriptFixtures/mt19937-29/details (0.00s)
+        --- PASS: TestExecutorTypeScriptFixtures/mt19937-29/summary (0.00s)
+    --- PASS: TestExecutorTypeScriptFixtures/mt19937-30 (0.00s)
+        --- PASS: TestExecutorTypeScriptFixtures/mt19937-30/full (0.00s)
+        --- PASS: TestExecutorTypeScriptFixtures/mt19937-30/details (0.00s)
+        --- PASS: TestExecutorTypeScriptFixtures/mt19937-30/summary (0.00s)
+    --- PASS: TestExecutorTypeScriptFixtures/mt19937-31 (0.00s)
+        --- PASS: TestExecutorTypeScriptFixtures/mt19937-31/full (0.00s)
+        --- PASS: TestExecutorTypeScriptFixtures/mt19937-31/details (0.00s)
+        --- PASS: TestExecutorTypeScriptFixtures/mt19937-31/summary (0.00s)
+    --- PASS: TestExecutorTypeScriptFixtures/mt19937-32 (0.00s)
+        --- PASS: TestExecutorTypeScriptFixtures/mt19937-32/full (0.00s)
+        --- PASS: TestExecutorTypeScriptFixtures/mt19937-32/details (0.00s)
+        --- PASS: TestExecutorTypeScriptFixtures/mt19937-32/summary (0.00s)
+    --- PASS: TestExecutorTypeScriptFixtures/mt19937-33 (0.00s)
+        --- PASS: TestExecutorTypeScriptFixtures/mt19937-33/full (0.00s)
+        --- PASS: TestExecutorTypeScriptFixtures/mt19937-33/details (0.00s)
+        --- PASS: TestExecutorTypeScriptFixtures/mt19937-33/summary (0.00s)
+    --- PASS: TestExecutorTypeScriptFixtures/mt19937-34 (0.00s)
+        --- PASS: TestExecutorTypeScriptFixtures/mt19937-34/full (0.00s)
+        --- PASS: TestExecutorTypeScriptFixtures/mt19937-34/details (0.00s)
+        --- PASS: TestExecutorTypeScriptFixtures/mt19937-34/summary (0.00s)
+    --- PASS: TestExecutorTypeScriptFixtures/mt19937-35 (0.00s)
+        --- PASS: TestExecutorTypeScriptFixtures/mt19937-35/full (0.00s)
+        --- PASS: TestExecutorTypeScriptFixtures/mt19937-35/details (0.00s)
+        --- PASS: TestExecutorTypeScriptFixtures/mt19937-35/summary (0.00s)
+    --- PASS: TestExecutorTypeScriptFixtures/mt19937-36 (0.00s)
+        --- PASS: TestExecutorTypeScriptFixtures/mt19937-36/full (0.00s)
+        --- PASS: TestExecutorTypeScriptFixtures/mt19937-36/details (0.00s)
+        --- PASS: TestExecutorTypeScriptFixtures/mt19937-36/summary (0.00s)
+    --- PASS: TestExecutorTypeScriptFixtures/mt19937-37 (0.00s)
+        --- PASS: TestExecutorTypeScriptFixtures/mt19937-37/full (0.00s)
+        --- PASS: TestExecutorTypeScriptFixtures/mt19937-37/details (0.00s)
+        --- PASS: TestExecutorTypeScriptFixtures/mt19937-37/summary (0.00s)
+    --- PASS: TestExecutorTypeScriptFixtures/mt19937-38 (0.00s)
+        --- PASS: TestExecutorTypeScriptFixtures/mt19937-38/full (0.00s)
+        --- PASS: TestExecutorTypeScriptFixtures/mt19937-38/details (0.00s)
+        --- PASS: TestExecutorTypeScriptFixtures/mt19937-38/summary (0.00s)
+    --- PASS: TestExecutorTypeScriptFixtures/mt19937-39 (0.00s)
+        --- PASS: TestExecutorTypeScriptFixtures/mt19937-39/full (0.00s)
+        --- PASS: TestExecutorTypeScriptFixtures/mt19937-39/details (0.00s)
+        --- PASS: TestExecutorTypeScriptFixtures/mt19937-39/summary (0.00s)
+    --- PASS: TestExecutorTypeScriptFixtures/mt19937-40 (0.00s)
+        --- PASS: TestExecutorTypeScriptFixtures/mt19937-40/full (0.00s)
+        --- PASS: TestExecutorTypeScriptFixtures/mt19937-40/details (0.00s)
+        --- PASS: TestExecutorTypeScriptFixtures/mt19937-40/summary (0.00s)
+    --- PASS: TestExecutorTypeScriptFixtures/mt19937-41 (0.00s)
+        --- PASS: TestExecutorTypeScriptFixtures/mt19937-41/full (0.00s)
+        --- PASS: TestExecutorTypeScriptFixtures/mt19937-41/details (0.00s)
+        --- PASS: TestExecutorTypeScriptFixtures/mt19937-41/summary (0.00s)
+    --- PASS: TestExecutorTypeScriptFixtures/mt19937-42 (0.00s)
+        --- PASS: TestExecutorTypeScriptFixtures/mt19937-42/full (0.00s)
+        --- PASS: TestExecutorTypeScriptFixtures/mt19937-42/details (0.00s)
+        --- PASS: TestExecutorTypeScriptFixtures/mt19937-42/summary (0.00s)
+    --- PASS: TestExecutorTypeScriptFixtures/mt19937-43 (0.00s)
+        --- PASS: TestExecutorTypeScriptFixtures/mt19937-43/full (0.00s)
+        --- PASS: TestExecutorTypeScriptFixtures/mt19937-43/details (0.00s)
+        --- PASS: TestExecutorTypeScriptFixtures/mt19937-43/summary (0.00s)
+    --- PASS: TestExecutorTypeScriptFixtures/mt19937-44 (0.00s)
+        --- PASS: TestExecutorTypeScriptFixtures/mt19937-44/full (0.00s)
+        --- PASS: TestExecutorTypeScriptFixtures/mt19937-44/details (0.00s)
+        --- PASS: TestExecutorTypeScriptFixtures/mt19937-44/summary (0.00s)
+    --- PASS: TestExecutorTypeScriptFixtures/mt19937-45 (0.00s)
+        --- PASS: TestExecutorTypeScriptFixtures/mt19937-45/full (0.00s)
+        --- PASS: TestExecutorTypeScriptFixtures/mt19937-45/details (0.00s)
+        --- PASS: TestExecutorTypeScriptFixtures/mt19937-45/summary (0.00s)
+    --- PASS: TestExecutorTypeScriptFixtures/mt19937-46 (0.00s)
+        --- PASS: TestExecutorTypeScriptFixtures/mt19937-46/full (0.00s)
+        --- PASS: TestExecutorTypeScriptFixtures/mt19937-46/details (0.00s)
+        --- PASS: TestExecutorTypeScriptFixtures/mt19937-46/summary (0.00s)
+    --- PASS: TestExecutorTypeScriptFixtures/mt19937-47 (0.00s)
+        --- PASS: TestExecutorTypeScriptFixtures/mt19937-47/full (0.00s)
+        --- PASS: TestExecutorTypeScriptFixtures/mt19937-47/details (0.00s)
+        --- PASS: TestExecutorTypeScriptFixtures/mt19937-47/summary (0.00s)
+    --- PASS: TestExecutorTypeScriptFixtures/mt19937-48 (0.00s)
+        --- PASS: TestExecutorTypeScriptFixtures/mt19937-48/full (0.00s)
+        --- PASS: TestExecutorTypeScriptFixtures/mt19937-48/details (0.00s)
+        --- PASS: TestExecutorTypeScriptFixtures/mt19937-48/summary (0.00s)
+    --- PASS: TestExecutorTypeScriptFixtures/mt19937-49 (0.00s)
+        --- PASS: TestExecutorTypeScriptFixtures/mt19937-49/full (0.00s)
+        --- PASS: TestExecutorTypeScriptFixtures/mt19937-49/details (0.00s)
+        --- PASS: TestExecutorTypeScriptFixtures/mt19937-49/summary (0.00s)
+    --- PASS: TestExecutorTypeScriptFixtures/mt19937-50 (0.00s)
+        --- PASS: TestExecutorTypeScriptFixtures/mt19937-50/full (0.00s)
+        --- PASS: TestExecutorTypeScriptFixtures/mt19937-50/details (0.00s)
+        --- PASS: TestExecutorTypeScriptFixtures/mt19937-50/summary (0.00s)
+    --- PASS: TestExecutorTypeScriptFixtures/mt19937-51 (0.00s)
+        --- PASS: TestExecutorTypeScriptFixtures/mt19937-51/full (0.00s)
+        --- PASS: TestExecutorTypeScriptFixtures/mt19937-51/details (0.00s)
+        --- PASS: TestExecutorTypeScriptFixtures/mt19937-51/summary (0.00s)
+    --- PASS: TestExecutorTypeScriptFixtures/mt19937-52 (0.00s)
+        --- PASS: TestExecutorTypeScriptFixtures/mt19937-52/full (0.00s)
+        --- PASS: TestExecutorTypeScriptFixtures/mt19937-52/details (0.00s)
+        --- PASS: TestExecutorTypeScriptFixtures/mt19937-52/summary (0.00s)
+    --- PASS: TestExecutorTypeScriptFixtures/mt19937-53 (0.00s)
+        --- PASS: TestExecutorTypeScriptFixtures/mt19937-53/full (0.00s)
+        --- PASS: TestExecutorTypeScriptFixtures/mt19937-53/details (0.00s)
+        --- PASS: TestExecutorTypeScriptFixtures/mt19937-53/summary (0.00s)
+    --- PASS: TestExecutorTypeScriptFixtures/mt19937-54 (0.00s)
+        --- PASS: TestExecutorTypeScriptFixtures/mt19937-54/full (0.00s)
+        --- PASS: TestExecutorTypeScriptFixtures/mt19937-54/details (0.00s)
+        --- PASS: TestExecutorTypeScriptFixtures/mt19937-54/summary (0.00s)
+    --- PASS: TestExecutorTypeScriptFixtures/mt19937-55 (0.00s)
+        --- PASS: TestExecutorTypeScriptFixtures/mt19937-55/full (0.00s)
+        --- PASS: TestExecutorTypeScriptFixtures/mt19937-55/details (0.00s)
+        --- PASS: TestExecutorTypeScriptFixtures/mt19937-55/summary (0.00s)
+    --- PASS: TestExecutorTypeScriptFixtures/mt19937-56 (0.00s)
+        --- PASS: TestExecutorTypeScriptFixtures/mt19937-56/full (0.00s)
+        --- PASS: TestExecutorTypeScriptFixtures/mt19937-56/details (0.00s)
+        --- PASS: TestExecutorTypeScriptFixtures/mt19937-56/summary (0.00s)
+    --- PASS: TestExecutorTypeScriptFixtures/mt19937-57 (0.00s)
+        --- PASS: TestExecutorTypeScriptFixtures/mt19937-57/full (0.00s)
+        --- PASS: TestExecutorTypeScriptFixtures/mt19937-57/details (0.00s)
+        --- PASS: TestExecutorTypeScriptFixtures/mt19937-57/summary (0.00s)
+    --- PASS: TestExecutorTypeScriptFixtures/mt19937-58 (0.00s)
+        --- PASS: TestExecutorTypeScriptFixtures/mt19937-58/full (0.00s)
+        --- PASS: TestExecutorTypeScriptFixtures/mt19937-58/details (0.00s)
+        --- PASS: TestExecutorTypeScriptFixtures/mt19937-58/summary (0.00s)
+    --- PASS: TestExecutorTypeScriptFixtures/mt19937-59 (0.00s)
+        --- PASS: TestExecutorTypeScriptFixtures/mt19937-59/full (0.00s)
+        --- PASS: TestExecutorTypeScriptFixtures/mt19937-59/details (0.00s)
+        --- PASS: TestExecutorTypeScriptFixtures/mt19937-59/summary (0.00s)
+    --- PASS: TestExecutorTypeScriptFixtures/mt19937-60 (0.00s)
+        --- PASS: TestExecutorTypeScriptFixtures/mt19937-60/full (0.00s)
+        --- PASS: TestExecutorTypeScriptFixtures/mt19937-60/details (0.00s)
+        --- PASS: TestExecutorTypeScriptFixtures/mt19937-60/summary (0.00s)
+    --- PASS: TestExecutorTypeScriptFixtures/mt19937-61 (0.00s)
+        --- PASS: TestExecutorTypeScriptFixtures/mt19937-61/full (0.00s)
+        --- PASS: TestExecutorTypeScriptFixtures/mt19937-61/details (0.00s)
+        --- PASS: TestExecutorTypeScriptFixtures/mt19937-61/summary (0.00s)
+    --- PASS: TestExecutorTypeScriptFixtures/mt19937-62 (0.00s)
+        --- PASS: TestExecutorTypeScriptFixtures/mt19937-62/full (0.00s)
+        --- PASS: TestExecutorTypeScriptFixtures/mt19937-62/details (0.00s)
+        --- PASS: TestExecutorTypeScriptFixtures/mt19937-62/summary (0.00s)
+    --- PASS: TestExecutorTypeScriptFixtures/mt19937-63 (0.00s)
+        --- PASS: TestExecutorTypeScriptFixtures/mt19937-63/full (0.00s)
+        --- PASS: TestExecutorTypeScriptFixtures/mt19937-63/details (0.00s)
+        --- PASS: TestExecutorTypeScriptFixtures/mt19937-63/summary (0.00s)
+    --- PASS: TestExecutorTypeScriptFixtures/mt19937-64 (0.00s)
+        --- PASS: TestExecutorTypeScriptFixtures/mt19937-64/full (0.00s)
+        --- PASS: TestExecutorTypeScriptFixtures/mt19937-64/details (0.00s)
+        --- PASS: TestExecutorTypeScriptFixtures/mt19937-64/summary (0.00s)
+    --- PASS: TestExecutorTypeScriptFixtures/mt19937-65 (0.00s)
+        --- PASS: TestExecutorTypeScriptFixtures/mt19937-65/full (0.00s)
+        --- PASS: TestExecutorTypeScriptFixtures/mt19937-65/details (0.00s)
+        --- PASS: TestExecutorTypeScriptFixtures/mt19937-65/summary (0.00s)
+    --- PASS: TestExecutorTypeScriptFixtures/mt19937-66 (0.00s)
+        --- PASS: TestExecutorTypeScriptFixtures/mt19937-66/full (0.00s)
+        --- PASS: TestExecutorTypeScriptFixtures/mt19937-66/details (0.00s)
+        --- PASS: TestExecutorTypeScriptFixtures/mt19937-66/summary (0.00s)
+    --- PASS: TestExecutorTypeScriptFixtures/mt19937-67 (0.00s)
+        --- PASS: TestExecutorTypeScriptFixtures/mt19937-67/full (0.00s)
+        --- PASS: TestExecutorTypeScriptFixtures/mt19937-67/details (0.00s)
+        --- PASS: TestExecutorTypeScriptFixtures/mt19937-67/summary (0.00s)
+    --- PASS: TestExecutorTypeScriptFixtures/mt19937-68 (0.00s)
+        --- PASS: TestExecutorTypeScriptFixtures/mt19937-68/full (0.00s)
+        --- PASS: TestExecutorTypeScriptFixtures/mt19937-68/details (0.00s)
+        --- PASS: TestExecutorTypeScriptFixtures/mt19937-68/summary (0.00s)
+    --- PASS: TestExecutorTypeScriptFixtures/mt19937-69 (0.00s)
+        --- PASS: TestExecutorTypeScriptFixtures/mt19937-69/full (0.00s)
+        --- PASS: TestExecutorTypeScriptFixtures/mt19937-69/details (0.00s)
+        --- PASS: TestExecutorTypeScriptFixtures/mt19937-69/summary (0.00s)
+    --- PASS: TestExecutorTypeScriptFixtures/mt19937-70 (0.00s)
+        --- PASS: TestExecutorTypeScriptFixtures/mt19937-70/full (0.00s)
+        --- PASS: TestExecutorTypeScriptFixtures/mt19937-70/details (0.00s)
+        --- PASS: TestExecutorTypeScriptFixtures/mt19937-70/summary (0.00s)
+    --- PASS: TestExecutorTypeScriptFixtures/mt19937-71 (0.00s)
+        --- PASS: TestExecutorTypeScriptFixtures/mt19937-71/full (0.00s)
+        --- PASS: TestExecutorTypeScriptFixtures/mt19937-71/details (0.00s)
+        --- PASS: TestExecutorTypeScriptFixtures/mt19937-71/summary (0.00s)
+    --- PASS: TestExecutorTypeScriptFixtures/mt19937-72 (0.00s)
+        --- PASS: TestExecutorTypeScriptFixtures/mt19937-72/full (0.00s)
+        --- PASS: TestExecutorTypeScriptFixtures/mt19937-72/details (0.00s)
+        --- PASS: TestExecutorTypeScriptFixtures/mt19937-72/summary (0.00s)
+    --- PASS: TestExecutorTypeScriptFixtures/mt19937-73 (0.00s)
+        --- PASS: TestExecutorTypeScriptFixtures/mt19937-73/full (0.00s)
+        --- PASS: TestExecutorTypeScriptFixtures/mt19937-73/details (0.00s)
+        --- PASS: TestExecutorTypeScriptFixtures/mt19937-73/summary (0.00s)
+    --- PASS: TestExecutorTypeScriptFixtures/mt19937-74 (0.00s)
+        --- PASS: TestExecutorTypeScriptFixtures/mt19937-74/full (0.00s)
+        --- PASS: TestExecutorTypeScriptFixtures/mt19937-74/details (0.00s)
+        --- PASS: TestExecutorTypeScriptFixtures/mt19937-74/summary (0.00s)
+    --- PASS: TestExecutorTypeScriptFixtures/mt19937-75 (0.00s)
+        --- PASS: TestExecutorTypeScriptFixtures/mt19937-75/full (0.00s)
+        --- PASS: TestExecutorTypeScriptFixtures/mt19937-75/details (0.00s)
+        --- PASS: TestExecutorTypeScriptFixtures/mt19937-75/summary (0.00s)
+    --- PASS: TestExecutorTypeScriptFixtures/mt19937-76 (0.00s)
+        --- PASS: TestExecutorTypeScriptFixtures/mt19937-76/full (0.00s)
+        --- PASS: TestExecutorTypeScriptFixtures/mt19937-76/details (0.00s)
+        --- PASS: TestExecutorTypeScriptFixtures/mt19937-76/summary (0.00s)
+    --- PASS: TestExecutorTypeScriptFixtures/mt19937-77 (0.00s)
+        --- PASS: TestExecutorTypeScriptFixtures/mt19937-77/full (0.00s)
+        --- PASS: TestExecutorTypeScriptFixtures/mt19937-77/details (0.00s)
+        --- PASS: TestExecutorTypeScriptFixtures/mt19937-77/summary (0.00s)
+    --- PASS: TestExecutorTypeScriptFixtures/mt19937-78 (0.00s)
+        --- PASS: TestExecutorTypeScriptFixtures/mt19937-78/full (0.00s)
+        --- PASS: TestExecutorTypeScriptFixtures/mt19937-78/details (0.00s)
+        --- PASS: TestExecutorTypeScriptFixtures/mt19937-78/summary (0.00s)
+    --- PASS: TestExecutorTypeScriptFixtures/mt19937-79 (0.00s)
+        --- PASS: TestExecutorTypeScriptFixtures/mt19937-79/full (0.00s)
+        --- PASS: TestExecutorTypeScriptFixtures/mt19937-79/details (0.00s)
+        --- PASS: TestExecutorTypeScriptFixtures/mt19937-79/summary (0.00s)
+    --- PASS: TestExecutorTypeScriptFixtures/mt19937-80 (0.00s)
+        --- PASS: TestExecutorTypeScriptFixtures/mt19937-80/full (0.00s)
+        --- PASS: TestExecutorTypeScriptFixtures/mt19937-80/details (0.00s)
+        --- PASS: TestExecutorTypeScriptFixtures/mt19937-80/summary (0.00s)
+    --- PASS: TestExecutorTypeScriptFixtures/mt19937-81 (0.00s)
+        --- PASS: TestExecutorTypeScriptFixtures/mt19937-81/full (0.00s)
+        --- PASS: TestExecutorTypeScriptFixtures/mt19937-81/details (0.00s)
+        --- PASS: TestExecutorTypeScriptFixtures/mt19937-81/summary (0.00s)
+    --- PASS: TestExecutorTypeScriptFixtures/mt19937-82 (0.00s)
+        --- PASS: TestExecutorTypeScriptFixtures/mt19937-82/full (0.00s)
+        --- PASS: TestExecutorTypeScriptFixtures/mt19937-82/details (0.00s)
+        --- PASS: TestExecutorTypeScriptFixtures/mt19937-82/summary (0.00s)
+    --- PASS: TestExecutorTypeScriptFixtures/mt19937-83 (0.00s)
+        --- PASS: TestExecutorTypeScriptFixtures/mt19937-83/full (0.00s)
+        --- PASS: TestExecutorTypeScriptFixtures/mt19937-83/details (0.00s)
+        --- PASS: TestExecutorTypeScriptFixtures/mt19937-83/summary (0.00s)
+    --- PASS: TestExecutorTypeScriptFixtures/mt19937-84 (0.00s)
+        --- PASS: TestExecutorTypeScriptFixtures/mt19937-84/full (0.00s)
+        --- PASS: TestExecutorTypeScriptFixtures/mt19937-84/details (0.00s)
+        --- PASS: TestExecutorTypeScriptFixtures/mt19937-84/summary (0.00s)
+    --- PASS: TestExecutorTypeScriptFixtures/mt19937-85 (0.00s)
+        --- PASS: TestExecutorTypeScriptFixtures/mt19937-85/full (0.00s)
+        --- PASS: TestExecutorTypeScriptFixtures/mt19937-85/details (0.00s)
+        --- PASS: TestExecutorTypeScriptFixtures/mt19937-85/summary (0.00s)
+    --- PASS: TestExecutorTypeScriptFixtures/mt19937-86 (0.00s)
+        --- PASS: TestExecutorTypeScriptFixtures/mt19937-86/full (0.00s)
+        --- PASS: TestExecutorTypeScriptFixtures/mt19937-86/details (0.00s)
+        --- PASS: TestExecutorTypeScriptFixtures/mt19937-86/summary (0.00s)
+    --- PASS: TestExecutorTypeScriptFixtures/mt19937-87 (0.00s)
+        --- PASS: TestExecutorTypeScriptFixtures/mt19937-87/full (0.00s)
+        --- PASS: TestExecutorTypeScriptFixtures/mt19937-87/details (0.00s)
+        --- PASS: TestExecutorTypeScriptFixtures/mt19937-87/summary (0.00s)
+    --- PASS: TestExecutorTypeScriptFixtures/mt19937-88 (0.00s)
+        --- PASS: TestExecutorTypeScriptFixtures/mt19937-88/full (0.00s)
+        --- PASS: TestExecutorTypeScriptFixtures/mt19937-88/details (0.00s)
+        --- PASS: TestExecutorTypeScriptFixtures/mt19937-88/summary (0.00s)
+    --- PASS: TestExecutorTypeScriptFixtures/mt19937-89 (0.00s)
+        --- PASS: TestExecutorTypeScriptFixtures/mt19937-89/full (0.00s)
+        --- PASS: TestExecutorTypeScriptFixtures/mt19937-89/details (0.00s)
+        --- PASS: TestExecutorTypeScriptFixtures/mt19937-89/summary (0.00s)
+    --- PASS: TestExecutorTypeScriptFixtures/mt19937-90 (0.00s)
+        --- PASS: TestExecutorTypeScriptFixtures/mt19937-90/full (0.00s)
+        --- PASS: TestExecutorTypeScriptFixtures/mt19937-90/details (0.00s)
+        --- PASS: TestExecutorTypeScriptFixtures/mt19937-90/summary (0.00s)
+    --- PASS: TestExecutorTypeScriptFixtures/mt19937-91 (0.00s)
+        --- PASS: TestExecutorTypeScriptFixtures/mt19937-91/full (0.00s)
+        --- PASS: TestExecutorTypeScriptFixtures/mt19937-91/details (0.00s)
+        --- PASS: TestExecutorTypeScriptFixtures/mt19937-91/summary (0.00s)
+    --- PASS: TestExecutorTypeScriptFixtures/mt19937-92 (0.00s)
+        --- PASS: TestExecutorTypeScriptFixtures/mt19937-92/full (0.00s)
+        --- PASS: TestExecutorTypeScriptFixtures/mt19937-92/details (0.00s)
+        --- PASS: TestExecutorTypeScriptFixtures/mt19937-92/summary (0.00s)
+    --- PASS: TestExecutorTypeScriptFixtures/mt19937-93 (0.00s)
+        --- PASS: TestExecutorTypeScriptFixtures/mt19937-93/full (0.00s)
+        --- PASS: TestExecutorTypeScriptFixtures/mt19937-93/details (0.00s)
+        --- PASS: TestExecutorTypeScriptFixtures/mt19937-93/summary (0.00s)
+    --- PASS: TestExecutorTypeScriptFixtures/xoshiro128ss-1 (0.00s)
+        --- PASS: TestExecutorTypeScriptFixtures/xoshiro128ss-1/full (0.00s)
+        --- PASS: TestExecutorTypeScriptFixtures/xoshiro128ss-1/details (0.00s)
+        --- PASS: TestExecutorTypeScriptFixtures/xoshiro128ss-1/summary (0.00s)
+    --- PASS: TestExecutorTypeScriptFixtures/xoshiro128ss-2 (0.00s)
+        --- PASS: TestExecutorTypeScriptFixtures/xoshiro128ss-2/full (0.00s)
+        --- PASS: TestExecutorTypeScriptFixtures/xoshiro128ss-2/details (0.00s)
+        --- PASS: TestExecutorTypeScriptFixtures/xoshiro128ss-2/summary (0.00s)
+    --- PASS: TestExecutorTypeScriptFixtures/xoshiro128ss-3 (0.00s)
+        --- PASS: TestExecutorTypeScriptFixtures/xoshiro128ss-3/full (0.00s)
+        --- PASS: TestExecutorTypeScriptFixtures/xoshiro128ss-3/details (0.00s)
+        --- PASS: TestExecutorTypeScriptFixtures/xoshiro128ss-3/summary (0.00s)
+    --- PASS: TestExecutorTypeScriptFixtures/xoshiro128ss-4 (0.00s)
+        --- PASS: TestExecutorTypeScriptFixtures/xoshiro128ss-4/full (0.00s)
+        --- PASS: TestExecutorTypeScriptFixtures/xoshiro128ss-4/details (0.00s)
+        --- PASS: TestExecutorTypeScriptFixtures/xoshiro128ss-4/summary (0.00s)
+    --- PASS: TestExecutorTypeScriptFixtures/xoshiro128ss-5 (0.00s)
+        --- PASS: TestExecutorTypeScriptFixtures/xoshiro128ss-5/full (0.00s)
+        --- PASS: TestExecutorTypeScriptFixtures/xoshiro128ss-5/details (0.00s)
+        --- PASS: TestExecutorTypeScriptFixtures/xoshiro128ss-5/summary (0.00s)
+    --- PASS: TestExecutorTypeScriptFixtures/xoshiro128ss-6 (0.00s)
+        --- PASS: TestExecutorTypeScriptFixtures/xoshiro128ss-6/full (0.00s)
+        --- PASS: TestExecutorTypeScriptFixtures/xoshiro128ss-6/details (0.00s)
+        --- PASS: TestExecutorTypeScriptFixtures/xoshiro128ss-6/summary (0.00s)
+    --- PASS: TestExecutorTypeScriptFixtures/xoshiro128ss-7 (0.00s)
+        --- PASS: TestExecutorTypeScriptFixtures/xoshiro128ss-7/full (0.00s)
+        --- PASS: TestExecutorTypeScriptFixtures/xoshiro128ss-7/details (0.00s)
+        --- PASS: TestExecutorTypeScriptFixtures/xoshiro128ss-7/summary (0.00s)
+    --- PASS: TestExecutorTypeScriptFixtures/xoshiro128ss-8 (0.00s)
+        --- PASS: TestExecutorTypeScriptFixtures/xoshiro128ss-8/full (0.00s)
+        --- PASS: TestExecutorTypeScriptFixtures/xoshiro128ss-8/details (0.00s)
+        --- PASS: TestExecutorTypeScriptFixtures/xoshiro128ss-8/summary (0.00s)
+    --- PASS: TestExecutorTypeScriptFixtures/xoshiro128ss-9 (0.00s)
+        --- PASS: TestExecutorTypeScriptFixtures/xoshiro128ss-9/full (0.00s)
+        --- PASS: TestExecutorTypeScriptFixtures/xoshiro128ss-9/details (0.00s)
+        --- PASS: TestExecutorTypeScriptFixtures/xoshiro128ss-9/summary (0.00s)
+    --- PASS: TestExecutorTypeScriptFixtures/xoshiro128ss-10 (0.00s)
+        --- PASS: TestExecutorTypeScriptFixtures/xoshiro128ss-10/full (0.00s)
+        --- PASS: TestExecutorTypeScriptFixtures/xoshiro128ss-10/details (0.00s)
+        --- PASS: TestExecutorTypeScriptFixtures/xoshiro128ss-10/summary (0.00s)
+    --- PASS: TestExecutorTypeScriptFixtures/xoshiro128ss-11 (0.00s)
+        --- PASS: TestExecutorTypeScriptFixtures/xoshiro128ss-11/full (0.00s)
+        --- PASS: TestExecutorTypeScriptFixtures/xoshiro128ss-11/details (0.00s)
+        --- PASS: TestExecutorTypeScriptFixtures/xoshiro128ss-11/summary (0.00s)
+    --- PASS: TestExecutorTypeScriptFixtures/xoshiro128ss-12 (0.00s)
+        --- PASS: TestExecutorTypeScriptFixtures/xoshiro128ss-12/full (0.00s)
+        --- PASS: TestExecutorTypeScriptFixtures/xoshiro128ss-12/details (0.00s)
+        --- PASS: TestExecutorTypeScriptFixtures/xoshiro128ss-12/summary (0.00s)
+    --- PASS: TestExecutorTypeScriptFixtures/xoshiro128ss-13 (0.00s)
+        --- PASS: TestExecutorTypeScriptFixtures/xoshiro128ss-13/full (0.00s)
+        --- PASS: TestExecutorTypeScriptFixtures/xoshiro128ss-13/details (0.00s)
+        --- PASS: TestExecutorTypeScriptFixtures/xoshiro128ss-13/summary (0.00s)
+    --- PASS: TestExecutorTypeScriptFixtures/xoshiro128ss-14 (0.00s)
+        --- PASS: TestExecutorTypeScriptFixtures/xoshiro128ss-14/full (0.00s)
+        --- PASS: TestExecutorTypeScriptFixtures/xoshiro128ss-14/details (0.00s)
+        --- PASS: TestExecutorTypeScriptFixtures/xoshiro128ss-14/summary (0.00s)
+    --- PASS: TestExecutorTypeScriptFixtures/xoshiro128ss-15 (0.00s)
+        --- PASS: TestExecutorTypeScriptFixtures/xoshiro128ss-15/full (0.00s)
+        --- PASS: TestExecutorTypeScriptFixtures/xoshiro128ss-15/details (0.00s)
+        --- PASS: TestExecutorTypeScriptFixtures/xoshiro128ss-15/summary (0.00s)
+    --- PASS: TestExecutorTypeScriptFixtures/xoshiro128ss-16 (0.00s)
+        --- PASS: TestExecutorTypeScriptFixtures/xoshiro128ss-16/full (0.00s)
+        --- PASS: TestExecutorTypeScriptFixtures/xoshiro128ss-16/details (0.00s)
+        --- PASS: TestExecutorTypeScriptFixtures/xoshiro128ss-16/summary (0.00s)
+    --- PASS: TestExecutorTypeScriptFixtures/xoshiro128ss-17 (0.00s)
+        --- PASS: TestExecutorTypeScriptFixtures/xoshiro128ss-17/full (0.00s)
+        --- PASS: TestExecutorTypeScriptFixtures/xoshiro128ss-17/details (0.00s)
+        --- PASS: TestExecutorTypeScriptFixtures/xoshiro128ss-17/summary (0.00s)
+    --- PASS: TestExecutorTypeScriptFixtures/xoshiro128ss-18 (0.00s)
+        --- PASS: TestExecutorTypeScriptFixtures/xoshiro128ss-18/full (0.00s)
+        --- PASS: TestExecutorTypeScriptFixtures/xoshiro128ss-18/details (0.00s)
+        --- PASS: TestExecutorTypeScriptFixtures/xoshiro128ss-18/summary (0.00s)
+    --- PASS: TestExecutorTypeScriptFixtures/xoshiro128ss-19 (0.00s)
+        --- PASS: TestExecutorTypeScriptFixtures/xoshiro128ss-19/full (0.00s)
+        --- PASS: TestExecutorTypeScriptFixtures/xoshiro128ss-19/details (0.00s)
+        --- PASS: TestExecutorTypeScriptFixtures/xoshiro128ss-19/summary (0.00s)
+    --- PASS: TestExecutorTypeScriptFixtures/xoshiro128ss-20 (0.00s)
+        --- PASS: TestExecutorTypeScriptFixtures/xoshiro128ss-20/full (0.00s)
+        --- PASS: TestExecutorTypeScriptFixtures/xoshiro128ss-20/details (0.00s)
+        --- PASS: TestExecutorTypeScriptFixtures/xoshiro128ss-20/summary (0.00s)
+    --- PASS: TestExecutorTypeScriptFixtures/xoshiro128ss-21 (0.00s)
+        --- PASS: TestExecutorTypeScriptFixtures/xoshiro128ss-21/full (0.00s)
+        --- PASS: TestExecutorTypeScriptFixtures/xoshiro128ss-21/details (0.00s)
+        --- PASS: TestExecutorTypeScriptFixtures/xoshiro128ss-21/summary (0.00s)
+    --- PASS: TestExecutorTypeScriptFixtures/xoshiro128ss-22 (0.00s)
+        --- PASS: TestExecutorTypeScriptFixtures/xoshiro128ss-22/full (0.00s)
+        --- PASS: TestExecutorTypeScriptFixtures/xoshiro128ss-22/details (0.00s)
+        --- PASS: TestExecutorTypeScriptFixtures/xoshiro128ss-22/summary (0.00s)
+    --- PASS: TestExecutorTypeScriptFixtures/xoshiro128ss-23 (0.00s)
+        --- PASS: TestExecutorTypeScriptFixtures/xoshiro128ss-23/full (0.00s)
+        --- PASS: TestExecutorTypeScriptFixtures/xoshiro128ss-23/details (0.00s)
+        --- PASS: TestExecutorTypeScriptFixtures/xoshiro128ss-23/summary (0.00s)
+    --- PASS: TestExecutorTypeScriptFixtures/xoshiro128ss-24 (0.00s)
+        --- PASS: TestExecutorTypeScriptFixtures/xoshiro128ss-24/full (0.00s)
+        --- PASS: TestExecutorTypeScriptFixtures/xoshiro128ss-24/details (0.00s)
+        --- PASS: TestExecutorTypeScriptFixtures/xoshiro128ss-24/summary (0.00s)
+    --- PASS: TestExecutorTypeScriptFixtures/xoshiro128ss-25 (0.00s)
+        --- PASS: TestExecutorTypeScriptFixtures/xoshiro128ss-25/full (0.00s)
+        --- PASS: TestExecutorTypeScriptFixtures/xoshiro128ss-25/details (0.00s)
+        --- PASS: TestExecutorTypeScriptFixtures/xoshiro128ss-25/summary (0.00s)
+    --- PASS: TestExecutorTypeScriptFixtures/xoshiro128ss-26 (0.00s)
+        --- PASS: TestExecutorTypeScriptFixtures/xoshiro128ss-26/full (0.00s)
+        --- PASS: TestExecutorTypeScriptFixtures/xoshiro128ss-26/details (0.00s)
+        --- PASS: TestExecutorTypeScriptFixtures/xoshiro128ss-26/summary (0.00s)
+    --- PASS: TestExecutorTypeScriptFixtures/xoshiro128ss-27 (0.00s)
+        --- PASS: TestExecutorTypeScriptFixtures/xoshiro128ss-27/full (0.00s)
+        --- PASS: TestExecutorTypeScriptFixtures/xoshiro128ss-27/details (0.00s)
+        --- PASS: TestExecutorTypeScriptFixtures/xoshiro128ss-27/summary (0.00s)
+    --- PASS: TestExecutorTypeScriptFixtures/xoshiro128ss-28 (0.00s)
+        --- PASS: TestExecutorTypeScriptFixtures/xoshiro128ss-28/full (0.00s)
+        --- PASS: TestExecutorTypeScriptFixtures/xoshiro128ss-28/details (0.00s)
+        --- PASS: TestExecutorTypeScriptFixtures/xoshiro128ss-28/summary (0.00s)
+    --- PASS: TestExecutorTypeScriptFixtures/xoshiro128ss-29 (0.00s)
+        --- PASS: TestExecutorTypeScriptFixtures/xoshiro128ss-29/full (0.00s)
+        --- PASS: TestExecutorTypeScriptFixtures/xoshiro128ss-29/details (0.00s)
+        --- PASS: TestExecutorTypeScriptFixtures/xoshiro128ss-29/summary (0.00s)
+    --- PASS: TestExecutorTypeScriptFixtures/xoshiro128ss-30 (0.00s)
+        --- PASS: TestExecutorTypeScriptFixtures/xoshiro128ss-30/full (0.00s)
+        --- PASS: TestExecutorTypeScriptFixtures/xoshiro128ss-30/details (0.00s)
+        --- PASS: TestExecutorTypeScriptFixtures/xoshiro128ss-30/summary (0.00s)
+    --- PASS: TestExecutorTypeScriptFixtures/xoshiro128ss-31 (0.00s)
+        --- PASS: TestExecutorTypeScriptFixtures/xoshiro128ss-31/full (0.00s)
+        --- PASS: TestExecutorTypeScriptFixtures/xoshiro128ss-31/details (0.00s)
+        --- PASS: TestExecutorTypeScriptFixtures/xoshiro128ss-31/summary (0.00s)
+    --- PASS: TestExecutorTypeScriptFixtures/xoshiro128ss-32 (0.00s)
+        --- PASS: TestExecutorTypeScriptFixtures/xoshiro128ss-32/full (0.00s)
+        --- PASS: TestExecutorTypeScriptFixtures/xoshiro128ss-32/details (0.00s)
+        --- PASS: TestExecutorTypeScriptFixtures/xoshiro128ss-32/summary (0.00s)
+    --- PASS: TestExecutorTypeScriptFixtures/xoshiro128ss-33 (0.00s)
+        --- PASS: TestExecutorTypeScriptFixtures/xoshiro128ss-33/full (0.00s)
+        --- PASS: TestExecutorTypeScriptFixtures/xoshiro128ss-33/details (0.00s)
+        --- PASS: TestExecutorTypeScriptFixtures/xoshiro128ss-33/summary (0.00s)
+    --- PASS: TestExecutorTypeScriptFixtures/xoshiro128ss-34 (0.00s)
+        --- PASS: TestExecutorTypeScriptFixtures/xoshiro128ss-34/full (0.00s)
+        --- PASS: TestExecutorTypeScriptFixtures/xoshiro128ss-34/details (0.00s)
+        --- PASS: TestExecutorTypeScriptFixtures/xoshiro128ss-34/summary (0.00s)
+    --- PASS: TestExecutorTypeScriptFixtures/xoshiro128ss-35 (0.00s)
+        --- PASS: TestExecutorTypeScriptFixtures/xoshiro128ss-35/full (0.00s)
+        --- PASS: TestExecutorTypeScriptFixtures/xoshiro128ss-35/details (0.00s)
+        --- PASS: TestExecutorTypeScriptFixtures/xoshiro128ss-35/summary (0.00s)
+    --- PASS: TestExecutorTypeScriptFixtures/xoshiro128ss-36 (0.00s)
+        --- PASS: TestExecutorTypeScriptFixtures/xoshiro128ss-36/full (0.00s)
+        --- PASS: TestExecutorTypeScriptFixtures/xoshiro128ss-36/details (0.00s)
+        --- PASS: TestExecutorTypeScriptFixtures/xoshiro128ss-36/summary (0.00s)
+    --- PASS: TestExecutorTypeScriptFixtures/xoshiro128ss-37 (0.00s)
+        --- PASS: TestExecutorTypeScriptFixtures/xoshiro128ss-37/full (0.00s)
+        --- PASS: TestExecutorTypeScriptFixtures/xoshiro128ss-37/details (0.00s)
+        --- PASS: TestExecutorTypeScriptFixtures/xoshiro128ss-37/summary (0.00s)
+    --- PASS: TestExecutorTypeScriptFixtures/xoshiro128ss-38 (0.00s)
+        --- PASS: TestExecutorTypeScriptFixtures/xoshiro128ss-38/full (0.00s)
+        --- PASS: TestExecutorTypeScriptFixtures/xoshiro128ss-38/details (0.00s)
+        --- PASS: TestExecutorTypeScriptFixtures/xoshiro128ss-38/summary (0.00s)
+    --- PASS: TestExecutorTypeScriptFixtures/xoshiro128ss-39 (0.00s)
+        --- PASS: TestExecutorTypeScriptFixtures/xoshiro128ss-39/full (0.00s)
+        --- PASS: TestExecutorTypeScriptFixtures/xoshiro128ss-39/details (0.00s)
+        --- PASS: TestExecutorTypeScriptFixtures/xoshiro128ss-39/summary (0.00s)
+    --- PASS: TestExecutorTypeScriptFixtures/xoshiro128ss-40 (0.00s)
+        --- PASS: TestExecutorTypeScriptFixtures/xoshiro128ss-40/full (0.00s)
+        --- PASS: TestExecutorTypeScriptFixtures/xoshiro128ss-40/details (0.00s)
+        --- PASS: TestExecutorTypeScriptFixtures/xoshiro128ss-40/summary (0.00s)
+    --- PASS: TestExecutorTypeScriptFixtures/xoshiro128ss-41 (0.00s)
+        --- PASS: TestExecutorTypeScriptFixtures/xoshiro128ss-41/full (0.00s)
+        --- PASS: TestExecutorTypeScriptFixtures/xoshiro128ss-41/details (0.00s)
+        --- PASS: TestExecutorTypeScriptFixtures/xoshiro128ss-41/summary (0.00s)
+    --- PASS: TestExecutorTypeScriptFixtures/xoshiro128ss-42 (0.00s)
+        --- PASS: TestExecutorTypeScriptFixtures/xoshiro128ss-42/full (0.00s)
+        --- PASS: TestExecutorTypeScriptFixtures/xoshiro128ss-42/details (0.00s)
+        --- PASS: TestExecutorTypeScriptFixtures/xoshiro128ss-42/summary (0.00s)
+    --- PASS: TestExecutorTypeScriptFixtures/xoshiro128ss-43 (0.00s)
+        --- PASS: TestExecutorTypeScriptFixtures/xoshiro128ss-43/full (0.00s)
+        --- PASS: TestExecutorTypeScriptFixtures/xoshiro128ss-43/details (0.00s)
+        --- PASS: TestExecutorTypeScriptFixtures/xoshiro128ss-43/summary (0.00s)
+    --- PASS: TestExecutorTypeScriptFixtures/xoshiro128ss-44 (0.00s)
+        --- PASS: TestExecutorTypeScriptFixtures/xoshiro128ss-44/full (0.00s)
+        --- PASS: TestExecutorTypeScriptFixtures/xoshiro128ss-44/details (0.00s)
+        --- PASS: TestExecutorTypeScriptFixtures/xoshiro128ss-44/summary (0.00s)
+    --- PASS: TestExecutorTypeScriptFixtures/xoshiro128ss-45 (0.00s)
+        --- PASS: TestExecutorTypeScriptFixtures/xoshiro128ss-45/full (0.00s)
+        --- PASS: TestExecutorTypeScriptFixtures/xoshiro128ss-45/details (0.00s)
+        --- PASS: TestExecutorTypeScriptFixtures/xoshiro128ss-45/summary (0.00s)
+    --- PASS: TestExecutorTypeScriptFixtures/xoshiro128ss-46 (0.00s)
+        --- PASS: TestExecutorTypeScriptFixtures/xoshiro128ss-46/full (0.00s)
+        --- PASS: TestExecutorTypeScriptFixtures/xoshiro128ss-46/details (0.00s)
+        --- PASS: TestExecutorTypeScriptFixtures/xoshiro128ss-46/summary (0.00s)
+    --- PASS: TestExecutorTypeScriptFixtures/xoshiro128ss-47 (0.00s)
+        --- PASS: TestExecutorTypeScriptFixtures/xoshiro128ss-47/full (0.00s)
+        --- PASS: TestExecutorTypeScriptFixtures/xoshiro128ss-47/details (0.00s)
+        --- PASS: TestExecutorTypeScriptFixtures/xoshiro128ss-47/summary (0.00s)
+    --- PASS: TestExecutorTypeScriptFixtures/xoshiro128ss-48 (0.00s)
+        --- PASS: TestExecutorTypeScriptFixtures/xoshiro128ss-48/full (0.00s)
+        --- PASS: TestExecutorTypeScriptFixtures/xoshiro128ss-48/details (0.00s)
+        --- PASS: TestExecutorTypeScriptFixtures/xoshiro128ss-48/summary (0.00s)
+    --- PASS: TestExecutorTypeScriptFixtures/xoshiro128ss-49 (0.00s)
+        --- PASS: TestExecutorTypeScriptFixtures/xoshiro128ss-49/full (0.00s)
+        --- PASS: TestExecutorTypeScriptFixtures/xoshiro128ss-49/details (0.00s)
+        --- PASS: TestExecutorTypeScriptFixtures/xoshiro128ss-49/summary (0.00s)
+    --- PASS: TestExecutorTypeScriptFixtures/xoshiro128ss-50 (0.00s)
+        --- PASS: TestExecutorTypeScriptFixtures/xoshiro128ss-50/full (0.00s)
+        --- PASS: TestExecutorTypeScriptFixtures/xoshiro128ss-50/details (0.00s)
+        --- PASS: TestExecutorTypeScriptFixtures/xoshiro128ss-50/summary (0.00s)
+    --- PASS: TestExecutorTypeScriptFixtures/xoshiro128ss-51 (0.00s)
+        --- PASS: TestExecutorTypeScriptFixtures/xoshiro128ss-51/full (0.00s)
+        --- PASS: TestExecutorTypeScriptFixtures/xoshiro128ss-51/details (0.00s)
+        --- PASS: TestExecutorTypeScriptFixtures/xoshiro128ss-51/summary (0.00s)
+    --- PASS: TestExecutorTypeScriptFixtures/xoshiro128ss-52 (0.00s)
+        --- PASS: TestExecutorTypeScriptFixtures/xoshiro128ss-52/full (0.00s)
+        --- PASS: TestExecutorTypeScriptFixtures/xoshiro128ss-52/details (0.00s)
+        --- PASS: TestExecutorTypeScriptFixtures/xoshiro128ss-52/summary (0.00s)
+    --- PASS: TestExecutorTypeScriptFixtures/xoshiro128ss-53 (0.00s)
+        --- PASS: TestExecutorTypeScriptFixtures/xoshiro128ss-53/full (0.00s)
+        --- PASS: TestExecutorTypeScriptFixtures/xoshiro128ss-53/details (0.00s)
+        --- PASS: TestExecutorTypeScriptFixtures/xoshiro128ss-53/summary (0.00s)
+    --- PASS: TestExecutorTypeScriptFixtures/xoshiro128ss-54 (0.00s)
+        --- PASS: TestExecutorTypeScriptFixtures/xoshiro128ss-54/full (0.00s)
+        --- PASS: TestExecutorTypeScriptFixtures/xoshiro128ss-54/details (0.00s)
+        --- PASS: TestExecutorTypeScriptFixtures/xoshiro128ss-54/summary (0.00s)
+    --- PASS: TestExecutorTypeScriptFixtures/xoshiro128ss-55 (0.00s)
+        --- PASS: TestExecutorTypeScriptFixtures/xoshiro128ss-55/full (0.00s)
+        --- PASS: TestExecutorTypeScriptFixtures/xoshiro128ss-55/details (0.00s)
+        --- PASS: TestExecutorTypeScriptFixtures/xoshiro128ss-55/summary (0.00s)
+    --- PASS: TestExecutorTypeScriptFixtures/xoshiro128ss-56 (0.00s)
+        --- PASS: TestExecutorTypeScriptFixtures/xoshiro128ss-56/full (0.00s)
+        --- PASS: TestExecutorTypeScriptFixtures/xoshiro128ss-56/details (0.00s)
+        --- PASS: TestExecutorTypeScriptFixtures/xoshiro128ss-56/summary (0.00s)
+    --- PASS: TestExecutorTypeScriptFixtures/xoshiro128ss-57 (0.00s)
+        --- PASS: TestExecutorTypeScriptFixtures/xoshiro128ss-57/full (0.00s)
+        --- PASS: TestExecutorTypeScriptFixtures/xoshiro128ss-57/details (0.00s)
+        --- PASS: TestExecutorTypeScriptFixtures/xoshiro128ss-57/summary (0.00s)
+    --- PASS: TestExecutorTypeScriptFixtures/xoshiro128ss-58 (0.00s)
+        --- PASS: TestExecutorTypeScriptFixtures/xoshiro128ss-58/full (0.00s)
+        --- PASS: TestExecutorTypeScriptFixtures/xoshiro128ss-58/details (0.00s)
+        --- PASS: TestExecutorTypeScriptFixtures/xoshiro128ss-58/summary (0.00s)
+    --- PASS: TestExecutorTypeScriptFixtures/xoshiro128ss-59 (0.00s)
+        --- PASS: TestExecutorTypeScriptFixtures/xoshiro128ss-59/full (0.00s)
+        --- PASS: TestExecutorTypeScriptFixtures/xoshiro128ss-59/details (0.00s)
+        --- PASS: TestExecutorTypeScriptFixtures/xoshiro128ss-59/summary (0.00s)
+    --- PASS: TestExecutorTypeScriptFixtures/xoshiro128ss-60 (0.00s)
+        --- PASS: TestExecutorTypeScriptFixtures/xoshiro128ss-60/full (0.00s)
+        --- PASS: TestExecutorTypeScriptFixtures/xoshiro128ss-60/details (0.00s)
+        --- PASS: TestExecutorTypeScriptFixtures/xoshiro128ss-60/summary (0.00s)
+    --- PASS: TestExecutorTypeScriptFixtures/xoshiro128ss-61 (0.00s)
+        --- PASS: TestExecutorTypeScriptFixtures/xoshiro128ss-61/full (0.00s)
+        --- PASS: TestExecutorTypeScriptFixtures/xoshiro128ss-61/details (0.00s)
+        --- PASS: TestExecutorTypeScriptFixtures/xoshiro128ss-61/summary (0.00s)
+    --- PASS: TestExecutorTypeScriptFixtures/xoshiro128ss-62 (0.00s)
+        --- PASS: TestExecutorTypeScriptFixtures/xoshiro128ss-62/full (0.00s)
+        --- PASS: TestExecutorTypeScriptFixtures/xoshiro128ss-62/details (0.00s)
+        --- PASS: TestExecutorTypeScriptFixtures/xoshiro128ss-62/summary (0.00s)
+    --- PASS: TestExecutorTypeScriptFixtures/xoshiro128ss-63 (0.00s)
+        --- PASS: TestExecutorTypeScriptFixtures/xoshiro128ss-63/full (0.00s)
+        --- PASS: TestExecutorTypeScriptFixtures/xoshiro128ss-63/details (0.00s)
+        --- PASS: TestExecutorTypeScriptFixtures/xoshiro128ss-63/summary (0.00s)
+    --- PASS: TestExecutorTypeScriptFixtures/xoshiro128ss-64 (0.00s)
+        --- PASS: TestExecutorTypeScriptFixtures/xoshiro128ss-64/full (0.00s)
+        --- PASS: TestExecutorTypeScriptFixtures/xoshiro128ss-64/details (0.00s)
+        --- PASS: TestExecutorTypeScriptFixtures/xoshiro128ss-64/summary (0.00s)
+    --- PASS: TestExecutorTypeScriptFixtures/xoshiro128ss-65 (0.00s)
+        --- PASS: TestExecutorTypeScriptFixtures/xoshiro128ss-65/full (0.00s)
+        --- PASS: TestExecutorTypeScriptFixtures/xoshiro128ss-65/details (0.00s)
+        --- PASS: TestExecutorTypeScriptFixtures/xoshiro128ss-65/summary (0.00s)
+    --- PASS: TestExecutorTypeScriptFixtures/xoshiro128ss-66 (0.00s)
+        --- PASS: TestExecutorTypeScriptFixtures/xoshiro128ss-66/full (0.00s)
+        --- PASS: TestExecutorTypeScriptFixtures/xoshiro128ss-66/details (0.00s)
+        --- PASS: TestExecutorTypeScriptFixtures/xoshiro128ss-66/summary (0.00s)
+    --- PASS: TestExecutorTypeScriptFixtures/xoshiro128ss-67 (0.00s)
+        --- PASS: TestExecutorTypeScriptFixtures/xoshiro128ss-67/full (0.00s)
+        --- PASS: TestExecutorTypeScriptFixtures/xoshiro128ss-67/details (0.00s)
+        --- PASS: TestExecutorTypeScriptFixtures/xoshiro128ss-67/summary (0.00s)
+    --- PASS: TestExecutorTypeScriptFixtures/xoshiro128ss-68 (0.00s)
+        --- PASS: TestExecutorTypeScriptFixtures/xoshiro128ss-68/full (0.00s)
+        --- PASS: TestExecutorTypeScriptFixtures/xoshiro128ss-68/details (0.00s)
+        --- PASS: TestExecutorTypeScriptFixtures/xoshiro128ss-68/summary (0.00s)
+    --- PASS: TestExecutorTypeScriptFixtures/xoshiro128ss-69 (0.00s)
+        --- PASS: TestExecutorTypeScriptFixtures/xoshiro128ss-69/full (0.00s)
+        --- PASS: TestExecutorTypeScriptFixtures/xoshiro128ss-69/details (0.00s)
+        --- PASS: TestExecutorTypeScriptFixtures/xoshiro128ss-69/summary (0.00s)
+    --- PASS: TestExecutorTypeScriptFixtures/xoshiro128ss-70 (0.00s)
+        --- PASS: TestExecutorTypeScriptFixtures/xoshiro128ss-70/full (0.00s)
+        --- PASS: TestExecutorTypeScriptFixtures/xoshiro128ss-70/details (0.00s)
+        --- PASS: TestExecutorTypeScriptFixtures/xoshiro128ss-70/summary (0.00s)
+    --- PASS: TestExecutorTypeScriptFixtures/xoshiro128ss-71 (0.00s)
+        --- PASS: TestExecutorTypeScriptFixtures/xoshiro128ss-71/full (0.00s)
+        --- PASS: TestExecutorTypeScriptFixtures/xoshiro128ss-71/details (0.00s)
+        --- PASS: TestExecutorTypeScriptFixtures/xoshiro128ss-71/summary (0.00s)
+    --- PASS: TestExecutorTypeScriptFixtures/xoshiro128ss-72 (0.00s)
+        --- PASS: TestExecutorTypeScriptFixtures/xoshiro128ss-72/full (0.00s)
+        --- PASS: TestExecutorTypeScriptFixtures/xoshiro128ss-72/details (0.00s)
+        --- PASS: TestExecutorTypeScriptFixtures/xoshiro128ss-72/summary (0.00s)
+    --- PASS: TestExecutorTypeScriptFixtures/xoshiro128ss-73 (0.00s)
+        --- PASS: TestExecutorTypeScriptFixtures/xoshiro128ss-73/full (0.00s)
+        --- PASS: TestExecutorTypeScriptFixtures/xoshiro128ss-73/details (0.00s)
+        --- PASS: TestExecutorTypeScriptFixtures/xoshiro128ss-73/summary (0.00s)
+    --- PASS: TestExecutorTypeScriptFixtures/xoshiro128ss-74 (0.00s)
+        --- PASS: TestExecutorTypeScriptFixtures/xoshiro128ss-74/full (0.00s)
+        --- PASS: TestExecutorTypeScriptFixtures/xoshiro128ss-74/details (0.00s)
+        --- PASS: TestExecutorTypeScriptFixtures/xoshiro128ss-74/summary (0.00s)
+    --- PASS: TestExecutorTypeScriptFixtures/xoshiro128ss-75 (0.00s)
+        --- PASS: TestExecutorTypeScriptFixtures/xoshiro128ss-75/full (0.00s)
+        --- PASS: TestExecutorTypeScriptFixtures/xoshiro128ss-75/details (0.00s)
+        --- PASS: TestExecutorTypeScriptFixtures/xoshiro128ss-75/summary (0.00s)
+    --- PASS: TestExecutorTypeScriptFixtures/xoshiro128ss-76 (0.00s)
+        --- PASS: TestExecutorTypeScriptFixtures/xoshiro128ss-76/full (0.00s)
+        --- PASS: TestExecutorTypeScriptFixtures/xoshiro128ss-76/details (0.00s)
+        --- PASS: TestExecutorTypeScriptFixtures/xoshiro128ss-76/summary (0.00s)
+    --- PASS: TestExecutorTypeScriptFixtures/xoshiro128ss-77 (0.00s)
+        --- PASS: TestExecutorTypeScriptFixtures/xoshiro128ss-77/full (0.00s)
+        --- PASS: TestExecutorTypeScriptFixtures/xoshiro128ss-77/details (0.00s)
+        --- PASS: TestExecutorTypeScriptFixtures/xoshiro128ss-77/summary (0.00s)
+    --- PASS: TestExecutorTypeScriptFixtures/xoshiro128ss-78 (0.00s)
+        --- PASS: TestExecutorTypeScriptFixtures/xoshiro128ss-78/full (0.00s)
+        --- PASS: TestExecutorTypeScriptFixtures/xoshiro128ss-78/details (0.00s)
+        --- PASS: TestExecutorTypeScriptFixtures/xoshiro128ss-78/summary (0.00s)
+    --- PASS: TestExecutorTypeScriptFixtures/xoshiro128ss-79 (0.00s)
+        --- PASS: TestExecutorTypeScriptFixtures/xoshiro128ss-79/full (0.00s)
+        --- PASS: TestExecutorTypeScriptFixtures/xoshiro128ss-79/details (0.00s)
+        --- PASS: TestExecutorTypeScriptFixtures/xoshiro128ss-79/summary (0.00s)
+    --- PASS: TestExecutorTypeScriptFixtures/xoshiro128ss-80 (0.00s)
+        --- PASS: TestExecutorTypeScriptFixtures/xoshiro128ss-80/full (0.00s)
+        --- PASS: TestExecutorTypeScriptFixtures/xoshiro128ss-80/details (0.00s)
+        --- PASS: TestExecutorTypeScriptFixtures/xoshiro128ss-80/summary (0.00s)
+    --- PASS: TestExecutorTypeScriptFixtures/xoshiro128ss-81 (0.00s)
+        --- PASS: TestExecutorTypeScriptFixtures/xoshiro128ss-81/full (0.00s)
+        --- PASS: TestExecutorTypeScriptFixtures/xoshiro128ss-81/details (0.00s)
+        --- PASS: TestExecutorTypeScriptFixtures/xoshiro128ss-81/summary (0.00s)
+    --- PASS: TestExecutorTypeScriptFixtures/xoshiro128ss-82 (0.00s)
+        --- PASS: TestExecutorTypeScriptFixtures/xoshiro128ss-82/full (0.00s)
+        --- PASS: TestExecutorTypeScriptFixtures/xoshiro128ss-82/details (0.00s)
+        --- PASS: TestExecutorTypeScriptFixtures/xoshiro128ss-82/summary (0.00s)
+    --- PASS: TestExecutorTypeScriptFixtures/xoshiro128ss-83 (0.00s)
+        --- PASS: TestExecutorTypeScriptFixtures/xoshiro128ss-83/full (0.00s)
+        --- PASS: TestExecutorTypeScriptFixtures/xoshiro128ss-83/details (0.00s)
+        --- PASS: TestExecutorTypeScriptFixtures/xoshiro128ss-83/summary (0.00s)
+    --- PASS: TestExecutorTypeScriptFixtures/xoshiro128ss-84 (0.00s)
+        --- PASS: TestExecutorTypeScriptFixtures/xoshiro128ss-84/full (0.00s)
+        --- PASS: TestExecutorTypeScriptFixtures/xoshiro128ss-84/details (0.00s)
+        --- PASS: TestExecutorTypeScriptFixtures/xoshiro128ss-84/summary (0.00s)
+    --- PASS: TestExecutorTypeScriptFixtures/xoshiro128ss-85 (0.00s)
+        --- PASS: TestExecutorTypeScriptFixtures/xoshiro128ss-85/full (0.00s)
+        --- PASS: TestExecutorTypeScriptFixtures/xoshiro128ss-85/details (0.00s)
+        --- PASS: TestExecutorTypeScriptFixtures/xoshiro128ss-85/summary (0.00s)
+    --- PASS: TestExecutorTypeScriptFixtures/xoshiro128ss-86 (0.00s)
+        --- PASS: TestExecutorTypeScriptFixtures/xoshiro128ss-86/full (0.00s)
+        --- PASS: TestExecutorTypeScriptFixtures/xoshiro128ss-86/details (0.00s)
+        --- PASS: TestExecutorTypeScriptFixtures/xoshiro128ss-86/summary (0.00s)
+    --- PASS: TestExecutorTypeScriptFixtures/xoshiro128ss-87 (0.00s)
+        --- PASS: TestExecutorTypeScriptFixtures/xoshiro128ss-87/full (0.00s)
+        --- PASS: TestExecutorTypeScriptFixtures/xoshiro128ss-87/details (0.00s)
+        --- PASS: TestExecutorTypeScriptFixtures/xoshiro128ss-87/summary (0.00s)
+    --- PASS: TestExecutorTypeScriptFixtures/xoshiro128ss-88 (0.00s)
+        --- PASS: TestExecutorTypeScriptFixtures/xoshiro128ss-88/full (0.00s)
+        --- PASS: TestExecutorTypeScriptFixtures/xoshiro128ss-88/details (0.00s)
+        --- PASS: TestExecutorTypeScriptFixtures/xoshiro128ss-88/summary (0.00s)
+    --- PASS: TestExecutorTypeScriptFixtures/xoshiro128ss-89 (0.00s)
+        --- PASS: TestExecutorTypeScriptFixtures/xoshiro128ss-89/full (0.00s)
+        --- PASS: TestExecutorTypeScriptFixtures/xoshiro128ss-89/details (0.00s)
+        --- PASS: TestExecutorTypeScriptFixtures/xoshiro128ss-89/summary (0.00s)
+    --- PASS: TestExecutorTypeScriptFixtures/xoshiro128ss-90 (0.00s)
+        --- PASS: TestExecutorTypeScriptFixtures/xoshiro128ss-90/full (0.00s)
+        --- PASS: TestExecutorTypeScriptFixtures/xoshiro128ss-90/details (0.00s)
+        --- PASS: TestExecutorTypeScriptFixtures/xoshiro128ss-90/summary (0.00s)
+    --- PASS: TestExecutorTypeScriptFixtures/xoshiro128ss-91 (0.00s)
+        --- PASS: TestExecutorTypeScriptFixtures/xoshiro128ss-91/full (0.00s)
+        --- PASS: TestExecutorTypeScriptFixtures/xoshiro128ss-91/details (0.00s)
+        --- PASS: TestExecutorTypeScriptFixtures/xoshiro128ss-91/summary (0.00s)
+    --- PASS: TestExecutorTypeScriptFixtures/xoshiro128ss-92 (0.00s)
+        --- PASS: TestExecutorTypeScriptFixtures/xoshiro128ss-92/full (0.00s)
+        --- PASS: TestExecutorTypeScriptFixtures/xoshiro128ss-92/details (0.00s)
+        --- PASS: TestExecutorTypeScriptFixtures/xoshiro128ss-92/summary (0.00s)
+    --- PASS: TestExecutorTypeScriptFixtures/xoshiro128ss-93 (0.00s)
+        --- PASS: TestExecutorTypeScriptFixtures/xoshiro128ss-93/full (0.00s)
+        --- PASS: TestExecutorTypeScriptFixtures/xoshiro128ss-93/details (0.00s)
+        --- PASS: TestExecutorTypeScriptFixtures/xoshiro128ss-93/summary (0.00s)
+    --- PASS: TestExecutorTypeScriptFixtures/execution-budget-0 (0.00s)
+        --- PASS: TestExecutorTypeScriptFixtures/execution-budget-0/full (0.00s)
+        --- PASS: TestExecutorTypeScriptFixtures/execution-budget-0/details (0.00s)
+        --- PASS: TestExecutorTypeScriptFixtures/execution-budget-0/summary (0.00s)
+    --- PASS: TestExecutorTypeScriptFixtures/execution-budget-1 (0.00s)
+        --- PASS: TestExecutorTypeScriptFixtures/execution-budget-1/full (0.00s)
+        --- PASS: TestExecutorTypeScriptFixtures/execution-budget-1/details (0.00s)
+        --- PASS: TestExecutorTypeScriptFixtures/execution-budget-1/summary (0.00s)
+    --- PASS: TestExecutorTypeScriptFixtures/execution-budget-2 (0.00s)
+        --- PASS: TestExecutorTypeScriptFixtures/execution-budget-2/full (0.00s)
+        --- PASS: TestExecutorTypeScriptFixtures/execution-budget-2/details (0.00s)
+        --- PASS: TestExecutorTypeScriptFixtures/execution-budget-2/summary (0.00s)
+    --- PASS: TestExecutorTypeScriptFixtures/execution-budget-3 (0.00s)
+        --- PASS: TestExecutorTypeScriptFixtures/execution-budget-3/full (0.00s)
+        --- PASS: TestExecutorTypeScriptFixtures/execution-budget-3/details (0.00s)
+        --- PASS: TestExecutorTypeScriptFixtures/execution-budget-3/summary (0.00s)
+    --- PASS: TestExecutorTypeScriptFixtures/execution-budget-4 (0.00s)
+        --- PASS: TestExecutorTypeScriptFixtures/execution-budget-4/full (0.00s)
+        --- PASS: TestExecutorTypeScriptFixtures/execution-budget-4/details (0.00s)
+        --- PASS: TestExecutorTypeScriptFixtures/execution-budget-4/summary (0.00s)
+    --- PASS: TestExecutorTypeScriptFixtures/execution-budget-5 (0.00s)
+        --- PASS: TestExecutorTypeScriptFixtures/execution-budget-5/full (0.00s)
+        --- PASS: TestExecutorTypeScriptFixtures/execution-budget-5/details (0.00s)
+        --- PASS: TestExecutorTypeScriptFixtures/execution-budget-5/summary (0.00s)
+    --- PASS: TestExecutorTypeScriptFixtures/execution-budget-6 (0.00s)
+        --- PASS: TestExecutorTypeScriptFixtures/execution-budget-6/full (0.00s)
+        --- PASS: TestExecutorTypeScriptFixtures/execution-budget-6/details (0.00s)
+        --- PASS: TestExecutorTypeScriptFixtures/execution-budget-6/summary (0.00s)
+    --- PASS: TestExecutorTypeScriptFixtures/execution-budget-7 (0.00s)
+        --- PASS: TestExecutorTypeScriptFixtures/execution-budget-7/full (0.00s)
+        --- PASS: TestExecutorTypeScriptFixtures/execution-budget-7/details (0.00s)
+        --- PASS: TestExecutorTypeScriptFixtures/execution-budget-7/summary (0.00s)
+    --- PASS: TestExecutorTypeScriptFixtures/execution-budget-8 (0.00s)
+        --- PASS: TestExecutorTypeScriptFixtures/execution-budget-8/full (0.00s)
+        --- PASS: TestExecutorTypeScriptFixtures/execution-budget-8/details (0.00s)
+        --- PASS: TestExecutorTypeScriptFixtures/execution-budget-8/summary (0.00s)
+    --- PASS: TestExecutorTypeScriptFixtures/execution-budget-9 (0.00s)
+        --- PASS: TestExecutorTypeScriptFixtures/execution-budget-9/full (0.00s)
+        --- PASS: TestExecutorTypeScriptFixtures/execution-budget-9/details (0.00s)
+        --- PASS: TestExecutorTypeScriptFixtures/execution-budget-9/summary (0.00s)
+    --- PASS: TestExecutorTypeScriptFixtures/fast-budget-0-1 (0.00s)
+        --- PASS: TestExecutorTypeScriptFixtures/fast-budget-0-1/full (0.00s)
+        --- PASS: TestExecutorTypeScriptFixtures/fast-budget-0-1/details (0.00s)
+        --- PASS: TestExecutorTypeScriptFixtures/fast-budget-0-1/summary (0.00s)
+    --- PASS: TestExecutorTypeScriptFixtures/fast-budget-0-3 (0.00s)
+        --- PASS: TestExecutorTypeScriptFixtures/fast-budget-0-3/full (0.00s)
+        --- PASS: TestExecutorTypeScriptFixtures/fast-budget-0-3/details (0.00s)
+        --- PASS: TestExecutorTypeScriptFixtures/fast-budget-0-3/summary (0.00s)
+    --- PASS: TestExecutorTypeScriptFixtures/fast-budget-0-5 (0.00s)
+        --- PASS: TestExecutorTypeScriptFixtures/fast-budget-0-5/full (0.00s)
+        --- PASS: TestExecutorTypeScriptFixtures/fast-budget-0-5/details (0.00s)
+        --- PASS: TestExecutorTypeScriptFixtures/fast-budget-0-5/summary (0.00s)
+    --- PASS: TestExecutorTypeScriptFixtures/fast-budget-0-8 (0.00s)
+        --- PASS: TestExecutorTypeScriptFixtures/fast-budget-0-8/full (0.00s)
+        --- PASS: TestExecutorTypeScriptFixtures/fast-budget-0-8/details (0.00s)
+        --- PASS: TestExecutorTypeScriptFixtures/fast-budget-0-8/summary (0.00s)
+    --- PASS: TestExecutorTypeScriptFixtures/fast-budget-0-10 (0.00s)
+        --- PASS: TestExecutorTypeScriptFixtures/fast-budget-0-10/full (0.00s)
+        --- PASS: TestExecutorTypeScriptFixtures/fast-budget-0-10/details (0.00s)
+        --- PASS: TestExecutorTypeScriptFixtures/fast-budget-0-10/summary (0.00s)
+    --- PASS: TestExecutorTypeScriptFixtures/fast-budget-0-14 (0.00s)
+        --- PASS: TestExecutorTypeScriptFixtures/fast-budget-0-14/full (0.00s)
+        --- PASS: TestExecutorTypeScriptFixtures/fast-budget-0-14/details (0.00s)
+        --- PASS: TestExecutorTypeScriptFixtures/fast-budget-0-14/summary (0.00s)
+    --- PASS: TestExecutorTypeScriptFixtures/fast-budget-0-18 (0.00s)
+        --- PASS: TestExecutorTypeScriptFixtures/fast-budget-0-18/full (0.00s)
+        --- PASS: TestExecutorTypeScriptFixtures/fast-budget-0-18/details (0.00s)
+        --- PASS: TestExecutorTypeScriptFixtures/fast-budget-0-18/summary (0.00s)
+    --- PASS: TestExecutorTypeScriptFixtures/fast-budget-1-1 (0.00s)
+        --- PASS: TestExecutorTypeScriptFixtures/fast-budget-1-1/full (0.00s)
+        --- PASS: TestExecutorTypeScriptFixtures/fast-budget-1-1/details (0.00s)
+        --- PASS: TestExecutorTypeScriptFixtures/fast-budget-1-1/summary (0.00s)
+    --- PASS: TestExecutorTypeScriptFixtures/fast-budget-1-3 (0.00s)
+        --- PASS: TestExecutorTypeScriptFixtures/fast-budget-1-3/full (0.00s)
+        --- PASS: TestExecutorTypeScriptFixtures/fast-budget-1-3/details (0.00s)
+        --- PASS: TestExecutorTypeScriptFixtures/fast-budget-1-3/summary (0.00s)
+    --- PASS: TestExecutorTypeScriptFixtures/fast-budget-1-5 (0.00s)
+        --- PASS: TestExecutorTypeScriptFixtures/fast-budget-1-5/full (0.00s)
+        --- PASS: TestExecutorTypeScriptFixtures/fast-budget-1-5/details (0.00s)
+        --- PASS: TestExecutorTypeScriptFixtures/fast-budget-1-5/summary (0.00s)
+    --- PASS: TestExecutorTypeScriptFixtures/fast-budget-1-8 (0.00s)
+        --- PASS: TestExecutorTypeScriptFixtures/fast-budget-1-8/full (0.00s)
+        --- PASS: TestExecutorTypeScriptFixtures/fast-budget-1-8/details (0.00s)
+        --- PASS: TestExecutorTypeScriptFixtures/fast-budget-1-8/summary (0.00s)
+    --- PASS: TestExecutorTypeScriptFixtures/fast-budget-1-10 (0.00s)
+        --- PASS: TestExecutorTypeScriptFixtures/fast-budget-1-10/full (0.00s)
+        --- PASS: TestExecutorTypeScriptFixtures/fast-budget-1-10/details (0.00s)
+        --- PASS: TestExecutorTypeScriptFixtures/fast-budget-1-10/summary (0.00s)
+    --- PASS: TestExecutorTypeScriptFixtures/fast-budget-1-14 (0.00s)
+        --- PASS: TestExecutorTypeScriptFixtures/fast-budget-1-14/full (0.00s)
+        --- PASS: TestExecutorTypeScriptFixtures/fast-budget-1-14/details (0.00s)
+        --- PASS: TestExecutorTypeScriptFixtures/fast-budget-1-14/summary (0.00s)
+    --- PASS: TestExecutorTypeScriptFixtures/fast-budget-1-18 (0.00s)
+        --- PASS: TestExecutorTypeScriptFixtures/fast-budget-1-18/full (0.00s)
+        --- PASS: TestExecutorTypeScriptFixtures/fast-budget-1-18/details (0.00s)
+        --- PASS: TestExecutorTypeScriptFixtures/fast-budget-1-18/summary (0.00s)
+    --- PASS: TestExecutorTypeScriptFixtures/fast-budget-2-1 (0.00s)
+        --- PASS: TestExecutorTypeScriptFixtures/fast-budget-2-1/full (0.00s)
+        --- PASS: TestExecutorTypeScriptFixtures/fast-budget-2-1/details (0.00s)
+        --- PASS: TestExecutorTypeScriptFixtures/fast-budget-2-1/summary (0.00s)
+    --- PASS: TestExecutorTypeScriptFixtures/fast-budget-2-3 (0.00s)
+        --- PASS: TestExecutorTypeScriptFixtures/fast-budget-2-3/full (0.00s)
+        --- PASS: TestExecutorTypeScriptFixtures/fast-budget-2-3/details (0.00s)
+        --- PASS: TestExecutorTypeScriptFixtures/fast-budget-2-3/summary (0.00s)
+    --- PASS: TestExecutorTypeScriptFixtures/fast-budget-2-5 (0.00s)
+        --- PASS: TestExecutorTypeScriptFixtures/fast-budget-2-5/full (0.00s)
+        --- PASS: TestExecutorTypeScriptFixtures/fast-budget-2-5/details (0.00s)
+        --- PASS: TestExecutorTypeScriptFixtures/fast-budget-2-5/summary (0.00s)
+    --- PASS: TestExecutorTypeScriptFixtures/fast-budget-2-8 (0.00s)
+        --- PASS: TestExecutorTypeScriptFixtures/fast-budget-2-8/full (0.00s)
+        --- PASS: TestExecutorTypeScriptFixtures/fast-budget-2-8/details (0.00s)
+        --- PASS: TestExecutorTypeScriptFixtures/fast-budget-2-8/summary (0.00s)
+    --- PASS: TestExecutorTypeScriptFixtures/fast-budget-2-10 (0.00s)
+        --- PASS: TestExecutorTypeScriptFixtures/fast-budget-2-10/full (0.00s)
+        --- PASS: TestExecutorTypeScriptFixtures/fast-budget-2-10/details (0.00s)
+        --- PASS: TestExecutorTypeScriptFixtures/fast-budget-2-10/summary (0.00s)
+    --- PASS: TestExecutorTypeScriptFixtures/fast-budget-2-14 (0.00s)
+        --- PASS: TestExecutorTypeScriptFixtures/fast-budget-2-14/full (0.00s)
+        --- PASS: TestExecutorTypeScriptFixtures/fast-budget-2-14/details (0.00s)
+        --- PASS: TestExecutorTypeScriptFixtures/fast-budget-2-14/summary (0.00s)
+    --- PASS: TestExecutorTypeScriptFixtures/fast-budget-2-18 (0.00s)
+        --- PASS: TestExecutorTypeScriptFixtures/fast-budget-2-18/full (0.00s)
+        --- PASS: TestExecutorTypeScriptFixtures/fast-budget-2-18/details (0.00s)
+        --- PASS: TestExecutorTypeScriptFixtures/fast-budget-2-18/summary (0.00s)
+    --- PASS: TestExecutorTypeScriptFixtures/fast-budget-3-1 (0.00s)
+        --- PASS: TestExecutorTypeScriptFixtures/fast-budget-3-1/full (0.00s)
+        --- PASS: TestExecutorTypeScriptFixtures/fast-budget-3-1/details (0.00s)
+        --- PASS: TestExecutorTypeScriptFixtures/fast-budget-3-1/summary (0.00s)
+    --- PASS: TestExecutorTypeScriptFixtures/fast-budget-3-3 (0.00s)
+        --- PASS: TestExecutorTypeScriptFixtures/fast-budget-3-3/full (0.00s)
+        --- PASS: TestExecutorTypeScriptFixtures/fast-budget-3-3/details (0.00s)
+        --- PASS: TestExecutorTypeScriptFixtures/fast-budget-3-3/summary (0.00s)
+    --- PASS: TestExecutorTypeScriptFixtures/fast-budget-3-5 (0.00s)
+        --- PASS: TestExecutorTypeScriptFixtures/fast-budget-3-5/full (0.00s)
+        --- PASS: TestExecutorTypeScriptFixtures/fast-budget-3-5/details (0.00s)
+        --- PASS: TestExecutorTypeScriptFixtures/fast-budget-3-5/summary (0.00s)
+    --- PASS: TestExecutorTypeScriptFixtures/fast-budget-3-8 (0.00s)
+        --- PASS: TestExecutorTypeScriptFixtures/fast-budget-3-8/full (0.00s)
+        --- PASS: TestExecutorTypeScriptFixtures/fast-budget-3-8/details (0.00s)
+        --- PASS: TestExecutorTypeScriptFixtures/fast-budget-3-8/summary (0.00s)
+    --- PASS: TestExecutorTypeScriptFixtures/fast-budget-3-10 (0.00s)
+        --- PASS: TestExecutorTypeScriptFixtures/fast-budget-3-10/full (0.00s)
+        --- PASS: TestExecutorTypeScriptFixtures/fast-budget-3-10/details (0.00s)
+        --- PASS: TestExecutorTypeScriptFixtures/fast-budget-3-10/summary (0.00s)
+    --- PASS: TestExecutorTypeScriptFixtures/fast-budget-3-14 (0.00s)
+        --- PASS: TestExecutorTypeScriptFixtures/fast-budget-3-14/full (0.00s)
+        --- PASS: TestExecutorTypeScriptFixtures/fast-budget-3-14/details (0.00s)
+        --- PASS: TestExecutorTypeScriptFixtures/fast-budget-3-14/summary (0.00s)
+    --- PASS: TestExecutorTypeScriptFixtures/fast-budget-3-18 (0.00s)
+        --- PASS: TestExecutorTypeScriptFixtures/fast-budget-3-18/full (0.00s)
+        --- PASS: TestExecutorTypeScriptFixtures/fast-budget-3-18/details (0.00s)
+        --- PASS: TestExecutorTypeScriptFixtures/fast-budget-3-18/summary (0.00s)
+    --- PASS: TestExecutorTypeScriptFixtures/fast-budget-4-1 (0.00s)
+        --- PASS: TestExecutorTypeScriptFixtures/fast-budget-4-1/full (0.00s)
+        --- PASS: TestExecutorTypeScriptFixtures/fast-budget-4-1/details (0.00s)
+        --- PASS: TestExecutorTypeScriptFixtures/fast-budget-4-1/summary (0.00s)
+    --- PASS: TestExecutorTypeScriptFixtures/fast-budget-4-3 (0.00s)
+        --- PASS: TestExecutorTypeScriptFixtures/fast-budget-4-3/full (0.00s)
+        --- PASS: TestExecutorTypeScriptFixtures/fast-budget-4-3/details (0.00s)
+        --- PASS: TestExecutorTypeScriptFixtures/fast-budget-4-3/summary (0.00s)
+    --- PASS: TestExecutorTypeScriptFixtures/fast-budget-4-5 (0.00s)
+        --- PASS: TestExecutorTypeScriptFixtures/fast-budget-4-5/full (0.00s)
+        --- PASS: TestExecutorTypeScriptFixtures/fast-budget-4-5/details (0.00s)
+        --- PASS: TestExecutorTypeScriptFixtures/fast-budget-4-5/summary (0.00s)
+    --- PASS: TestExecutorTypeScriptFixtures/fast-budget-4-8 (0.00s)
+        --- PASS: TestExecutorTypeScriptFixtures/fast-budget-4-8/full (0.00s)
+        --- PASS: TestExecutorTypeScriptFixtures/fast-budget-4-8/details (0.00s)
+        --- PASS: TestExecutorTypeScriptFixtures/fast-budget-4-8/summary (0.00s)
+    --- PASS: TestExecutorTypeScriptFixtures/fast-budget-4-10 (0.00s)
+        --- PASS: TestExecutorTypeScriptFixtures/fast-budget-4-10/full (0.00s)
+        --- PASS: TestExecutorTypeScriptFixtures/fast-budget-4-10/details (0.00s)
+        --- PASS: TestExecutorTypeScriptFixtures/fast-budget-4-10/summary (0.00s)
+    --- PASS: TestExecutorTypeScriptFixtures/fast-budget-4-14 (0.00s)
+        --- PASS: TestExecutorTypeScriptFixtures/fast-budget-4-14/full (0.00s)
+        --- PASS: TestExecutorTypeScriptFixtures/fast-budget-4-14/details (0.00s)
+        --- PASS: TestExecutorTypeScriptFixtures/fast-budget-4-14/summary (0.00s)
+    --- PASS: TestExecutorTypeScriptFixtures/fast-budget-4-18 (0.00s)
+        --- PASS: TestExecutorTypeScriptFixtures/fast-budget-4-18/full (0.00s)
+        --- PASS: TestExecutorTypeScriptFixtures/fast-budget-4-18/details (0.00s)
+        --- PASS: TestExecutorTypeScriptFixtures/fast-budget-4-18/summary (0.00s)
+    --- PASS: TestExecutorTypeScriptFixtures/fast-budget-5-1 (0.00s)
+        --- PASS: TestExecutorTypeScriptFixtures/fast-budget-5-1/full (0.00s)
+        --- PASS: TestExecutorTypeScriptFixtures/fast-budget-5-1/details (0.00s)
+        --- PASS: TestExecutorTypeScriptFixtures/fast-budget-5-1/summary (0.00s)
+    --- PASS: TestExecutorTypeScriptFixtures/fast-budget-5-3 (0.00s)
+        --- PASS: TestExecutorTypeScriptFixtures/fast-budget-5-3/full (0.00s)
+        --- PASS: TestExecutorTypeScriptFixtures/fast-budget-5-3/details (0.00s)
+        --- PASS: TestExecutorTypeScriptFixtures/fast-budget-5-3/summary (0.00s)
+    --- PASS: TestExecutorTypeScriptFixtures/fast-budget-5-5 (0.00s)
+        --- PASS: TestExecutorTypeScriptFixtures/fast-budget-5-5/full (0.00s)
+        --- PASS: TestExecutorTypeScriptFixtures/fast-budget-5-5/details (0.00s)
+        --- PASS: TestExecutorTypeScriptFixtures/fast-budget-5-5/summary (0.00s)
+    --- PASS: TestExecutorTypeScriptFixtures/fast-budget-5-8 (0.00s)
+        --- PASS: TestExecutorTypeScriptFixtures/fast-budget-5-8/full (0.00s)
+        --- PASS: TestExecutorTypeScriptFixtures/fast-budget-5-8/details (0.00s)
+        --- PASS: TestExecutorTypeScriptFixtures/fast-budget-5-8/summary (0.00s)
+    --- PASS: TestExecutorTypeScriptFixtures/fast-budget-5-10 (0.00s)
+        --- PASS: TestExecutorTypeScriptFixtures/fast-budget-5-10/full (0.00s)
+        --- PASS: TestExecutorTypeScriptFixtures/fast-budget-5-10/details (0.00s)
+        --- PASS: TestExecutorTypeScriptFixtures/fast-budget-5-10/summary (0.00s)
+    --- PASS: TestExecutorTypeScriptFixtures/fast-budget-5-14 (0.00s)
+        --- PASS: TestExecutorTypeScriptFixtures/fast-budget-5-14/full (0.00s)
+        --- PASS: TestExecutorTypeScriptFixtures/fast-budget-5-14/details (0.00s)
+        --- PASS: TestExecutorTypeScriptFixtures/fast-budget-5-14/summary (0.00s)
+    --- PASS: TestExecutorTypeScriptFixtures/fast-budget-5-18 (0.00s)
+        --- PASS: TestExecutorTypeScriptFixtures/fast-budget-5-18/full (0.00s)
+        --- PASS: TestExecutorTypeScriptFixtures/fast-budget-5-18/details (0.00s)
+        --- PASS: TestExecutorTypeScriptFixtures/fast-budget-5-18/summary (0.00s)
+=== RUN   TestExecutorReplayAcrossProjections
+=== RUN   TestExecutorReplayAcrossProjections/2#4d6kh3
+=== RUN   TestExecutorReplayAcrossProjections/2#8d6!!p2ro<2kh5>=5f=1
+=== RUN   TestExecutorReplayAcrossProjections/{1d6,2d8+3}kh1sd
+--- PASS: TestExecutorReplayAcrossProjections (0.00s)
+    --- PASS: TestExecutorReplayAcrossProjections/2#4d6kh3 (0.00s)
+    --- PASS: TestExecutorReplayAcrossProjections/2#8d6!!p2ro<2kh5>=5f=1 (0.00s)
+    --- PASS: TestExecutorReplayAcrossProjections/{1d6,2d8+3}kh1sd (0.00s)
+PASS
+ok  	github.com/arkanus-app/rpg-dice-roller/go	0.673s

@@ -1,0 +1,2 @@
+go vet passed; new JavaScript scripts lint passed; Linux/amd64 test cross-compilation passed (not executed on Linux)
+gofmt: no files reported
