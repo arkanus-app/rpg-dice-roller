@@ -1,0 +1,50 @@
+{
+  "baselineRef": "bb82246",
+  "goVersion": "go1.26.2",
+  "platform": "windows/amd64",
+  "cgoEnabled": 0,
+  "accepted": [
+    "h1-digit",
+    "h3-ascii-slice"
+  ],
+  "sources": [
+    {
+      "path": "go/event.go",
+      "sha256": "1fa2b76cbb39ac8a803c577d0e9f46499f2c41f2e89dd40f0803cda863fb4f55"
+    },
+    {
+      "path": "go/event_test.go",
+      "sha256": "2df08d4d9e020578a83339a60d9053313c911434fa1cdd839e067db7c9fa2619"
+    },
+    {
+      "path": "go/event_strings_test.go",
+      "sha256": "6a65e2d883daa01dcdd022408820a929691eca6d4e6c970a6707f0f1573e7c5c"
+    },
+    {
+      "path": "go/json_pipeline_bench_test.go",
+      "sha256": "575a02f865259e40aa5cdd1debdba09f1d1fb534aa9c340c00043a33e864179a"
+    },
+    {
+      "path": "scripts/compare-go-round7-micro.mjs",
+      "sha256": "68e466c6249234b6f21d4592c5abe6d8426d5c0a7f45a1a9c208254c94647a2f"
+    }
+  ],
+  "variantSources": [
+    {
+      "path": "go/benchmarks/optimization-round7/sources/h1-digit/event.go.txt",
+      "sha256": "802c42851dafa46229dbdb2b4716fbfbdb3f31b8a2ebd3ad9673334d10a85db8"
+    },
+    {
+      "path": "go/benchmarks/optimization-round7/sources/h2-ascii/event_strings_test.go.txt",
+      "sha256": "4e57df99687c7aa393876b40c0aed010fe8a2535166308dbe833d9a3e9a7a402"
+    },
+    {
+      "path": "go/benchmarks/optimization-round7/sources/h2-ascii/event.go.txt",
+      "sha256": "6e08ba7e1d648c6ee36f02111706dadd2dbbfe95f1e446163a9016bff4c6d564"
+    },
+    {
+      "path": "go/benchmarks/optimization-round7/sources/h3-ascii-slice/event.go.txt",
+      "sha256": "1fa2b76cbb39ac8a803c577d0e9f46499f2c41f2e89dd40f0803cda863fb4f55"
+    }
+  ]
+}

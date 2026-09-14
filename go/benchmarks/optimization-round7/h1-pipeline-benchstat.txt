@@ -1,0 +1,38 @@
+goos: windows
+goarch: amd64
+pkg: github.com/arkanus-app/rpg-dice-roller/go
+cpu: AMD Ryzen 5 5500
+                      │ go\benchmarks\optimization-round7\h1-pipeline-before.txt │ go\benchmarks\optimization-round7\h1-pipeline-after.txt │
+                      │                          sec/op                          │              sec/op               vs base               │
+RollAndJSON/d20                                                     11.31µ ± 24%                       11.75µ ± 13%       ~ (p=0.739 n=10)
+RollAndJSON/100d6                                                   64.67µ ± 14%                       65.91µ ± 20%       ~ (p=0.912 n=10)
+RollAndJSON/pool                                                    36.66µ ± 11%                       39.10µ ± 12%       ~ (p=0.353 n=10)
+RollAndJSON/keep                                                    11.93µ ± 15%                       12.21µ ± 11%       ~ (p=0.796 n=10)
+RollAndJSON/successes                                               66.06µ ± 11%                       59.97µ ± 14%       ~ (p=0.247 n=10)
+RollAndJSON/unicode                                                 17.56µ ± 20%                       17.26µ ± 14%       ~ (p=0.436 n=10)
+RollAndJSON/fraction                                                21.83µ ± 18%                       22.48µ ± 12%       ~ (p=0.631 n=10)
+geomean                                                             26.03µ                             26.26µ        +0.86%
+
+                      │ go\benchmarks\optimization-round7\h1-pipeline-before.txt │ go\benchmarks\optimization-round7\h1-pipeline-after.txt │
+                      │                           B/op                           │              B/op               vs base                 │
+RollAndJSON/d20                                                     10.00Ki ± 0%                     10.00Ki ± 0%       ~ (p=1.000 n=10) ¹
+RollAndJSON/100d6                                                   122.1Ki ± 0%                     122.1Ki ± 0%       ~ (p=1.000 n=10) ¹
+RollAndJSON/pool                                                    54.88Ki ± 0%                     54.87Ki ± 0%       ~ (p=0.541 n=10)
+RollAndJSON/keep                                                    11.83Ki ± 0%                     11.83Ki ± 0%       ~ (p=1.000 n=10) ¹
+RollAndJSON/successes                                               128.2Ki ± 0%                     128.2Ki ± 0%       ~ (p=0.548 n=10)
+RollAndJSON/unicode                                                 17.83Ki ± 0%                     17.83Ki ± 0%       ~ (p=1.000 n=10) ¹
+RollAndJSON/fraction                                                20.58Ki ± 0%                     20.58Ki ± 0%       ~ (p=0.961 n=10)
+geomean                                                             32.38Ki                          32.38Ki       -0.00%
+¹ all samples are equal
+
+                      │ go\benchmarks\optimization-round7\h1-pipeline-before.txt │ go\benchmarks\optimization-round7\h1-pipeline-after.txt │
+                      │                        allocs/op                         │           allocs/op             vs base                 │
+RollAndJSON/d20                                                       46.00 ± 0%                       46.00 ± 0%       ~ (p=1.000 n=10) ¹
+RollAndJSON/100d6                                                     35.00 ± 0%                       35.00 ± 0%       ~ (p=1.000 n=10) ¹
+RollAndJSON/pool                                                      117.0 ± 0%                       117.0 ± 0%       ~ (p=1.000 n=10) ¹
+RollAndJSON/keep                                                      37.00 ± 0%                       37.00 ± 0%       ~ (p=1.000 n=10) ¹
+RollAndJSON/successes                                                 167.0 ± 0%                       167.0 ± 0%       ~ (p=1.000 n=10) ¹
+RollAndJSON/unicode                                                   57.00 ± 0%                       57.00 ± 0%       ~ (p=1.000 n=10) ¹
+RollAndJSON/fraction                                                  129.0 ± 0%                       129.0 ± 0%       ~ (p=1.000 n=10) ¹
+geomean                                                               70.39                            70.39       +0.00%
+¹ all samples are equal

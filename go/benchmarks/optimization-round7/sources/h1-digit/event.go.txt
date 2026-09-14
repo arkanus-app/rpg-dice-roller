@@ -279,28 +279,16 @@ func (output *eventJSON) strings(key string, values []string) {
 
 // The table replaces repeated character-class comparisons on the ASCII path.
 // Values are still inspected on every call; unsafe bytes use encoding/json.
-var eventJSONSafeASCII = func() (safe [256]byte) {
+var eventJSONSafeASCII = func() (safe [256]bool) {
 	for character := byte(0x20); character < 0x80; character++ {
-		if character != '"' && character != '\\' && character != '<' && character != '>' && character != '&' {
-			safe[character] = 1
-		}
+		safe[character] = character != '"' && character != '\\' && character != '<' && character != '>' && character != '&'
 	}
 	return safe
 }()
 
 func appendEventString(output []byte, value string) []byte {
-	remaining := value
-	// Check four table entries with one branch. Short tails and strings with
-	// escapes still follow the same classification and standard JSON fallback.
-	for len(remaining) >= 4 {
-		if eventJSONSafeASCII[remaining[0]]&eventJSONSafeASCII[remaining[1]]&eventJSONSafeASCII[remaining[2]]&eventJSONSafeASCII[remaining[3]] == 0 {
-			encoded, _ := json.Marshal(value)
-			return append(output, encoded...)
-		}
-		remaining = remaining[4:]
-	}
-	for index := range len(remaining) {
-		if eventJSONSafeASCII[remaining[index]] == 0 {
+	for index := range len(value) {
+		if !eventJSONSafeASCII[value[index]] {
 			encoded, _ := json.Marshal(value)
 			return append(output, encoded...)
 		}

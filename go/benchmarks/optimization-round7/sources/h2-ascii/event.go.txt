@@ -289,18 +289,17 @@ var eventJSONSafeASCII = func() (safe [256]byte) {
 }()
 
 func appendEventString(output []byte, value string) []byte {
-	remaining := value
+	index := 0
 	// Check four table entries with one branch. Short tails and strings with
 	// escapes still follow the same classification and standard JSON fallback.
-	for len(remaining) >= 4 {
-		if eventJSONSafeASCII[remaining[0]]&eventJSONSafeASCII[remaining[1]]&eventJSONSafeASCII[remaining[2]]&eventJSONSafeASCII[remaining[3]] == 0 {
+	for ; index+4 <= len(value); index += 4 {
+		if eventJSONSafeASCII[value[index]]&eventJSONSafeASCII[value[index+1]]&eventJSONSafeASCII[value[index+2]]&eventJSONSafeASCII[value[index+3]] == 0 {
 			encoded, _ := json.Marshal(value)
 			return append(output, encoded...)
 		}
-		remaining = remaining[4:]
 	}
-	for index := range len(remaining) {
-		if eventJSONSafeASCII[remaining[index]] == 0 {
+	for ; index < len(value); index++ {
+		if eventJSONSafeASCII[value[index]] == 0 {
 			encoded, _ := json.Marshal(value)
 			return append(output, encoded...)
 		}

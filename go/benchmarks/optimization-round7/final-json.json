@@ -1,0 +1,412 @@
+{
+  "status": "complete",
+  "label": "final-json",
+  "startedAt": "2026-09-14T05:47:39.330Z",
+  "budgetMs": 120000,
+  "filter": "^BenchmarkRollJSON$",
+  "benchtime": "300ms",
+  "rounds": 10,
+  "cpu": "AMD Ryzen 5 5500                               ",
+  "os": "Windows 11 Pro",
+  "arch": "x64",
+  "invocation": [
+    "D:\\Projetos\\ERPG\\rpg-dice-roller\\scripts\\compare-go-round7-micro.mjs",
+    ".artifacts/optimization-round7/baseline.exe",
+    ".artifacts/optimization-round7/final.exe",
+    "final-json",
+    "^BenchmarkRollJSON$",
+    "300ms"
+  ],
+  "env": {
+    "GOMAXPROCS": "1",
+    "GOGC": "100",
+    "GOMEMLIMIT": "off",
+    "DICECORE_JSON_ENCODER": "direct"
+  },
+  "binaries": {
+    "before": {
+      "file": "D:\\Projetos\\ERPG\\rpg-dice-roller\\.artifacts\\optimization-round7\\baseline.exe",
+      "sha256": "0207207dea6c7e8f60e1741f146e12e95853a860ab311bafc154d2f2cd30a18b"
+    },
+    "after": {
+      "file": "D:\\Projetos\\ERPG\\rpg-dice-roller\\.artifacts\\optimization-round7\\final.exe",
+      "sha256": "eefd09cf883c511461e0cd2d9dd9a24c649392990f844c21a4e7883682589f30"
+    }
+  },
+  "order": [
+    [
+      "before",
+      "after"
+    ],
+    [
+      "after",
+      "before"
+    ],
+    [
+      "before",
+      "after"
+    ],
+    [
+      "after",
+      "before"
+    ],
+    [
+      "before",
+      "after"
+    ],
+    [
+      "after",
+      "before"
+    ],
+    [
+      "before",
+      "after"
+    ],
+    [
+      "after",
+      "before"
+    ],
+    [
+      "before",
+      "after"
+    ],
+    [
+      "after",
+      "before"
+    ]
+  ],
+  "runs": [
+    {
+      "variant": "before",
+      "round": 0,
+      "args": [
+        "-test.run=^$",
+        "-test.bench=^BenchmarkRollJSON$",
+        "-test.benchtime=300ms",
+        "-test.count=1",
+        "-test.benchmem"
+      ],
+      "wallMs": 3667,
+      "stdoutSha256": "79fc9e7bcfa62998c8f669470c306eeb8a575dd9be64bedc80ef8817b5efc5f8",
+      "stderr": "",
+      "status": 0,
+      "error": null
+    },
+    {
+      "variant": "after",
+      "round": 0,
+      "args": [
+        "-test.run=^$",
+        "-test.bench=^BenchmarkRollJSON$",
+        "-test.benchtime=300ms",
+        "-test.count=1",
+        "-test.benchmem"
+      ],
+      "wallMs": 3487,
+      "stdoutSha256": "b94b825f67b4a5d33481a2bff46872066ed6d952b49a972acc9d4ea2fec28425",
+      "stderr": "",
+      "status": 0,
+      "error": null
+    },
+    {
+      "variant": "after",
+      "round": 1,
+      "args": [
+        "-test.run=^$",
+        "-test.bench=^BenchmarkRollJSON$",
+        "-test.benchtime=300ms",
+        "-test.count=1",
+        "-test.benchmem"
+      ],
+      "wallMs": 3243,
+      "stdoutSha256": "f35b5967bc2ed4dd48e0e42688a1bd3d2e4eaeacd1d8b99a5721822a15771fdf",
+      "stderr": "",
+      "status": 0,
+      "error": null
+    },
+    {
+      "variant": "before",
+      "round": 1,
+      "args": [
+        "-test.run=^$",
+        "-test.bench=^BenchmarkRollJSON$",
+        "-test.benchtime=300ms",
+        "-test.count=1",
+        "-test.benchmem"
+      ],
+      "wallMs": 3192,
+      "stdoutSha256": "48641d06b53a3c171a1c969b356dbb2eb6eba0102057b73339705b4a2259e111",
+      "stderr": "",
+      "status": 0,
+      "error": null
+    },
+    {
+      "variant": "before",
+      "round": 2,
+      "args": [
+        "-test.run=^$",
+        "-test.bench=^BenchmarkRollJSON$",
+        "-test.benchtime=300ms",
+        "-test.count=1",
+        "-test.benchmem"
+      ],
+      "wallMs": 3336,
+      "stdoutSha256": "24d36d5f00bd6e80a4e289e9aa9f25c45c08a8a9c455c17b8f98da0d9e2b5dd7",
+      "stderr": "",
+      "status": 0,
+      "error": null
+    },
+    {
+      "variant": "after",
+      "round": 2,
+      "args": [
+        "-test.run=^$",
+        "-test.bench=^BenchmarkRollJSON$",
+        "-test.benchtime=300ms",
+        "-test.count=1",
+        "-test.benchmem"
+      ],
+      "wallMs": 3451,
+      "stdoutSha256": "070bbc43b4d99f8903bb30c07d5ce9532221eeba2257f29c84bdc02c0dc6ea5e",
+      "stderr": "",
+      "status": 0,
+      "error": null
+    },
+    {
+      "variant": "after",
+      "round": 3,
+      "args": [
+        "-test.run=^$",
+        "-test.bench=^BenchmarkRollJSON$",
+        "-test.benchtime=300ms",
+        "-test.count=1",
+        "-test.benchmem"
+      ],
+      "wallMs": 3337,
+      "stdoutSha256": "fd6ca18182ec608590497bcf0f3e723946a4b20c8346105b831d13c2e5826f5c",
+      "stderr": "",
+      "status": 0,
+      "error": null
+    },
+    {
+      "variant": "before",
+      "round": 3,
+      "args": [
+        "-test.run=^$",
+        "-test.bench=^BenchmarkRollJSON$",
+        "-test.benchtime=300ms",
+        "-test.count=1",
+        "-test.benchmem"
+      ],
+      "wallMs": 3525,
+      "stdoutSha256": "289fa3d4360a6ac8eaba91d764ba3889c4cdb6abf52b31d93855b2a014428811",
+      "stderr": "",
+      "status": 0,
+      "error": null
+    },
+    {
+      "variant": "before",
+      "round": 4,
+      "args": [
+        "-test.run=^$",
+        "-test.bench=^BenchmarkRollJSON$",
+        "-test.benchtime=300ms",
+        "-test.count=1",
+        "-test.benchmem"
+      ],
+      "wallMs": 3274,
+      "stdoutSha256": "b283a3734913e02d27e99ecaa3ab675d4835ce9fca4be0a1103879c66c8ae774",
+      "stderr": "",
+      "status": 0,
+      "error": null
+    },
+    {
+      "variant": "after",
+      "round": 4,
+      "args": [
+        "-test.run=^$",
+        "-test.bench=^BenchmarkRollJSON$",
+        "-test.benchtime=300ms",
+        "-test.count=1",
+        "-test.benchmem"
+      ],
+      "wallMs": 3337,
+      "stdoutSha256": "54001650756021faf9d1a1ed29618fc25352dae07c68b5301c34300ed69da6ed",
+      "stderr": "",
+      "status": 0,
+      "error": null
+    },
+    {
+      "variant": "after",
+      "round": 5,
+      "args": [
+        "-test.run=^$",
+        "-test.bench=^BenchmarkRollJSON$",
+        "-test.benchtime=300ms",
+        "-test.count=1",
+        "-test.benchmem"
+      ],
+      "wallMs": 3235,
+      "stdoutSha256": "9ad85a15540aef93cffa5b425e26e964983a977c903708cd0f431cac0103bf56",
+      "stderr": "",
+      "status": 0,
+      "error": null
+    },
+    {
+      "variant": "before",
+      "round": 5,
+      "args": [
+        "-test.run=^$",
+        "-test.bench=^BenchmarkRollJSON$",
+        "-test.benchtime=300ms",
+        "-test.count=1",
+        "-test.benchmem"
+      ],
+      "wallMs": 3287,
+      "stdoutSha256": "f6d519704393da8c77b057936d4e947393b5836a897f31ab71d41db055d399dd",
+      "stderr": "",
+      "status": 0,
+      "error": null
+    },
+    {
+      "variant": "before",
+      "round": 6,
+      "args": [
+        "-test.run=^$",
+        "-test.bench=^BenchmarkRollJSON$",
+        "-test.benchtime=300ms",
+        "-test.count=1",
+        "-test.benchmem"
+      ],
+      "wallMs": 3265,
+      "stdoutSha256": "15bdeca66570799c80702b1280a669592b3c1c785330f637188129c6fdd4c19b",
+      "stderr": "",
+      "status": 0,
+      "error": null
+    },
+    {
+      "variant": "after",
+      "round": 6,
+      "args": [
+        "-test.run=^$",
+        "-test.bench=^BenchmarkRollJSON$",
+        "-test.benchtime=300ms",
+        "-test.count=1",
+        "-test.benchmem"
+      ],
+      "wallMs": 3267,
+      "stdoutSha256": "777f541c5d473958722965527a63cbebd161e75e9354519cefea8b893c655283",
+      "stderr": "",
+      "status": 0,
+      "error": null
+    },
+    {
+      "variant": "after",
+      "round": 7,
+      "args": [
+        "-test.run=^$",
+        "-test.bench=^BenchmarkRollJSON$",
+        "-test.benchtime=300ms",
+        "-test.count=1",
+        "-test.benchmem"
+      ],
+      "wallMs": 3316,
+      "stdoutSha256": "ecbab3332e816655d4c1038673dff6c1f4b582a2d853ac0d6d5b89782c3107fc",
+      "stderr": "",
+      "status": 0,
+      "error": null
+    },
+    {
+      "variant": "before",
+      "round": 7,
+      "args": [
+        "-test.run=^$",
+        "-test.bench=^BenchmarkRollJSON$",
+        "-test.benchtime=300ms",
+        "-test.count=1",
+        "-test.benchmem"
+      ],
+      "wallMs": 3492,
+      "stdoutSha256": "75ff21c9d3e1f41b4e64abf1ec8f4017e55ecddc98aa98e4197b59527a072c37",
+      "stderr": "",
+      "status": 0,
+      "error": null
+    },
+    {
+      "variant": "before",
+      "round": 8,
+      "args": [
+        "-test.run=^$",
+        "-test.bench=^BenchmarkRollJSON$",
+        "-test.benchtime=300ms",
+        "-test.count=1",
+        "-test.benchmem"
+      ],
+      "wallMs": 3307,
+      "stdoutSha256": "829e09d5258ebfa0d797f39bd0da43a58a1f0904afe48242a7c666f3bc09b733",
+      "stderr": "",
+      "status": 0,
+      "error": null
+    },
+    {
+      "variant": "after",
+      "round": 8,
+      "args": [
+        "-test.run=^$",
+        "-test.bench=^BenchmarkRollJSON$",
+        "-test.benchtime=300ms",
+        "-test.count=1",
+        "-test.benchmem"
+      ],
+      "wallMs": 3656,
+      "stdoutSha256": "6c6ba56bb15bb352764096f8b2a35857af0b82061c0a450730918258822cc80d",
+      "stderr": "",
+      "status": 0,
+      "error": null
+    },
+    {
+      "variant": "after",
+      "round": 9,
+      "args": [
+        "-test.run=^$",
+        "-test.bench=^BenchmarkRollJSON$",
+        "-test.benchtime=300ms",
+        "-test.count=1",
+        "-test.benchmem"
+      ],
+      "wallMs": 3488,
+      "stdoutSha256": "dd365809cd8c57706457a02f4fb11e778a61a7fcd47b8d46a9dccaf895e072a2",
+      "stderr": "",
+      "status": 0,
+      "error": null
+    },
+    {
+      "variant": "before",
+      "round": 9,
+      "args": [
+        "-test.run=^$",
+        "-test.bench=^BenchmarkRollJSON$",
+        "-test.benchtime=300ms",
+        "-test.count=1",
+        "-test.benchmem"
+      ],
+      "wallMs": 3239,
+      "stdoutSha256": "4631179b40dda16314de031a9515c058c8b940e56189ba727e402a9445d0ce22",
+      "stderr": "",
+      "status": 0,
+      "error": null
+    }
+  ],
+  "methodology": "Same benchmark and direct JSON encoder; only preserved implementation binary changes. Results escape. No startup or setup in b.Loop.",
+  "wallMs": 67710,
+  "outputs": {
+    "before": {
+      "file": "D:\\Projetos\\ERPG\\rpg-dice-roller\\go\\benchmarks\\optimization-round7\\final-json-before.txt",
+      "sha256": "f84989dcd8ca7083ecdb02715fe1380656ac98875ab3e646d23342d9c51a5065"
+    },
+    "after": {
+      "file": "D:\\Projetos\\ERPG\\rpg-dice-roller\\go\\benchmarks\\optimization-round7\\final-json-after.txt",
+      "sha256": "fce7e716dd30931e887dd8534a3580c500549a1cf8980aeb0f9553e1858a6183"
+    }
+  }
+}

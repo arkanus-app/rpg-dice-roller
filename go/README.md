@@ -195,5 +195,11 @@ rolagem completa + JSON em 11 expressões, com vazão, CPU/op, latência individ
 e RSS apresentados separadamente. Os gráficos distinguem GC padrão e
 configuração explícita do processo.
 
+A [sétima rodada](OPTIMIZATION_ROUND7.md) reduz o trabalho ao escrever números
+e strings. No ensaio com um worker, o tempo de rolagem full + JSON caiu 15,02%
+em `100d6` e 6,81% no pool com modificadores, sem aumento das alocações.
+Os testes mantêm cobertura exata de 100%. O relatório separa esses ganhos dos
+cenários sem diferença significativa e dos ensaios anteriores com seis workers.
+
 A [licença do projeto](../licence.txt) e os
 [avisos dos kernels matemáticos](THIRD_PARTY_NOTICES.md) se aplicam a este código.

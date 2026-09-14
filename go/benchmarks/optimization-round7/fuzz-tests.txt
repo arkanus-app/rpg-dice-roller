@@ -1,0 +1,7 @@
+fuzz: elapsed: 0s, gathering baseline coverage: 0/88 completed
+fuzz: elapsed: 0s, gathering baseline coverage: 88/88 completed, now fuzzing with 2 workers
+fuzz: elapsed: 3s, execs: 10508 (3502/sec), new interesting: 10 (total: 98)
+fuzz: elapsed: 6s, execs: 17030 (2174/sec), new interesting: 14 (total: 102)
+fuzz: elapsed: 6s, execs: 17030 (0/sec), new interesting: 14 (total: 102)
+PASS
+ok  	github.com/arkanus-app/rpg-dice-roller/go	6.542s

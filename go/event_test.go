@@ -75,6 +75,11 @@ func TestResolvedEventDiscriminatedJSONAndMapJournal(t *testing.T) {
 func TestResolvedEventJSONEscapesAndNumberBoundaries(t *testing.T) {
 	values := []float64{0, math.Copysign(0, -1), 1, -1, 6, 0.5, -9.75, 1e-6, 1e-7, 1e-9, 1e-10, 1e20, 1e21, math.SmallestNonzeroFloat64, math.MaxFloat64,
 		9007199254740991, -9007199254740991, 9007199254740992, -9007199254740992, math.Nextafter(6, 7), math.Nextafter(-6, -7)}
+	// Fractions one ULP from a digit must never be rounded by the fast path.
+	for digit := 0; digit <= 10; digit++ {
+		value := float64(digit)
+		values = append(values, value, math.Nextafter(value, math.Inf(-1)), math.Nextafter(value, math.Inf(1)))
+	}
 	for _, value := range values {
 		event := ResolvedEvent{Type: "roll", Subject: "die", Value: value}
 		wire, err := event.MarshalJSON()
