@@ -1,0 +1,232 @@
+package dicecore
+
+import (
+	"encoding/json"
+	"math"
+	"strconv"
+)
+
+// ResolvedEvent contains a fully materialized event. Type and Subject select its
+// JSON fields: die transforms use Details.From/To, while group sorting uses
+// Details.FromIDs/ToIDs. Details holds fields used only by modifiers and groups;
+// ordinary die roll/include events need no secondary allocation.
+// Zero numeric values are retained. HasParent distinguishes a parent ID from
+// JSON null without sharing a mutable pointer with the final die. Group events
+// omit die-only fields entirely.
+type ResolvedEvent struct {
+	Sequence     int64
+	RollIndex    int64
+	Type         string
+	Subject      string
+	SourceNodeID string
+	DieID        string
+	ParentDieID  string
+	HasParent    bool
+	Value        float64
+	Contribution float64
+	Details      *ResolvedEventDetails
+	legacy       DiceEvent
+}
+
+// ResolvedEventDetails contains the fully resolved payload of a modifier or
+// group event. Numeric transformations use From/To; group sorting uses IDs.
+type ResolvedEventDetails struct {
+	GroupID    string
+	ChildDieID string
+	Reason     string
+	Outcome    string
+	From       float64
+	To         float64
+	FromIDs    []string
+	ToIDs      []string
+}
+
+func (event *ResolvedEvent) resolvedDetails() *ResolvedEventDetails {
+	if event.Details == nil {
+		return &ResolvedEventDetails{}
+	}
+	return event.Details
+}
+
+// asDiceEvent is used only by the public, map-based journal. Retaining the map
+// preserves its existing shallow-copy semantics across Slice/ToArray calls.
+func (event *ResolvedEvent) asDiceEvent() DiceEvent {
+	if event.legacy != nil {
+		return event.legacy
+	}
+	details := event.resolvedDetails()
+	result := DiceEvent{"sequence": event.Sequence, "rollIndex": event.RollIndex, "type": event.Type, "subject": event.Subject, "sourceNodeId": event.SourceNodeID}
+	if event.Subject == "die" {
+		result["dieId"] = event.DieID
+		result["parentDieId"] = nil
+		if event.HasParent {
+			result["parentDieId"] = event.ParentDieID
+		}
+	} else {
+		result["groupId"] = details.GroupID
+	}
+	switch event.Type {
+	case "roll":
+		result["value"] = event.Value
+	case "reroll", "transform":
+		if event.Subject == "group" {
+			result["from"], result["to"] = details.FromIDs, details.ToIDs
+		} else {
+			result["from"], result["to"] = details.From, details.To
+		}
+		result["reason"] = details.Reason
+	case "explode":
+		result["childDieId"], result["value"], result["reason"] = details.ChildDieID, event.Value, details.Reason
+	case "include":
+		result["contribution"] = event.Contribution
+		if event.Subject == "group" {
+			result["value"] = event.Value
+		}
+	case "exclude":
+		result["reason"] = details.Reason
+		if event.Subject == "group" {
+			result["value"] = event.Value
+		}
+	case "classify":
+		result["outcome"] = details.Outcome
+	}
+	event.legacy = result
+	return result
+}
+
+// MarshalJSON writes the discriminated event directly, without rebuilding a map
+// or boxing its scalar fields. All event values already exist before encoding.
+func (event ResolvedEvent) MarshalJSON() ([]byte, error) {
+	return event.appendJSON(make([]byte, 0, 256))
+}
+
+func (event ResolvedEvent) appendJSON(data []byte) ([]byte, error) {
+	if event.legacy != nil {
+		encoded, err := json.Marshal(event.legacy)
+		return append(data, encoded...), err
+	}
+	details := event.resolvedDetails()
+	output := eventJSON{data: data, start: len(data)}
+	output.data = append(output.data, '{')
+	output.integer("sequence", event.Sequence)
+	output.text("type", event.Type)
+	output.text("subject", event.Subject)
+	if event.Subject == "die" {
+		output.text("dieId", event.DieID)
+		if !event.HasParent {
+			output.key("parentDieId")
+			output.data = append(output.data, "null"...)
+		} else {
+			output.text("parentDieId", event.ParentDieID)
+		}
+	} else {
+		output.text("groupId", details.GroupID)
+	}
+	output.integer("rollIndex", event.RollIndex)
+	output.text("sourceNodeId", event.SourceNodeID)
+	switch event.Type {
+	case "roll":
+		output.number("value", event.Value)
+	case "reroll", "transform":
+		if event.Subject == "group" {
+			output.strings("from", details.FromIDs)
+			output.strings("to", details.ToIDs)
+		} else {
+			output.number("from", details.From)
+			output.number("to", details.To)
+		}
+		output.text("reason", details.Reason)
+	case "explode":
+		output.text("childDieId", details.ChildDieID)
+		output.number("value", event.Value)
+		output.text("reason", details.Reason)
+	case "include":
+		if event.Subject == "group" {
+			output.number("value", event.Value)
+		}
+		output.number("contribution", event.Contribution)
+	case "exclude":
+		output.text("reason", details.Reason)
+		if event.Subject == "group" {
+			output.number("value", event.Value)
+		}
+	case "classify":
+		output.text("outcome", details.Outcome)
+	}
+	if output.err != nil {
+		return nil, output.err
+	}
+	return append(output.data, '}'), nil
+}
+
+type eventJSON struct {
+	data  []byte
+	err   error
+	start int
+}
+
+func (output *eventJSON) key(key string) {
+	if len(output.data) > output.start+1 {
+		output.data = append(output.data, ',')
+	}
+	output.data = append(output.data, '"')
+	output.data = append(output.data, key...)
+	output.data = append(output.data, '"', ':')
+}
+func (output *eventJSON) text(key, value string) {
+	output.key(key)
+	output.data = appendEventString(output.data, value)
+}
+func (output *eventJSON) integer(key string, value int64) {
+	output.key(key)
+	output.data = strconv.AppendInt(output.data, value, 10)
+}
+func (output *eventJSON) number(key string, value float64) {
+	if output.err != nil {
+		return
+	}
+	if math.IsNaN(value) || math.IsInf(value, 0) {
+		_, output.err = json.Marshal(value)
+		return
+	}
+	output.key(key)
+	format := byte('f')
+	absolute := math.Abs(value)
+	if absolute != 0 && (absolute < 1e-6 || absolute >= 1e21) {
+		format = 'e'
+	}
+	output.data = strconv.AppendFloat(output.data, value, format, -1, 64)
+	// encoding/json follows ES number formatting and removes exponent zeroes.
+	length := len(output.data)
+	if format == 'e' && output.data[length-4] == 'e' && output.data[length-3] == '-' && output.data[length-2] == '0' {
+		output.data[length-2] = output.data[length-1]
+		output.data = output.data[:length-1]
+	}
+}
+func (output *eventJSON) strings(key string, values []string) {
+	output.key(key)
+	if values == nil {
+		output.data = append(output.data, "null"...)
+		return
+	}
+	output.data = append(output.data, '[')
+	for index, value := range values {
+		if index > 0 {
+			output.data = append(output.data, ',')
+		}
+		output.data = appendEventString(output.data, value)
+	}
+	output.data = append(output.data, ']')
+}
+func appendEventString(output []byte, value string) []byte {
+	for index := range len(value) {
+		character := value[index]
+		if character < 0x20 || character >= 0x80 || character == '"' || character == '\\' || character == '<' || character == '>' || character == '&' {
+			encoded, _ := json.Marshal(value)
+			return append(output, encoded...)
+		}
+	}
+	output = append(output, '"')
+	output = append(output, value...)
+	return append(output, '"')
+}

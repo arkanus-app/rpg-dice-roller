@@ -1,0 +1,30 @@
+import fs from 'node:fs';
+import path from 'node:path';
+import {spawnSync} from 'node:child_process';
+import {createHash} from 'node:crypto';
+const root=process.cwd(), base=path.join(root,'.artifacts/optimization-round2/root-variants');
+const go=process.argv[2];
+function run(exe,args,cwd,file) {
+  const result=spawnSync(exe,args,{cwd,encoding:'utf8',windowsHide:true,timeout:90000});
+  fs.writeFileSync(path.join(base,file),result.stdout+result.stderr);
+  if(result.error||result.status!==0) throw new Error(file+': '+result.error+'\n'+result.stdout+result.stderr);
+  console.log(file+' complete');
+}
+const manifest={go,variants:{},commands:[]};
+for(const variant of ['baseline','rng','projection','ids']) {
+  const dir=path.join(base,variant,'go');
+  const files=fs.readdirSync(dir).filter(name=>name.endsWith('.go')||name==='go.mod').sort().map(name=>({name,sha256:createHash('sha256').update(fs.readFileSync(path.join(dir,name))).digest('hex')}));
+  manifest.variants[variant]=files;
+  run(go,['test','./...','-count=1'],dir,variant+'-tests.txt');
+  run(go,['test','-c','-o',path.join(base,variant+'.exe')],dir,variant+'-build.txt');
+}
+const selectors={rng:'^BenchmarkBackendOperation$/^1d20\\+5$/(full|details|summary)',projection:'^BenchmarkSystemProjection$',ids:'^BenchmarkBackendOperation$/(100d6|20d6)/^(full|details)$'};
+for(let round=1;round<=2;round++) for(const variant of ['rng','projection','ids']) {
+  for(const source of round===1?['baseline',variant]:[variant,'baseline']) {
+    const args=['-test.run=^$','-test.bench='+selectors[variant],'-test.benchmem','-test.benchtime=100ms','-test.count=2'];
+    const file=`${variant}-round${round}-${source}.txt`;
+    manifest.commands.push({source,args,file});
+    run(path.join(base,source+'.exe'),args,base,file);
+  }
+}
+fs.writeFileSync(path.join(base,'manifest.json'),JSON.stringify(manifest,null,2)+'\n');

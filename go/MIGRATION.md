@@ -56,7 +56,7 @@ os testes matemáticos comparam os bits IEEE 754 do resultado normalizado.
 
 ## Evidências e reprodução
 
-A suíte Go passou com **4.151 de 4.151 statements cobertos (100%)**, com o perfil de todos os
+A suíte Go passou com **4.531 de 4.531 statements cobertos (100%)**, com o perfil de todos os
 pacotes. A cobertura mede a execução do código; as comparações com TypeScript
 verificam seu comportamento de forma independente. Nenhum arquivo de produção é
 removido da medição. Go não oferece nativamente as quatro métricas de cobertura
@@ -83,14 +83,20 @@ Node **24.18.0**, V8 **13.6.233.17-node.50**, pois `Math.pow` depende da bibliot
 matemática da plataforma. Os testes Go leem esse corpus congelado sem Node.
 
 O [benchmark comparativo](BENCHMARK.md) apresenta Go, Node e Bun com metodologia,
-dispersão, comandos e resultados brutos. O [benchmark de backend](BACKEND_BENCHMARK.md)
-mede lotes de 10.000 chamadas, concorrência e memória residente. O
-[registro de otimização](OPTIMIZATION.md) documenta as mudanças internas,
-comparações com a primeira versão Go e redução de alocações. Não se pressupõe
-que a troca de linguagem acelere todas as operações.
+dispersão, comandos e resultados brutos. A [segunda rodada de backend](BACKEND_ROUND2_BENCHMARK.md)
+mede lotes de 10.000 chamadas, concorrência e memória residente; o
+[teste com JSON](JSON_BENCHMARK.md) inclui a serialização. O
+[registro da segunda rodada](OPTIMIZATION_ROUND2.md) documenta as mudanças,
+variantes rejeitadas e evidências anteriores preservadas.
 
 ## Adaptações de linguagem
 
+- Eventos completos são `[]ResolvedEvent`: `event.Value` substitui o acesso
+  nativo anterior por mapa, e `event.Details` contém campos de modificadores e
+  grupos quando aplicável. A estrutura Go mudou; as funções de rolagem e o
+  contrato JSON mantêm os campos, valores, omissões e `null` da referência.
+  Eventos guardam o ID do pai por valor, protegendo o histórico da mutação de
+  `ResolvedDie.ParentDieID`. O journal público continua usando `DiceEvent`.
 - Erros retornam como `(valor, error)`; nomes e tipos seguem as convenções Go.
   Opções omitidas usam o valor zero/nil apropriado. Contadores são inteiros
   nativos, sem a possibilidade de receber frações ou `NaN`.

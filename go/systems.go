@@ -233,8 +233,8 @@ func RollFateDiceWithEngine(engine SystemEngine, input any, options ...SystemRol
 	if err != nil {
 		return nil, err
 	}
-	result := &FateRollResult{systemResultHeader: systemHeader("fate"), DiceCount: diceCount, Dice: []FateDieResult{}, BaseRoll: base}
-	for _, die := range dice {
+	result := &FateRollResult{systemResultHeader: systemHeader("fate"), DiceCount: diceCount, Dice: make([]FateDieResult, len(dice)), BaseRoll: base}
+	for index, die := range dice {
 		face, value, symbols := "", float64(0), []string{}
 		switch die.RawValue {
 		case 1, 2:
@@ -250,7 +250,7 @@ func RollFateDiceWithEngine(engine SystemEngine, input any, options ...SystemRol
 		if err != nil {
 			return nil, err
 		}
-		result.Dice = append(result.Dice, FateDieResult{projected, value})
+		result.Dice[index] = FateDieResult{projected, value}
 		result.Total += value
 	}
 	return result, nil
@@ -323,13 +323,13 @@ func RollAssimilationWithEngine(engine SystemEngine, input any, options ...Syste
 	if err != nil {
 		return nil, err
 	}
-	result := &AssimilationRollResult{systemResultHeader: systemHeader("assimilation"), D6: counts[0], D10: counts[1], D12: counts[2], TotalDice: int64(total), Keep: keep, Dice: []AssimilationDieResult{}, BaseRoll: base}
-	for _, die := range dice {
+	result := &AssimilationRollResult{systemResultHeader: systemHeader("assimilation"), D6: counts[0], D10: counts[1], D12: counts[2], TotalDice: int64(total), Keep: keep, Dice: make([]AssimilationDieResult, len(dice)), BaseRoll: base}
+	for index, die := range dice {
 		projected, err := toAssimilationDie(die)
 		if err != nil {
 			return nil, err
 		}
-		result.Dice = append(result.Dice, projected)
+		result.Dice[index] = projected
 	}
 	return result, nil
 }
@@ -491,7 +491,7 @@ func RollVampireV5WithEngine(engine SystemEngine, input any, options ...SystemRo
 	if err != nil {
 		return nil, err
 	}
-	result := &VampireV5RollResult{systemResultHeader: systemHeader("vampire-v5"), Pool: *pool, Hunger: *hunger, Difficulty: difficulty, NormalDice: normalCount, HungerDice: hungerCount, Outcome: "pending", Dice: []VampireV5DieResult{}, BaseRoll: base}
+	result := &VampireV5RollResult{systemResultHeader: systemHeader("vampire-v5"), Pool: *pool, Hunger: *hunger, Difficulty: difficulty, NormalDice: normalCount, HungerDice: hungerCount, Outcome: "pending", Dice: make([]VampireV5DieResult, len(dice)), BaseRoll: base}
 	tens, hasHungerTen, hasHungerOne := int64(0), false, false
 	for index, die := range dice {
 		isHunger := int64(index) >= normalCount
@@ -499,7 +499,7 @@ func RollVampireV5WithEngine(engine SystemEngine, input any, options ...SystemRo
 		if err != nil {
 			return nil, err
 		}
-		result.Dice = append(result.Dice, projected)
+		result.Dice[index] = projected
 		if die.RawValue >= 6 {
 			result.Successes++
 		}

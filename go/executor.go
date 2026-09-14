@@ -13,6 +13,7 @@ type ExecuteRollPlanOptions struct {
 	Seed            any
 	Replay          any
 	RandomAlgorithm RandomAlgorithm
+	rngCache        *executionRNGCache
 }
 
 type workingDie struct {
@@ -44,6 +45,7 @@ type rollState struct {
 	dieArena     []workingDie
 	dieArenaUsed int
 	initialDice  int64
+	ids          executionIDs
 }
 
 func executorCheck(err error) {
@@ -115,12 +117,12 @@ func createWorkingDie(node *ExpressionNode, spec *CompiledDiceSpec, state *rollS
 	executorCheck(state.context.Budget.ConsumeResultItems(1))
 	state.nextDieIndex++
 	value := executorRollFace(node, spec, state.context)
+	budget := state.context.Budget
 	var die *workingDie
 	if generated {
 		die = &workingDie{}
 	} else {
 		if state.dieArenaUsed == len(state.dieArena) {
-			budget := state.context.Budget
 			capacity := min(max(int64(1), state.program.StaticDice-state.initialDice), 256,
 				budget.limits.MaxInitialDice-budget.snapshot.InitialDice+1,
 				budget.limits.MaxResultItems-budget.snapshot.ResultItems+1)
@@ -134,40 +136,49 @@ func createWorkingDie(node *ExpressionNode, spec *CompiledDiceSpec, state *rollS
 		state.dieArenaUsed++
 		state.initialDice++
 	}
-	*die = workingDie{ResolvedDie: ResolvedDie{ID: "roll-" + strconv.FormatInt(state.rollIndex, 10) + "-die-" + strconv.FormatInt(state.nextDieIndex, 10), SourceNodeID: node.ID, ParentDieID: parent, RollIndex: state.rollIndex, GroupID: groupID, Sides: spec.Sides, RawValue: value, Value: value, Contribution: value, Included: true, States: []string{}}, active: true}
+	*die = workingDie{ResolvedDie: ResolvedDie{ID: state.ids.dieID(state.rollIndex, state.nextDieIndex, min(state.program.StaticDice,
+		budget.limits.MaxInitialDice-budget.snapshot.InitialDice+1, budget.limits.MaxResultItems-budget.snapshot.ResultItems+1)), SourceNodeID: node.ID, ParentDieID: parent, RollIndex: state.rollIndex, GroupID: groupID, Sides: spec.Sides, RawValue: value, Value: value, Contribution: value, Included: true, States: []string{}}, active: true}
 	state.dice = append(state.dice, die)
 	if state.context.Journal.materialize {
-		recordDieEvent(state, die, "roll", DiceEvent{"value": value})
+		recordDieEvent(state, die, ResolvedEvent{Type: "roll", Value: value})
 	} else {
 		executorValue(state.context.Journal.Record(nil))
 	}
 	return die
 }
-func recordDieEvent(state *rollState, die *workingDie, kind string, fields DiceEvent) {
+func recordDieEvent(state *rollState, die *workingDie, event ResolvedEvent, details ...ResolvedEventDetails) {
 	if !state.context.Journal.materialize {
 		executorValue(state.context.Journal.Record(nil))
 		return
 	}
-	var parentID any
+	if len(details) > 0 {
+		event.Details = new(ResolvedEventDetails)
+		*event.Details = details[0]
+	}
+	event.Subject = "die"
+	event.DieID = die.ID
 	if die.ParentDieID != nil {
-		parentID = *die.ParentDieID
+		event.ParentDieID = *die.ParentDieID
+		event.HasParent = true
 	}
-	event := DiceEvent{"type": kind, "subject": "die", "dieId": die.ID, "parentDieId": parentID, "rollIndex": state.rollIndex, "sourceNodeId": die.SourceNodeID}
-	for key, value := range fields {
-		event[key] = value
-	}
-	executorValue(state.context.Journal.record(event, true))
+	event.RollIndex = state.rollIndex
+	event.SourceNodeID = die.SourceNodeID
+	executorCheck(state.context.Journal.recordResolved(event))
 }
-func recordGroupEvent(state *rollState, group *workingGroup, kind string, fields DiceEvent) {
+func recordGroupEvent(state *rollState, group *workingGroup, event ResolvedEvent, details ...ResolvedEventDetails) {
 	if !state.context.Journal.materialize {
 		executorValue(state.context.Journal.Record(nil))
 		return
 	}
-	event := DiceEvent{"type": kind, "subject": "group", "groupId": group.ID, "rollIndex": state.rollIndex, "sourceNodeId": group.SourceNodeID}
-	for key, value := range fields {
-		event[key] = value
+	event.Subject = "group"
+	event.Details = new(ResolvedEventDetails)
+	if len(details) > 0 {
+		*event.Details = details[0]
 	}
-	executorValue(state.context.Journal.record(event, true))
+	event.Details.GroupID = group.ID
+	event.RollIndex = state.rollIndex
+	event.SourceNodeID = group.SourceNodeID
+	executorCheck(state.context.Journal.recordResolved(event))
 }
 func applyDieBound(dice []*workingDie, bound float64, minimum bool, state *rollState) {
 	for _, die := range dice {
@@ -182,7 +193,7 @@ func applyDieBound(dice []*workingDie, bound float64, minimum bool, state *rollS
 		}
 		appendDieState(die, reason)
 		syncDieContribution(die)
-		recordDieEvent(state, die, "transform", DiceEvent{"from": from, "to": die.Value, "reason": reason})
+		recordDieEvent(state, die, ResolvedEvent{Type: "transform"}, ResolvedEventDetails{From: from, To: die.Value, Reason: reason})
 	}
 }
 func activeWorkingDice(dice []*workingDie) []*workingDie {
@@ -224,7 +235,7 @@ func applyDieExplode(dice *[]*workingDie, modifier *ModifierNode, node *Expressi
 				child.Value--
 				appendDieState(child, "penetrated")
 				syncDieContribution(child)
-				recordDieEvent(state, child, "transform", DiceEvent{"from": from, "to": child.Value, "reason": "penetrate"})
+				recordDieEvent(state, child, ResolvedEvent{Type: "transform"}, ResolvedEventDetails{From: from, To: child.Value, Reason: "penetrate"})
 			}
 			*dice = append(*dice, child)
 			chain = append(chain, child)
@@ -234,7 +245,7 @@ func applyDieExplode(dice *[]*workingDie, modifier *ModifierNode, node *Expressi
 			} else if modifier.Compound {
 				reason = "compound"
 			}
-			recordDieEvent(state, current, "explode", DiceEvent{"childDieId": child.ID, "value": child.Value, "reason": reason})
+			recordDieEvent(state, current, ResolvedEvent{Type: "explode", Value: child.Value}, ResolvedEventDetails{ChildDieID: child.ID, Reason: reason})
 			current = child
 			explosionCount++
 		}
@@ -247,12 +258,12 @@ func applyDieExplode(dice *[]*workingDie, modifier *ModifierNode, node *Expressi
 			root.Value = total
 			appendDieState(root, "compound")
 			syncDieContribution(root)
-			recordDieEvent(state, root, "transform", DiceEvent{"from": from, "to": root.Value, "reason": "compound"})
+			recordDieEvent(state, root, ResolvedEvent{Type: "transform"}, ResolvedEventDetails{From: from, To: root.Value, Reason: "compound"})
 			for _, child := range chain[1:] {
 				child.active = false
 				child.Included = false
 				syncDieContribution(child)
-				recordDieEvent(state, child, "exclude", DiceEvent{"reason": "compound-absorbed"})
+				recordDieEvent(state, child, ResolvedEvent{Type: "exclude"}, ResolvedEventDetails{Reason: "compound-absorbed"})
 			}
 		}
 	}
@@ -279,7 +290,7 @@ func applyDieReroll(dice []*workingDie, modifier *ModifierNode, node *Expression
 			if modifier.Once {
 				reason = "reroll-once"
 			}
-			recordDieEvent(state, die, "reroll", DiceEvent{"from": from, "to": die.Value, "reason": reason})
+			recordDieEvent(state, die, ResolvedEvent{Type: "reroll"}, ResolvedEventDetails{From: from, To: die.Value, Reason: reason})
 			if modifier.Once {
 				break
 			}
@@ -302,7 +313,7 @@ func applyDieUnique(dice []*workingDie, modifier *ModifierNode, node *Expression
 			if modifier.Once {
 				reason = "unique-once"
 			}
-			recordDieEvent(state, die, "reroll", DiceEvent{"from": from, "to": die.Value, "reason": reason})
+			recordDieEvent(state, die, ResolvedEvent{Type: "reroll"}, ResolvedEventDetails{From: from, To: die.Value, Reason: reason})
 			if modifier.Once {
 				break
 			}
@@ -348,7 +359,7 @@ func applyDieSelection(dice []*workingDie, modifier *ModifierNode, state *rollSt
 		die.Included = false
 		appendDieState(die, "dropped")
 		syncDieContribution(die)
-		recordDieEvent(state, die, "exclude", DiceEvent{"reason": modifier.Kind})
+		recordDieEvent(state, die, ResolvedEvent{Type: "exclude"}, ResolvedEventDetails{Reason: modifier.Kind})
 	}
 }
 func applyDieTarget(dice []*workingDie, modifier *ModifierNode, state *rollState) {
@@ -370,7 +381,7 @@ func applyDieTarget(dice []*workingDie, modifier *ModifierNode, state *rollState
 			}
 		}
 		appendDieState(die, "target-"+outcome)
-		recordDieEvent(state, die, "classify", DiceEvent{"outcome": outcome})
+		recordDieEvent(state, die, ResolvedEvent{Type: "classify"}, ResolvedEventDetails{Outcome: outcome})
 	}
 }
 func applyDieCritical(dice []*workingDie, modifier *ModifierNode, spec *CompiledDiceSpec, state *rollState) {
@@ -385,7 +396,7 @@ func applyDieCritical(dice []*workingDie, modifier *ModifierNode, spec *Compiled
 		}
 		if die.active && matches {
 			appendDieState(die, modifier.Kind)
-			recordDieEvent(state, die, "classify", DiceEvent{"outcome": modifier.Kind})
+			recordDieEvent(state, die, ResolvedEvent{Type: "classify"}, ResolvedEventDetails{Outcome: modifier.Kind})
 		}
 	}
 }
@@ -488,7 +499,7 @@ func excludeWorkingGroupTree(groupID string, state *rollState, reason string) {
 	group.Included = false
 	group.Contribution = 0
 	group.States = append(group.States, "dropped")
-	recordGroupEvent(state, group, "exclude", DiceEvent{"reason": reason, "value": group.Value})
+	recordGroupEvent(state, group, ResolvedEvent{Type: "exclude", Value: group.Value}, ResolvedEventDetails{Reason: reason})
 	for _, childID := range group.ChildIDs {
 		if _, ok := state.groupByID[childID]; ok {
 			excludeWorkingGroupTree(childID, state, reason)
@@ -507,7 +518,7 @@ func excludeWorkingEvaluation(item *groupItem, state *rollState, reason string) 
 		die.Included = false
 		appendDieState(die, "dropped")
 		syncDieContribution(die)
-		recordDieEvent(state, die, "exclude", DiceEvent{"reason": reason})
+		recordDieEvent(state, die, ResolvedEvent{Type: "exclude"}, ResolvedEventDetails{Reason: reason})
 	}
 }
 func applyWorkingGroupModifiers(items []*groupItem, modifiers []*ModifierNode, state *rollState) []*groupItem {
@@ -574,7 +585,7 @@ func evaluateWorkingGroup(node *ExpressionNode, state *rollState) rollEvaluation
 	}
 	groupID := addWorkingGroup(node, state, value, childIDs, states)
 	if sortModifier != nil {
-		recordGroupEvent(state, state.groupByID[groupID], "transform", DiceEvent{"from": originalIDs, "to": childIDs, "reason": "sort-" + sortModifier.Direction})
+		recordGroupEvent(state, state.groupByID[groupID], ResolvedEvent{Type: "transform"}, ResolvedEventDetails{FromIDs: originalIDs, ToIDs: childIDs, Reason: "sort-" + sortModifier.Direction})
 	}
 	rendered := ""
 	if state.renderOutput {
@@ -663,7 +674,7 @@ func finalizeWorkingDice(state *rollState, materialize bool) []ResolvedDie {
 	for index, die := range state.dice {
 		if die.active && die.Included {
 			if state.context.Journal.materialize {
-				recordDieEvent(state, die, "include", DiceEvent{"contribution": die.Contribution})
+				recordDieEvent(state, die, ResolvedEvent{Type: "include", Contribution: die.Contribution})
 			} else {
 				executorValue(state.context.Journal.Record(nil))
 			}
@@ -685,7 +696,7 @@ func finalizeWorkingGroups(state *rollState, materialize bool) []ResolvedGroup {
 	}
 	for index, group := range state.groups {
 		if group.Included {
-			recordGroupEvent(state, group, "include", DiceEvent{"value": group.Value, "contribution": group.Contribution})
+			recordGroupEvent(state, group, ResolvedEvent{Type: "include", Value: group.Value, Contribution: group.Contribution})
 		}
 		if materialize {
 			copy := group.ResolvedGroup
@@ -758,7 +769,7 @@ func formatExecutionOutput(outputs []string, total float64, context *ExecutionCo
 	return strings.Join(append(lines, line), "\n")
 }
 func executorCreateContext(plan *RollPlan, options ExecuteRollPlanOptions, materialize bool) *ExecutionContext {
-	contextOptions := ExecutionContextOptions{ResolvedLimits: &options.Limits, PlanFingerprint: plan.PlanFingerprint, CollectEvents: &materialize}
+	contextOptions := ExecutionContextOptions{ResolvedLimits: &options.Limits, PlanFingerprint: plan.PlanFingerprint, CollectEvents: &materialize, rngCache: options.rngCache}
 	if options.Replay != nil {
 		contextOptions.Replay = options.Replay
 	} else {
@@ -773,6 +784,13 @@ func executeGeneralPlan(plan *RollPlan, program *CompiledDiceProgram, options Ex
 	materializeDice := mode != "summary"
 	context := executorCreateContext(plan, options, full)
 	executorCheck(context.Budget.ConsumeRolls(plan.RollCount))
+	if full {
+		// Reserve only a small, statically bounded prefix. This avoids repeated
+		// copies of concrete events without reserving an unknown explosion tail.
+		capacity := max(int64(0), min(int64(256), options.Limits.MaxEvents, options.Limits.MaxResultItems,
+			saturatingMultiply(saturatingAdd(saturatingMultiply(program.StaticDice, 2), program.NodeCount), plan.RollCount)))
+		context.Journal.events = make([]ResolvedEvent, 0, capacity)
+	}
 	dice := []ResolvedDie{}
 	groups := []ResolvedGroup{}
 	rolls := []ResolvedRoll{}
@@ -821,7 +839,7 @@ func executeGeneralPlan(plan *RollPlan, program *CompiledDiceProgram, options Ex
 	if mode == "summary" {
 		return nil, nil, &DiceRollSummary{Type: "dice-roll-summary", SchemaVersion: 3, Input: plan.Input, Notation: plan.Notation, NormalizedNotation: plan.NormalizedNotation, Comment: plan.Comment, Total: total, Replay: context.Replay, Stats: stats, Pool: pool, Rolls: summaries}
 	}
-	return &DiceRollResult{Type: "dice-roll", SchemaVersion: 3, Input: plan.Input, Notation: plan.Notation, NormalizedNotation: plan.NormalizedNotation, Comment: plan.Comment, Total: total, Replay: context.Replay, Stats: stats, Pool: pool, Output: formatExecutionOutput(outputs, total, context), Rolls: rolls, Groups: groups, Dice: dice, Events: context.Journal.ToArray()}, nil, nil
+	return &DiceRollResult{Type: "dice-roll", SchemaVersion: 3, Input: plan.Input, Notation: plan.Notation, NormalizedNotation: plan.NormalizedNotation, Comment: plan.Comment, Total: total, Replay: context.Replay, Stats: stats, Pool: pool, Output: formatExecutionOutput(outputs, total, context), Rolls: rolls, Groups: groups, Dice: dice, Events: context.Journal.takeResolvedEvents()}, nil, nil
 }
 
 func ExecuteRollPlan(plan *RollPlan, options ExecuteRollPlanOptions) (result *DiceRollResult, err error) {
@@ -844,6 +862,9 @@ func ExecuteRollPlanSummary(plan *RollPlan, options ExecuteRollPlanOptions) (res
 	program := executorValue(GetPlanProgram(plan))
 	if program.SupportsFastSummary {
 		return executeFastSummaryPlan(plan, program, options), nil
+	}
+	if canExecuteCompactSummary(program) {
+		return executeCompactSummaryPlan(plan, program, options), nil
 	}
 	_, _, result = executeGeneralPlan(plan, program, options, "summary")
 	return result, nil

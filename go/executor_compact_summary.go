@@ -1,0 +1,331 @@
+package dicecore
+
+import "slices"
+
+// A summary needs numerical state and selection history, but does not expose
+// die IDs, states, groups, rendering order or event maps. Indices remain valid
+// when explosions grow the slice; no pointer into its storage is retained.
+type compactSummaryDie struct {
+	value        float64
+	contribution float64
+	active       bool
+	included     bool
+	target       uint8
+}
+
+const (
+	compactTargetSuccess uint8 = 1 << iota
+	compactTargetFailure
+	compactTargetNeutral
+)
+
+func canExecuteCompactSummary(program *CompiledDiceProgram) bool {
+	if program == nil || program.AST == nil || program.AST.Kind != "dice" {
+		return false
+	}
+	spec := program.DiceSpecs[program.AST.ID]
+	if spec == nil {
+		return false
+	}
+	for _, modifier := range spec.Modifiers {
+		switch modifier.Kind {
+		case "min", "max", "explode", "reroll", "unique", "keep", "drop", "target", "critical-success", "critical-failure", "sort":
+		default:
+			return false
+		}
+	}
+	return true
+}
+
+func compactSummaryRoll(node *ExpressionNode, spec *CompiledDiceSpec, context *ExecutionContext, generated bool) compactSummaryDie {
+	if generated {
+		executorCheck(context.Budget.ConsumeGeneratedDice(1))
+	} else {
+		executorCheck(context.Budget.ConsumeInitialDice(1))
+	}
+	executorCheck(context.Budget.ConsumeResultItems(1))
+	value := executorRollFace(node, spec, context)
+	consumeSummaryEvent(context, 1)
+	return compactSummaryDie{value: value, contribution: value, active: true, included: true}
+}
+
+func (die *compactSummaryDie) syncContribution() {
+	die.contribution = 0
+	if die.active && die.included {
+		die.contribution = die.value
+	}
+}
+
+func compactSummaryBound(dice []compactSummaryDie, modifier *ModifierNode, context *ExecutionContext) {
+	minimum := modifier.Kind == "min"
+	for index := range dice {
+		die := &dice[index]
+		if !die.active || minimum && die.value >= modifier.Value || !minimum && die.value <= modifier.Value {
+			continue
+		}
+		die.value = modifier.Value
+		die.syncContribution()
+		consumeSummaryEvent(context, 1)
+	}
+}
+
+func compactSummaryExplode(dice []compactSummaryDie, modifier *ModifierNode, node *ExpressionNode, spec *CompiledDiceSpec, context *ExecutionContext) []compactSummaryDie {
+	// The compiler keeps one explode modifier, before any operation that can
+	// deactivate a die. Every root is active here. Children are visited only
+	// by their own chain, never again as a new root.
+	rootCount := len(dice)
+	for root := 0; root < rootCount; root++ {
+		compareValue := dice[root].value
+		chainTotal := compareValue
+		childrenStart := len(dice)
+		explosions := float64(0)
+		for {
+			if modifier.MaxExplosions != nil && explosions >= *modifier.MaxExplosions {
+				break
+			}
+			matches := compareValue == float64(spec.Maximum)
+			if modifier.Compare != nil {
+				matches = executorCompare(modifier.Compare, compareValue)
+			}
+			if !matches {
+				break
+			}
+			executorCheck(context.Budget.ConsumeModifierSteps(1))
+			child := compactSummaryRoll(node, spec, context, true)
+			compareValue = child.value
+			if modifier.Penetrate {
+				child.value--
+				child.syncContribution()
+				consumeSummaryEvent(context, 1)
+			}
+			dice = append(dice, child)
+			chainTotal += child.value
+			consumeSummaryEvent(context, 1)
+			explosions++
+		}
+		if modifier.Compound && len(dice) > childrenStart {
+			dice[root].value = chainTotal
+			dice[root].syncContribution()
+			consumeSummaryEvent(context, 1)
+			for child := childrenStart; child < len(dice); child++ {
+				dice[child].active = false
+				dice[child].included = false
+				dice[child].contribution = 0
+				consumeSummaryEvent(context, 1)
+			}
+		}
+	}
+	return dice
+}
+
+func compactSummaryReroll(dice []compactSummaryDie, modifier *ModifierNode, node *ExpressionNode, spec *CompiledDiceSpec, context *ExecutionContext) {
+	for index := range dice {
+		die := &dice[index]
+		if !die.active {
+			continue
+		}
+		for {
+			matches := die.value == float64(spec.Minimum)
+			if modifier.Compare != nil {
+				matches = executorCompare(modifier.Compare, die.value)
+			}
+			if !matches {
+				break
+			}
+			executorCheck(context.Budget.ConsumeModifierSteps(1))
+			die.value = executorRollFace(node, spec, context)
+			die.syncContribution()
+			consumeSummaryEvent(context, 1)
+			if modifier.Once {
+				break
+			}
+		}
+	}
+}
+
+func compactSummaryUnique(dice []compactSummaryDie, modifier *ModifierNode, node *ExpressionNode, spec *CompiledDiceSpec, context *ExecutionContext) {
+	seen := map[float64]bool{}
+	for index := range dice {
+		die := &dice[index]
+		if !die.active {
+			continue
+		}
+		for {
+			if !seen[die.value] || modifier.Compare != nil && !executorCompare(modifier.Compare, die.value) {
+				break
+			}
+			executorCheck(context.Budget.ConsumeModifierSteps(1))
+			die.value = executorRollFace(node, spec, context)
+			die.syncContribution()
+			consumeSummaryEvent(context, 1)
+			if modifier.Once {
+				break
+			}
+		}
+		seen[die.value] = true
+	}
+}
+
+type compactSummaryRank struct {
+	value float64
+	index int
+}
+
+func compactSummaryRankOrder(left, right compactSummaryRank) int {
+	if left.value < right.value {
+		return -1
+	}
+	if left.value > right.value {
+		return 1
+	}
+	return left.index - right.index
+}
+
+func compactSummarySelection(dice []compactSummaryDie, modifier *ModifierNode, context *ExecutionContext) {
+	var local [32]compactSummaryRank
+	active := local[:0]
+	if len(dice) > len(local) {
+		active = make([]compactSummaryRank, 0, len(dice))
+	}
+	for index, die := range dice {
+		if die.active {
+			active = append(active, compactSummaryRank{value: die.value, index: index})
+		}
+	}
+	// The original position is the second key, preserving the reference's
+	// stable tie order without copying values and ranking another index slice.
+	slices.SortFunc(active, compactSummaryRankOrder)
+	boundary := int(min(float64(len(active)), modifier.Quantity))
+	if modifier.Selection != "lowest" {
+		boundary = len(active) - boundary
+	}
+	if (modifier.Selection == "lowest") == (modifier.Kind == "drop") {
+		active = active[:boundary]
+	} else {
+		active = active[boundary:]
+	}
+	for _, rank := range active {
+		die := &dice[rank.index]
+		if !die.included {
+			continue
+		}
+		die.included = false
+		die.contribution = 0
+		consumeSummaryEvent(context, 1)
+	}
+}
+
+func compactSummaryTarget(dice []compactSummaryDie, modifier *ModifierNode, context *ExecutionContext) {
+	for index := range dice {
+		die := &dice[index]
+		if !die.active {
+			continue
+		}
+		die.contribution = 0
+		if executorCompare(modifier.Success, die.value) {
+			die.target |= compactTargetSuccess
+			if die.included {
+				die.contribution = 1
+			}
+		} else if modifier.Failure != nil && executorCompare(modifier.Failure, die.value) {
+			die.target |= compactTargetFailure
+			if die.included {
+				die.contribution = -1
+			}
+		} else {
+			die.target |= compactTargetNeutral
+		}
+		consumeSummaryEvent(context, 1)
+	}
+}
+
+func compactSummaryCritical(dice []compactSummaryDie, modifier *ModifierNode, spec *CompiledDiceSpec, context *ExecutionContext) {
+	defaultValue := float64(spec.Minimum)
+	if modifier.Kind == "critical-success" {
+		defaultValue = float64(spec.Maximum)
+	}
+	for _, die := range dice {
+		matches := die.value == defaultValue
+		if modifier.Compare != nil {
+			matches = executorCompare(modifier.Compare, die.value)
+		}
+		if die.active && matches {
+			consumeSummaryEvent(context, 1)
+		}
+	}
+}
+
+func evaluateCompactSummary(node *ExpressionNode, spec *CompiledDiceSpec, context *ExecutionContext) (float64, *PoolSummary) {
+	var local [32]compactSummaryDie
+	dice := local[:0]
+	if spec.Quantity > int64(len(local)) {
+		dice = make([]compactSummaryDie, 0, min(spec.Quantity, 256))
+	}
+	for index := int64(0); index < spec.Quantity; index++ {
+		dice = append(dice, compactSummaryRoll(node, spec, context, false))
+	}
+	for _, modifier := range spec.Modifiers {
+		switch modifier.Kind {
+		case "min", "max":
+			compactSummaryBound(dice, modifier, context)
+		case "explode":
+			dice = compactSummaryExplode(dice, modifier, node, spec, context)
+		case "reroll":
+			compactSummaryReroll(dice, modifier, node, spec, context)
+		case "unique":
+			compactSummaryUnique(dice, modifier, node, spec, context)
+		case "keep", "drop":
+			compactSummarySelection(dice, modifier, context)
+		case "target":
+			compactSummaryTarget(dice, modifier, context)
+		case "critical-success", "critical-failure":
+			compactSummaryCritical(dice, modifier, spec, context)
+			// Sort changes only the group's display order, not contributions or
+			// later modifier iteration. A summary exposes neither order nor group.
+		}
+	}
+	total := float64(0)
+	for _, die := range dice {
+		total += die.contribution
+	}
+	total = executorValue(RoundResult(total))
+	executorCheck(context.Budget.ConsumeResolvedGroups(1))
+	executorCheck(context.Budget.ConsumeResultItems(1))
+	total = executorValue(RoundResult(total))
+	var pool *PoolSummary
+	for _, die := range dice {
+		if die.target != 0 && pool == nil {
+			pool = &PoolSummary{}
+		}
+		if die.active && die.included {
+			consumeSummaryEvent(context, 1)
+			if die.target&compactTargetSuccess != 0 {
+				pool.Successes++
+			} else if die.target&compactTargetFailure != 0 {
+				pool.Failures++
+			}
+		}
+	}
+	consumeSummaryEvent(context, 1)
+	if pool != nil {
+		pool.NetSuccesses = pool.Successes - pool.Failures
+	}
+	return total, pool
+}
+
+func executeCompactSummaryPlan(plan *RollPlan, program *CompiledDiceProgram, options ExecuteRollPlanOptions) *DiceRollSummary {
+	context := executorCreateContext(plan, options, false)
+	executorCheck(context.Budget.ConsumeRolls(plan.RollCount))
+	rolls := make([]ResolvedRollSummary, 0, plan.RollCount)
+	spec := program.DiceSpecs[program.AST.ID]
+	for rollIndex := int64(1); rollIndex <= plan.RollCount; rollIndex++ {
+		executorCheck(context.Budget.ConsumeResultItems(1))
+		total, pool := evaluateCompactSummary(program.AST, spec, context)
+		rolls = append(rolls, ResolvedRollSummary{Index: rollIndex, Total: total, Pool: pool})
+	}
+	total := float64(0)
+	for _, roll := range rolls {
+		total += roll.Total
+	}
+	return &DiceRollSummary{Type: "dice-roll-summary", SchemaVersion: 3, Input: plan.Input, Notation: plan.Notation, NormalizedNotation: plan.NormalizedNotation, Comment: plan.Comment, Total: executorValue(RoundResult(total)), Replay: context.Replay, Stats: context.Budget.Stats(), Rolls: rolls, Pool: aggregateWorkingPool(rolls)}
+}

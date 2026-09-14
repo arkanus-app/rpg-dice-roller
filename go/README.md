@@ -46,6 +46,14 @@ func main() {
 `RollRPGDiceSummary` entrega o resumo. Semente, consumo aleatório, total, limites
 e replay seguem o contrato de cada projeção TypeScript.
 
+Os eventos completos usam `ResolvedEvents` (`[]ResolvedEvent`), com campos Go tipados. Por exemplo,
+`result.Events[i].Value` acessa o valor de uma rolagem; campos de modificadores e
+grupos ficam em `event.Details`, quando presente. `Type` e `Subject` identificam
+os campos aplicáveis. Essa representação substitui o acesso anterior por mapa
+(`event["value"]`); `json.Marshal(result)` preserva os mesmos campos e valores
+do resultado TypeScript. O journal público de baixo nível ainda aceita e retorna
+`DiceEvent` como mapa.
+
 ## Engine e sistemas
 
 Crie uma engine para compartilhar limites e caches entre chamadas. Ela pode ser
@@ -111,9 +119,17 @@ explica como reproduzir as comparações TypeScript. O [benchmark](BENCHMARK.md)
 compara Go, Node e Bun com entradas idênticas e mantém os dados brutos. O
 [benchmark de backend](BACKEND_BENCHMARK.md) mede lotes de 10.000 chamadas com
 1/2/4/6 workers, engines compartilhadas ou por worker e memória residente.
-O [registro de otimização](OPTIMIZATION.md) explica as mudanças e seus ganhos
-medidos, preservando a API e os resultados. O [experimento de GC](GC_TUNING.md)
-avalia uma configuração opcional do backend e sua troca entre throughput e memória.
+A [segunda rodada de otimização](OPTIMIZATION_ROUND2.md) inclui eventos tipados,
+resumos compactos e menos alocações. Consulte o [confronto atualizado de backend](BACKEND_ROUND2_BENCHMARK.md),
+o [teste com serialização JSON](JSON_BENCHMARK.md) e o [experimento de GC atualizado](GC_ROUND2_TUNING.md).
+Os resultados anteriores permanecem disponíveis para comparação.
+
+Na confirmação com seis workers e uma engine por worker, `GOGC=500` e `GOMEMLIMIT=96MiB` deram maior
+vazão que Node e Bun nas nove cargas da API nativa sem JSON, com RSS amostrado até 78,44 MiB.
+Essas variáveis configuram o processo Go inteiro; a biblioteca não as altera.
+O orçamento de memória de um futuro backend deve considerar também os demais
+componentes desse processo. Incluindo JSON, Go venceu uma das três cargas;
+Node e Bun continuam mais rápidos nas duas cargas com resultados maiores.
 
 A [licença do projeto](../licence.txt) e os
 [avisos dos kernels matemáticos](THIRD_PARTY_NOTICES.md) se aplicam a este código.

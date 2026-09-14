@@ -16,6 +16,7 @@ type Engine struct {
 	mu           sync.Mutex
 	inputCache   *WeightedLruCache[engineInputKey, *RollPlan]
 	programCache *WeightedLruCache[string, *CompiledDiceProgram]
+	rngCache     executionRNGCache
 }
 
 func resolveEngineCache(options any) ([3]int64, error) {
@@ -259,7 +260,7 @@ func (engine *Engine) prepareRoll(input any, options []RollOptions) (*RollPlan, 
 	if option.Replay == nil && algorithm == "" {
 		algorithm = engine.algorithm
 	}
-	return plan, ExecuteRollPlanOptions{Limits: limits, Seed: option.Seed, Replay: option.Replay, RandomAlgorithm: algorithm}, nil
+	return plan, ExecuteRollPlanOptions{Limits: limits, Seed: option.Seed, Replay: option.Replay, RandomAlgorithm: algorithm, rngCache: &engine.rngCache}, nil
 }
 
 func (engine *Engine) Roll(input any, options ...RollOptions) (*DiceRollResult, error) {

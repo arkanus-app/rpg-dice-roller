@@ -1,0 +1,684 @@
+package dicecore
+
+import (
+	"encoding/json"
+	"fmt"
+	"math"
+	"regexp"
+	"sort"
+	"strconv"
+	"strings"
+	"unicode/utf16"
+)
+
+type MixedRollReplayEntry struct {
+	Kind     string           `json:"kind"`
+	Notation string           `json:"notation"`
+	Replay   ReplayDescriptor `json:"replay"`
+}
+type MixedRollReplayDescriptor struct {
+	Type          string                 `json:"type"`
+	SchemaVersion int64                  `json:"schemaVersion"`
+	Notation      string                 `json:"notation"`
+	Rolls         []MixedRollReplayEntry `json:"rolls"`
+}
+
+// UnmarshalJSON rejects malformed envelopes instead of silently dropping keys.
+// RollMixedDice subsequently binds the descriptor to the actual parsed notation.
+func (descriptor *MixedRollReplayDescriptor) UnmarshalJSON(data []byte) error {
+	var value any
+	if err := json.Unmarshal(data, &value); err != nil {
+		return invalidReplayError("Mixed replay could not be read")
+	}
+	record, _ := value.(map[string]any)
+	notation, _ := record["notation"].(string)
+	entries, _ := record["rolls"].([]any)
+	parsed := make([]parsedMixedRoll, len(entries))
+	for index, entry := range entries {
+		fields, _ := entry.(map[string]any)
+		parsed[index].kind, _ = fields["kind"].(string)
+		parsed[index].notation, _ = fields["notation"].(string)
+	}
+	validated, err := validateMixedReplay(value, notation, parsed)
+	if err != nil {
+		return err
+	}
+	*descriptor = validated
+	return nil
+}
+
+type MixedRollItem struct {
+	ID       string `json:"id"`
+	Index    int64  `json:"index"`
+	Kind     string `json:"kind"`
+	Notation string `json:"notation"`
+	Result   any    `json:"result"`
+}
+type MixedGenericDieResult struct {
+	ResolvedDie
+	MixedRollID    string  `json:"mixedRollId"`
+	MixedRollIndex int64   `json:"mixedRollIndex"`
+	SourceDieID    string  `json:"sourceDieId"`
+	PhysicalValue  float64 `json:"physicalValue"`
+}
+type MixedSystemDieResult struct {
+	SystemDieResult
+	FateValue      *float64 `json:"fateValue,omitempty"`
+	MixedRollID    string   `json:"mixedRollId"`
+	MixedRollIndex int64    `json:"mixedRollIndex"`
+	SystemDieID    string   `json:"systemDieId"`
+	PhysicalValue  float64  `json:"physicalValue"`
+	Included       bool     `json:"included"`
+}
+type MixedRollResult struct {
+	Type          string                    `json:"type"`
+	SchemaVersion int64                     `json:"schemaVersion"`
+	Input         string                    `json:"input"`
+	Notation      string                    `json:"notation"`
+	Rolls         []MixedRollItem           `json:"rolls"`
+	Dice          []any                     `json:"dice"`
+	Output        string                    `json:"output"`
+	Replay        MixedRollReplayDescriptor `json:"replay"`
+	Stats         ExecutionStats            `json:"stats"`
+}
+
+type parsedMixedRoll struct {
+	kind, notation         string
+	input                  map[string]any
+	plan                   *RollPlan
+	initialDice, rollCount float64
+}
+type mixedArguments struct {
+	positional []float64
+	named      map[string]float64
+	names      []string
+}
+
+var systemAliases = map[string]string{
+	"as": "assimilation", "assim": "assimilation", "assimilacao": "assimilation", "assimilation": "assimilation",
+	"dagger": "daggerheart", "daggerheart": "daggerheart", "dh": "daggerheart", "fate": "fate", "fatedice": "fate",
+	"v5": "vampire-v5", "vampire": "vampire-v5", "vampirev5": "vampire-v5", "vampiro": "vampire-v5",
+}
+var mixedCallPattern = regexp.MustCompile(`(?s)^([` + systemLetterRanges + `][` + systemLetterRanges + systemNumberRanges + `_-]*)(?:\p{Z}|[\t\n\v\f\r\x{FEFF}])*\((.*)\)$`)
+var mixedIntegerPattern = regexp.MustCompile(`^-?\d+$`)
+
+func normalizeSystemName(name string) string {
+	var output strings.Builder
+	for _, character := range name {
+		if character >= 'A' && character <= 'Z' {
+			character += 'a' - 'A'
+		}
+		if character >= 'a' && character <= 'z' || character >= '0' && character <= '9' {
+			output.WriteRune(character)
+			continue
+		}
+		for base, characters := range systemNameFolds {
+			if strings.ContainsRune(characters, character) {
+				output.WriteRune(base)
+				break
+			}
+		}
+	}
+	return output.String()
+}
+func mixedNotationError(input, message string, segment ...int64) error {
+	details := map[string]any{}
+	if len(segment) > 0 {
+		details["segment"] = segment[0]
+	}
+	return newDiceError("INVALID_NOTATION", message, input, details)
+}
+func splitMixedNotation(input string) ([]string, error) {
+	segments := []string{}
+	start, parentheses, braces, brackets, end := 0, 0, 0, 0, len(input)
+	for index := 0; index < len(input); index++ {
+		character := input[index]
+		if character == '/' && index+1 < len(input) && input[index+1] == '/' {
+			end = index
+			break
+		}
+		switch character {
+		case '(':
+			parentheses++
+		case ')':
+			parentheses--
+		case '{':
+			braces++
+		case '}':
+			braces--
+		case '[':
+			brackets++
+		case ']':
+			brackets--
+		}
+		if parentheses < 0 || braces < 0 || brackets < 0 {
+			return nil, mixedNotationError(input, "Mixed dice notation has an unmatched closing delimiter")
+		}
+		if character == ';' && parentheses == 0 && braces == 0 && brackets == 0 {
+			segment := syntaxTrimSpace(input[start:index])
+			if segment == "" {
+				return nil, mixedNotationError(input, "Mixed dice notation contains an empty roll")
+			}
+			segments = append(segments, segment)
+			start = index + 1
+		}
+	}
+	if parentheses != 0 || braces != 0 || brackets != 0 {
+		return nil, mixedNotationError(input, "Mixed dice notation has an unmatched opening delimiter")
+	}
+	final := syntaxTrimSpace(input[start:end])
+	if final == "" {
+		return nil, mixedNotationError(input, "Mixed dice notation contains an empty roll")
+	}
+	return append(segments, final), nil
+}
+func parseMixedInteger(input, original string, segment int64) (float64, error) {
+	if !mixedIntegerPattern.MatchString(input) {
+		return 0, mixedNotationError(original, fmt.Sprintf("Mixed roll %d arguments must be integer literals", segment), segment)
+	}
+	value, _ := strconv.ParseFloat(input, 64)
+	if math.Abs(value) > float64(maxSafeInteger) {
+		return 0, mixedNotationError(original, fmt.Sprintf("Mixed roll %d argument exceeds the safe integer range", segment), segment)
+	}
+	return value, nil
+}
+func parseMixedArguments(body, original string, segment int64) (mixedArguments, error) {
+	result := mixedArguments{positional: []float64{}}
+	trimmed := syntaxTrimSpace(body)
+	if trimmed == "" {
+		return result, nil
+	}
+	parts := strings.Split(trimmed, ",")
+	named := false
+	for i, part := range parts {
+		parts[i] = syntaxTrimSpace(part)
+		if parts[i] == "" {
+			return result, mixedNotationError(original, fmt.Sprintf("Mixed roll %d contains an empty argument", segment), segment)
+		}
+		named = named || strings.Contains(part, "=")
+	}
+	if !named {
+		for _, part := range parts {
+			value, err := parseMixedInteger(part, original, segment)
+			if err != nil {
+				return result, err
+			}
+			result.positional = append(result.positional, value)
+		}
+		return result, nil
+	}
+	result.named = map[string]float64{}
+	for _, part := range parts {
+		if !strings.Contains(part, "=") {
+			return result, mixedNotationError(original, fmt.Sprintf("Mixed roll %d cannot mix positional and named arguments", segment), segment)
+		}
+	}
+	for _, part := range parts {
+		separator := strings.IndexByte(part, '=')
+		name := normalizeSystemName(syntaxTrimSpace(part[:separator]))
+		_, duplicate := result.named[name]
+		if name == "" || duplicate {
+			return result, mixedNotationError(original, fmt.Sprintf("Mixed roll %d contains an invalid or duplicate argument", segment), segment)
+		}
+		value, err := parseMixedInteger(syntaxTrimSpace(part[separator+1:]), original, segment)
+		if err != nil {
+			return result, err
+		}
+		result.named[name] = value
+		result.names = append(result.names, name)
+	}
+	// Object.keys visits canonical uint32 indices before other property names.
+	sort.SliceStable(result.names, func(i, j int) bool {
+		a, ea := strconv.ParseUint(result.names[i], 10, 32)
+		b, eb := strconv.ParseUint(result.names[j], 10, 32)
+		ai := ea == nil && a < 0xffffffff && strconv.FormatUint(a, 10) == result.names[i]
+		bi := eb == nil && b < 0xffffffff && strconv.FormatUint(b, 10) == result.names[j]
+		return ai && (!bi || a < b)
+	})
+	return result, nil
+}
+
+type mixedField struct {
+	name     string
+	aliases  []string
+	fallback *float64
+}
+
+func mixedDefault(value float64) *float64 { return &value }
+func parseMixedSystem(kind string, args mixedArguments, original string, segment int64) (parsedMixedRoll, error) {
+	parsed := parsedMixedRoll{kind: kind, input: map[string]any{}, rollCount: 1}
+	var fields []mixedField
+	minimum, maximum, message := 0, 0, ""
+	switch kind {
+	case "vampire-v5":
+		fields = []mixedField{{"pool", []string{"pool"}, nil}, {"hunger", []string{"hunger", "fome"}, nil}, {"difficulty", []string{"difficulty", "dificuldade"}, nil}}
+		minimum, maximum, message = 2, 3, "v5() expects pool, hunger, and optional difficulty"
+	case "fate":
+		fields = []mixedField{{"dice", []string{"dice", "dado", "dados"}, mixedDefault(4)}}
+		maximum, message = 1, "fate() expects an optional dice count"
+	case "daggerheart":
+		fields = []mixedField{{"modifier", []string{"modifier", "mod", "bonus"}, mixedDefault(0)}, {"difficulty", []string{"difficulty", "dificuldade", "dc"}, nil}}
+		maximum, message = 2, "daggerheart() expects optional modifier and difficulty"
+	case "assimilation":
+		fields = []mixedField{{"d6", []string{"d6"}, mixedDefault(0)}, {"d10", []string{"d10"}, mixedDefault(0)}, {"d12", []string{"d12"}, mixedDefault(0)}, {"keep", []string{"keep", "manter"}, mixedDefault(1)}}
+		minimum, maximum, message = 1, 4, "assim() expects d6, d10, d12, and optional keep"
+	}
+	if args.named == nil {
+		if len(args.positional) < minimum || len(args.positional) > maximum {
+			return parsed, mixedNotationError(original, fmt.Sprintf("Mixed roll %d %s", segment, message), segment)
+		}
+	} else {
+		allowed := map[string]bool{}
+		for _, field := range fields {
+			for _, alias := range field.aliases {
+				allowed[alias] = true
+			}
+		}
+		for _, name := range args.names {
+			if !allowed[name] {
+				return parsed, mixedNotationError(original, fmt.Sprintf("Mixed roll %d contains unknown argument '%s'", segment, name), segment)
+			}
+		}
+	}
+	for index, field := range fields {
+		value := field.fallback
+		if args.named == nil {
+			if index < len(args.positional) {
+				value = &args.positional[index]
+			}
+		} else {
+			found := false
+			for _, alias := range field.aliases {
+				if candidate, ok := args.named[alias]; ok {
+					if found {
+						return parsed, mixedNotationError(original, fmt.Sprintf("Mixed roll %d contains more than one '%s' argument", segment, field.name), segment)
+					}
+					found = true
+					value = &candidate
+				}
+			}
+		}
+		if value != nil {
+			parsed.input[field.name] = *value
+		}
+	}
+	numeric := func(field string) float64 { value, _ := parsed.input[field].(float64); return value }
+	text := func(field string) string { return systemNumber(numeric(field)) }
+	suffix := ""
+	if _, ok := parsed.input["difficulty"]; ok {
+		suffix = ",difficulty=" + text("difficulty")
+	}
+	switch kind {
+	case "vampire-v5":
+		_, hasPool := parsed.input["pool"]
+		_, hasHunger := parsed.input["hunger"]
+		if !hasPool || !hasHunger {
+			return parsed, mixedNotationError(original, fmt.Sprintf("Mixed roll %d v5() requires pool and hunger", segment), segment)
+		}
+		parsed.notation = "v5(pool=" + text("pool") + ",hunger=" + text("hunger") + suffix + ")"
+		parsed.initialDice = numeric("pool")
+	case "fate":
+		parsed.notation = "fate(dice=" + text("dice") + ")"
+		parsed.initialDice = numeric("dice")
+	case "daggerheart":
+		parsed.notation = "daggerheart(modifier=" + text("modifier") + suffix + ")"
+		parsed.initialDice = 2
+	case "assimilation":
+		parsed.notation = "assim(d6=" + text("d6") + ",d10=" + text("d10") + ",d12=" + text("d12") + ",keep=" + text("keep") + ")"
+		parsed.initialDice = numeric("d6") + numeric("d10") + numeric("d12")
+	}
+	return parsed, nil
+}
+func mixedLimitOverrides(limits DiceLimits) DiceLimitOverrides {
+	result := DiceLimitOverrides{}
+	for _, field := range limitFields(&limits) {
+		result[field.name] = *field.value
+	}
+	return result
+}
+func parseMixedRoll(segmentInput, original string, segment int64, limits DiceLimits, engine SystemEngine) (parsedMixedRoll, error) {
+	if call := mixedCallPattern.FindStringSubmatch(segmentInput); call != nil {
+		if kind := systemAliases[normalizeSystemName(call[1])]; kind != "" {
+			args, err := parseMixedArguments(call[2], original, segment)
+			if err != nil {
+				return parsedMixedRoll{}, err
+			}
+			return parseMixedSystem(kind, args, original, segment)
+		}
+	}
+	plan, err := engine.Compile(segmentInput, CompileOptions{Limits: mixedLimitOverrides(limits)})
+	if err != nil {
+		return parsedMixedRoll{}, err
+	}
+	return parsedMixedRoll{kind: "generic", notation: plan.NormalizedNotation, plan: plan, initialDice: float64(plan.Cost.TotalStaticDice), rollCount: float64(plan.RollCount)}, nil
+}
+func assertMixedStaticBudgets(parsed []parsedMixedRoll, limits DiceLimits, input string) error {
+	rolls, dice := float64(0), float64(0)
+	for _, roll := range parsed {
+		rolls += roll.rollCount
+		dice += roll.initialDice
+	}
+	if rolls > float64(limits.MaxRolls) {
+		return newDiceError("TOO_MANY_ROLLS", "Mixed roll exceeds the roll-count limit", input, map[string]any{"rollCount": rolls, "limit": limits.MaxRolls})
+	}
+	if math.Abs(dice) > float64(maxSafeInteger) || dice > float64(limits.MaxInitialDice) {
+		return newDiceError("TOO_MANY_INITIAL_DICE", "Mixed roll exceeds the initial-dice limit", input, map[string]any{"initialDice": dice, "limit": limits.MaxInitialDice})
+	}
+	return nil
+}
+
+var mixedStatsDefinitions = []struct{ limit, code string }{
+	{"maxRolls", "TOO_MANY_ROLLS"}, {"maxInitialDice", "TOO_MANY_INITIAL_DICE"}, {"maxGeneratedDice", "GENERATED_DICE_LIMIT_EXCEEDED"}, {"maxRandomCalls", "RANDOM_BUDGET_EXCEEDED"}, {"maxEvents", "EVENT_LIMIT_EXCEEDED"}, {"maxModifierSteps", "MODIFIER_STEP_LIMIT_EXCEEDED"}, {"maxResolvedGroups", "RESOLVED_GROUP_LIMIT_EXCEEDED"}, {"maxResultItems", "RESULT_LIMIT_EXCEEDED"},
+}
+
+func mixedStatsValues(stats ExecutionStats) []int64 {
+	return []int64{stats.Rolls, stats.InitialDice, stats.GeneratedDice, stats.RandomCalls, stats.Events, stats.ModifierSteps, stats.ResolvedGroups, stats.ResultItems}
+}
+func addMixedStats(left, right ExecutionStats) ExecutionStats {
+	return ExecutionStats{Rolls: left.Rolls + right.Rolls, InitialDice: left.InitialDice + right.InitialDice, GeneratedDice: left.GeneratedDice + right.GeneratedDice, RandomCalls: left.RandomCalls + right.RandomCalls, Events: left.Events + right.Events, ModifierSteps: left.ModifierSteps + right.ModifierSteps, ResolvedGroups: left.ResolvedGroups + right.ResolvedGroups, ResultItems: left.ResultItems + right.ResultItems}
+}
+func assertMixedRuntimeBudgets(stats ExecutionStats, limits DiceLimits, input string) error {
+	caps := mixedLimitOverrides(limits)
+	for index, value := range mixedStatsValues(stats) {
+		definition := mixedStatsDefinitions[index]
+		if value > caps[definition.limit] {
+			return newDiceError(definition.code, "Mixed roll exceeds "+definition.limit, input, map[string]any{"limit": caps[definition.limit], "actual": value})
+		}
+	}
+	return nil
+}
+func mixedRemainingLimits(limits DiceLimits, stats ExecutionStats, outputLength int64) DiceLimitOverrides {
+	remaining := mixedLimitOverrides(limits)
+	for index, value := range mixedStatsValues(stats) {
+		name := mixedStatsDefinitions[index].limit
+		remaining[name] = max(1, remaining[name]-value)
+	}
+	remaining["maxOutputLength"] = max(1, limits.MaxOutputLength-outputLength)
+	return remaining
+}
+func mixSystem32(value uint32) uint32 {
+	value = (value ^ (value >> 16)) * 0x7feb352d
+	value = (value ^ (value >> 15)) * 0x846ca68b
+	return value ^ (value >> 16)
+}
+func deriveMixedSeed(root SeedMaterial, index int) float64 {
+	high := mixSystem32(root.Words[index%4] ^ uint32(index))
+	low := mixSystem32(root.Words[(index+1)%4] ^ (uint32(index+1) * 0x9e3779b1))
+	return float64(high&0x1fffff)*4294967296 + float64(low)
+}
+
+func validateMixedReplay(value any, notation string, parsed []parsedMixedRoll) (MixedRollReplayDescriptor, error) {
+	if typed, ok := value.(*MixedRollReplayDescriptor); ok {
+		if typed == nil {
+			return MixedRollReplayDescriptor{}, invalidReplayError("Mixed replay must be a non-null object")
+		}
+		value = *typed
+	}
+	if typed, ok := value.(MixedRollReplayDescriptor); ok {
+		entries := []any{}
+		for _, entry := range typed.Rolls {
+			entries = append(entries, map[string]any{"kind": entry.Kind, "notation": entry.Notation, "replay": entry.Replay})
+		}
+		value = map[string]any{"type": typed.Type, "schemaVersion": typed.SchemaVersion, "notation": typed.Notation, "rolls": entries}
+	}
+	record, ok := value.(map[string]any)
+	if !ok || record == nil {
+		return MixedRollReplayDescriptor{}, invalidReplayError("Mixed replay must be a non-null object")
+	}
+	entries, entriesOK := record["rolls"].([]any)
+	version, _ := seedNumber(record["schemaVersion"])
+	if len(record) != 4 || record["type"] != "mixed-roll-replay" || version != 1 || record["notation"] != notation || !entriesOK || len(entries) != len(parsed) {
+		return MixedRollReplayDescriptor{}, newDiceError("INVALID_REPLAY", "Mixed replay does not match this notation", "", map[string]any{"expectedNotation": notation})
+	}
+	result := MixedRollReplayDescriptor{Type: "mixed-roll-replay", SchemaVersion: 1, Notation: notation, Rolls: []MixedRollReplayEntry{}}
+	for index, entry := range entries {
+		record, ok := entry.(map[string]any)
+		if !ok || record == nil {
+			return result, newDiceError("INVALID_REPLAY", "Mixed replay contains an invalid roll entry", "", map[string]any{"index": index})
+		}
+		expected := parsed[index]
+		if len(record) != 3 || record["kind"] != expected.kind || record["notation"] != expected.notation {
+			return result, newDiceError("INVALID_REPLAY", "Mixed replay roll entry does not match the notation", "", map[string]any{"index": index})
+		}
+		replay, err := ValidateReplayDescriptor(record["replay"])
+		if err != nil {
+			return result, err
+		}
+		result.Rolls = append(result.Rolls, MixedRollReplayEntry{expected.kind, expected.notation, replay})
+	}
+	return result, nil
+}
+
+// validateMixedReplay has already bound replay entries to the parsed roll count.
+func createMixedItemOptions(options SystemRollOptions, limits DiceLimitOverrides, index int, root *SeedMaterial, replay *MixedRollReplayDescriptor) SystemRollOptions {
+	result := SystemRollOptions{RollOptions: RollOptions{Limits: limits}, Detail: options.Detail}
+	if result.Detail == "" {
+		result.Detail = "full"
+	}
+	if replay != nil {
+		result.Replay = replay.Rolls[index].Replay
+	} else {
+		if root != nil {
+			result.Seed = deriveMixedSeed(*root, index)
+		}
+		result.RandomAlgorithm = options.RandomAlgorithm
+	}
+	return result
+}
+func (r *FateRollResult) systemBaseRoll() any         { return r.BaseRoll }
+func (r *AssimilationRollResult) systemBaseRoll() any { return r.BaseRoll }
+func (r *DaggerheartRollResult) systemBaseRoll() any  { return r.BaseRoll }
+func (r *VampireV5RollResult) systemBaseRoll() any    { return r.BaseRoll }
+func mixedResultMeta(item MixedRollItem) (ExecutionStats, ReplayDescriptor) {
+	base := item.Result
+	if item.Kind != "generic" {
+		base = base.(interface{ systemBaseRoll() any }).systemBaseRoll()
+	}
+	if full, ok := base.(*DiceRollResult); ok {
+		return full.Stats, full.Replay
+	}
+	summary := base.(*DiceRollSummary)
+	return summary.Stats, summary.Replay
+}
+func createMixedItem(engine SystemEngine, parsed parsedMixedRoll, index int, options SystemRollOptions) (MixedRollItem, error) {
+	item := MixedRollItem{ID: fmt.Sprintf("mixed-roll-%d", index+1), Index: int64(index), Kind: parsed.kind, Notation: parsed.notation}
+	var err error
+	switch parsed.kind {
+	case "generic":
+		item.Result, err = engine.Roll(parsed.plan, options.RollOptions)
+	case "fate":
+		item.Result, err = RollFateDiceWithEngine(engine, parsed.input, options)
+	case "assimilation":
+		item.Result, err = RollAssimilationWithEngine(engine, parsed.input, options)
+	case "daggerheart":
+		item.Result, err = RollDaggerheartWithEngine(engine, parsed.input, options)
+	case "vampire-v5":
+		item.Result, err = RollVampireV5WithEngine(engine, parsed.input, options)
+	}
+	return item, err
+}
+func flattenMixedDice(items []MixedRollItem) []any {
+	dice := []any{}
+	for _, item := range items {
+		if item.Kind == "generic" {
+			result := item.Result.(*DiceRollResult)
+			physical := map[string]float64{}
+			for _, die := range result.Dice {
+				physical[die.ID] = die.RawValue
+			}
+			for _, event := range result.Events {
+				if event.Subject != "die" {
+					continue
+				}
+				if event.Type == "roll" {
+					physical[event.DieID] = event.Value
+				} else if event.Type == "reroll" {
+					physical[event.DieID] = event.To
+				}
+			}
+			for _, die := range result.Dice {
+				sourceID := die.ID
+				die.ID = item.ID + ":" + die.ID
+				die.SourceNodeID = item.ID + ":" + die.SourceNodeID
+				die.GroupID = item.ID + ":" + die.GroupID
+				if die.ParentDieID != nil {
+					parent := item.ID + ":" + *die.ParentDieID
+					die.ParentDieID = &parent
+				}
+				dice = append(dice, MixedGenericDieResult{die, item.ID, item.Index, sourceID, physical[sourceID]})
+			}
+			continue
+		}
+		appendDie := func(die SystemDieResult, fate *float64) {
+			sourceID := die.ID
+			die.ID = item.ID + ":" + die.ID
+			dice = append(dice, MixedSystemDieResult{die, fate, item.ID, item.Index, sourceID, die.RawValue, true})
+		}
+		switch result := item.Result.(type) {
+		case *FateRollResult:
+			for _, die := range result.Dice {
+				fate := die.FateValue
+				appendDie(die.SystemDieResult, &fate)
+			}
+		case *AssimilationRollResult:
+			for _, die := range result.Dice {
+				appendDie(die, nil)
+			}
+		case *DaggerheartRollResult:
+			for _, die := range result.Dice {
+				appendDie(die, nil)
+			}
+		case *VampireV5RollResult:
+			for _, die := range result.Dice {
+				appendDie(die, nil)
+			}
+		}
+	}
+	return dice
+}
+func formatMixedItem(item MixedRollItem) string {
+	switch result := item.Result.(type) {
+	case *DiceRollResult:
+		return result.Output
+	case *FateRollResult:
+		faces := []string{}
+		for _, die := range result.Dice {
+			face := "0"
+			if die.FateValue < 0 {
+				face = "−"
+			} else if die.FateValue > 0 {
+				face = "+"
+			}
+			faces = append(faces, face)
+		}
+		total := systemNumber(result.Total)
+		if result.Total > 0 {
+			total = "+" + total
+		}
+		return item.Notation + ": [" + strings.Join(faces, ",") + "] = " + total
+	case *AssimilationRollResult:
+		faces := []string{}
+		for _, die := range result.Dice {
+			face := strings.Join(die.Symbols, "+")
+			if len(die.Symbols) == 0 {
+				face = "blank"
+			}
+			faces = append(faces, face)
+		}
+		return fmt.Sprintf("%s: [%s] (keep %d)", item.Notation, strings.Join(faces, " | "), result.Keep)
+	case *DaggerheartRollResult:
+		return fmt.Sprintf("%s: Hope %s, Fear %s = %s (%s)", item.Notation, systemNumber(result.HopeDie.RawValue), systemNumber(result.FearDie.RawValue), systemNumber(result.Total), result.Outcome)
+	default:
+		vampire := item.Result.(*VampireV5RollResult)
+		word := "successes"
+		if vampire.Successes == 1 {
+			word = "success"
+		}
+		output := fmt.Sprintf("%s: %d %s", item.Notation, vampire.Successes, word)
+		if vampire.Outcome != "pending" {
+			output += " (" + vampire.Outcome + ")"
+		}
+		return output
+	}
+}
+func RollMixedDice(input any, options ...MixedRollOptions) (*MixedRollResult, error) {
+	return RollMixedDiceWithEngine(DefaultDiceEngine(), input, options...)
+}
+func RollMixedDiceWithEngine(engine SystemEngine, inputValue any, optionList ...MixedRollOptions) (*MixedRollResult, error) {
+	input, ok := inputValue.(string)
+	if !ok || syntaxTrimSpace(input) == "" {
+		return nil, newDiceError("DICE_NOTATION_REQUIRED", "Mixed dice notation is required", input, nil)
+	}
+	options := systemOptions(optionList)
+	limits, err := ResolveDiceLimits(engine.Limits(), options.Limits)
+	if err != nil {
+		return nil, err
+	}
+	length := int64(len(utf16.Encode([]rune(input))))
+	if length > limits.MaxInputLength {
+		return nil, newDiceError("INPUT_TOO_LONG", "Mixed dice notation exceeds the input-length limit", input, map[string]any{"length": length, "limit": limits.MaxInputLength})
+	}
+	segments, err := splitMixedNotation(input)
+	if err != nil {
+		return nil, err
+	}
+	parsed := []parsedMixedRoll{}
+	notations := []string{}
+	for index, segment := range segments {
+		roll, err := parseMixedRoll(segment, input, int64(index+1), limits, engine)
+		if err != nil {
+			return nil, err
+		}
+		parsed = append(parsed, roll)
+		notations = append(notations, roll.notation)
+	}
+	if err = assertMixedStaticBudgets(parsed, limits, input); err != nil {
+		return nil, err
+	}
+	notation := strings.Join(notations, "; ")
+	var replay *MixedRollReplayDescriptor
+	var root *SeedMaterial
+	if options.Replay != nil {
+		validated, err := validateMixedReplay(options.Replay, notation, parsed)
+		if err != nil {
+			return nil, err
+		}
+		replay = &validated
+	} else if options.Seed != nil {
+		seed, err := CreateProvidedSeed(options.Seed, limits.MaxSeedLength)
+		if err != nil {
+			return nil, err
+		}
+		root = &seed
+	}
+	result := &MixedRollResult{Type: "mixed-roll", SchemaVersion: 1, Input: input, Notation: notation, Rolls: []MixedRollItem{}, Replay: MixedRollReplayDescriptor{Type: "mixed-roll-replay", SchemaVersion: 1, Notation: notation, Rolls: []MixedRollReplayEntry{}}}
+	outputLength := int64(0)
+	outputs := []string{}
+	for index, roll := range parsed {
+		itemOptions := createMixedItemOptions(options, mixedRemainingLimits(limits, result.Stats, outputLength), index, root, replay)
+		item, err := createMixedItem(engine, roll, index, itemOptions)
+		if err != nil {
+			return nil, err
+		}
+		result.Rolls = append(result.Rolls, item)
+		stats, itemReplay := mixedResultMeta(item)
+		result.Stats = addMixedStats(result.Stats, stats)
+		output := formatMixedItem(item)
+		outputs = append(outputs, output)
+		outputLength += int64(len(utf16.Encode([]rune(output))))
+		if err = assertMixedRuntimeBudgets(result.Stats, limits, input); err != nil {
+			return nil, err
+		}
+		if outputLength > limits.MaxOutputLength {
+			return nil, newDiceError("OUTPUT_LIMIT_EXCEEDED", "Mixed roll output exceeds the output-length limit", input, map[string]any{"outputLength": outputLength, "limit": limits.MaxOutputLength})
+		}
+		result.Replay.Rolls = append(result.Replay.Rolls, MixedRollReplayEntry{item.Kind, item.Notation, itemReplay})
+	}
+	result.Output = strings.Join(outputs, " ; ")
+	outputLength = int64(len(utf16.Encode([]rune(result.Output))))
+	if outputLength > limits.MaxOutputLength {
+		return nil, newDiceError("OUTPUT_LIMIT_EXCEEDED", "Mixed roll output exceeds the output-length limit", input, map[string]any{"outputLength": outputLength, "limit": limits.MaxOutputLength})
+	}
+	result.Dice = flattenMixedDice(result.Rolls)
+	return result, nil
+}

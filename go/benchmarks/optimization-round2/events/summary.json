@@ -1,0 +1,2397 @@
+{
+  "baselineCommit": "a1c4bbb",
+  "method": "Go 1.26.2 windows/amd64, AMD Ryzen 5 5500, default GOMAXPROCS=12. Five 100ms benchmark samples per workload in frozen binaries. Execution: three full-result workloads, fixed seed and 128-seed cycle. Encoding: fully prepared result outside timer, ordinary json.Marshal, returned bytes escape. Other runtime optimizations are excluded from these snapshots.",
+  "executionConfirmation": [
+    "final-execution-winner.txt",
+    "final-execution-baseline.txt"
+  ],
+  "encodingConfirmation": [
+    "v4b-json-selection.txt",
+    "v4b-json-baseline.txt",
+    "v4b-json-confirmation.txt"
+  ],
+  "correctness": {
+    "validatedSnapshot": "v4b",
+    "coveredStatements": 4314,
+    "totalStatements": 4314,
+    "fullSuiteSeconds": 1.352,
+    "coverageProfile": "v4b-coverage.txt",
+    "note": "The final integrated suite and race checks are separate. Early focused runs omitted singular TestSystem names; complete tests exposed event JSON decoding loss, fixed before the final confirmed candidates. No fixture was changed."
+  },
+  "variants": [
+    {
+      "id": "H1",
+      "hypothesis": "Concrete resolved events instead of maps",
+      "decision": "retained in H3; initial flat representation increased allocated bytes"
+    },
+    {
+      "id": "H2",
+      "hypothesis": "Bounded initial event capacity",
+      "decision": "accepted; at most 256 initial slots and capped by limits, with negative direct-limit regression"
+    },
+    {
+      "id": "H3",
+      "hypothesis": "Optional typed payload for modifier and group fields",
+      "decision": "accepted after full JSON decoder and full-suite verification"
+    },
+    {
+      "id": "H4",
+      "hypothesis": "Append events into one JSON buffer",
+      "decision": "whole-envelope serializer rejected; event-collection-only refinement H4b accepted"
+    }
+  ],
+  "binaryHashes": {
+    "baseline": {
+      "file": ".artifacts/optimization-round2/baseline.test.exe",
+      "sha256": "141e64149bf48fe0f2b56902d0dcbd521522fe01c28ffc1c0a2729f29b458445"
+    },
+    "v1": {
+      "file": ".artifacts/optimization-round2/events/v1-typed-events.exe",
+      "sha256": "e90501271aa43bc7dbcac748d4f7914ed7c25ecdd4b6c8e758ac5e8b28d47c06"
+    },
+    "v2": {
+      "file": ".artifacts/optimization-round2/events/v2-reserved-events.exe",
+      "sha256": "c34186f9afe4d176afbef1c77893be111de5e5b645783e1778d88ce904c2a025"
+    },
+    "v3Initial": {
+      "file": ".artifacts/optimization-round2/events/v3-compact-event-payload.exe",
+      "sha256": "23cd35fae31dca09c5261f121015ffe476fd526bebfd05f3b42925d9f09ee258"
+    },
+    "v3Validated": {
+      "file": ".artifacts/optimization-round2/events/v3-json.exe",
+      "sha256": "44beda7be8af9a4eba61b37017c41c738464dbb0b8036cbe0d13c6a6d517a0c2"
+    },
+    "v4Rejected": {
+      "file": ".artifacts/optimization-round2/events/v4-direct-event-json.exe",
+      "sha256": "b375ad6d0b11e711821431c1c5b94dc2c0a2f4cbf8afc741bca4f0d79e05a8d6"
+    },
+    "v4b": {
+      "file": ".artifacts/optimization-round2/events/v4b-event-collection.exe",
+      "sha256": "6c5558c980c6eabae8f1b5cd4a03c4b63dfd56ab7f62907099dc5158c2cb0fb7"
+    }
+  },
+  "sourceHashes": [
+    {
+      "variant": "v1",
+      "file": "go/benchmarks/optimization-round2/events/sources/v1/engine_test.go.txt",
+      "sha256": "9fbae15c69f62f70ea7ee49a887f208c07c515f36391945ee5a312b3938c32b0"
+    },
+    {
+      "variant": "v1",
+      "file": "go/benchmarks/optimization-round2/events/sources/v1/event.go.txt",
+      "sha256": "6cc68cfd7c70257ed76d5e9719a7247f794e87064c87acad372388633d8ebf2c"
+    },
+    {
+      "variant": "v1",
+      "file": "go/benchmarks/optimization-round2/events/sources/v1/event_test.go.txt",
+      "sha256": "b11158b2f8eb465426c109267173a3c3aa0e575f37d01a0790d78b262a647def"
+    },
+    {
+      "variant": "v1",
+      "file": "go/benchmarks/optimization-round2/events/sources/v1/executor.go.txt",
+      "sha256": "2572a3eb6fc6ef79eb13734ab0c121532fd7a67b12200a8095066bbe1ed7bb7d"
+    },
+    {
+      "variant": "v1",
+      "file": "go/benchmarks/optimization-round2/events/sources/v1/journal.go.txt",
+      "sha256": "57066655afb9f43feb1a76a5c7f9e19393af1a802e4890512784f46cd9e48832"
+    },
+    {
+      "variant": "v1",
+      "file": "go/benchmarks/optimization-round2/events/sources/v1/systems_mixed.go.txt",
+      "sha256": "6a52aad97ed35c1406888a05b3583a8998d9aa4204ae343f0571ff6b41eeb10c"
+    },
+    {
+      "variant": "v1",
+      "file": "go/benchmarks/optimization-round2/events/sources/v1/types.go.txt",
+      "sha256": "5149d9c5443e71908cddc309d8e4e57d0385f531e77e98f083af314ba561a8a3"
+    },
+    {
+      "variant": "v2",
+      "file": "go/benchmarks/optimization-round2/events/sources/v2/engine_test.go.txt",
+      "sha256": "9fbae15c69f62f70ea7ee49a887f208c07c515f36391945ee5a312b3938c32b0"
+    },
+    {
+      "variant": "v2",
+      "file": "go/benchmarks/optimization-round2/events/sources/v2/event.go.txt",
+      "sha256": "6cc68cfd7c70257ed76d5e9719a7247f794e87064c87acad372388633d8ebf2c"
+    },
+    {
+      "variant": "v2",
+      "file": "go/benchmarks/optimization-round2/events/sources/v2/event_test.go.txt",
+      "sha256": "b11158b2f8eb465426c109267173a3c3aa0e575f37d01a0790d78b262a647def"
+    },
+    {
+      "variant": "v2",
+      "file": "go/benchmarks/optimization-round2/events/sources/v2/executor.go.txt",
+      "sha256": "00923ff9114344fcff1159ee87f5558efdf20499f788826190c61aba9e56f63d"
+    },
+    {
+      "variant": "v2",
+      "file": "go/benchmarks/optimization-round2/events/sources/v2/journal.go.txt",
+      "sha256": "57066655afb9f43feb1a76a5c7f9e19393af1a802e4890512784f46cd9e48832"
+    },
+    {
+      "variant": "v2",
+      "file": "go/benchmarks/optimization-round2/events/sources/v2/systems_mixed.go.txt",
+      "sha256": "6a52aad97ed35c1406888a05b3583a8998d9aa4204ae343f0571ff6b41eeb10c"
+    },
+    {
+      "variant": "v2",
+      "file": "go/benchmarks/optimization-round2/events/sources/v2/types.go.txt",
+      "sha256": "5149d9c5443e71908cddc309d8e4e57d0385f531e77e98f083af314ba561a8a3"
+    },
+    {
+      "variant": "v3",
+      "file": "go/benchmarks/optimization-round2/events/sources/v3/engine_test.go.txt",
+      "sha256": "9fbae15c69f62f70ea7ee49a887f208c07c515f36391945ee5a312b3938c32b0"
+    },
+    {
+      "variant": "v3",
+      "file": "go/benchmarks/optimization-round2/events/sources/v3/event.go.txt",
+      "sha256": "3bbaea09b0913fce4306adce5bfe3b5bd25d975ad4c73359f655387e727516db"
+    },
+    {
+      "variant": "v3",
+      "file": "go/benchmarks/optimization-round2/events/sources/v3/event_decode.go.txt",
+      "sha256": "e2a24d8fab55422e5aa202ce14173038064790b4ed0908914317a1684666aa55"
+    },
+    {
+      "variant": "v3",
+      "file": "go/benchmarks/optimization-round2/events/sources/v3/event_test.go.txt",
+      "sha256": "4d922c4059dffa2f61bed09a8d3cfb47a877c35e62b8f78828a0ede594a96fca"
+    },
+    {
+      "variant": "v3",
+      "file": "go/benchmarks/optimization-round2/events/sources/v3/executor.go.txt",
+      "sha256": "a0e9baa7cf0580f1c2e1550109acc8b56c33f5dd2ab75cc3975572368d31754a"
+    },
+    {
+      "variant": "v3",
+      "file": "go/benchmarks/optimization-round2/events/sources/v3/journal.go.txt",
+      "sha256": "57066655afb9f43feb1a76a5c7f9e19393af1a802e4890512784f46cd9e48832"
+    },
+    {
+      "variant": "v3",
+      "file": "go/benchmarks/optimization-round2/events/sources/v3/systems_mixed.go.txt",
+      "sha256": "152e3b59dd8fa2b1e1722ee26026dce19c79942c2447663ac591126d63fc2033"
+    },
+    {
+      "variant": "v3",
+      "file": "go/benchmarks/optimization-round2/events/sources/v3/types.go.txt",
+      "sha256": "5149d9c5443e71908cddc309d8e4e57d0385f531e77e98f083af314ba561a8a3"
+    },
+    {
+      "variant": "v4-rejected",
+      "file": "go/benchmarks/optimization-round2/events/sources/v4-rejected/event.go.txt",
+      "sha256": "5f7f9958c51c9822ff9e6f276891962b1e8b5effac80cb27507ebe0a2456d491"
+    },
+    {
+      "variant": "v4-rejected",
+      "file": "go/benchmarks/optimization-round2/events/sources/v4-rejected/result_json.go.txt",
+      "sha256": "d76cd0864c18f46c728ab68a979f477aab261ff2a264e64610c4e1bad96f5989"
+    },
+    {
+      "variant": "v4-rejected",
+      "file": "go/benchmarks/optimization-round2/events/sources/v4-rejected/result_json_test.go.txt",
+      "sha256": "cf7cb1781dd0326c8ec40e6636c543daa84608bd38390c11db1533350117265f"
+    },
+    {
+      "variant": "v4-rejected",
+      "file": "go/benchmarks/optimization-round2/events/sources/v4-rejected/types.go.txt",
+      "sha256": "5149d9c5443e71908cddc309d8e4e57d0385f531e77e98f083af314ba561a8a3"
+    },
+    {
+      "variant": "v4b",
+      "file": "go/benchmarks/optimization-round2/events/sources/v4b/engine_test.go.txt",
+      "sha256": "9fbae15c69f62f70ea7ee49a887f208c07c515f36391945ee5a312b3938c32b0"
+    },
+    {
+      "variant": "v4b",
+      "file": "go/benchmarks/optimization-round2/events/sources/v4b/event.go.txt",
+      "sha256": "5f7f9958c51c9822ff9e6f276891962b1e8b5effac80cb27507ebe0a2456d491"
+    },
+    {
+      "variant": "v4b",
+      "file": "go/benchmarks/optimization-round2/events/sources/v4b/event_collection.go.txt",
+      "sha256": "59fe23558572efaac83f50491362f9194d81ab2b21c7ae7872663e1eca9aa796"
+    },
+    {
+      "variant": "v4b",
+      "file": "go/benchmarks/optimization-round2/events/sources/v4b/event_decode.go.txt",
+      "sha256": "e2a24d8fab55422e5aa202ce14173038064790b4ed0908914317a1684666aa55"
+    },
+    {
+      "variant": "v4b",
+      "file": "go/benchmarks/optimization-round2/events/sources/v4b/event_performance_test.go.txt",
+      "sha256": "3f54fa17d327bf6970883606043bd34ab55c1dbeb6cdb3414ed1205c2c725c5b"
+    },
+    {
+      "variant": "v4b",
+      "file": "go/benchmarks/optimization-round2/events/sources/v4b/event_test.go.txt",
+      "sha256": "4d922c4059dffa2f61bed09a8d3cfb47a877c35e62b8f78828a0ede594a96fca"
+    },
+    {
+      "variant": "v4b",
+      "file": "go/benchmarks/optimization-round2/events/sources/v4b/executor.go.txt",
+      "sha256": "a0e9baa7cf0580f1c2e1550109acc8b56c33f5dd2ab75cc3975572368d31754a"
+    },
+    {
+      "variant": "v4b",
+      "file": "go/benchmarks/optimization-round2/events/sources/v4b/journal.go.txt",
+      "sha256": "57066655afb9f43feb1a76a5c7f9e19393af1a802e4890512784f46cd9e48832"
+    },
+    {
+      "variant": "v4b",
+      "file": "go/benchmarks/optimization-round2/events/sources/v4b/result_json_test.go.txt",
+      "sha256": "0b039e30347fdfcb7656116b7d04ab0ee6fd68613f8ce7f82dc20f272972be80"
+    },
+    {
+      "variant": "v4b",
+      "file": "go/benchmarks/optimization-round2/events/sources/v4b/systems_mixed.go.txt",
+      "sha256": "152e3b59dd8fa2b1e1722ee26026dce19c79942c2447663ac591126d63fc2033"
+    },
+    {
+      "variant": "v4b",
+      "file": "go/benchmarks/optimization-round2/events/sources/v4b/types.go.txt",
+      "sha256": "9c357968e1e36d233825a4532189e172195f0658ae944dd06e49495b1f4179f2"
+    }
+  ],
+  "runs": {
+    "baseline.txt": {
+      "BenchmarkBackendOperation/1d20+5/full/changing=false": {
+        "medianNs": 10116,
+        "medianBytes": 8056,
+        "medianAllocations": 82,
+        "samples": [
+          {
+            "iterations": 12908,
+            "ns": 9822,
+            "bytes": 8056,
+            "allocations": 82
+          },
+          {
+            "iterations": 12082,
+            "ns": 9467,
+            "bytes": 8056,
+            "allocations": 82
+          },
+          {
+            "iterations": 10000,
+            "ns": 10168,
+            "bytes": 8056,
+            "allocations": 82
+          },
+          {
+            "iterations": 10000,
+            "ns": 14240,
+            "bytes": 8056,
+            "allocations": 82
+          },
+          {
+            "iterations": 10000,
+            "ns": 10116,
+            "bytes": 8055,
+            "allocations": 82
+          }
+        ]
+      },
+      "BenchmarkBackendOperation/1d20+5/full/changing=true": {
+        "medianNs": 13184,
+        "medianBytes": 8063,
+        "medianAllocations": 82,
+        "samples": [
+          {
+            "iterations": 10000,
+            "ns": 15135,
+            "bytes": 8063,
+            "allocations": 82
+          },
+          {
+            "iterations": 10000,
+            "ns": 13184,
+            "bytes": 8063,
+            "allocations": 82
+          },
+          {
+            "iterations": 12994,
+            "ns": 13338,
+            "bytes": 8063,
+            "allocations": 82
+          },
+          {
+            "iterations": 10000,
+            "ns": 11500,
+            "bytes": 8063,
+            "allocations": 82
+          },
+          {
+            "iterations": 10000,
+            "ns": 10091,
+            "bytes": 8063,
+            "allocations": 82
+          }
+        ]
+      },
+      "BenchmarkBackendOperation/100d6/full/changing=false": {
+        "medianNs": 131391,
+        "medianBytes": 136752,
+        "medianAllocations": 1368,
+        "samples": [
+          {
+            "iterations": 973,
+            "ns": 170164,
+            "bytes": 136752,
+            "allocations": 1368
+          },
+          {
+            "iterations": 1256,
+            "ns": 146453,
+            "bytes": 136752,
+            "allocations": 1368
+          },
+          {
+            "iterations": 1250,
+            "ns": 131057,
+            "bytes": 136752,
+            "allocations": 1368
+          },
+          {
+            "iterations": 1172,
+            "ns": 131391,
+            "bytes": 136757,
+            "allocations": 1368
+          },
+          {
+            "iterations": 939,
+            "ns": 126755,
+            "bytes": 136752,
+            "allocations": 1368
+          }
+        ]
+      },
+      "BenchmarkBackendOperation/100d6/full/changing=true": {
+        "medianNs": 162092,
+        "medianBytes": 136760,
+        "medianAllocations": 1368,
+        "samples": [
+          {
+            "iterations": 874,
+            "ns": 189707,
+            "bytes": 136760,
+            "allocations": 1368
+          },
+          {
+            "iterations": 1106,
+            "ns": 151460,
+            "bytes": 136760,
+            "allocations": 1368
+          },
+          {
+            "iterations": 1148,
+            "ns": 162092,
+            "bytes": 136760,
+            "allocations": 1368
+          },
+          {
+            "iterations": 1064,
+            "ns": 150315,
+            "bytes": 136760,
+            "allocations": 1368
+          },
+          {
+            "iterations": 702,
+            "ns": 176891,
+            "bytes": 136759,
+            "allocations": 1368
+          }
+        ]
+      },
+      "BenchmarkBackendOperation/20d6!2ro=1kh10/full/changing=false": {
+        "medianNs": 72760,
+        "medianBytes": 51944,
+        "medianAllocations": 598,
+        "samples": [
+          {
+            "iterations": 2112,
+            "ns": 72890,
+            "bytes": 51944,
+            "allocations": 598
+          },
+          {
+            "iterations": 2823,
+            "ns": 74987,
+            "bytes": 51944,
+            "allocations": 598
+          },
+          {
+            "iterations": 2924,
+            "ns": 62402,
+            "bytes": 51944,
+            "allocations": 598
+          },
+          {
+            "iterations": 2150,
+            "ns": 72760,
+            "bytes": 51944,
+            "allocations": 598
+          },
+          {
+            "iterations": 2349,
+            "ns": 72757,
+            "bytes": 51944,
+            "allocations": 598
+          }
+        ]
+      },
+      "BenchmarkBackendOperation/20d6!2ro=1kh10/full/changing=true": {
+        "medianNs": 65001,
+        "medianBytes": 47532,
+        "medianAllocations": 533,
+        "samples": [
+          {
+            "iterations": 3073,
+            "ns": 67225,
+            "bytes": 47521,
+            "allocations": 533
+          },
+          {
+            "iterations": 2446,
+            "ns": 64691,
+            "bytes": 47517,
+            "allocations": 533
+          },
+          {
+            "iterations": 2532,
+            "ns": 66921,
+            "bytes": 47532,
+            "allocations": 533
+          },
+          {
+            "iterations": 2347,
+            "ns": 65001,
+            "bytes": 47534,
+            "allocations": 533
+          },
+          {
+            "iterations": 1765,
+            "ns": 63104,
+            "bytes": 47534,
+            "allocations": 533
+          }
+        ]
+      }
+    },
+    "final-execution-baseline.txt": {
+      "BenchmarkBackendOperation/1d20+5/full/changing=false": {
+        "medianNs": 13226,
+        "medianBytes": 8056,
+        "medianAllocations": 82,
+        "samples": [
+          {
+            "iterations": 12788,
+            "ns": 13226,
+            "bytes": 8056,
+            "allocations": 82
+          },
+          {
+            "iterations": 10000,
+            "ns": 12471,
+            "bytes": 8056,
+            "allocations": 82
+          },
+          {
+            "iterations": 10000,
+            "ns": 15241,
+            "bytes": 8056,
+            "allocations": 82
+          },
+          {
+            "iterations": 10000,
+            "ns": 14683,
+            "bytes": 8056,
+            "allocations": 82
+          },
+          {
+            "iterations": 11046,
+            "ns": 10429,
+            "bytes": 8056,
+            "allocations": 82
+          }
+        ]
+      },
+      "BenchmarkBackendOperation/1d20+5/full/changing=true": {
+        "medianNs": 11204,
+        "medianBytes": 8063,
+        "medianAllocations": 82,
+        "samples": [
+          {
+            "iterations": 10000,
+            "ns": 10124,
+            "bytes": 8063,
+            "allocations": 82
+          },
+          {
+            "iterations": 10000,
+            "ns": 10025,
+            "bytes": 8063,
+            "allocations": 82
+          },
+          {
+            "iterations": 12552,
+            "ns": 13963,
+            "bytes": 8063,
+            "allocations": 82
+          },
+          {
+            "iterations": 9230,
+            "ns": 11204,
+            "bytes": 8063,
+            "allocations": 82
+          },
+          {
+            "iterations": 10000,
+            "ns": 13548,
+            "bytes": 8063,
+            "allocations": 82
+          }
+        ]
+      },
+      "BenchmarkBackendOperation/100d6/full/changing=false": {
+        "medianNs": 125759,
+        "medianBytes": 136752,
+        "medianAllocations": 1368,
+        "samples": [
+          {
+            "iterations": 1236,
+            "ns": 125759,
+            "bytes": 136752,
+            "allocations": 1368
+          },
+          {
+            "iterations": 896,
+            "ns": 144153,
+            "bytes": 136752,
+            "allocations": 1368
+          },
+          {
+            "iterations": 1292,
+            "ns": 109759,
+            "bytes": 136752,
+            "allocations": 1368
+          },
+          {
+            "iterations": 1123,
+            "ns": 100969,
+            "bytes": 136757,
+            "allocations": 1368
+          },
+          {
+            "iterations": 1206,
+            "ns": 148322,
+            "bytes": 136752,
+            "allocations": 1368
+          }
+        ]
+      },
+      "BenchmarkBackendOperation/100d6/full/changing=true": {
+        "medianNs": 139128,
+        "medianBytes": 136760,
+        "medianAllocations": 1368,
+        "samples": [
+          {
+            "iterations": 1141,
+            "ns": 126664,
+            "bytes": 136760,
+            "allocations": 1368
+          },
+          {
+            "iterations": 1184,
+            "ns": 139128,
+            "bytes": 136760,
+            "allocations": 1368
+          },
+          {
+            "iterations": 1288,
+            "ns": 136017,
+            "bytes": 136759,
+            "allocations": 1368
+          },
+          {
+            "iterations": 1006,
+            "ns": 162656,
+            "bytes": 136760,
+            "allocations": 1368
+          },
+          {
+            "iterations": 860,
+            "ns": 159815,
+            "bytes": 136760,
+            "allocations": 1368
+          }
+        ]
+      },
+      "BenchmarkBackendOperation/20d6!2ro=1kh10/full/changing=false": {
+        "medianNs": 72902,
+        "medianBytes": 51944,
+        "medianAllocations": 598,
+        "samples": [
+          {
+            "iterations": 2776,
+            "ns": 72102,
+            "bytes": 51944,
+            "allocations": 598
+          },
+          {
+            "iterations": 1975,
+            "ns": 79487,
+            "bytes": 51944,
+            "allocations": 598
+          },
+          {
+            "iterations": 2370,
+            "ns": 72460,
+            "bytes": 51944,
+            "allocations": 598
+          },
+          {
+            "iterations": 2685,
+            "ns": 79041,
+            "bytes": 51944,
+            "allocations": 598
+          },
+          {
+            "iterations": 3088,
+            "ns": 72902,
+            "bytes": 51944,
+            "allocations": 598
+          }
+        ]
+      },
+      "BenchmarkBackendOperation/20d6!2ro=1kh10/full/changing=true": {
+        "medianNs": 58993,
+        "medianBytes": 47523,
+        "medianAllocations": 533,
+        "samples": [
+          {
+            "iterations": 2838,
+            "ns": 71549,
+            "bytes": 47510,
+            "allocations": 533
+          },
+          {
+            "iterations": 1986,
+            "ns": 51938,
+            "bytes": 47531,
+            "allocations": 533
+          },
+          {
+            "iterations": 2625,
+            "ns": 58993,
+            "bytes": 47530,
+            "allocations": 533
+          },
+          {
+            "iterations": 2432,
+            "ns": 65647,
+            "bytes": 47519,
+            "allocations": 533
+          },
+          {
+            "iterations": 1993,
+            "ns": 54915,
+            "bytes": 47523,
+            "allocations": 533
+          }
+        ]
+      }
+    },
+    "final-execution-winner.txt": {
+      "BenchmarkBackendOperation/1d20+5/full/changing=false": {
+        "medianNs": 8124,
+        "medianBytes": 7296,
+        "medianAllocations": 48,
+        "samples": [
+          {
+            "iterations": 16338,
+            "ns": 7809,
+            "bytes": 7296,
+            "allocations": 48
+          },
+          {
+            "iterations": 16629,
+            "ns": 8124,
+            "bytes": 7296,
+            "allocations": 48
+          },
+          {
+            "iterations": 16917,
+            "ns": 8206,
+            "bytes": 7296,
+            "allocations": 48
+          },
+          {
+            "iterations": 15580,
+            "ns": 7859,
+            "bytes": 7296,
+            "allocations": 48
+          },
+          {
+            "iterations": 14541,
+            "ns": 8314,
+            "bytes": 7296,
+            "allocations": 48
+          }
+        ]
+      },
+      "BenchmarkBackendOperation/1d20+5/full/changing=true": {
+        "medianNs": 8790,
+        "medianBytes": 7303,
+        "medianAllocations": 48,
+        "samples": [
+          {
+            "iterations": 16509,
+            "ns": 7317,
+            "bytes": 7303,
+            "allocations": 48
+          },
+          {
+            "iterations": 13856,
+            "ns": 7956,
+            "bytes": 7303,
+            "allocations": 48
+          },
+          {
+            "iterations": 13903,
+            "ns": 8790,
+            "bytes": 7303,
+            "allocations": 48
+          },
+          {
+            "iterations": 14146,
+            "ns": 9960,
+            "bytes": 7303,
+            "allocations": 48
+          },
+          {
+            "iterations": 13468,
+            "ns": 9455,
+            "bytes": 7303,
+            "allocations": 48
+          }
+        ]
+      },
+      "BenchmarkBackendOperation/100d6/full/changing=false": {
+        "medianNs": 60402,
+        "medianBytes": 80488,
+        "medianAllocations": 153,
+        "samples": [
+          {
+            "iterations": 2167,
+            "ns": 73841,
+            "bytes": 80488,
+            "allocations": 153
+          },
+          {
+            "iterations": 3760,
+            "ns": 60402,
+            "bytes": 80489,
+            "allocations": 153
+          },
+          {
+            "iterations": 3626,
+            "ns": 42461,
+            "bytes": 80488,
+            "allocations": 153
+          },
+          {
+            "iterations": 3200,
+            "ns": 64848,
+            "bytes": 80488,
+            "allocations": 153
+          },
+          {
+            "iterations": 3771,
+            "ns": 57809,
+            "bytes": 80488,
+            "allocations": 153
+          }
+        ]
+      },
+      "BenchmarkBackendOperation/100d6/full/changing=true": {
+        "medianNs": 58473,
+        "medianBytes": 80495,
+        "medianAllocations": 153,
+        "samples": [
+          {
+            "iterations": 3146,
+            "ns": 40774,
+            "bytes": 80495,
+            "allocations": 153
+          },
+          {
+            "iterations": 2764,
+            "ns": 51367,
+            "bytes": 80495,
+            "allocations": 153
+          },
+          {
+            "iterations": 3230,
+            "ns": 65434,
+            "bytes": 80495,
+            "allocations": 153
+          },
+          {
+            "iterations": 2680,
+            "ns": 62846,
+            "bytes": 80495,
+            "allocations": 153
+          },
+          {
+            "iterations": 2896,
+            "ns": 58473,
+            "bytes": 80495,
+            "allocations": 153
+          }
+        ]
+      },
+      "BenchmarkBackendOperation/20d6!2ro=1kh10/full/changing=false": {
+        "medianNs": 33096,
+        "medianBytes": 42464,
+        "medianAllocations": 176,
+        "samples": [
+          {
+            "iterations": 5347,
+            "ns": 37547,
+            "bytes": 42464,
+            "allocations": 176
+          },
+          {
+            "iterations": 3704,
+            "ns": 32307,
+            "bytes": 42464,
+            "allocations": 176
+          },
+          {
+            "iterations": 5995,
+            "ns": 29054,
+            "bytes": 42464,
+            "allocations": 176
+          },
+          {
+            "iterations": 5946,
+            "ns": 33096,
+            "bytes": 42464,
+            "allocations": 176
+          },
+          {
+            "iterations": 5205,
+            "ns": 40003,
+            "bytes": 42464,
+            "allocations": 176
+          }
+        ]
+      },
+      "BenchmarkBackendOperation/20d6!2ro=1kh10/full/changing=true": {
+        "medianNs": 33293,
+        "medianBytes": 40341,
+        "medianAllocations": 156,
+        "samples": [
+          {
+            "iterations": 5426,
+            "ns": 27414,
+            "bytes": 40339,
+            "allocations": 156
+          },
+          {
+            "iterations": 4915,
+            "ns": 30334,
+            "bytes": 40338,
+            "allocations": 156
+          },
+          {
+            "iterations": 5319,
+            "ns": 33293,
+            "bytes": 40341,
+            "allocations": 156
+          },
+          {
+            "iterations": 5718,
+            "ns": 35212,
+            "bytes": 40343,
+            "allocations": 156
+          },
+          {
+            "iterations": 4179,
+            "ns": 44741,
+            "bytes": 40343,
+            "allocations": 156
+          }
+        ]
+      }
+    },
+    "v1-typed-events.txt": {
+      "BenchmarkBackendOperation/1d20+5/full/changing=false": {
+        "medianNs": 8110,
+        "medianBytes": 10112,
+        "medianAllocations": 48,
+        "samples": [
+          {
+            "iterations": 14490,
+            "ns": 9849,
+            "bytes": 10112,
+            "allocations": 48
+          },
+          {
+            "iterations": 15004,
+            "ns": 8656,
+            "bytes": 10112,
+            "allocations": 48
+          },
+          {
+            "iterations": 15204,
+            "ns": 7965,
+            "bytes": 10112,
+            "allocations": 48
+          },
+          {
+            "iterations": 14650,
+            "ns": 8110,
+            "bytes": 10112,
+            "allocations": 48
+          },
+          {
+            "iterations": 13212,
+            "ns": 7910,
+            "bytes": 10112,
+            "allocations": 48
+          }
+        ]
+      },
+      "BenchmarkBackendOperation/1d20+5/full/changing=true": {
+        "medianNs": 9963,
+        "medianBytes": 10119,
+        "medianAllocations": 48,
+        "samples": [
+          {
+            "iterations": 10000,
+            "ns": 10536,
+            "bytes": 10119,
+            "allocations": 48
+          },
+          {
+            "iterations": 13725,
+            "ns": 8263,
+            "bytes": 10119,
+            "allocations": 48
+          },
+          {
+            "iterations": 10000,
+            "ns": 10840,
+            "bytes": 10119,
+            "allocations": 48
+          },
+          {
+            "iterations": 12549,
+            "ns": 8317,
+            "bytes": 10119,
+            "allocations": 48
+          },
+          {
+            "iterations": 14014,
+            "ns": 9963,
+            "bytes": 10119,
+            "allocations": 48
+          }
+        ]
+      },
+      "BenchmarkBackendOperation/100d6/full/changing=false": {
+        "medianNs": 78819,
+        "medianBytes": 212200,
+        "medianAllocations": 160,
+        "samples": [
+          {
+            "iterations": 2384,
+            "ns": 66897,
+            "bytes": 212200,
+            "allocations": 160
+          },
+          {
+            "iterations": 2030,
+            "ns": 84504,
+            "bytes": 212200,
+            "allocations": 160
+          },
+          {
+            "iterations": 2370,
+            "ns": 77157,
+            "bytes": 212200,
+            "allocations": 160
+          },
+          {
+            "iterations": 1861,
+            "ns": 78819,
+            "bytes": 212200,
+            "allocations": 160
+          },
+          {
+            "iterations": 2461,
+            "ns": 95308,
+            "bytes": 212200,
+            "allocations": 160
+          }
+        ]
+      },
+      "BenchmarkBackendOperation/100d6/full/changing=true": {
+        "medianNs": 103715,
+        "medianBytes": 212208,
+        "medianAllocations": 160,
+        "samples": [
+          {
+            "iterations": 2017,
+            "ns": 103715,
+            "bytes": 212208,
+            "allocations": 160
+          },
+          {
+            "iterations": 1808,
+            "ns": 98485,
+            "bytes": 212208,
+            "allocations": 160
+          },
+          {
+            "iterations": 1371,
+            "ns": 90527,
+            "bytes": 212208,
+            "allocations": 160
+          },
+          {
+            "iterations": 1866,
+            "ns": 141135,
+            "bytes": 212207,
+            "allocations": 160
+          },
+          {
+            "iterations": 2028,
+            "ns": 108305,
+            "bytes": 212207,
+            "allocations": 160
+          }
+        ]
+      },
+      "BenchmarkBackendOperation/20d6!2ro=1kh10/full/changing=false": {
+        "medianNs": 47168,
+        "medianBytes": 56544,
+        "medianAllocations": 154,
+        "samples": [
+          {
+            "iterations": 5145,
+            "ns": 47168,
+            "bytes": 56544,
+            "allocations": 154
+          },
+          {
+            "iterations": 4039,
+            "ns": 44984,
+            "bytes": 56544,
+            "allocations": 154
+          },
+          {
+            "iterations": 5934,
+            "ns": 52315,
+            "bytes": 56544,
+            "allocations": 154
+          },
+          {
+            "iterations": 4060,
+            "ns": 63410,
+            "bytes": 56544,
+            "allocations": 154
+          },
+          {
+            "iterations": 3550,
+            "ns": 40752,
+            "bytes": 56544,
+            "allocations": 154
+          }
+        ]
+      },
+      "BenchmarkBackendOperation/20d6!2ro=1kh10/full/changing=true": {
+        "medianNs": 45801,
+        "medianBytes": 56509,
+        "medianAllocations": 137,
+        "samples": [
+          {
+            "iterations": 4508,
+            "ns": 42639,
+            "bytes": 56499,
+            "allocations": 137
+          },
+          {
+            "iterations": 1960,
+            "ns": 62875,
+            "bytes": 56510,
+            "allocations": 138
+          },
+          {
+            "iterations": 3361,
+            "ns": 50765,
+            "bytes": 56509,
+            "allocations": 137
+          },
+          {
+            "iterations": 2725,
+            "ns": 45801,
+            "bytes": 56509,
+            "allocations": 138
+          },
+          {
+            "iterations": 3327,
+            "ns": 36836,
+            "bytes": 56504,
+            "allocations": 137
+          }
+        ]
+      }
+    },
+    "v2-reserved-events.txt": {
+      "BenchmarkBackendOperation/1d20+5/full/changing=false": {
+        "medianNs": 9086,
+        "medianBytes": 7936,
+        "medianAllocations": 45,
+        "samples": [
+          {
+            "iterations": 14835,
+            "ns": 7543,
+            "bytes": 7936,
+            "allocations": 45
+          },
+          {
+            "iterations": 15088,
+            "ns": 9086,
+            "bytes": 7936,
+            "allocations": 45
+          },
+          {
+            "iterations": 10000,
+            "ns": 10325,
+            "bytes": 7936,
+            "allocations": 45
+          },
+          {
+            "iterations": 13519,
+            "ns": 9207,
+            "bytes": 7936,
+            "allocations": 45
+          },
+          {
+            "iterations": 14001,
+            "ns": 8813,
+            "bytes": 7936,
+            "allocations": 45
+          }
+        ]
+      },
+      "BenchmarkBackendOperation/1d20+5/full/changing=true": {
+        "medianNs": 12502,
+        "medianBytes": 7943,
+        "medianAllocations": 45,
+        "samples": [
+          {
+            "iterations": 14072,
+            "ns": 9585,
+            "bytes": 7943,
+            "allocations": 45
+          },
+          {
+            "iterations": 13579,
+            "ns": 13427,
+            "bytes": 7943,
+            "allocations": 45
+          },
+          {
+            "iterations": 10000,
+            "ns": 12502,
+            "bytes": 7943,
+            "allocations": 45
+          },
+          {
+            "iterations": 10000,
+            "ns": 12814,
+            "bytes": 7943,
+            "allocations": 45
+          },
+          {
+            "iterations": 10000,
+            "ns": 11171,
+            "bytes": 7943,
+            "allocations": 45
+          }
+        ]
+      },
+      "BenchmarkBackendOperation/100d6/full/changing=false": {
+        "medianNs": 79041,
+        "medianBytes": 109032,
+        "medianAllocations": 152,
+        "samples": [
+          {
+            "iterations": 2174,
+            "ns": 79041,
+            "bytes": 109032,
+            "allocations": 152
+          },
+          {
+            "iterations": 2002,
+            "ns": 97637,
+            "bytes": 109033,
+            "allocations": 152
+          },
+          {
+            "iterations": 1988,
+            "ns": 62899,
+            "bytes": 109032,
+            "allocations": 152
+          },
+          {
+            "iterations": 2491,
+            "ns": 60378,
+            "bytes": 109032,
+            "allocations": 152
+          },
+          {
+            "iterations": 3261,
+            "ns": 123461,
+            "bytes": 109032,
+            "allocations": 152
+          }
+        ]
+      },
+      "BenchmarkBackendOperation/100d6/full/changing=true": {
+        "medianNs": 97508,
+        "medianBytes": 109039,
+        "medianAllocations": 152,
+        "samples": [
+          {
+            "iterations": 2352,
+            "ns": 124694,
+            "bytes": 109039,
+            "allocations": 152
+          },
+          {
+            "iterations": 2013,
+            "ns": 97508,
+            "bytes": 109039,
+            "allocations": 152
+          },
+          {
+            "iterations": 2187,
+            "ns": 131904,
+            "bytes": 109039,
+            "allocations": 152
+          },
+          {
+            "iterations": 1611,
+            "ns": 78401,
+            "bytes": 109039,
+            "allocations": 152
+          },
+          {
+            "iterations": 1905,
+            "ns": 89470,
+            "bytes": 109039,
+            "allocations": 152
+          }
+        ]
+      },
+      "BenchmarkBackendOperation/20d6!2ro=1kh10/full/changing=false": {
+        "medianNs": 58224,
+        "medianBytes": 55776,
+        "medianAllocations": 149,
+        "samples": [
+          {
+            "iterations": 3872,
+            "ns": 53231,
+            "bytes": 55776,
+            "allocations": 149
+          },
+          {
+            "iterations": 5400,
+            "ns": 73520,
+            "bytes": 55776,
+            "allocations": 149
+          },
+          {
+            "iterations": 2289,
+            "ns": 58224,
+            "bytes": 55776,
+            "allocations": 149
+          },
+          {
+            "iterations": 4285,
+            "ns": 47196,
+            "bytes": 55776,
+            "allocations": 149
+          },
+          {
+            "iterations": 5247,
+            "ns": 84738,
+            "bytes": 55776,
+            "allocations": 149
+          }
+        ]
+      },
+      "BenchmarkBackendOperation/20d6!2ro=1kh10/full/changing=true": {
+        "medianNs": 41723,
+        "medianBytes": 53621,
+        "medianAllocations": 132,
+        "samples": [
+          {
+            "iterations": 4252,
+            "ns": 58397,
+            "bytes": 53614,
+            "allocations": 132
+          },
+          {
+            "iterations": 3624,
+            "ns": 41723,
+            "bytes": 53612,
+            "allocations": 132
+          },
+          {
+            "iterations": 5860,
+            "ns": 47663,
+            "bytes": 53628,
+            "allocations": 132
+          },
+          {
+            "iterations": 4435,
+            "ns": 38097,
+            "bytes": 53624,
+            "allocations": 132
+          },
+          {
+            "iterations": 5318,
+            "ns": 34967,
+            "bytes": 53621,
+            "allocations": 132
+          }
+        ]
+      }
+    },
+    "v3-compact-event-payload.txt": {
+      "BenchmarkBackendOperation/1d20+5/full/changing=false": {
+        "medianNs": 9709,
+        "medianBytes": 7296,
+        "medianAllocations": 48,
+        "samples": [
+          {
+            "iterations": 16768,
+            "ns": 6937,
+            "bytes": 7296,
+            "allocations": 48
+          },
+          {
+            "iterations": 16660,
+            "ns": 7589,
+            "bytes": 7296,
+            "allocations": 48
+          },
+          {
+            "iterations": 12901,
+            "ns": 10706,
+            "bytes": 7296,
+            "allocations": 48
+          },
+          {
+            "iterations": 13680,
+            "ns": 9709,
+            "bytes": 7296,
+            "allocations": 48
+          },
+          {
+            "iterations": 13953,
+            "ns": 9931,
+            "bytes": 7296,
+            "allocations": 48
+          }
+        ]
+      },
+      "BenchmarkBackendOperation/1d20+5/full/changing=true": {
+        "medianNs": 7545,
+        "medianBytes": 7303,
+        "medianAllocations": 48,
+        "samples": [
+          {
+            "iterations": 15415,
+            "ns": 8077,
+            "bytes": 7303,
+            "allocations": 48
+          },
+          {
+            "iterations": 16455,
+            "ns": 7220,
+            "bytes": 7303,
+            "allocations": 48
+          },
+          {
+            "iterations": 16708,
+            "ns": 8911,
+            "bytes": 7303,
+            "allocations": 48
+          },
+          {
+            "iterations": 15286,
+            "ns": 7194,
+            "bytes": 7303,
+            "allocations": 48
+          },
+          {
+            "iterations": 16609,
+            "ns": 7545,
+            "bytes": 7303,
+            "allocations": 48
+          }
+        ]
+      },
+      "BenchmarkBackendOperation/100d6/full/changing=false": {
+        "medianNs": 35115,
+        "medianBytes": 80488,
+        "medianAllocations": 153,
+        "samples": [
+          {
+            "iterations": 3876,
+            "ns": 31968,
+            "bytes": 80488,
+            "allocations": 153
+          },
+          {
+            "iterations": 3392,
+            "ns": 37915,
+            "bytes": 80488,
+            "allocations": 153
+          },
+          {
+            "iterations": 3888,
+            "ns": 31448,
+            "bytes": 80488,
+            "allocations": 153
+          },
+          {
+            "iterations": 3646,
+            "ns": 35115,
+            "bytes": 80488,
+            "allocations": 153
+          },
+          {
+            "iterations": 3924,
+            "ns": 43196,
+            "bytes": 80488,
+            "allocations": 153
+          }
+        ]
+      },
+      "BenchmarkBackendOperation/100d6/full/changing=true": {
+        "medianNs": 46324,
+        "medianBytes": 80495,
+        "medianAllocations": 153,
+        "samples": [
+          {
+            "iterations": 3889,
+            "ns": 33297,
+            "bytes": 80495,
+            "allocations": 153
+          },
+          {
+            "iterations": 2588,
+            "ns": 48477,
+            "bytes": 80495,
+            "allocations": 153
+          },
+          {
+            "iterations": 3684,
+            "ns": 42558,
+            "bytes": 80495,
+            "allocations": 153
+          },
+          {
+            "iterations": 3186,
+            "ns": 46324,
+            "bytes": 80495,
+            "allocations": 153
+          },
+          {
+            "iterations": 3376,
+            "ns": 47510,
+            "bytes": 80495,
+            "allocations": 153
+          }
+        ]
+      },
+      "BenchmarkBackendOperation/20d6!2ro=1kh10/full/changing=false": {
+        "medianNs": 41532,
+        "medianBytes": 42464,
+        "medianAllocations": 176,
+        "samples": [
+          {
+            "iterations": 5378,
+            "ns": 41532,
+            "bytes": 42464,
+            "allocations": 176
+          },
+          {
+            "iterations": 4591,
+            "ns": 31699,
+            "bytes": 42464,
+            "allocations": 176
+          },
+          {
+            "iterations": 3537,
+            "ns": 31553,
+            "bytes": 42464,
+            "allocations": 176
+          },
+          {
+            "iterations": 4831,
+            "ns": 42430,
+            "bytes": 42464,
+            "allocations": 176
+          },
+          {
+            "iterations": 4012,
+            "ns": 50344,
+            "bytes": 42464,
+            "allocations": 176
+          }
+        ]
+      },
+      "BenchmarkBackendOperation/20d6!2ro=1kh10/full/changing=true": {
+        "medianNs": 35112,
+        "medianBytes": 40342,
+        "medianAllocations": 156,
+        "samples": [
+          {
+            "iterations": 5233,
+            "ns": 35636,
+            "bytes": 40342,
+            "allocations": 156
+          },
+          {
+            "iterations": 5270,
+            "ns": 35112,
+            "bytes": 40338,
+            "allocations": 156
+          },
+          {
+            "iterations": 5024,
+            "ns": 25619,
+            "bytes": 40339,
+            "allocations": 156
+          },
+          {
+            "iterations": 4262,
+            "ns": 31771,
+            "bytes": 40342,
+            "allocations": 156
+          },
+          {
+            "iterations": 5966,
+            "ns": 40337,
+            "bytes": 40342,
+            "allocations": 156
+          }
+        ]
+      }
+    },
+    "v3-json-confirmation.txt": {
+      "BenchmarkResolvedEventsJSON/1d20+5": {
+        "medianNs": 10052,
+        "medianBytes": 3973,
+        "medianAllocations": 6,
+        "samples": [
+          {
+            "iterations": 10000,
+            "ns": 10052,
+            "bytes": 3974,
+            "allocations": 6
+          },
+          {
+            "iterations": 10000,
+            "ns": 10505,
+            "bytes": 3973,
+            "allocations": 6
+          },
+          {
+            "iterations": 12212,
+            "ns": 9553,
+            "bytes": 3972,
+            "allocations": 6
+          },
+          {
+            "iterations": 12259,
+            "ns": 9966,
+            "bytes": 3973,
+            "allocations": 6
+          },
+          {
+            "iterations": 10000,
+            "ns": 10415,
+            "bytes": 3973,
+            "allocations": 6
+          }
+        ]
+      },
+      "BenchmarkResolvedEventsJSON/100d6": {
+        "medianNs": 278137,
+        "medianBytes": 109220,
+        "medianAllocations": 202,
+        "samples": [
+          {
+            "iterations": 435,
+            "ns": 282521,
+            "bytes": 109220,
+            "allocations": 202
+          },
+          {
+            "iterations": 429,
+            "ns": 273686,
+            "bytes": 109226,
+            "allocations": 202
+          },
+          {
+            "iterations": 459,
+            "ns": 270849,
+            "bytes": 109205,
+            "allocations": 202
+          },
+          {
+            "iterations": 439,
+            "ns": 297459,
+            "bytes": 108925,
+            "allocations": 202
+          },
+          {
+            "iterations": 433,
+            "ns": 278137,
+            "bytes": 109230,
+            "allocations": 202
+          }
+        ]
+      },
+      "BenchmarkResolvedEventsJSON/20d6!2ro=1kh10": {
+        "medianNs": 98128,
+        "medianBytes": 36189,
+        "medianAllocations": 70,
+        "samples": [
+          {
+            "iterations": 1203,
+            "ns": 98128,
+            "bytes": 36189,
+            "allocations": 70
+          },
+          {
+            "iterations": 1215,
+            "ns": 95715,
+            "bytes": 36189,
+            "allocations": 70
+          },
+          {
+            "iterations": 1225,
+            "ns": 98841,
+            "bytes": 36188,
+            "allocations": 70
+          },
+          {
+            "iterations": 1238,
+            "ns": 97943,
+            "bytes": 36190,
+            "allocations": 70
+          },
+          {
+            "iterations": 1171,
+            "ns": 99098,
+            "bytes": 36192,
+            "allocations": 70
+          }
+        ]
+      }
+    },
+    "v3-json-selection.txt": {
+      "BenchmarkResolvedEventsJSON/1d20+5": {
+        "medianNs": 9550,
+        "medianBytes": 3973,
+        "medianAllocations": 6,
+        "samples": [
+          {
+            "iterations": 12402,
+            "ns": 9482,
+            "bytes": 3973,
+            "allocations": 6
+          },
+          {
+            "iterations": 12478,
+            "ns": 9668,
+            "bytes": 3973,
+            "allocations": 6
+          },
+          {
+            "iterations": 12555,
+            "ns": 9421,
+            "bytes": 3973,
+            "allocations": 6
+          },
+          {
+            "iterations": 12250,
+            "ns": 9876,
+            "bytes": 3972,
+            "allocations": 6
+          },
+          {
+            "iterations": 12747,
+            "ns": 9550,
+            "bytes": 3972,
+            "allocations": 6
+          }
+        ]
+      },
+      "BenchmarkResolvedEventsJSON/100d6": {
+        "medianNs": 269272,
+        "medianBytes": 109227,
+        "medianAllocations": 202,
+        "samples": [
+          {
+            "iterations": 435,
+            "ns": 264695,
+            "bytes": 109227,
+            "allocations": 202
+          },
+          {
+            "iterations": 380,
+            "ns": 269272,
+            "bytes": 109271,
+            "allocations": 202
+          },
+          {
+            "iterations": 433,
+            "ns": 275539,
+            "bytes": 108925,
+            "allocations": 202
+          },
+          {
+            "iterations": 435,
+            "ns": 270507,
+            "bytes": 109227,
+            "allocations": 202
+          },
+          {
+            "iterations": 444,
+            "ns": 266732,
+            "bytes": 109220,
+            "allocations": 202
+          }
+        ]
+      },
+      "BenchmarkResolvedEventsJSON/20d6!2ro=1kh10": {
+        "medianNs": 99173,
+        "medianBytes": 36190,
+        "medianAllocations": 70,
+        "samples": [
+          {
+            "iterations": 1192,
+            "ns": 99173,
+            "bytes": 36191,
+            "allocations": 70
+          },
+          {
+            "iterations": 1246,
+            "ns": 99338,
+            "bytes": 36190,
+            "allocations": 70
+          },
+          {
+            "iterations": 1226,
+            "ns": 97015,
+            "bytes": 36188,
+            "allocations": 70
+          },
+          {
+            "iterations": 1204,
+            "ns": 96730,
+            "bytes": 36244,
+            "allocations": 70
+          },
+          {
+            "iterations": 1239,
+            "ns": 99327,
+            "bytes": 36190,
+            "allocations": 70
+          }
+        ]
+      }
+    },
+    "v4-json-confirmation.txt": {
+      "BenchmarkResolvedEventsJSON/1d20+5": {
+        "medianNs": 19878,
+        "medianBytes": 7605,
+        "medianAllocations": 5,
+        "samples": [
+          {
+            "iterations": 5652,
+            "ns": 20183,
+            "bytes": 7609,
+            "allocations": 5
+          },
+          {
+            "iterations": 5472,
+            "ns": 19878,
+            "bytes": 7605,
+            "allocations": 5
+          },
+          {
+            "iterations": 6561,
+            "ns": 20007,
+            "bytes": 7605,
+            "allocations": 5
+          },
+          {
+            "iterations": 6758,
+            "ns": 19740,
+            "bytes": 7607,
+            "allocations": 5
+          },
+          {
+            "iterations": 6588,
+            "ns": 19453,
+            "bytes": 7600,
+            "allocations": 5
+          }
+        ]
+      },
+      "BenchmarkResolvedEventsJSON/100d6": {
+        "medianNs": 406560,
+        "medianBytes": 152192,
+        "medianAllocations": 6,
+        "samples": [
+          {
+            "iterations": 309,
+            "ns": 391826,
+            "bytes": 153155,
+            "allocations": 6
+          },
+          {
+            "iterations": 302,
+            "ns": 396144,
+            "bytes": 152192,
+            "allocations": 6
+          },
+          {
+            "iterations": 298,
+            "ns": 406560,
+            "bytes": 150710,
+            "allocations": 5
+          },
+          {
+            "iterations": 290,
+            "ns": 414353,
+            "bytes": 151678,
+            "allocations": 5
+          },
+          {
+            "iterations": 276,
+            "ns": 497604,
+            "bytes": 153788,
+            "allocations": 6
+          }
+        ]
+      },
+      "BenchmarkResolvedEventsJSON/20d6!2ro=1kh10": {
+        "medianNs": 141550,
+        "medianBytes": 49242,
+        "medianAllocations": 5,
+        "samples": [
+          {
+            "iterations": 811,
+            "ns": 144340,
+            "bytes": 49244,
+            "allocations": 5
+          },
+          {
+            "iterations": 842,
+            "ns": 138973,
+            "bytes": 49191,
+            "allocations": 5
+          },
+          {
+            "iterations": 914,
+            "ns": 150116,
+            "bytes": 49242,
+            "allocations": 5
+          },
+          {
+            "iterations": 859,
+            "ns": 139812,
+            "bytes": 49264,
+            "allocations": 5
+          },
+          {
+            "iterations": 913,
+            "ns": 141550,
+            "bytes": 49164,
+            "allocations": 5
+          }
+        ]
+      }
+    },
+    "v4-json-selection.txt": {
+      "BenchmarkResolvedEventsJSON/1d20+5": {
+        "medianNs": 19554,
+        "medianBytes": 7605,
+        "medianAllocations": 5,
+        "samples": [
+          {
+            "iterations": 6127,
+            "ns": 19995,
+            "bytes": 7603,
+            "allocations": 5
+          },
+          {
+            "iterations": 6652,
+            "ns": 20168,
+            "bytes": 7611,
+            "allocations": 5
+          },
+          {
+            "iterations": 6068,
+            "ns": 19554,
+            "bytes": 7607,
+            "allocations": 5
+          },
+          {
+            "iterations": 5400,
+            "ns": 18847,
+            "bytes": 7602,
+            "allocations": 5
+          },
+          {
+            "iterations": 6327,
+            "ns": 19391,
+            "bytes": 7605,
+            "allocations": 5
+          }
+        ]
+      },
+      "BenchmarkResolvedEventsJSON/100d6": {
+        "medianNs": 396550,
+        "medianBytes": 153294,
+        "medianAllocations": 6,
+        "samples": [
+          {
+            "iterations": 301,
+            "ns": 398111,
+            "bytes": 153294,
+            "allocations": 6
+          },
+          {
+            "iterations": 300,
+            "ns": 396550,
+            "bytes": 153752,
+            "allocations": 6
+          },
+          {
+            "iterations": 302,
+            "ns": 390684,
+            "bytes": 150658,
+            "allocations": 5
+          },
+          {
+            "iterations": 297,
+            "ns": 389054,
+            "bytes": 150705,
+            "allocations": 5
+          },
+          {
+            "iterations": 313,
+            "ns": 720296,
+            "bytes": 154791,
+            "allocations": 6
+          }
+        ]
+      },
+      "BenchmarkResolvedEventsJSON/20d6!2ro=1kh10": {
+        "medianNs": 144991,
+        "medianBytes": 49204,
+        "medianAllocations": 5,
+        "samples": [
+          {
+            "iterations": 572,
+            "ns": 235886,
+            "bytes": 49568,
+            "allocations": 5
+          },
+          {
+            "iterations": 711,
+            "ns": 150640,
+            "bytes": 49204,
+            "allocations": 5
+          },
+          {
+            "iterations": 880,
+            "ns": 134429,
+            "bytes": 49059,
+            "allocations": 5
+          },
+          {
+            "iterations": 888,
+            "ns": 144991,
+            "bytes": 49170,
+            "allocations": 5
+          },
+          {
+            "iterations": 796,
+            "ns": 135441,
+            "bytes": 49252,
+            "allocations": 5
+          }
+        ]
+      }
+    },
+    "v4b-json-baseline.txt": {
+      "BenchmarkResolvedEventsJSON/1d20+5": {
+        "medianNs": 9642,
+        "medianBytes": 3972,
+        "medianAllocations": 6,
+        "samples": [
+          {
+            "iterations": 10000,
+            "ns": 10173,
+            "bytes": 3973,
+            "allocations": 6
+          },
+          {
+            "iterations": 12314,
+            "ns": 9860,
+            "bytes": 3972,
+            "allocations": 6
+          },
+          {
+            "iterations": 12212,
+            "ns": 9642,
+            "bytes": 3972,
+            "allocations": 6
+          },
+          {
+            "iterations": 12325,
+            "ns": 9530,
+            "bytes": 3972,
+            "allocations": 6
+          },
+          {
+            "iterations": 12494,
+            "ns": 9625,
+            "bytes": 3973,
+            "allocations": 6
+          }
+        ]
+      },
+      "BenchmarkResolvedEventsJSON/100d6": {
+        "medianNs": 280182,
+        "medianBytes": 109229,
+        "medianAllocations": 202,
+        "samples": [
+          {
+            "iterations": 438,
+            "ns": 271627,
+            "bytes": 109225,
+            "allocations": 202
+          },
+          {
+            "iterations": 434,
+            "ns": 280182,
+            "bytes": 109229,
+            "allocations": 202
+          },
+          {
+            "iterations": 406,
+            "ns": 272812,
+            "bytes": 108936,
+            "allocations": 202
+          },
+          {
+            "iterations": 378,
+            "ns": 286021,
+            "bytes": 109273,
+            "allocations": 202
+          },
+          {
+            "iterations": 424,
+            "ns": 283743,
+            "bytes": 109230,
+            "allocations": 202
+          }
+        ]
+      },
+      "BenchmarkResolvedEventsJSON/20d6!2ro=1kh10": {
+        "medianNs": 108814,
+        "medianBytes": 36195,
+        "medianAllocations": 70,
+        "samples": [
+          {
+            "iterations": 970,
+            "ns": 156569,
+            "bytes": 36204,
+            "allocations": 70
+          },
+          {
+            "iterations": 973,
+            "ns": 115853,
+            "bytes": 36201,
+            "allocations": 70
+          },
+          {
+            "iterations": 1105,
+            "ns": 108814,
+            "bytes": 36195,
+            "allocations": 70
+          },
+          {
+            "iterations": 1266,
+            "ns": 107101,
+            "bytes": 36188,
+            "allocations": 70
+          },
+          {
+            "iterations": 1176,
+            "ns": 101659,
+            "bytes": 36192,
+            "allocations": 70
+          }
+        ]
+      }
+    },
+    "v4b-json-confirmation.txt": {
+      "BenchmarkResolvedEventsJSON/1d20+5": {
+        "medianNs": 9053,
+        "medianBytes": 3716,
+        "medianAllocations": 2,
+        "samples": [
+          {
+            "iterations": 13124,
+            "ns": 9048,
+            "bytes": 3716,
+            "allocations": 2
+          },
+          {
+            "iterations": 13426,
+            "ns": 9373,
+            "bytes": 3716,
+            "allocations": 2
+          },
+          {
+            "iterations": 13074,
+            "ns": 9053,
+            "bytes": 3716,
+            "allocations": 2
+          },
+          {
+            "iterations": 13119,
+            "ns": 8968,
+            "bytes": 3716,
+            "allocations": 2
+          },
+          {
+            "iterations": 13196,
+            "ns": 9071,
+            "bytes": 3716,
+            "allocations": 2
+          }
+        ]
+      },
+      "BenchmarkResolvedEventsJSON/100d6": {
+        "medianNs": 248690,
+        "medianBytes": 98682,
+        "medianAllocations": 2,
+        "samples": [
+          {
+            "iterations": 506,
+            "ns": 253275,
+            "bytes": 98680,
+            "allocations": 2
+          },
+          {
+            "iterations": 482,
+            "ns": 252113,
+            "bytes": 98699,
+            "allocations": 2
+          },
+          {
+            "iterations": 493,
+            "ns": 247868,
+            "bytes": 98682,
+            "allocations": 2
+          },
+          {
+            "iterations": 477,
+            "ns": 248690,
+            "bytes": 98412,
+            "allocations": 2
+          },
+          {
+            "iterations": 422,
+            "ns": 245165,
+            "bytes": 98728,
+            "allocations": 2
+          }
+        ]
+      },
+      "BenchmarkResolvedEventsJSON/20d6!2ro=1kh10": {
+        "medianNs": 88394,
+        "medianBytes": 32060,
+        "medianAllocations": 2,
+        "samples": [
+          {
+            "iterations": 1357,
+            "ns": 88566,
+            "bytes": 32060,
+            "allocations": 2
+          },
+          {
+            "iterations": 1406,
+            "ns": 88394,
+            "bytes": 32061,
+            "allocations": 2
+          },
+          {
+            "iterations": 1377,
+            "ns": 89044,
+            "bytes": 32062,
+            "allocations": 2
+          },
+          {
+            "iterations": 1350,
+            "ns": 87589,
+            "bytes": 32060,
+            "allocations": 2
+          },
+          {
+            "iterations": 1389,
+            "ns": 87267,
+            "bytes": 32059,
+            "allocations": 2
+          }
+        ]
+      }
+    },
+    "v4b-json-selection.txt": {
+      "BenchmarkResolvedEventsJSON/1d20+5": {
+        "medianNs": 9114,
+        "medianBytes": 3716,
+        "medianAllocations": 2,
+        "samples": [
+          {
+            "iterations": 12795,
+            "ns": 9114,
+            "bytes": 3716,
+            "allocations": 2
+          },
+          {
+            "iterations": 12902,
+            "ns": 9203,
+            "bytes": 3715,
+            "allocations": 2
+          },
+          {
+            "iterations": 12967,
+            "ns": 9251,
+            "bytes": 3716,
+            "allocations": 2
+          },
+          {
+            "iterations": 13256,
+            "ns": 9092,
+            "bytes": 3716,
+            "allocations": 2
+          },
+          {
+            "iterations": 13084,
+            "ns": 8997,
+            "bytes": 3715,
+            "allocations": 2
+          }
+        ]
+      },
+      "BenchmarkResolvedEventsJSON/100d6": {
+        "medianNs": 247377,
+        "medianBytes": 98682,
+        "medianAllocations": 2,
+        "samples": [
+          {
+            "iterations": 439,
+            "ns": 245997,
+            "bytes": 98712,
+            "allocations": 2
+          },
+          {
+            "iterations": 498,
+            "ns": 250515,
+            "bytes": 98677,
+            "allocations": 2
+          },
+          {
+            "iterations": 466,
+            "ns": 252294,
+            "bytes": 98696,
+            "allocations": 2
+          },
+          {
+            "iterations": 477,
+            "ns": 247377,
+            "bytes": 98412,
+            "allocations": 2
+          },
+          {
+            "iterations": 493,
+            "ns": 246376,
+            "bytes": 98682,
+            "allocations": 2
+          }
+        ]
+      },
+      "BenchmarkResolvedEventsJSON/20d6!2ro=1kh10": {
+        "medianNs": 87895,
+        "medianBytes": 32059,
+        "medianAllocations": 2,
+        "samples": [
+          {
+            "iterations": 1387,
+            "ns": 87649,
+            "bytes": 32059,
+            "allocations": 2
+          },
+          {
+            "iterations": 1380,
+            "ns": 90728,
+            "bytes": 32062,
+            "allocations": 2
+          },
+          {
+            "iterations": 1376,
+            "ns": 86813,
+            "bytes": 32059,
+            "allocations": 2
+          },
+          {
+            "iterations": 1417,
+            "ns": 88676,
+            "bytes": 32061,
+            "allocations": 2
+          },
+          {
+            "iterations": 1395,
+            "ns": 87895,
+            "bytes": 32059,
+            "allocations": 2
+          }
+        ]
+      }
+    }
+  }
+}

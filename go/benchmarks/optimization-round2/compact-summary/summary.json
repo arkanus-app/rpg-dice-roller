@@ -1,0 +1,997 @@
+{
+  "schemaVersion": 1,
+  "baselineCommit": "a1c4bbb",
+  "goVersion": "1.26.2",
+  "platform": "windows/amd64",
+  "cpu": "AMD Ryzen 5 5500",
+  "variants": {
+    "v1-clean-final": {
+      "20d6!2ro=1kh10/compact=false": {
+        "medianNsPerOp": 14952.0,
+        "medianBytesPerOp": 12085,
+        "medianAllocationsPerOp": 137,
+        "samples": [
+          {
+            "nsPerOp": 12813.0,
+            "bytesPerOp": 12085,
+            "allocationsPerOp": 137
+          },
+          {
+            "nsPerOp": 16222.0,
+            "bytesPerOp": 12085,
+            "allocationsPerOp": 137
+          },
+          {
+            "nsPerOp": 14952.0,
+            "bytesPerOp": 12085,
+            "allocationsPerOp": 137
+          },
+          {
+            "nsPerOp": 14418.0,
+            "bytesPerOp": 12085,
+            "allocationsPerOp": 137
+          },
+          {
+            "nsPerOp": 18416.0,
+            "bytesPerOp": 12085,
+            "allocationsPerOp": 137
+          }
+        ]
+      },
+      "20d6!2ro=1kh10/compact=true": {
+        "medianNsPerOp": 8863.0,
+        "medianBytesPerOp": 5826,
+        "medianAllocationsPerOp": 15,
+        "samples": [
+          {
+            "nsPerOp": 7714.0,
+            "bytesPerOp": 5826,
+            "allocationsPerOp": 15
+          },
+          {
+            "nsPerOp": 8863.0,
+            "bytesPerOp": 5826,
+            "allocationsPerOp": 15
+          },
+          {
+            "nsPerOp": 8431.0,
+            "bytesPerOp": 5826,
+            "allocationsPerOp": 15
+          },
+          {
+            "nsPerOp": 8892.0,
+            "bytesPerOp": 5826,
+            "allocationsPerOp": 15
+          },
+          {
+            "nsPerOp": 9932.0,
+            "bytesPerOp": 5826,
+            "allocationsPerOp": 15
+          }
+        ]
+      },
+      "100d6min2max5kh80/compact=false": {
+        "medianNsPerOp": 42913.0,
+        "medianBytesPerOp": 34720,
+        "medianAllocationsPerOp": 320,
+        "samples": [
+          {
+            "nsPerOp": 44348.0,
+            "bytesPerOp": 34720,
+            "allocationsPerOp": 320
+          },
+          {
+            "nsPerOp": 42913.0,
+            "bytesPerOp": 34720,
+            "allocationsPerOp": 320
+          },
+          {
+            "nsPerOp": 37482.0,
+            "bytesPerOp": 34720,
+            "allocationsPerOp": 320
+          },
+          {
+            "nsPerOp": 43424.0,
+            "bytesPerOp": 34720,
+            "allocationsPerOp": 320
+          },
+          {
+            "nsPerOp": 42499.0,
+            "bytesPerOp": 34720,
+            "allocationsPerOp": 320
+          }
+        ]
+      },
+      "100d6min2max5kh80/compact=true": {
+        "medianNsPerOp": 18680.0,
+        "medianBytesPerOp": 9128,
+        "medianAllocationsPerOp": 14,
+        "samples": [
+          {
+            "nsPerOp": 18872.0,
+            "bytesPerOp": 9128,
+            "allocationsPerOp": 14
+          },
+          {
+            "nsPerOp": 17222.0,
+            "bytesPerOp": 9128,
+            "allocationsPerOp": 14
+          },
+          {
+            "nsPerOp": 20424.0,
+            "bytesPerOp": 9128,
+            "allocationsPerOp": 14
+          },
+          {
+            "nsPerOp": 17785.0,
+            "bytesPerOp": 9128,
+            "allocationsPerOp": 14
+          },
+          {
+            "nsPerOp": 18680.0,
+            "bytesPerOp": 9128,
+            "allocationsPerOp": 14
+          }
+        ]
+      },
+      "12d6!!p2ro<2uo=2kh7dl2>=5f=1cs>=6cf<=1sa/compact=false": {
+        "medianNsPerOp": 17690.0,
+        "medianBytesPerOp": 11278,
+        "medianAllocationsPerOp": 158,
+        "samples": [
+          {
+            "nsPerOp": 20649.0,
+            "bytesPerOp": 11278,
+            "allocationsPerOp": 158
+          },
+          {
+            "nsPerOp": 17690.0,
+            "bytesPerOp": 11278,
+            "allocationsPerOp": 158
+          },
+          {
+            "nsPerOp": 16822.0,
+            "bytesPerOp": 11277,
+            "allocationsPerOp": 158
+          },
+          {
+            "nsPerOp": 17293.0,
+            "bytesPerOp": 11278,
+            "allocationsPerOp": 158
+          },
+          {
+            "nsPerOp": 21652.0,
+            "bytesPerOp": 11278,
+            "allocationsPerOp": 158
+          }
+        ]
+      },
+      "12d6!!p2ro<2uo=2kh7dl2>=5f=1cs>=6cf<=1sa/compact=true": {
+        "medianNsPerOp": 8850.0,
+        "medianBytesPerOp": 5316,
+        "medianAllocationsPerOp": 21,
+        "samples": [
+          {
+            "nsPerOp": 10947.0,
+            "bytesPerOp": 5316,
+            "allocationsPerOp": 21
+          },
+          {
+            "nsPerOp": 8850.0,
+            "bytesPerOp": 5316,
+            "allocationsPerOp": 21
+          },
+          {
+            "nsPerOp": 8141.0,
+            "bytesPerOp": 5316,
+            "allocationsPerOp": 21
+          },
+          {
+            "nsPerOp": 8401.0,
+            "bytesPerOp": 5316,
+            "allocationsPerOp": 21
+          },
+          {
+            "nsPerOp": 8872.0,
+            "bytesPerOp": 5316,
+            "allocationsPerOp": 21
+          }
+        ]
+      }
+    },
+    "v1-final": {
+      "20d6!2ro=1kh10/compact=true": {
+        "medianNsPerOp": 7170.0,
+        "medianBytesPerOp": 5826,
+        "medianAllocationsPerOp": 15,
+        "samples": [
+          {
+            "nsPerOp": 7198.0,
+            "bytesPerOp": 5826,
+            "allocationsPerOp": 15
+          },
+          {
+            "nsPerOp": 7170.0,
+            "bytesPerOp": 5826,
+            "allocationsPerOp": 15
+          },
+          {
+            "nsPerOp": 7107.0,
+            "bytesPerOp": 5826,
+            "allocationsPerOp": 15
+          },
+          {
+            "nsPerOp": 7161.0,
+            "bytesPerOp": 5826,
+            "allocationsPerOp": 15
+          },
+          {
+            "nsPerOp": 7935.0,
+            "bytesPerOp": 5826,
+            "allocationsPerOp": 15
+          }
+        ]
+      },
+      "100d6min2max5kh80/compact=true": {
+        "medianNsPerOp": 15742.0,
+        "medianBytesPerOp": 9128,
+        "medianAllocationsPerOp": 14,
+        "samples": [
+          {
+            "nsPerOp": 15336.0,
+            "bytesPerOp": 9128,
+            "allocationsPerOp": 14
+          },
+          {
+            "nsPerOp": 15742.0,
+            "bytesPerOp": 9128,
+            "allocationsPerOp": 14
+          },
+          {
+            "nsPerOp": 16674.0,
+            "bytesPerOp": 9128,
+            "allocationsPerOp": 14
+          },
+          {
+            "nsPerOp": 15718.0,
+            "bytesPerOp": 9128,
+            "allocationsPerOp": 14
+          },
+          {
+            "nsPerOp": 16274.0,
+            "bytesPerOp": 9128,
+            "allocationsPerOp": 14
+          }
+        ]
+      },
+      "12d6!!p2ro<2uo=2kh7dl2>=5f=1cs>=6cf<=1sa/compact=true": {
+        "medianNsPerOp": 8517.0,
+        "medianBytesPerOp": 5316,
+        "medianAllocationsPerOp": 21,
+        "samples": [
+          {
+            "nsPerOp": 8517.0,
+            "bytesPerOp": 5316,
+            "allocationsPerOp": 21
+          },
+          {
+            "nsPerOp": 8824.0,
+            "bytesPerOp": 5316,
+            "allocationsPerOp": 21
+          },
+          {
+            "nsPerOp": 8620.0,
+            "bytesPerOp": 5316,
+            "allocationsPerOp": 21
+          },
+          {
+            "nsPerOp": 8469.0,
+            "bytesPerOp": 5316,
+            "allocationsPerOp": 21
+          },
+          {
+            "nsPerOp": 7985.0,
+            "bytesPerOp": 5316,
+            "allocationsPerOp": 21
+          }
+        ]
+      }
+    },
+    "v1-repeat": {
+      "20d6!2ro=1kh10/compact=true": {
+        "medianNsPerOp": 7361.0,
+        "medianBytesPerOp": 5826,
+        "medianAllocationsPerOp": 15,
+        "samples": [
+          {
+            "nsPerOp": 7546.0,
+            "bytesPerOp": 5826,
+            "allocationsPerOp": 15
+          },
+          {
+            "nsPerOp": 7332.0,
+            "bytesPerOp": 5826,
+            "allocationsPerOp": 15
+          },
+          {
+            "nsPerOp": 7478.0,
+            "bytesPerOp": 5826,
+            "allocationsPerOp": 15
+          },
+          {
+            "nsPerOp": 7361.0,
+            "bytesPerOp": 5826,
+            "allocationsPerOp": 15
+          },
+          {
+            "nsPerOp": 7277.0,
+            "bytesPerOp": 5826,
+            "allocationsPerOp": 15
+          }
+        ]
+      },
+      "100d6min2max5kh80/compact=true": {
+        "medianNsPerOp": 15281.0,
+        "medianBytesPerOp": 9128,
+        "medianAllocationsPerOp": 14,
+        "samples": [
+          {
+            "nsPerOp": 14977.0,
+            "bytesPerOp": 9128,
+            "allocationsPerOp": 14
+          },
+          {
+            "nsPerOp": 15281.0,
+            "bytesPerOp": 9128,
+            "allocationsPerOp": 14
+          },
+          {
+            "nsPerOp": 15192.0,
+            "bytesPerOp": 9128,
+            "allocationsPerOp": 14
+          },
+          {
+            "nsPerOp": 17020.0,
+            "bytesPerOp": 9128,
+            "allocationsPerOp": 14
+          },
+          {
+            "nsPerOp": 16828.0,
+            "bytesPerOp": 9128,
+            "allocationsPerOp": 14
+          }
+        ]
+      },
+      "12d6!!p2ro<2uo=2kh7dl2>=5f=1cs>=6cf<=1sa/compact=true": {
+        "medianNsPerOp": 9271.0,
+        "medianBytesPerOp": 5316,
+        "medianAllocationsPerOp": 21,
+        "samples": [
+          {
+            "nsPerOp": 9163.0,
+            "bytesPerOp": 5316,
+            "allocationsPerOp": 21
+          },
+          {
+            "nsPerOp": 9467.0,
+            "bytesPerOp": 5316,
+            "allocationsPerOp": 21
+          },
+          {
+            "nsPerOp": 10477.0,
+            "bytesPerOp": 5316,
+            "allocationsPerOp": 21
+          },
+          {
+            "nsPerOp": 9130.0,
+            "bytesPerOp": 5316,
+            "allocationsPerOp": 21
+          },
+          {
+            "nsPerOp": 9271.0,
+            "bytesPerOp": 5316,
+            "allocationsPerOp": 21
+          }
+        ]
+      }
+    },
+    "v1": {
+      "20d6!2ro=1kh10/compact=false": {
+        "medianNsPerOp": 16232.0,
+        "medianBytesPerOp": 12085,
+        "medianAllocationsPerOp": 137,
+        "samples": [
+          {
+            "nsPerOp": 20460.0,
+            "bytesPerOp": 12086,
+            "allocationsPerOp": 137
+          },
+          {
+            "nsPerOp": 15871.0,
+            "bytesPerOp": 12085,
+            "allocationsPerOp": 137
+          },
+          {
+            "nsPerOp": 16232.0,
+            "bytesPerOp": 12085,
+            "allocationsPerOp": 137
+          },
+          {
+            "nsPerOp": 17729.0,
+            "bytesPerOp": 12085,
+            "allocationsPerOp": 137
+          },
+          {
+            "nsPerOp": 13826.0,
+            "bytesPerOp": 12085,
+            "allocationsPerOp": 137
+          }
+        ]
+      },
+      "20d6!2ro=1kh10/compact=true": {
+        "medianNsPerOp": 10117.0,
+        "medianBytesPerOp": 5826,
+        "medianAllocationsPerOp": 15,
+        "samples": [
+          {
+            "nsPerOp": 8660.0,
+            "bytesPerOp": 5826,
+            "allocationsPerOp": 15
+          },
+          {
+            "nsPerOp": 10290.0,
+            "bytesPerOp": 5826,
+            "allocationsPerOp": 15
+          },
+          {
+            "nsPerOp": 10266.0,
+            "bytesPerOp": 5826,
+            "allocationsPerOp": 15
+          },
+          {
+            "nsPerOp": 10117.0,
+            "bytesPerOp": 5826,
+            "allocationsPerOp": 15
+          },
+          {
+            "nsPerOp": 8917.0,
+            "bytesPerOp": 5826,
+            "allocationsPerOp": 15
+          }
+        ]
+      },
+      "100d6min2max5kh80/compact=false": {
+        "medianNsPerOp": 41255.0,
+        "medianBytesPerOp": 34720,
+        "medianAllocationsPerOp": 320,
+        "samples": [
+          {
+            "nsPerOp": 38500.0,
+            "bytesPerOp": 34720,
+            "allocationsPerOp": 320
+          },
+          {
+            "nsPerOp": 49085.0,
+            "bytesPerOp": 34721,
+            "allocationsPerOp": 320
+          },
+          {
+            "nsPerOp": 34212.0,
+            "bytesPerOp": 34720,
+            "allocationsPerOp": 320
+          },
+          {
+            "nsPerOp": 41255.0,
+            "bytesPerOp": 34720,
+            "allocationsPerOp": 320
+          },
+          {
+            "nsPerOp": 43422.0,
+            "bytesPerOp": 34720,
+            "allocationsPerOp": 320
+          }
+        ]
+      },
+      "100d6min2max5kh80/compact=true": {
+        "medianNsPerOp": 17453.0,
+        "medianBytesPerOp": 9128,
+        "medianAllocationsPerOp": 14,
+        "samples": [
+          {
+            "nsPerOp": 17374.0,
+            "bytesPerOp": 9128,
+            "allocationsPerOp": 14
+          },
+          {
+            "nsPerOp": 18581.0,
+            "bytesPerOp": 9128,
+            "allocationsPerOp": 14
+          },
+          {
+            "nsPerOp": 17453.0,
+            "bytesPerOp": 9128,
+            "allocationsPerOp": 14
+          },
+          {
+            "nsPerOp": 18395.0,
+            "bytesPerOp": 9128,
+            "allocationsPerOp": 14
+          },
+          {
+            "nsPerOp": 17336.0,
+            "bytesPerOp": 9128,
+            "allocationsPerOp": 14
+          }
+        ]
+      },
+      "12d6!!p2ro<2uo=2kh7dl2>=5f=1cs>=6cf<=1sa/compact=false": {
+        "medianNsPerOp": 19769.0,
+        "medianBytesPerOp": 11278,
+        "medianAllocationsPerOp": 158,
+        "samples": [
+          {
+            "nsPerOp": 20659.0,
+            "bytesPerOp": 11278,
+            "allocationsPerOp": 158
+          },
+          {
+            "nsPerOp": 21724.0,
+            "bytesPerOp": 11278,
+            "allocationsPerOp": 158
+          },
+          {
+            "nsPerOp": 19769.0,
+            "bytesPerOp": 11277,
+            "allocationsPerOp": 158
+          },
+          {
+            "nsPerOp": 17577.0,
+            "bytesPerOp": 11278,
+            "allocationsPerOp": 158
+          },
+          {
+            "nsPerOp": 19180.0,
+            "bytesPerOp": 11277,
+            "allocationsPerOp": 158
+          }
+        ]
+      },
+      "12d6!!p2ro<2uo=2kh7dl2>=5f=1cs>=6cf<=1sa/compact=true": {
+        "medianNsPerOp": 9268.0,
+        "medianBytesPerOp": 5316,
+        "medianAllocationsPerOp": 21,
+        "samples": [
+          {
+            "nsPerOp": 8259.0,
+            "bytesPerOp": 5316,
+            "allocationsPerOp": 21
+          },
+          {
+            "nsPerOp": 9894.0,
+            "bytesPerOp": 5316,
+            "allocationsPerOp": 21
+          },
+          {
+            "nsPerOp": 8884.0,
+            "bytesPerOp": 5316,
+            "allocationsPerOp": 21
+          },
+          {
+            "nsPerOp": 9268.0,
+            "bytesPerOp": 5316,
+            "allocationsPerOp": 21
+          },
+          {
+            "nsPerOp": 9795.0,
+            "bytesPerOp": 5316,
+            "allocationsPerOp": 21
+          }
+        ]
+      }
+    },
+    "v2-compact": {
+      "20d6!2ro=1kh10/compact=true": {
+        "medianNsPerOp": 7917.0,
+        "medianBytesPerOp": 5435,
+        "medianAllocationsPerOp": 13,
+        "samples": [
+          {
+            "nsPerOp": 8174.0,
+            "bytesPerOp": 5435,
+            "allocationsPerOp": 13
+          },
+          {
+            "nsPerOp": 7917.0,
+            "bytesPerOp": 5435,
+            "allocationsPerOp": 13
+          },
+          {
+            "nsPerOp": 7812.0,
+            "bytesPerOp": 5435,
+            "allocationsPerOp": 13
+          },
+          {
+            "nsPerOp": 7931.0,
+            "bytesPerOp": 5435,
+            "allocationsPerOp": 13
+          },
+          {
+            "nsPerOp": 7495.0,
+            "bytesPerOp": 5435,
+            "allocationsPerOp": 13
+          }
+        ]
+      },
+      "100d6min2max5kh80/compact=true": {
+        "medianNsPerOp": 16674.0,
+        "medianBytesPerOp": 7336,
+        "medianAllocationsPerOp": 12,
+        "samples": [
+          {
+            "nsPerOp": 16334.0,
+            "bytesPerOp": 7336,
+            "allocationsPerOp": 12
+          },
+          {
+            "nsPerOp": 15351.0,
+            "bytesPerOp": 7336,
+            "allocationsPerOp": 12
+          },
+          {
+            "nsPerOp": 16674.0,
+            "bytesPerOp": 7336,
+            "allocationsPerOp": 12
+          },
+          {
+            "nsPerOp": 18675.0,
+            "bytesPerOp": 7336,
+            "allocationsPerOp": 12
+          },
+          {
+            "nsPerOp": 16998.0,
+            "bytesPerOp": 7336,
+            "allocationsPerOp": 12
+          }
+        ]
+      },
+      "12d6!!p2ro<2uo=2kh7dl2>=5f=1cs>=6cf<=1sa/compact=true": {
+        "medianNsPerOp": 8496.0,
+        "medianBytesPerOp": 4885,
+        "medianAllocationsPerOp": 17,
+        "samples": [
+          {
+            "nsPerOp": 8496.0,
+            "bytesPerOp": 4885,
+            "allocationsPerOp": 17
+          },
+          {
+            "nsPerOp": 8661.0,
+            "bytesPerOp": 4885,
+            "allocationsPerOp": 17
+          },
+          {
+            "nsPerOp": 8694.0,
+            "bytesPerOp": 4885,
+            "allocationsPerOp": 17
+          },
+          {
+            "nsPerOp": 8221.0,
+            "bytesPerOp": 4885,
+            "allocationsPerOp": 17
+          },
+          {
+            "nsPerOp": 8195.0,
+            "bytesPerOp": 4885,
+            "allocationsPerOp": 17
+          }
+        ]
+      }
+    },
+    "v2b": {
+      "20d6!2ro=1kh10/compact=true": {
+        "medianNsPerOp": 7202.0,
+        "medianBytesPerOp": 5630,
+        "medianAllocationsPerOp": 13,
+        "samples": [
+          {
+            "nsPerOp": 7554.0,
+            "bytesPerOp": 5630,
+            "allocationsPerOp": 13
+          },
+          {
+            "nsPerOp": 7376.0,
+            "bytesPerOp": 5630,
+            "allocationsPerOp": 13
+          },
+          {
+            "nsPerOp": 7202.0,
+            "bytesPerOp": 5630,
+            "allocationsPerOp": 13
+          },
+          {
+            "nsPerOp": 7156.0,
+            "bytesPerOp": 5630,
+            "allocationsPerOp": 13
+          },
+          {
+            "nsPerOp": 7106.0,
+            "bytesPerOp": 5630,
+            "allocationsPerOp": 13
+          }
+        ]
+      },
+      "100d6min2max5kh80/compact=true": {
+        "medianNsPerOp": 15349.0,
+        "medianBytesPerOp": 8232,
+        "medianAllocationsPerOp": 12,
+        "samples": [
+          {
+            "nsPerOp": 15349.0,
+            "bytesPerOp": 8232,
+            "allocationsPerOp": 12
+          },
+          {
+            "nsPerOp": 14855.0,
+            "bytesPerOp": 8232,
+            "allocationsPerOp": 12
+          },
+          {
+            "nsPerOp": 14857.0,
+            "bytesPerOp": 8232,
+            "allocationsPerOp": 12
+          },
+          {
+            "nsPerOp": 16712.0,
+            "bytesPerOp": 8232,
+            "allocationsPerOp": 12
+          },
+          {
+            "nsPerOp": 17043.0,
+            "bytesPerOp": 8232,
+            "allocationsPerOp": 12
+          }
+        ]
+      },
+      "12d6!!p2ro<2uo=2kh7dl2>=5f=1cs>=6cf<=1sa/compact=true": {
+        "medianNsPerOp": 7826.0,
+        "medianBytesPerOp": 5111,
+        "medianAllocationsPerOp": 17,
+        "samples": [
+          {
+            "nsPerOp": 8113.0,
+            "bytesPerOp": 5111,
+            "allocationsPerOp": 17
+          },
+          {
+            "nsPerOp": 7730.0,
+            "bytesPerOp": 5111,
+            "allocationsPerOp": 17
+          },
+          {
+            "nsPerOp": 7711.0,
+            "bytesPerOp": 5111,
+            "allocationsPerOp": 17
+          },
+          {
+            "nsPerOp": 7826.0,
+            "bytesPerOp": 5111,
+            "allocationsPerOp": 17
+          },
+          {
+            "nsPerOp": 8203.0,
+            "bytesPerOp": 5111,
+            "allocationsPerOp": 17
+          }
+        ]
+      }
+    },
+    "v3-clean-final": {
+      "20d6!2ro=1kh10/compact=true": {
+        "medianNsPerOp": 6787.0,
+        "medianBytesPerOp": 3752,
+        "medianAllocationsPerOp": 10,
+        "samples": [
+          {
+            "nsPerOp": 6772.0,
+            "bytesPerOp": 3752,
+            "allocationsPerOp": 10
+          },
+          {
+            "nsPerOp": 6729.0,
+            "bytesPerOp": 3752,
+            "allocationsPerOp": 10
+          },
+          {
+            "nsPerOp": 6787.0,
+            "bytesPerOp": 3752,
+            "allocationsPerOp": 10
+          },
+          {
+            "nsPerOp": 6794.0,
+            "bytesPerOp": 3752,
+            "allocationsPerOp": 10
+          },
+          {
+            "nsPerOp": 6788.0,
+            "bytesPerOp": 3752,
+            "allocationsPerOp": 10
+          }
+        ]
+      },
+      "100d6min2max5kh80/compact=true": {
+        "medianNsPerOp": 15108.0,
+        "medianBytesPerOp": 8232,
+        "medianAllocationsPerOp": 12,
+        "samples": [
+          {
+            "nsPerOp": 14849.0,
+            "bytesPerOp": 8232,
+            "allocationsPerOp": 12
+          },
+          {
+            "nsPerOp": 15108.0,
+            "bytesPerOp": 8232,
+            "allocationsPerOp": 12
+          },
+          {
+            "nsPerOp": 14780.0,
+            "bytesPerOp": 8232,
+            "allocationsPerOp": 12
+          },
+          {
+            "nsPerOp": 17417.0,
+            "bytesPerOp": 8232,
+            "allocationsPerOp": 12
+          },
+          {
+            "nsPerOp": 15539.0,
+            "bytesPerOp": 8232,
+            "allocationsPerOp": 12
+          }
+        ]
+      },
+      "12d6!!p2ro<2uo=2kh7dl2>=5f=1cs>=6cf<=1sa/compact=true": {
+        "medianNsPerOp": 7098.0,
+        "medianBytesPerOp": 3835,
+        "medianAllocationsPerOp": 13,
+        "samples": [
+          {
+            "nsPerOp": 6996.0,
+            "bytesPerOp": 3835,
+            "allocationsPerOp": 13
+          },
+          {
+            "nsPerOp": 7154.0,
+            "bytesPerOp": 3835,
+            "allocationsPerOp": 13
+          },
+          {
+            "nsPerOp": 7099.0,
+            "bytesPerOp": 3835,
+            "allocationsPerOp": 13
+          },
+          {
+            "nsPerOp": 7098.0,
+            "bytesPerOp": 3836,
+            "allocationsPerOp": 13
+          },
+          {
+            "nsPerOp": 7090.0,
+            "bytesPerOp": 3835,
+            "allocationsPerOp": 13
+          }
+        ]
+      }
+    },
+    "v3": {
+      "20d6!2ro=1kh10/compact=true": {
+        "medianNsPerOp": 6746.0,
+        "medianBytesPerOp": 3752,
+        "medianAllocationsPerOp": 10,
+        "samples": [
+          {
+            "nsPerOp": 6746.0,
+            "bytesPerOp": 3752,
+            "allocationsPerOp": 10
+          },
+          {
+            "nsPerOp": 7047.0,
+            "bytesPerOp": 3752,
+            "allocationsPerOp": 10
+          },
+          {
+            "nsPerOp": 6692.0,
+            "bytesPerOp": 3752,
+            "allocationsPerOp": 10
+          },
+          {
+            "nsPerOp": 6762.0,
+            "bytesPerOp": 3752,
+            "allocationsPerOp": 10
+          },
+          {
+            "nsPerOp": 6645.0,
+            "bytesPerOp": 3752,
+            "allocationsPerOp": 10
+          }
+        ]
+      },
+      "100d6min2max5kh80/compact=true": {
+        "medianNsPerOp": 16318.0,
+        "medianBytesPerOp": 8232,
+        "medianAllocationsPerOp": 12,
+        "samples": [
+          {
+            "nsPerOp": 15048.0,
+            "bytesPerOp": 8232,
+            "allocationsPerOp": 12
+          },
+          {
+            "nsPerOp": 16318.0,
+            "bytesPerOp": 8232,
+            "allocationsPerOp": 12
+          },
+          {
+            "nsPerOp": 15193.0,
+            "bytesPerOp": 8232,
+            "allocationsPerOp": 12
+          },
+          {
+            "nsPerOp": 16850.0,
+            "bytesPerOp": 8232,
+            "allocationsPerOp": 12
+          },
+          {
+            "nsPerOp": 17892.0,
+            "bytesPerOp": 8232,
+            "allocationsPerOp": 12
+          }
+        ]
+      },
+      "12d6!!p2ro<2uo=2kh7dl2>=5f=1cs>=6cf<=1sa/compact=true": {
+        "medianNsPerOp": 7164.0,
+        "medianBytesPerOp": 3835,
+        "medianAllocationsPerOp": 13,
+        "samples": [
+          {
+            "nsPerOp": 7164.0,
+            "bytesPerOp": 3835,
+            "allocationsPerOp": 13
+          },
+          {
+            "nsPerOp": 7283.0,
+            "bytesPerOp": 3835,
+            "allocationsPerOp": 13
+          },
+          {
+            "nsPerOp": 7278.0,
+            "bytesPerOp": 3835,
+            "allocationsPerOp": 13
+          },
+          {
+            "nsPerOp": 7126.0,
+            "bytesPerOp": 3835,
+            "allocationsPerOp": 13
+          },
+          {
+            "nsPerOp": 7083.0,
+            "bytesPerOp": 3835,
+            "allocationsPerOp": 13
+          }
+        ]
+      }
+    }
+  },
+  "provisionalRuns": [
+    "v3",
+    "v2b",
+    "v1-final"
+  ],
+  "provisionalReason": "Possible overlap with 1.4 seconds of ESLint reported after a crossed CPU-window message; clean final confirmation supersedes these timing samples.",
+  "binarySha256": {
+    "v1.exe": "83189f6c073a381ff3cab7393b73bd46f7363020451f4b99f48a361c22e6df93",
+    "v2.exe": "185c771ac5e218407955e106a7f15a77245482772ff33bc09c9318ae4e713c4a",
+    "v2b.exe": "c84063e5143e94c76b55bb4b0af7863a3e2ab4b661843864a57af6eab5dbb1d6",
+    "v3.exe": "16d49db7307857b77ff7e9ee449811ce446fadb088887d278a112b89866bf150"
+  }
+}

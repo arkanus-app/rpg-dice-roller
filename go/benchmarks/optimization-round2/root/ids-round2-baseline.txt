@@ -1,0 +1,21 @@
+goos: windows
+goarch: amd64
+pkg: github.com/arkanus-app/rpg-dice-roller/go
+cpu: AMD Ryzen 5 5500
+BenchmarkBackendOperation/100d6/full/changing=false-12         	    1124	     99011 ns/op	  136752 B/op	    1368 allocs/op
+BenchmarkBackendOperation/100d6/full/changing=false-12         	    1272	     94791 ns/op	  136756 B/op	    1368 allocs/op
+BenchmarkBackendOperation/100d6/full/changing=true-12          	    1213	     95311 ns/op	  136759 B/op	    1368 allocs/op
+BenchmarkBackendOperation/100d6/full/changing=true-12          	    1286	     95801 ns/op	  136763 B/op	    1368 allocs/op
+BenchmarkBackendOperation/100d6/details/changing=false-12      	    5726	     24304 ns/op	   44808 B/op	     142 allocs/op
+BenchmarkBackendOperation/100d6/details/changing=false-12      	    6165	     25243 ns/op	   44808 B/op	     142 allocs/op
+BenchmarkBackendOperation/100d6/details/changing=true-12       	    5970	     32915 ns/op	   44815 B/op	     142 allocs/op
+BenchmarkBackendOperation/100d6/details/changing=true-12       	    5264	     39307 ns/op	   44815 B/op	     142 allocs/op
+BenchmarkBackendOperation/20d6!2ro=1kh10/full/changing=false-12         	    2529	     51485 ns/op	   51944 B/op	     598 allocs/op
+BenchmarkBackendOperation/20d6!2ro=1kh10/full/changing=false-12         	    2913	     65450 ns/op	   51944 B/op	     598 allocs/op
+BenchmarkBackendOperation/20d6!2ro=1kh10/full/changing=true-12          	    3078	     48788 ns/op	   47522 B/op	     533 allocs/op
+BenchmarkBackendOperation/20d6!2ro=1kh10/full/changing=true-12          	    3384	     46917 ns/op	   47525 B/op	     533 allocs/op
+BenchmarkBackendOperation/20d6!2ro=1kh10/details/changing=false-12      	    9489	     21809 ns/op	   17312 B/op	     185 allocs/op
+BenchmarkBackendOperation/20d6!2ro=1kh10/details/changing=false-12      	    9124	     18713 ns/op	   17312 B/op	     185 allocs/op
+BenchmarkBackendOperation/20d6!2ro=1kh10/details/changing=true-12       	    9040	     15554 ns/op	   16337 B/op	     161 allocs/op
+BenchmarkBackendOperation/20d6!2ro=1kh10/details/changing=true-12       	    8414	     16261 ns/op	   16337 B/op	     161 allocs/op
+PASS

@@ -1,5 +1,9 @@
 # Otimização da biblioteca Go para backend
 
+Este documento registra a primeira rodada, encerrada em `a1c4bbb`.
+A [segunda rodada](OPTIMIZATION_ROUND2.md) descreve a representação tipada dos
+eventos, o executor de resumos e o confronto atualizado com Node e Bun.
+
 O ponto de partida é o commit `62de502`. O objetivo desta rodada é reduzir tempo
 e alocações mantendo a API de rolagem, todos os resultados, erros, limites e
 replay da versão TypeScript de referência. A estrutura interna pode mudar.

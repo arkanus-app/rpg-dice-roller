@@ -1,0 +1,35 @@
+goos: windows
+goarch: amd64
+pkg: github.com/arkanus-app/rpg-dice-roller/go
+cpu: AMD Ryzen 5 5500
+BenchmarkBackendOperation/1d20+5/full/changing=false-12         	   14835	      7543 ns/op	    7936 B/op	      45 allocs/op
+BenchmarkBackendOperation/1d20+5/full/changing=false-12         	   15088	      9086 ns/op	    7936 B/op	      45 allocs/op
+BenchmarkBackendOperation/1d20+5/full/changing=false-12         	   10000	     10325 ns/op	    7936 B/op	      45 allocs/op
+BenchmarkBackendOperation/1d20+5/full/changing=false-12         	   13519	      9207 ns/op	    7936 B/op	      45 allocs/op
+BenchmarkBackendOperation/1d20+5/full/changing=false-12         	   14001	      8813 ns/op	    7936 B/op	      45 allocs/op
+BenchmarkBackendOperation/1d20+5/full/changing=true-12          	   14072	      9585 ns/op	    7943 B/op	      45 allocs/op
+BenchmarkBackendOperation/1d20+5/full/changing=true-12          	   13579	     13427 ns/op	    7943 B/op	      45 allocs/op
+BenchmarkBackendOperation/1d20+5/full/changing=true-12          	   10000	     12502 ns/op	    7943 B/op	      45 allocs/op
+BenchmarkBackendOperation/1d20+5/full/changing=true-12          	   10000	     12814 ns/op	    7943 B/op	      45 allocs/op
+BenchmarkBackendOperation/1d20+5/full/changing=true-12          	   10000	     11171 ns/op	    7943 B/op	      45 allocs/op
+BenchmarkBackendOperation/100d6/full/changing=false-12          	    2174	     79041 ns/op	  109032 B/op	     152 allocs/op
+BenchmarkBackendOperation/100d6/full/changing=false-12          	    2002	     97637 ns/op	  109033 B/op	     152 allocs/op
+BenchmarkBackendOperation/100d6/full/changing=false-12          	    1988	     62899 ns/op	  109032 B/op	     152 allocs/op
+BenchmarkBackendOperation/100d6/full/changing=false-12          	    2491	     60378 ns/op	  109032 B/op	     152 allocs/op
+BenchmarkBackendOperation/100d6/full/changing=false-12          	    3261	    123461 ns/op	  109032 B/op	     152 allocs/op
+BenchmarkBackendOperation/100d6/full/changing=true-12           	    2352	    124694 ns/op	  109039 B/op	     152 allocs/op
+BenchmarkBackendOperation/100d6/full/changing=true-12           	    2013	     97508 ns/op	  109039 B/op	     152 allocs/op
+BenchmarkBackendOperation/100d6/full/changing=true-12           	    2187	    131904 ns/op	  109039 B/op	     152 allocs/op
+BenchmarkBackendOperation/100d6/full/changing=true-12           	    1611	     78401 ns/op	  109039 B/op	     152 allocs/op
+BenchmarkBackendOperation/100d6/full/changing=true-12           	    1905	     89470 ns/op	  109039 B/op	     152 allocs/op
+BenchmarkBackendOperation/20d6!2ro=1kh10/full/changing=false-12 	    3872	     53231 ns/op	   55776 B/op	     149 allocs/op
+BenchmarkBackendOperation/20d6!2ro=1kh10/full/changing=false-12 	    5400	     73520 ns/op	   55776 B/op	     149 allocs/op
+BenchmarkBackendOperation/20d6!2ro=1kh10/full/changing=false-12 	    2289	     58224 ns/op	   55776 B/op	     149 allocs/op
+BenchmarkBackendOperation/20d6!2ro=1kh10/full/changing=false-12 	    4285	     47196 ns/op	   55776 B/op	     149 allocs/op
+BenchmarkBackendOperation/20d6!2ro=1kh10/full/changing=false-12 	    5247	     84738 ns/op	   55776 B/op	     149 allocs/op
+BenchmarkBackendOperation/20d6!2ro=1kh10/full/changing=true-12  	    4252	     58397 ns/op	   53614 B/op	     132 allocs/op
+BenchmarkBackendOperation/20d6!2ro=1kh10/full/changing=true-12  	    3624	     41723 ns/op	   53612 B/op	     132 allocs/op
+BenchmarkBackendOperation/20d6!2ro=1kh10/full/changing=true-12  	    5860	     47663 ns/op	   53628 B/op	     132 allocs/op
+BenchmarkBackendOperation/20d6!2ro=1kh10/full/changing=true-12  	    4435	     38097 ns/op	   53624 B/op	     132 allocs/op
+BenchmarkBackendOperation/20d6!2ro=1kh10/full/changing=true-12  	    5318	     34967 ns/op	   53621 B/op	     132 allocs/op
+PASS

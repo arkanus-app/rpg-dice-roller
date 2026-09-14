@@ -1,0 +1,30 @@
+import fs from 'node:fs';
+import path from 'node:path';
+const root = process.cwd();
+const base = path.join(root, '.artifacts/optimization-round2/baseline/go');
+const target = path.join(root, '.artifacts/optimization-round2/root-variants');
+const copy = (dir, name) => fs.copyFileSync(path.join(root,'go',name),path.join(dir,name));
+function replace(text, from, to) {
+  if (!text.includes(from)) throw new Error('Missing anchor '+from);
+  return text.replace(from,to);
+}
+for (const variant of ['baseline','rng','projection','ids']) {
+  const dir = path.join(target,variant,'go');
+  if (fs.existsSync(dir)) throw new Error('Snapshot already exists '+dir);
+  fs.cpSync(base,dir,{recursive:true});
+  copy(dir,'system_performance_test.go');
+  let executor = fs.readFileSync(path.join(dir,'executor.go'),'utf8').replaceAll('\r\n','\n');
+  if (variant==='rng') {
+    for (const file of ['engine.go','context.go','execution_rng_cache.go','execution_rng_cache_test.go']) copy(dir,file);
+    executor = replace(executor,'RandomAlgorithm RandomAlgorithm\n}', 'RandomAlgorithm RandomAlgorithm\n\trngCache *executionRNGCache\n}');
+    executor = replace(executor,'CollectEvents: &materialize}', 'CollectEvents: &materialize, rngCache: options.rngCache}');
+  }
+  if (variant==='projection') copy(dir,'systems.go');
+  if (variant==='ids') {
+    for (const file of ['execution_ids.go','execution_ids_test.go']) copy(dir,file);
+    executor = replace(executor,'initialDice  int64\n}', 'initialDice  int64\n\tids executionIDs\n}');
+    executor = replace(executor,'"roll-" + strconv.FormatInt(state.rollIndex, 10) + "-die-" + strconv.FormatInt(state.nextDieIndex, 10)', 'state.ids.dieID(state.rollIndex, state.nextDieIndex, min(state.program.StaticDice, state.context.Budget.limits.MaxInitialDice-state.context.Budget.snapshot.InitialDice+1, state.context.Budget.limits.MaxResultItems-state.context.Budget.snapshot.ResultItems+1))');
+  }
+  fs.writeFileSync(path.join(dir,'executor.go'),executor);
+}
+console.log('Created four immutable root snapshots.');

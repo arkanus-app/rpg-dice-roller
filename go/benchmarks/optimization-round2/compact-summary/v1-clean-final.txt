@@ -1,0 +1,35 @@
+goos: windows
+goarch: amd64
+pkg: github.com/arkanus-app/rpg-dice-roller/go
+cpu: AMD Ryzen 5 5500
+BenchmarkCompactSummary/20d6!2ro=1kh10/compact=false-12         	   17583	     12813 ns/op	   12085 B/op	     137 allocs/op
+BenchmarkCompactSummary/20d6!2ro=1kh10/compact=false-12         	   17216	     16222 ns/op	   12085 B/op	     137 allocs/op
+BenchmarkCompactSummary/20d6!2ro=1kh10/compact=false-12         	   18283	     14952 ns/op	   12085 B/op	     137 allocs/op
+BenchmarkCompactSummary/20d6!2ro=1kh10/compact=false-12         	   16714	     14418 ns/op	   12085 B/op	     137 allocs/op
+BenchmarkCompactSummary/20d6!2ro=1kh10/compact=false-12         	   16532	     18416 ns/op	   12085 B/op	     137 allocs/op
+BenchmarkCompactSummary/20d6!2ro=1kh10/compact=true-12          	   32334	      7714 ns/op	    5826 B/op	      15 allocs/op
+BenchmarkCompactSummary/20d6!2ro=1kh10/compact=true-12          	   30270	      8863 ns/op	    5826 B/op	      15 allocs/op
+BenchmarkCompactSummary/20d6!2ro=1kh10/compact=true-12          	   30166	      8431 ns/op	    5826 B/op	      15 allocs/op
+BenchmarkCompactSummary/20d6!2ro=1kh10/compact=true-12          	   24276	      8892 ns/op	    5826 B/op	      15 allocs/op
+BenchmarkCompactSummary/20d6!2ro=1kh10/compact=true-12          	   27255	      9932 ns/op	    5826 B/op	      15 allocs/op
+BenchmarkCompactSummary/100d6min2max5kh80/compact=false-12      	    9344	     44348 ns/op	   34720 B/op	     320 allocs/op
+BenchmarkCompactSummary/100d6min2max5kh80/compact=false-12      	    6195	     42913 ns/op	   34720 B/op	     320 allocs/op
+BenchmarkCompactSummary/100d6min2max5kh80/compact=false-12      	    5379	     37482 ns/op	   34720 B/op	     320 allocs/op
+BenchmarkCompactSummary/100d6min2max5kh80/compact=false-12      	    7212	     43424 ns/op	   34720 B/op	     320 allocs/op
+BenchmarkCompactSummary/100d6min2max5kh80/compact=false-12      	    8186	     42499 ns/op	   34720 B/op	     320 allocs/op
+BenchmarkCompactSummary/100d6min2max5kh80/compact=true-12       	   12486	     18872 ns/op	    9128 B/op	      14 allocs/op
+BenchmarkCompactSummary/100d6min2max5kh80/compact=true-12       	   13132	     17222 ns/op	    9128 B/op	      14 allocs/op
+BenchmarkCompactSummary/100d6min2max5kh80/compact=true-12       	   10000	     20424 ns/op	    9128 B/op	      14 allocs/op
+BenchmarkCompactSummary/100d6min2max5kh80/compact=true-12       	   12500	     17785 ns/op	    9128 B/op	      14 allocs/op
+BenchmarkCompactSummary/100d6min2max5kh80/compact=true-12       	   14286	     18680 ns/op	    9128 B/op	      14 allocs/op
+BenchmarkCompactSummary/12d6!!p2ro<2uo=2kh7dl2>=5f=1cs>=6cf<=1sa/compact=false-12         	   10000	     20649 ns/op	   11278 B/op	     158 allocs/op
+BenchmarkCompactSummary/12d6!!p2ro<2uo=2kh7dl2>=5f=1cs>=6cf<=1sa/compact=false-12         	   12931	     17690 ns/op	   11278 B/op	     158 allocs/op
+BenchmarkCompactSummary/12d6!!p2ro<2uo=2kh7dl2>=5f=1cs>=6cf<=1sa/compact=false-12         	   15025	     16822 ns/op	   11277 B/op	     158 allocs/op
+BenchmarkCompactSummary/12d6!!p2ro<2uo=2kh7dl2>=5f=1cs>=6cf<=1sa/compact=false-12         	   12162	     17293 ns/op	   11278 B/op	     158 allocs/op
+BenchmarkCompactSummary/12d6!!p2ro<2uo=2kh7dl2>=5f=1cs>=6cf<=1sa/compact=false-12         	   13204	     21652 ns/op	   11278 B/op	     158 allocs/op
+BenchmarkCompactSummary/12d6!!p2ro<2uo=2kh7dl2>=5f=1cs>=6cf<=1sa/compact=true-12          	   26648	     10947 ns/op	    5316 B/op	      21 allocs/op
+BenchmarkCompactSummary/12d6!!p2ro<2uo=2kh7dl2>=5f=1cs>=6cf<=1sa/compact=true-12          	   25688	      8850 ns/op	    5316 B/op	      21 allocs/op
+BenchmarkCompactSummary/12d6!!p2ro<2uo=2kh7dl2>=5f=1cs>=6cf<=1sa/compact=true-12          	   25274	      8141 ns/op	    5316 B/op	      21 allocs/op
+BenchmarkCompactSummary/12d6!!p2ro<2uo=2kh7dl2>=5f=1cs>=6cf<=1sa/compact=true-12          	   29005	      8401 ns/op	    5316 B/op	      21 allocs/op
+BenchmarkCompactSummary/12d6!!p2ro<2uo=2kh7dl2>=5f=1cs>=6cf<=1sa/compact=true-12          	   27280	      8872 ns/op	    5316 B/op	      21 allocs/op
+PASS

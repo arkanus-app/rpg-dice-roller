@@ -1,0 +1,13 @@
+goos: windows
+goarch: amd64
+pkg: github.com/arkanus-app/rpg-dice-roller/go
+cpu: AMD Ryzen 5 5500
+BenchmarkSystemProjection/fate/full-12         	    2721	     37452 ns/op	   41468 B/op	     364 allocs/op
+BenchmarkSystemProjection/fate/full-12         	    3716	     32206 ns/op	   41468 B/op	     364 allocs/op
+BenchmarkSystemProjection/fate/compact-12      	   10000	     12297 ns/op	   22669 B/op	     103 allocs/op
+BenchmarkSystemProjection/fate/compact-12      	   10000	     16366 ns/op	   22669 B/op	     103 allocs/op
+BenchmarkSystemProjection/vampire-v5/full-12   	    7044	     26293 ns/op	   25279 B/op	     250 allocs/op
+BenchmarkSystemProjection/vampire-v5/full-12   	    7315	     25418 ns/op	   25279 B/op	     250 allocs/op
+BenchmarkSystemProjection/vampire-v5/compact-12         	   10000	     16457 ns/op	   14312 B/op	      96 allocs/op
+BenchmarkSystemProjection/vampire-v5/compact-12         	   10000	     12117 ns/op	   14312 B/op	      96 allocs/op
+PASS

@@ -247,6 +247,10 @@ def three_runtime_speedup(data: dict, source: Path):
     fig.legend(handles=[Line2D([], [], marker="s", color=TS_COLOR, label="Node/Go"), Line2D([], [], marker="^", color=BUN_COLOR, label="Bun/Go")], loc="lower left", bbox_to_anchor=(.045,.887), frameon=False, ncol=2)
     fig.text(.045,.113,"0,5×: JavaScript usa metade do tempo de Go. 2×: Go usa metade do tempo de JavaScript.\nCinza: faixas Q1–Q3 sobrepostas; razões próximas de 1× devem ser lidas junto da dispersão.",fontsize=9.5,color=MUTED_COLOR,linespacing=1.6,va="top")
     fig.text(.96,.025,f"Fonte: {source.name}",fontsize=8.5,color=MUTED_COLOR,ha="right")
+    ax.set_yticks(range(len(rows)))
+    ax.set_yticklabels([workload_label(row) for row in rows])
+    ax.tick_params(axis="y", labelleft=True)
+    fig.canvas.draw()
     return fig
 
 

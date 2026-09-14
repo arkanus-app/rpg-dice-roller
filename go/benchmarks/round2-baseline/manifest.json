@@ -1,0 +1,211 @@
+{
+  "sourceCommit": "a1c4bbb0a525de5d9f9b5f383be26bf867d79e1d",
+  "preservedAt": "2026-09-14T01:49:10.976Z",
+  "description": "Evidência anterior à segunda rodada de otimização; bytes extraídos diretamente do commit. Scripts congelados como .txt; preflight backend preservado em gzip sem expandir.",
+  "files": [
+    {
+      "source": "go/BENCHMARK.md",
+      "path": "go/benchmarks/round2-baseline/go/BENCHMARK.md",
+      "bytes": 12898,
+      "sha256": "4fa75b19b89a7396f0ee1e4fd858f4da1b3b7823ef8183f4694f2cbd6bf7e9ee"
+    },
+    {
+      "source": "go/BACKEND_BENCHMARK.md",
+      "path": "go/benchmarks/round2-baseline/go/BACKEND_BENCHMARK.md",
+      "bytes": 19445,
+      "sha256": "1faebac82639a2b7149a247427490a98a75154c35bb30c28812453726dc8e7d5"
+    },
+    {
+      "source": "go/GC_TUNING.md",
+      "path": "go/benchmarks/round2-baseline/go/GC_TUNING.md",
+      "bytes": 5360,
+      "sha256": "a6be1eb47f752ab809a21603f97afb3a6398080f9bf77312e36704086613493e"
+    },
+    {
+      "source": "go/OPTIMIZATION.md",
+      "path": "go/benchmarks/round2-baseline/go/OPTIMIZATION.md",
+      "bytes": 10070,
+      "sha256": "c73ee1de4b8ba0e3263f6bf24b8c9a9e246640738cce0e3c4decd831244d633b"
+    },
+    {
+      "source": "go/benchmarks/backend-batches.png",
+      "path": "go/benchmarks/round2-baseline/go/benchmarks/backend-batches.png",
+      "bytes": 505293,
+      "sha256": "2eb8762964ce77784d57b21707763615a6eb492cb2959dc19044a3e7895e8b4d"
+    },
+    {
+      "source": "go/benchmarks/backend-batches.svg",
+      "path": "go/benchmarks/round2-baseline/go/benchmarks/backend-batches.svg",
+      "bytes": 158546,
+      "sha256": "94b9edad883ce949d461aad83c14879f68a2988062f15e0640fe6f84a50a9d81"
+    },
+    {
+      "source": "go/benchmarks/backend-final.json",
+      "path": "go/benchmarks/round2-baseline/go/benchmarks/backend-final.json",
+      "bytes": 566132,
+      "sha256": "fa4a864645f731e3cca7a8669a167b3d7a5533c24c7eb2aaa0f667b75466cb0f"
+    },
+    {
+      "source": "go/benchmarks/backend-preflight-final.json.gz",
+      "path": "go/benchmarks/round2-baseline/go/benchmarks/backend-preflight-final.json.gz",
+      "bytes": 1275992,
+      "sha256": "c94398de57bc52affd29bd841a01eb70ea39737c05651530e6b804bf55e1a030"
+    },
+    {
+      "source": "go/benchmarks/backend-rss.png",
+      "path": "go/benchmarks/round2-baseline/go/benchmarks/backend-rss.png",
+      "bytes": 413462,
+      "sha256": "eb551dcbb25bcde71d5875aec498776eaffb933e7eacba3b69240aefa4db55c1"
+    },
+    {
+      "source": "go/benchmarks/backend-rss.svg",
+      "path": "go/benchmarks/round2-baseline/go/benchmarks/backend-rss.svg",
+      "bytes": 154350,
+      "sha256": "96b13c326ca53505ee200862b41436ea4781be6e691894f30190ff493134be1f"
+    },
+    {
+      "source": "go/benchmarks/backend-throughput.png",
+      "path": "go/benchmarks/round2-baseline/go/benchmarks/backend-throughput.png",
+      "bytes": 503972,
+      "sha256": "34b86380a695a8216b9013c63a70e182c528a0cb122706cbdb5b7e60f8a1badd"
+    },
+    {
+      "source": "go/benchmarks/backend-throughput.svg",
+      "path": "go/benchmarks/round2-baseline/go/benchmarks/backend-throughput.svg",
+      "bytes": 159202,
+      "sha256": "e466ae9e70d6c897142daeb371bcc82967b2e37e6234747454f26bbb1bf74e65"
+    },
+    {
+      "source": "go/benchmarks/comparison-final.json",
+      "path": "go/benchmarks/round2-baseline/go/benchmarks/comparison-final.json",
+      "bytes": 142837,
+      "sha256": "359b8d4e5846777ec751945c729fa661a694cc9869166c3284e919d4b8b1e735"
+    },
+    {
+      "source": "go/benchmarks/gc-tradeoff.png",
+      "path": "go/benchmarks/round2-baseline/go/benchmarks/gc-tradeoff.png",
+      "bytes": 354425,
+      "sha256": "6a26e34edf61db382b52f7e5d91accec614398655d3790d18e3cc029d0a42f0f"
+    },
+    {
+      "source": "go/benchmarks/gc-tradeoff.svg",
+      "path": "go/benchmarks/round2-baseline/go/benchmarks/gc-tradeoff.svg",
+      "bytes": 144495,
+      "sha256": "13e68a6455b551e1ce742231cbad112e586a4f156e21f6197ea93594ff618fda"
+    },
+    {
+      "source": "go/benchmarks/gc-tuning.json",
+      "path": "go/benchmarks/round2-baseline/go/benchmarks/gc-tuning.json",
+      "bytes": 200229,
+      "sha256": "f29c5b1ab2f10ae0173bb2d26637e0ac2b4131b6be2411d7bd04a0c3a9ebc772"
+    },
+    {
+      "source": "go/benchmarks/latency.png",
+      "path": "go/benchmarks/round2-baseline/go/benchmarks/latency.png",
+      "bytes": 352382,
+      "sha256": "e0d17a4e4500a2499b2ffcf2739c7f7cd257000d1ac4bd3316d467391aa90ffb"
+    },
+    {
+      "source": "go/benchmarks/latency.svg",
+      "path": "go/benchmarks/round2-baseline/go/benchmarks/latency.svg",
+      "bytes": 57053,
+      "sha256": "8355aad15dae6bf7c2208a7911781d77c4f3394001035f6904684d6aa60ce6b0"
+    },
+    {
+      "source": "go/benchmarks/preflight-final.json",
+      "path": "go/benchmarks/round2-baseline/go/benchmarks/preflight-final.json",
+      "bytes": 1023082,
+      "sha256": "a92436e8b5c91513e71a2cb2170e92088a694eece47fdb9f1d9bbd669aa0aaba"
+    },
+    {
+      "source": "go/benchmarks/speedup.png",
+      "path": "go/benchmarks/round2-baseline/go/benchmarks/speedup.png",
+      "bytes": 351027,
+      "sha256": "22213d9dc412127fb763707ec7563a1c6a9063360253858452ff8a4a3dff33cd"
+    },
+    {
+      "source": "go/benchmarks/speedup.svg",
+      "path": "go/benchmarks/round2-baseline/go/benchmarks/speedup.svg",
+      "bytes": 36999,
+      "sha256": "4e82b847d60f1763133d1e55e78ff8aff166f576e62accdc59ff5ddc243ad04d"
+    },
+    {
+      "source": "go/benchmark_test.go",
+      "path": "go/benchmarks/round2-baseline/go/benchmark_test.go.txt",
+      "bytes": 4409,
+      "sha256": "2dfdb690f6dfddc2151453cd3fba15f4cc944681a9f00870994389c7ef7c70c7"
+    },
+    {
+      "source": "go/backend_benchmark_test.go",
+      "path": "go/benchmarks/round2-baseline/go/backend_benchmark_test.go.txt",
+      "bytes": 7401,
+      "sha256": "8caeb34d29638fb07ee6cffd048870d050e3ddaf2a90e0527693c39f47275151"
+    },
+    {
+      "source": "go/backend_rss_windows_test.go",
+      "path": "go/benchmarks/round2-baseline/go/backend_rss_windows_test.go.txt",
+      "bytes": 1077,
+      "sha256": "f5a18d13ce1153a1688d77e2bf580e2fc0695a509bc630cc9c85aaa55a9ce974"
+    },
+    {
+      "source": "go/backend_rss_linux_test.go",
+      "path": "go/benchmarks/round2-baseline/go/backend_rss_linux_test.go.txt",
+      "bytes": 647,
+      "sha256": "13bdd743d3e7a00f2d35ed698f7ba8729b8cb3a71451a9666722bdbac43c3ec0"
+    },
+    {
+      "source": "go/backend_rss_other_test.go",
+      "path": "go/benchmarks/round2-baseline/go/backend_rss_other_test.go.txt",
+      "bytes": 195,
+      "sha256": "c2e53b664c9299b200b6fe277e87645a5d4dd7a84d413a7eac939d139588881a"
+    },
+    {
+      "source": "scripts/compare-go-typescript.mjs",
+      "path": "go/benchmarks/round2-baseline/scripts/compare-go-typescript.mjs.txt",
+      "bytes": 21030,
+      "sha256": "2dbda66c873607f67d64eaf70000f1d691a7eed70f283f7fb31ba724fcf5deae"
+    },
+    {
+      "source": "scripts/benchmark-go-reference.mjs",
+      "path": "go/benchmarks/round2-baseline/scripts/benchmark-go-reference.mjs.txt",
+      "bytes": 2919,
+      "sha256": "c55f7b10755e3a9a4e6c08fe7d50fe1d5c3d957287b8c2b92fbecd3bc8fca4b6"
+    },
+    {
+      "source": "scripts/compare-backend-runtimes.mjs",
+      "path": "go/benchmarks/round2-baseline/scripts/compare-backend-runtimes.mjs.txt",
+      "bytes": 15990,
+      "sha256": "7d298fd67c534611a8392117fa3dd64c6002fef3834561345f259bd3ee2e44ab"
+    },
+    {
+      "source": "scripts/benchmark-backend-reference.mjs",
+      "path": "go/benchmarks/round2-baseline/scripts/benchmark-backend-reference.mjs.txt",
+      "bytes": 4438,
+      "sha256": "d355afd9819e5e452fde83fe7bc60bcf73f8f35fd85676e03704efbdbe073b87"
+    },
+    {
+      "source": "scripts/compare-go-gc.mjs",
+      "path": "go/benchmarks/round2-baseline/scripts/compare-go-gc.mjs.txt",
+      "bytes": 6276,
+      "sha256": "86938ea8200b6c178287a56ab109c325ceba968439447d0d97ceb100a6b725b2"
+    },
+    {
+      "source": "scripts/plot-go-benchmark.py",
+      "path": "go/benchmarks/round2-baseline/scripts/plot-go-benchmark.py.txt",
+      "bytes": 15439,
+      "sha256": "3fd048397c36a36aa4ccae744cd3b6e1d1ad7f54dd7f879b555064d4f60be7ea"
+    },
+    {
+      "source": "scripts/plot-backend-benchmark.py",
+      "path": "go/benchmarks/round2-baseline/scripts/plot-backend-benchmark.py.txt",
+      "bytes": 6141,
+      "sha256": "7ca5a1c3d7a7cfc536f189a1f4c2685a5af9201e38cb98e4a0088688108f3ac5"
+    },
+    {
+      "source": "scripts/plot-go-gc.py",
+      "path": "go/benchmarks/round2-baseline/scripts/plot-go-gc.py.txt",
+      "bytes": 5986,
+      "sha256": "b006a08988a9e1aa839b6b3e0f6abf3c484fe55af9633e4adf4a47cff2dd5d5d"
+    }
+  ]
+}

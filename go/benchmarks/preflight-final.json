@@ -1,6 +1,6 @@
 {
   "typescript": {
-    "workerWallMilliseconds": 99,
+    "workerWallMilliseconds": 98,
     "output": {
       "runtime": "v24.18.0",
       "phase": "preflight",
@@ -10389,7 +10389,7 @@
     }
   },
   "bun": {
-    "workerWallMilliseconds": 74,
+    "workerWallMilliseconds": 80,
     "output": {
       "runtime": "Bun 1.4.0",
       "phase": "preflight",
@@ -20778,7 +20778,7 @@
     }
   },
   "go": {
-    "workerWallMilliseconds": 30,
+    "workerWallMilliseconds": 253,
     "output": {
       "cases": {
         "100d6-details": [
@@ -23795,2014 +23795,2014 @@
             ],
             "events": [
               {
-                "dieId": "roll-1-die-1",
-                "parentDieId": null,
-                "rollIndex": 1,
                 "sequence": 1,
-                "sourceNodeId": "dice@0:5",
-                "subject": "die",
-                "type": "roll",
-                "value": 2
-              },
-              {
-                "dieId": "roll-1-die-2",
-                "parentDieId": null,
-                "rollIndex": 1,
-                "sequence": 2,
-                "sourceNodeId": "dice@0:5",
-                "subject": "die",
-                "type": "roll",
-                "value": 3
-              },
-              {
-                "dieId": "roll-1-die-3",
-                "parentDieId": null,
-                "rollIndex": 1,
-                "sequence": 3,
-                "sourceNodeId": "dice@0:5",
-                "subject": "die",
-                "type": "roll",
-                "value": 4
-              },
-              {
-                "dieId": "roll-1-die-4",
-                "parentDieId": null,
-                "rollIndex": 1,
-                "sequence": 4,
-                "sourceNodeId": "dice@0:5",
-                "subject": "die",
-                "type": "roll",
-                "value": 5
-              },
-              {
-                "dieId": "roll-1-die-5",
-                "parentDieId": null,
-                "rollIndex": 1,
-                "sequence": 5,
-                "sourceNodeId": "dice@0:5",
-                "subject": "die",
-                "type": "roll",
-                "value": 6
-              },
-              {
-                "dieId": "roll-1-die-6",
-                "parentDieId": null,
-                "rollIndex": 1,
-                "sequence": 6,
-                "sourceNodeId": "dice@0:5",
-                "subject": "die",
-                "type": "roll",
-                "value": 3
-              },
-              {
-                "dieId": "roll-1-die-7",
-                "parentDieId": null,
-                "rollIndex": 1,
-                "sequence": 7,
-                "sourceNodeId": "dice@0:5",
-                "subject": "die",
-                "type": "roll",
-                "value": 5
-              },
-              {
-                "dieId": "roll-1-die-8",
-                "parentDieId": null,
-                "rollIndex": 1,
-                "sequence": 8,
-                "sourceNodeId": "dice@0:5",
-                "subject": "die",
-                "type": "roll",
-                "value": 3
-              },
-              {
-                "dieId": "roll-1-die-9",
-                "parentDieId": null,
-                "rollIndex": 1,
-                "sequence": 9,
-                "sourceNodeId": "dice@0:5",
-                "subject": "die",
-                "type": "roll",
-                "value": 4
-              },
-              {
-                "dieId": "roll-1-die-10",
-                "parentDieId": null,
-                "rollIndex": 1,
-                "sequence": 10,
-                "sourceNodeId": "dice@0:5",
-                "subject": "die",
-                "type": "roll",
-                "value": 1
-              },
-              {
-                "dieId": "roll-1-die-11",
-                "parentDieId": null,
-                "rollIndex": 1,
-                "sequence": 11,
-                "sourceNodeId": "dice@0:5",
-                "subject": "die",
-                "type": "roll",
-                "value": 1
-              },
-              {
-                "dieId": "roll-1-die-12",
-                "parentDieId": null,
-                "rollIndex": 1,
-                "sequence": 12,
-                "sourceNodeId": "dice@0:5",
-                "subject": "die",
-                "type": "roll",
-                "value": 6
-              },
-              {
-                "dieId": "roll-1-die-13",
-                "parentDieId": null,
-                "rollIndex": 1,
-                "sequence": 13,
-                "sourceNodeId": "dice@0:5",
-                "subject": "die",
-                "type": "roll",
-                "value": 2
-              },
-              {
-                "dieId": "roll-1-die-14",
-                "parentDieId": null,
-                "rollIndex": 1,
-                "sequence": 14,
-                "sourceNodeId": "dice@0:5",
-                "subject": "die",
-                "type": "roll",
-                "value": 4
-              },
-              {
-                "dieId": "roll-1-die-15",
-                "parentDieId": null,
-                "rollIndex": 1,
-                "sequence": 15,
-                "sourceNodeId": "dice@0:5",
-                "subject": "die",
-                "type": "roll",
-                "value": 3
-              },
-              {
-                "dieId": "roll-1-die-16",
-                "parentDieId": null,
-                "rollIndex": 1,
-                "sequence": 16,
-                "sourceNodeId": "dice@0:5",
-                "subject": "die",
-                "type": "roll",
-                "value": 3
-              },
-              {
-                "dieId": "roll-1-die-17",
-                "parentDieId": null,
-                "rollIndex": 1,
-                "sequence": 17,
-                "sourceNodeId": "dice@0:5",
-                "subject": "die",
-                "type": "roll",
-                "value": 5
-              },
-              {
-                "dieId": "roll-1-die-18",
-                "parentDieId": null,
-                "rollIndex": 1,
-                "sequence": 18,
-                "sourceNodeId": "dice@0:5",
-                "subject": "die",
-                "type": "roll",
-                "value": 3
-              },
-              {
-                "dieId": "roll-1-die-19",
-                "parentDieId": null,
-                "rollIndex": 1,
-                "sequence": 19,
-                "sourceNodeId": "dice@0:5",
-                "subject": "die",
-                "type": "roll",
-                "value": 6
-              },
-              {
-                "dieId": "roll-1-die-20",
-                "parentDieId": null,
-                "rollIndex": 1,
-                "sequence": 20,
-                "sourceNodeId": "dice@0:5",
-                "subject": "die",
-                "type": "roll",
-                "value": 5
-              },
-              {
-                "dieId": "roll-1-die-21",
-                "parentDieId": null,
-                "rollIndex": 1,
-                "sequence": 21,
-                "sourceNodeId": "dice@0:5",
-                "subject": "die",
-                "type": "roll",
-                "value": 6
-              },
-              {
-                "dieId": "roll-1-die-22",
-                "parentDieId": null,
-                "rollIndex": 1,
-                "sequence": 22,
-                "sourceNodeId": "dice@0:5",
-                "subject": "die",
-                "type": "roll",
-                "value": 3
-              },
-              {
-                "dieId": "roll-1-die-23",
-                "parentDieId": null,
-                "rollIndex": 1,
-                "sequence": 23,
-                "sourceNodeId": "dice@0:5",
-                "subject": "die",
-                "type": "roll",
-                "value": 2
-              },
-              {
-                "dieId": "roll-1-die-24",
-                "parentDieId": null,
-                "rollIndex": 1,
-                "sequence": 24,
-                "sourceNodeId": "dice@0:5",
-                "subject": "die",
-                "type": "roll",
-                "value": 5
-              },
-              {
-                "dieId": "roll-1-die-25",
-                "parentDieId": null,
-                "rollIndex": 1,
-                "sequence": 25,
-                "sourceNodeId": "dice@0:5",
-                "subject": "die",
-                "type": "roll",
-                "value": 1
-              },
-              {
-                "dieId": "roll-1-die-26",
-                "parentDieId": null,
-                "rollIndex": 1,
-                "sequence": 26,
-                "sourceNodeId": "dice@0:5",
-                "subject": "die",
-                "type": "roll",
-                "value": 1
-              },
-              {
-                "dieId": "roll-1-die-27",
-                "parentDieId": null,
-                "rollIndex": 1,
-                "sequence": 27,
-                "sourceNodeId": "dice@0:5",
-                "subject": "die",
-                "type": "roll",
-                "value": 6
-              },
-              {
-                "dieId": "roll-1-die-28",
-                "parentDieId": null,
-                "rollIndex": 1,
-                "sequence": 28,
-                "sourceNodeId": "dice@0:5",
-                "subject": "die",
-                "type": "roll",
-                "value": 4
-              },
-              {
-                "dieId": "roll-1-die-29",
-                "parentDieId": null,
-                "rollIndex": 1,
-                "sequence": 29,
-                "sourceNodeId": "dice@0:5",
-                "subject": "die",
-                "type": "roll",
-                "value": 5
-              },
-              {
-                "dieId": "roll-1-die-30",
-                "parentDieId": null,
-                "rollIndex": 1,
-                "sequence": 30,
-                "sourceNodeId": "dice@0:5",
-                "subject": "die",
-                "type": "roll",
-                "value": 2
-              },
-              {
-                "dieId": "roll-1-die-31",
-                "parentDieId": null,
-                "rollIndex": 1,
-                "sequence": 31,
-                "sourceNodeId": "dice@0:5",
-                "subject": "die",
-                "type": "roll",
-                "value": 6
-              },
-              {
-                "dieId": "roll-1-die-32",
-                "parentDieId": null,
-                "rollIndex": 1,
-                "sequence": 32,
-                "sourceNodeId": "dice@0:5",
-                "subject": "die",
-                "type": "roll",
-                "value": 2
-              },
-              {
-                "dieId": "roll-1-die-33",
-                "parentDieId": null,
-                "rollIndex": 1,
-                "sequence": 33,
-                "sourceNodeId": "dice@0:5",
-                "subject": "die",
-                "type": "roll",
-                "value": 1
-              },
-              {
-                "dieId": "roll-1-die-34",
-                "parentDieId": null,
-                "rollIndex": 1,
-                "sequence": 34,
-                "sourceNodeId": "dice@0:5",
-                "subject": "die",
-                "type": "roll",
-                "value": 6
-              },
-              {
-                "dieId": "roll-1-die-35",
-                "parentDieId": null,
-                "rollIndex": 1,
-                "sequence": 35,
-                "sourceNodeId": "dice@0:5",
-                "subject": "die",
-                "type": "roll",
-                "value": 1
-              },
-              {
-                "dieId": "roll-1-die-36",
-                "parentDieId": null,
-                "rollIndex": 1,
-                "sequence": 36,
-                "sourceNodeId": "dice@0:5",
-                "subject": "die",
-                "type": "roll",
-                "value": 3
-              },
-              {
-                "dieId": "roll-1-die-37",
-                "parentDieId": null,
-                "rollIndex": 1,
-                "sequence": 37,
-                "sourceNodeId": "dice@0:5",
-                "subject": "die",
-                "type": "roll",
-                "value": 6
-              },
-              {
-                "dieId": "roll-1-die-38",
-                "parentDieId": null,
-                "rollIndex": 1,
-                "sequence": 38,
-                "sourceNodeId": "dice@0:5",
-                "subject": "die",
-                "type": "roll",
-                "value": 6
-              },
-              {
-                "dieId": "roll-1-die-39",
-                "parentDieId": null,
-                "rollIndex": 1,
-                "sequence": 39,
-                "sourceNodeId": "dice@0:5",
-                "subject": "die",
-                "type": "roll",
-                "value": 5
-              },
-              {
-                "dieId": "roll-1-die-40",
-                "parentDieId": null,
-                "rollIndex": 1,
-                "sequence": 40,
-                "sourceNodeId": "dice@0:5",
-                "subject": "die",
-                "type": "roll",
-                "value": 3
-              },
-              {
-                "dieId": "roll-1-die-41",
-                "parentDieId": null,
-                "rollIndex": 1,
-                "sequence": 41,
-                "sourceNodeId": "dice@0:5",
-                "subject": "die",
-                "type": "roll",
-                "value": 2
-              },
-              {
-                "dieId": "roll-1-die-42",
-                "parentDieId": null,
-                "rollIndex": 1,
-                "sequence": 42,
-                "sourceNodeId": "dice@0:5",
-                "subject": "die",
-                "type": "roll",
-                "value": 1
-              },
-              {
-                "dieId": "roll-1-die-43",
-                "parentDieId": null,
-                "rollIndex": 1,
-                "sequence": 43,
-                "sourceNodeId": "dice@0:5",
-                "subject": "die",
-                "type": "roll",
-                "value": 4
-              },
-              {
-                "dieId": "roll-1-die-44",
-                "parentDieId": null,
-                "rollIndex": 1,
-                "sequence": 44,
-                "sourceNodeId": "dice@0:5",
-                "subject": "die",
-                "type": "roll",
-                "value": 1
-              },
-              {
-                "dieId": "roll-1-die-45",
-                "parentDieId": null,
-                "rollIndex": 1,
-                "sequence": 45,
-                "sourceNodeId": "dice@0:5",
-                "subject": "die",
-                "type": "roll",
-                "value": 4
-              },
-              {
-                "dieId": "roll-1-die-46",
-                "parentDieId": null,
-                "rollIndex": 1,
-                "sequence": 46,
-                "sourceNodeId": "dice@0:5",
-                "subject": "die",
-                "type": "roll",
-                "value": 3
-              },
-              {
-                "dieId": "roll-1-die-47",
-                "parentDieId": null,
-                "rollIndex": 1,
-                "sequence": 47,
-                "sourceNodeId": "dice@0:5",
-                "subject": "die",
-                "type": "roll",
-                "value": 6
-              },
-              {
-                "dieId": "roll-1-die-48",
-                "parentDieId": null,
-                "rollIndex": 1,
-                "sequence": 48,
-                "sourceNodeId": "dice@0:5",
-                "subject": "die",
-                "type": "roll",
-                "value": 6
-              },
-              {
-                "dieId": "roll-1-die-49",
-                "parentDieId": null,
-                "rollIndex": 1,
-                "sequence": 49,
-                "sourceNodeId": "dice@0:5",
-                "subject": "die",
-                "type": "roll",
-                "value": 5
-              },
-              {
-                "dieId": "roll-1-die-50",
-                "parentDieId": null,
-                "rollIndex": 1,
-                "sequence": 50,
-                "sourceNodeId": "dice@0:5",
-                "subject": "die",
                 "type": "roll",
-                "value": 5
-              },
-              {
-                "dieId": "roll-1-die-51",
-                "parentDieId": null,
-                "rollIndex": 1,
-                "sequence": 51,
-                "sourceNodeId": "dice@0:5",
                 "subject": "die",
-                "type": "roll",
-                "value": 3
-              },
-              {
-                "dieId": "roll-1-die-52",
-                "parentDieId": null,
-                "rollIndex": 1,
-                "sequence": 52,
-                "sourceNodeId": "dice@0:5",
-                "subject": "die",
-                "type": "roll",
-                "value": 3
-              },
-              {
-                "dieId": "roll-1-die-53",
-                "parentDieId": null,
-                "rollIndex": 1,
-                "sequence": 53,
-                "sourceNodeId": "dice@0:5",
-                "subject": "die",
-                "type": "roll",
-                "value": 3
-              },
-              {
-                "dieId": "roll-1-die-54",
-                "parentDieId": null,
-                "rollIndex": 1,
-                "sequence": 54,
-                "sourceNodeId": "dice@0:5",
-                "subject": "die",
-                "type": "roll",
-                "value": 6
-              },
-              {
-                "dieId": "roll-1-die-55",
-                "parentDieId": null,
-                "rollIndex": 1,
-                "sequence": 55,
-                "sourceNodeId": "dice@0:5",
-                "subject": "die",
-                "type": "roll",
-                "value": 5
-              },
-              {
-                "dieId": "roll-1-die-56",
-                "parentDieId": null,
-                "rollIndex": 1,
-                "sequence": 56,
-                "sourceNodeId": "dice@0:5",
-                "subject": "die",
-                "type": "roll",
-                "value": 4
-              },
-              {
-                "dieId": "roll-1-die-57",
-                "parentDieId": null,
-                "rollIndex": 1,
-                "sequence": 57,
-                "sourceNodeId": "dice@0:5",
-                "subject": "die",
-                "type": "roll",
-                "value": 1
-              },
-              {
-                "dieId": "roll-1-die-58",
-                "parentDieId": null,
-                "rollIndex": 1,
-                "sequence": 58,
-                "sourceNodeId": "dice@0:5",
-                "subject": "die",
-                "type": "roll",
-                "value": 6
-              },
-              {
-                "dieId": "roll-1-die-59",
-                "parentDieId": null,
-                "rollIndex": 1,
-                "sequence": 59,
-                "sourceNodeId": "dice@0:5",
-                "subject": "die",
-                "type": "roll",
-                "value": 6
-              },
-              {
-                "dieId": "roll-1-die-60",
-                "parentDieId": null,
-                "rollIndex": 1,
-                "sequence": 60,
-                "sourceNodeId": "dice@0:5",
-                "subject": "die",
-                "type": "roll",
-                "value": 5
-              },
-              {
-                "dieId": "roll-1-die-61",
-                "parentDieId": null,
-                "rollIndex": 1,
-                "sequence": 61,
-                "sourceNodeId": "dice@0:5",
-                "subject": "die",
-                "type": "roll",
-                "value": 4
-              },
-              {
-                "dieId": "roll-1-die-62",
-                "parentDieId": null,
-                "rollIndex": 1,
-                "sequence": 62,
-                "sourceNodeId": "dice@0:5",
-                "subject": "die",
-                "type": "roll",
-                "value": 4
-              },
-              {
-                "dieId": "roll-1-die-63",
-                "parentDieId": null,
-                "rollIndex": 1,
-                "sequence": 63,
-                "sourceNodeId": "dice@0:5",
-                "subject": "die",
-                "type": "roll",
-                "value": 5
-              },
-              {
-                "dieId": "roll-1-die-64",
-                "parentDieId": null,
-                "rollIndex": 1,
-                "sequence": 64,
-                "sourceNodeId": "dice@0:5",
-                "subject": "die",
-                "type": "roll",
-                "value": 1
-              },
-              {
-                "dieId": "roll-1-die-65",
-                "parentDieId": null,
-                "rollIndex": 1,
-                "sequence": 65,
-                "sourceNodeId": "dice@0:5",
-                "subject": "die",
-                "type": "roll",
-                "value": 3
-              },
-              {
-                "dieId": "roll-1-die-66",
-                "parentDieId": null,
-                "rollIndex": 1,
-                "sequence": 66,
-                "sourceNodeId": "dice@0:5",
-                "subject": "die",
-                "type": "roll",
-                "value": 2
-              },
-              {
-                "dieId": "roll-1-die-67",
-                "parentDieId": null,
-                "rollIndex": 1,
-                "sequence": 67,
-                "sourceNodeId": "dice@0:5",
-                "subject": "die",
-                "type": "roll",
-                "value": 2
-              },
-              {
-                "dieId": "roll-1-die-68",
-                "parentDieId": null,
-                "rollIndex": 1,
-                "sequence": 68,
-                "sourceNodeId": "dice@0:5",
-                "subject": "die",
-                "type": "roll",
-                "value": 6
-              },
-              {
-                "dieId": "roll-1-die-69",
-                "parentDieId": null,
-                "rollIndex": 1,
-                "sequence": 69,
-                "sourceNodeId": "dice@0:5",
-                "subject": "die",
-                "type": "roll",
-                "value": 6
-              },
-              {
-                "dieId": "roll-1-die-70",
-                "parentDieId": null,
-                "rollIndex": 1,
-                "sequence": 70,
-                "sourceNodeId": "dice@0:5",
-                "subject": "die",
-                "type": "roll",
-                "value": 4
-              },
-              {
-                "dieId": "roll-1-die-71",
-                "parentDieId": null,
-                "rollIndex": 1,
-                "sequence": 71,
-                "sourceNodeId": "dice@0:5",
-                "subject": "die",
-                "type": "roll",
-                "value": 4
-              },
-              {
-                "dieId": "roll-1-die-72",
-                "parentDieId": null,
-                "rollIndex": 1,
-                "sequence": 72,
-                "sourceNodeId": "dice@0:5",
-                "subject": "die",
-                "type": "roll",
-                "value": 6
-              },
-              {
-                "dieId": "roll-1-die-73",
-                "parentDieId": null,
-                "rollIndex": 1,
-                "sequence": 73,
-                "sourceNodeId": "dice@0:5",
-                "subject": "die",
-                "type": "roll",
-                "value": 1
-              },
-              {
-                "dieId": "roll-1-die-74",
-                "parentDieId": null,
-                "rollIndex": 1,
-                "sequence": 74,
-                "sourceNodeId": "dice@0:5",
-                "subject": "die",
-                "type": "roll",
-                "value": 3
-              },
-              {
-                "dieId": "roll-1-die-75",
-                "parentDieId": null,
-                "rollIndex": 1,
-                "sequence": 75,
-                "sourceNodeId": "dice@0:5",
-                "subject": "die",
-                "type": "roll",
-                "value": 5
-              },
-              {
-                "dieId": "roll-1-die-76",
-                "parentDieId": null,
-                "rollIndex": 1,
-                "sequence": 76,
-                "sourceNodeId": "dice@0:5",
-                "subject": "die",
-                "type": "roll",
-                "value": 4
-              },
-              {
-                "dieId": "roll-1-die-77",
-                "parentDieId": null,
-                "rollIndex": 1,
-                "sequence": 77,
-                "sourceNodeId": "dice@0:5",
-                "subject": "die",
-                "type": "roll",
-                "value": 2
-              },
-              {
-                "dieId": "roll-1-die-78",
-                "parentDieId": null,
-                "rollIndex": 1,
-                "sequence": 78,
-                "sourceNodeId": "dice@0:5",
-                "subject": "die",
-                "type": "roll",
-                "value": 2
-              },
-              {
-                "dieId": "roll-1-die-79",
-                "parentDieId": null,
-                "rollIndex": 1,
-                "sequence": 79,
-                "sourceNodeId": "dice@0:5",
-                "subject": "die",
-                "type": "roll",
-                "value": 5
-              },
-              {
-                "dieId": "roll-1-die-80",
-                "parentDieId": null,
-                "rollIndex": 1,
-                "sequence": 80,
-                "sourceNodeId": "dice@0:5",
-                "subject": "die",
-                "type": "roll",
-                "value": 3
-              },
-              {
-                "dieId": "roll-1-die-81",
-                "parentDieId": null,
-                "rollIndex": 1,
-                "sequence": 81,
-                "sourceNodeId": "dice@0:5",
-                "subject": "die",
-                "type": "roll",
-                "value": 4
-              },
-              {
-                "dieId": "roll-1-die-82",
-                "parentDieId": null,
-                "rollIndex": 1,
-                "sequence": 82,
-                "sourceNodeId": "dice@0:5",
-                "subject": "die",
-                "type": "roll",
-                "value": 3
-              },
-              {
-                "dieId": "roll-1-die-83",
-                "parentDieId": null,
-                "rollIndex": 1,
-                "sequence": 83,
-                "sourceNodeId": "dice@0:5",
-                "subject": "die",
-                "type": "roll",
-                "value": 2
-              },
-              {
-                "dieId": "roll-1-die-84",
-                "parentDieId": null,
-                "rollIndex": 1,
-                "sequence": 84,
-                "sourceNodeId": "dice@0:5",
-                "subject": "die",
-                "type": "roll",
-                "value": 2
-              },
-              {
-                "dieId": "roll-1-die-85",
-                "parentDieId": null,
-                "rollIndex": 1,
-                "sequence": 85,
-                "sourceNodeId": "dice@0:5",
-                "subject": "die",
-                "type": "roll",
-                "value": 4
-              },
-              {
-                "dieId": "roll-1-die-86",
-                "parentDieId": null,
-                "rollIndex": 1,
-                "sequence": 86,
-                "sourceNodeId": "dice@0:5",
-                "subject": "die",
-                "type": "roll",
-                "value": 6
-              },
-              {
-                "dieId": "roll-1-die-87",
-                "parentDieId": null,
-                "rollIndex": 1,
-                "sequence": 87,
-                "sourceNodeId": "dice@0:5",
-                "subject": "die",
-                "type": "roll",
-                "value": 3
-              },
-              {
-                "dieId": "roll-1-die-88",
-                "parentDieId": null,
-                "rollIndex": 1,
-                "sequence": 88,
-                "sourceNodeId": "dice@0:5",
-                "subject": "die",
-                "type": "roll",
-                "value": 3
-              },
-              {
-                "dieId": "roll-1-die-89",
-                "parentDieId": null,
-                "rollIndex": 1,
-                "sequence": 89,
-                "sourceNodeId": "dice@0:5",
-                "subject": "die",
-                "type": "roll",
-                "value": 5
-              },
-              {
-                "dieId": "roll-1-die-90",
-                "parentDieId": null,
-                "rollIndex": 1,
-                "sequence": 90,
-                "sourceNodeId": "dice@0:5",
-                "subject": "die",
-                "type": "roll",
-                "value": 2
-              },
-              {
-                "dieId": "roll-1-die-91",
-                "parentDieId": null,
-                "rollIndex": 1,
-                "sequence": 91,
-                "sourceNodeId": "dice@0:5",
-                "subject": "die",
-                "type": "roll",
-                "value": 2
-              },
-              {
-                "dieId": "roll-1-die-92",
-                "parentDieId": null,
-                "rollIndex": 1,
-                "sequence": 92,
-                "sourceNodeId": "dice@0:5",
-                "subject": "die",
-                "type": "roll",
-                "value": 6
-              },
-              {
-                "dieId": "roll-1-die-93",
-                "parentDieId": null,
-                "rollIndex": 1,
-                "sequence": 93,
-                "sourceNodeId": "dice@0:5",
-                "subject": "die",
-                "type": "roll",
-                "value": 1
-              },
-              {
-                "dieId": "roll-1-die-94",
-                "parentDieId": null,
-                "rollIndex": 1,
-                "sequence": 94,
-                "sourceNodeId": "dice@0:5",
-                "subject": "die",
-                "type": "roll",
-                "value": 3
-              },
-              {
-                "dieId": "roll-1-die-95",
-                "parentDieId": null,
-                "rollIndex": 1,
-                "sequence": 95,
-                "sourceNodeId": "dice@0:5",
-                "subject": "die",
-                "type": "roll",
-                "value": 3
-              },
-              {
-                "dieId": "roll-1-die-96",
-                "parentDieId": null,
-                "rollIndex": 1,
-                "sequence": 96,
-                "sourceNodeId": "dice@0:5",
-                "subject": "die",
-                "type": "roll",
-                "value": 5
-              },
-              {
-                "dieId": "roll-1-die-97",
-                "parentDieId": null,
-                "rollIndex": 1,
-                "sequence": 97,
-                "sourceNodeId": "dice@0:5",
-                "subject": "die",
-                "type": "roll",
-                "value": 6
-              },
-              {
-                "dieId": "roll-1-die-98",
-                "parentDieId": null,
-                "rollIndex": 1,
-                "sequence": 98,
-                "sourceNodeId": "dice@0:5",
-                "subject": "die",
-                "type": "roll",
-                "value": 2
-              },
-              {
-                "dieId": "roll-1-die-99",
-                "parentDieId": null,
-                "rollIndex": 1,
-                "sequence": 99,
-                "sourceNodeId": "dice@0:5",
-                "subject": "die",
-                "type": "roll",
-                "value": 2
-              },
-              {
-                "dieId": "roll-1-die-100",
-                "parentDieId": null,
-                "rollIndex": 1,
-                "sequence": 100,
-                "sourceNodeId": "dice@0:5",
-                "subject": "die",
-                "type": "roll",
-                "value": 2
-              },
-              {
-                "contribution": 2,
                 "dieId": "roll-1-die-1",
                 "parentDieId": null,
                 "rollIndex": 1,
-                "sequence": 101,
                 "sourceNodeId": "dice@0:5",
-                "subject": "die",
-                "type": "include"
+                "value": 2
               },
               {
-                "contribution": 3,
+                "sequence": 2,
+                "type": "roll",
+                "subject": "die",
                 "dieId": "roll-1-die-2",
                 "parentDieId": null,
                 "rollIndex": 1,
-                "sequence": 102,
                 "sourceNodeId": "dice@0:5",
-                "subject": "die",
-                "type": "include"
+                "value": 3
               },
               {
-                "contribution": 4,
+                "sequence": 3,
+                "type": "roll",
+                "subject": "die",
                 "dieId": "roll-1-die-3",
                 "parentDieId": null,
                 "rollIndex": 1,
-                "sequence": 103,
                 "sourceNodeId": "dice@0:5",
-                "subject": "die",
-                "type": "include"
+                "value": 4
               },
               {
-                "contribution": 5,
+                "sequence": 4,
+                "type": "roll",
+                "subject": "die",
                 "dieId": "roll-1-die-4",
                 "parentDieId": null,
                 "rollIndex": 1,
-                "sequence": 104,
                 "sourceNodeId": "dice@0:5",
-                "subject": "die",
-                "type": "include"
+                "value": 5
               },
               {
-                "contribution": 6,
+                "sequence": 5,
+                "type": "roll",
+                "subject": "die",
                 "dieId": "roll-1-die-5",
                 "parentDieId": null,
                 "rollIndex": 1,
-                "sequence": 105,
                 "sourceNodeId": "dice@0:5",
-                "subject": "die",
-                "type": "include"
+                "value": 6
               },
               {
-                "contribution": 3,
+                "sequence": 6,
+                "type": "roll",
+                "subject": "die",
                 "dieId": "roll-1-die-6",
                 "parentDieId": null,
                 "rollIndex": 1,
-                "sequence": 106,
                 "sourceNodeId": "dice@0:5",
-                "subject": "die",
-                "type": "include"
+                "value": 3
               },
               {
-                "contribution": 5,
+                "sequence": 7,
+                "type": "roll",
+                "subject": "die",
                 "dieId": "roll-1-die-7",
                 "parentDieId": null,
                 "rollIndex": 1,
-                "sequence": 107,
                 "sourceNodeId": "dice@0:5",
-                "subject": "die",
-                "type": "include"
+                "value": 5
               },
               {
-                "contribution": 3,
+                "sequence": 8,
+                "type": "roll",
+                "subject": "die",
                 "dieId": "roll-1-die-8",
                 "parentDieId": null,
                 "rollIndex": 1,
-                "sequence": 108,
                 "sourceNodeId": "dice@0:5",
-                "subject": "die",
-                "type": "include"
+                "value": 3
               },
               {
-                "contribution": 4,
+                "sequence": 9,
+                "type": "roll",
+                "subject": "die",
                 "dieId": "roll-1-die-9",
                 "parentDieId": null,
                 "rollIndex": 1,
-                "sequence": 109,
                 "sourceNodeId": "dice@0:5",
-                "subject": "die",
-                "type": "include"
+                "value": 4
               },
               {
-                "contribution": 1,
+                "sequence": 10,
+                "type": "roll",
+                "subject": "die",
                 "dieId": "roll-1-die-10",
                 "parentDieId": null,
                 "rollIndex": 1,
-                "sequence": 110,
                 "sourceNodeId": "dice@0:5",
-                "subject": "die",
-                "type": "include"
+                "value": 1
               },
               {
-                "contribution": 1,
+                "sequence": 11,
+                "type": "roll",
+                "subject": "die",
                 "dieId": "roll-1-die-11",
                 "parentDieId": null,
                 "rollIndex": 1,
-                "sequence": 111,
                 "sourceNodeId": "dice@0:5",
-                "subject": "die",
-                "type": "include"
+                "value": 1
               },
               {
-                "contribution": 6,
+                "sequence": 12,
+                "type": "roll",
+                "subject": "die",
                 "dieId": "roll-1-die-12",
                 "parentDieId": null,
                 "rollIndex": 1,
-                "sequence": 112,
                 "sourceNodeId": "dice@0:5",
-                "subject": "die",
-                "type": "include"
+                "value": 6
               },
               {
-                "contribution": 2,
+                "sequence": 13,
+                "type": "roll",
+                "subject": "die",
                 "dieId": "roll-1-die-13",
                 "parentDieId": null,
                 "rollIndex": 1,
-                "sequence": 113,
                 "sourceNodeId": "dice@0:5",
-                "subject": "die",
-                "type": "include"
+                "value": 2
               },
               {
-                "contribution": 4,
+                "sequence": 14,
+                "type": "roll",
+                "subject": "die",
                 "dieId": "roll-1-die-14",
                 "parentDieId": null,
                 "rollIndex": 1,
-                "sequence": 114,
                 "sourceNodeId": "dice@0:5",
-                "subject": "die",
-                "type": "include"
+                "value": 4
               },
               {
-                "contribution": 3,
+                "sequence": 15,
+                "type": "roll",
+                "subject": "die",
                 "dieId": "roll-1-die-15",
                 "parentDieId": null,
                 "rollIndex": 1,
-                "sequence": 115,
                 "sourceNodeId": "dice@0:5",
-                "subject": "die",
-                "type": "include"
+                "value": 3
               },
               {
-                "contribution": 3,
+                "sequence": 16,
+                "type": "roll",
+                "subject": "die",
                 "dieId": "roll-1-die-16",
                 "parentDieId": null,
                 "rollIndex": 1,
-                "sequence": 116,
                 "sourceNodeId": "dice@0:5",
-                "subject": "die",
-                "type": "include"
+                "value": 3
               },
               {
-                "contribution": 5,
+                "sequence": 17,
+                "type": "roll",
+                "subject": "die",
                 "dieId": "roll-1-die-17",
                 "parentDieId": null,
                 "rollIndex": 1,
-                "sequence": 117,
                 "sourceNodeId": "dice@0:5",
-                "subject": "die",
-                "type": "include"
+                "value": 5
               },
               {
-                "contribution": 3,
+                "sequence": 18,
+                "type": "roll",
+                "subject": "die",
                 "dieId": "roll-1-die-18",
                 "parentDieId": null,
                 "rollIndex": 1,
-                "sequence": 118,
                 "sourceNodeId": "dice@0:5",
-                "subject": "die",
-                "type": "include"
+                "value": 3
               },
               {
-                "contribution": 6,
+                "sequence": 19,
+                "type": "roll",
+                "subject": "die",
                 "dieId": "roll-1-die-19",
                 "parentDieId": null,
                 "rollIndex": 1,
-                "sequence": 119,
                 "sourceNodeId": "dice@0:5",
-                "subject": "die",
-                "type": "include"
+                "value": 6
               },
               {
-                "contribution": 5,
+                "sequence": 20,
+                "type": "roll",
+                "subject": "die",
                 "dieId": "roll-1-die-20",
                 "parentDieId": null,
                 "rollIndex": 1,
-                "sequence": 120,
                 "sourceNodeId": "dice@0:5",
-                "subject": "die",
-                "type": "include"
+                "value": 5
               },
               {
-                "contribution": 6,
+                "sequence": 21,
+                "type": "roll",
+                "subject": "die",
                 "dieId": "roll-1-die-21",
                 "parentDieId": null,
                 "rollIndex": 1,
-                "sequence": 121,
                 "sourceNodeId": "dice@0:5",
-                "subject": "die",
-                "type": "include"
+                "value": 6
               },
               {
-                "contribution": 3,
+                "sequence": 22,
+                "type": "roll",
+                "subject": "die",
                 "dieId": "roll-1-die-22",
                 "parentDieId": null,
                 "rollIndex": 1,
-                "sequence": 122,
                 "sourceNodeId": "dice@0:5",
-                "subject": "die",
-                "type": "include"
+                "value": 3
               },
               {
-                "contribution": 2,
+                "sequence": 23,
+                "type": "roll",
+                "subject": "die",
                 "dieId": "roll-1-die-23",
                 "parentDieId": null,
                 "rollIndex": 1,
-                "sequence": 123,
                 "sourceNodeId": "dice@0:5",
-                "subject": "die",
-                "type": "include"
+                "value": 2
               },
               {
-                "contribution": 5,
+                "sequence": 24,
+                "type": "roll",
+                "subject": "die",
                 "dieId": "roll-1-die-24",
                 "parentDieId": null,
                 "rollIndex": 1,
-                "sequence": 124,
                 "sourceNodeId": "dice@0:5",
-                "subject": "die",
-                "type": "include"
+                "value": 5
               },
               {
-                "contribution": 1,
+                "sequence": 25,
+                "type": "roll",
+                "subject": "die",
                 "dieId": "roll-1-die-25",
                 "parentDieId": null,
                 "rollIndex": 1,
-                "sequence": 125,
                 "sourceNodeId": "dice@0:5",
-                "subject": "die",
-                "type": "include"
+                "value": 1
               },
               {
-                "contribution": 1,
+                "sequence": 26,
+                "type": "roll",
+                "subject": "die",
                 "dieId": "roll-1-die-26",
                 "parentDieId": null,
                 "rollIndex": 1,
-                "sequence": 126,
                 "sourceNodeId": "dice@0:5",
-                "subject": "die",
-                "type": "include"
+                "value": 1
               },
               {
-                "contribution": 6,
+                "sequence": 27,
+                "type": "roll",
+                "subject": "die",
                 "dieId": "roll-1-die-27",
                 "parentDieId": null,
                 "rollIndex": 1,
-                "sequence": 127,
                 "sourceNodeId": "dice@0:5",
-                "subject": "die",
-                "type": "include"
+                "value": 6
               },
               {
-                "contribution": 4,
+                "sequence": 28,
+                "type": "roll",
+                "subject": "die",
                 "dieId": "roll-1-die-28",
                 "parentDieId": null,
                 "rollIndex": 1,
-                "sequence": 128,
                 "sourceNodeId": "dice@0:5",
-                "subject": "die",
-                "type": "include"
+                "value": 4
               },
               {
-                "contribution": 5,
+                "sequence": 29,
+                "type": "roll",
+                "subject": "die",
                 "dieId": "roll-1-die-29",
                 "parentDieId": null,
                 "rollIndex": 1,
-                "sequence": 129,
                 "sourceNodeId": "dice@0:5",
-                "subject": "die",
-                "type": "include"
+                "value": 5
               },
               {
-                "contribution": 2,
+                "sequence": 30,
+                "type": "roll",
+                "subject": "die",
                 "dieId": "roll-1-die-30",
                 "parentDieId": null,
                 "rollIndex": 1,
-                "sequence": 130,
                 "sourceNodeId": "dice@0:5",
-                "subject": "die",
-                "type": "include"
+                "value": 2
               },
               {
-                "contribution": 6,
+                "sequence": 31,
+                "type": "roll",
+                "subject": "die",
                 "dieId": "roll-1-die-31",
                 "parentDieId": null,
                 "rollIndex": 1,
-                "sequence": 131,
                 "sourceNodeId": "dice@0:5",
-                "subject": "die",
-                "type": "include"
+                "value": 6
               },
               {
-                "contribution": 2,
+                "sequence": 32,
+                "type": "roll",
+                "subject": "die",
                 "dieId": "roll-1-die-32",
                 "parentDieId": null,
                 "rollIndex": 1,
-                "sequence": 132,
                 "sourceNodeId": "dice@0:5",
-                "subject": "die",
-                "type": "include"
+                "value": 2
               },
               {
-                "contribution": 1,
+                "sequence": 33,
+                "type": "roll",
+                "subject": "die",
                 "dieId": "roll-1-die-33",
                 "parentDieId": null,
                 "rollIndex": 1,
-                "sequence": 133,
                 "sourceNodeId": "dice@0:5",
-                "subject": "die",
-                "type": "include"
+                "value": 1
               },
               {
-                "contribution": 6,
+                "sequence": 34,
+                "type": "roll",
+                "subject": "die",
                 "dieId": "roll-1-die-34",
                 "parentDieId": null,
                 "rollIndex": 1,
-                "sequence": 134,
                 "sourceNodeId": "dice@0:5",
-                "subject": "die",
-                "type": "include"
+                "value": 6
               },
               {
-                "contribution": 1,
+                "sequence": 35,
+                "type": "roll",
+                "subject": "die",
                 "dieId": "roll-1-die-35",
                 "parentDieId": null,
                 "rollIndex": 1,
-                "sequence": 135,
                 "sourceNodeId": "dice@0:5",
-                "subject": "die",
-                "type": "include"
+                "value": 1
               },
               {
-                "contribution": 3,
+                "sequence": 36,
+                "type": "roll",
+                "subject": "die",
                 "dieId": "roll-1-die-36",
                 "parentDieId": null,
                 "rollIndex": 1,
-                "sequence": 136,
                 "sourceNodeId": "dice@0:5",
-                "subject": "die",
-                "type": "include"
+                "value": 3
               },
               {
-                "contribution": 6,
+                "sequence": 37,
+                "type": "roll",
+                "subject": "die",
                 "dieId": "roll-1-die-37",
                 "parentDieId": null,
                 "rollIndex": 1,
-                "sequence": 137,
                 "sourceNodeId": "dice@0:5",
-                "subject": "die",
-                "type": "include"
+                "value": 6
               },
               {
-                "contribution": 6,
+                "sequence": 38,
+                "type": "roll",
+                "subject": "die",
                 "dieId": "roll-1-die-38",
                 "parentDieId": null,
                 "rollIndex": 1,
-                "sequence": 138,
                 "sourceNodeId": "dice@0:5",
-                "subject": "die",
-                "type": "include"
+                "value": 6
               },
               {
-                "contribution": 5,
+                "sequence": 39,
+                "type": "roll",
+                "subject": "die",
                 "dieId": "roll-1-die-39",
                 "parentDieId": null,
                 "rollIndex": 1,
-                "sequence": 139,
                 "sourceNodeId": "dice@0:5",
-                "subject": "die",
-                "type": "include"
+                "value": 5
               },
               {
-                "contribution": 3,
+                "sequence": 40,
+                "type": "roll",
+                "subject": "die",
                 "dieId": "roll-1-die-40",
                 "parentDieId": null,
                 "rollIndex": 1,
-                "sequence": 140,
                 "sourceNodeId": "dice@0:5",
-                "subject": "die",
-                "type": "include"
+                "value": 3
               },
               {
-                "contribution": 2,
+                "sequence": 41,
+                "type": "roll",
+                "subject": "die",
                 "dieId": "roll-1-die-41",
                 "parentDieId": null,
                 "rollIndex": 1,
-                "sequence": 141,
                 "sourceNodeId": "dice@0:5",
-                "subject": "die",
-                "type": "include"
+                "value": 2
               },
               {
-                "contribution": 1,
+                "sequence": 42,
+                "type": "roll",
+                "subject": "die",
                 "dieId": "roll-1-die-42",
                 "parentDieId": null,
                 "rollIndex": 1,
-                "sequence": 142,
                 "sourceNodeId": "dice@0:5",
-                "subject": "die",
-                "type": "include"
+                "value": 1
               },
               {
-                "contribution": 4,
+                "sequence": 43,
+                "type": "roll",
+                "subject": "die",
                 "dieId": "roll-1-die-43",
                 "parentDieId": null,
                 "rollIndex": 1,
-                "sequence": 143,
                 "sourceNodeId": "dice@0:5",
-                "subject": "die",
-                "type": "include"
+                "value": 4
               },
               {
-                "contribution": 1,
+                "sequence": 44,
+                "type": "roll",
+                "subject": "die",
                 "dieId": "roll-1-die-44",
                 "parentDieId": null,
                 "rollIndex": 1,
-                "sequence": 144,
                 "sourceNodeId": "dice@0:5",
-                "subject": "die",
-                "type": "include"
+                "value": 1
               },
               {
-                "contribution": 4,
+                "sequence": 45,
+                "type": "roll",
+                "subject": "die",
                 "dieId": "roll-1-die-45",
                 "parentDieId": null,
                 "rollIndex": 1,
-                "sequence": 145,
                 "sourceNodeId": "dice@0:5",
-                "subject": "die",
-                "type": "include"
+                "value": 4
               },
               {
-                "contribution": 3,
+                "sequence": 46,
+                "type": "roll",
+                "subject": "die",
                 "dieId": "roll-1-die-46",
                 "parentDieId": null,
                 "rollIndex": 1,
-                "sequence": 146,
                 "sourceNodeId": "dice@0:5",
-                "subject": "die",
-                "type": "include"
+                "value": 3
               },
               {
-                "contribution": 6,
+                "sequence": 47,
+                "type": "roll",
+                "subject": "die",
                 "dieId": "roll-1-die-47",
                 "parentDieId": null,
                 "rollIndex": 1,
-                "sequence": 147,
                 "sourceNodeId": "dice@0:5",
-                "subject": "die",
-                "type": "include"
+                "value": 6
               },
               {
-                "contribution": 6,
+                "sequence": 48,
+                "type": "roll",
+                "subject": "die",
                 "dieId": "roll-1-die-48",
                 "parentDieId": null,
                 "rollIndex": 1,
-                "sequence": 148,
                 "sourceNodeId": "dice@0:5",
-                "subject": "die",
-                "type": "include"
+                "value": 6
               },
               {
-                "contribution": 5,
+                "sequence": 49,
+                "type": "roll",
+                "subject": "die",
                 "dieId": "roll-1-die-49",
                 "parentDieId": null,
                 "rollIndex": 1,
-                "sequence": 149,
                 "sourceNodeId": "dice@0:5",
-                "subject": "die",
-                "type": "include"
+                "value": 5
               },
               {
-                "contribution": 5,
+                "sequence": 50,
+                "type": "roll",
+                "subject": "die",
                 "dieId": "roll-1-die-50",
                 "parentDieId": null,
                 "rollIndex": 1,
-                "sequence": 150,
                 "sourceNodeId": "dice@0:5",
-                "subject": "die",
-                "type": "include"
+                "value": 5
               },
               {
-                "contribution": 3,
+                "sequence": 51,
+                "type": "roll",
+                "subject": "die",
                 "dieId": "roll-1-die-51",
                 "parentDieId": null,
                 "rollIndex": 1,
-                "sequence": 151,
                 "sourceNodeId": "dice@0:5",
-                "subject": "die",
-                "type": "include"
+                "value": 3
               },
               {
-                "contribution": 3,
+                "sequence": 52,
+                "type": "roll",
+                "subject": "die",
                 "dieId": "roll-1-die-52",
                 "parentDieId": null,
                 "rollIndex": 1,
-                "sequence": 152,
                 "sourceNodeId": "dice@0:5",
-                "subject": "die",
-                "type": "include"
+                "value": 3
               },
               {
-                "contribution": 3,
+                "sequence": 53,
+                "type": "roll",
+                "subject": "die",
                 "dieId": "roll-1-die-53",
                 "parentDieId": null,
                 "rollIndex": 1,
-                "sequence": 153,
                 "sourceNodeId": "dice@0:5",
-                "subject": "die",
-                "type": "include"
+                "value": 3
               },
               {
-                "contribution": 6,
+                "sequence": 54,
+                "type": "roll",
+                "subject": "die",
                 "dieId": "roll-1-die-54",
                 "parentDieId": null,
                 "rollIndex": 1,
-                "sequence": 154,
                 "sourceNodeId": "dice@0:5",
-                "subject": "die",
-                "type": "include"
+                "value": 6
               },
               {
-                "contribution": 5,
+                "sequence": 55,
+                "type": "roll",
+                "subject": "die",
                 "dieId": "roll-1-die-55",
                 "parentDieId": null,
                 "rollIndex": 1,
-                "sequence": 155,
                 "sourceNodeId": "dice@0:5",
-                "subject": "die",
-                "type": "include"
+                "value": 5
               },
               {
-                "contribution": 4,
+                "sequence": 56,
+                "type": "roll",
+                "subject": "die",
                 "dieId": "roll-1-die-56",
                 "parentDieId": null,
                 "rollIndex": 1,
-                "sequence": 156,
                 "sourceNodeId": "dice@0:5",
-                "subject": "die",
-                "type": "include"
+                "value": 4
               },
               {
-                "contribution": 1,
+                "sequence": 57,
+                "type": "roll",
+                "subject": "die",
                 "dieId": "roll-1-die-57",
                 "parentDieId": null,
                 "rollIndex": 1,
-                "sequence": 157,
                 "sourceNodeId": "dice@0:5",
-                "subject": "die",
-                "type": "include"
+                "value": 1
               },
               {
-                "contribution": 6,
+                "sequence": 58,
+                "type": "roll",
+                "subject": "die",
                 "dieId": "roll-1-die-58",
                 "parentDieId": null,
                 "rollIndex": 1,
-                "sequence": 158,
                 "sourceNodeId": "dice@0:5",
-                "subject": "die",
-                "type": "include"
+                "value": 6
               },
               {
-                "contribution": 6,
+                "sequence": 59,
+                "type": "roll",
+                "subject": "die",
                 "dieId": "roll-1-die-59",
                 "parentDieId": null,
                 "rollIndex": 1,
-                "sequence": 159,
                 "sourceNodeId": "dice@0:5",
-                "subject": "die",
-                "type": "include"
+                "value": 6
               },
               {
-                "contribution": 5,
+                "sequence": 60,
+                "type": "roll",
+                "subject": "die",
                 "dieId": "roll-1-die-60",
                 "parentDieId": null,
                 "rollIndex": 1,
-                "sequence": 160,
                 "sourceNodeId": "dice@0:5",
-                "subject": "die",
-                "type": "include"
+                "value": 5
               },
               {
-                "contribution": 4,
+                "sequence": 61,
+                "type": "roll",
+                "subject": "die",
                 "dieId": "roll-1-die-61",
                 "parentDieId": null,
                 "rollIndex": 1,
-                "sequence": 161,
                 "sourceNodeId": "dice@0:5",
-                "subject": "die",
-                "type": "include"
+                "value": 4
               },
               {
-                "contribution": 4,
+                "sequence": 62,
+                "type": "roll",
+                "subject": "die",
                 "dieId": "roll-1-die-62",
                 "parentDieId": null,
                 "rollIndex": 1,
-                "sequence": 162,
                 "sourceNodeId": "dice@0:5",
-                "subject": "die",
-                "type": "include"
+                "value": 4
               },
               {
-                "contribution": 5,
+                "sequence": 63,
+                "type": "roll",
+                "subject": "die",
                 "dieId": "roll-1-die-63",
                 "parentDieId": null,
                 "rollIndex": 1,
-                "sequence": 163,
                 "sourceNodeId": "dice@0:5",
-                "subject": "die",
-                "type": "include"
+                "value": 5
               },
               {
-                "contribution": 1,
+                "sequence": 64,
+                "type": "roll",
+                "subject": "die",
                 "dieId": "roll-1-die-64",
                 "parentDieId": null,
                 "rollIndex": 1,
-                "sequence": 164,
                 "sourceNodeId": "dice@0:5",
-                "subject": "die",
-                "type": "include"
+                "value": 1
               },
               {
-                "contribution": 3,
+                "sequence": 65,
+                "type": "roll",
+                "subject": "die",
                 "dieId": "roll-1-die-65",
                 "parentDieId": null,
                 "rollIndex": 1,
-                "sequence": 165,
                 "sourceNodeId": "dice@0:5",
-                "subject": "die",
-                "type": "include"
+                "value": 3
               },
               {
-                "contribution": 2,
+                "sequence": 66,
+                "type": "roll",
+                "subject": "die",
                 "dieId": "roll-1-die-66",
                 "parentDieId": null,
                 "rollIndex": 1,
-                "sequence": 166,
                 "sourceNodeId": "dice@0:5",
-                "subject": "die",
-                "type": "include"
+                "value": 2
               },
               {
-                "contribution": 2,
+                "sequence": 67,
+                "type": "roll",
+                "subject": "die",
                 "dieId": "roll-1-die-67",
                 "parentDieId": null,
                 "rollIndex": 1,
-                "sequence": 167,
                 "sourceNodeId": "dice@0:5",
-                "subject": "die",
-                "type": "include"
+                "value": 2
               },
               {
-                "contribution": 6,
+                "sequence": 68,
+                "type": "roll",
+                "subject": "die",
                 "dieId": "roll-1-die-68",
                 "parentDieId": null,
                 "rollIndex": 1,
-                "sequence": 168,
                 "sourceNodeId": "dice@0:5",
-                "subject": "die",
-                "type": "include"
+                "value": 6
               },
               {
-                "contribution": 6,
+                "sequence": 69,
+                "type": "roll",
+                "subject": "die",
                 "dieId": "roll-1-die-69",
                 "parentDieId": null,
                 "rollIndex": 1,
-                "sequence": 169,
                 "sourceNodeId": "dice@0:5",
-                "subject": "die",
-                "type": "include"
+                "value": 6
               },
               {
-                "contribution": 4,
+                "sequence": 70,
+                "type": "roll",
+                "subject": "die",
                 "dieId": "roll-1-die-70",
                 "parentDieId": null,
                 "rollIndex": 1,
-                "sequence": 170,
                 "sourceNodeId": "dice@0:5",
-                "subject": "die",
-                "type": "include"
+                "value": 4
               },
               {
-                "contribution": 4,
+                "sequence": 71,
+                "type": "roll",
+                "subject": "die",
                 "dieId": "roll-1-die-71",
                 "parentDieId": null,
                 "rollIndex": 1,
-                "sequence": 171,
                 "sourceNodeId": "dice@0:5",
-                "subject": "die",
-                "type": "include"
+                "value": 4
               },
               {
-                "contribution": 6,
+                "sequence": 72,
+                "type": "roll",
+                "subject": "die",
                 "dieId": "roll-1-die-72",
                 "parentDieId": null,
                 "rollIndex": 1,
-                "sequence": 172,
                 "sourceNodeId": "dice@0:5",
-                "subject": "die",
-                "type": "include"
+                "value": 6
               },
               {
-                "contribution": 1,
+                "sequence": 73,
+                "type": "roll",
+                "subject": "die",
                 "dieId": "roll-1-die-73",
                 "parentDieId": null,
                 "rollIndex": 1,
-                "sequence": 173,
                 "sourceNodeId": "dice@0:5",
-                "subject": "die",
-                "type": "include"
+                "value": 1
               },
               {
-                "contribution": 3,
+                "sequence": 74,
+                "type": "roll",
+                "subject": "die",
                 "dieId": "roll-1-die-74",
                 "parentDieId": null,
                 "rollIndex": 1,
-                "sequence": 174,
                 "sourceNodeId": "dice@0:5",
-                "subject": "die",
-                "type": "include"
+                "value": 3
               },
               {
-                "contribution": 5,
+                "sequence": 75,
+                "type": "roll",
+                "subject": "die",
                 "dieId": "roll-1-die-75",
                 "parentDieId": null,
                 "rollIndex": 1,
-                "sequence": 175,
                 "sourceNodeId": "dice@0:5",
-                "subject": "die",
-                "type": "include"
+                "value": 5
               },
               {
-                "contribution": 4,
+                "sequence": 76,
+                "type": "roll",
+                "subject": "die",
                 "dieId": "roll-1-die-76",
                 "parentDieId": null,
                 "rollIndex": 1,
-                "sequence": 176,
                 "sourceNodeId": "dice@0:5",
-                "subject": "die",
-                "type": "include"
+                "value": 4
               },
               {
-                "contribution": 2,
+                "sequence": 77,
+                "type": "roll",
+                "subject": "die",
                 "dieId": "roll-1-die-77",
                 "parentDieId": null,
                 "rollIndex": 1,
-                "sequence": 177,
                 "sourceNodeId": "dice@0:5",
-                "subject": "die",
-                "type": "include"
+                "value": 2
               },
               {
-                "contribution": 2,
+                "sequence": 78,
+                "type": "roll",
+                "subject": "die",
                 "dieId": "roll-1-die-78",
                 "parentDieId": null,
                 "rollIndex": 1,
-                "sequence": 178,
                 "sourceNodeId": "dice@0:5",
-                "subject": "die",
-                "type": "include"
+                "value": 2
               },
               {
-                "contribution": 5,
+                "sequence": 79,
+                "type": "roll",
+                "subject": "die",
                 "dieId": "roll-1-die-79",
                 "parentDieId": null,
                 "rollIndex": 1,
-                "sequence": 179,
                 "sourceNodeId": "dice@0:5",
-                "subject": "die",
-                "type": "include"
+                "value": 5
               },
               {
-                "contribution": 3,
+                "sequence": 80,
+                "type": "roll",
+                "subject": "die",
                 "dieId": "roll-1-die-80",
                 "parentDieId": null,
                 "rollIndex": 1,
-                "sequence": 180,
                 "sourceNodeId": "dice@0:5",
-                "subject": "die",
-                "type": "include"
+                "value": 3
               },
               {
-                "contribution": 4,
+                "sequence": 81,
+                "type": "roll",
+                "subject": "die",
                 "dieId": "roll-1-die-81",
                 "parentDieId": null,
                 "rollIndex": 1,
-                "sequence": 181,
                 "sourceNodeId": "dice@0:5",
-                "subject": "die",
-                "type": "include"
+                "value": 4
               },
               {
-                "contribution": 3,
+                "sequence": 82,
+                "type": "roll",
+                "subject": "die",
                 "dieId": "roll-1-die-82",
                 "parentDieId": null,
                 "rollIndex": 1,
-                "sequence": 182,
                 "sourceNodeId": "dice@0:5",
-                "subject": "die",
-                "type": "include"
+                "value": 3
               },
               {
-                "contribution": 2,
+                "sequence": 83,
+                "type": "roll",
+                "subject": "die",
                 "dieId": "roll-1-die-83",
                 "parentDieId": null,
                 "rollIndex": 1,
-                "sequence": 183,
                 "sourceNodeId": "dice@0:5",
-                "subject": "die",
-                "type": "include"
+                "value": 2
               },
               {
-                "contribution": 2,
+                "sequence": 84,
+                "type": "roll",
+                "subject": "die",
                 "dieId": "roll-1-die-84",
                 "parentDieId": null,
                 "rollIndex": 1,
-                "sequence": 184,
                 "sourceNodeId": "dice@0:5",
-                "subject": "die",
-                "type": "include"
+                "value": 2
               },
               {
-                "contribution": 4,
+                "sequence": 85,
+                "type": "roll",
+                "subject": "die",
                 "dieId": "roll-1-die-85",
                 "parentDieId": null,
                 "rollIndex": 1,
-                "sequence": 185,
                 "sourceNodeId": "dice@0:5",
-                "subject": "die",
-                "type": "include"
+                "value": 4
               },
               {
-                "contribution": 6,
+                "sequence": 86,
+                "type": "roll",
+                "subject": "die",
                 "dieId": "roll-1-die-86",
                 "parentDieId": null,
                 "rollIndex": 1,
-                "sequence": 186,
                 "sourceNodeId": "dice@0:5",
-                "subject": "die",
-                "type": "include"
+                "value": 6
               },
               {
-                "contribution": 3,
+                "sequence": 87,
+                "type": "roll",
+                "subject": "die",
                 "dieId": "roll-1-die-87",
                 "parentDieId": null,
                 "rollIndex": 1,
-                "sequence": 187,
                 "sourceNodeId": "dice@0:5",
-                "subject": "die",
-                "type": "include"
+                "value": 3
               },
               {
-                "contribution": 3,
+                "sequence": 88,
+                "type": "roll",
+                "subject": "die",
                 "dieId": "roll-1-die-88",
                 "parentDieId": null,
                 "rollIndex": 1,
-                "sequence": 188,
                 "sourceNodeId": "dice@0:5",
-                "subject": "die",
-                "type": "include"
+                "value": 3
               },
               {
-                "contribution": 5,
+                "sequence": 89,
+                "type": "roll",
+                "subject": "die",
                 "dieId": "roll-1-die-89",
                 "parentDieId": null,
                 "rollIndex": 1,
-                "sequence": 189,
                 "sourceNodeId": "dice@0:5",
-                "subject": "die",
-                "type": "include"
+                "value": 5
               },
               {
-                "contribution": 2,
+                "sequence": 90,
+                "type": "roll",
+                "subject": "die",
                 "dieId": "roll-1-die-90",
                 "parentDieId": null,
                 "rollIndex": 1,
-                "sequence": 190,
                 "sourceNodeId": "dice@0:5",
-                "subject": "die",
-                "type": "include"
+                "value": 2
               },
               {
-                "contribution": 2,
+                "sequence": 91,
+                "type": "roll",
+                "subject": "die",
                 "dieId": "roll-1-die-91",
                 "parentDieId": null,
                 "rollIndex": 1,
-                "sequence": 191,
                 "sourceNodeId": "dice@0:5",
-                "subject": "die",
-                "type": "include"
+                "value": 2
               },
               {
-                "contribution": 6,
+                "sequence": 92,
+                "type": "roll",
+                "subject": "die",
                 "dieId": "roll-1-die-92",
                 "parentDieId": null,
                 "rollIndex": 1,
-                "sequence": 192,
                 "sourceNodeId": "dice@0:5",
-                "subject": "die",
-                "type": "include"
+                "value": 6
               },
               {
-                "contribution": 1,
+                "sequence": 93,
+                "type": "roll",
+                "subject": "die",
                 "dieId": "roll-1-die-93",
                 "parentDieId": null,
                 "rollIndex": 1,
-                "sequence": 193,
                 "sourceNodeId": "dice@0:5",
-                "subject": "die",
-                "type": "include"
+                "value": 1
               },
               {
-                "contribution": 3,
+                "sequence": 94,
+                "type": "roll",
+                "subject": "die",
                 "dieId": "roll-1-die-94",
                 "parentDieId": null,
                 "rollIndex": 1,
-                "sequence": 194,
                 "sourceNodeId": "dice@0:5",
-                "subject": "die",
-                "type": "include"
+                "value": 3
               },
               {
-                "contribution": 3,
+                "sequence": 95,
+                "type": "roll",
+                "subject": "die",
                 "dieId": "roll-1-die-95",
                 "parentDieId": null,
                 "rollIndex": 1,
-                "sequence": 195,
                 "sourceNodeId": "dice@0:5",
-                "subject": "die",
-                "type": "include"
+                "value": 3
               },
               {
-                "contribution": 5,
+                "sequence": 96,
+                "type": "roll",
+                "subject": "die",
                 "dieId": "roll-1-die-96",
                 "parentDieId": null,
                 "rollIndex": 1,
-                "sequence": 196,
                 "sourceNodeId": "dice@0:5",
-                "subject": "die",
-                "type": "include"
+                "value": 5
               },
               {
-                "contribution": 6,
+                "sequence": 97,
+                "type": "roll",
+                "subject": "die",
                 "dieId": "roll-1-die-97",
                 "parentDieId": null,
                 "rollIndex": 1,
-                "sequence": 197,
                 "sourceNodeId": "dice@0:5",
-                "subject": "die",
-                "type": "include"
+                "value": 6
               },
               {
-                "contribution": 2,
+                "sequence": 98,
+                "type": "roll",
+                "subject": "die",
                 "dieId": "roll-1-die-98",
                 "parentDieId": null,
                 "rollIndex": 1,
-                "sequence": 198,
                 "sourceNodeId": "dice@0:5",
-                "subject": "die",
-                "type": "include"
+                "value": 2
               },
               {
-                "contribution": 2,
+                "sequence": 99,
+                "type": "roll",
+                "subject": "die",
                 "dieId": "roll-1-die-99",
                 "parentDieId": null,
                 "rollIndex": 1,
-                "sequence": 199,
                 "sourceNodeId": "dice@0:5",
-                "subject": "die",
-                "type": "include"
+                "value": 2
               },
               {
-                "contribution": 2,
+                "sequence": 100,
+                "type": "roll",
+                "subject": "die",
                 "dieId": "roll-1-die-100",
                 "parentDieId": null,
                 "rollIndex": 1,
-                "sequence": 200,
                 "sourceNodeId": "dice@0:5",
-                "subject": "die",
-                "type": "include"
+                "value": 2
               },
               {
-                "contribution": 365,
+                "sequence": 101,
+                "type": "include",
+                "subject": "die",
+                "dieId": "roll-1-die-1",
+                "parentDieId": null,
+                "rollIndex": 1,
+                "sourceNodeId": "dice@0:5",
+                "contribution": 2
+              },
+              {
+                "sequence": 102,
+                "type": "include",
+                "subject": "die",
+                "dieId": "roll-1-die-2",
+                "parentDieId": null,
+                "rollIndex": 1,
+                "sourceNodeId": "dice@0:5",
+                "contribution": 3
+              },
+              {
+                "sequence": 103,
+                "type": "include",
+                "subject": "die",
+                "dieId": "roll-1-die-3",
+                "parentDieId": null,
+                "rollIndex": 1,
+                "sourceNodeId": "dice@0:5",
+                "contribution": 4
+              },
+              {
+                "sequence": 104,
+                "type": "include",
+                "subject": "die",
+                "dieId": "roll-1-die-4",
+                "parentDieId": null,
+                "rollIndex": 1,
+                "sourceNodeId": "dice@0:5",
+                "contribution": 5
+              },
+              {
+                "sequence": 105,
+                "type": "include",
+                "subject": "die",
+                "dieId": "roll-1-die-5",
+                "parentDieId": null,
+                "rollIndex": 1,
+                "sourceNodeId": "dice@0:5",
+                "contribution": 6
+              },
+              {
+                "sequence": 106,
+                "type": "include",
+                "subject": "die",
+                "dieId": "roll-1-die-6",
+                "parentDieId": null,
+                "rollIndex": 1,
+                "sourceNodeId": "dice@0:5",
+                "contribution": 3
+              },
+              {
+                "sequence": 107,
+                "type": "include",
+                "subject": "die",
+                "dieId": "roll-1-die-7",
+                "parentDieId": null,
+                "rollIndex": 1,
+                "sourceNodeId": "dice@0:5",
+                "contribution": 5
+              },
+              {
+                "sequence": 108,
+                "type": "include",
+                "subject": "die",
+                "dieId": "roll-1-die-8",
+                "parentDieId": null,
+                "rollIndex": 1,
+                "sourceNodeId": "dice@0:5",
+                "contribution": 3
+              },
+              {
+                "sequence": 109,
+                "type": "include",
+                "subject": "die",
+                "dieId": "roll-1-die-9",
+                "parentDieId": null,
+                "rollIndex": 1,
+                "sourceNodeId": "dice@0:5",
+                "contribution": 4
+              },
+              {
+                "sequence": 110,
+                "type": "include",
+                "subject": "die",
+                "dieId": "roll-1-die-10",
+                "parentDieId": null,
+                "rollIndex": 1,
+                "sourceNodeId": "dice@0:5",
+                "contribution": 1
+              },
+              {
+                "sequence": 111,
+                "type": "include",
+                "subject": "die",
+                "dieId": "roll-1-die-11",
+                "parentDieId": null,
+                "rollIndex": 1,
+                "sourceNodeId": "dice@0:5",
+                "contribution": 1
+              },
+              {
+                "sequence": 112,
+                "type": "include",
+                "subject": "die",
+                "dieId": "roll-1-die-12",
+                "parentDieId": null,
+                "rollIndex": 1,
+                "sourceNodeId": "dice@0:5",
+                "contribution": 6
+              },
+              {
+                "sequence": 113,
+                "type": "include",
+                "subject": "die",
+                "dieId": "roll-1-die-13",
+                "parentDieId": null,
+                "rollIndex": 1,
+                "sourceNodeId": "dice@0:5",
+                "contribution": 2
+              },
+              {
+                "sequence": 114,
+                "type": "include",
+                "subject": "die",
+                "dieId": "roll-1-die-14",
+                "parentDieId": null,
+                "rollIndex": 1,
+                "sourceNodeId": "dice@0:5",
+                "contribution": 4
+              },
+              {
+                "sequence": 115,
+                "type": "include",
+                "subject": "die",
+                "dieId": "roll-1-die-15",
+                "parentDieId": null,
+                "rollIndex": 1,
+                "sourceNodeId": "dice@0:5",
+                "contribution": 3
+              },
+              {
+                "sequence": 116,
+                "type": "include",
+                "subject": "die",
+                "dieId": "roll-1-die-16",
+                "parentDieId": null,
+                "rollIndex": 1,
+                "sourceNodeId": "dice@0:5",
+                "contribution": 3
+              },
+              {
+                "sequence": 117,
+                "type": "include",
+                "subject": "die",
+                "dieId": "roll-1-die-17",
+                "parentDieId": null,
+                "rollIndex": 1,
+                "sourceNodeId": "dice@0:5",
+                "contribution": 5
+              },
+              {
+                "sequence": 118,
+                "type": "include",
+                "subject": "die",
+                "dieId": "roll-1-die-18",
+                "parentDieId": null,
+                "rollIndex": 1,
+                "sourceNodeId": "dice@0:5",
+                "contribution": 3
+              },
+              {
+                "sequence": 119,
+                "type": "include",
+                "subject": "die",
+                "dieId": "roll-1-die-19",
+                "parentDieId": null,
+                "rollIndex": 1,
+                "sourceNodeId": "dice@0:5",
+                "contribution": 6
+              },
+              {
+                "sequence": 120,
+                "type": "include",
+                "subject": "die",
+                "dieId": "roll-1-die-20",
+                "parentDieId": null,
+                "rollIndex": 1,
+                "sourceNodeId": "dice@0:5",
+                "contribution": 5
+              },
+              {
+                "sequence": 121,
+                "type": "include",
+                "subject": "die",
+                "dieId": "roll-1-die-21",
+                "parentDieId": null,
+                "rollIndex": 1,
+                "sourceNodeId": "dice@0:5",
+                "contribution": 6
+              },
+              {
+                "sequence": 122,
+                "type": "include",
+                "subject": "die",
+                "dieId": "roll-1-die-22",
+                "parentDieId": null,
+                "rollIndex": 1,
+                "sourceNodeId": "dice@0:5",
+                "contribution": 3
+              },
+              {
+                "sequence": 123,
+                "type": "include",
+                "subject": "die",
+                "dieId": "roll-1-die-23",
+                "parentDieId": null,
+                "rollIndex": 1,
+                "sourceNodeId": "dice@0:5",
+                "contribution": 2
+              },
+              {
+                "sequence": 124,
+                "type": "include",
+                "subject": "die",
+                "dieId": "roll-1-die-24",
+                "parentDieId": null,
+                "rollIndex": 1,
+                "sourceNodeId": "dice@0:5",
+                "contribution": 5
+              },
+              {
+                "sequence": 125,
+                "type": "include",
+                "subject": "die",
+                "dieId": "roll-1-die-25",
+                "parentDieId": null,
+                "rollIndex": 1,
+                "sourceNodeId": "dice@0:5",
+                "contribution": 1
+              },
+              {
+                "sequence": 126,
+                "type": "include",
+                "subject": "die",
+                "dieId": "roll-1-die-26",
+                "parentDieId": null,
+                "rollIndex": 1,
+                "sourceNodeId": "dice@0:5",
+                "contribution": 1
+              },
+              {
+                "sequence": 127,
+                "type": "include",
+                "subject": "die",
+                "dieId": "roll-1-die-27",
+                "parentDieId": null,
+                "rollIndex": 1,
+                "sourceNodeId": "dice@0:5",
+                "contribution": 6
+              },
+              {
+                "sequence": 128,
+                "type": "include",
+                "subject": "die",
+                "dieId": "roll-1-die-28",
+                "parentDieId": null,
+                "rollIndex": 1,
+                "sourceNodeId": "dice@0:5",
+                "contribution": 4
+              },
+              {
+                "sequence": 129,
+                "type": "include",
+                "subject": "die",
+                "dieId": "roll-1-die-29",
+                "parentDieId": null,
+                "rollIndex": 1,
+                "sourceNodeId": "dice@0:5",
+                "contribution": 5
+              },
+              {
+                "sequence": 130,
+                "type": "include",
+                "subject": "die",
+                "dieId": "roll-1-die-30",
+                "parentDieId": null,
+                "rollIndex": 1,
+                "sourceNodeId": "dice@0:5",
+                "contribution": 2
+              },
+              {
+                "sequence": 131,
+                "type": "include",
+                "subject": "die",
+                "dieId": "roll-1-die-31",
+                "parentDieId": null,
+                "rollIndex": 1,
+                "sourceNodeId": "dice@0:5",
+                "contribution": 6
+              },
+              {
+                "sequence": 132,
+                "type": "include",
+                "subject": "die",
+                "dieId": "roll-1-die-32",
+                "parentDieId": null,
+                "rollIndex": 1,
+                "sourceNodeId": "dice@0:5",
+                "contribution": 2
+              },
+              {
+                "sequence": 133,
+                "type": "include",
+                "subject": "die",
+                "dieId": "roll-1-die-33",
+                "parentDieId": null,
+                "rollIndex": 1,
+                "sourceNodeId": "dice@0:5",
+                "contribution": 1
+              },
+              {
+                "sequence": 134,
+                "type": "include",
+                "subject": "die",
+                "dieId": "roll-1-die-34",
+                "parentDieId": null,
+                "rollIndex": 1,
+                "sourceNodeId": "dice@0:5",
+                "contribution": 6
+              },
+              {
+                "sequence": 135,
+                "type": "include",
+                "subject": "die",
+                "dieId": "roll-1-die-35",
+                "parentDieId": null,
+                "rollIndex": 1,
+                "sourceNodeId": "dice@0:5",
+                "contribution": 1
+              },
+              {
+                "sequence": 136,
+                "type": "include",
+                "subject": "die",
+                "dieId": "roll-1-die-36",
+                "parentDieId": null,
+                "rollIndex": 1,
+                "sourceNodeId": "dice@0:5",
+                "contribution": 3
+              },
+              {
+                "sequence": 137,
+                "type": "include",
+                "subject": "die",
+                "dieId": "roll-1-die-37",
+                "parentDieId": null,
+                "rollIndex": 1,
+                "sourceNodeId": "dice@0:5",
+                "contribution": 6
+              },
+              {
+                "sequence": 138,
+                "type": "include",
+                "subject": "die",
+                "dieId": "roll-1-die-38",
+                "parentDieId": null,
+                "rollIndex": 1,
+                "sourceNodeId": "dice@0:5",
+                "contribution": 6
+              },
+              {
+                "sequence": 139,
+                "type": "include",
+                "subject": "die",
+                "dieId": "roll-1-die-39",
+                "parentDieId": null,
+                "rollIndex": 1,
+                "sourceNodeId": "dice@0:5",
+                "contribution": 5
+              },
+              {
+                "sequence": 140,
+                "type": "include",
+                "subject": "die",
+                "dieId": "roll-1-die-40",
+                "parentDieId": null,
+                "rollIndex": 1,
+                "sourceNodeId": "dice@0:5",
+                "contribution": 3
+              },
+              {
+                "sequence": 141,
+                "type": "include",
+                "subject": "die",
+                "dieId": "roll-1-die-41",
+                "parentDieId": null,
+                "rollIndex": 1,
+                "sourceNodeId": "dice@0:5",
+                "contribution": 2
+              },
+              {
+                "sequence": 142,
+                "type": "include",
+                "subject": "die",
+                "dieId": "roll-1-die-42",
+                "parentDieId": null,
+                "rollIndex": 1,
+                "sourceNodeId": "dice@0:5",
+                "contribution": 1
+              },
+              {
+                "sequence": 143,
+                "type": "include",
+                "subject": "die",
+                "dieId": "roll-1-die-43",
+                "parentDieId": null,
+                "rollIndex": 1,
+                "sourceNodeId": "dice@0:5",
+                "contribution": 4
+              },
+              {
+                "sequence": 144,
+                "type": "include",
+                "subject": "die",
+                "dieId": "roll-1-die-44",
+                "parentDieId": null,
+                "rollIndex": 1,
+                "sourceNodeId": "dice@0:5",
+                "contribution": 1
+              },
+              {
+                "sequence": 145,
+                "type": "include",
+                "subject": "die",
+                "dieId": "roll-1-die-45",
+                "parentDieId": null,
+                "rollIndex": 1,
+                "sourceNodeId": "dice@0:5",
+                "contribution": 4
+              },
+              {
+                "sequence": 146,
+                "type": "include",
+                "subject": "die",
+                "dieId": "roll-1-die-46",
+                "parentDieId": null,
+                "rollIndex": 1,
+                "sourceNodeId": "dice@0:5",
+                "contribution": 3
+              },
+              {
+                "sequence": 147,
+                "type": "include",
+                "subject": "die",
+                "dieId": "roll-1-die-47",
+                "parentDieId": null,
+                "rollIndex": 1,
+                "sourceNodeId": "dice@0:5",
+                "contribution": 6
+              },
+              {
+                "sequence": 148,
+                "type": "include",
+                "subject": "die",
+                "dieId": "roll-1-die-48",
+                "parentDieId": null,
+                "rollIndex": 1,
+                "sourceNodeId": "dice@0:5",
+                "contribution": 6
+              },
+              {
+                "sequence": 149,
+                "type": "include",
+                "subject": "die",
+                "dieId": "roll-1-die-49",
+                "parentDieId": null,
+                "rollIndex": 1,
+                "sourceNodeId": "dice@0:5",
+                "contribution": 5
+              },
+              {
+                "sequence": 150,
+                "type": "include",
+                "subject": "die",
+                "dieId": "roll-1-die-50",
+                "parentDieId": null,
+                "rollIndex": 1,
+                "sourceNodeId": "dice@0:5",
+                "contribution": 5
+              },
+              {
+                "sequence": 151,
+                "type": "include",
+                "subject": "die",
+                "dieId": "roll-1-die-51",
+                "parentDieId": null,
+                "rollIndex": 1,
+                "sourceNodeId": "dice@0:5",
+                "contribution": 3
+              },
+              {
+                "sequence": 152,
+                "type": "include",
+                "subject": "die",
+                "dieId": "roll-1-die-52",
+                "parentDieId": null,
+                "rollIndex": 1,
+                "sourceNodeId": "dice@0:5",
+                "contribution": 3
+              },
+              {
+                "sequence": 153,
+                "type": "include",
+                "subject": "die",
+                "dieId": "roll-1-die-53",
+                "parentDieId": null,
+                "rollIndex": 1,
+                "sourceNodeId": "dice@0:5",
+                "contribution": 3
+              },
+              {
+                "sequence": 154,
+                "type": "include",
+                "subject": "die",
+                "dieId": "roll-1-die-54",
+                "parentDieId": null,
+                "rollIndex": 1,
+                "sourceNodeId": "dice@0:5",
+                "contribution": 6
+              },
+              {
+                "sequence": 155,
+                "type": "include",
+                "subject": "die",
+                "dieId": "roll-1-die-55",
+                "parentDieId": null,
+                "rollIndex": 1,
+                "sourceNodeId": "dice@0:5",
+                "contribution": 5
+              },
+              {
+                "sequence": 156,
+                "type": "include",
+                "subject": "die",
+                "dieId": "roll-1-die-56",
+                "parentDieId": null,
+                "rollIndex": 1,
+                "sourceNodeId": "dice@0:5",
+                "contribution": 4
+              },
+              {
+                "sequence": 157,
+                "type": "include",
+                "subject": "die",
+                "dieId": "roll-1-die-57",
+                "parentDieId": null,
+                "rollIndex": 1,
+                "sourceNodeId": "dice@0:5",
+                "contribution": 1
+              },
+              {
+                "sequence": 158,
+                "type": "include",
+                "subject": "die",
+                "dieId": "roll-1-die-58",
+                "parentDieId": null,
+                "rollIndex": 1,
+                "sourceNodeId": "dice@0:5",
+                "contribution": 6
+              },
+              {
+                "sequence": 159,
+                "type": "include",
+                "subject": "die",
+                "dieId": "roll-1-die-59",
+                "parentDieId": null,
+                "rollIndex": 1,
+                "sourceNodeId": "dice@0:5",
+                "contribution": 6
+              },
+              {
+                "sequence": 160,
+                "type": "include",
+                "subject": "die",
+                "dieId": "roll-1-die-60",
+                "parentDieId": null,
+                "rollIndex": 1,
+                "sourceNodeId": "dice@0:5",
+                "contribution": 5
+              },
+              {
+                "sequence": 161,
+                "type": "include",
+                "subject": "die",
+                "dieId": "roll-1-die-61",
+                "parentDieId": null,
+                "rollIndex": 1,
+                "sourceNodeId": "dice@0:5",
+                "contribution": 4
+              },
+              {
+                "sequence": 162,
+                "type": "include",
+                "subject": "die",
+                "dieId": "roll-1-die-62",
+                "parentDieId": null,
+                "rollIndex": 1,
+                "sourceNodeId": "dice@0:5",
+                "contribution": 4
+              },
+              {
+                "sequence": 163,
+                "type": "include",
+                "subject": "die",
+                "dieId": "roll-1-die-63",
+                "parentDieId": null,
+                "rollIndex": 1,
+                "sourceNodeId": "dice@0:5",
+                "contribution": 5
+              },
+              {
+                "sequence": 164,
+                "type": "include",
+                "subject": "die",
+                "dieId": "roll-1-die-64",
+                "parentDieId": null,
+                "rollIndex": 1,
+                "sourceNodeId": "dice@0:5",
+                "contribution": 1
+              },
+              {
+                "sequence": 165,
+                "type": "include",
+                "subject": "die",
+                "dieId": "roll-1-die-65",
+                "parentDieId": null,
+                "rollIndex": 1,
+                "sourceNodeId": "dice@0:5",
+                "contribution": 3
+              },
+              {
+                "sequence": 166,
+                "type": "include",
+                "subject": "die",
+                "dieId": "roll-1-die-66",
+                "parentDieId": null,
+                "rollIndex": 1,
+                "sourceNodeId": "dice@0:5",
+                "contribution": 2
+              },
+              {
+                "sequence": 167,
+                "type": "include",
+                "subject": "die",
+                "dieId": "roll-1-die-67",
+                "parentDieId": null,
+                "rollIndex": 1,
+                "sourceNodeId": "dice@0:5",
+                "contribution": 2
+              },
+              {
+                "sequence": 168,
+                "type": "include",
+                "subject": "die",
+                "dieId": "roll-1-die-68",
+                "parentDieId": null,
+                "rollIndex": 1,
+                "sourceNodeId": "dice@0:5",
+                "contribution": 6
+              },
+              {
+                "sequence": 169,
+                "type": "include",
+                "subject": "die",
+                "dieId": "roll-1-die-69",
+                "parentDieId": null,
+                "rollIndex": 1,
+                "sourceNodeId": "dice@0:5",
+                "contribution": 6
+              },
+              {
+                "sequence": 170,
+                "type": "include",
+                "subject": "die",
+                "dieId": "roll-1-die-70",
+                "parentDieId": null,
+                "rollIndex": 1,
+                "sourceNodeId": "dice@0:5",
+                "contribution": 4
+              },
+              {
+                "sequence": 171,
+                "type": "include",
+                "subject": "die",
+                "dieId": "roll-1-die-71",
+                "parentDieId": null,
+                "rollIndex": 1,
+                "sourceNodeId": "dice@0:5",
+                "contribution": 4
+              },
+              {
+                "sequence": 172,
+                "type": "include",
+                "subject": "die",
+                "dieId": "roll-1-die-72",
+                "parentDieId": null,
+                "rollIndex": 1,
+                "sourceNodeId": "dice@0:5",
+                "contribution": 6
+              },
+              {
+                "sequence": 173,
+                "type": "include",
+                "subject": "die",
+                "dieId": "roll-1-die-73",
+                "parentDieId": null,
+                "rollIndex": 1,
+                "sourceNodeId": "dice@0:5",
+                "contribution": 1
+              },
+              {
+                "sequence": 174,
+                "type": "include",
+                "subject": "die",
+                "dieId": "roll-1-die-74",
+                "parentDieId": null,
+                "rollIndex": 1,
+                "sourceNodeId": "dice@0:5",
+                "contribution": 3
+              },
+              {
+                "sequence": 175,
+                "type": "include",
+                "subject": "die",
+                "dieId": "roll-1-die-75",
+                "parentDieId": null,
+                "rollIndex": 1,
+                "sourceNodeId": "dice@0:5",
+                "contribution": 5
+              },
+              {
+                "sequence": 176,
+                "type": "include",
+                "subject": "die",
+                "dieId": "roll-1-die-76",
+                "parentDieId": null,
+                "rollIndex": 1,
+                "sourceNodeId": "dice@0:5",
+                "contribution": 4
+              },
+              {
+                "sequence": 177,
+                "type": "include",
+                "subject": "die",
+                "dieId": "roll-1-die-77",
+                "parentDieId": null,
+                "rollIndex": 1,
+                "sourceNodeId": "dice@0:5",
+                "contribution": 2
+              },
+              {
+                "sequence": 178,
+                "type": "include",
+                "subject": "die",
+                "dieId": "roll-1-die-78",
+                "parentDieId": null,
+                "rollIndex": 1,
+                "sourceNodeId": "dice@0:5",
+                "contribution": 2
+              },
+              {
+                "sequence": 179,
+                "type": "include",
+                "subject": "die",
+                "dieId": "roll-1-die-79",
+                "parentDieId": null,
+                "rollIndex": 1,
+                "sourceNodeId": "dice@0:5",
+                "contribution": 5
+              },
+              {
+                "sequence": 180,
+                "type": "include",
+                "subject": "die",
+                "dieId": "roll-1-die-80",
+                "parentDieId": null,
+                "rollIndex": 1,
+                "sourceNodeId": "dice@0:5",
+                "contribution": 3
+              },
+              {
+                "sequence": 181,
+                "type": "include",
+                "subject": "die",
+                "dieId": "roll-1-die-81",
+                "parentDieId": null,
+                "rollIndex": 1,
+                "sourceNodeId": "dice@0:5",
+                "contribution": 4
+              },
+              {
+                "sequence": 182,
+                "type": "include",
+                "subject": "die",
+                "dieId": "roll-1-die-82",
+                "parentDieId": null,
+                "rollIndex": 1,
+                "sourceNodeId": "dice@0:5",
+                "contribution": 3
+              },
+              {
+                "sequence": 183,
+                "type": "include",
+                "subject": "die",
+                "dieId": "roll-1-die-83",
+                "parentDieId": null,
+                "rollIndex": 1,
+                "sourceNodeId": "dice@0:5",
+                "contribution": 2
+              },
+              {
+                "sequence": 184,
+                "type": "include",
+                "subject": "die",
+                "dieId": "roll-1-die-84",
+                "parentDieId": null,
+                "rollIndex": 1,
+                "sourceNodeId": "dice@0:5",
+                "contribution": 2
+              },
+              {
+                "sequence": 185,
+                "type": "include",
+                "subject": "die",
+                "dieId": "roll-1-die-85",
+                "parentDieId": null,
+                "rollIndex": 1,
+                "sourceNodeId": "dice@0:5",
+                "contribution": 4
+              },
+              {
+                "sequence": 186,
+                "type": "include",
+                "subject": "die",
+                "dieId": "roll-1-die-86",
+                "parentDieId": null,
+                "rollIndex": 1,
+                "sourceNodeId": "dice@0:5",
+                "contribution": 6
+              },
+              {
+                "sequence": 187,
+                "type": "include",
+                "subject": "die",
+                "dieId": "roll-1-die-87",
+                "parentDieId": null,
+                "rollIndex": 1,
+                "sourceNodeId": "dice@0:5",
+                "contribution": 3
+              },
+              {
+                "sequence": 188,
+                "type": "include",
+                "subject": "die",
+                "dieId": "roll-1-die-88",
+                "parentDieId": null,
+                "rollIndex": 1,
+                "sourceNodeId": "dice@0:5",
+                "contribution": 3
+              },
+              {
+                "sequence": 189,
+                "type": "include",
+                "subject": "die",
+                "dieId": "roll-1-die-89",
+                "parentDieId": null,
+                "rollIndex": 1,
+                "sourceNodeId": "dice@0:5",
+                "contribution": 5
+              },
+              {
+                "sequence": 190,
+                "type": "include",
+                "subject": "die",
+                "dieId": "roll-1-die-90",
+                "parentDieId": null,
+                "rollIndex": 1,
+                "sourceNodeId": "dice@0:5",
+                "contribution": 2
+              },
+              {
+                "sequence": 191,
+                "type": "include",
+                "subject": "die",
+                "dieId": "roll-1-die-91",
+                "parentDieId": null,
+                "rollIndex": 1,
+                "sourceNodeId": "dice@0:5",
+                "contribution": 2
+              },
+              {
+                "sequence": 192,
+                "type": "include",
+                "subject": "die",
+                "dieId": "roll-1-die-92",
+                "parentDieId": null,
+                "rollIndex": 1,
+                "sourceNodeId": "dice@0:5",
+                "contribution": 6
+              },
+              {
+                "sequence": 193,
+                "type": "include",
+                "subject": "die",
+                "dieId": "roll-1-die-93",
+                "parentDieId": null,
+                "rollIndex": 1,
+                "sourceNodeId": "dice@0:5",
+                "contribution": 1
+              },
+              {
+                "sequence": 194,
+                "type": "include",
+                "subject": "die",
+                "dieId": "roll-1-die-94",
+                "parentDieId": null,
+                "rollIndex": 1,
+                "sourceNodeId": "dice@0:5",
+                "contribution": 3
+              },
+              {
+                "sequence": 195,
+                "type": "include",
+                "subject": "die",
+                "dieId": "roll-1-die-95",
+                "parentDieId": null,
+                "rollIndex": 1,
+                "sourceNodeId": "dice@0:5",
+                "contribution": 3
+              },
+              {
+                "sequence": 196,
+                "type": "include",
+                "subject": "die",
+                "dieId": "roll-1-die-96",
+                "parentDieId": null,
+                "rollIndex": 1,
+                "sourceNodeId": "dice@0:5",
+                "contribution": 5
+              },
+              {
+                "sequence": 197,
+                "type": "include",
+                "subject": "die",
+                "dieId": "roll-1-die-97",
+                "parentDieId": null,
+                "rollIndex": 1,
+                "sourceNodeId": "dice@0:5",
+                "contribution": 6
+              },
+              {
+                "sequence": 198,
+                "type": "include",
+                "subject": "die",
+                "dieId": "roll-1-die-98",
+                "parentDieId": null,
+                "rollIndex": 1,
+                "sourceNodeId": "dice@0:5",
+                "contribution": 2
+              },
+              {
+                "sequence": 199,
+                "type": "include",
+                "subject": "die",
+                "dieId": "roll-1-die-99",
+                "parentDieId": null,
+                "rollIndex": 1,
+                "sourceNodeId": "dice@0:5",
+                "contribution": 2
+              },
+              {
+                "sequence": 200,
+                "type": "include",
+                "subject": "die",
+                "dieId": "roll-1-die-100",
+                "parentDieId": null,
+                "rollIndex": 1,
+                "sourceNodeId": "dice@0:5",
+                "contribution": 2
+              },
+              {
+                "sequence": 201,
+                "type": "include",
+                "subject": "group",
                 "groupId": "roll-1:group:dice@0:5",
                 "rollIndex": 1,
-                "sequence": 201,
                 "sourceNodeId": "dice@0:5",
-                "subject": "group",
-                "type": "include",
-                "value": 365
+                "value": 365,
+                "contribution": 365
               }
             ]
           }
@@ -26738,54 +26738,54 @@
             ],
             "events": [
               {
+                "sequence": 1,
+                "type": "roll",
+                "subject": "die",
                 "dieId": "roll-1-die-1",
                 "parentDieId": null,
                 "rollIndex": 1,
-                "sequence": 1,
                 "sourceNodeId": "dice@0:4",
-                "subject": "die",
-                "type": "roll",
                 "value": 18
               },
               {
-                "contribution": 18,
+                "sequence": 2,
+                "type": "include",
+                "subject": "die",
                 "dieId": "roll-1-die-1",
                 "parentDieId": null,
                 "rollIndex": 1,
-                "sequence": 2,
                 "sourceNodeId": "dice@0:4",
-                "subject": "die",
-                "type": "include"
+                "contribution": 18
               },
               {
-                "contribution": 18,
+                "sequence": 3,
+                "type": "include",
+                "subject": "group",
                 "groupId": "roll-1:group:dice@0:4",
                 "rollIndex": 1,
-                "sequence": 3,
                 "sourceNodeId": "dice@0:4",
-                "subject": "group",
-                "type": "include",
-                "value": 18
+                "value": 18,
+                "contribution": 18
               },
               {
-                "contribution": 5,
+                "sequence": 4,
+                "type": "include",
+                "subject": "group",
                 "groupId": "roll-1:group:number@5:6",
                 "rollIndex": 1,
-                "sequence": 4,
                 "sourceNodeId": "number@5:6",
-                "subject": "group",
-                "type": "include",
-                "value": 5
+                "value": 5,
+                "contribution": 5
               },
               {
-                "contribution": 23,
+                "sequence": 5,
+                "type": "include",
+                "subject": "group",
                 "groupId": "roll-1:group:binary@0:6",
                 "rollIndex": 1,
-                "sequence": 5,
                 "sourceNodeId": "binary@0:6",
-                "subject": "group",
-                "type": "include",
-                "value": 23
+                "value": 23,
+                "contribution": 23
               }
             ]
           }
@@ -27784,414 +27784,414 @@
               ],
               "events": [
                 {
-                  "dieId": "roll-1-die-1",
-                  "parentDieId": null,
-                  "rollIndex": 1,
                   "sequence": 1,
-                  "sourceNodeId": "dice@0:4",
-                  "subject": "die",
                   "type": "roll",
-                  "value": 2
-                },
-                {
-                  "dieId": "roll-1-die-2",
-                  "parentDieId": null,
-                  "rollIndex": 1,
-                  "sequence": 2,
-                  "sourceNodeId": "dice@0:4",
                   "subject": "die",
-                  "type": "roll",
-                  "value": 3
-                },
-                {
-                  "dieId": "roll-1-die-3",
-                  "parentDieId": null,
-                  "rollIndex": 1,
-                  "sequence": 3,
-                  "sourceNodeId": "dice@0:4",
-                  "subject": "die",
-                  "type": "roll",
-                  "value": 4
-                },
-                {
-                  "dieId": "roll-1-die-4",
-                  "parentDieId": null,
-                  "rollIndex": 1,
-                  "sequence": 4,
-                  "sourceNodeId": "dice@0:4",
-                  "subject": "die",
-                  "type": "roll",
-                  "value": 5
-                },
-                {
-                  "dieId": "roll-1-die-5",
-                  "parentDieId": null,
-                  "rollIndex": 1,
-                  "sequence": 5,
-                  "sourceNodeId": "dice@0:4",
-                  "subject": "die",
-                  "type": "roll",
-                  "value": 6
-                },
-                {
-                  "dieId": "roll-1-die-6",
-                  "parentDieId": null,
-                  "rollIndex": 1,
-                  "sequence": 6,
-                  "sourceNodeId": "dice@0:4",
-                  "subject": "die",
-                  "type": "roll",
-                  "value": 3
-                },
-                {
-                  "dieId": "roll-1-die-7",
-                  "parentDieId": null,
-                  "rollIndex": 1,
-                  "sequence": 7,
-                  "sourceNodeId": "dice@0:4",
-                  "subject": "die",
-                  "type": "roll",
-                  "value": 5
-                },
-                {
-                  "dieId": "roll-1-die-8",
-                  "parentDieId": null,
-                  "rollIndex": 1,
-                  "sequence": 8,
-                  "sourceNodeId": "dice@0:4",
-                  "subject": "die",
-                  "type": "roll",
-                  "value": 3
-                },
-                {
-                  "dieId": "roll-1-die-9",
-                  "parentDieId": null,
-                  "rollIndex": 1,
-                  "sequence": 9,
-                  "sourceNodeId": "dice@0:4",
-                  "subject": "die",
-                  "type": "roll",
-                  "value": 4
-                },
-                {
-                  "dieId": "roll-1-die-10",
-                  "parentDieId": null,
-                  "rollIndex": 1,
-                  "sequence": 10,
-                  "sourceNodeId": "dice@0:4",
-                  "subject": "die",
-                  "type": "roll",
-                  "value": 1
-                },
-                {
-                  "dieId": "roll-1-die-11",
-                  "parentDieId": null,
-                  "rollIndex": 1,
-                  "sequence": 11,
-                  "sourceNodeId": "dice@0:4",
-                  "subject": "die",
-                  "type": "roll",
-                  "value": 1
-                },
-                {
-                  "dieId": "roll-1-die-12",
-                  "parentDieId": null,
-                  "rollIndex": 1,
-                  "sequence": 12,
-                  "sourceNodeId": "dice@0:4",
-                  "subject": "die",
-                  "type": "roll",
-                  "value": 6
-                },
-                {
-                  "dieId": "roll-1-die-13",
-                  "parentDieId": null,
-                  "rollIndex": 1,
-                  "sequence": 13,
-                  "sourceNodeId": "dice@0:4",
-                  "subject": "die",
-                  "type": "roll",
-                  "value": 2
-                },
-                {
-                  "dieId": "roll-1-die-14",
-                  "parentDieId": null,
-                  "rollIndex": 1,
-                  "sequence": 14,
-                  "sourceNodeId": "dice@0:4",
-                  "subject": "die",
-                  "type": "roll",
-                  "value": 4
-                },
-                {
-                  "dieId": "roll-1-die-15",
-                  "parentDieId": null,
-                  "rollIndex": 1,
-                  "sequence": 15,
-                  "sourceNodeId": "dice@0:4",
-                  "subject": "die",
-                  "type": "roll",
-                  "value": 3
-                },
-                {
-                  "dieId": "roll-1-die-16",
-                  "parentDieId": null,
-                  "rollIndex": 1,
-                  "sequence": 16,
-                  "sourceNodeId": "dice@0:4",
-                  "subject": "die",
-                  "type": "roll",
-                  "value": 3
-                },
-                {
-                  "dieId": "roll-1-die-17",
-                  "parentDieId": null,
-                  "rollIndex": 1,
-                  "sequence": 17,
-                  "sourceNodeId": "dice@0:4",
-                  "subject": "die",
-                  "type": "roll",
-                  "value": 5
-                },
-                {
-                  "dieId": "roll-1-die-18",
-                  "parentDieId": null,
-                  "rollIndex": 1,
-                  "sequence": 18,
-                  "sourceNodeId": "dice@0:4",
-                  "subject": "die",
-                  "type": "roll",
-                  "value": 3
-                },
-                {
-                  "dieId": "roll-1-die-19",
-                  "parentDieId": null,
-                  "rollIndex": 1,
-                  "sequence": 19,
-                  "sourceNodeId": "dice@0:4",
-                  "subject": "die",
-                  "type": "roll",
-                  "value": 6
-                },
-                {
-                  "dieId": "roll-1-die-20",
-                  "parentDieId": null,
-                  "rollIndex": 1,
-                  "sequence": 20,
-                  "sourceNodeId": "dice@0:4",
-                  "subject": "die",
-                  "type": "roll",
-                  "value": 5
-                },
-                {
-                  "contribution": 2,
                   "dieId": "roll-1-die-1",
                   "parentDieId": null,
                   "rollIndex": 1,
-                  "sequence": 21,
                   "sourceNodeId": "dice@0:4",
-                  "subject": "die",
-                  "type": "include"
+                  "value": 2
                 },
                 {
-                  "contribution": 3,
+                  "sequence": 2,
+                  "type": "roll",
+                  "subject": "die",
                   "dieId": "roll-1-die-2",
                   "parentDieId": null,
                   "rollIndex": 1,
-                  "sequence": 22,
                   "sourceNodeId": "dice@0:4",
-                  "subject": "die",
-                  "type": "include"
+                  "value": 3
                 },
                 {
-                  "contribution": 4,
+                  "sequence": 3,
+                  "type": "roll",
+                  "subject": "die",
                   "dieId": "roll-1-die-3",
                   "parentDieId": null,
                   "rollIndex": 1,
-                  "sequence": 23,
                   "sourceNodeId": "dice@0:4",
-                  "subject": "die",
-                  "type": "include"
+                  "value": 4
                 },
                 {
-                  "contribution": 5,
+                  "sequence": 4,
+                  "type": "roll",
+                  "subject": "die",
                   "dieId": "roll-1-die-4",
                   "parentDieId": null,
                   "rollIndex": 1,
-                  "sequence": 24,
                   "sourceNodeId": "dice@0:4",
-                  "subject": "die",
-                  "type": "include"
+                  "value": 5
                 },
                 {
-                  "contribution": 6,
+                  "sequence": 5,
+                  "type": "roll",
+                  "subject": "die",
                   "dieId": "roll-1-die-5",
                   "parentDieId": null,
                   "rollIndex": 1,
-                  "sequence": 25,
                   "sourceNodeId": "dice@0:4",
-                  "subject": "die",
-                  "type": "include"
+                  "value": 6
                 },
                 {
-                  "contribution": 3,
+                  "sequence": 6,
+                  "type": "roll",
+                  "subject": "die",
                   "dieId": "roll-1-die-6",
                   "parentDieId": null,
                   "rollIndex": 1,
-                  "sequence": 26,
                   "sourceNodeId": "dice@0:4",
-                  "subject": "die",
-                  "type": "include"
+                  "value": 3
                 },
                 {
-                  "contribution": 5,
+                  "sequence": 7,
+                  "type": "roll",
+                  "subject": "die",
                   "dieId": "roll-1-die-7",
                   "parentDieId": null,
                   "rollIndex": 1,
-                  "sequence": 27,
                   "sourceNodeId": "dice@0:4",
-                  "subject": "die",
-                  "type": "include"
+                  "value": 5
                 },
                 {
-                  "contribution": 3,
+                  "sequence": 8,
+                  "type": "roll",
+                  "subject": "die",
                   "dieId": "roll-1-die-8",
                   "parentDieId": null,
                   "rollIndex": 1,
-                  "sequence": 28,
                   "sourceNodeId": "dice@0:4",
-                  "subject": "die",
-                  "type": "include"
+                  "value": 3
                 },
                 {
-                  "contribution": 4,
+                  "sequence": 9,
+                  "type": "roll",
+                  "subject": "die",
                   "dieId": "roll-1-die-9",
                   "parentDieId": null,
                   "rollIndex": 1,
-                  "sequence": 29,
                   "sourceNodeId": "dice@0:4",
-                  "subject": "die",
-                  "type": "include"
+                  "value": 4
                 },
                 {
-                  "contribution": 1,
+                  "sequence": 10,
+                  "type": "roll",
+                  "subject": "die",
                   "dieId": "roll-1-die-10",
                   "parentDieId": null,
                   "rollIndex": 1,
-                  "sequence": 30,
                   "sourceNodeId": "dice@0:4",
-                  "subject": "die",
-                  "type": "include"
+                  "value": 1
                 },
                 {
-                  "contribution": 1,
+                  "sequence": 11,
+                  "type": "roll",
+                  "subject": "die",
                   "dieId": "roll-1-die-11",
                   "parentDieId": null,
                   "rollIndex": 1,
-                  "sequence": 31,
                   "sourceNodeId": "dice@0:4",
-                  "subject": "die",
-                  "type": "include"
+                  "value": 1
                 },
                 {
-                  "contribution": 6,
+                  "sequence": 12,
+                  "type": "roll",
+                  "subject": "die",
                   "dieId": "roll-1-die-12",
                   "parentDieId": null,
                   "rollIndex": 1,
-                  "sequence": 32,
                   "sourceNodeId": "dice@0:4",
-                  "subject": "die",
-                  "type": "include"
+                  "value": 6
                 },
                 {
-                  "contribution": 2,
+                  "sequence": 13,
+                  "type": "roll",
+                  "subject": "die",
                   "dieId": "roll-1-die-13",
                   "parentDieId": null,
                   "rollIndex": 1,
-                  "sequence": 33,
                   "sourceNodeId": "dice@0:4",
-                  "subject": "die",
-                  "type": "include"
+                  "value": 2
                 },
                 {
-                  "contribution": 4,
+                  "sequence": 14,
+                  "type": "roll",
+                  "subject": "die",
                   "dieId": "roll-1-die-14",
                   "parentDieId": null,
                   "rollIndex": 1,
-                  "sequence": 34,
                   "sourceNodeId": "dice@0:4",
-                  "subject": "die",
-                  "type": "include"
+                  "value": 4
                 },
                 {
-                  "contribution": 3,
+                  "sequence": 15,
+                  "type": "roll",
+                  "subject": "die",
                   "dieId": "roll-1-die-15",
                   "parentDieId": null,
                   "rollIndex": 1,
-                  "sequence": 35,
                   "sourceNodeId": "dice@0:4",
-                  "subject": "die",
-                  "type": "include"
+                  "value": 3
                 },
                 {
-                  "contribution": 3,
+                  "sequence": 16,
+                  "type": "roll",
+                  "subject": "die",
                   "dieId": "roll-1-die-16",
                   "parentDieId": null,
                   "rollIndex": 1,
-                  "sequence": 36,
                   "sourceNodeId": "dice@0:4",
-                  "subject": "die",
-                  "type": "include"
+                  "value": 3
                 },
                 {
-                  "contribution": 5,
+                  "sequence": 17,
+                  "type": "roll",
+                  "subject": "die",
                   "dieId": "roll-1-die-17",
                   "parentDieId": null,
                   "rollIndex": 1,
-                  "sequence": 37,
                   "sourceNodeId": "dice@0:4",
-                  "subject": "die",
-                  "type": "include"
+                  "value": 5
                 },
                 {
-                  "contribution": 3,
+                  "sequence": 18,
+                  "type": "roll",
+                  "subject": "die",
                   "dieId": "roll-1-die-18",
                   "parentDieId": null,
                   "rollIndex": 1,
-                  "sequence": 38,
                   "sourceNodeId": "dice@0:4",
-                  "subject": "die",
-                  "type": "include"
+                  "value": 3
                 },
                 {
-                  "contribution": 6,
+                  "sequence": 19,
+                  "type": "roll",
+                  "subject": "die",
                   "dieId": "roll-1-die-19",
                   "parentDieId": null,
                   "rollIndex": 1,
-                  "sequence": 39,
                   "sourceNodeId": "dice@0:4",
-                  "subject": "die",
-                  "type": "include"
+                  "value": 6
                 },
                 {
-                  "contribution": 5,
+                  "sequence": 20,
+                  "type": "roll",
+                  "subject": "die",
                   "dieId": "roll-1-die-20",
                   "parentDieId": null,
                   "rollIndex": 1,
-                  "sequence": 40,
                   "sourceNodeId": "dice@0:4",
-                  "subject": "die",
-                  "type": "include"
+                  "value": 5
                 },
                 {
-                  "contribution": 74,
+                  "sequence": 21,
+                  "type": "include",
+                  "subject": "die",
+                  "dieId": "roll-1-die-1",
+                  "parentDieId": null,
+                  "rollIndex": 1,
+                  "sourceNodeId": "dice@0:4",
+                  "contribution": 2
+                },
+                {
+                  "sequence": 22,
+                  "type": "include",
+                  "subject": "die",
+                  "dieId": "roll-1-die-2",
+                  "parentDieId": null,
+                  "rollIndex": 1,
+                  "sourceNodeId": "dice@0:4",
+                  "contribution": 3
+                },
+                {
+                  "sequence": 23,
+                  "type": "include",
+                  "subject": "die",
+                  "dieId": "roll-1-die-3",
+                  "parentDieId": null,
+                  "rollIndex": 1,
+                  "sourceNodeId": "dice@0:4",
+                  "contribution": 4
+                },
+                {
+                  "sequence": 24,
+                  "type": "include",
+                  "subject": "die",
+                  "dieId": "roll-1-die-4",
+                  "parentDieId": null,
+                  "rollIndex": 1,
+                  "sourceNodeId": "dice@0:4",
+                  "contribution": 5
+                },
+                {
+                  "sequence": 25,
+                  "type": "include",
+                  "subject": "die",
+                  "dieId": "roll-1-die-5",
+                  "parentDieId": null,
+                  "rollIndex": 1,
+                  "sourceNodeId": "dice@0:4",
+                  "contribution": 6
+                },
+                {
+                  "sequence": 26,
+                  "type": "include",
+                  "subject": "die",
+                  "dieId": "roll-1-die-6",
+                  "parentDieId": null,
+                  "rollIndex": 1,
+                  "sourceNodeId": "dice@0:4",
+                  "contribution": 3
+                },
+                {
+                  "sequence": 27,
+                  "type": "include",
+                  "subject": "die",
+                  "dieId": "roll-1-die-7",
+                  "parentDieId": null,
+                  "rollIndex": 1,
+                  "sourceNodeId": "dice@0:4",
+                  "contribution": 5
+                },
+                {
+                  "sequence": 28,
+                  "type": "include",
+                  "subject": "die",
+                  "dieId": "roll-1-die-8",
+                  "parentDieId": null,
+                  "rollIndex": 1,
+                  "sourceNodeId": "dice@0:4",
+                  "contribution": 3
+                },
+                {
+                  "sequence": 29,
+                  "type": "include",
+                  "subject": "die",
+                  "dieId": "roll-1-die-9",
+                  "parentDieId": null,
+                  "rollIndex": 1,
+                  "sourceNodeId": "dice@0:4",
+                  "contribution": 4
+                },
+                {
+                  "sequence": 30,
+                  "type": "include",
+                  "subject": "die",
+                  "dieId": "roll-1-die-10",
+                  "parentDieId": null,
+                  "rollIndex": 1,
+                  "sourceNodeId": "dice@0:4",
+                  "contribution": 1
+                },
+                {
+                  "sequence": 31,
+                  "type": "include",
+                  "subject": "die",
+                  "dieId": "roll-1-die-11",
+                  "parentDieId": null,
+                  "rollIndex": 1,
+                  "sourceNodeId": "dice@0:4",
+                  "contribution": 1
+                },
+                {
+                  "sequence": 32,
+                  "type": "include",
+                  "subject": "die",
+                  "dieId": "roll-1-die-12",
+                  "parentDieId": null,
+                  "rollIndex": 1,
+                  "sourceNodeId": "dice@0:4",
+                  "contribution": 6
+                },
+                {
+                  "sequence": 33,
+                  "type": "include",
+                  "subject": "die",
+                  "dieId": "roll-1-die-13",
+                  "parentDieId": null,
+                  "rollIndex": 1,
+                  "sourceNodeId": "dice@0:4",
+                  "contribution": 2
+                },
+                {
+                  "sequence": 34,
+                  "type": "include",
+                  "subject": "die",
+                  "dieId": "roll-1-die-14",
+                  "parentDieId": null,
+                  "rollIndex": 1,
+                  "sourceNodeId": "dice@0:4",
+                  "contribution": 4
+                },
+                {
+                  "sequence": 35,
+                  "type": "include",
+                  "subject": "die",
+                  "dieId": "roll-1-die-15",
+                  "parentDieId": null,
+                  "rollIndex": 1,
+                  "sourceNodeId": "dice@0:4",
+                  "contribution": 3
+                },
+                {
+                  "sequence": 36,
+                  "type": "include",
+                  "subject": "die",
+                  "dieId": "roll-1-die-16",
+                  "parentDieId": null,
+                  "rollIndex": 1,
+                  "sourceNodeId": "dice@0:4",
+                  "contribution": 3
+                },
+                {
+                  "sequence": 37,
+                  "type": "include",
+                  "subject": "die",
+                  "dieId": "roll-1-die-17",
+                  "parentDieId": null,
+                  "rollIndex": 1,
+                  "sourceNodeId": "dice@0:4",
+                  "contribution": 5
+                },
+                {
+                  "sequence": 38,
+                  "type": "include",
+                  "subject": "die",
+                  "dieId": "roll-1-die-18",
+                  "parentDieId": null,
+                  "rollIndex": 1,
+                  "sourceNodeId": "dice@0:4",
+                  "contribution": 3
+                },
+                {
+                  "sequence": 39,
+                  "type": "include",
+                  "subject": "die",
+                  "dieId": "roll-1-die-19",
+                  "parentDieId": null,
+                  "rollIndex": 1,
+                  "sourceNodeId": "dice@0:4",
+                  "contribution": 6
+                },
+                {
+                  "sequence": 40,
+                  "type": "include",
+                  "subject": "die",
+                  "dieId": "roll-1-die-20",
+                  "parentDieId": null,
+                  "rollIndex": 1,
+                  "sourceNodeId": "dice@0:4",
+                  "contribution": 5
+                },
+                {
+                  "sequence": 41,
+                  "type": "include",
+                  "subject": "group",
                   "groupId": "roll-1:group:dice@0:4",
                   "rollIndex": 1,
-                  "sequence": 41,
                   "sourceNodeId": "dice@0:4",
-                  "subject": "group",
-                  "type": "include",
-                  "value": 74
+                  "value": 74,
+                  "contribution": 74
                 }
               ]
             }
@@ -28313,54 +28313,54 @@
                   ],
                   "events": [
                     {
+                      "sequence": 1,
+                      "type": "roll",
+                      "subject": "die",
                       "dieId": "roll-1-die-1",
                       "parentDieId": null,
                       "rollIndex": 1,
-                      "sequence": 1,
                       "sourceNodeId": "dice@0:7",
-                      "subject": "die",
-                      "type": "roll",
                       "value": 5
                     },
                     {
+                      "sequence": 2,
+                      "type": "roll",
+                      "subject": "die",
                       "dieId": "roll-1-die-2",
                       "parentDieId": null,
                       "rollIndex": 1,
-                      "sequence": 2,
                       "sourceNodeId": "dice@0:7",
-                      "subject": "die",
-                      "type": "roll",
                       "value": 2
                     },
                     {
+                      "sequence": 3,
+                      "type": "exclude",
+                      "subject": "die",
                       "dieId": "roll-1-die-2",
                       "parentDieId": null,
-                      "reason": "keep",
                       "rollIndex": 1,
-                      "sequence": 3,
                       "sourceNodeId": "dice@0:7",
-                      "subject": "die",
-                      "type": "exclude"
+                      "reason": "keep"
                     },
                     {
-                      "contribution": 5,
+                      "sequence": 4,
+                      "type": "include",
+                      "subject": "die",
                       "dieId": "roll-1-die-1",
                       "parentDieId": null,
                       "rollIndex": 1,
-                      "sequence": 4,
                       "sourceNodeId": "dice@0:7",
-                      "subject": "die",
-                      "type": "include"
+                      "contribution": 5
                     },
                     {
-                      "contribution": 5,
+                      "sequence": 5,
+                      "type": "include",
+                      "subject": "group",
                       "groupId": "roll-1:group:dice@0:7",
                       "rollIndex": 1,
-                      "sequence": 5,
                       "sourceNodeId": "dice@0:7",
-                      "subject": "group",
-                      "type": "include",
-                      "value": 5
+                      "value": 5,
+                      "contribution": 5
                     }
                   ]
                 }
@@ -29746,566 +29746,566 @@
             ],
             "events": [
               {
-                "dieId": "roll-1-die-1",
-                "parentDieId": null,
-                "rollIndex": 1,
                 "sequence": 1,
-                "sourceNodeId": "dice@0:14",
-                "subject": "die",
                 "type": "roll",
-                "value": 2
-              },
-              {
-                "dieId": "roll-1-die-2",
-                "parentDieId": null,
-                "rollIndex": 1,
-                "sequence": 2,
-                "sourceNodeId": "dice@0:14",
                 "subject": "die",
-                "type": "roll",
-                "value": 3
-              },
-              {
-                "dieId": "roll-1-die-3",
-                "parentDieId": null,
-                "rollIndex": 1,
-                "sequence": 3,
-                "sourceNodeId": "dice@0:14",
-                "subject": "die",
-                "type": "roll",
-                "value": 4
-              },
-              {
-                "dieId": "roll-1-die-4",
-                "parentDieId": null,
-                "rollIndex": 1,
-                "sequence": 4,
-                "sourceNodeId": "dice@0:14",
-                "subject": "die",
-                "type": "roll",
-                "value": 5
-              },
-              {
-                "dieId": "roll-1-die-5",
-                "parentDieId": null,
-                "rollIndex": 1,
-                "sequence": 5,
-                "sourceNodeId": "dice@0:14",
-                "subject": "die",
-                "type": "roll",
-                "value": 6
-              },
-              {
-                "dieId": "roll-1-die-6",
-                "parentDieId": null,
-                "rollIndex": 1,
-                "sequence": 6,
-                "sourceNodeId": "dice@0:14",
-                "subject": "die",
-                "type": "roll",
-                "value": 3
-              },
-              {
-                "dieId": "roll-1-die-7",
-                "parentDieId": null,
-                "rollIndex": 1,
-                "sequence": 7,
-                "sourceNodeId": "dice@0:14",
-                "subject": "die",
-                "type": "roll",
-                "value": 5
-              },
-              {
-                "dieId": "roll-1-die-8",
-                "parentDieId": null,
-                "rollIndex": 1,
-                "sequence": 8,
-                "sourceNodeId": "dice@0:14",
-                "subject": "die",
-                "type": "roll",
-                "value": 3
-              },
-              {
-                "dieId": "roll-1-die-9",
-                "parentDieId": null,
-                "rollIndex": 1,
-                "sequence": 9,
-                "sourceNodeId": "dice@0:14",
-                "subject": "die",
-                "type": "roll",
-                "value": 4
-              },
-              {
-                "dieId": "roll-1-die-10",
-                "parentDieId": null,
-                "rollIndex": 1,
-                "sequence": 10,
-                "sourceNodeId": "dice@0:14",
-                "subject": "die",
-                "type": "roll",
-                "value": 1
-              },
-              {
-                "dieId": "roll-1-die-11",
-                "parentDieId": null,
-                "rollIndex": 1,
-                "sequence": 11,
-                "sourceNodeId": "dice@0:14",
-                "subject": "die",
-                "type": "roll",
-                "value": 1
-              },
-              {
-                "dieId": "roll-1-die-12",
-                "parentDieId": null,
-                "rollIndex": 1,
-                "sequence": 12,
-                "sourceNodeId": "dice@0:14",
-                "subject": "die",
-                "type": "roll",
-                "value": 6
-              },
-              {
-                "dieId": "roll-1-die-13",
-                "parentDieId": null,
-                "rollIndex": 1,
-                "sequence": 13,
-                "sourceNodeId": "dice@0:14",
-                "subject": "die",
-                "type": "roll",
-                "value": 2
-              },
-              {
-                "dieId": "roll-1-die-14",
-                "parentDieId": null,
-                "rollIndex": 1,
-                "sequence": 14,
-                "sourceNodeId": "dice@0:14",
-                "subject": "die",
-                "type": "roll",
-                "value": 4
-              },
-              {
-                "dieId": "roll-1-die-15",
-                "parentDieId": null,
-                "rollIndex": 1,
-                "sequence": 15,
-                "sourceNodeId": "dice@0:14",
-                "subject": "die",
-                "type": "roll",
-                "value": 3
-              },
-              {
-                "dieId": "roll-1-die-16",
-                "parentDieId": null,
-                "rollIndex": 1,
-                "sequence": 16,
-                "sourceNodeId": "dice@0:14",
-                "subject": "die",
-                "type": "roll",
-                "value": 3
-              },
-              {
-                "dieId": "roll-1-die-17",
-                "parentDieId": null,
-                "rollIndex": 1,
-                "sequence": 17,
-                "sourceNodeId": "dice@0:14",
-                "subject": "die",
-                "type": "roll",
-                "value": 5
-              },
-              {
-                "dieId": "roll-1-die-18",
-                "parentDieId": null,
-                "rollIndex": 1,
-                "sequence": 18,
-                "sourceNodeId": "dice@0:14",
-                "subject": "die",
-                "type": "roll",
-                "value": 3
-              },
-              {
-                "dieId": "roll-1-die-19",
-                "parentDieId": null,
-                "rollIndex": 1,
-                "sequence": 19,
-                "sourceNodeId": "dice@0:14",
-                "subject": "die",
-                "type": "roll",
-                "value": 6
-              },
-              {
-                "dieId": "roll-1-die-20",
-                "parentDieId": null,
-                "rollIndex": 1,
-                "sequence": 20,
-                "sourceNodeId": "dice@0:14",
-                "subject": "die",
-                "type": "roll",
-                "value": 5
-              },
-              {
-                "dieId": "roll-1-die-21",
-                "parentDieId": "roll-1-die-5",
-                "rollIndex": 1,
-                "sequence": 21,
-                "sourceNodeId": "dice@0:14",
-                "subject": "die",
-                "type": "roll",
-                "value": 6
-              },
-              {
-                "childDieId": "roll-1-die-21",
-                "dieId": "roll-1-die-5",
-                "parentDieId": null,
-                "reason": "explode",
-                "rollIndex": 1,
-                "sequence": 22,
-                "sourceNodeId": "dice@0:14",
-                "subject": "die",
-                "type": "explode",
-                "value": 6
-              },
-              {
-                "dieId": "roll-1-die-22",
-                "parentDieId": "roll-1-die-21",
-                "rollIndex": 1,
-                "sequence": 23,
-                "sourceNodeId": "dice@0:14",
-                "subject": "die",
-                "type": "roll",
-                "value": 3
-              },
-              {
-                "childDieId": "roll-1-die-22",
-                "dieId": "roll-1-die-21",
-                "parentDieId": "roll-1-die-5",
-                "reason": "explode",
-                "rollIndex": 1,
-                "sequence": 24,
-                "sourceNodeId": "dice@0:14",
-                "subject": "die",
-                "type": "explode",
-                "value": 3
-              },
-              {
-                "dieId": "roll-1-die-23",
-                "parentDieId": "roll-1-die-12",
-                "rollIndex": 1,
-                "sequence": 25,
-                "sourceNodeId": "dice@0:14",
-                "subject": "die",
-                "type": "roll",
-                "value": 2
-              },
-              {
-                "childDieId": "roll-1-die-23",
-                "dieId": "roll-1-die-12",
-                "parentDieId": null,
-                "reason": "explode",
-                "rollIndex": 1,
-                "sequence": 26,
-                "sourceNodeId": "dice@0:14",
-                "subject": "die",
-                "type": "explode",
-                "value": 2
-              },
-              {
-                "dieId": "roll-1-die-24",
-                "parentDieId": "roll-1-die-19",
-                "rollIndex": 1,
-                "sequence": 27,
-                "sourceNodeId": "dice@0:14",
-                "subject": "die",
-                "type": "roll",
-                "value": 5
-              },
-              {
-                "childDieId": "roll-1-die-24",
-                "dieId": "roll-1-die-19",
-                "parentDieId": null,
-                "reason": "explode",
-                "rollIndex": 1,
-                "sequence": 28,
-                "sourceNodeId": "dice@0:14",
-                "subject": "die",
-                "type": "explode",
-                "value": 5
-              },
-              {
-                "dieId": "roll-1-die-10",
-                "from": 1,
-                "parentDieId": null,
-                "reason": "reroll-once",
-                "rollIndex": 1,
-                "sequence": 29,
-                "sourceNodeId": "dice@0:14",
-                "subject": "die",
-                "to": 1,
-                "type": "reroll"
-              },
-              {
-                "dieId": "roll-1-die-11",
-                "from": 1,
-                "parentDieId": null,
-                "reason": "reroll-once",
-                "rollIndex": 1,
-                "sequence": 30,
-                "sourceNodeId": "dice@0:14",
-                "subject": "die",
-                "to": 1,
-                "type": "reroll"
-              },
-              {
-                "dieId": "roll-1-die-10",
-                "parentDieId": null,
-                "reason": "keep",
-                "rollIndex": 1,
-                "sequence": 31,
-                "sourceNodeId": "dice@0:14",
-                "subject": "die",
-                "type": "exclude"
-              },
-              {
-                "dieId": "roll-1-die-11",
-                "parentDieId": null,
-                "reason": "keep",
-                "rollIndex": 1,
-                "sequence": 32,
-                "sourceNodeId": "dice@0:14",
-                "subject": "die",
-                "type": "exclude"
-              },
-              {
                 "dieId": "roll-1-die-1",
                 "parentDieId": null,
-                "reason": "keep",
                 "rollIndex": 1,
-                "sequence": 33,
                 "sourceNodeId": "dice@0:14",
-                "subject": "die",
-                "type": "exclude"
+                "value": 2
               },
               {
-                "dieId": "roll-1-die-13",
-                "parentDieId": null,
-                "reason": "keep",
-                "rollIndex": 1,
-                "sequence": 34,
-                "sourceNodeId": "dice@0:14",
+                "sequence": 2,
+                "type": "roll",
                 "subject": "die",
-                "type": "exclude"
-              },
-              {
-                "dieId": "roll-1-die-23",
-                "parentDieId": "roll-1-die-12",
-                "reason": "keep",
-                "rollIndex": 1,
-                "sequence": 35,
-                "sourceNodeId": "dice@0:14",
-                "subject": "die",
-                "type": "exclude"
-              },
-              {
                 "dieId": "roll-1-die-2",
                 "parentDieId": null,
-                "reason": "keep",
                 "rollIndex": 1,
-                "sequence": 36,
                 "sourceNodeId": "dice@0:14",
-                "subject": "die",
-                "type": "exclude"
+                "value": 3
               },
               {
-                "dieId": "roll-1-die-6",
-                "parentDieId": null,
-                "reason": "keep",
-                "rollIndex": 1,
-                "sequence": 37,
-                "sourceNodeId": "dice@0:14",
+                "sequence": 3,
+                "type": "roll",
                 "subject": "die",
-                "type": "exclude"
-              },
-              {
-                "dieId": "roll-1-die-8",
-                "parentDieId": null,
-                "reason": "keep",
-                "rollIndex": 1,
-                "sequence": 38,
-                "sourceNodeId": "dice@0:14",
-                "subject": "die",
-                "type": "exclude"
-              },
-              {
-                "dieId": "roll-1-die-15",
-                "parentDieId": null,
-                "reason": "keep",
-                "rollIndex": 1,
-                "sequence": 39,
-                "sourceNodeId": "dice@0:14",
-                "subject": "die",
-                "type": "exclude"
-              },
-              {
-                "dieId": "roll-1-die-16",
-                "parentDieId": null,
-                "reason": "keep",
-                "rollIndex": 1,
-                "sequence": 40,
-                "sourceNodeId": "dice@0:14",
-                "subject": "die",
-                "type": "exclude"
-              },
-              {
-                "dieId": "roll-1-die-18",
-                "parentDieId": null,
-                "reason": "keep",
-                "rollIndex": 1,
-                "sequence": 41,
-                "sourceNodeId": "dice@0:14",
-                "subject": "die",
-                "type": "exclude"
-              },
-              {
-                "dieId": "roll-1-die-22",
-                "parentDieId": "roll-1-die-21",
-                "reason": "keep",
-                "rollIndex": 1,
-                "sequence": 42,
-                "sourceNodeId": "dice@0:14",
-                "subject": "die",
-                "type": "exclude"
-              },
-              {
                 "dieId": "roll-1-die-3",
                 "parentDieId": null,
-                "reason": "keep",
                 "rollIndex": 1,
-                "sequence": 43,
                 "sourceNodeId": "dice@0:14",
-                "subject": "die",
-                "type": "exclude"
+                "value": 4
               },
               {
-                "dieId": "roll-1-die-9",
-                "parentDieId": null,
-                "reason": "keep",
-                "rollIndex": 1,
-                "sequence": 44,
-                "sourceNodeId": "dice@0:14",
+                "sequence": 4,
+                "type": "roll",
                 "subject": "die",
-                "type": "exclude"
-              },
-              {
-                "contribution": 5,
                 "dieId": "roll-1-die-4",
                 "parentDieId": null,
                 "rollIndex": 1,
-                "sequence": 45,
                 "sourceNodeId": "dice@0:14",
-                "subject": "die",
-                "type": "include"
+                "value": 5
               },
               {
-                "contribution": 6,
+                "sequence": 5,
+                "type": "roll",
+                "subject": "die",
                 "dieId": "roll-1-die-5",
                 "parentDieId": null,
                 "rollIndex": 1,
-                "sequence": 46,
                 "sourceNodeId": "dice@0:14",
-                "subject": "die",
-                "type": "include"
+                "value": 6
               },
               {
-                "contribution": 5,
+                "sequence": 6,
+                "type": "roll",
+                "subject": "die",
+                "dieId": "roll-1-die-6",
+                "parentDieId": null,
+                "rollIndex": 1,
+                "sourceNodeId": "dice@0:14",
+                "value": 3
+              },
+              {
+                "sequence": 7,
+                "type": "roll",
+                "subject": "die",
                 "dieId": "roll-1-die-7",
                 "parentDieId": null,
                 "rollIndex": 1,
-                "sequence": 47,
                 "sourceNodeId": "dice@0:14",
-                "subject": "die",
-                "type": "include"
+                "value": 5
               },
               {
-                "contribution": 6,
+                "sequence": 8,
+                "type": "roll",
+                "subject": "die",
+                "dieId": "roll-1-die-8",
+                "parentDieId": null,
+                "rollIndex": 1,
+                "sourceNodeId": "dice@0:14",
+                "value": 3
+              },
+              {
+                "sequence": 9,
+                "type": "roll",
+                "subject": "die",
+                "dieId": "roll-1-die-9",
+                "parentDieId": null,
+                "rollIndex": 1,
+                "sourceNodeId": "dice@0:14",
+                "value": 4
+              },
+              {
+                "sequence": 10,
+                "type": "roll",
+                "subject": "die",
+                "dieId": "roll-1-die-10",
+                "parentDieId": null,
+                "rollIndex": 1,
+                "sourceNodeId": "dice@0:14",
+                "value": 1
+              },
+              {
+                "sequence": 11,
+                "type": "roll",
+                "subject": "die",
+                "dieId": "roll-1-die-11",
+                "parentDieId": null,
+                "rollIndex": 1,
+                "sourceNodeId": "dice@0:14",
+                "value": 1
+              },
+              {
+                "sequence": 12,
+                "type": "roll",
+                "subject": "die",
                 "dieId": "roll-1-die-12",
                 "parentDieId": null,
                 "rollIndex": 1,
-                "sequence": 48,
                 "sourceNodeId": "dice@0:14",
-                "subject": "die",
-                "type": "include"
+                "value": 6
               },
               {
-                "contribution": 4,
+                "sequence": 13,
+                "type": "roll",
+                "subject": "die",
+                "dieId": "roll-1-die-13",
+                "parentDieId": null,
+                "rollIndex": 1,
+                "sourceNodeId": "dice@0:14",
+                "value": 2
+              },
+              {
+                "sequence": 14,
+                "type": "roll",
+                "subject": "die",
                 "dieId": "roll-1-die-14",
                 "parentDieId": null,
                 "rollIndex": 1,
-                "sequence": 49,
                 "sourceNodeId": "dice@0:14",
-                "subject": "die",
-                "type": "include"
+                "value": 4
               },
               {
-                "contribution": 5,
+                "sequence": 15,
+                "type": "roll",
+                "subject": "die",
+                "dieId": "roll-1-die-15",
+                "parentDieId": null,
+                "rollIndex": 1,
+                "sourceNodeId": "dice@0:14",
+                "value": 3
+              },
+              {
+                "sequence": 16,
+                "type": "roll",
+                "subject": "die",
+                "dieId": "roll-1-die-16",
+                "parentDieId": null,
+                "rollIndex": 1,
+                "sourceNodeId": "dice@0:14",
+                "value": 3
+              },
+              {
+                "sequence": 17,
+                "type": "roll",
+                "subject": "die",
                 "dieId": "roll-1-die-17",
                 "parentDieId": null,
                 "rollIndex": 1,
-                "sequence": 50,
                 "sourceNodeId": "dice@0:14",
-                "subject": "die",
-                "type": "include"
+                "value": 5
               },
               {
-                "contribution": 6,
+                "sequence": 18,
+                "type": "roll",
+                "subject": "die",
+                "dieId": "roll-1-die-18",
+                "parentDieId": null,
+                "rollIndex": 1,
+                "sourceNodeId": "dice@0:14",
+                "value": 3
+              },
+              {
+                "sequence": 19,
+                "type": "roll",
+                "subject": "die",
                 "dieId": "roll-1-die-19",
                 "parentDieId": null,
                 "rollIndex": 1,
-                "sequence": 51,
                 "sourceNodeId": "dice@0:14",
-                "subject": "die",
-                "type": "include"
+                "value": 6
               },
               {
-                "contribution": 5,
+                "sequence": 20,
+                "type": "roll",
+                "subject": "die",
                 "dieId": "roll-1-die-20",
                 "parentDieId": null,
                 "rollIndex": 1,
-                "sequence": 52,
                 "sourceNodeId": "dice@0:14",
-                "subject": "die",
-                "type": "include"
+                "value": 5
               },
               {
-                "contribution": 6,
+                "sequence": 21,
+                "type": "roll",
+                "subject": "die",
                 "dieId": "roll-1-die-21",
                 "parentDieId": "roll-1-die-5",
                 "rollIndex": 1,
-                "sequence": 53,
                 "sourceNodeId": "dice@0:14",
-                "subject": "die",
-                "type": "include"
+                "value": 6
               },
               {
-                "contribution": 5,
+                "sequence": 22,
+                "type": "explode",
+                "subject": "die",
+                "dieId": "roll-1-die-5",
+                "parentDieId": null,
+                "rollIndex": 1,
+                "sourceNodeId": "dice@0:14",
+                "childDieId": "roll-1-die-21",
+                "value": 6,
+                "reason": "explode"
+              },
+              {
+                "sequence": 23,
+                "type": "roll",
+                "subject": "die",
+                "dieId": "roll-1-die-22",
+                "parentDieId": "roll-1-die-21",
+                "rollIndex": 1,
+                "sourceNodeId": "dice@0:14",
+                "value": 3
+              },
+              {
+                "sequence": 24,
+                "type": "explode",
+                "subject": "die",
+                "dieId": "roll-1-die-21",
+                "parentDieId": "roll-1-die-5",
+                "rollIndex": 1,
+                "sourceNodeId": "dice@0:14",
+                "childDieId": "roll-1-die-22",
+                "value": 3,
+                "reason": "explode"
+              },
+              {
+                "sequence": 25,
+                "type": "roll",
+                "subject": "die",
+                "dieId": "roll-1-die-23",
+                "parentDieId": "roll-1-die-12",
+                "rollIndex": 1,
+                "sourceNodeId": "dice@0:14",
+                "value": 2
+              },
+              {
+                "sequence": 26,
+                "type": "explode",
+                "subject": "die",
+                "dieId": "roll-1-die-12",
+                "parentDieId": null,
+                "rollIndex": 1,
+                "sourceNodeId": "dice@0:14",
+                "childDieId": "roll-1-die-23",
+                "value": 2,
+                "reason": "explode"
+              },
+              {
+                "sequence": 27,
+                "type": "roll",
+                "subject": "die",
                 "dieId": "roll-1-die-24",
                 "parentDieId": "roll-1-die-19",
                 "rollIndex": 1,
-                "sequence": 54,
                 "sourceNodeId": "dice@0:14",
-                "subject": "die",
-                "type": "include"
+                "value": 5
               },
               {
-                "contribution": 53,
+                "sequence": 28,
+                "type": "explode",
+                "subject": "die",
+                "dieId": "roll-1-die-19",
+                "parentDieId": null,
+                "rollIndex": 1,
+                "sourceNodeId": "dice@0:14",
+                "childDieId": "roll-1-die-24",
+                "value": 5,
+                "reason": "explode"
+              },
+              {
+                "sequence": 29,
+                "type": "reroll",
+                "subject": "die",
+                "dieId": "roll-1-die-10",
+                "parentDieId": null,
+                "rollIndex": 1,
+                "sourceNodeId": "dice@0:14",
+                "from": 1,
+                "to": 1,
+                "reason": "reroll-once"
+              },
+              {
+                "sequence": 30,
+                "type": "reroll",
+                "subject": "die",
+                "dieId": "roll-1-die-11",
+                "parentDieId": null,
+                "rollIndex": 1,
+                "sourceNodeId": "dice@0:14",
+                "from": 1,
+                "to": 1,
+                "reason": "reroll-once"
+              },
+              {
+                "sequence": 31,
+                "type": "exclude",
+                "subject": "die",
+                "dieId": "roll-1-die-10",
+                "parentDieId": null,
+                "rollIndex": 1,
+                "sourceNodeId": "dice@0:14",
+                "reason": "keep"
+              },
+              {
+                "sequence": 32,
+                "type": "exclude",
+                "subject": "die",
+                "dieId": "roll-1-die-11",
+                "parentDieId": null,
+                "rollIndex": 1,
+                "sourceNodeId": "dice@0:14",
+                "reason": "keep"
+              },
+              {
+                "sequence": 33,
+                "type": "exclude",
+                "subject": "die",
+                "dieId": "roll-1-die-1",
+                "parentDieId": null,
+                "rollIndex": 1,
+                "sourceNodeId": "dice@0:14",
+                "reason": "keep"
+              },
+              {
+                "sequence": 34,
+                "type": "exclude",
+                "subject": "die",
+                "dieId": "roll-1-die-13",
+                "parentDieId": null,
+                "rollIndex": 1,
+                "sourceNodeId": "dice@0:14",
+                "reason": "keep"
+              },
+              {
+                "sequence": 35,
+                "type": "exclude",
+                "subject": "die",
+                "dieId": "roll-1-die-23",
+                "parentDieId": "roll-1-die-12",
+                "rollIndex": 1,
+                "sourceNodeId": "dice@0:14",
+                "reason": "keep"
+              },
+              {
+                "sequence": 36,
+                "type": "exclude",
+                "subject": "die",
+                "dieId": "roll-1-die-2",
+                "parentDieId": null,
+                "rollIndex": 1,
+                "sourceNodeId": "dice@0:14",
+                "reason": "keep"
+              },
+              {
+                "sequence": 37,
+                "type": "exclude",
+                "subject": "die",
+                "dieId": "roll-1-die-6",
+                "parentDieId": null,
+                "rollIndex": 1,
+                "sourceNodeId": "dice@0:14",
+                "reason": "keep"
+              },
+              {
+                "sequence": 38,
+                "type": "exclude",
+                "subject": "die",
+                "dieId": "roll-1-die-8",
+                "parentDieId": null,
+                "rollIndex": 1,
+                "sourceNodeId": "dice@0:14",
+                "reason": "keep"
+              },
+              {
+                "sequence": 39,
+                "type": "exclude",
+                "subject": "die",
+                "dieId": "roll-1-die-15",
+                "parentDieId": null,
+                "rollIndex": 1,
+                "sourceNodeId": "dice@0:14",
+                "reason": "keep"
+              },
+              {
+                "sequence": 40,
+                "type": "exclude",
+                "subject": "die",
+                "dieId": "roll-1-die-16",
+                "parentDieId": null,
+                "rollIndex": 1,
+                "sourceNodeId": "dice@0:14",
+                "reason": "keep"
+              },
+              {
+                "sequence": 41,
+                "type": "exclude",
+                "subject": "die",
+                "dieId": "roll-1-die-18",
+                "parentDieId": null,
+                "rollIndex": 1,
+                "sourceNodeId": "dice@0:14",
+                "reason": "keep"
+              },
+              {
+                "sequence": 42,
+                "type": "exclude",
+                "subject": "die",
+                "dieId": "roll-1-die-22",
+                "parentDieId": "roll-1-die-21",
+                "rollIndex": 1,
+                "sourceNodeId": "dice@0:14",
+                "reason": "keep"
+              },
+              {
+                "sequence": 43,
+                "type": "exclude",
+                "subject": "die",
+                "dieId": "roll-1-die-3",
+                "parentDieId": null,
+                "rollIndex": 1,
+                "sourceNodeId": "dice@0:14",
+                "reason": "keep"
+              },
+              {
+                "sequence": 44,
+                "type": "exclude",
+                "subject": "die",
+                "dieId": "roll-1-die-9",
+                "parentDieId": null,
+                "rollIndex": 1,
+                "sourceNodeId": "dice@0:14",
+                "reason": "keep"
+              },
+              {
+                "sequence": 45,
+                "type": "include",
+                "subject": "die",
+                "dieId": "roll-1-die-4",
+                "parentDieId": null,
+                "rollIndex": 1,
+                "sourceNodeId": "dice@0:14",
+                "contribution": 5
+              },
+              {
+                "sequence": 46,
+                "type": "include",
+                "subject": "die",
+                "dieId": "roll-1-die-5",
+                "parentDieId": null,
+                "rollIndex": 1,
+                "sourceNodeId": "dice@0:14",
+                "contribution": 6
+              },
+              {
+                "sequence": 47,
+                "type": "include",
+                "subject": "die",
+                "dieId": "roll-1-die-7",
+                "parentDieId": null,
+                "rollIndex": 1,
+                "sourceNodeId": "dice@0:14",
+                "contribution": 5
+              },
+              {
+                "sequence": 48,
+                "type": "include",
+                "subject": "die",
+                "dieId": "roll-1-die-12",
+                "parentDieId": null,
+                "rollIndex": 1,
+                "sourceNodeId": "dice@0:14",
+                "contribution": 6
+              },
+              {
+                "sequence": 49,
+                "type": "include",
+                "subject": "die",
+                "dieId": "roll-1-die-14",
+                "parentDieId": null,
+                "rollIndex": 1,
+                "sourceNodeId": "dice@0:14",
+                "contribution": 4
+              },
+              {
+                "sequence": 50,
+                "type": "include",
+                "subject": "die",
+                "dieId": "roll-1-die-17",
+                "parentDieId": null,
+                "rollIndex": 1,
+                "sourceNodeId": "dice@0:14",
+                "contribution": 5
+              },
+              {
+                "sequence": 51,
+                "type": "include",
+                "subject": "die",
+                "dieId": "roll-1-die-19",
+                "parentDieId": null,
+                "rollIndex": 1,
+                "sourceNodeId": "dice@0:14",
+                "contribution": 6
+              },
+              {
+                "sequence": 52,
+                "type": "include",
+                "subject": "die",
+                "dieId": "roll-1-die-20",
+                "parentDieId": null,
+                "rollIndex": 1,
+                "sourceNodeId": "dice@0:14",
+                "contribution": 5
+              },
+              {
+                "sequence": 53,
+                "type": "include",
+                "subject": "die",
+                "dieId": "roll-1-die-21",
+                "parentDieId": "roll-1-die-5",
+                "rollIndex": 1,
+                "sourceNodeId": "dice@0:14",
+                "contribution": 6
+              },
+              {
+                "sequence": 54,
+                "type": "include",
+                "subject": "die",
+                "dieId": "roll-1-die-24",
+                "parentDieId": "roll-1-die-19",
+                "rollIndex": 1,
+                "sourceNodeId": "dice@0:14",
+                "contribution": 5
+              },
+              {
+                "sequence": 55,
+                "type": "include",
+                "subject": "group",
                 "groupId": "roll-1:group:dice@0:14",
                 "rollIndex": 1,
-                "sequence": 55,
                 "sourceNodeId": "dice@0:14",
-                "subject": "group",
-                "type": "include",
-                "value": 53
+                "value": 53,
+                "contribution": 53
               }
             ]
           }
@@ -30928,234 +30928,234 @@
               ],
               "events": [
                 {
+                  "sequence": 1,
+                  "type": "roll",
+                  "subject": "die",
                   "dieId": "roll-1-die-1",
                   "parentDieId": null,
                   "rollIndex": 1,
-                  "sequence": 1,
                   "sourceNodeId": "dice@0:4",
-                  "subject": "die",
-                  "type": "roll",
                   "value": 8
                 },
                 {
+                  "sequence": 2,
+                  "type": "roll",
+                  "subject": "die",
                   "dieId": "roll-1-die-2",
                   "parentDieId": null,
                   "rollIndex": 1,
-                  "sequence": 2,
                   "sourceNodeId": "dice@0:4",
-                  "subject": "die",
-                  "type": "roll",
                   "value": 3
                 },
                 {
+                  "sequence": 3,
+                  "type": "roll",
+                  "subject": "die",
                   "dieId": "roll-1-die-3",
                   "parentDieId": null,
                   "rollIndex": 1,
-                  "sequence": 3,
                   "sourceNodeId": "dice@0:4",
-                  "subject": "die",
-                  "type": "roll",
                   "value": 10
                 },
                 {
+                  "sequence": 4,
+                  "type": "roll",
+                  "subject": "die",
                   "dieId": "roll-1-die-4",
                   "parentDieId": null,
                   "rollIndex": 1,
-                  "sequence": 4,
                   "sourceNodeId": "dice@0:4",
-                  "subject": "die",
-                  "type": "roll",
                   "value": 9
                 },
                 {
+                  "sequence": 5,
+                  "type": "roll",
+                  "subject": "die",
                   "dieId": "roll-1-die-5",
                   "parentDieId": null,
                   "rollIndex": 1,
-                  "sequence": 5,
                   "sourceNodeId": "dice@0:4",
-                  "subject": "die",
-                  "type": "roll",
                   "value": 6
                 },
                 {
+                  "sequence": 6,
+                  "type": "roll",
+                  "subject": "die",
                   "dieId": "roll-1-die-6",
                   "parentDieId": null,
                   "rollIndex": 1,
-                  "sequence": 6,
                   "sourceNodeId": "dice@0:4",
-                  "subject": "die",
-                  "type": "roll",
                   "value": 3
                 },
                 {
+                  "sequence": 7,
+                  "type": "roll",
+                  "subject": "die",
                   "dieId": "roll-1-die-7",
                   "parentDieId": null,
                   "rollIndex": 1,
-                  "sequence": 7,
                   "sourceNodeId": "dice@0:4",
-                  "subject": "die",
-                  "type": "roll",
                   "value": 1
                 },
                 {
+                  "sequence": 8,
+                  "type": "roll",
+                  "subject": "die",
                   "dieId": "roll-1-die-8",
                   "parentDieId": null,
                   "rollIndex": 1,
-                  "sequence": 8,
                   "sourceNodeId": "dice@5:9",
-                  "subject": "die",
-                  "type": "roll",
                   "value": 5
                 },
                 {
+                  "sequence": 9,
+                  "type": "roll",
+                  "subject": "die",
                   "dieId": "roll-1-die-9",
                   "parentDieId": null,
                   "rollIndex": 1,
-                  "sequence": 9,
                   "sourceNodeId": "dice@5:9",
-                  "subject": "die",
-                  "type": "roll",
                   "value": 10
                 },
                 {
+                  "sequence": 10,
+                  "type": "roll",
+                  "subject": "die",
                   "dieId": "roll-1-die-10",
                   "parentDieId": null,
                   "rollIndex": 1,
-                  "sequence": 10,
                   "sourceNodeId": "dice@5:9",
-                  "subject": "die",
-                  "type": "roll",
                   "value": 9
                 },
                 {
-                  "contribution": 8,
+                  "sequence": 11,
+                  "type": "include",
+                  "subject": "die",
                   "dieId": "roll-1-die-1",
                   "parentDieId": null,
                   "rollIndex": 1,
-                  "sequence": 11,
                   "sourceNodeId": "dice@0:4",
-                  "subject": "die",
-                  "type": "include"
+                  "contribution": 8
                 },
                 {
-                  "contribution": 3,
+                  "sequence": 12,
+                  "type": "include",
+                  "subject": "die",
                   "dieId": "roll-1-die-2",
                   "parentDieId": null,
                   "rollIndex": 1,
-                  "sequence": 12,
                   "sourceNodeId": "dice@0:4",
-                  "subject": "die",
-                  "type": "include"
+                  "contribution": 3
                 },
                 {
-                  "contribution": 10,
+                  "sequence": 13,
+                  "type": "include",
+                  "subject": "die",
                   "dieId": "roll-1-die-3",
                   "parentDieId": null,
                   "rollIndex": 1,
-                  "sequence": 13,
                   "sourceNodeId": "dice@0:4",
-                  "subject": "die",
-                  "type": "include"
+                  "contribution": 10
                 },
                 {
-                  "contribution": 9,
+                  "sequence": 14,
+                  "type": "include",
+                  "subject": "die",
                   "dieId": "roll-1-die-4",
                   "parentDieId": null,
                   "rollIndex": 1,
-                  "sequence": 14,
                   "sourceNodeId": "dice@0:4",
-                  "subject": "die",
-                  "type": "include"
+                  "contribution": 9
                 },
                 {
-                  "contribution": 6,
+                  "sequence": 15,
+                  "type": "include",
+                  "subject": "die",
                   "dieId": "roll-1-die-5",
                   "parentDieId": null,
                   "rollIndex": 1,
-                  "sequence": 15,
                   "sourceNodeId": "dice@0:4",
-                  "subject": "die",
-                  "type": "include"
+                  "contribution": 6
                 },
                 {
-                  "contribution": 3,
+                  "sequence": 16,
+                  "type": "include",
+                  "subject": "die",
                   "dieId": "roll-1-die-6",
                   "parentDieId": null,
                   "rollIndex": 1,
-                  "sequence": 16,
                   "sourceNodeId": "dice@0:4",
-                  "subject": "die",
-                  "type": "include"
+                  "contribution": 3
                 },
                 {
-                  "contribution": 1,
+                  "sequence": 17,
+                  "type": "include",
+                  "subject": "die",
                   "dieId": "roll-1-die-7",
                   "parentDieId": null,
                   "rollIndex": 1,
-                  "sequence": 17,
                   "sourceNodeId": "dice@0:4",
-                  "subject": "die",
-                  "type": "include"
+                  "contribution": 1
                 },
                 {
-                  "contribution": 5,
+                  "sequence": 18,
+                  "type": "include",
+                  "subject": "die",
                   "dieId": "roll-1-die-8",
                   "parentDieId": null,
                   "rollIndex": 1,
-                  "sequence": 18,
                   "sourceNodeId": "dice@5:9",
-                  "subject": "die",
-                  "type": "include"
+                  "contribution": 5
                 },
                 {
-                  "contribution": 10,
+                  "sequence": 19,
+                  "type": "include",
+                  "subject": "die",
                   "dieId": "roll-1-die-9",
                   "parentDieId": null,
                   "rollIndex": 1,
-                  "sequence": 19,
                   "sourceNodeId": "dice@5:9",
-                  "subject": "die",
-                  "type": "include"
+                  "contribution": 10
                 },
                 {
-                  "contribution": 9,
+                  "sequence": 20,
+                  "type": "include",
+                  "subject": "die",
                   "dieId": "roll-1-die-10",
                   "parentDieId": null,
                   "rollIndex": 1,
-                  "sequence": 20,
                   "sourceNodeId": "dice@5:9",
-                  "subject": "die",
-                  "type": "include"
+                  "contribution": 9
                 },
                 {
-                  "contribution": 40,
+                  "sequence": 21,
+                  "type": "include",
+                  "subject": "group",
                   "groupId": "roll-1:group:dice@0:4",
                   "rollIndex": 1,
-                  "sequence": 21,
                   "sourceNodeId": "dice@0:4",
-                  "subject": "group",
-                  "type": "include",
-                  "value": 40
+                  "value": 40,
+                  "contribution": 40
                 },
                 {
-                  "contribution": 24,
+                  "sequence": 22,
+                  "type": "include",
+                  "subject": "group",
                   "groupId": "roll-1:group:dice@5:9",
                   "rollIndex": 1,
-                  "sequence": 22,
                   "sourceNodeId": "dice@5:9",
-                  "subject": "group",
-                  "type": "include",
-                  "value": 24
+                  "value": 24,
+                  "contribution": 24
                 },
                 {
-                  "contribution": 64,
+                  "sequence": 23,
+                  "type": "include",
+                  "subject": "group",
                   "groupId": "roll-1:group:binary@0:9",
                   "rollIndex": 1,
-                  "sequence": 23,
                   "sourceNodeId": "binary@0:9",
-                  "subject": "group",
-                  "type": "include",
-                  "value": 64
+                  "value": 64,
+                  "contribution": 64
                 }
               ]
             }

@@ -1,0 +1,36 @@
+package dicecore
+
+import "encoding/json"
+
+// Keep the standard encoder for the envelope and nested public fields. Events
+// append directly to the same buffer, avoiding a buffer and encoder scan for
+// every individual event. This changes only encoding, never roll execution.
+func (result DiceRollResult) MarshalJSON() ([]byte, error) {
+	type envelope DiceRollResult
+	withoutEvents := struct {
+		*envelope
+		Events []ResolvedEvent `json:"events,omitempty"`
+	}{envelope: (*envelope)(&result)}
+	encoded, err := json.Marshal(withoutEvents)
+	if err != nil {
+		return nil, err
+	}
+	// The envelope has fixed public fields and always encodes as an object.
+	output := make([]byte, len(encoded)-1, len(encoded)+len(result.Events)*192+16)
+	copy(output, encoded[:len(encoded)-1])
+	output = append(output, `,"events":`...)
+	if result.Events == nil {
+		return append(output, "null}"...), nil
+	}
+	output = append(output, '[')
+	for index := range result.Events {
+		if index > 0 {
+			output = append(output, ',')
+		}
+		output, err = result.Events[index].appendJSON(output)
+		if err != nil {
+			return nil, err
+		}
+	}
+	return append(output, ']', '}'), nil
+}

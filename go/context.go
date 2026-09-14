@@ -14,6 +14,7 @@ type ExecutionContextOptions struct {
 	CollectEvents        *bool
 	CryptoSource         io.Reader
 	CryptoSourceProvided bool
+	rngCache             *executionRNGCache
 }
 
 type ExecutionContext struct {
@@ -86,14 +87,16 @@ func CreateExecutionContext(options ...ExecutionContextOptions) (*ExecutionConte
 	if err != nil {
 		return nil, err
 	}
-	return initializeExecutionContextRandom(context, algorithm, seed.Words[:], option.CollectEvents)
+	return initializeExecutionContextRandom(context, algorithm, seed.Words[:], option.CollectEvents, option.rngCache)
 }
 
 // Initializing the generator is separate from resolving seed/replay material;
 // generator validation errors leave no partially initialized context available.
-func initializeExecutionContextRandom(context *ExecutionContext, algorithm RandomAlgorithm, words []uint32, collectEvents *bool) (*ExecutionContext, error) {
+func initializeExecutionContextRandom(context *ExecutionContext, algorithm RandomAlgorithm, words []uint32, collectEvents *bool, caches ...*executionRNGCache) (*ExecutionContext, error) {
 	var err error
-	if algorithm == MT19937 {
+	if algorithm == MT19937 && len(words) == 4 && len(caches) > 0 && caches[0] != nil {
+		context.Random = caches[0].newMT([4]uint32(words), context.Budget)
+	} else if algorithm == MT19937 {
 		context.Random, err = NewMersenneTwister19937FromWords(words, context.Budget)
 	} else {
 		context.Random, err = NewXoshiro128StarStar(words, context.Budget)

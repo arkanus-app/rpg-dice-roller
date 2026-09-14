@@ -1,0 +1,5991 @@
+{
+  "schemaVersion": 1,
+  "status": "complete",
+  "mode": "final",
+  "startedAt": "2026-09-14T02:41:43.652Z",
+  "invocation": {
+    "executable": "C:\\Users\\quira\\AppData\\Local\\Microsoft\\WinGet\\Packages\\OpenJS.NodeJS.LTS_Microsoft.Winget.Source_8wekyb3d8bbwe\\node-v24.18.0-win-x64\\node.exe",
+    "args": [
+      "scripts/compare-json-runtimes.mjs",
+      "--go",
+      "C:\\Users\\quira\\.codex\\visualizations\\2026\\07\\21\\019f8591-c4eb-7913-9683-054308852112\\go-runtime-full\\go\\bin\\go.exe",
+      "--bun",
+      "bun",
+      "--with-confirmed-gc"
+    ]
+  },
+  "configuration": {
+    "workers": [
+      1,
+      6
+    ],
+    "seedPrefix": "dicecore-backend/v3.7.1/",
+    "algorithm": "mt19937",
+    "freezeResults": "never",
+    "cache": "warm",
+    "wallBudgetMs": 300000,
+    "operations": {
+      "build-and-encode": {
+        "requests": 10000,
+        "samples": 5,
+        "warmup": 5000
+      },
+      "encoding-only": {
+        "requests": 512,
+        "samples": 3,
+        "warmup": 256,
+        "wallBudgetMs": 20000
+      }
+    }
+  },
+  "runtimes": [
+    "node",
+    "bun",
+    "go-pool",
+    "go-shared"
+  ],
+  "workloads": [
+    {
+      "id": "d20",
+      "input": "1d20+5",
+      "mode": "full",
+      "label": "1d20+5 · full"
+    },
+    {
+      "id": "100d6",
+      "input": "100d6",
+      "mode": "full",
+      "label": "100d6 · full"
+    },
+    {
+      "id": "pool",
+      "input": "20d6!2ro=1kh10",
+      "mode": "full",
+      "label": "20d6!2ro=1kh10 · full"
+    }
+  ],
+  "runs": [
+    {
+      "runtime": "node",
+      "workers": 1,
+      "operation": "build-and-encode",
+      "gc": null,
+      "memoryLimit": null,
+      "wallMilliseconds": 18037,
+      "output": {
+        "runtime": "v24.18.0",
+        "cases": {
+          "d20": [
+            {
+              "durationNs": 290274000,
+              "requests": 10000,
+              "workers": 1,
+              "digest": {
+                "count": 10000,
+                "total": 155656,
+                "weightedTotal": 775910358,
+                "randomCalls": 10000,
+                "encodedLength": 23812029
+              },
+              "opsPerSecond": 34450.20911276931
+            },
+            {
+              "durationNs": 275932900,
+              "requests": 10000,
+              "workers": 1,
+              "digest": {
+                "count": 10000,
+                "total": 155656,
+                "weightedTotal": 775910358,
+                "randomCalls": 10000,
+                "encodedLength": 23812029
+              },
+              "opsPerSecond": 36240.69474861461
+            },
+            {
+              "durationNs": 311577300,
+              "requests": 10000,
+              "workers": 1,
+              "digest": {
+                "count": 10000,
+                "total": 155656,
+                "weightedTotal": 775910358,
+                "randomCalls": 10000,
+                "encodedLength": 23812029
+              },
+              "opsPerSecond": 32094.764284817924
+            },
+            {
+              "durationNs": 284984700,
+              "requests": 10000,
+              "workers": 1,
+              "digest": {
+                "count": 10000,
+                "total": 155656,
+                "weightedTotal": 775910358,
+                "randomCalls": 10000,
+                "encodedLength": 23812029
+              },
+              "opsPerSecond": 35089.60305588335
+            },
+            {
+              "durationNs": 285310100,
+              "requests": 10000,
+              "workers": 1,
+              "digest": {
+                "count": 10000,
+                "total": 155656,
+                "weightedTotal": 775910358,
+                "randomCalls": 10000,
+                "encodedLength": 23812029
+              },
+              "opsPerSecond": 35049.58289243879
+            }
+          ],
+          "100d6": [
+            {
+              "durationNs": 2148696000,
+              "requests": 10000,
+              "workers": 1,
+              "digest": {
+                "count": 10000,
+                "total": 3501322,
+                "weightedTotal": 17516749728,
+                "randomCalls": 1000000,
+                "encodedLength": 530550000
+              },
+              "opsPerSecond": 4653.985487011657
+            },
+            {
+              "durationNs": 2195384900,
+              "requests": 10000,
+              "workers": 1,
+              "digest": {
+                "count": 10000,
+                "total": 3501322,
+                "weightedTotal": 17516749728,
+                "randomCalls": 1000000,
+                "encodedLength": 530550000
+              },
+              "opsPerSecond": 4555.009921039358
+            },
+            {
+              "durationNs": 2160973400,
+              "requests": 10000,
+              "workers": 1,
+              "digest": {
+                "count": 10000,
+                "total": 3501322,
+                "weightedTotal": 17516749728,
+                "randomCalls": 1000000,
+                "encodedLength": 530550000
+              },
+              "opsPerSecond": 4627.544235389478
+            },
+            {
+              "durationNs": 2113867200,
+              "requests": 10000,
+              "workers": 1,
+              "digest": {
+                "count": 10000,
+                "total": 3501322,
+                "weightedTotal": 17516749728,
+                "randomCalls": 1000000,
+                "encodedLength": 530550000
+              },
+              "opsPerSecond": 4730.666145914937
+            },
+            {
+              "durationNs": 2076152600,
+              "requests": 10000,
+              "workers": 1,
+              "digest": {
+                "count": 10000,
+                "total": 3501322,
+                "weightedTotal": 17516749728,
+                "randomCalls": 1000000,
+                "encodedLength": 530550000
+              },
+              "opsPerSecond": 4816.601631305907
+            }
+          ],
+          "pool": [
+            {
+              "durationNs": 844559900,
+              "requests": 10000,
+              "workers": 1,
+              "digest": {
+                "count": 10000,
+                "total": 529368,
+                "weightedTotal": 2646650494,
+                "randomCalls": 278519,
+                "encodedLength": 153303550
+              },
+              "opsPerSecond": 11840.48638823605
+            },
+            {
+              "durationNs": 865242600,
+              "requests": 10000,
+              "workers": 1,
+              "digest": {
+                "count": 10000,
+                "total": 529368,
+                "weightedTotal": 2646650494,
+                "randomCalls": 278519,
+                "encodedLength": 153303550
+              },
+              "opsPerSecond": 11557.452210512982
+            },
+            {
+              "durationNs": 835267000,
+              "requests": 10000,
+              "workers": 1,
+              "digest": {
+                "count": 10000,
+                "total": 529368,
+                "weightedTotal": 2646650494,
+                "randomCalls": 278519,
+                "encodedLength": 153303550
+              },
+              "opsPerSecond": 11972.219661497462
+            },
+            {
+              "durationNs": 826498200,
+              "requests": 10000,
+              "workers": 1,
+              "digest": {
+                "count": 10000,
+                "total": 529368,
+                "weightedTotal": 2646650494,
+                "randomCalls": 278519,
+                "encodedLength": 153303550
+              },
+              "opsPerSecond": 12099.239901550905
+            },
+            {
+              "durationNs": 824342400,
+              "requests": 10000,
+              "workers": 1,
+              "digest": {
+                "count": 10000,
+                "total": 529368,
+                "weightedTotal": 2646650494,
+                "randomCalls": 278519,
+                "encodedLength": 153303550
+              },
+              "opsPerSecond": 12130.881536604207
+            }
+          ]
+        },
+        "memory": {
+          "d20": {
+            "afterWarmup": {
+              "available": true,
+              "rssBytes": 82874368,
+              "source": "process.memoryUsage().rss"
+            },
+            "afterBatches": [
+              {
+                "available": true,
+                "rssBytes": 84074496,
+                "source": "process.memoryUsage().rss"
+              },
+              {
+                "available": true,
+                "rssBytes": 84066304,
+                "source": "process.memoryUsage().rss"
+              },
+              {
+                "available": true,
+                "rssBytes": 84041728,
+                "source": "process.memoryUsage().rss"
+              },
+              {
+                "available": true,
+                "rssBytes": 84066304,
+                "source": "process.memoryUsage().rss"
+              },
+              {
+                "available": true,
+                "rssBytes": 84353024,
+                "source": "process.memoryUsage().rss"
+              }
+            ]
+          },
+          "100d6": {
+            "afterWarmup": {
+              "available": true,
+              "rssBytes": 110272512,
+              "source": "process.memoryUsage().rss"
+            },
+            "afterBatches": [
+              {
+                "available": true,
+                "rssBytes": 145920000,
+                "source": "process.memoryUsage().rss"
+              },
+              {
+                "available": true,
+                "rssBytes": 146030592,
+                "source": "process.memoryUsage().rss"
+              },
+              {
+                "available": true,
+                "rssBytes": 145223680,
+                "source": "process.memoryUsage().rss"
+              },
+              {
+                "available": true,
+                "rssBytes": 146923520,
+                "source": "process.memoryUsage().rss"
+              },
+              {
+                "available": true,
+                "rssBytes": 148656128,
+                "source": "process.memoryUsage().rss"
+              }
+            ]
+          },
+          "pool": {
+            "afterWarmup": {
+              "available": true,
+              "rssBytes": 150355968,
+              "source": "process.memoryUsage().rss"
+            },
+            "afterBatches": [
+              {
+                "available": true,
+                "rssBytes": 222277632,
+                "source": "process.memoryUsage().rss"
+              },
+              {
+                "available": true,
+                "rssBytes": 220004352,
+                "source": "process.memoryUsage().rss"
+              },
+              {
+                "available": true,
+                "rssBytes": 220192768,
+                "source": "process.memoryUsage().rss"
+              },
+              {
+                "available": true,
+                "rssBytes": 221941760,
+                "source": "process.memoryUsage().rss"
+              },
+              {
+                "available": true,
+                "rssBytes": 222478336,
+                "source": "process.memoryUsage().rss"
+              }
+            ]
+          }
+        }
+      }
+    },
+    {
+      "runtime": "bun",
+      "workers": 1,
+      "operation": "build-and-encode",
+      "gc": null,
+      "memoryLimit": null,
+      "wallMilliseconds": 16326,
+      "output": {
+        "runtime": "Bun 1.4.0",
+        "cases": {
+          "d20": [
+            {
+              "durationNs": 300475500,
+              "requests": 10000,
+              "workers": 1,
+              "digest": {
+                "count": 10000,
+                "total": 155656,
+                "weightedTotal": 775910358,
+                "randomCalls": 10000,
+                "encodedLength": 23812029
+              },
+              "opsPerSecond": 33280.583608314155
+            },
+            {
+              "durationNs": 291499800,
+              "requests": 10000,
+              "workers": 1,
+              "digest": {
+                "count": 10000,
+                "total": 155656,
+                "weightedTotal": 775910358,
+                "randomCalls": 10000,
+                "encodedLength": 23812029
+              },
+              "opsPerSecond": 34305.34086129733
+            },
+            {
+              "durationNs": 286871400,
+              "requests": 10000,
+              "workers": 1,
+              "digest": {
+                "count": 10000,
+                "total": 155656,
+                "weightedTotal": 775910358,
+                "randomCalls": 10000,
+                "encodedLength": 23812029
+              },
+              "opsPerSecond": 34858.82524364576
+            },
+            {
+              "durationNs": 289140600,
+              "requests": 10000,
+              "workers": 1,
+              "digest": {
+                "count": 10000,
+                "total": 155656,
+                "weightedTotal": 775910358,
+                "randomCalls": 10000,
+                "encodedLength": 23812029
+              },
+              "opsPerSecond": 34585.25022082682
+            },
+            {
+              "durationNs": 284387900,
+              "requests": 10000,
+              "workers": 1,
+              "digest": {
+                "count": 10000,
+                "total": 155656,
+                "weightedTotal": 775910358,
+                "randomCalls": 10000,
+                "encodedLength": 23812029
+              },
+              "opsPerSecond": 35163.240067527484
+            }
+          ],
+          "100d6": [
+            {
+              "durationNs": 1721395600,
+              "requests": 10000,
+              "workers": 1,
+              "digest": {
+                "count": 10000,
+                "total": 3501322,
+                "weightedTotal": 17516749728,
+                "randomCalls": 1000000,
+                "encodedLength": 530550000
+              },
+              "opsPerSecond": 5809.239898138464
+            },
+            {
+              "durationNs": 1925410300,
+              "requests": 10000,
+              "workers": 1,
+              "digest": {
+                "count": 10000,
+                "total": 3501322,
+                "weightedTotal": 17516749728,
+                "randomCalls": 1000000,
+                "encodedLength": 530550000
+              },
+              "opsPerSecond": 5193.698195132746
+            },
+            {
+              "durationNs": 1691504900,
+              "requests": 10000,
+              "workers": 1,
+              "digest": {
+                "count": 10000,
+                "total": 3501322,
+                "weightedTotal": 17516749728,
+                "randomCalls": 1000000,
+                "encodedLength": 530550000
+              },
+              "opsPerSecond": 5911.895377896924
+            },
+            {
+              "durationNs": 1776242900,
+              "requests": 10000,
+              "workers": 1,
+              "digest": {
+                "count": 10000,
+                "total": 3501322,
+                "weightedTotal": 17516749728,
+                "randomCalls": 1000000,
+                "encodedLength": 530550000
+              },
+              "opsPerSecond": 5629.860645748394
+            },
+            {
+              "durationNs": 1829012100,
+              "requests": 10000,
+              "workers": 1,
+              "digest": {
+                "count": 10000,
+                "total": 3501322,
+                "weightedTotal": 17516749728,
+                "randomCalls": 1000000,
+                "encodedLength": 530550000
+              },
+              "opsPerSecond": 5467.432391507962
+            }
+          ],
+          "pool": [
+            {
+              "durationNs": 898416500,
+              "requests": 10000,
+              "workers": 1,
+              "digest": {
+                "count": 10000,
+                "total": 529368,
+                "weightedTotal": 2646650494,
+                "randomCalls": 278519,
+                "encodedLength": 153303550
+              },
+              "opsPerSecond": 11130.694950504581
+            },
+            {
+              "durationNs": 938805300,
+              "requests": 10000,
+              "workers": 1,
+              "digest": {
+                "count": 10000,
+                "total": 529368,
+                "weightedTotal": 2646650494,
+                "randomCalls": 278519,
+                "encodedLength": 153303550
+              },
+              "opsPerSecond": 10651.835902502893
+            },
+            {
+              "durationNs": 859858900,
+              "requests": 10000,
+              "workers": 1,
+              "digest": {
+                "count": 10000,
+                "total": 529368,
+                "weightedTotal": 2646650494,
+                "randomCalls": 278519,
+                "encodedLength": 153303550
+              },
+              "opsPerSecond": 11629.815077799392
+            },
+            {
+              "durationNs": 821886900,
+              "requests": 10000,
+              "workers": 1,
+              "digest": {
+                "count": 10000,
+                "total": 529368,
+                "weightedTotal": 2646650494,
+                "randomCalls": 278519,
+                "encodedLength": 153303550
+              },
+              "opsPerSecond": 12167.124211372635
+            },
+            {
+              "durationNs": 865412600,
+              "requests": 10000,
+              "workers": 1,
+              "digest": {
+                "count": 10000,
+                "total": 529368,
+                "weightedTotal": 2646650494,
+                "randomCalls": 278519,
+                "encodedLength": 153303550
+              },
+              "opsPerSecond": 11555.181886651524
+            }
+          ]
+        },
+        "memory": {
+          "d20": {
+            "afterWarmup": {
+              "available": true,
+              "rssBytes": 66572288,
+              "source": "process.memoryUsage().rss"
+            },
+            "afterBatches": [
+              {
+                "available": true,
+                "rssBytes": 77021184,
+                "source": "process.memoryUsage().rss"
+              },
+              {
+                "available": true,
+                "rssBytes": 73555968,
+                "source": "process.memoryUsage().rss"
+              },
+              {
+                "available": true,
+                "rssBytes": 74985472,
+                "source": "process.memoryUsage().rss"
+              },
+              {
+                "available": true,
+                "rssBytes": 76201984,
+                "source": "process.memoryUsage().rss"
+              },
+              {
+                "available": true,
+                "rssBytes": 77164544,
+                "source": "process.memoryUsage().rss"
+              }
+            ]
+          },
+          "100d6": {
+            "afterWarmup": {
+              "available": true,
+              "rssBytes": 93802496,
+              "source": "process.memoryUsage().rss"
+            },
+            "afterBatches": [
+              {
+                "available": true,
+                "rssBytes": 93556736,
+                "source": "process.memoryUsage().rss"
+              },
+              {
+                "available": true,
+                "rssBytes": 95924224,
+                "source": "process.memoryUsage().rss"
+              },
+              {
+                "available": true,
+                "rssBytes": 97304576,
+                "source": "process.memoryUsage().rss"
+              },
+              {
+                "available": true,
+                "rssBytes": 95358976,
+                "source": "process.memoryUsage().rss"
+              },
+              {
+                "available": true,
+                "rssBytes": 94498816,
+                "source": "process.memoryUsage().rss"
+              }
+            ]
+          },
+          "pool": {
+            "afterWarmup": {
+              "available": true,
+              "rssBytes": 94134272,
+              "source": "process.memoryUsage().rss"
+            },
+            "afterBatches": [
+              {
+                "available": true,
+                "rssBytes": 95780864,
+                "source": "process.memoryUsage().rss"
+              },
+              {
+                "available": true,
+                "rssBytes": 100618240,
+                "source": "process.memoryUsage().rss"
+              },
+              {
+                "available": true,
+                "rssBytes": 97927168,
+                "source": "process.memoryUsage().rss"
+              },
+              {
+                "available": true,
+                "rssBytes": 96886784,
+                "source": "process.memoryUsage().rss"
+              },
+              {
+                "available": true,
+                "rssBytes": 98402304,
+                "source": "process.memoryUsage().rss"
+              }
+            ]
+          }
+        }
+      }
+    },
+    {
+      "runtime": "go-pool",
+      "workers": 1,
+      "operation": "build-and-encode",
+      "gc": null,
+      "memoryLimit": null,
+      "wallMilliseconds": 35527,
+      "output": {
+        "cases": {
+          "100d6": [
+            {
+              "digest": {
+                "count": 10000,
+                "total": 3501322,
+                "weightedTotal": 17516749728,
+                "randomCalls": 1000000,
+                "encodedLength": 530550000
+              },
+              "durationNs": 4650538800,
+              "opsPerSecond": 2150.2884784016856,
+              "requests": 10000,
+              "workers": 1
+            },
+            {
+              "digest": {
+                "count": 10000,
+                "total": 3501322,
+                "weightedTotal": 17516749728,
+                "randomCalls": 1000000,
+                "encodedLength": 530550000
+              },
+              "durationNs": 4584435700,
+              "opsPerSecond": 2181.2935450267087,
+              "requests": 10000,
+              "workers": 1
+            },
+            {
+              "digest": {
+                "count": 10000,
+                "total": 3501322,
+                "weightedTotal": 17516749728,
+                "randomCalls": 1000000,
+                "encodedLength": 530550000
+              },
+              "durationNs": 4586668500,
+              "opsPerSecond": 2180.2316866806486,
+              "requests": 10000,
+              "workers": 1
+            },
+            {
+              "digest": {
+                "count": 10000,
+                "total": 3501322,
+                "weightedTotal": 17516749728,
+                "randomCalls": 1000000,
+                "encodedLength": 530550000
+              },
+              "durationNs": 4473542100,
+              "opsPerSecond": 2235.365125992667,
+              "requests": 10000,
+              "workers": 1
+            },
+            {
+              "digest": {
+                "count": 10000,
+                "total": 3501322,
+                "weightedTotal": 17516749728,
+                "randomCalls": 1000000,
+                "encodedLength": 530550000
+              },
+              "durationNs": 4452028100,
+              "opsPerSecond": 2246.167314173062,
+              "requests": 10000,
+              "workers": 1
+            }
+          ],
+          "d20": [
+            {
+              "digest": {
+                "count": 10000,
+                "total": 155656,
+                "weightedTotal": 775910358,
+                "randomCalls": 10000,
+                "encodedLength": 23812029
+              },
+              "durationNs": 243939200,
+              "opsPerSecond": 40993.821411236895,
+              "requests": 10000,
+              "workers": 1
+            },
+            {
+              "digest": {
+                "count": 10000,
+                "total": 155656,
+                "weightedTotal": 775910358,
+                "randomCalls": 10000,
+                "encodedLength": 23812029
+              },
+              "durationNs": 313483600,
+              "opsPerSecond": 31899.59538553213,
+              "requests": 10000,
+              "workers": 1
+            },
+            {
+              "digest": {
+                "count": 10000,
+                "total": 155656,
+                "weightedTotal": 775910358,
+                "randomCalls": 10000,
+                "encodedLength": 23812029
+              },
+              "durationNs": 311872100,
+              "opsPerSecond": 32064.42641069849,
+              "requests": 10000,
+              "workers": 1
+            },
+            {
+              "digest": {
+                "count": 10000,
+                "total": 155656,
+                "weightedTotal": 775910358,
+                "randomCalls": 10000,
+                "encodedLength": 23812029
+              },
+              "durationNs": 254514400,
+              "opsPerSecond": 39290.50772765706,
+              "requests": 10000,
+              "workers": 1
+            },
+            {
+              "digest": {
+                "count": 10000,
+                "total": 155656,
+                "weightedTotal": 775910358,
+                "randomCalls": 10000,
+                "encodedLength": 23812029
+              },
+              "durationNs": 301531200,
+              "opsPerSecond": 33164.0639509278,
+              "requests": 10000,
+              "workers": 1
+            }
+          ],
+          "pool": [
+            {
+              "digest": {
+                "count": 10000,
+                "total": 529368,
+                "weightedTotal": 2646650494,
+                "randomCalls": 278519,
+                "encodedLength": 153303550
+              },
+              "durationNs": 1624424200,
+              "opsPerSecond": 6156.027471149469,
+              "requests": 10000,
+              "workers": 1
+            },
+            {
+              "digest": {
+                "count": 10000,
+                "total": 529368,
+                "weightedTotal": 2646650494,
+                "randomCalls": 278519,
+                "encodedLength": 153303550
+              },
+              "durationNs": 1597166000,
+              "opsPerSecond": 6261.089955583828,
+              "requests": 10000,
+              "workers": 1
+            },
+            {
+              "digest": {
+                "count": 10000,
+                "total": 529368,
+                "weightedTotal": 2646650494,
+                "randomCalls": 278519,
+                "encodedLength": 153303550
+              },
+              "durationNs": 1591243100,
+              "opsPerSecond": 6284.39488598568,
+              "requests": 10000,
+              "workers": 1
+            },
+            {
+              "digest": {
+                "count": 10000,
+                "total": 529368,
+                "weightedTotal": 2646650494,
+                "randomCalls": 278519,
+                "encodedLength": 153303550
+              },
+              "durationNs": 1567309100,
+              "opsPerSecond": 6380.3623675763765,
+              "requests": 10000,
+              "workers": 1
+            },
+            {
+              "digest": {
+                "count": 10000,
+                "total": 529368,
+                "weightedTotal": 2646650494,
+                "randomCalls": 278519,
+                "encodedLength": 153303550
+              },
+              "durationNs": 1633536400,
+              "opsPerSecond": 6121.687891374811,
+              "requests": 10000,
+              "workers": 1
+            }
+          ]
+        },
+        "gomaxprocs": 12,
+        "memory": {
+          "100d6": {
+            "afterBatches": [
+              {
+                "available": true,
+                "rssBytes": 16474112,
+                "source": "GetProcessMemoryInfo.WorkingSetSize"
+              },
+              {
+                "available": true,
+                "rssBytes": 16818176,
+                "source": "GetProcessMemoryInfo.WorkingSetSize"
+              },
+              {
+                "available": true,
+                "rssBytes": 16551936,
+                "source": "GetProcessMemoryInfo.WorkingSetSize"
+              },
+              {
+                "available": true,
+                "rssBytes": 16437248,
+                "source": "GetProcessMemoryInfo.WorkingSetSize"
+              },
+              {
+                "available": true,
+                "rssBytes": 21565440,
+                "source": "GetProcessMemoryInfo.WorkingSetSize"
+              }
+            ],
+            "afterWarmup": {
+              "available": true,
+              "rssBytes": 16211968,
+              "source": "GetProcessMemoryInfo.WorkingSetSize"
+            }
+          },
+          "d20": {
+            "afterBatches": [
+              {
+                "available": true,
+                "rssBytes": 15949824,
+                "source": "GetProcessMemoryInfo.WorkingSetSize"
+              },
+              {
+                "available": true,
+                "rssBytes": 15466496,
+                "source": "GetProcessMemoryInfo.WorkingSetSize"
+              },
+              {
+                "available": true,
+                "rssBytes": 15863808,
+                "source": "GetProcessMemoryInfo.WorkingSetSize"
+              },
+              {
+                "available": true,
+                "rssBytes": 15880192,
+                "source": "GetProcessMemoryInfo.WorkingSetSize"
+              },
+              {
+                "available": true,
+                "rssBytes": 15716352,
+                "source": "GetProcessMemoryInfo.WorkingSetSize"
+              }
+            ],
+            "afterWarmup": {
+              "available": true,
+              "rssBytes": 15572992,
+              "source": "GetProcessMemoryInfo.WorkingSetSize"
+            }
+          },
+          "pool": {
+            "afterBatches": [
+              {
+                "available": true,
+                "rssBytes": 17604608,
+                "source": "GetProcessMemoryInfo.WorkingSetSize"
+              },
+              {
+                "available": true,
+                "rssBytes": 17686528,
+                "source": "GetProcessMemoryInfo.WorkingSetSize"
+              },
+              {
+                "available": true,
+                "rssBytes": 17477632,
+                "source": "GetProcessMemoryInfo.WorkingSetSize"
+              },
+              {
+                "available": true,
+                "rssBytes": 17305600,
+                "source": "GetProcessMemoryInfo.WorkingSetSize"
+              },
+              {
+                "available": true,
+                "rssBytes": 17530880,
+                "source": "GetProcessMemoryInfo.WorkingSetSize"
+              }
+            ],
+            "afterWarmup": {
+              "available": true,
+              "rssBytes": 16830464,
+              "source": "GetProcessMemoryInfo.WorkingSetSize"
+            }
+          }
+        },
+        "runtime": "go1.26.2"
+      }
+    },
+    {
+      "runtime": "go-shared",
+      "workers": 1,
+      "operation": "build-and-encode",
+      "gc": null,
+      "memoryLimit": null,
+      "wallMilliseconds": 34043,
+      "output": {
+        "cases": {
+          "100d6": [
+            {
+              "digest": {
+                "count": 10000,
+                "total": 3501322,
+                "weightedTotal": 17516749728,
+                "randomCalls": 1000000,
+                "encodedLength": 530550000
+              },
+              "durationNs": 4396296300,
+              "opsPerSecond": 2274.641952590866,
+              "requests": 10000,
+              "workers": 1
+            },
+            {
+              "digest": {
+                "count": 10000,
+                "total": 3501322,
+                "weightedTotal": 17516749728,
+                "randomCalls": 1000000,
+                "encodedLength": 530550000
+              },
+              "durationNs": 4417001100,
+              "opsPerSecond": 2263.979513158826,
+              "requests": 10000,
+              "workers": 1
+            },
+            {
+              "digest": {
+                "count": 10000,
+                "total": 3501322,
+                "weightedTotal": 17516749728,
+                "randomCalls": 1000000,
+                "encodedLength": 530550000
+              },
+              "durationNs": 4374584700,
+              "opsPerSecond": 2285.931279373788,
+              "requests": 10000,
+              "workers": 1
+            },
+            {
+              "digest": {
+                "count": 10000,
+                "total": 3501322,
+                "weightedTotal": 17516749728,
+                "randomCalls": 1000000,
+                "encodedLength": 530550000
+              },
+              "durationNs": 4516865900,
+              "opsPerSecond": 2213.924482460283,
+              "requests": 10000,
+              "workers": 1
+            },
+            {
+              "digest": {
+                "count": 10000,
+                "total": 3501322,
+                "weightedTotal": 17516749728,
+                "randomCalls": 1000000,
+                "encodedLength": 530550000
+              },
+              "durationNs": 4495337400,
+              "opsPerSecond": 2224.5271289314123,
+              "requests": 10000,
+              "workers": 1
+            }
+          ],
+          "d20": [
+            {
+              "digest": {
+                "count": 10000,
+                "total": 155656,
+                "weightedTotal": 775910358,
+                "randomCalls": 10000,
+                "encodedLength": 23812029
+              },
+              "durationNs": 186743600,
+              "opsPerSecond": 53549.35858578286,
+              "requests": 10000,
+              "workers": 1
+            },
+            {
+              "digest": {
+                "count": 10000,
+                "total": 155656,
+                "weightedTotal": 775910358,
+                "randomCalls": 10000,
+                "encodedLength": 23812029
+              },
+              "durationNs": 190756100,
+              "opsPerSecond": 52422.96314508422,
+              "requests": 10000,
+              "workers": 1
+            },
+            {
+              "digest": {
+                "count": 10000,
+                "total": 155656,
+                "weightedTotal": 775910358,
+                "randomCalls": 10000,
+                "encodedLength": 23812029
+              },
+              "durationNs": 228612500,
+              "opsPerSecond": 43742.14008420362,
+              "requests": 10000,
+              "workers": 1
+            },
+            {
+              "digest": {
+                "count": 10000,
+                "total": 155656,
+                "weightedTotal": 775910358,
+                "randomCalls": 10000,
+                "encodedLength": 23812029
+              },
+              "durationNs": 186698800,
+              "opsPerSecond": 53562.20821987072,
+              "requests": 10000,
+              "workers": 1
+            },
+            {
+              "digest": {
+                "count": 10000,
+                "total": 155656,
+                "weightedTotal": 775910358,
+                "randomCalls": 10000,
+                "encodedLength": 23812029
+              },
+              "durationNs": 207001300,
+              "opsPerSecond": 48308.875354889075,
+              "requests": 10000,
+              "workers": 1
+            }
+          ],
+          "pool": [
+            {
+              "digest": {
+                "count": 10000,
+                "total": 529368,
+                "weightedTotal": 2646650494,
+                "randomCalls": 278519,
+                "encodedLength": 153303550
+              },
+              "durationNs": 1542553400,
+              "opsPerSecond": 6482.757744399642,
+              "requests": 10000,
+              "workers": 1
+            },
+            {
+              "digest": {
+                "count": 10000,
+                "total": 529368,
+                "weightedTotal": 2646650494,
+                "randomCalls": 278519,
+                "encodedLength": 153303550
+              },
+              "durationNs": 1586073700,
+              "opsPerSecond": 6304.877257595281,
+              "requests": 10000,
+              "workers": 1
+            },
+            {
+              "digest": {
+                "count": 10000,
+                "total": 529368,
+                "weightedTotal": 2646650494,
+                "randomCalls": 278519,
+                "encodedLength": 153303550
+              },
+              "durationNs": 1546358500,
+              "opsPerSecond": 6466.805724545763,
+              "requests": 10000,
+              "workers": 1
+            },
+            {
+              "digest": {
+                "count": 10000,
+                "total": 529368,
+                "weightedTotal": 2646650494,
+                "randomCalls": 278519,
+                "encodedLength": 153303550
+              },
+              "durationNs": 1523768400,
+              "opsPerSecond": 6562.677110248513,
+              "requests": 10000,
+              "workers": 1
+            },
+            {
+              "digest": {
+                "count": 10000,
+                "total": 529368,
+                "weightedTotal": 2646650494,
+                "randomCalls": 278519,
+                "encodedLength": 153303550
+              },
+              "durationNs": 1545620300,
+              "opsPerSecond": 6469.894320099186,
+              "requests": 10000,
+              "workers": 1
+            }
+          ]
+        },
+        "gomaxprocs": 12,
+        "memory": {
+          "100d6": {
+            "afterBatches": [
+              {
+                "available": true,
+                "rssBytes": 16416768,
+                "source": "GetProcessMemoryInfo.WorkingSetSize"
+              },
+              {
+                "available": true,
+                "rssBytes": 16297984,
+                "source": "GetProcessMemoryInfo.WorkingSetSize"
+              },
+              {
+                "available": true,
+                "rssBytes": 16396288,
+                "source": "GetProcessMemoryInfo.WorkingSetSize"
+              },
+              {
+                "available": true,
+                "rssBytes": 18518016,
+                "source": "GetProcessMemoryInfo.WorkingSetSize"
+              },
+              {
+                "available": true,
+                "rssBytes": 16302080,
+                "source": "GetProcessMemoryInfo.WorkingSetSize"
+              }
+            ],
+            "afterWarmup": {
+              "available": true,
+              "rssBytes": 17100800,
+              "source": "GetProcessMemoryInfo.WorkingSetSize"
+            }
+          },
+          "d20": {
+            "afterBatches": [
+              {
+                "available": true,
+                "rssBytes": 15597568,
+                "source": "GetProcessMemoryInfo.WorkingSetSize"
+              },
+              {
+                "available": true,
+                "rssBytes": 16003072,
+                "source": "GetProcessMemoryInfo.WorkingSetSize"
+              },
+              {
+                "available": true,
+                "rssBytes": 16003072,
+                "source": "GetProcessMemoryInfo.WorkingSetSize"
+              },
+              {
+                "available": true,
+                "rssBytes": 15855616,
+                "source": "GetProcessMemoryInfo.WorkingSetSize"
+              },
+              {
+                "available": true,
+                "rssBytes": 15949824,
+                "source": "GetProcessMemoryInfo.WorkingSetSize"
+              }
+            ],
+            "afterWarmup": {
+              "available": true,
+              "rssBytes": 15982592,
+              "source": "GetProcessMemoryInfo.WorkingSetSize"
+            }
+          },
+          "pool": {
+            "afterBatches": [
+              {
+                "available": true,
+                "rssBytes": 17842176,
+                "source": "GetProcessMemoryInfo.WorkingSetSize"
+              },
+              {
+                "available": true,
+                "rssBytes": 17444864,
+                "source": "GetProcessMemoryInfo.WorkingSetSize"
+              },
+              {
+                "available": true,
+                "rssBytes": 17313792,
+                "source": "GetProcessMemoryInfo.WorkingSetSize"
+              },
+              {
+                "available": true,
+                "rssBytes": 17432576,
+                "source": "GetProcessMemoryInfo.WorkingSetSize"
+              },
+              {
+                "available": true,
+                "rssBytes": 17465344,
+                "source": "GetProcessMemoryInfo.WorkingSetSize"
+              }
+            ],
+            "afterWarmup": {
+              "available": true,
+              "rssBytes": 17055744,
+              "source": "GetProcessMemoryInfo.WorkingSetSize"
+            }
+          }
+        },
+        "runtime": "go1.26.2"
+      }
+    },
+    {
+      "runtime": "bun",
+      "workers": 6,
+      "operation": "build-and-encode",
+      "gc": null,
+      "memoryLimit": null,
+      "wallMilliseconds": 6032,
+      "output": {
+        "runtime": "Bun 1.4.0",
+        "cases": {
+          "d20": [
+            {
+              "durationNs": 91400100,
+              "requests": 10000,
+              "workers": 6,
+              "digest": {
+                "count": 10000,
+                "total": 155656,
+                "weightedTotal": 775910358,
+                "randomCalls": 10000,
+                "encodedLength": 23812029
+              },
+              "opsPerSecond": 109409.07066841284
+            },
+            {
+              "durationNs": 95668500,
+              "requests": 10000,
+              "workers": 6,
+              "digest": {
+                "count": 10000,
+                "total": 155656,
+                "weightedTotal": 775910358,
+                "randomCalls": 10000,
+                "encodedLength": 23812029
+              },
+              "opsPerSecond": 104527.61358231811
+            },
+            {
+              "durationNs": 103077200,
+              "requests": 10000,
+              "workers": 6,
+              "digest": {
+                "count": 10000,
+                "total": 155656,
+                "weightedTotal": 775910358,
+                "randomCalls": 10000,
+                "encodedLength": 23812029
+              },
+              "opsPerSecond": 97014.6647367216
+            },
+            {
+              "durationNs": 96153400,
+              "requests": 10000,
+              "workers": 6,
+              "digest": {
+                "count": 10000,
+                "total": 155656,
+                "weightedTotal": 775910358,
+                "randomCalls": 10000,
+                "encodedLength": 23812029
+              },
+              "opsPerSecond": 104000.48256223909
+            },
+            {
+              "durationNs": 92395000,
+              "requests": 10000,
+              "workers": 6,
+              "digest": {
+                "count": 10000,
+                "total": 155656,
+                "weightedTotal": 775910358,
+                "randomCalls": 10000,
+                "encodedLength": 23812029
+              },
+              "opsPerSecond": 108230.9648790519
+            }
+          ],
+          "100d6": [
+            {
+              "durationNs": 384521200,
+              "requests": 10000,
+              "workers": 6,
+              "digest": {
+                "count": 10000,
+                "total": 3501322,
+                "weightedTotal": 17516749728,
+                "randomCalls": 1000000,
+                "encodedLength": 530550000
+              },
+              "opsPerSecond": 26006.368439503465
+            },
+            {
+              "durationNs": 411884600,
+              "requests": 10000,
+              "workers": 6,
+              "digest": {
+                "count": 10000,
+                "total": 3501322,
+                "weightedTotal": 17516749728,
+                "randomCalls": 1000000,
+                "encodedLength": 530550000
+              },
+              "opsPerSecond": 24278.645037954804
+            },
+            {
+              "durationNs": 410584400,
+              "requests": 10000,
+              "workers": 6,
+              "digest": {
+                "count": 10000,
+                "total": 3501322,
+                "weightedTotal": 17516749728,
+                "randomCalls": 1000000,
+                "encodedLength": 530550000
+              },
+              "opsPerSecond": 24355.52836396122
+            },
+            {
+              "durationNs": 444772900,
+              "requests": 10000,
+              "workers": 6,
+              "digest": {
+                "count": 10000,
+                "total": 3501322,
+                "weightedTotal": 17516749728,
+                "randomCalls": 1000000,
+                "encodedLength": 530550000
+              },
+              "opsPerSecond": 22483.384216979048
+            },
+            {
+              "durationNs": 440625000,
+              "requests": 10000,
+              "workers": 6,
+              "digest": {
+                "count": 10000,
+                "total": 3501322,
+                "weightedTotal": 17516749728,
+                "randomCalls": 1000000,
+                "encodedLength": 530550000
+              },
+              "opsPerSecond": 22695.03546099291
+            }
+          ],
+          "pool": [
+            {
+              "durationNs": 214765900,
+              "requests": 10000,
+              "workers": 6,
+              "digest": {
+                "count": 10000,
+                "total": 529368,
+                "weightedTotal": 2646650494,
+                "randomCalls": 278519,
+                "encodedLength": 153303550
+              },
+              "opsPerSecond": 46562.32670084031
+            },
+            {
+              "durationNs": 221423800,
+              "requests": 10000,
+              "workers": 6,
+              "digest": {
+                "count": 10000,
+                "total": 529368,
+                "weightedTotal": 2646650494,
+                "randomCalls": 278519,
+                "encodedLength": 153303550
+              },
+              "opsPerSecond": 45162.263496516636
+            },
+            {
+              "durationNs": 201603200,
+              "requests": 10000,
+              "workers": 6,
+              "digest": {
+                "count": 10000,
+                "total": 529368,
+                "weightedTotal": 2646650494,
+                "randomCalls": 278519,
+                "encodedLength": 153303550
+              },
+              "opsPerSecond": 49602.387263694225
+            },
+            {
+              "durationNs": 208043900,
+              "requests": 10000,
+              "workers": 6,
+              "digest": {
+                "count": 10000,
+                "total": 529368,
+                "weightedTotal": 2646650494,
+                "randomCalls": 278519,
+                "encodedLength": 153303550
+              },
+              "opsPerSecond": 48066.778213636644
+            },
+            {
+              "durationNs": 195342700,
+              "requests": 10000,
+              "workers": 6,
+              "digest": {
+                "count": 10000,
+                "total": 529368,
+                "weightedTotal": 2646650494,
+                "randomCalls": 278519,
+                "encodedLength": 153303550
+              },
+              "opsPerSecond": 51192.08447513012
+            }
+          ]
+        },
+        "memory": {
+          "d20": {
+            "afterWarmup": {
+              "available": true,
+              "rssBytes": 176295936,
+              "source": "process.memoryUsage().rss"
+            },
+            "afterBatches": [
+              {
+                "available": true,
+                "rssBytes": 179523584,
+                "source": "process.memoryUsage().rss"
+              },
+              {
+                "available": true,
+                "rssBytes": 181981184,
+                "source": "process.memoryUsage().rss"
+              },
+              {
+                "available": true,
+                "rssBytes": 189448192,
+                "source": "process.memoryUsage().rss"
+              },
+              {
+                "available": true,
+                "rssBytes": 192000000,
+                "source": "process.memoryUsage().rss"
+              },
+              {
+                "available": true,
+                "rssBytes": 207028224,
+                "source": "process.memoryUsage().rss"
+              }
+            ]
+          },
+          "100d6": {
+            "afterWarmup": {
+              "available": true,
+              "rssBytes": 339013632,
+              "source": "process.memoryUsage().rss"
+            },
+            "afterBatches": [
+              {
+                "available": true,
+                "rssBytes": 340770816,
+                "source": "process.memoryUsage().rss"
+              },
+              {
+                "available": true,
+                "rssBytes": 337719296,
+                "source": "process.memoryUsage().rss"
+              },
+              {
+                "available": true,
+                "rssBytes": 335888384,
+                "source": "process.memoryUsage().rss"
+              },
+              {
+                "available": true,
+                "rssBytes": 335437824,
+                "source": "process.memoryUsage().rss"
+              },
+              {
+                "available": true,
+                "rssBytes": 334987264,
+                "source": "process.memoryUsage().rss"
+              }
+            ]
+          },
+          "pool": {
+            "afterWarmup": {
+              "available": true,
+              "rssBytes": 308019200,
+              "source": "process.memoryUsage().rss"
+            },
+            "afterBatches": [
+              {
+                "available": true,
+                "rssBytes": 306487296,
+                "source": "process.memoryUsage().rss"
+              },
+              {
+                "available": true,
+                "rssBytes": 311242752,
+                "source": "process.memoryUsage().rss"
+              },
+              {
+                "available": true,
+                "rssBytes": 313806848,
+                "source": "process.memoryUsage().rss"
+              },
+              {
+                "available": true,
+                "rssBytes": 315703296,
+                "source": "process.memoryUsage().rss"
+              },
+              {
+                "available": true,
+                "rssBytes": 316915712,
+                "source": "process.memoryUsage().rss"
+              }
+            ]
+          }
+        }
+      }
+    },
+    {
+      "runtime": "go-pool",
+      "workers": 6,
+      "operation": "build-and-encode",
+      "gc": null,
+      "memoryLimit": null,
+      "wallMilliseconds": 20935,
+      "output": {
+        "cases": {
+          "100d6": [
+            {
+              "digest": {
+                "count": 10000,
+                "total": 3501322,
+                "weightedTotal": 17516749728,
+                "randomCalls": 1000000,
+                "encodedLength": 530550000
+              },
+              "durationNs": 1902004800,
+              "opsPerSecond": 5257.610285736398,
+              "requests": 10000,
+              "workers": 6
+            },
+            {
+              "digest": {
+                "count": 10000,
+                "total": 3501322,
+                "weightedTotal": 17516749728,
+                "randomCalls": 1000000,
+                "encodedLength": 530550000
+              },
+              "durationNs": 1858283300,
+              "opsPerSecond": 5381.310804439775,
+              "requests": 10000,
+              "workers": 6
+            },
+            {
+              "digest": {
+                "count": 10000,
+                "total": 3501322,
+                "weightedTotal": 17516749728,
+                "randomCalls": 1000000,
+                "encodedLength": 530550000
+              },
+              "durationNs": 1749979900,
+              "opsPerSecond": 5714.351347692622,
+              "requests": 10000,
+              "workers": 6
+            },
+            {
+              "digest": {
+                "count": 10000,
+                "total": 3501322,
+                "weightedTotal": 17516749728,
+                "randomCalls": 1000000,
+                "encodedLength": 530550000
+              },
+              "durationNs": 1698456700,
+              "opsPerSecond": 5887.697931893113,
+              "requests": 10000,
+              "workers": 6
+            },
+            {
+              "digest": {
+                "count": 10000,
+                "total": 3501322,
+                "weightedTotal": 17516749728,
+                "randomCalls": 1000000,
+                "encodedLength": 530550000
+              },
+              "durationNs": 1904910400,
+              "opsPerSecond": 5249.590741905761,
+              "requests": 10000,
+              "workers": 6
+            }
+          ],
+          "d20": [
+            {
+              "digest": {
+                "count": 10000,
+                "total": 155656,
+                "weightedTotal": 775910358,
+                "randomCalls": 10000,
+                "encodedLength": 23812029
+              },
+              "durationNs": 92246100,
+              "opsPerSecond": 108405.66701464886,
+              "requests": 10000,
+              "workers": 6
+            },
+            {
+              "digest": {
+                "count": 10000,
+                "total": 155656,
+                "weightedTotal": 775910358,
+                "randomCalls": 10000,
+                "encodedLength": 23812029
+              },
+              "durationNs": 89995900,
+              "opsPerSecond": 111116.17307010652,
+              "requests": 10000,
+              "workers": 6
+            },
+            {
+              "digest": {
+                "count": 10000,
+                "total": 155656,
+                "weightedTotal": 775910358,
+                "randomCalls": 10000,
+                "encodedLength": 23812029
+              },
+              "durationNs": 91835600,
+              "opsPerSecond": 108890.2342882281,
+              "requests": 10000,
+              "workers": 6
+            },
+            {
+              "digest": {
+                "count": 10000,
+                "total": 155656,
+                "weightedTotal": 775910358,
+                "randomCalls": 10000,
+                "encodedLength": 23812029
+              },
+              "durationNs": 92130300,
+              "opsPerSecond": 108541.92377534861,
+              "requests": 10000,
+              "workers": 6
+            },
+            {
+              "digest": {
+                "count": 10000,
+                "total": 155656,
+                "weightedTotal": 775910358,
+                "randomCalls": 10000,
+                "encodedLength": 23812029
+              },
+              "durationNs": 102385800,
+              "opsPerSecond": 97669.79405347226,
+              "requests": 10000,
+              "workers": 6
+            }
+          ],
+          "pool": [
+            {
+              "digest": {
+                "count": 10000,
+                "total": 529368,
+                "weightedTotal": 2646650494,
+                "randomCalls": 278519,
+                "encodedLength": 153303550
+              },
+              "durationNs": 805090700,
+              "opsPerSecond": 12420.96076876804,
+              "requests": 10000,
+              "workers": 6
+            },
+            {
+              "digest": {
+                "count": 10000,
+                "total": 529368,
+                "weightedTotal": 2646650494,
+                "randomCalls": 278519,
+                "encodedLength": 153303550
+              },
+              "durationNs": 780545800,
+              "opsPerSecond": 12811.548021909797,
+              "requests": 10000,
+              "workers": 6
+            },
+            {
+              "digest": {
+                "count": 10000,
+                "total": 529368,
+                "weightedTotal": 2646650494,
+                "randomCalls": 278519,
+                "encodedLength": 153303550
+              },
+              "durationNs": 769588900,
+              "opsPerSecond": 12993.950406509242,
+              "requests": 10000,
+              "workers": 6
+            },
+            {
+              "digest": {
+                "count": 10000,
+                "total": 529368,
+                "weightedTotal": 2646650494,
+                "randomCalls": 278519,
+                "encodedLength": 153303550
+              },
+              "durationNs": 755360100,
+              "opsPerSecond": 13238.718857403244,
+              "requests": 10000,
+              "workers": 6
+            },
+            {
+              "digest": {
+                "count": 10000,
+                "total": 529368,
+                "weightedTotal": 2646650494,
+                "randomCalls": 278519,
+                "encodedLength": 153303550
+              },
+              "durationNs": 763880100,
+              "opsPerSecond": 13091.059709501531,
+              "requests": 10000,
+              "workers": 6
+            }
+          ]
+        },
+        "gomaxprocs": 12,
+        "memory": {
+          "100d6": {
+            "afterBatches": [
+              {
+                "available": true,
+                "rssBytes": 18522112,
+                "source": "GetProcessMemoryInfo.WorkingSetSize"
+              },
+              {
+                "available": true,
+                "rssBytes": 19374080,
+                "source": "GetProcessMemoryInfo.WorkingSetSize"
+              },
+              {
+                "available": true,
+                "rssBytes": 18640896,
+                "source": "GetProcessMemoryInfo.WorkingSetSize"
+              },
+              {
+                "available": true,
+                "rssBytes": 18546688,
+                "source": "GetProcessMemoryInfo.WorkingSetSize"
+              },
+              {
+                "available": true,
+                "rssBytes": 19775488,
+                "source": "GetProcessMemoryInfo.WorkingSetSize"
+              }
+            ],
+            "afterWarmup": {
+              "available": true,
+              "rssBytes": 25870336,
+              "source": "GetProcessMemoryInfo.WorkingSetSize"
+            }
+          },
+          "d20": {
+            "afterBatches": [
+              {
+                "available": true,
+                "rssBytes": 17829888,
+                "source": "GetProcessMemoryInfo.WorkingSetSize"
+              },
+              {
+                "available": true,
+                "rssBytes": 18231296,
+                "source": "GetProcessMemoryInfo.WorkingSetSize"
+              },
+              {
+                "available": true,
+                "rssBytes": 17641472,
+                "source": "GetProcessMemoryInfo.WorkingSetSize"
+              },
+              {
+                "available": true,
+                "rssBytes": 17588224,
+                "source": "GetProcessMemoryInfo.WorkingSetSize"
+              },
+              {
+                "available": true,
+                "rssBytes": 18550784,
+                "source": "GetProcessMemoryInfo.WorkingSetSize"
+              }
+            ],
+            "afterWarmup": {
+              "available": true,
+              "rssBytes": 16220160,
+              "source": "GetProcessMemoryInfo.WorkingSetSize"
+            }
+          },
+          "pool": {
+            "afterBatches": [
+              {
+                "available": true,
+                "rssBytes": 18530304,
+                "source": "GetProcessMemoryInfo.WorkingSetSize"
+              },
+              {
+                "available": true,
+                "rssBytes": 18944000,
+                "source": "GetProcessMemoryInfo.WorkingSetSize"
+              },
+              {
+                "available": true,
+                "rssBytes": 18350080,
+                "source": "GetProcessMemoryInfo.WorkingSetSize"
+              },
+              {
+                "available": true,
+                "rssBytes": 18595840,
+                "source": "GetProcessMemoryInfo.WorkingSetSize"
+              },
+              {
+                "available": true,
+                "rssBytes": 18731008,
+                "source": "GetProcessMemoryInfo.WorkingSetSize"
+              }
+            ],
+            "afterWarmup": {
+              "available": true,
+              "rssBytes": 18792448,
+              "source": "GetProcessMemoryInfo.WorkingSetSize"
+            }
+          }
+        },
+        "runtime": "go1.26.2"
+      }
+    },
+    {
+      "runtime": "go-shared",
+      "workers": 6,
+      "operation": "build-and-encode",
+      "gc": null,
+      "memoryLimit": null,
+      "wallMilliseconds": 20784,
+      "output": {
+        "cases": {
+          "100d6": [
+            {
+              "digest": {
+                "count": 10000,
+                "total": 3501322,
+                "weightedTotal": 17516749728,
+                "randomCalls": 1000000,
+                "encodedLength": 530550000
+              },
+              "durationNs": 1773146800,
+              "opsPerSecond": 5639.690972005251,
+              "requests": 10000,
+              "workers": 6
+            },
+            {
+              "digest": {
+                "count": 10000,
+                "total": 3501322,
+                "weightedTotal": 17516749728,
+                "randomCalls": 1000000,
+                "encodedLength": 530550000
+              },
+              "durationNs": 1778786200,
+              "opsPerSecond": 5621.81109792734,
+              "requests": 10000,
+              "workers": 6
+            },
+            {
+              "digest": {
+                "count": 10000,
+                "total": 3501322,
+                "weightedTotal": 17516749728,
+                "randomCalls": 1000000,
+                "encodedLength": 530550000
+              },
+              "durationNs": 1884715800,
+              "opsPerSecond": 5305.8397451753735,
+              "requests": 10000,
+              "workers": 6
+            },
+            {
+              "digest": {
+                "count": 10000,
+                "total": 3501322,
+                "weightedTotal": 17516749728,
+                "randomCalls": 1000000,
+                "encodedLength": 530550000
+              },
+              "durationNs": 1839397800,
+              "opsPerSecond": 5436.5619008569,
+              "requests": 10000,
+              "workers": 6
+            },
+            {
+              "digest": {
+                "count": 10000,
+                "total": 3501322,
+                "weightedTotal": 17516749728,
+                "randomCalls": 1000000,
+                "encodedLength": 530550000
+              },
+              "durationNs": 1797207500,
+              "opsPerSecond": 5564.187774644831,
+              "requests": 10000,
+              "workers": 6
+            }
+          ],
+          "d20": [
+            {
+              "digest": {
+                "count": 10000,
+                "total": 155656,
+                "weightedTotal": 775910358,
+                "randomCalls": 10000,
+                "encodedLength": 23812029
+              },
+              "durationNs": 81325700,
+              "opsPerSecond": 122962.35999198286,
+              "requests": 10000,
+              "workers": 6
+            },
+            {
+              "digest": {
+                "count": 10000,
+                "total": 155656,
+                "weightedTotal": 775910358,
+                "randomCalls": 10000,
+                "encodedLength": 23812029
+              },
+              "durationNs": 83636900,
+              "opsPerSecond": 119564.45061928408,
+              "requests": 10000,
+              "workers": 6
+            },
+            {
+              "digest": {
+                "count": 10000,
+                "total": 155656,
+                "weightedTotal": 775910358,
+                "randomCalls": 10000,
+                "encodedLength": 23812029
+              },
+              "durationNs": 87046000,
+              "opsPerSecond": 114881.78664154586,
+              "requests": 10000,
+              "workers": 6
+            },
+            {
+              "digest": {
+                "count": 10000,
+                "total": 155656,
+                "weightedTotal": 775910358,
+                "randomCalls": 10000,
+                "encodedLength": 23812029
+              },
+              "durationNs": 101658400,
+              "opsPerSecond": 98368.6542381151,
+              "requests": 10000,
+              "workers": 6
+            },
+            {
+              "digest": {
+                "count": 10000,
+                "total": 155656,
+                "weightedTotal": 775910358,
+                "randomCalls": 10000,
+                "encodedLength": 23812029
+              },
+              "durationNs": 93958300,
+              "opsPerSecond": 106430.19296858287,
+              "requests": 10000,
+              "workers": 6
+            }
+          ],
+          "pool": [
+            {
+              "digest": {
+                "count": 10000,
+                "total": 529368,
+                "weightedTotal": 2646650494,
+                "randomCalls": 278519,
+                "encodedLength": 153303550
+              },
+              "durationNs": 789756200,
+              "opsPerSecond": 12662.13547927829,
+              "requests": 10000,
+              "workers": 6
+            },
+            {
+              "digest": {
+                "count": 10000,
+                "total": 529368,
+                "weightedTotal": 2646650494,
+                "randomCalls": 278519,
+                "encodedLength": 153303550
+              },
+              "durationNs": 820248300,
+              "opsPerSecond": 12191.430326646212,
+              "requests": 10000,
+              "workers": 6
+            },
+            {
+              "digest": {
+                "count": 10000,
+                "total": 529368,
+                "weightedTotal": 2646650494,
+                "randomCalls": 278519,
+                "encodedLength": 153303550
+              },
+              "durationNs": 781202600,
+              "opsPerSecond": 12800.776648720832,
+              "requests": 10000,
+              "workers": 6
+            },
+            {
+              "digest": {
+                "count": 10000,
+                "total": 529368,
+                "weightedTotal": 2646650494,
+                "randomCalls": 278519,
+                "encodedLength": 153303550
+              },
+              "durationNs": 798019900,
+              "opsPerSecond": 12531.01583055761,
+              "requests": 10000,
+              "workers": 6
+            },
+            {
+              "digest": {
+                "count": 10000,
+                "total": 529368,
+                "weightedTotal": 2646650494,
+                "randomCalls": 278519,
+                "encodedLength": 153303550
+              },
+              "durationNs": 784500100,
+              "opsPerSecond": 12746.970969156027,
+              "requests": 10000,
+              "workers": 6
+            }
+          ]
+        },
+        "gomaxprocs": 12,
+        "memory": {
+          "100d6": {
+            "afterBatches": [
+              {
+                "available": true,
+                "rssBytes": 18001920,
+                "source": "GetProcessMemoryInfo.WorkingSetSize"
+              },
+              {
+                "available": true,
+                "rssBytes": 18006016,
+                "source": "GetProcessMemoryInfo.WorkingSetSize"
+              },
+              {
+                "available": true,
+                "rssBytes": 17629184,
+                "source": "GetProcessMemoryInfo.WorkingSetSize"
+              },
+              {
+                "available": true,
+                "rssBytes": 21037056,
+                "source": "GetProcessMemoryInfo.WorkingSetSize"
+              },
+              {
+                "available": true,
+                "rssBytes": 19345408,
+                "source": "GetProcessMemoryInfo.WorkingSetSize"
+              }
+            ],
+            "afterWarmup": {
+              "available": true,
+              "rssBytes": 17666048,
+              "source": "GetProcessMemoryInfo.WorkingSetSize"
+            }
+          },
+          "d20": {
+            "afterBatches": [
+              {
+                "available": true,
+                "rssBytes": 17580032,
+                "source": "GetProcessMemoryInfo.WorkingSetSize"
+              },
+              {
+                "available": true,
+                "rssBytes": 17604608,
+                "source": "GetProcessMemoryInfo.WorkingSetSize"
+              },
+              {
+                "available": true,
+                "rssBytes": 18526208,
+                "source": "GetProcessMemoryInfo.WorkingSetSize"
+              },
+              {
+                "available": true,
+                "rssBytes": 18104320,
+                "source": "GetProcessMemoryInfo.WorkingSetSize"
+              },
+              {
+                "available": true,
+                "rssBytes": 17240064,
+                "source": "GetProcessMemoryInfo.WorkingSetSize"
+              }
+            ],
+            "afterWarmup": {
+              "available": true,
+              "rssBytes": 16998400,
+              "source": "GetProcessMemoryInfo.WorkingSetSize"
+            }
+          },
+          "pool": {
+            "afterBatches": [
+              {
+                "available": true,
+                "rssBytes": 19390464,
+                "source": "GetProcessMemoryInfo.WorkingSetSize"
+              },
+              {
+                "available": true,
+                "rssBytes": 18644992,
+                "source": "GetProcessMemoryInfo.WorkingSetSize"
+              },
+              {
+                "available": true,
+                "rssBytes": 18534400,
+                "source": "GetProcessMemoryInfo.WorkingSetSize"
+              },
+              {
+                "available": true,
+                "rssBytes": 18661376,
+                "source": "GetProcessMemoryInfo.WorkingSetSize"
+              },
+              {
+                "available": true,
+                "rssBytes": 18513920,
+                "source": "GetProcessMemoryInfo.WorkingSetSize"
+              }
+            ],
+            "afterWarmup": {
+              "available": true,
+              "rssBytes": 18579456,
+              "source": "GetProcessMemoryInfo.WorkingSetSize"
+            }
+          }
+        },
+        "runtime": "go1.26.2"
+      }
+    },
+    {
+      "runtime": "node",
+      "workers": 6,
+      "operation": "build-and-encode",
+      "gc": null,
+      "memoryLimit": null,
+      "wallMilliseconds": 6423,
+      "output": {
+        "runtime": "v24.18.0",
+        "cases": {
+          "d20": [
+            {
+              "durationNs": 81379700,
+              "requests": 10000,
+              "workers": 6,
+              "digest": {
+                "count": 10000,
+                "total": 155656,
+                "weightedTotal": 775910358,
+                "randomCalls": 10000,
+                "encodedLength": 23812029
+              },
+              "opsPerSecond": 122880.7675624265
+            },
+            {
+              "durationNs": 79059500,
+              "requests": 10000,
+              "workers": 6,
+              "digest": {
+                "count": 10000,
+                "total": 155656,
+                "weightedTotal": 775910358,
+                "randomCalls": 10000,
+                "encodedLength": 23812029
+              },
+              "opsPerSecond": 126487.01294594578
+            },
+            {
+              "durationNs": 69868300,
+              "requests": 10000,
+              "workers": 6,
+              "digest": {
+                "count": 10000,
+                "total": 155656,
+                "weightedTotal": 775910358,
+                "randomCalls": 10000,
+                "encodedLength": 23812029
+              },
+              "opsPerSecond": 143126.42500246892
+            },
+            {
+              "durationNs": 81642000,
+              "requests": 10000,
+              "workers": 6,
+              "digest": {
+                "count": 10000,
+                "total": 155656,
+                "weightedTotal": 775910358,
+                "randomCalls": 10000,
+                "encodedLength": 23812029
+              },
+              "opsPerSecond": 122485.97535582176
+            },
+            {
+              "durationNs": 75536600,
+              "requests": 10000,
+              "workers": 6,
+              "digest": {
+                "count": 10000,
+                "total": 155656,
+                "weightedTotal": 775910358,
+                "randomCalls": 10000,
+                "encodedLength": 23812029
+              },
+              "opsPerSecond": 132386.15452641502
+            }
+          ],
+          "100d6": [
+            {
+              "durationNs": 457814700,
+              "requests": 10000,
+              "workers": 6,
+              "digest": {
+                "count": 10000,
+                "total": 3501322,
+                "weightedTotal": 17516749728,
+                "randomCalls": 1000000,
+                "encodedLength": 530550000
+              },
+              "opsPerSecond": 21842.89844777811
+            },
+            {
+              "durationNs": 454487700,
+              "requests": 10000,
+              "workers": 6,
+              "digest": {
+                "count": 10000,
+                "total": 3501322,
+                "weightedTotal": 17516749728,
+                "randomCalls": 1000000,
+                "encodedLength": 530550000
+              },
+              "opsPerSecond": 22002.795675218495
+            },
+            {
+              "durationNs": 525237500,
+              "requests": 10000,
+              "workers": 6,
+              "digest": {
+                "count": 10000,
+                "total": 3501322,
+                "weightedTotal": 17516749728,
+                "randomCalls": 1000000,
+                "encodedLength": 530550000
+              },
+              "opsPerSecond": 19039.006163878246
+            },
+            {
+              "durationNs": 533081300,
+              "requests": 10000,
+              "workers": 6,
+              "digest": {
+                "count": 10000,
+                "total": 3501322,
+                "weightedTotal": 17516749728,
+                "randomCalls": 1000000,
+                "encodedLength": 530550000
+              },
+              "opsPerSecond": 18758.864736016814
+            },
+            {
+              "durationNs": 552759200,
+              "requests": 10000,
+              "workers": 6,
+              "digest": {
+                "count": 10000,
+                "total": 3501322,
+                "weightedTotal": 17516749728,
+                "randomCalls": 1000000,
+                "encodedLength": 530550000
+              },
+              "opsPerSecond": 18091.060266387245
+            }
+          ],
+          "pool": [
+            {
+              "durationNs": 200537300,
+              "requests": 10000,
+              "workers": 6,
+              "digest": {
+                "count": 10000,
+                "total": 529368,
+                "weightedTotal": 2646650494,
+                "randomCalls": 278519,
+                "encodedLength": 153303550
+              },
+              "opsPerSecond": 49866.034897248544
+            },
+            {
+              "durationNs": 212155500,
+              "requests": 10000,
+              "workers": 6,
+              "digest": {
+                "count": 10000,
+                "total": 529368,
+                "weightedTotal": 2646650494,
+                "randomCalls": 278519,
+                "encodedLength": 153303550
+              },
+              "opsPerSecond": 47135.238068303675
+            },
+            {
+              "durationNs": 199662500,
+              "requests": 10000,
+              "workers": 6,
+              "digest": {
+                "count": 10000,
+                "total": 529368,
+                "weightedTotal": 2646650494,
+                "randomCalls": 278519,
+                "encodedLength": 153303550
+              },
+              "opsPerSecond": 50084.517623489635
+            },
+            {
+              "durationNs": 209193900,
+              "requests": 10000,
+              "workers": 6,
+              "digest": {
+                "count": 10000,
+                "total": 529368,
+                "weightedTotal": 2646650494,
+                "randomCalls": 278519,
+                "encodedLength": 153303550
+              },
+              "opsPerSecond": 47802.54108747913
+            },
+            {
+              "durationNs": 209221600,
+              "requests": 10000,
+              "workers": 6,
+              "digest": {
+                "count": 10000,
+                "total": 529368,
+                "weightedTotal": 2646650494,
+                "randomCalls": 278519,
+                "encodedLength": 153303550
+              },
+              "opsPerSecond": 47796.212245771945
+            }
+          ]
+        },
+        "memory": {
+          "d20": {
+            "afterWarmup": {
+              "available": true,
+              "rssBytes": 198041600,
+              "source": "process.memoryUsage().rss"
+            },
+            "afterBatches": [
+              {
+                "available": true,
+                "rssBytes": 202256384,
+                "source": "process.memoryUsage().rss"
+              },
+              {
+                "available": true,
+                "rssBytes": 197120000,
+                "source": "process.memoryUsage().rss"
+              },
+              {
+                "available": true,
+                "rssBytes": 200097792,
+                "source": "process.memoryUsage().rss"
+              },
+              {
+                "available": true,
+                "rssBytes": 202067968,
+                "source": "process.memoryUsage().rss"
+              },
+              {
+                "available": true,
+                "rssBytes": 201854976,
+                "source": "process.memoryUsage().rss"
+              }
+            ]
+          },
+          "100d6": {
+            "afterWarmup": {
+              "available": true,
+              "rssBytes": 353038336,
+              "source": "process.memoryUsage().rss"
+            },
+            "afterBatches": [
+              {
+                "available": true,
+                "rssBytes": 355385344,
+                "source": "process.memoryUsage().rss"
+              },
+              {
+                "available": true,
+                "rssBytes": 356589568,
+                "source": "process.memoryUsage().rss"
+              },
+              {
+                "available": true,
+                "rssBytes": 357240832,
+                "source": "process.memoryUsage().rss"
+              },
+              {
+                "available": true,
+                "rssBytes": 354611200,
+                "source": "process.memoryUsage().rss"
+              },
+              {
+                "available": true,
+                "rssBytes": 357662720,
+                "source": "process.memoryUsage().rss"
+              }
+            ]
+          },
+          "pool": {
+            "afterWarmup": {
+              "available": true,
+              "rssBytes": 361988096,
+              "source": "process.memoryUsage().rss"
+            },
+            "afterBatches": [
+              {
+                "available": true,
+                "rssBytes": 364359680,
+                "source": "process.memoryUsage().rss"
+              },
+              {
+                "available": true,
+                "rssBytes": 364273664,
+                "source": "process.memoryUsage().rss"
+              },
+              {
+                "available": true,
+                "rssBytes": 365752320,
+                "source": "process.memoryUsage().rss"
+              },
+              {
+                "available": true,
+                "rssBytes": 394723328,
+                "source": "process.memoryUsage().rss"
+              },
+              {
+                "available": true,
+                "rssBytes": 400478208,
+                "source": "process.memoryUsage().rss"
+              }
+            ]
+          }
+        }
+      }
+    },
+    {
+      "runtime": "go-pool-gc",
+      "workers": 6,
+      "operation": "build-and-encode",
+      "gc": 500,
+      "memoryLimit": "96MiB",
+      "wallMilliseconds": 9768,
+      "output": {
+        "cases": {
+          "100d6": [
+            {
+              "digest": {
+                "count": 10000,
+                "total": 3501322,
+                "weightedTotal": 17516749728,
+                "randomCalls": 1000000,
+                "encodedLength": 530550000
+              },
+              "durationNs": 1027763200,
+              "opsPerSecond": 9729.867736069942,
+              "requests": 10000,
+              "workers": 6
+            },
+            {
+              "digest": {
+                "count": 10000,
+                "total": 3501322,
+                "weightedTotal": 17516749728,
+                "randomCalls": 1000000,
+                "encodedLength": 530550000
+              },
+              "durationNs": 910849700,
+              "opsPerSecond": 10978.759722926845,
+              "requests": 10000,
+              "workers": 6
+            },
+            {
+              "digest": {
+                "count": 10000,
+                "total": 3501322,
+                "weightedTotal": 17516749728,
+                "randomCalls": 1000000,
+                "encodedLength": 530550000
+              },
+              "durationNs": 889176400,
+              "opsPerSecond": 11246.362364093335,
+              "requests": 10000,
+              "workers": 6
+            },
+            {
+              "digest": {
+                "count": 10000,
+                "total": 3501322,
+                "weightedTotal": 17516749728,
+                "randomCalls": 1000000,
+                "encodedLength": 530550000
+              },
+              "durationNs": 874637400,
+              "opsPerSecond": 11433.309391983466,
+              "requests": 10000,
+              "workers": 6
+            },
+            {
+              "digest": {
+                "count": 10000,
+                "total": 3501322,
+                "weightedTotal": 17516749728,
+                "randomCalls": 1000000,
+                "encodedLength": 530550000
+              },
+              "durationNs": 876850000,
+              "opsPerSecond": 11404.459143525119,
+              "requests": 10000,
+              "workers": 6
+            }
+          ],
+          "d20": [
+            {
+              "digest": {
+                "count": 10000,
+                "total": 155656,
+                "weightedTotal": 775910358,
+                "randomCalls": 10000,
+                "encodedLength": 23812029
+              },
+              "durationNs": 47334600,
+              "opsPerSecond": 211261.9521449426,
+              "requests": 10000,
+              "workers": 6
+            },
+            {
+              "digest": {
+                "count": 10000,
+                "total": 155656,
+                "weightedTotal": 775910358,
+                "randomCalls": 10000,
+                "encodedLength": 23812029
+              },
+              "durationNs": 43450600,
+              "opsPerSecond": 230146.41915186442,
+              "requests": 10000,
+              "workers": 6
+            },
+            {
+              "digest": {
+                "count": 10000,
+                "total": 155656,
+                "weightedTotal": 775910358,
+                "randomCalls": 10000,
+                "encodedLength": 23812029
+              },
+              "durationNs": 44659100,
+              "opsPerSecond": 223918.5294822332,
+              "requests": 10000,
+              "workers": 6
+            },
+            {
+              "digest": {
+                "count": 10000,
+                "total": 155656,
+                "weightedTotal": 775910358,
+                "randomCalls": 10000,
+                "encodedLength": 23812029
+              },
+              "durationNs": 47542800,
+              "opsPerSecond": 210336.79127018183,
+              "requests": 10000,
+              "workers": 6
+            },
+            {
+              "digest": {
+                "count": 10000,
+                "total": 155656,
+                "weightedTotal": 775910358,
+                "randomCalls": 10000,
+                "encodedLength": 23812029
+              },
+              "durationNs": 46086900,
+              "opsPerSecond": 216981.3981847336,
+              "requests": 10000,
+              "workers": 6
+            }
+          ],
+          "pool": [
+            {
+              "digest": {
+                "count": 10000,
+                "total": 529368,
+                "weightedTotal": 2646650494,
+                "randomCalls": 278519,
+                "encodedLength": 153303550
+              },
+              "durationNs": 335250300,
+              "opsPerSecond": 29828.459512191337,
+              "requests": 10000,
+              "workers": 6
+            },
+            {
+              "digest": {
+                "count": 10000,
+                "total": 529368,
+                "weightedTotal": 2646650494,
+                "randomCalls": 278519,
+                "encodedLength": 153303550
+              },
+              "durationNs": 327258300,
+              "opsPerSecond": 30556.902605678755,
+              "requests": 10000,
+              "workers": 6
+            },
+            {
+              "digest": {
+                "count": 10000,
+                "total": 529368,
+                "weightedTotal": 2646650494,
+                "randomCalls": 278519,
+                "encodedLength": 153303550
+              },
+              "durationNs": 296729000,
+              "opsPerSecond": 33700.784217248736,
+              "requests": 10000,
+              "workers": 6
+            },
+            {
+              "digest": {
+                "count": 10000,
+                "total": 529368,
+                "weightedTotal": 2646650494,
+                "randomCalls": 278519,
+                "encodedLength": 153303550
+              },
+              "durationNs": 303398100,
+              "opsPerSecond": 32959.995464704625,
+              "requests": 10000,
+              "workers": 6
+            },
+            {
+              "digest": {
+                "count": 10000,
+                "total": 529368,
+                "weightedTotal": 2646650494,
+                "randomCalls": 278519,
+                "encodedLength": 153303550
+              },
+              "durationNs": 296170400,
+              "opsPerSecond": 33764.34647081545,
+              "requests": 10000,
+              "workers": 6
+            }
+          ]
+        },
+        "gomaxprocs": 12,
+        "memory": {
+          "100d6": {
+            "afterBatches": [
+              {
+                "available": true,
+                "rssBytes": 58466304,
+                "source": "GetProcessMemoryInfo.WorkingSetSize"
+              },
+              {
+                "available": true,
+                "rssBytes": 39391232,
+                "source": "GetProcessMemoryInfo.WorkingSetSize"
+              },
+              {
+                "available": true,
+                "rssBytes": 40034304,
+                "source": "GetProcessMemoryInfo.WorkingSetSize"
+              },
+              {
+                "available": true,
+                "rssBytes": 50438144,
+                "source": "GetProcessMemoryInfo.WorkingSetSize"
+              },
+              {
+                "available": true,
+                "rssBytes": 64090112,
+                "source": "GetProcessMemoryInfo.WorkingSetSize"
+              }
+            ],
+            "afterWarmup": {
+              "available": true,
+              "rssBytes": 49147904,
+              "source": "GetProcessMemoryInfo.WorkingSetSize"
+            }
+          },
+          "d20": {
+            "afterBatches": [
+              {
+                "available": true,
+                "rssBytes": 54009856,
+                "source": "GetProcessMemoryInfo.WorkingSetSize"
+              },
+              {
+                "available": true,
+                "rssBytes": 48472064,
+                "source": "GetProcessMemoryInfo.WorkingSetSize"
+              },
+              {
+                "available": true,
+                "rssBytes": 42336256,
+                "source": "GetProcessMemoryInfo.WorkingSetSize"
+              },
+              {
+                "available": true,
+                "rssBytes": 36261888,
+                "source": "GetProcessMemoryInfo.WorkingSetSize"
+              },
+              {
+                "available": true,
+                "rssBytes": 32739328,
+                "source": "GetProcessMemoryInfo.WorkingSetSize"
+              }
+            ],
+            "afterWarmup": {
+              "available": true,
+              "rssBytes": 58011648,
+              "source": "GetProcessMemoryInfo.WorkingSetSize"
+            }
+          },
+          "pool": {
+            "afterBatches": [
+              {
+                "available": true,
+                "rssBytes": 69386240,
+                "source": "GetProcessMemoryInfo.WorkingSetSize"
+              },
+              {
+                "available": true,
+                "rssBytes": 36089856,
+                "source": "GetProcessMemoryInfo.WorkingSetSize"
+              },
+              {
+                "available": true,
+                "rssBytes": 58884096,
+                "source": "GetProcessMemoryInfo.WorkingSetSize"
+              },
+              {
+                "available": true,
+                "rssBytes": 52015104,
+                "source": "GetProcessMemoryInfo.WorkingSetSize"
+              },
+              {
+                "available": true,
+                "rssBytes": 36024320,
+                "source": "GetProcessMemoryInfo.WorkingSetSize"
+              }
+            ],
+            "afterWarmup": {
+              "available": true,
+              "rssBytes": 42475520,
+              "source": "GetProcessMemoryInfo.WorkingSetSize"
+            }
+          }
+        },
+        "runtime": "go1.26.2"
+      }
+    },
+    {
+      "runtime": "node",
+      "workers": 1,
+      "operation": "encoding-only",
+      "gc": null,
+      "memoryLimit": null,
+      "wallMilliseconds": 540,
+      "output": {
+        "runtime": "v24.18.0",
+        "cases": {
+          "d20": [
+            {
+              "durationNs": 3689000,
+              "requests": 512,
+              "workers": 1,
+              "digest": {
+                "count": 512,
+                "total": 7877,
+                "weightedTotal": 2033094,
+                "randomCalls": 512,
+                "encodedLength": 1219063
+              },
+              "opsPerSecond": 138791.00027107616
+            },
+            {
+              "durationNs": 2980300,
+              "requests": 512,
+              "workers": 1,
+              "digest": {
+                "count": 512,
+                "total": 7877,
+                "weightedTotal": 2033094,
+                "randomCalls": 512,
+                "encodedLength": 1219063
+              },
+              "opsPerSecond": 171794.78575982284
+            },
+            {
+              "durationNs": 3566500,
+              "requests": 512,
+              "workers": 1,
+              "digest": {
+                "count": 512,
+                "total": 7877,
+                "weightedTotal": 2033094,
+                "randomCalls": 512,
+                "encodedLength": 1219063
+              },
+              "opsPerSecond": 143558.11019206504
+            }
+          ],
+          "100d6": [
+            {
+              "durationNs": 58646100,
+              "requests": 512,
+              "workers": 1,
+              "digest": {
+                "count": 512,
+                "total": 179220,
+                "weightedTotal": 46035302,
+                "randomCalls": 51200,
+                "encodedLength": 27164160
+              },
+              "opsPerSecond": 8730.333304345899
+            },
+            {
+              "durationNs": 47189900,
+              "requests": 512,
+              "workers": 1,
+              "digest": {
+                "count": 512,
+                "total": 179220,
+                "weightedTotal": 46035302,
+                "randomCalls": 51200,
+                "encodedLength": 27164160
+              },
+              "opsPerSecond": 10849.779295993423
+            },
+            {
+              "durationNs": 48152700,
+              "requests": 512,
+              "workers": 1,
+              "digest": {
+                "count": 512,
+                "total": 179220,
+                "weightedTotal": 46035302,
+                "randomCalls": 51200,
+                "encodedLength": 27164160
+              },
+              "opsPerSecond": 10632.84094142177
+            }
+          ],
+          "pool": [
+            {
+              "durationNs": 17718400,
+              "requests": 512,
+              "workers": 1,
+              "digest": {
+                "count": 512,
+                "total": 27124,
+                "weightedTotal": 6963242,
+                "randomCalls": 14207,
+                "encodedLength": 7830302
+              },
+              "opsPerSecond": 28896.514357955573
+            },
+            {
+              "durationNs": 17276300,
+              "requests": 512,
+              "workers": 1,
+              "digest": {
+                "count": 512,
+                "total": 27124,
+                "weightedTotal": 6963242,
+                "randomCalls": 14207,
+                "encodedLength": 7830302
+              },
+              "opsPerSecond": 29635.975295636217
+            },
+            {
+              "durationNs": 16369400,
+              "requests": 512,
+              "workers": 1,
+              "digest": {
+                "count": 512,
+                "total": 27124,
+                "weightedTotal": 6963242,
+                "randomCalls": 14207,
+                "encodedLength": 7830302
+              },
+              "opsPerSecond": 31277.872127261842
+            }
+          ]
+        },
+        "memory": {
+          "d20": {
+            "afterWarmup": {
+              "available": true,
+              "rssBytes": 82276352,
+              "source": "process.memoryUsage().rss"
+            },
+            "afterBatches": [
+              {
+                "available": true,
+                "rssBytes": 81375232,
+                "source": "process.memoryUsage().rss"
+              },
+              {
+                "available": true,
+                "rssBytes": 81375232,
+                "source": "process.memoryUsage().rss"
+              },
+              {
+                "available": true,
+                "rssBytes": 82145280,
+                "source": "process.memoryUsage().rss"
+              }
+            ]
+          },
+          "100d6": {
+            "afterWarmup": {
+              "available": true,
+              "rssBytes": 151732224,
+              "source": "process.memoryUsage().rss"
+            },
+            "afterBatches": [
+              {
+                "available": true,
+                "rssBytes": 173359104,
+                "source": "process.memoryUsage().rss"
+              },
+              {
+                "available": true,
+                "rssBytes": 173363200,
+                "source": "process.memoryUsage().rss"
+              },
+              {
+                "available": true,
+                "rssBytes": 173367296,
+                "source": "process.memoryUsage().rss"
+              }
+            ]
+          },
+          "pool": {
+            "afterWarmup": {
+              "available": true,
+              "rssBytes": 179175424,
+              "source": "process.memoryUsage().rss"
+            },
+            "afterBatches": [
+              {
+                "available": true,
+                "rssBytes": 180035584,
+                "source": "process.memoryUsage().rss"
+              },
+              {
+                "available": true,
+                "rssBytes": 181530624,
+                "source": "process.memoryUsage().rss"
+              },
+              {
+                "available": true,
+                "rssBytes": 186400768,
+                "source": "process.memoryUsage().rss"
+              }
+            ]
+          }
+        }
+      }
+    },
+    {
+      "runtime": "bun",
+      "workers": 1,
+      "operation": "encoding-only",
+      "gc": null,
+      "memoryLimit": null,
+      "wallMilliseconds": 370,
+      "output": {
+        "runtime": "Bun 1.4.0",
+        "cases": {
+          "d20": [
+            {
+              "durationNs": 1689200,
+              "requests": 512,
+              "workers": 1,
+              "digest": {
+                "count": 512,
+                "total": 7877,
+                "weightedTotal": 2033094,
+                "randomCalls": 512,
+                "encodedLength": 1219063
+              },
+              "opsPerSecond": 303102.0601468151
+            },
+            {
+              "durationNs": 1406000,
+              "requests": 512,
+              "workers": 1,
+              "digest": {
+                "count": 512,
+                "total": 7877,
+                "weightedTotal": 2033094,
+                "randomCalls": 512,
+                "encodedLength": 1219063
+              },
+              "opsPerSecond": 364153.627311522
+            },
+            {
+              "durationNs": 1460200,
+              "requests": 512,
+              "workers": 1,
+              "digest": {
+                "count": 512,
+                "total": 7877,
+                "weightedTotal": 2033094,
+                "randomCalls": 512,
+                "encodedLength": 1219063
+              },
+              "opsPerSecond": 350636.89905492397
+            }
+          ],
+          "100d6": [
+            {
+              "durationNs": 35850700,
+              "requests": 512,
+              "workers": 1,
+              "digest": {
+                "count": 512,
+                "total": 179220,
+                "weightedTotal": 46035302,
+                "randomCalls": 51200,
+                "encodedLength": 27164160
+              },
+              "opsPerSecond": 14281.45057139749
+            },
+            {
+              "durationNs": 21922900,
+              "requests": 512,
+              "workers": 1,
+              "digest": {
+                "count": 512,
+                "total": 179220,
+                "weightedTotal": 46035302,
+                "randomCalls": 51200,
+                "encodedLength": 27164160
+              },
+              "opsPerSecond": 23354.57444042531
+            },
+            {
+              "durationNs": 22976900,
+              "requests": 512,
+              "workers": 1,
+              "digest": {
+                "count": 512,
+                "total": 179220,
+                "weightedTotal": 46035302,
+                "randomCalls": 51200,
+                "encodedLength": 27164160
+              },
+              "opsPerSecond": 22283.249698610343
+            }
+          ],
+          "pool": [
+            {
+              "durationNs": 14796100,
+              "requests": 512,
+              "workers": 1,
+              "digest": {
+                "count": 512,
+                "total": 27124,
+                "weightedTotal": 6963242,
+                "randomCalls": 14207,
+                "encodedLength": 7830302
+              },
+              "opsPerSecond": 34603.713140624895
+            },
+            {
+              "durationNs": 10916100,
+              "requests": 512,
+              "workers": 1,
+              "digest": {
+                "count": 512,
+                "total": 27124,
+                "weightedTotal": 6963242,
+                "randomCalls": 14207,
+                "encodedLength": 7830302
+              },
+              "opsPerSecond": 46903.19802859996
+            },
+            {
+              "durationNs": 10104800,
+              "requests": 512,
+              "workers": 1,
+              "digest": {
+                "count": 512,
+                "total": 27124,
+                "weightedTotal": 6963242,
+                "randomCalls": 14207,
+                "encodedLength": 7830302
+              },
+              "opsPerSecond": 50668.98899532895
+            }
+          ]
+        },
+        "memory": {
+          "d20": {
+            "afterWarmup": {
+              "available": true,
+              "rssBytes": 63406080,
+              "source": "process.memoryUsage().rss"
+            },
+            "afterBatches": [
+              {
+                "available": true,
+                "rssBytes": 64851968,
+                "source": "process.memoryUsage().rss"
+              },
+              {
+                "available": true,
+                "rssBytes": 66179072,
+                "source": "process.memoryUsage().rss"
+              },
+              {
+                "available": true,
+                "rssBytes": 67559424,
+                "source": "process.memoryUsage().rss"
+              }
+            ]
+          },
+          "100d6": {
+            "afterWarmup": {
+              "available": true,
+              "rssBytes": 117788672,
+              "source": "process.memoryUsage().rss"
+            },
+            "afterBatches": [
+              {
+                "available": true,
+                "rssBytes": 147009536,
+                "source": "process.memoryUsage().rss"
+              },
+              {
+                "available": true,
+                "rssBytes": 147390464,
+                "source": "process.memoryUsage().rss"
+              },
+              {
+                "available": true,
+                "rssBytes": 147410944,
+                "source": "process.memoryUsage().rss"
+              }
+            ]
+          },
+          "pool": {
+            "afterWarmup": {
+              "available": true,
+              "rssBytes": 152309760,
+              "source": "process.memoryUsage().rss"
+            },
+            "afterBatches": [
+              {
+                "available": true,
+                "rssBytes": 141434880,
+                "source": "process.memoryUsage().rss"
+              },
+              {
+                "available": true,
+                "rssBytes": 150429696,
+                "source": "process.memoryUsage().rss"
+              },
+              {
+                "available": true,
+                "rssBytes": 152104960,
+                "source": "process.memoryUsage().rss"
+              }
+            ]
+          }
+        }
+      }
+    },
+    {
+      "runtime": "go-pool",
+      "workers": 1,
+      "operation": "encoding-only",
+      "gc": null,
+      "memoryLimit": null,
+      "wallMilliseconds": 683,
+      "output": {
+        "cases": {
+          "100d6": [
+            {
+              "digest": {
+                "count": 512,
+                "total": 179220,
+                "weightedTotal": 46035302,
+                "randomCalls": 51200,
+                "encodedLength": 27164160
+              },
+              "durationNs": 128092400,
+              "opsPerSecond": 3997.1145829104616,
+              "requests": 512,
+              "workers": 1
+            },
+            {
+              "digest": {
+                "count": 512,
+                "total": 179220,
+                "weightedTotal": 46035302,
+                "randomCalls": 51200,
+                "encodedLength": 27164160
+              },
+              "durationNs": 126209500,
+              "opsPerSecond": 4056.7469168327266,
+              "requests": 512,
+              "workers": 1
+            },
+            {
+              "digest": {
+                "count": 512,
+                "total": 179220,
+                "weightedTotal": 46035302,
+                "randomCalls": 51200,
+                "encodedLength": 27164160
+              },
+              "durationNs": 128252100,
+              "opsPerSecond": 3992.1373607137816,
+              "requests": 512,
+              "workers": 1
+            }
+          ],
+          "d20": [
+            {
+              "digest": {
+                "count": 512,
+                "total": 7877,
+                "weightedTotal": 2033094,
+                "randomCalls": 512,
+                "encodedLength": 1219063
+              },
+              "durationNs": 5203100,
+              "opsPerSecond": 98402.87520901002,
+              "requests": 512,
+              "workers": 1
+            },
+            {
+              "digest": {
+                "count": 512,
+                "total": 7877,
+                "weightedTotal": 2033094,
+                "randomCalls": 512,
+                "encodedLength": 1219063
+              },
+              "durationNs": 5164300,
+              "opsPerSecond": 99142.18771179057,
+              "requests": 512,
+              "workers": 1
+            },
+            {
+              "digest": {
+                "count": 512,
+                "total": 7877,
+                "weightedTotal": 2033094,
+                "randomCalls": 512,
+                "encodedLength": 1219063
+              },
+              "durationNs": 5721200,
+              "opsPerSecond": 89491.71502481996,
+              "requests": 512,
+              "workers": 1
+            }
+          ],
+          "pool": [
+            {
+              "digest": {
+                "count": 512,
+                "total": 27124,
+                "weightedTotal": 6963242,
+                "randomCalls": 14207,
+                "encodedLength": 7830302
+              },
+              "durationNs": 42089600,
+              "opsPerSecond": 12164.525203375655,
+              "requests": 512,
+              "workers": 1
+            },
+            {
+              "digest": {
+                "count": 512,
+                "total": 27124,
+                "weightedTotal": 6963242,
+                "randomCalls": 14207,
+                "encodedLength": 7830302
+              },
+              "durationNs": 38647100,
+              "opsPerSecond": 13248.083297323732,
+              "requests": 512,
+              "workers": 1
+            },
+            {
+              "digest": {
+                "count": 512,
+                "total": 27124,
+                "weightedTotal": 6963242,
+                "randomCalls": 14207,
+                "encodedLength": 7830302
+              },
+              "durationNs": 38556800,
+              "opsPerSecond": 13279.110299609925,
+              "requests": 512,
+              "workers": 1
+            }
+          ]
+        },
+        "gomaxprocs": 12,
+        "memory": {
+          "100d6": {
+            "afterBatches": [
+              {
+                "available": true,
+                "rssBytes": 66060288,
+                "source": "GetProcessMemoryInfo.WorkingSetSize"
+              },
+              {
+                "available": true,
+                "rssBytes": 66252800,
+                "source": "GetProcessMemoryInfo.WorkingSetSize"
+              },
+              {
+                "available": true,
+                "rssBytes": 67710976,
+                "source": "GetProcessMemoryInfo.WorkingSetSize"
+              }
+            ],
+            "afterWarmup": {
+              "available": true,
+              "rssBytes": 57761792,
+              "source": "GetProcessMemoryInfo.WorkingSetSize"
+            }
+          },
+          "d20": {
+            "afterBatches": [
+              {
+                "available": true,
+                "rssBytes": 15106048,
+                "source": "GetProcessMemoryInfo.WorkingSetSize"
+              },
+              {
+                "available": true,
+                "rssBytes": 15290368,
+                "source": "GetProcessMemoryInfo.WorkingSetSize"
+              },
+              {
+                "available": true,
+                "rssBytes": 15319040,
+                "source": "GetProcessMemoryInfo.WorkingSetSize"
+              }
+            ],
+            "afterWarmup": {
+              "available": true,
+              "rssBytes": 14512128,
+              "source": "GetProcessMemoryInfo.WorkingSetSize"
+            }
+          },
+          "pool": {
+            "afterBatches": [
+              {
+                "available": true,
+                "rssBytes": 65658880,
+                "source": "GetProcessMemoryInfo.WorkingSetSize"
+              },
+              {
+                "available": true,
+                "rssBytes": 64303104,
+                "source": "GetProcessMemoryInfo.WorkingSetSize"
+              },
+              {
+                "available": true,
+                "rssBytes": 62930944,
+                "source": "GetProcessMemoryInfo.WorkingSetSize"
+              }
+            ],
+            "afterWarmup": {
+              "available": true,
+              "rssBytes": 66523136,
+              "source": "GetProcessMemoryInfo.WorkingSetSize"
+            }
+          }
+        },
+        "runtime": "go1.26.2"
+      }
+    },
+    {
+      "runtime": "go-shared",
+      "workers": 1,
+      "operation": "encoding-only",
+      "gc": null,
+      "memoryLimit": null,
+      "wallMilliseconds": 687,
+      "output": {
+        "cases": {
+          "100d6": [
+            {
+              "digest": {
+                "count": 512,
+                "total": 179220,
+                "weightedTotal": 46035302,
+                "randomCalls": 51200,
+                "encodedLength": 27164160
+              },
+              "durationNs": 131274600,
+              "opsPerSecond": 3900.221368033115,
+              "requests": 512,
+              "workers": 1
+            },
+            {
+              "digest": {
+                "count": 512,
+                "total": 179220,
+                "weightedTotal": 46035302,
+                "randomCalls": 51200,
+                "encodedLength": 27164160
+              },
+              "durationNs": 127964800,
+              "opsPerSecond": 4001.1003025832106,
+              "requests": 512,
+              "workers": 1
+            },
+            {
+              "digest": {
+                "count": 512,
+                "total": 179220,
+                "weightedTotal": 46035302,
+                "randomCalls": 51200,
+                "encodedLength": 27164160
+              },
+              "durationNs": 129329700,
+              "opsPerSecond": 3958.8741023910206,
+              "requests": 512,
+              "workers": 1
+            }
+          ],
+          "d20": [
+            {
+              "digest": {
+                "count": 512,
+                "total": 7877,
+                "weightedTotal": 2033094,
+                "randomCalls": 512,
+                "encodedLength": 1219063
+              },
+              "durationNs": 5208100,
+              "opsPerSecond": 98308.4042165089,
+              "requests": 512,
+              "workers": 1
+            },
+            {
+              "digest": {
+                "count": 512,
+                "total": 7877,
+                "weightedTotal": 2033094,
+                "randomCalls": 512,
+                "encodedLength": 1219063
+              },
+              "durationNs": 5654400,
+              "opsPerSecond": 90548.95302773062,
+              "requests": 512,
+              "workers": 1
+            },
+            {
+              "digest": {
+                "count": 512,
+                "total": 7877,
+                "weightedTotal": 2033094,
+                "randomCalls": 512,
+                "encodedLength": 1219063
+              },
+              "durationNs": 5323500,
+              "opsPerSecond": 96177.32694655772,
+              "requests": 512,
+              "workers": 1
+            }
+          ],
+          "pool": [
+            {
+              "digest": {
+                "count": 512,
+                "total": 27124,
+                "weightedTotal": 6963242,
+                "randomCalls": 14207,
+                "encodedLength": 7830302
+              },
+              "durationNs": 36793900,
+              "opsPerSecond": 13915.35009879355,
+              "requests": 512,
+              "workers": 1
+            },
+            {
+              "digest": {
+                "count": 512,
+                "total": 27124,
+                "weightedTotal": 6963242,
+                "randomCalls": 14207,
+                "encodedLength": 7830302
+              },
+              "durationNs": 37113900,
+              "opsPerSecond": 13795.370467668448,
+              "requests": 512,
+              "workers": 1
+            },
+            {
+              "digest": {
+                "count": 512,
+                "total": 27124,
+                "weightedTotal": 6963242,
+                "randomCalls": 14207,
+                "encodedLength": 7830302
+              },
+              "durationNs": 38820400,
+              "opsPerSecond": 13188.94189652863,
+              "requests": 512,
+              "workers": 1
+            }
+          ]
+        },
+        "gomaxprocs": 12,
+        "memory": {
+          "100d6": {
+            "afterBatches": [
+              {
+                "available": true,
+                "rssBytes": 66772992,
+                "source": "GetProcessMemoryInfo.WorkingSetSize"
+              },
+              {
+                "available": true,
+                "rssBytes": 67723264,
+                "source": "GetProcessMemoryInfo.WorkingSetSize"
+              },
+              {
+                "available": true,
+                "rssBytes": 69238784,
+                "source": "GetProcessMemoryInfo.WorkingSetSize"
+              }
+            ],
+            "afterWarmup": {
+              "available": true,
+              "rssBytes": 64512000,
+              "source": "GetProcessMemoryInfo.WorkingSetSize"
+            }
+          },
+          "d20": {
+            "afterBatches": [
+              {
+                "available": true,
+                "rssBytes": 14675968,
+                "source": "GetProcessMemoryInfo.WorkingSetSize"
+              },
+              {
+                "available": true,
+                "rssBytes": 15228928,
+                "source": "GetProcessMemoryInfo.WorkingSetSize"
+              },
+              {
+                "available": true,
+                "rssBytes": 14991360,
+                "source": "GetProcessMemoryInfo.WorkingSetSize"
+              }
+            ],
+            "afterWarmup": {
+              "available": true,
+              "rssBytes": 14098432,
+              "source": "GetProcessMemoryInfo.WorkingSetSize"
+            }
+          },
+          "pool": {
+            "afterBatches": [
+              {
+                "available": true,
+                "rssBytes": 68071424,
+                "source": "GetProcessMemoryInfo.WorkingSetSize"
+              },
+              {
+                "available": true,
+                "rssBytes": 66244608,
+                "source": "GetProcessMemoryInfo.WorkingSetSize"
+              },
+              {
+                "available": true,
+                "rssBytes": 64360448,
+                "source": "GetProcessMemoryInfo.WorkingSetSize"
+              }
+            ],
+            "afterWarmup": {
+              "available": true,
+              "rssBytes": 69804032,
+              "source": "GetProcessMemoryInfo.WorkingSetSize"
+            }
+          }
+        },
+        "runtime": "go1.26.2"
+      }
+    },
+    {
+      "runtime": "bun",
+      "workers": 6,
+      "operation": "encoding-only",
+      "gc": null,
+      "memoryLimit": null,
+      "wallMilliseconds": 343,
+      "output": {
+        "runtime": "Bun 1.4.0",
+        "cases": {
+          "d20": [
+            {
+              "durationNs": 1065100,
+              "requests": 512,
+              "workers": 6,
+              "digest": {
+                "count": 512,
+                "total": 7877,
+                "weightedTotal": 2033094,
+                "randomCalls": 512,
+                "encodedLength": 1219063
+              },
+              "opsPerSecond": 480706.03699183173
+            },
+            {
+              "durationNs": 1055700,
+              "requests": 512,
+              "workers": 6,
+              "digest": {
+                "count": 512,
+                "total": 7877,
+                "weightedTotal": 2033094,
+                "randomCalls": 512,
+                "encodedLength": 1219063
+              },
+              "opsPerSecond": 484986.26503741596
+            },
+            {
+              "durationNs": 691800,
+              "requests": 512,
+              "workers": 6,
+              "digest": {
+                "count": 512,
+                "total": 7877,
+                "weightedTotal": 2033094,
+                "randomCalls": 512,
+                "encodedLength": 1219063
+              },
+              "opsPerSecond": 740098.2943047123
+            }
+          ],
+          "100d6": [
+            {
+              "durationNs": 9421500,
+              "requests": 512,
+              "workers": 6,
+              "digest": {
+                "count": 512,
+                "total": 179220,
+                "weightedTotal": 46035302,
+                "randomCalls": 51200,
+                "encodedLength": 27164160
+              },
+              "opsPerSecond": 54343.78814413841
+            },
+            {
+              "durationNs": 10624000,
+              "requests": 512,
+              "workers": 6,
+              "digest": {
+                "count": 512,
+                "total": 179220,
+                "weightedTotal": 46035302,
+                "randomCalls": 51200,
+                "encodedLength": 27164160
+              },
+              "opsPerSecond": 48192.77108433735
+            },
+            {
+              "durationNs": 9103600,
+              "requests": 512,
+              "workers": 6,
+              "digest": {
+                "count": 512,
+                "total": 179220,
+                "weightedTotal": 46035302,
+                "randomCalls": 51200,
+                "encodedLength": 27164160
+              },
+              "opsPerSecond": 56241.4868843095
+            }
+          ],
+          "pool": [
+            {
+              "durationNs": 5353100,
+              "requests": 512,
+              "workers": 6,
+              "digest": {
+                "count": 512,
+                "total": 27124,
+                "weightedTotal": 6963242,
+                "randomCalls": 14207,
+                "encodedLength": 7830302
+              },
+              "opsPerSecond": 95645.51381442529
+            },
+            {
+              "durationNs": 3691500,
+              "requests": 512,
+              "workers": 6,
+              "digest": {
+                "count": 512,
+                "total": 27124,
+                "weightedTotal": 6963242,
+                "randomCalls": 14207,
+                "encodedLength": 7830302
+              },
+              "opsPerSecond": 138697.0066368685
+            },
+            {
+              "durationNs": 6126200,
+              "requests": 512,
+              "workers": 6,
+              "digest": {
+                "count": 512,
+                "total": 27124,
+                "weightedTotal": 6963242,
+                "randomCalls": 14207,
+                "encodedLength": 7830302
+              },
+              "opsPerSecond": 83575.4627664784
+            }
+          ]
+        },
+        "memory": {
+          "d20": {
+            "afterWarmup": {
+              "available": true,
+              "rssBytes": 128638976,
+              "source": "process.memoryUsage().rss"
+            },
+            "afterBatches": [
+              {
+                "available": true,
+                "rssBytes": 130179072,
+                "source": "process.memoryUsage().rss"
+              },
+              {
+                "available": true,
+                "rssBytes": 132014080,
+                "source": "process.memoryUsage().rss"
+              },
+              {
+                "available": true,
+                "rssBytes": 133464064,
+                "source": "process.memoryUsage().rss"
+              }
+            ]
+          },
+          "100d6": {
+            "afterWarmup": {
+              "available": true,
+              "rssBytes": 215592960,
+              "source": "process.memoryUsage().rss"
+            },
+            "afterBatches": [
+              {
+                "available": true,
+                "rssBytes": 231419904,
+                "source": "process.memoryUsage().rss"
+              },
+              {
+                "available": true,
+                "rssBytes": 244211712,
+                "source": "process.memoryUsage().rss"
+              },
+              {
+                "available": true,
+                "rssBytes": 245960704,
+                "source": "process.memoryUsage().rss"
+              }
+            ]
+          },
+          "pool": {
+            "afterWarmup": {
+              "available": true,
+              "rssBytes": 256827392,
+              "source": "process.memoryUsage().rss"
+            },
+            "afterBatches": [
+              {
+                "available": true,
+                "rssBytes": 262606848,
+                "source": "process.memoryUsage().rss"
+              },
+              {
+                "available": true,
+                "rssBytes": 269914112,
+                "source": "process.memoryUsage().rss"
+              },
+              {
+                "available": true,
+                "rssBytes": 274825216,
+                "source": "process.memoryUsage().rss"
+              }
+            ]
+          }
+        }
+      }
+    },
+    {
+      "runtime": "go-pool",
+      "workers": 6,
+      "operation": "encoding-only",
+      "gc": null,
+      "memoryLimit": null,
+      "wallMilliseconds": 356,
+      "output": {
+        "cases": {
+          "100d6": [
+            {
+              "digest": {
+                "count": 512,
+                "total": 179220,
+                "weightedTotal": 46035302,
+                "randomCalls": 51200,
+                "encodedLength": 27164160
+              },
+              "durationNs": 35442200,
+              "opsPerSecond": 14446.055831748594,
+              "requests": 512,
+              "workers": 6
+            },
+            {
+              "digest": {
+                "count": 512,
+                "total": 179220,
+                "weightedTotal": 46035302,
+                "randomCalls": 51200,
+                "encodedLength": 27164160
+              },
+              "durationNs": 37099100,
+              "opsPerSecond": 13800.87387564658,
+              "requests": 512,
+              "workers": 6
+            },
+            {
+              "digest": {
+                "count": 512,
+                "total": 179220,
+                "weightedTotal": 46035302,
+                "randomCalls": 51200,
+                "encodedLength": 27164160
+              },
+              "durationNs": 38203800,
+              "opsPerSecond": 13401.808197090342,
+              "requests": 512,
+              "workers": 6
+            }
+          ],
+          "d20": [
+            {
+              "digest": {
+                "count": 512,
+                "total": 7877,
+                "weightedTotal": 2033094,
+                "randomCalls": 512,
+                "encodedLength": 1219063
+              },
+              "durationNs": 2154900,
+              "opsPerSecond": 237598.03239129425,
+              "requests": 512,
+              "workers": 6
+            },
+            {
+              "digest": {
+                "count": 512,
+                "total": 7877,
+                "weightedTotal": 2033094,
+                "randomCalls": 512,
+                "encodedLength": 1219063
+              },
+              "durationNs": 1540600,
+              "opsPerSecond": 332338.05011034664,
+              "requests": 512,
+              "workers": 6
+            },
+            {
+              "digest": {
+                "count": 512,
+                "total": 7877,
+                "weightedTotal": 2033094,
+                "randomCalls": 512,
+                "encodedLength": 1219063
+              },
+              "durationNs": 2111700,
+              "opsPerSecond": 242458.6825780177,
+              "requests": 512,
+              "workers": 6
+            }
+          ],
+          "pool": [
+            {
+              "digest": {
+                "count": 512,
+                "total": 27124,
+                "weightedTotal": 6963242,
+                "randomCalls": 14207,
+                "encodedLength": 7830302
+              },
+              "durationNs": 11706600,
+              "opsPerSecond": 43736.012164078384,
+              "requests": 512,
+              "workers": 6
+            },
+            {
+              "digest": {
+                "count": 512,
+                "total": 27124,
+                "weightedTotal": 6963242,
+                "randomCalls": 14207,
+                "encodedLength": 7830302
+              },
+              "durationNs": 13509500,
+              "opsPerSecond": 37899.25607905548,
+              "requests": 512,
+              "workers": 6
+            },
+            {
+              "digest": {
+                "count": 512,
+                "total": 27124,
+                "weightedTotal": 6963242,
+                "randomCalls": 14207,
+                "encodedLength": 7830302
+              },
+              "durationNs": 11165200,
+              "opsPerSecond": 45856.769247304124,
+              "requests": 512,
+              "workers": 6
+            }
+          ]
+        },
+        "gomaxprocs": 12,
+        "memory": {
+          "100d6": {
+            "afterBatches": [
+              {
+                "available": true,
+                "rssBytes": 83623936,
+                "source": "GetProcessMemoryInfo.WorkingSetSize"
+              },
+              {
+                "available": true,
+                "rssBytes": 82178048,
+                "source": "GetProcessMemoryInfo.WorkingSetSize"
+              },
+              {
+                "available": true,
+                "rssBytes": 80896000,
+                "source": "GetProcessMemoryInfo.WorkingSetSize"
+              }
+            ],
+            "afterWarmup": {
+              "available": true,
+              "rssBytes": 85172224,
+              "source": "GetProcessMemoryInfo.WorkingSetSize"
+            }
+          },
+          "d20": {
+            "afterBatches": [
+              {
+                "available": true,
+                "rssBytes": 18239488,
+                "source": "GetProcessMemoryInfo.WorkingSetSize"
+              },
+              {
+                "available": true,
+                "rssBytes": 18259968,
+                "source": "GetProcessMemoryInfo.WorkingSetSize"
+              },
+              {
+                "available": true,
+                "rssBytes": 17920000,
+                "source": "GetProcessMemoryInfo.WorkingSetSize"
+              }
+            ],
+            "afterWarmup": {
+              "available": true,
+              "rssBytes": 18571264,
+              "source": "GetProcessMemoryInfo.WorkingSetSize"
+            }
+          },
+          "pool": {
+            "afterBatches": [
+              {
+                "available": true,
+                "rssBytes": 79966208,
+                "source": "GetProcessMemoryInfo.WorkingSetSize"
+              },
+              {
+                "available": true,
+                "rssBytes": 78589952,
+                "source": "GetProcessMemoryInfo.WorkingSetSize"
+              },
+              {
+                "available": true,
+                "rssBytes": 78131200,
+                "source": "GetProcessMemoryInfo.WorkingSetSize"
+              }
+            ],
+            "afterWarmup": {
+              "available": true,
+              "rssBytes": 81301504,
+              "source": "GetProcessMemoryInfo.WorkingSetSize"
+            }
+          }
+        },
+        "runtime": "go1.26.2"
+      }
+    },
+    {
+      "runtime": "go-shared",
+      "workers": 6,
+      "operation": "encoding-only",
+      "gc": null,
+      "memoryLimit": null,
+      "wallMilliseconds": 351,
+      "output": {
+        "cases": {
+          "100d6": [
+            {
+              "digest": {
+                "count": 512,
+                "total": 179220,
+                "weightedTotal": 46035302,
+                "randomCalls": 51200,
+                "encodedLength": 27164160
+              },
+              "durationNs": 33473400,
+              "opsPerSecond": 15295.72735365992,
+              "requests": 512,
+              "workers": 6
+            },
+            {
+              "digest": {
+                "count": 512,
+                "total": 179220,
+                "weightedTotal": 46035302,
+                "randomCalls": 51200,
+                "encodedLength": 27164160
+              },
+              "durationNs": 34533600,
+              "opsPerSecond": 14826.140338684643,
+              "requests": 512,
+              "workers": 6
+            },
+            {
+              "digest": {
+                "count": 512,
+                "total": 179220,
+                "weightedTotal": 46035302,
+                "randomCalls": 51200,
+                "encodedLength": 27164160
+              },
+              "durationNs": 34453600,
+              "opsPerSecond": 14860.56609468967,
+              "requests": 512,
+              "workers": 6
+            }
+          ],
+          "d20": [
+            {
+              "digest": {
+                "count": 512,
+                "total": 7877,
+                "weightedTotal": 2033094,
+                "randomCalls": 512,
+                "encodedLength": 1219063
+              },
+              "durationNs": 2090700,
+              "opsPerSecond": 244894.05462285358,
+              "requests": 512,
+              "workers": 6
+            },
+            {
+              "digest": {
+                "count": 512,
+                "total": 7877,
+                "weightedTotal": 2033094,
+                "randomCalls": 512,
+                "encodedLength": 1219063
+              },
+              "durationNs": 2177300,
+              "opsPerSecond": 235153.6306434575,
+              "requests": 512,
+              "workers": 6
+            },
+            {
+              "digest": {
+                "count": 512,
+                "total": 7877,
+                "weightedTotal": 2033094,
+                "randomCalls": 512,
+                "encodedLength": 1219063
+              },
+              "durationNs": 1548500,
+              "opsPerSecond": 330642.55731352925,
+              "requests": 512,
+              "workers": 6
+            }
+          ],
+          "pool": [
+            {
+              "digest": {
+                "count": 512,
+                "total": 27124,
+                "weightedTotal": 6963242,
+                "randomCalls": 14207,
+                "encodedLength": 7830302
+              },
+              "durationNs": 17755900,
+              "opsPerSecond": 28835.485669552094,
+              "requests": 512,
+              "workers": 6
+            },
+            {
+              "digest": {
+                "count": 512,
+                "total": 27124,
+                "weightedTotal": 6963242,
+                "randomCalls": 14207,
+                "encodedLength": 7830302
+              },
+              "durationNs": 14715500,
+              "opsPerSecond": 34793.24521762767,
+              "requests": 512,
+              "workers": 6
+            },
+            {
+              "digest": {
+                "count": 512,
+                "total": 27124,
+                "weightedTotal": 6963242,
+                "randomCalls": 14207,
+                "encodedLength": 7830302
+              },
+              "durationNs": 10128700,
+              "opsPerSecond": 50549.4288506916,
+              "requests": 512,
+              "workers": 6
+            }
+          ]
+        },
+        "gomaxprocs": 12,
+        "memory": {
+          "100d6": {
+            "afterBatches": [
+              {
+                "available": true,
+                "rssBytes": 76509184,
+                "source": "GetProcessMemoryInfo.WorkingSetSize"
+              },
+              {
+                "available": true,
+                "rssBytes": 76107776,
+                "source": "GetProcessMemoryInfo.WorkingSetSize"
+              },
+              {
+                "available": true,
+                "rssBytes": 75849728,
+                "source": "GetProcessMemoryInfo.WorkingSetSize"
+              }
+            ],
+            "afterWarmup": {
+              "available": true,
+              "rssBytes": 74936320,
+              "source": "GetProcessMemoryInfo.WorkingSetSize"
+            }
+          },
+          "d20": {
+            "afterBatches": [
+              {
+                "available": true,
+                "rssBytes": 17743872,
+                "source": "GetProcessMemoryInfo.WorkingSetSize"
+              },
+              {
+                "available": true,
+                "rssBytes": 17989632,
+                "source": "GetProcessMemoryInfo.WorkingSetSize"
+              },
+              {
+                "available": true,
+                "rssBytes": 17432576,
+                "source": "GetProcessMemoryInfo.WorkingSetSize"
+              }
+            ],
+            "afterWarmup": {
+              "available": true,
+              "rssBytes": 17747968,
+              "source": "GetProcessMemoryInfo.WorkingSetSize"
+            }
+          },
+          "pool": {
+            "afterBatches": [
+              {
+                "available": true,
+                "rssBytes": 74035200,
+                "source": "GetProcessMemoryInfo.WorkingSetSize"
+              },
+              {
+                "available": true,
+                "rssBytes": 72663040,
+                "source": "GetProcessMemoryInfo.WorkingSetSize"
+              },
+              {
+                "available": true,
+                "rssBytes": 71745536,
+                "source": "GetProcessMemoryInfo.WorkingSetSize"
+              }
+            ],
+            "afterWarmup": {
+              "available": true,
+              "rssBytes": 74911744,
+              "source": "GetProcessMemoryInfo.WorkingSetSize"
+            }
+          }
+        },
+        "runtime": "go1.26.2"
+      }
+    },
+    {
+      "runtime": "node",
+      "workers": 6,
+      "operation": "encoding-only",
+      "gc": null,
+      "memoryLimit": null,
+      "wallMilliseconds": 383,
+      "output": {
+        "runtime": "v24.18.0",
+        "cases": {
+          "d20": [
+            {
+              "durationNs": 1289500,
+              "requests": 512,
+              "workers": 6,
+              "digest": {
+                "count": 512,
+                "total": 7877,
+                "weightedTotal": 2033094,
+                "randomCalls": 512,
+                "encodedLength": 1219063
+              },
+              "opsPerSecond": 397053.1213648701
+            },
+            {
+              "durationNs": 1014200,
+              "requests": 512,
+              "workers": 6,
+              "digest": {
+                "count": 512,
+                "total": 7877,
+                "weightedTotal": 2033094,
+                "randomCalls": 512,
+                "encodedLength": 1219063
+              },
+              "opsPerSecond": 504831.39420232695
+            },
+            {
+              "durationNs": 957000,
+              "requests": 512,
+              "workers": 6,
+              "digest": {
+                "count": 512,
+                "total": 7877,
+                "weightedTotal": 2033094,
+                "randomCalls": 512,
+                "encodedLength": 1219063
+              },
+              "opsPerSecond": 535005.224660397
+            }
+          ],
+          "100d6": [
+            {
+              "durationNs": 15539800,
+              "requests": 512,
+              "workers": 6,
+              "digest": {
+                "count": 512,
+                "total": 179220,
+                "weightedTotal": 46035302,
+                "randomCalls": 51200,
+                "encodedLength": 27164160
+              },
+              "opsPerSecond": 32947.656984002366
+            },
+            {
+              "durationNs": 13755600,
+              "requests": 512,
+              "workers": 6,
+              "digest": {
+                "count": 512,
+                "total": 179220,
+                "weightedTotal": 46035302,
+                "randomCalls": 51200,
+                "encodedLength": 27164160
+              },
+              "opsPerSecond": 37221.204454912906
+            },
+            {
+              "durationNs": 12941300,
+              "requests": 512,
+              "workers": 6,
+              "digest": {
+                "count": 512,
+                "total": 179220,
+                "weightedTotal": 46035302,
+                "randomCalls": 51200,
+                "encodedLength": 27164160
+              },
+              "opsPerSecond": 39563.25871434864
+            }
+          ],
+          "pool": [
+            {
+              "durationNs": 4906700,
+              "requests": 512,
+              "workers": 6,
+              "digest": {
+                "count": 512,
+                "total": 27124,
+                "weightedTotal": 6963242,
+                "randomCalls": 14207,
+                "encodedLength": 7830302
+              },
+              "opsPerSecond": 104347.11720708419
+            },
+            {
+              "durationNs": 5554400,
+              "requests": 512,
+              "workers": 6,
+              "digest": {
+                "count": 512,
+                "total": 27124,
+                "weightedTotal": 6963242,
+                "randomCalls": 14207,
+                "encodedLength": 7830302
+              },
+              "opsPerSecond": 92179.17326803975
+            },
+            {
+              "durationNs": 5493900,
+              "requests": 512,
+              "workers": 6,
+              "digest": {
+                "count": 512,
+                "total": 27124,
+                "weightedTotal": 6963242,
+                "randomCalls": 14207,
+                "encodedLength": 7830302
+              },
+              "opsPerSecond": 93194.27000855494
+            }
+          ]
+        },
+        "memory": {
+          "d20": {
+            "afterWarmup": {
+              "available": true,
+              "rssBytes": 166326272,
+              "source": "process.memoryUsage().rss"
+            },
+            "afterBatches": [
+              {
+                "available": true,
+                "rssBytes": 166596608,
+                "source": "process.memoryUsage().rss"
+              },
+              {
+                "available": true,
+                "rssBytes": 166793216,
+                "source": "process.memoryUsage().rss"
+              },
+              {
+                "available": true,
+                "rssBytes": 167727104,
+                "source": "process.memoryUsage().rss"
+              }
+            ]
+          },
+          "100d6": {
+            "afterWarmup": {
+              "available": true,
+              "rssBytes": 275419136,
+              "source": "process.memoryUsage().rss"
+            },
+            "afterBatches": [
+              {
+                "available": true,
+                "rssBytes": 275226624,
+                "source": "process.memoryUsage().rss"
+              },
+              {
+                "available": true,
+                "rssBytes": 276283392,
+                "source": "process.memoryUsage().rss"
+              },
+              {
+                "available": true,
+                "rssBytes": 278474752,
+                "source": "process.memoryUsage().rss"
+              }
+            ]
+          },
+          "pool": {
+            "afterWarmup": {
+              "available": true,
+              "rssBytes": 290054144,
+              "source": "process.memoryUsage().rss"
+            },
+            "afterBatches": [
+              {
+                "available": true,
+                "rssBytes": 292769792,
+                "source": "process.memoryUsage().rss"
+              },
+              {
+                "available": true,
+                "rssBytes": 296226816,
+                "source": "process.memoryUsage().rss"
+              },
+              {
+                "available": true,
+                "rssBytes": 299941888,
+                "source": "process.memoryUsage().rss"
+              }
+            ]
+          }
+        }
+      }
+    }
+  ],
+  "environment": {
+    "cpuModel": "AMD Ryzen 5 5500                               ",
+    "logicalCPUs": 12,
+    "osVersion": "Windows 11 Pro",
+    "osRelease": "10.0.26200",
+    "arch": "x64",
+    "node": "v24.18.0",
+    "bun": "1.4.0",
+    "go": "go version go1.26.2 windows/amd64",
+    "runtimeEnvironment": {
+      "NODE_OPTIONS": null,
+      "GOMAXPROCS": null,
+      "GOGC": null,
+      "GOMEMLIMIT": null
+    }
+  },
+  "git": {
+    "commit": "a1c4bbb0a525de5d9f9b5f383be26bf867d79e1d",
+    "statusLines": [
+      "M go/BENCHMARK.md",
+      " M go/MIGRATION.md",
+      " M go/OPTIMIZATION.md",
+      " M go/README.md",
+      " M go/benchmarks/comparison-final.json",
+      " M go/benchmarks/preflight-final.json",
+      " M go/context.go",
+      " M go/engine.go",
+      " M go/engine_test.go",
+      " M go/executor.go",
+      " M go/journal.go",
+      " M go/systems.go",
+      " M go/systems_mixed.go",
+      " M go/types.go",
+      "?? go/BACKEND_ROUND2_BENCHMARK.md",
+      "?? go/OPTIMIZATION_ROUND2.md",
+      "?? go/benchmarks/backend-preflight-round2-final.json.gz",
+      "?? go/benchmarks/backend-round2-final.json",
+      "?? go/benchmarks/gc-round2-memory-cap.json",
+      "?? go/benchmarks/gc-round2-tuning.json",
+      "?? go/benchmarks/json-final.json",
+      "?? go/benchmarks/optimization-round2/",
+      "?? go/benchmarks/round2-baseline/",
+      "?? go/event.go",
+      "?? go/event_collection.go",
+      "?? go/event_collection_test.go",
+      "?? go/event_decode.go",
+      "?? go/event_performance_test.go",
+      "?? go/event_test.go",
+      "?? go/execution_ids.go",
+      "?? go/execution_ids_test.go",
+      "?? go/execution_rng_cache.go",
+      "?? go/execution_rng_cache_test.go",
+      "?? go/executor_compact_summary.go",
+      "?? go/executor_compact_summary_test.go",
+      "?? go/json_benchmark_test.go",
+      "?? go/system_performance_test.go",
+      "?? scripts/benchmark-json-reference.mjs",
+      "?? scripts/compare-backend-round2.mjs",
+      "?? scripts/compare-go-gc-memory-cap.mjs",
+      "?? scripts/compare-go-gc-round2.mjs",
+      "?? scripts/compare-json-runtimes.mjs",
+      "?? scripts/plot-backend-round2.py",
+      "?? scripts/plot-json-benchmark.py",
+      "?? scripts/report-go-gc-round2.mjs"
+    ]
+  },
+  "commands": [
+    {
+      "executable": "C:\\Users\\quira\\AppData\\Local\\Microsoft\\WinGet\\Packages\\OpenJS.NodeJS.LTS_Microsoft.Winget.Source_8wekyb3d8bbwe\\node-v24.18.0-win-x64\\node.exe",
+      "args": [
+        "node_modules/rollup/dist/bin/rollup",
+        "--config=./rollup.config.mjs"
+      ]
+    },
+    {
+      "executable": "C:\\Users\\quira\\.codex\\visualizations\\2026\\07\\21\\019f8591-c4eb-7913-9683-054308852112\\go-runtime-full\\go\\bin\\go.exe",
+      "args": [
+        "test",
+        "-c",
+        "-o",
+        "D:\\Projetos\\ERPG\\rpg-dice-roller\\.artifacts\\dicecore-json.exe"
+      ],
+      "cwd": "go"
+    }
+  ],
+  "source": {
+    "sha256": "405fd5fa4349a9b90138ffb9c7461a2249d45f9d04e63d900e4a0662a2ca594d",
+    "files": [
+      {
+        "path": "dist/chunks/common-BD_2ikUL.js",
+        "sha256": "6d6a944e66f77d64f22c79dfe8939326335b95c094cc35525621d1d8b36c8db5"
+      },
+      {
+        "path": "dist/chunks/core-BgwMxRi8.js",
+        "sha256": "68cfa89cd641be13d5b1af49cfa9ae7eb1b6c31f08789fd25d384d217e10bba3"
+      },
+      {
+        "path": "dist/core.js",
+        "sha256": "6204d325cbd410c1f6f0c3646f35fbf0fd775560037b3fa8e1e401438e4123c5"
+      },
+      {
+        "path": "dist/index.js",
+        "sha256": "ff35b8ad07c9bfdb9063cecae0f2de5901102a9a7b3769ed8c52cb28d218e132"
+      },
+      {
+        "path": "dist/systems/assimilation.js",
+        "sha256": "b5e00ecfcb15424f666dcaf04afa058cd9abad493170ead06559415697981c3f"
+      },
+      {
+        "path": "dist/systems/daggerheart.js",
+        "sha256": "c81e02857830b247fc4274339b6e0e70178472a6d6c2d071a634b6554d90def9"
+      },
+      {
+        "path": "dist/systems/fate.js",
+        "sha256": "175129b1a0cca1c43a9ea4b23f3cf2e36b10219ad01d3613d687e189b480af6f"
+      },
+      {
+        "path": "dist/systems/index.js",
+        "sha256": "1ac1bd05b757198078badd282245de7015ccf426c3d9abffc135bbdeed09f35e"
+      },
+      {
+        "path": "dist/systems/mixed.js",
+        "sha256": "25c4214e5a133e33b79fbecbd00f85517149a91d410d8ceecb2524757687896f"
+      },
+      {
+        "path": "dist/systems/vampire-v5.js",
+        "sha256": "8dd901059b213b040da4451e1224e35dba9de8002a44bc673faeefd86c2917c1"
+      },
+      {
+        "path": "go/backend_benchmark_test.go",
+        "sha256": "8caeb34d29638fb07ee6cffd048870d050e3ddaf2a90e0527693c39f47275151"
+      },
+      {
+        "path": "go/backend_rss_linux_test.go",
+        "sha256": "13bdd743d3e7a00f2d35ed698f7ba8729b8cb3a71451a9666722bdbac43c3ec0"
+      },
+      {
+        "path": "go/backend_rss_other_test.go",
+        "sha256": "c2e53b664c9299b200b6fe277e87645a5d4dd7a84d413a7eac939d139588881a"
+      },
+      {
+        "path": "go/backend_rss_windows_test.go",
+        "sha256": "f5a18d13ce1153a1688d77e2bf580e2fc0695a509bc630cc9c85aaa55a9ce974"
+      },
+      {
+        "path": "go/go.mod",
+        "sha256": "6176f43cc3c8805dd71b9819687efbe2ac4240bb2284f64e466fd47ec13a6c1b"
+      },
+      {
+        "path": "go/json_benchmark_test.go",
+        "sha256": "a3fad7fcd62c57294eeb65b6b9d598777edb1f4ae9e05bf6a3057c10b40a0b55"
+      },
+      {
+        "path": "go/budget.go",
+        "sha256": "ece1d18d5e46a472ef1c544dd0b4d425ebf79631afec330c53376ed896ec0609"
+      },
+      {
+        "path": "go/cache.go",
+        "sha256": "bc72fedcb0e1fc928d2bed11161b578b3f1b828530148eefcda00b7d7422832a"
+      },
+      {
+        "path": "go/compiler.go",
+        "sha256": "d88ffe71296acdd06942b899896f691c50f4382dfb4a9b6c27528019687862c3"
+      },
+      {
+        "path": "go/compiler_plan.go",
+        "sha256": "cdcda478d75bc41996867063d693f452e45b78f597a54a9a19cf24880561667f"
+      },
+      {
+        "path": "go/compiler_semantics.go",
+        "sha256": "c46547890f3113e7a32b7729a10d93f541390441f4e4bdaea20197d65aec512a"
+      },
+      {
+        "path": "go/compiler_types.go",
+        "sha256": "578d0a4d5a09dba9e294efa14b2d51382a817126121645c9caf8018b7a5846e9"
+      },
+      {
+        "path": "go/context.go",
+        "sha256": "bfeed3c341446b38aab0b78a6ef43051b37fb6fa039d6f90b080261d4f97afb2"
+      },
+      {
+        "path": "go/doc.go",
+        "sha256": "656bd408bdcd739bc21df7dd5c96cd5301d6c4498c601c4cb0d0f2c0a7403e3e"
+      },
+      {
+        "path": "go/engine.go",
+        "sha256": "ae653aeec8d2f113509cd96c444a4e5f1dad352e092194992e49b2108d57c764"
+      },
+      {
+        "path": "go/error_utf16.go",
+        "sha256": "ceb096dea18374dcaddc61fdf12fcb548bbcef3277b94eb997665a8bd312f6bd"
+      },
+      {
+        "path": "go/errors.go",
+        "sha256": "a7f1db56a341f7b5618f0a77b57d1c8dc878c9034e32e7cd1236a121a81a3a37"
+      },
+      {
+        "path": "go/event.go",
+        "sha256": "5f7f9958c51c9822ff9e6f276891962b1e8b5effac80cb27507ebe0a2456d491"
+      },
+      {
+        "path": "go/event_collection.go",
+        "sha256": "59fe23558572efaac83f50491362f9194d81ab2b21c7ae7872663e1eca9aa796"
+      },
+      {
+        "path": "go/event_decode.go",
+        "sha256": "e2a24d8fab55422e5aa202ce14173038064790b4ed0908914317a1684666aa55"
+      },
+      {
+        "path": "go/execution_ids.go",
+        "sha256": "fc3a1402204c57eebd7bce8b85a6094886263006f8c51b07c95d9969b6b66fea"
+      },
+      {
+        "path": "go/execution_rng_cache.go",
+        "sha256": "1f89fcc1bcf1e541a2365fbf101d05a0f5fa8bb9b742dbf74ee92eeb924f1050"
+      },
+      {
+        "path": "go/executor.go",
+        "sha256": "21712c28452ee17bdd396b2bf293d9f14b7d11266826e8c2c5760a4e876e8e1f"
+      },
+      {
+        "path": "go/executor_compact_summary.go",
+        "sha256": "42194a9082259f070511e459e64715d16f44cf92b962acbfbf1b5053a2ac4a2c"
+      },
+      {
+        "path": "go/executor_summary.go",
+        "sha256": "1f9586a613d7b7bb91b7932ad094f447b9b33c8e21922d938379387b50e6a6df"
+      },
+      {
+        "path": "go/journal.go",
+        "sha256": "57066655afb9f43feb1a76a5c7f9e19393af1a802e4890512784f46cd9e48832"
+      },
+      {
+        "path": "go/limits.go",
+        "sha256": "25141b044a5106a0744708decd23d6f71aa12fbcf37da9b1dc82c83c2cd1ad80"
+      },
+      {
+        "path": "go/math.go",
+        "sha256": "3f4711d07a8fad87d5848799895adeb85a54d4f4b993741808d499391f012dcf"
+      },
+      {
+        "path": "go/math_pow.go",
+        "sha256": "07a43032a8bc17d7b1c8ed1abc42f87fd07ddfb33d5aa1fe53aced3a8eb776b0"
+      },
+      {
+        "path": "go/math_pow_refine.go",
+        "sha256": "0decf4b3ac5498c878e81c862dad841c140174f5204630d4eb48e0adeb4bd312"
+      },
+      {
+        "path": "go/math_transcendental.go",
+        "sha256": "6fbab20a6edff34ac71dd614af40f4ca47fa394cf52d9cf4cba85991ddf2798a"
+      },
+      {
+        "path": "go/math_trig.go",
+        "sha256": "d13187a24cb08c989513bf0b5b1eabf51e65f8d9d0fc85093280dfbbcb87f010"
+      },
+      {
+        "path": "go/normalization.go",
+        "sha256": "1524e4931a632058687dcf1bc906f7e37a68dc6d970ff9b71fda326b1489a406"
+      },
+      {
+        "path": "go/parser.go",
+        "sha256": "d70a3ebe5ddc7c756c1a8299b25d4d618cdec70d0302dfc8c22a2708e0768dad"
+      },
+      {
+        "path": "go/random.go",
+        "sha256": "06a7fb5d2b62d4905dcba2544873605ca8cdecae0b1a246a891e263462860bf9"
+      },
+      {
+        "path": "go/replay.go",
+        "sha256": "7f315138836afc32bb992c7599d2364946bc6357300dbea6477a574110b4c148"
+      },
+      {
+        "path": "go/roll_count.go",
+        "sha256": "07e2b5dc1ff3a685701d99ac65f5810077014a1d6ff38c4ccd93914349d4b75c"
+      },
+      {
+        "path": "go/scanner.go",
+        "sha256": "f02b97a565f6e9c9f44bb4a57cfec66fb54fe684d080afe11453c2ec040c7dd5"
+      },
+      {
+        "path": "go/seed.go",
+        "sha256": "234b0ea8ad1d6aa9f713a077ee3cd3bedbe5a524a765370e07b813030be1e6ff"
+      },
+      {
+        "path": "go/syntax.go",
+        "sha256": "b8c46647fa19b01a482e907a0d25da525dc637d9d19315e291703156b1c1ec74"
+      },
+      {
+        "path": "go/system_unicode.go",
+        "sha256": "6b9b527ab4f5a67938087d361d85a175dfc7f52c425c4905413e9ed3c7529e0e"
+      },
+      {
+        "path": "go/systems.go",
+        "sha256": "3a4438e0f1793c0128a3be8957a5d8c141b9074ce787890905a454ca5e7515b0"
+      },
+      {
+        "path": "go/systems_mixed.go",
+        "sha256": "152e3b59dd8fa2b1e1722ee26026dce19c79942c2447663ac591126d63fc2033"
+      },
+      {
+        "path": "go/types.go",
+        "sha256": "9c357968e1e36d233825a4532189e172195f0658ae944dd06e49495b1f4179f2"
+      },
+      {
+        "path": "package-lock.json",
+        "sha256": "1b023b9bcc6e58c4c7bcb7e70ea45a914fd79e09e98ca8550940c92d82936a28"
+      },
+      {
+        "path": "package.json",
+        "sha256": "7a697d3832f6af94f8eab364147a05c3e13438a0b0c6d0c3f58e3d3cf6dc9504"
+      },
+      {
+        "path": "rollup.config.mjs",
+        "sha256": "4c6d0f06c1a5b7a3fb95061aba97f52d4aa1a8e1fa77e32931569ecddcea4bcd"
+      },
+      {
+        "path": "scripts/benchmark-json-reference.mjs",
+        "sha256": "21bd674749e11e260a5f2f49c873d7dcdf1ecc061cc4feb30a1448def214c0e5"
+      },
+      {
+        "path": "scripts/compare-json-runtimes.mjs",
+        "sha256": "f8a6087a45470aedf9b0ddd5e143a97026f9fd45486652f078934837d7c42036"
+      },
+      {
+        "path": "src/index.ts",
+        "sha256": "e6248ca68143cc1f4cedebf19a7a0cc40dbedf1f084eebefebdd625be8bc2ac9"
+      },
+      {
+        "path": "src/v3/cache.ts",
+        "sha256": "e1eecc07237bb7f5c3b6b8c132630897925ccbfebd0abff14017f87014e57654"
+      },
+      {
+        "path": "src/v3/compiler.ts",
+        "sha256": "f676854e61ac831df51dc83e5cc512b3029b21ecf756f151915d8c4a7541667d"
+      },
+      {
+        "path": "src/v3/core.ts",
+        "sha256": "a2aff05791b55b3009cd8683fed536e1d181b188f58f538c1e0e34451444d691"
+      },
+      {
+        "path": "src/v3/engine.ts",
+        "sha256": "03536d7d109007aa807af816ae69953e8ee422b4c3b9e0a1d0113067370992b5"
+      },
+      {
+        "path": "src/v3/errors.ts",
+        "sha256": "1cc67c4ee5c2daa0a767a97ac19305cad9bd1e49e6a0fa8519f2ff510eb5f53e"
+      },
+      {
+        "path": "src/v3/executor.ts",
+        "sha256": "438af933fb31c356305d03326fd89b96af55e904837f40c11641f368ed622af3"
+      },
+      {
+        "path": "src/v3/freeze.ts",
+        "sha256": "d39f00023fd81968fbfdf6c5fe3d2ba76b0e981df45cebfaaa34ec586212e1f0"
+      },
+      {
+        "path": "src/v3/index.ts",
+        "sha256": "70bd7800236c5c024365c232a8adb19393a1516ee3134581053c26417210adc2"
+      },
+      {
+        "path": "src/v3/math.ts",
+        "sha256": "a2d118ec27539010a84d1995ae659217dfb5f261104a8fbe9da1319129e6be92"
+      },
+      {
+        "path": "src/v3/normalization.ts",
+        "sha256": "db235e562d52f3df2ea2273dbaf35bdda93e78d1a875c2dcfe3a9ffc33352a3e"
+      },
+      {
+        "path": "src/v3/roll-count-expression.ts",
+        "sha256": "059d5ec171c6830eefeaeab454fb60f8ee6be358057f44fd4bf341de3cda0984"
+      },
+      {
+        "path": "src/v3/runtime/budget.ts",
+        "sha256": "bcd667dc2a2e54f119c926731c592d565d185d615770006128d93b49f14caed8"
+      },
+      {
+        "path": "src/v3/runtime/context.ts",
+        "sha256": "de0738df0170d9fda5f4bb166cb6ae97fa7f5b15adda9fa286ac6171deb50e60"
+      },
+      {
+        "path": "src/v3/runtime/index.ts",
+        "sha256": "0c247e3ec29dff0c846f1d4931ae9d6e0f78b94901fff30e7f0122c1d78052ff"
+      },
+      {
+        "path": "src/v3/runtime/journal.ts",
+        "sha256": "3da96b3c1c7fcae8a94948564b54667b2eae3ff56970e5bb1523fc396e0f7847"
+      },
+      {
+        "path": "src/v3/runtime/limits.ts",
+        "sha256": "7c1fb84eb2c85f20bceb2f9345d402f87c28c79ee882cfd133c8f9eae851b98b"
+      },
+      {
+        "path": "src/v3/runtime/mt19937.ts",
+        "sha256": "ab69b15adb1dba5c18b80ed67ec83e8a68083b335104086736235bcdbe81dffc"
+      },
+      {
+        "path": "src/v3/runtime/replay.ts",
+        "sha256": "eb11febf46042402ee16e3ef6e869efdcc45109c46732a38ecd52b5f0a2775dc"
+      },
+      {
+        "path": "src/v3/runtime/xoshiro128ss.ts",
+        "sha256": "638c4377153ee9a4ba221d7ce5d287451a47358b4ec69163c65a21cdabaa2f69"
+      },
+      {
+        "path": "src/v3/syntax/ast.ts",
+        "sha256": "7d5a2b16dda816b02d17a6bc0d4d775da31bf2aee5b08825818a64bf7c5d20e5"
+      },
+      {
+        "path": "src/v3/syntax/index.ts",
+        "sha256": "666d69684d5bf50cabd9426fbb81404942912d584811acd57bb85965ed70663d"
+      },
+      {
+        "path": "src/v3/syntax/parser.ts",
+        "sha256": "03316de5ba906c8c90dbe76a1b0558e52c6a76f9f7da3d9717e0c2cac1b0ed82"
+      },
+      {
+        "path": "src/v3/syntax/scanner.ts",
+        "sha256": "c7259299ce74cec4312bc1cbf60c0d0dc139744708686d4b42982294fe33dd97"
+      },
+      {
+        "path": "src/v3/syntax/tokens.ts",
+        "sha256": "1fe33b50452d641c3277940ec80a8a3d68f61714765b95384d83b9bbc763216d"
+      },
+      {
+        "path": "src/v3/systems/assimilation.ts",
+        "sha256": "37c12180ee45aa6aa6facf2950d293e80a6c0034111bdf363dba78828681c57c"
+      },
+      {
+        "path": "src/v3/systems/common.ts",
+        "sha256": "6846ed9770b9f30dd80622efb5e25a1506e696cba57b7af6125c5b6d8879dbe5"
+      },
+      {
+        "path": "src/v3/systems/daggerheart.ts",
+        "sha256": "4edc235f02d1af9688b38491f4a499aea560b35c8b447a8279e495a2e864cb83"
+      },
+      {
+        "path": "src/v3/systems/fate.ts",
+        "sha256": "b8d08a348b76eac09832910cbca1222177c5a3ae31503d349275260ff9fa1bba"
+      },
+      {
+        "path": "src/v3/systems/index.ts",
+        "sha256": "f970a828aa6aaacbecd081fb317c137d10b2a45935337d6682637388a02decd1"
+      },
+      {
+        "path": "src/v3/systems/mixed.ts",
+        "sha256": "d5e2ef573038a12c36eaa9f09f7ce05d0609340122748eba729d7be5385d1f0b"
+      },
+      {
+        "path": "src/v3/systems/system-roller.ts",
+        "sha256": "800b37e4d5cc38506dc0eaeb624a94b84a99807ee1cba6162d2afe160e940fbd"
+      },
+      {
+        "path": "src/v3/systems/vampire-v5.ts",
+        "sha256": "e429a2b8aa0a37093ce15d357cc7316e8ca39149e08d0002fd727d2b55e5d63d"
+      },
+      {
+        "path": "src/v3/types.ts",
+        "sha256": "3d3eef638b8e11b34941d0ed41d5000d714b827c6ce521233e44db828a487300"
+      },
+      {
+        "path": "tsconfig.build.json",
+        "sha256": "5574381876f6ded561c5ca3b51f612086a75da6f085fd7d4f63b43ebec5eef9d"
+      },
+      {
+        "path": "tsconfig.json",
+        "sha256": "7143b1b940f802eacf401b3d4a1e17a2e211f5d22a18d0b88fa253fa3c4da439"
+      }
+    ]
+  },
+  "goWorkerBinary": {
+    "sha256": "c3cb043275cdbbff37906ff0a4e94d6479deaad1ab6d49f4b1580940ada8b431"
+  },
+  "confirmedGc": {
+    "gc": 500,
+    "memoryLimit": "96MiB",
+    "selectionFile": "go/benchmarks/gc-round2-memory-cap.json",
+    "selectionSha256": "0c574df20847d1059773e62b82a293ab909f1cb15ea1fe2bab7e904c31df1028",
+    "workers": 6,
+    "engineMode": "pool",
+    "operation": "build-and-encode",
+    "env": {
+      "GOGC": "500",
+      "GOMAXPROCS": null,
+      "GOMEMLIMIT": "96MiB"
+    }
+  },
+  "preflight": {
+    "passed": true,
+    "file": "go/benchmarks/json-preflight-final.json.gz",
+    "configurations": 9,
+    "uniqueOutputs": 36,
+    "uncompressedSha256": "a3caf5d010d2c7557df79c113e153750712adf5e1fa795c4a8854cd8fd290dc9",
+    "compressedSha256": "7e0469c30075b5a94fa7c03e795356d7f6ce2fd2af3588d86de907566566e672",
+    "uncompressedBytes": 8884717,
+    "compressedBytes": 408277
+  },
+  "gcSummary": [
+    {
+      "id": "d20",
+      "label": "1d20+5 · full",
+      "gc": 500,
+      "workers": 6,
+      "stats": {
+        "medianBatchMs": 46.0869,
+        "q1BatchMs": 44.6591,
+        "q3BatchMs": 47.3346,
+        "opsPerSecond": 216981.3981847336,
+        "samples": [
+          47334600,
+          43450600,
+          44659100,
+          47542800,
+          46086900
+        ],
+        "encodedLengthPerResult": 2381.2029,
+        "medianSnapshotRssMiB": 40.375,
+        "maximumSnapshotRssMiB": 51.5078125
+      }
+    },
+    {
+      "id": "100d6",
+      "label": "100d6 · full",
+      "gc": 500,
+      "workers": 6,
+      "stats": {
+        "medianBatchMs": 889.1764,
+        "q1BatchMs": 876.85,
+        "q3BatchMs": 910.8497,
+        "opsPerSecond": 11246.362364093335,
+        "samples": [
+          1027763200,
+          910849700,
+          889176400,
+          874637400,
+          876850000
+        ],
+        "encodedLengthPerResult": 53055,
+        "medianSnapshotRssMiB": 48.1015625,
+        "maximumSnapshotRssMiB": 61.12109375
+      }
+    },
+    {
+      "id": "pool",
+      "label": "20d6!2ro=1kh10 · full",
+      "gc": 500,
+      "workers": 6,
+      "stats": {
+        "medianBatchMs": 303.3981,
+        "q1BatchMs": 296.729,
+        "q3BatchMs": 327.2583,
+        "opsPerSecond": 32959.995464704625,
+        "samples": [
+          335250300,
+          327258300,
+          296729000,
+          303398100,
+          296170400
+        ],
+        "encodedLengthPerResult": 15330.355,
+        "medianSnapshotRssMiB": 49.60546875,
+        "maximumSnapshotRssMiB": 66.171875
+      }
+    }
+  ],
+  "operationStatus": {
+    "build-and-encode": {
+      "status": "complete",
+      "wallMilliseconds": 167882
+    },
+    "encoding-only": {
+      "status": "complete",
+      "wallMilliseconds": 3721
+    }
+  },
+  "summary": [
+    {
+      "id": "d20",
+      "label": "1d20+5 · full",
+      "workers": 1,
+      "operation": "build-and-encode",
+      "node": {
+        "medianBatchMs": 285.3101,
+        "q1BatchMs": 284.9847,
+        "q3BatchMs": 290.274,
+        "opsPerSecond": 35049.58289243879,
+        "samples": [
+          290274000,
+          275932900,
+          311577300,
+          284984700,
+          285310100
+        ],
+        "encodedLengthPerResult": 2381.2029,
+        "medianSnapshotRssMiB": 80.171875,
+        "maximumSnapshotRssMiB": 80.4453125
+      },
+      "bun": {
+        "medianBatchMs": 289.1406,
+        "q1BatchMs": 286.8714,
+        "q3BatchMs": 291.4998,
+        "opsPerSecond": 34585.25022082682,
+        "samples": [
+          300475500,
+          291499800,
+          286871400,
+          289140600,
+          284387900
+        ],
+        "encodedLengthPerResult": 2381.2029,
+        "medianSnapshotRssMiB": 72.671875,
+        "maximumSnapshotRssMiB": 73.58984375
+      },
+      "go-pool": {
+        "medianBatchMs": 301.5312,
+        "q1BatchMs": 254.5144,
+        "q3BatchMs": 311.8721,
+        "opsPerSecond": 33164.0639509278,
+        "samples": [
+          243939200,
+          313483600,
+          311872100,
+          254514400,
+          301531200
+        ],
+        "encodedLengthPerResult": 2381.2029,
+        "medianSnapshotRssMiB": 15.12890625,
+        "maximumSnapshotRssMiB": 15.2109375
+      },
+      "go-shared": {
+        "medianBatchMs": 190.7561,
+        "q1BatchMs": 186.7436,
+        "q3BatchMs": 207.0013,
+        "opsPerSecond": 52422.96314508422,
+        "samples": [
+          186743600,
+          190756100,
+          228612500,
+          186698800,
+          207001300
+        ],
+        "encodedLengthPerResult": 2381.2029,
+        "medianSnapshotRssMiB": 15.2109375,
+        "maximumSnapshotRssMiB": 15.26171875
+      }
+    },
+    {
+      "id": "d20",
+      "label": "1d20+5 · full",
+      "workers": 6,
+      "operation": "build-and-encode",
+      "node": {
+        "medianBatchMs": 79.0595,
+        "q1BatchMs": 75.5366,
+        "q3BatchMs": 81.3797,
+        "opsPerSecond": 126487.01294594578,
+        "samples": [
+          81379700,
+          79059500,
+          69868300,
+          81642000,
+          75536600
+        ],
+        "encodedLengthPerResult": 2381.2029,
+        "medianSnapshotRssMiB": 192.50390625,
+        "maximumSnapshotRssMiB": 192.88671875
+      },
+      "bun": {
+        "medianBatchMs": 95.6685,
+        "q1BatchMs": 92.395,
+        "q3BatchMs": 96.1534,
+        "opsPerSecond": 104527.61358231811,
+        "samples": [
+          91400100,
+          95668500,
+          103077200,
+          96153400,
+          92395000
+        ],
+        "encodedLengthPerResult": 2381.2029,
+        "medianSnapshotRssMiB": 180.671875,
+        "maximumSnapshotRssMiB": 197.4375
+      },
+      "go-pool": {
+        "medianBatchMs": 92.1303,
+        "q1BatchMs": 91.8356,
+        "q3BatchMs": 92.2461,
+        "opsPerSecond": 108541.92377534861,
+        "samples": [
+          92246100,
+          89995900,
+          91835600,
+          92130300,
+          102385800
+        ],
+        "encodedLengthPerResult": 2381.2029,
+        "medianSnapshotRssMiB": 17.00390625,
+        "maximumSnapshotRssMiB": 17.69140625
+      },
+      "go-shared": {
+        "medianBatchMs": 87.046,
+        "q1BatchMs": 83.6369,
+        "q3BatchMs": 93.9583,
+        "opsPerSecond": 114881.78664154586,
+        "samples": [
+          81325700,
+          83636900,
+          87046000,
+          101658400,
+          93958300
+        ],
+        "encodedLengthPerResult": 2381.2029,
+        "medianSnapshotRssMiB": 16.7890625,
+        "maximumSnapshotRssMiB": 17.66796875
+      }
+    },
+    {
+      "id": "100d6",
+      "label": "100d6 · full",
+      "workers": 1,
+      "operation": "build-and-encode",
+      "node": {
+        "medianBatchMs": 2148.696,
+        "q1BatchMs": 2113.8672,
+        "q3BatchMs": 2160.9734,
+        "opsPerSecond": 4653.985487011657,
+        "samples": [
+          2148696000,
+          2195384900,
+          2160973400,
+          2113867200,
+          2076152600
+        ],
+        "encodedLengthPerResult": 53055,
+        "medianSnapshotRssMiB": 139.265625,
+        "maximumSnapshotRssMiB": 141.76953125
+      },
+      "bun": {
+        "medianBatchMs": 1776.2429,
+        "q1BatchMs": 1721.3956,
+        "q3BatchMs": 1829.0121,
+        "opsPerSecond": 5629.860645748394,
+        "samples": [
+          1721395600,
+          1925410300,
+          1691504900,
+          1776242900,
+          1829012100
+        ],
+        "encodedLengthPerResult": 53055,
+        "medianSnapshotRssMiB": 90.94140625,
+        "maximumSnapshotRssMiB": 92.796875
+      },
+      "go-pool": {
+        "medianBatchMs": 4584.4357,
+        "q1BatchMs": 4473.5421,
+        "q3BatchMs": 4586.6685,
+        "opsPerSecond": 2181.2935450267087,
+        "samples": [
+          4650538800,
+          4584435700,
+          4586668500,
+          4473542100,
+          4452028100
+        ],
+        "encodedLengthPerResult": 53055,
+        "medianSnapshotRssMiB": 15.78515625,
+        "maximumSnapshotRssMiB": 20.56640625
+      },
+      "go-shared": {
+        "medianBatchMs": 4417.0011,
+        "q1BatchMs": 4396.2963,
+        "q3BatchMs": 4495.3374,
+        "opsPerSecond": 2263.979513158826,
+        "samples": [
+          4396296300,
+          4417001100,
+          4374584700,
+          4516865900,
+          4495337400
+        ],
+        "encodedLengthPerResult": 53055,
+        "medianSnapshotRssMiB": 15.63671875,
+        "maximumSnapshotRssMiB": 17.66015625
+      }
+    },
+    {
+      "id": "100d6",
+      "label": "100d6 · full",
+      "workers": 6,
+      "operation": "build-and-encode",
+      "node": {
+        "medianBatchMs": 525.2375,
+        "q1BatchMs": 457.8147,
+        "q3BatchMs": 533.0813,
+        "opsPerSecond": 19039.006163878246,
+        "samples": [
+          457814700,
+          454487700,
+          525237500,
+          533081300,
+          552759200
+        ],
+        "encodedLengthPerResult": 53055,
+        "medianSnapshotRssMiB": 340.0703125,
+        "maximumSnapshotRssMiB": 341.09375
+      },
+      "bun": {
+        "medianBatchMs": 411.8846,
+        "q1BatchMs": 410.5844,
+        "q3BatchMs": 440.625,
+        "opsPerSecond": 24278.645037954804,
+        "samples": [
+          384521200,
+          411884600,
+          410584400,
+          444772900,
+          440625000
+        ],
+        "encodedLengthPerResult": 53055,
+        "medianSnapshotRssMiB": 320.328125,
+        "maximumSnapshotRssMiB": 324.984375
+      },
+      "go-pool": {
+        "medianBatchMs": 1858.2833,
+        "q1BatchMs": 1749.9799,
+        "q3BatchMs": 1902.0048,
+        "opsPerSecond": 5381.310804439775,
+        "samples": [
+          1902004800,
+          1858283300,
+          1749979900,
+          1698456700,
+          1904910400
+        ],
+        "encodedLengthPerResult": 53055,
+        "medianSnapshotRssMiB": 17.77734375,
+        "maximumSnapshotRssMiB": 18.859375
+      },
+      "go-shared": {
+        "medianBatchMs": 1797.2075,
+        "q1BatchMs": 1778.7862,
+        "q3BatchMs": 1839.3978,
+        "opsPerSecond": 5564.187774644831,
+        "samples": [
+          1773146800,
+          1778786200,
+          1884715800,
+          1839397800,
+          1797207500
+        ],
+        "encodedLengthPerResult": 53055,
+        "medianSnapshotRssMiB": 17.171875,
+        "maximumSnapshotRssMiB": 20.0625
+      }
+    },
+    {
+      "id": "pool",
+      "label": "20d6!2ro=1kh10 · full",
+      "workers": 1,
+      "operation": "build-and-encode",
+      "node": {
+        "medianBatchMs": 835.267,
+        "q1BatchMs": 826.4982,
+        "q3BatchMs": 844.5599,
+        "opsPerSecond": 11972.219661497462,
+        "samples": [
+          844559900,
+          865242600,
+          835267000,
+          826498200,
+          824342400
+        ],
+        "encodedLengthPerResult": 15330.355,
+        "medianSnapshotRssMiB": 211.66015625,
+        "maximumSnapshotRssMiB": 212.171875
+      },
+      "bun": {
+        "medianBatchMs": 865.4126,
+        "q1BatchMs": 859.8589,
+        "q3BatchMs": 898.4165,
+        "opsPerSecond": 11555.181886651524,
+        "samples": [
+          898416500,
+          938805300,
+          859858900,
+          821886900,
+          865412600
+        ],
+        "encodedLengthPerResult": 15330.355,
+        "medianSnapshotRssMiB": 93.390625,
+        "maximumSnapshotRssMiB": 95.95703125
+      },
+      "go-pool": {
+        "medianBatchMs": 1597.166,
+        "q1BatchMs": 1591.2431,
+        "q3BatchMs": 1624.4242,
+        "opsPerSecond": 6261.089955583828,
+        "samples": [
+          1624424200,
+          1597166000,
+          1591243100,
+          1567309100,
+          1633536400
+        ],
+        "encodedLengthPerResult": 15330.355,
+        "medianSnapshotRssMiB": 16.71875,
+        "maximumSnapshotRssMiB": 16.8671875
+      },
+      "go-shared": {
+        "medianBatchMs": 1545.6203,
+        "q1BatchMs": 1542.5534,
+        "q3BatchMs": 1546.3585,
+        "opsPerSecond": 6469.894320099186,
+        "samples": [
+          1542553400,
+          1586073700,
+          1546358500,
+          1523768400,
+          1545620300
+        ],
+        "encodedLengthPerResult": 15330.355,
+        "medianSnapshotRssMiB": 16.63671875,
+        "maximumSnapshotRssMiB": 17.015625
+      }
+    },
+    {
+      "id": "pool",
+      "label": "20d6!2ro=1kh10 · full",
+      "workers": 6,
+      "operation": "build-and-encode",
+      "node": {
+        "medianBatchMs": 209.1939,
+        "q1BatchMs": 200.5373,
+        "q3BatchMs": 209.2216,
+        "opsPerSecond": 47802.54108747913,
+        "samples": [
+          200537300,
+          212155500,
+          199662500,
+          209193900,
+          209221600
+        ],
+        "encodedLengthPerResult": 15330.355,
+        "medianSnapshotRssMiB": 348.80859375,
+        "maximumSnapshotRssMiB": 381.92578125
+      },
+      "bun": {
+        "medianBatchMs": 208.0439,
+        "q1BatchMs": 201.6032,
+        "q3BatchMs": 214.7659,
+        "opsPerSecond": 48066.778213636644,
+        "samples": [
+          214765900,
+          221423800,
+          201603200,
+          208043900,
+          195342700
+        ],
+        "encodedLengthPerResult": 15330.355,
+        "medianSnapshotRssMiB": 299.26953125,
+        "maximumSnapshotRssMiB": 302.234375
+      },
+      "go-pool": {
+        "medianBatchMs": 769.5889,
+        "q1BatchMs": 763.8801,
+        "q3BatchMs": 780.5458,
+        "opsPerSecond": 12993.950406509242,
+        "samples": [
+          805090700,
+          780545800,
+          769588900,
+          755360100,
+          763880100
+        ],
+        "encodedLengthPerResult": 15330.355,
+        "medianSnapshotRssMiB": 17.734375,
+        "maximumSnapshotRssMiB": 18.06640625
+      },
+      "go-shared": {
+        "medianBatchMs": 789.7562,
+        "q1BatchMs": 784.5001,
+        "q3BatchMs": 798.0199,
+        "opsPerSecond": 12662.13547927829,
+        "samples": [
+          789756200,
+          820248300,
+          781202600,
+          798019900,
+          784500100
+        ],
+        "encodedLengthPerResult": 15330.355,
+        "medianSnapshotRssMiB": 17.78125,
+        "maximumSnapshotRssMiB": 18.4921875
+      }
+    },
+    {
+      "id": "d20",
+      "label": "1d20+5 · full",
+      "workers": 1,
+      "operation": "encoding-only",
+      "node": {
+        "medianBatchMs": 3.5665,
+        "q1BatchMs": 3.2734,
+        "q3BatchMs": 3.62775,
+        "opsPerSecond": 143558.11019206504,
+        "samples": [
+          3689000,
+          2980300,
+          3566500
+        ],
+        "encodedLengthPerResult": 2380.982421875,
+        "medianSnapshotRssMiB": 77.60546875,
+        "maximumSnapshotRssMiB": 78.33984375
+      },
+      "bun": {
+        "medianBatchMs": 1.4602,
+        "q1BatchMs": 1.4331,
+        "q3BatchMs": 1.5747,
+        "opsPerSecond": 350636.89905492397,
+        "samples": [
+          1689200,
+          1406000,
+          1460200
+        ],
+        "encodedLengthPerResult": 2380.982421875,
+        "medianSnapshotRssMiB": 63.11328125,
+        "maximumSnapshotRssMiB": 64.4296875
+      },
+      "go-pool": {
+        "medianBatchMs": 5.2031,
+        "q1BatchMs": 5.1837,
+        "q3BatchMs": 5.46215,
+        "opsPerSecond": 98402.87520901002,
+        "samples": [
+          5203100,
+          5164300,
+          5721200
+        ],
+        "encodedLengthPerResult": 2380.982421875,
+        "medianSnapshotRssMiB": 14.58203125,
+        "maximumSnapshotRssMiB": 14.609375
+      },
+      "go-shared": {
+        "medianBatchMs": 5.3235,
+        "q1BatchMs": 5.2658,
+        "q3BatchMs": 5.48895,
+        "opsPerSecond": 96177.32694655772,
+        "samples": [
+          5208100,
+          5654400,
+          5323500
+        ],
+        "encodedLengthPerResult": 2380.982421875,
+        "medianSnapshotRssMiB": 14.296875,
+        "maximumSnapshotRssMiB": 14.5234375
+      }
+    },
+    {
+      "id": "d20",
+      "label": "1d20+5 · full",
+      "workers": 6,
+      "operation": "encoding-only",
+      "node": {
+        "medianBatchMs": 1.0142,
+        "q1BatchMs": 0.9856,
+        "q3BatchMs": 1.15185,
+        "opsPerSecond": 504831.39420232695,
+        "samples": [
+          1289500,
+          1014200,
+          957000
+        ],
+        "encodedLengthPerResult": 2380.982421875,
+        "medianSnapshotRssMiB": 159.06640625,
+        "maximumSnapshotRssMiB": 159.95703125
+      },
+      "bun": {
+        "medianBatchMs": 1.0557,
+        "q1BatchMs": 0.87375,
+        "q3BatchMs": 1.0604,
+        "opsPerSecond": 484986.26503741596,
+        "samples": [
+          1065100,
+          1055700,
+          691800
+        ],
+        "encodedLengthPerResult": 2380.982421875,
+        "medianSnapshotRssMiB": 125.8984375,
+        "maximumSnapshotRssMiB": 127.28125
+      },
+      "go-pool": {
+        "medianBatchMs": 2.1117,
+        "q1BatchMs": 1.82615,
+        "q3BatchMs": 2.1333,
+        "opsPerSecond": 242458.6825780177,
+        "samples": [
+          2154900,
+          1540600,
+          2111700
+        ],
+        "encodedLengthPerResult": 2380.982421875,
+        "medianSnapshotRssMiB": 17.39453125,
+        "maximumSnapshotRssMiB": 17.4140625
+      },
+      "go-shared": {
+        "medianBatchMs": 2.0907,
+        "q1BatchMs": 1.8196,
+        "q3BatchMs": 2.134,
+        "opsPerSecond": 244894.05462285358,
+        "samples": [
+          2090700,
+          2177300,
+          1548500
+        ],
+        "encodedLengthPerResult": 2380.982421875,
+        "medianSnapshotRssMiB": 16.921875,
+        "maximumSnapshotRssMiB": 17.15625
+      }
+    },
+    {
+      "id": "100d6",
+      "label": "100d6 · full",
+      "workers": 1,
+      "operation": "encoding-only",
+      "node": {
+        "medianBatchMs": 48.1527,
+        "q1BatchMs": 47.6713,
+        "q3BatchMs": 53.3994,
+        "opsPerSecond": 10632.84094142177,
+        "samples": [
+          58646100,
+          47189900,
+          48152700
+        ],
+        "encodedLengthPerResult": 53055,
+        "medianSnapshotRssMiB": 165.33203125,
+        "maximumSnapshotRssMiB": 165.3359375
+      },
+      "bun": {
+        "medianBatchMs": 22.9769,
+        "q1BatchMs": 22.4499,
+        "q3BatchMs": 29.4138,
+        "opsPerSecond": 22283.249698610343,
+        "samples": [
+          35850700,
+          21922900,
+          22976900
+        ],
+        "encodedLengthPerResult": 53055,
+        "medianSnapshotRssMiB": 140.5625,
+        "maximumSnapshotRssMiB": 140.58203125
+      },
+      "go-pool": {
+        "medianBatchMs": 128.0924,
+        "q1BatchMs": 127.15095,
+        "q3BatchMs": 128.17225,
+        "opsPerSecond": 3997.1145829104616,
+        "samples": [
+          128092400,
+          126209500,
+          128252100
+        ],
+        "encodedLengthPerResult": 53055,
+        "medianSnapshotRssMiB": 63.18359375,
+        "maximumSnapshotRssMiB": 64.57421875
+      },
+      "go-shared": {
+        "medianBatchMs": 129.3297,
+        "q1BatchMs": 128.64725,
+        "q3BatchMs": 130.30215,
+        "opsPerSecond": 3958.8741023910206,
+        "samples": [
+          131274600,
+          127964800,
+          129329700
+        ],
+        "encodedLengthPerResult": 53055,
+        "medianSnapshotRssMiB": 64.5859375,
+        "maximumSnapshotRssMiB": 66.03125
+      }
+    },
+    {
+      "id": "100d6",
+      "label": "100d6 · full",
+      "workers": 6,
+      "operation": "encoding-only",
+      "node": {
+        "medianBatchMs": 13.7556,
+        "q1BatchMs": 13.34845,
+        "q3BatchMs": 14.6477,
+        "opsPerSecond": 37221.204454912906,
+        "samples": [
+          15539800,
+          13755600,
+          12941300
+        ],
+        "encodedLengthPerResult": 53055,
+        "medianSnapshotRssMiB": 263.484375,
+        "maximumSnapshotRssMiB": 265.57421875
+      },
+      "bun": {
+        "medianBatchMs": 9.4215,
+        "q1BatchMs": 9.26255,
+        "q3BatchMs": 10.02275,
+        "opsPerSecond": 54343.78814413841,
+        "samples": [
+          9421500,
+          10624000,
+          9103600
+        ],
+        "encodedLengthPerResult": 53055,
+        "medianSnapshotRssMiB": 232.8984375,
+        "maximumSnapshotRssMiB": 234.56640625
+      },
+      "go-pool": {
+        "medianBatchMs": 37.0991,
+        "q1BatchMs": 36.27065,
+        "q3BatchMs": 37.65145,
+        "opsPerSecond": 13800.87387564658,
+        "samples": [
+          35442200,
+          37099100,
+          38203800
+        ],
+        "encodedLengthPerResult": 53055,
+        "medianSnapshotRssMiB": 78.37109375,
+        "maximumSnapshotRssMiB": 79.75
+      },
+      "go-shared": {
+        "medianBatchMs": 34.4536,
+        "q1BatchMs": 33.9635,
+        "q3BatchMs": 34.4936,
+        "opsPerSecond": 14860.56609468967,
+        "samples": [
+          33473400,
+          34533600,
+          34453600
+        ],
+        "encodedLengthPerResult": 53055,
+        "medianSnapshotRssMiB": 72.58203125,
+        "maximumSnapshotRssMiB": 72.96484375
+      }
+    },
+    {
+      "id": "pool",
+      "label": "20d6!2ro=1kh10 · full",
+      "workers": 1,
+      "operation": "encoding-only",
+      "node": {
+        "medianBatchMs": 17.2763,
+        "q1BatchMs": 16.82285,
+        "q3BatchMs": 17.49735,
+        "opsPerSecond": 29635.975295636217,
+        "samples": [
+          17718400,
+          17276300,
+          16369400
+        ],
+        "encodedLengthPerResult": 15293.55859375,
+        "medianSnapshotRssMiB": 173.12109375,
+        "maximumSnapshotRssMiB": 177.765625
+      },
+      "bun": {
+        "medianBatchMs": 10.9161,
+        "q1BatchMs": 10.51045,
+        "q3BatchMs": 12.8561,
+        "opsPerSecond": 46903.19802859996,
+        "samples": [
+          14796100,
+          10916100,
+          10104800
+        ],
+        "encodedLengthPerResult": 15293.55859375,
+        "medianSnapshotRssMiB": 143.4609375,
+        "maximumSnapshotRssMiB": 145.05859375
+      },
+      "go-pool": {
+        "medianBatchMs": 38.6471,
+        "q1BatchMs": 38.60195,
+        "q3BatchMs": 40.36835,
+        "opsPerSecond": 13248.083297323732,
+        "samples": [
+          42089600,
+          38647100,
+          38556800
+        ],
+        "encodedLengthPerResult": 15293.55859375,
+        "medianSnapshotRssMiB": 61.32421875,
+        "maximumSnapshotRssMiB": 62.6171875
+      },
+      "go-shared": {
+        "medianBatchMs": 37.1139,
+        "q1BatchMs": 36.9539,
+        "q3BatchMs": 37.96715,
+        "opsPerSecond": 13795.370467668448,
+        "samples": [
+          36793900,
+          37113900,
+          38820400
+        ],
+        "encodedLengthPerResult": 15293.55859375,
+        "medianSnapshotRssMiB": 63.17578125,
+        "maximumSnapshotRssMiB": 64.91796875
+      }
+    },
+    {
+      "id": "pool",
+      "label": "20d6!2ro=1kh10 · full",
+      "workers": 6,
+      "operation": "encoding-only",
+      "node": {
+        "medianBatchMs": 5.4939,
+        "q1BatchMs": 5.2003,
+        "q3BatchMs": 5.52415,
+        "opsPerSecond": 93194.27000855494,
+        "samples": [
+          4906700,
+          5554400,
+          5493900
+        ],
+        "encodedLengthPerResult": 15293.55859375,
+        "medianSnapshotRssMiB": 282.50390625,
+        "maximumSnapshotRssMiB": 286.046875
+      },
+      "bun": {
+        "medianBatchMs": 5.3531,
+        "q1BatchMs": 4.5223,
+        "q3BatchMs": 5.73965,
+        "opsPerSecond": 95645.51381442529,
+        "samples": [
+          5353100,
+          3691500,
+          6126200
+        ],
+        "encodedLengthPerResult": 15293.55859375,
+        "medianSnapshotRssMiB": 257.41015625,
+        "maximumSnapshotRssMiB": 262.09375
+      },
+      "go-pool": {
+        "medianBatchMs": 11.7066,
+        "q1BatchMs": 11.4359,
+        "q3BatchMs": 12.60805,
+        "opsPerSecond": 43736.012164078384,
+        "samples": [
+          11706600,
+          13509500,
+          11165200
+        ],
+        "encodedLengthPerResult": 15293.55859375,
+        "medianSnapshotRssMiB": 74.94921875,
+        "maximumSnapshotRssMiB": 76.26171875
+      },
+      "go-shared": {
+        "medianBatchMs": 14.7155,
+        "q1BatchMs": 12.4221,
+        "q3BatchMs": 16.2357,
+        "opsPerSecond": 34793.24521762767,
+        "samples": [
+          17755900,
+          14715500,
+          10128700
+        ],
+        "encodedLengthPerResult": 15293.55859375,
+        "medianSnapshotRssMiB": 69.296875,
+        "maximumSnapshotRssMiB": 70.60546875
+      }
+    }
+  ],
+  "finishedAt": "2026-09-14T02:44:44.166Z",
+  "wallMilliseconds": 180514
+}

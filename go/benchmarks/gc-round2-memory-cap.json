@@ -1,0 +1,5468 @@
+{
+  "status": "complete",
+  "startedAt": "2026-09-14T02:33:43.516Z",
+  "configuration": {
+    "samples": 5,
+    "requests": 10000,
+    "warmup": 5000,
+    "workers": 6,
+    "seedPrefix": "dicecore-backend/v3.7.1/",
+    "algorithm": "mt19937",
+    "freezeResults": "never",
+    "cache": "warm",
+    "wallBudgetMs": 90000,
+    "phase": "measure",
+    "engineMode": "pool",
+    "workloads": [
+      {
+        "id": "d20-full",
+        "label": "1d20+5 · full",
+        "input": "1d20+5",
+        "mode": "full"
+      },
+      {
+        "id": "d20-details",
+        "label": "1d20+5 · details",
+        "input": "1d20+5",
+        "mode": "details"
+      },
+      {
+        "id": "d20-summary",
+        "label": "1d20+5 · summary",
+        "input": "1d20+5",
+        "mode": "summary"
+      },
+      {
+        "id": "100d6-full",
+        "label": "100d6 · full",
+        "input": "100d6",
+        "mode": "full"
+      },
+      {
+        "id": "100d6-details",
+        "label": "100d6 · details",
+        "input": "100d6",
+        "mode": "details"
+      },
+      {
+        "id": "100d6-summary",
+        "label": "100d6 · summary",
+        "input": "100d6",
+        "mode": "summary"
+      },
+      {
+        "id": "pool-full",
+        "label": "20d6!2ro=1kh10 · full",
+        "input": "20d6!2ro=1kh10",
+        "mode": "full"
+      },
+      {
+        "id": "pool-details",
+        "label": "20d6!2ro=1kh10 · details",
+        "input": "20d6!2ro=1kh10",
+        "mode": "details"
+      },
+      {
+        "id": "pool-summary",
+        "label": "20d6!2ro=1kh10 · summary",
+        "input": "20d6!2ro=1kh10",
+        "mode": "summary"
+      }
+    ],
+    "validationIndices": []
+  },
+  "source": {
+    "sha256": "e3f889b34ab89576b293e0a608fe6d1e3f2076036b31b886a58ac970e780cfbd",
+    "files": [
+      {
+        "path": "dist/chunks/common-BD_2ikUL.js",
+        "sha256": "6d6a944e66f77d64f22c79dfe8939326335b95c094cc35525621d1d8b36c8db5"
+      },
+      {
+        "path": "dist/chunks/core-BgwMxRi8.js",
+        "sha256": "68cfa89cd641be13d5b1af49cfa9ae7eb1b6c31f08789fd25d384d217e10bba3"
+      },
+      {
+        "path": "dist/core.js",
+        "sha256": "6204d325cbd410c1f6f0c3646f35fbf0fd775560037b3fa8e1e401438e4123c5"
+      },
+      {
+        "path": "dist/index.js",
+        "sha256": "ff35b8ad07c9bfdb9063cecae0f2de5901102a9a7b3769ed8c52cb28d218e132"
+      },
+      {
+        "path": "dist/systems/assimilation.js",
+        "sha256": "b5e00ecfcb15424f666dcaf04afa058cd9abad493170ead06559415697981c3f"
+      },
+      {
+        "path": "dist/systems/daggerheart.js",
+        "sha256": "c81e02857830b247fc4274339b6e0e70178472a6d6c2d071a634b6554d90def9"
+      },
+      {
+        "path": "dist/systems/fate.js",
+        "sha256": "175129b1a0cca1c43a9ea4b23f3cf2e36b10219ad01d3613d687e189b480af6f"
+      },
+      {
+        "path": "dist/systems/index.js",
+        "sha256": "1ac1bd05b757198078badd282245de7015ccf426c3d9abffc135bbdeed09f35e"
+      },
+      {
+        "path": "dist/systems/mixed.js",
+        "sha256": "25c4214e5a133e33b79fbecbd00f85517149a91d410d8ceecb2524757687896f"
+      },
+      {
+        "path": "dist/systems/vampire-v5.js",
+        "sha256": "8dd901059b213b040da4451e1224e35dba9de8002a44bc673faeefd86c2917c1"
+      },
+      {
+        "path": "go/backend_benchmark_test.go",
+        "sha256": "8caeb34d29638fb07ee6cffd048870d050e3ddaf2a90e0527693c39f47275151"
+      },
+      {
+        "path": "go/backend_rss_linux_test.go",
+        "sha256": "13bdd743d3e7a00f2d35ed698f7ba8729b8cb3a71451a9666722bdbac43c3ec0"
+      },
+      {
+        "path": "go/backend_rss_other_test.go",
+        "sha256": "c2e53b664c9299b200b6fe277e87645a5d4dd7a84d413a7eac939d139588881a"
+      },
+      {
+        "path": "go/backend_rss_windows_test.go",
+        "sha256": "f5a18d13ce1153a1688d77e2bf580e2fc0695a509bc630cc9c85aaa55a9ce974"
+      },
+      {
+        "path": "go/go.mod",
+        "sha256": "6176f43cc3c8805dd71b9819687efbe2ac4240bb2284f64e466fd47ec13a6c1b"
+      },
+      {
+        "path": "go/budget.go",
+        "sha256": "ece1d18d5e46a472ef1c544dd0b4d425ebf79631afec330c53376ed896ec0609"
+      },
+      {
+        "path": "go/cache.go",
+        "sha256": "bc72fedcb0e1fc928d2bed11161b578b3f1b828530148eefcda00b7d7422832a"
+      },
+      {
+        "path": "go/compiler.go",
+        "sha256": "d88ffe71296acdd06942b899896f691c50f4382dfb4a9b6c27528019687862c3"
+      },
+      {
+        "path": "go/compiler_plan.go",
+        "sha256": "cdcda478d75bc41996867063d693f452e45b78f597a54a9a19cf24880561667f"
+      },
+      {
+        "path": "go/compiler_semantics.go",
+        "sha256": "c46547890f3113e7a32b7729a10d93f541390441f4e4bdaea20197d65aec512a"
+      },
+      {
+        "path": "go/compiler_types.go",
+        "sha256": "578d0a4d5a09dba9e294efa14b2d51382a817126121645c9caf8018b7a5846e9"
+      },
+      {
+        "path": "go/context.go",
+        "sha256": "bfeed3c341446b38aab0b78a6ef43051b37fb6fa039d6f90b080261d4f97afb2"
+      },
+      {
+        "path": "go/doc.go",
+        "sha256": "656bd408bdcd739bc21df7dd5c96cd5301d6c4498c601c4cb0d0f2c0a7403e3e"
+      },
+      {
+        "path": "go/engine.go",
+        "sha256": "ae653aeec8d2f113509cd96c444a4e5f1dad352e092194992e49b2108d57c764"
+      },
+      {
+        "path": "go/error_utf16.go",
+        "sha256": "ceb096dea18374dcaddc61fdf12fcb548bbcef3277b94eb997665a8bd312f6bd"
+      },
+      {
+        "path": "go/errors.go",
+        "sha256": "a7f1db56a341f7b5618f0a77b57d1c8dc878c9034e32e7cd1236a121a81a3a37"
+      },
+      {
+        "path": "go/event.go",
+        "sha256": "5f7f9958c51c9822ff9e6f276891962b1e8b5effac80cb27507ebe0a2456d491"
+      },
+      {
+        "path": "go/event_collection.go",
+        "sha256": "59fe23558572efaac83f50491362f9194d81ab2b21c7ae7872663e1eca9aa796"
+      },
+      {
+        "path": "go/event_decode.go",
+        "sha256": "e2a24d8fab55422e5aa202ce14173038064790b4ed0908914317a1684666aa55"
+      },
+      {
+        "path": "go/execution_ids.go",
+        "sha256": "fc3a1402204c57eebd7bce8b85a6094886263006f8c51b07c95d9969b6b66fea"
+      },
+      {
+        "path": "go/execution_rng_cache.go",
+        "sha256": "1f89fcc1bcf1e541a2365fbf101d05a0f5fa8bb9b742dbf74ee92eeb924f1050"
+      },
+      {
+        "path": "go/executor.go",
+        "sha256": "21712c28452ee17bdd396b2bf293d9f14b7d11266826e8c2c5760a4e876e8e1f"
+      },
+      {
+        "path": "go/executor_compact_summary.go",
+        "sha256": "42194a9082259f070511e459e64715d16f44cf92b962acbfbf1b5053a2ac4a2c"
+      },
+      {
+        "path": "go/executor_summary.go",
+        "sha256": "1f9586a613d7b7bb91b7932ad094f447b9b33c8e21922d938379387b50e6a6df"
+      },
+      {
+        "path": "go/journal.go",
+        "sha256": "57066655afb9f43feb1a76a5c7f9e19393af1a802e4890512784f46cd9e48832"
+      },
+      {
+        "path": "go/limits.go",
+        "sha256": "25141b044a5106a0744708decd23d6f71aa12fbcf37da9b1dc82c83c2cd1ad80"
+      },
+      {
+        "path": "go/math.go",
+        "sha256": "3f4711d07a8fad87d5848799895adeb85a54d4f4b993741808d499391f012dcf"
+      },
+      {
+        "path": "go/math_pow.go",
+        "sha256": "07a43032a8bc17d7b1c8ed1abc42f87fd07ddfb33d5aa1fe53aced3a8eb776b0"
+      },
+      {
+        "path": "go/math_pow_refine.go",
+        "sha256": "0decf4b3ac5498c878e81c862dad841c140174f5204630d4eb48e0adeb4bd312"
+      },
+      {
+        "path": "go/math_transcendental.go",
+        "sha256": "6fbab20a6edff34ac71dd614af40f4ca47fa394cf52d9cf4cba85991ddf2798a"
+      },
+      {
+        "path": "go/math_trig.go",
+        "sha256": "d13187a24cb08c989513bf0b5b1eabf51e65f8d9d0fc85093280dfbbcb87f010"
+      },
+      {
+        "path": "go/normalization.go",
+        "sha256": "1524e4931a632058687dcf1bc906f7e37a68dc6d970ff9b71fda326b1489a406"
+      },
+      {
+        "path": "go/parser.go",
+        "sha256": "d70a3ebe5ddc7c756c1a8299b25d4d618cdec70d0302dfc8c22a2708e0768dad"
+      },
+      {
+        "path": "go/random.go",
+        "sha256": "06a7fb5d2b62d4905dcba2544873605ca8cdecae0b1a246a891e263462860bf9"
+      },
+      {
+        "path": "go/replay.go",
+        "sha256": "7f315138836afc32bb992c7599d2364946bc6357300dbea6477a574110b4c148"
+      },
+      {
+        "path": "go/roll_count.go",
+        "sha256": "07e2b5dc1ff3a685701d99ac65f5810077014a1d6ff38c4ccd93914349d4b75c"
+      },
+      {
+        "path": "go/scanner.go",
+        "sha256": "f02b97a565f6e9c9f44bb4a57cfec66fb54fe684d080afe11453c2ec040c7dd5"
+      },
+      {
+        "path": "go/seed.go",
+        "sha256": "234b0ea8ad1d6aa9f713a077ee3cd3bedbe5a524a765370e07b813030be1e6ff"
+      },
+      {
+        "path": "go/syntax.go",
+        "sha256": "b8c46647fa19b01a482e907a0d25da525dc637d9d19315e291703156b1c1ec74"
+      },
+      {
+        "path": "go/system_unicode.go",
+        "sha256": "6b9b527ab4f5a67938087d361d85a175dfc7f52c425c4905413e9ed3c7529e0e"
+      },
+      {
+        "path": "go/systems.go",
+        "sha256": "3a4438e0f1793c0128a3be8957a5d8c141b9074ce787890905a454ca5e7515b0"
+      },
+      {
+        "path": "go/systems_mixed.go",
+        "sha256": "152e3b59dd8fa2b1e1722ee26026dce19c79942c2447663ac591126d63fc2033"
+      },
+      {
+        "path": "go/types.go",
+        "sha256": "9c357968e1e36d233825a4532189e172195f0658ae944dd06e49495b1f4179f2"
+      },
+      {
+        "path": "package-lock.json",
+        "sha256": "1b023b9bcc6e58c4c7bcb7e70ea45a914fd79e09e98ca8550940c92d82936a28"
+      },
+      {
+        "path": "package.json",
+        "sha256": "7a697d3832f6af94f8eab364147a05c3e13438a0b0c6d0c3f58e3d3cf6dc9504"
+      },
+      {
+        "path": "rollup.config.mjs",
+        "sha256": "4c6d0f06c1a5b7a3fb95061aba97f52d4aa1a8e1fa77e32931569ecddcea4bcd"
+      },
+      {
+        "path": "scripts/benchmark-backend-reference.mjs",
+        "sha256": "d355afd9819e5e452fde83fe7bc60bcf73f8f35fd85676e03704efbdbe073b87"
+      },
+      {
+        "path": "scripts/compare-backend-round2.mjs",
+        "sha256": "ee2bca9bd49f31b00f97b221d25efe0979d62d3e0010f9d9a10ac0b41914a17b"
+      },
+      {
+        "path": "src/index.ts",
+        "sha256": "e6248ca68143cc1f4cedebf19a7a0cc40dbedf1f084eebefebdd625be8bc2ac9"
+      },
+      {
+        "path": "src/v3/cache.ts",
+        "sha256": "e1eecc07237bb7f5c3b6b8c132630897925ccbfebd0abff14017f87014e57654"
+      },
+      {
+        "path": "src/v3/compiler.ts",
+        "sha256": "f676854e61ac831df51dc83e5cc512b3029b21ecf756f151915d8c4a7541667d"
+      },
+      {
+        "path": "src/v3/core.ts",
+        "sha256": "a2aff05791b55b3009cd8683fed536e1d181b188f58f538c1e0e34451444d691"
+      },
+      {
+        "path": "src/v3/engine.ts",
+        "sha256": "03536d7d109007aa807af816ae69953e8ee422b4c3b9e0a1d0113067370992b5"
+      },
+      {
+        "path": "src/v3/errors.ts",
+        "sha256": "1cc67c4ee5c2daa0a767a97ac19305cad9bd1e49e6a0fa8519f2ff510eb5f53e"
+      },
+      {
+        "path": "src/v3/executor.ts",
+        "sha256": "438af933fb31c356305d03326fd89b96af55e904837f40c11641f368ed622af3"
+      },
+      {
+        "path": "src/v3/freeze.ts",
+        "sha256": "d39f00023fd81968fbfdf6c5fe3d2ba76b0e981df45cebfaaa34ec586212e1f0"
+      },
+      {
+        "path": "src/v3/index.ts",
+        "sha256": "70bd7800236c5c024365c232a8adb19393a1516ee3134581053c26417210adc2"
+      },
+      {
+        "path": "src/v3/math.ts",
+        "sha256": "a2d118ec27539010a84d1995ae659217dfb5f261104a8fbe9da1319129e6be92"
+      },
+      {
+        "path": "src/v3/normalization.ts",
+        "sha256": "db235e562d52f3df2ea2273dbaf35bdda93e78d1a875c2dcfe3a9ffc33352a3e"
+      },
+      {
+        "path": "src/v3/roll-count-expression.ts",
+        "sha256": "059d5ec171c6830eefeaeab454fb60f8ee6be358057f44fd4bf341de3cda0984"
+      },
+      {
+        "path": "src/v3/runtime/budget.ts",
+        "sha256": "bcd667dc2a2e54f119c926731c592d565d185d615770006128d93b49f14caed8"
+      },
+      {
+        "path": "src/v3/runtime/context.ts",
+        "sha256": "de0738df0170d9fda5f4bb166cb6ae97fa7f5b15adda9fa286ac6171deb50e60"
+      },
+      {
+        "path": "src/v3/runtime/index.ts",
+        "sha256": "0c247e3ec29dff0c846f1d4931ae9d6e0f78b94901fff30e7f0122c1d78052ff"
+      },
+      {
+        "path": "src/v3/runtime/journal.ts",
+        "sha256": "3da96b3c1c7fcae8a94948564b54667b2eae3ff56970e5bb1523fc396e0f7847"
+      },
+      {
+        "path": "src/v3/runtime/limits.ts",
+        "sha256": "7c1fb84eb2c85f20bceb2f9345d402f87c28c79ee882cfd133c8f9eae851b98b"
+      },
+      {
+        "path": "src/v3/runtime/mt19937.ts",
+        "sha256": "ab69b15adb1dba5c18b80ed67ec83e8a68083b335104086736235bcdbe81dffc"
+      },
+      {
+        "path": "src/v3/runtime/replay.ts",
+        "sha256": "eb11febf46042402ee16e3ef6e869efdcc45109c46732a38ecd52b5f0a2775dc"
+      },
+      {
+        "path": "src/v3/runtime/xoshiro128ss.ts",
+        "sha256": "638c4377153ee9a4ba221d7ce5d287451a47358b4ec69163c65a21cdabaa2f69"
+      },
+      {
+        "path": "src/v3/syntax/ast.ts",
+        "sha256": "7d5a2b16dda816b02d17a6bc0d4d775da31bf2aee5b08825818a64bf7c5d20e5"
+      },
+      {
+        "path": "src/v3/syntax/index.ts",
+        "sha256": "666d69684d5bf50cabd9426fbb81404942912d584811acd57bb85965ed70663d"
+      },
+      {
+        "path": "src/v3/syntax/parser.ts",
+        "sha256": "03316de5ba906c8c90dbe76a1b0558e52c6a76f9f7da3d9717e0c2cac1b0ed82"
+      },
+      {
+        "path": "src/v3/syntax/scanner.ts",
+        "sha256": "c7259299ce74cec4312bc1cbf60c0d0dc139744708686d4b42982294fe33dd97"
+      },
+      {
+        "path": "src/v3/syntax/tokens.ts",
+        "sha256": "1fe33b50452d641c3277940ec80a8a3d68f61714765b95384d83b9bbc763216d"
+      },
+      {
+        "path": "src/v3/systems/assimilation.ts",
+        "sha256": "37c12180ee45aa6aa6facf2950d293e80a6c0034111bdf363dba78828681c57c"
+      },
+      {
+        "path": "src/v3/systems/common.ts",
+        "sha256": "6846ed9770b9f30dd80622efb5e25a1506e696cba57b7af6125c5b6d8879dbe5"
+      },
+      {
+        "path": "src/v3/systems/daggerheart.ts",
+        "sha256": "4edc235f02d1af9688b38491f4a499aea560b35c8b447a8279e495a2e864cb83"
+      },
+      {
+        "path": "src/v3/systems/fate.ts",
+        "sha256": "b8d08a348b76eac09832910cbca1222177c5a3ae31503d349275260ff9fa1bba"
+      },
+      {
+        "path": "src/v3/systems/index.ts",
+        "sha256": "f970a828aa6aaacbecd081fb317c137d10b2a45935337d6682637388a02decd1"
+      },
+      {
+        "path": "src/v3/systems/mixed.ts",
+        "sha256": "d5e2ef573038a12c36eaa9f09f7ce05d0609340122748eba729d7be5385d1f0b"
+      },
+      {
+        "path": "src/v3/systems/system-roller.ts",
+        "sha256": "800b37e4d5cc38506dc0eaeb624a94b84a99807ee1cba6162d2afe160e940fbd"
+      },
+      {
+        "path": "src/v3/systems/vampire-v5.ts",
+        "sha256": "e429a2b8aa0a37093ce15d357cc7316e8ca39149e08d0002fd727d2b55e5d63d"
+      },
+      {
+        "path": "src/v3/types.ts",
+        "sha256": "3d3eef638b8e11b34941d0ed41d5000d714b827c6ce521233e44db828a487300"
+      },
+      {
+        "path": "tsconfig.build.json",
+        "sha256": "5574381876f6ded561c5ca3b51f612086a75da6f085fd7d4f63b43ebec5eef9d"
+      },
+      {
+        "path": "tsconfig.json",
+        "sha256": "7143b1b940f802eacf401b3d4a1e17a2e211f5d22a18d0b88fa253fa3c4da439"
+      }
+    ]
+  },
+  "goWorkerBinary": {
+    "sha256": "c3cb043275cdbbff37906ff0a4e94d6479deaad1ab6d49f4b1580940ada8b431"
+  },
+  "environment": {
+    "cpuModel": "AMD Ryzen 5 5500                               ",
+    "logicalCPUs": 12,
+    "osVersion": "Windows 11 Pro",
+    "arch": "x64",
+    "inheritedGOMAXPROCS": null,
+    "inheritedGOMEMLIMIT": null
+  },
+  "referenceEnvironment": {
+    "cpuModel": "AMD Ryzen 5 5500                               ",
+    "logicalCPUs": 12,
+    "osVersion": "Windows 11 Pro",
+    "osRelease": "10.0.26200",
+    "arch": "x64",
+    "totalMemoryBytes": 34220920832,
+    "node": "v24.18.0",
+    "bun": "1.4.0",
+    "go": "go version go1.26.2 windows/amd64",
+    "runtimeEnvironment": {
+      "NODE_OPTIONS": null,
+      "GOMAXPROCS": null,
+      "GOGC": null,
+      "GOMEMLIMIT": null
+    }
+  },
+  "extensionOf": {
+    "file": "go/benchmarks/gc-round2-tuning.json",
+    "sha256": "4748822b59193b6d0718ca7424f8ce7b1f9a29cfb0ccd9e464e52bb761347483",
+    "reason": "The original GOGC=500 candidate exceeded 128 MiB RSS during confirmation. This explicitly authorized extension tries only 64MiB and 96MiB soft Go runtime memory limits with GOGC=500, without changing library code."
+  },
+  "selection": "Fresh GOGC=100/no-cap control, GOGC=500/GOMEMLIMIT=64MiB, then GOGC=500/GOMEMLIMIT=96MiB. Select highest 100d6-full throughput among candidates whose maximum observed post-batch RSS is <=128MiB in all nine workloads. Confirm selected candidate, then a fresh GOGC=100/no-cap control. GOMEMLIMIT is a soft runtime memory limit, not an RSS cap.",
+  "experimentScript": {
+    "path": "scripts/compare-go-gc-memory-cap.mjs",
+    "sha256": "43c23501c8afc73158cbd5bb996c43ce746eb6bdb736cfb165e9c81aef00c9a7"
+  },
+  "commands": [
+    {
+      "gc": 100,
+      "memoryLimit": null,
+      "stage": "selection",
+      "executable": "D:\\Projetos\\ERPG\\rpg-dice-roller\\.artifacts\\dicecore-backend.exe",
+      "args": [
+        "-test.run=^TestBackendBenchmarkWorker$"
+      ],
+      "cwd": "go",
+      "env": {
+        "GOGC": "100",
+        "GOMEMLIMIT": null,
+        "GOMAXPROCS": null
+      }
+    },
+    {
+      "gc": 500,
+      "memoryLimit": "64MiB",
+      "stage": "selection",
+      "executable": "D:\\Projetos\\ERPG\\rpg-dice-roller\\.artifacts\\dicecore-backend.exe",
+      "args": [
+        "-test.run=^TestBackendBenchmarkWorker$"
+      ],
+      "cwd": "go",
+      "env": {
+        "GOGC": "500",
+        "GOMEMLIMIT": "64MiB",
+        "GOMAXPROCS": null
+      }
+    },
+    {
+      "gc": 500,
+      "memoryLimit": "96MiB",
+      "stage": "selection",
+      "executable": "D:\\Projetos\\ERPG\\rpg-dice-roller\\.artifacts\\dicecore-backend.exe",
+      "args": [
+        "-test.run=^TestBackendBenchmarkWorker$"
+      ],
+      "cwd": "go",
+      "env": {
+        "GOGC": "500",
+        "GOMEMLIMIT": "96MiB",
+        "GOMAXPROCS": null
+      }
+    },
+    {
+      "gc": 500,
+      "memoryLimit": "96MiB",
+      "stage": "confirmation",
+      "executable": "D:\\Projetos\\ERPG\\rpg-dice-roller\\.artifacts\\dicecore-backend.exe",
+      "args": [
+        "-test.run=^TestBackendBenchmarkWorker$"
+      ],
+      "cwd": "go",
+      "env": {
+        "GOGC": "500",
+        "GOMEMLIMIT": "96MiB",
+        "GOMAXPROCS": null
+      }
+    },
+    {
+      "gc": 100,
+      "memoryLimit": null,
+      "stage": "confirmation",
+      "executable": "D:\\Projetos\\ERPG\\rpg-dice-roller\\.artifacts\\dicecore-backend.exe",
+      "args": [
+        "-test.run=^TestBackendBenchmarkWorker$"
+      ],
+      "cwd": "go",
+      "env": {
+        "GOGC": "100",
+        "GOMEMLIMIT": null,
+        "GOMAXPROCS": null
+      }
+    }
+  ],
+  "runs": [
+    {
+      "gc": 100,
+      "memoryLimit": null,
+      "stage": "selection",
+      "output": {
+        "cases": {
+          "100d6-details": [
+            {
+              "digest": {
+                "count": 10000,
+                "total": 3501322,
+                "weightedTotal": 17516749728,
+                "randomCalls": 1000000
+              },
+              "durationNs": 214563500,
+              "nsPerOp": 21456.35,
+              "opsPerSecond": 46606.24943198633,
+              "requests": 10000,
+              "workers": 6
+            },
+            {
+              "digest": {
+                "count": 10000,
+                "total": 3501322,
+                "weightedTotal": 17516749728,
+                "randomCalls": 1000000
+              },
+              "durationNs": 197264800,
+              "nsPerOp": 19726.48,
+              "opsPerSecond": 50693.2813152676,
+              "requests": 10000,
+              "workers": 6
+            },
+            {
+              "digest": {
+                "count": 10000,
+                "total": 3501322,
+                "weightedTotal": 17516749728,
+                "randomCalls": 1000000
+              },
+              "durationNs": 199644000,
+              "nsPerOp": 19964.4,
+              "opsPerSecond": 50089.15870249044,
+              "requests": 10000,
+              "workers": 6
+            },
+            {
+              "digest": {
+                "count": 10000,
+                "total": 3501322,
+                "weightedTotal": 17516749728,
+                "randomCalls": 1000000
+              },
+              "durationNs": 191307500,
+              "nsPerOp": 19130.75,
+              "opsPerSecond": 52271.86597493564,
+              "requests": 10000,
+              "workers": 6
+            },
+            {
+              "digest": {
+                "count": 10000,
+                "total": 3501322,
+                "weightedTotal": 17516749728,
+                "randomCalls": 1000000
+              },
+              "durationNs": 210294200,
+              "nsPerOp": 21029.42,
+              "opsPerSecond": 47552.428930517344,
+              "requests": 10000,
+              "workers": 6
+            }
+          ],
+          "100d6-full": [
+            {
+              "digest": {
+                "count": 10000,
+                "total": 3501322,
+                "weightedTotal": 17516749728,
+                "randomCalls": 1000000
+              },
+              "durationNs": 351191800,
+              "nsPerOp": 35119.18,
+              "opsPerSecond": 28474.468936917092,
+              "requests": 10000,
+              "workers": 6
+            },
+            {
+              "digest": {
+                "count": 10000,
+                "total": 3501322,
+                "weightedTotal": 17516749728,
+                "randomCalls": 1000000
+              },
+              "durationNs": 332827700,
+              "nsPerOp": 33282.77,
+              "opsPerSecond": 30045.576134438328,
+              "requests": 10000,
+              "workers": 6
+            },
+            {
+              "digest": {
+                "count": 10000,
+                "total": 3501322,
+                "weightedTotal": 17516749728,
+                "randomCalls": 1000000
+              },
+              "durationNs": 333624000,
+              "nsPerOp": 33362.4,
+              "opsPerSecond": 29973.862791645686,
+              "requests": 10000,
+              "workers": 6
+            },
+            {
+              "digest": {
+                "count": 10000,
+                "total": 3501322,
+                "weightedTotal": 17516749728,
+                "randomCalls": 1000000
+              },
+              "durationNs": 330246200,
+              "nsPerOp": 33024.62,
+              "opsPerSecond": 30280.439260164083,
+              "requests": 10000,
+              "workers": 6
+            },
+            {
+              "digest": {
+                "count": 10000,
+                "total": 3501322,
+                "weightedTotal": 17516749728,
+                "randomCalls": 1000000
+              },
+              "durationNs": 373322100,
+              "nsPerOp": 37332.21,
+              "opsPerSecond": 26786.52027297607,
+              "requests": 10000,
+              "workers": 6
+            }
+          ],
+          "100d6-summary": [
+            {
+              "digest": {
+                "count": 10000,
+                "total": 3501322,
+                "weightedTotal": 17516749728,
+                "randomCalls": 1000000
+              },
+              "durationNs": 45477500,
+              "nsPerOp": 4547.75,
+              "opsPerSecond": 219888.95607718104,
+              "requests": 10000,
+              "workers": 6
+            },
+            {
+              "digest": {
+                "count": 10000,
+                "total": 3501322,
+                "weightedTotal": 17516749728,
+                "randomCalls": 1000000
+              },
+              "durationNs": 43036000,
+              "nsPerOp": 4303.6,
+              "opsPerSecond": 232363.60256529416,
+              "requests": 10000,
+              "workers": 6
+            },
+            {
+              "digest": {
+                "count": 10000,
+                "total": 3501322,
+                "weightedTotal": 17516749728,
+                "randomCalls": 1000000
+              },
+              "durationNs": 33079400,
+              "nsPerOp": 3307.94,
+              "opsPerSecond": 302302.94382606697,
+              "requests": 10000,
+              "workers": 6
+            },
+            {
+              "digest": {
+                "count": 10000,
+                "total": 3501322,
+                "weightedTotal": 17516749728,
+                "randomCalls": 1000000
+              },
+              "durationNs": 38804800,
+              "nsPerOp": 3880.48,
+              "opsPerSecond": 257700.07834082382,
+              "requests": 10000,
+              "workers": 6
+            },
+            {
+              "digest": {
+                "count": 10000,
+                "total": 3501322,
+                "weightedTotal": 17516749728,
+                "randomCalls": 1000000
+              },
+              "durationNs": 29879600,
+              "nsPerOp": 2987.96,
+              "opsPerSecond": 334676.5016934631,
+              "requests": 10000,
+              "workers": 6
+            }
+          ],
+          "d20-details": [
+            {
+              "digest": {
+                "count": 10000,
+                "total": 155656,
+                "weightedTotal": 775910358,
+                "randomCalls": 10000
+              },
+              "durationNs": 38500800,
+              "nsPerOp": 3850.08,
+              "opsPerSecond": 259734.86265220464,
+              "requests": 10000,
+              "workers": 6
+            },
+            {
+              "digest": {
+                "count": 10000,
+                "total": 155656,
+                "weightedTotal": 775910358,
+                "randomCalls": 10000
+              },
+              "durationNs": 26189800,
+              "nsPerOp": 2618.98,
+              "opsPerSecond": 381828.03992393985,
+              "requests": 10000,
+              "workers": 6
+            },
+            {
+              "digest": {
+                "count": 10000,
+                "total": 155656,
+                "weightedTotal": 775910358,
+                "randomCalls": 10000
+              },
+              "durationNs": 26273800,
+              "nsPerOp": 2627.38,
+              "opsPerSecond": 380607.2970030981,
+              "requests": 10000,
+              "workers": 6
+            },
+            {
+              "digest": {
+                "count": 10000,
+                "total": 155656,
+                "weightedTotal": 775910358,
+                "randomCalls": 10000
+              },
+              "durationNs": 25561400,
+              "nsPerOp": 2556.14,
+              "opsPerSecond": 391214.8786842661,
+              "requests": 10000,
+              "workers": 6
+            },
+            {
+              "digest": {
+                "count": 10000,
+                "total": 155656,
+                "weightedTotal": 775910358,
+                "randomCalls": 10000
+              },
+              "durationNs": 27138800,
+              "nsPerOp": 2713.88,
+              "opsPerSecond": 368476.13011629105,
+              "requests": 10000,
+              "workers": 6
+            }
+          ],
+          "d20-full": [
+            {
+              "digest": {
+                "count": 10000,
+                "total": 155656,
+                "weightedTotal": 775910358,
+                "randomCalls": 10000
+              },
+              "durationNs": 35129600,
+              "nsPerOp": 3512.96,
+              "opsPerSecond": 284660.2295500091,
+              "requests": 10000,
+              "workers": 6
+            },
+            {
+              "digest": {
+                "count": 10000,
+                "total": 155656,
+                "weightedTotal": 775910358,
+                "randomCalls": 10000
+              },
+              "durationNs": 34088300,
+              "nsPerOp": 3408.83,
+              "opsPerSecond": 293355.78482939897,
+              "requests": 10000,
+              "workers": 6
+            },
+            {
+              "digest": {
+                "count": 10000,
+                "total": 155656,
+                "weightedTotal": 775910358,
+                "randomCalls": 10000
+              },
+              "durationNs": 34503700,
+              "nsPerOp": 3450.37,
+              "opsPerSecond": 289823.9898909392,
+              "requests": 10000,
+              "workers": 6
+            },
+            {
+              "digest": {
+                "count": 10000,
+                "total": 155656,
+                "weightedTotal": 775910358,
+                "randomCalls": 10000
+              },
+              "durationNs": 34380800,
+              "nsPerOp": 3438.08,
+              "opsPerSecond": 290860.0148920328,
+              "requests": 10000,
+              "workers": 6
+            },
+            {
+              "digest": {
+                "count": 10000,
+                "total": 155656,
+                "weightedTotal": 775910358,
+                "randomCalls": 10000
+              },
+              "durationNs": 34917000,
+              "nsPerOp": 3491.7,
+              "opsPerSecond": 286393.44731792534,
+              "requests": 10000,
+              "workers": 6
+            }
+          ],
+          "d20-summary": [
+            {
+              "digest": {
+                "count": 10000,
+                "total": 155656,
+                "weightedTotal": 775910358,
+                "randomCalls": 10000
+              },
+              "durationNs": 17060400,
+              "nsPerOp": 1706.04,
+              "opsPerSecond": 586152.7279547959,
+              "requests": 10000,
+              "workers": 6
+            },
+            {
+              "digest": {
+                "count": 10000,
+                "total": 155656,
+                "weightedTotal": 775910358,
+                "randomCalls": 10000
+              },
+              "durationNs": 18237200,
+              "nsPerOp": 1823.72,
+              "opsPerSecond": 548329.7874673743,
+              "requests": 10000,
+              "workers": 6
+            },
+            {
+              "digest": {
+                "count": 10000,
+                "total": 155656,
+                "weightedTotal": 775910358,
+                "randomCalls": 10000
+              },
+              "durationNs": 17267200,
+              "nsPerOp": 1726.72,
+              "opsPerSecond": 579132.690882135,
+              "requests": 10000,
+              "workers": 6
+            },
+            {
+              "digest": {
+                "count": 10000,
+                "total": 155656,
+                "weightedTotal": 775910358,
+                "randomCalls": 10000
+              },
+              "durationNs": 17337300,
+              "nsPerOp": 1733.73,
+              "opsPerSecond": 576791.0805027311,
+              "requests": 10000,
+              "workers": 6
+            },
+            {
+              "digest": {
+                "count": 10000,
+                "total": 155656,
+                "weightedTotal": 775910358,
+                "randomCalls": 10000
+              },
+              "durationNs": 23819500,
+              "nsPerOp": 2381.95,
+              "opsPerSecond": 419824.0937047377,
+              "requests": 10000,
+              "workers": 6
+            }
+          ],
+          "pool-details": [
+            {
+              "digest": {
+                "count": 10000,
+                "total": 529368,
+                "weightedTotal": 2646650494,
+                "randomCalls": 278519
+              },
+              "durationNs": 126422200,
+              "nsPerOp": 12642.22,
+              "opsPerSecond": 79100.03148181253,
+              "requests": 10000,
+              "workers": 6
+            },
+            {
+              "digest": {
+                "count": 10000,
+                "total": 529368,
+                "weightedTotal": 2646650494,
+                "randomCalls": 278519
+              },
+              "durationNs": 122430200,
+              "nsPerOp": 12243.02,
+              "opsPerSecond": 81679.19353231473,
+              "requests": 10000,
+              "workers": 6
+            },
+            {
+              "digest": {
+                "count": 10000,
+                "total": 529368,
+                "weightedTotal": 2646650494,
+                "randomCalls": 278519
+              },
+              "durationNs": 98657600,
+              "nsPerOp": 9865.76,
+              "opsPerSecond": 101360.66557467444,
+              "requests": 10000,
+              "workers": 6
+            },
+            {
+              "digest": {
+                "count": 10000,
+                "total": 529368,
+                "weightedTotal": 2646650494,
+                "randomCalls": 278519
+              },
+              "durationNs": 108307200,
+              "nsPerOp": 10830.72,
+              "opsPerSecond": 92329.96513620517,
+              "requests": 10000,
+              "workers": 6
+            },
+            {
+              "digest": {
+                "count": 10000,
+                "total": 529368,
+                "weightedTotal": 2646650494,
+                "randomCalls": 278519
+              },
+              "durationNs": 119311700,
+              "nsPerOp": 11931.17,
+              "opsPerSecond": 83814.07690947325,
+              "requests": 10000,
+              "workers": 6
+            }
+          ],
+          "pool-full": [
+            {
+              "digest": {
+                "count": 10000,
+                "total": 529368,
+                "weightedTotal": 2646650494,
+                "randomCalls": 278519
+              },
+              "durationNs": 232858100,
+              "nsPerOp": 23285.81,
+              "opsPerSecond": 42944.60875528916,
+              "requests": 10000,
+              "workers": 6
+            },
+            {
+              "digest": {
+                "count": 10000,
+                "total": 529368,
+                "weightedTotal": 2646650494,
+                "randomCalls": 278519
+              },
+              "durationNs": 244219500,
+              "nsPerOp": 24421.95,
+              "opsPerSecond": 40946.771244720425,
+              "requests": 10000,
+              "workers": 6
+            },
+            {
+              "digest": {
+                "count": 10000,
+                "total": 529368,
+                "weightedTotal": 2646650494,
+                "randomCalls": 278519
+              },
+              "durationNs": 225701000,
+              "nsPerOp": 22570.1,
+              "opsPerSecond": 44306.40537702536,
+              "requests": 10000,
+              "workers": 6
+            },
+            {
+              "digest": {
+                "count": 10000,
+                "total": 529368,
+                "weightedTotal": 2646650494,
+                "randomCalls": 278519
+              },
+              "durationNs": 222757200,
+              "nsPerOp": 22275.72,
+              "opsPerSecond": 44891.92717452006,
+              "requests": 10000,
+              "workers": 6
+            },
+            {
+              "digest": {
+                "count": 10000,
+                "total": 529368,
+                "weightedTotal": 2646650494,
+                "randomCalls": 278519
+              },
+              "durationNs": 222096200,
+              "nsPerOp": 22209.62,
+              "opsPerSecond": 45025.53398032024,
+              "requests": 10000,
+              "workers": 6
+            }
+          ],
+          "pool-summary": [
+            {
+              "digest": {
+                "count": 10000,
+                "total": 529368,
+                "weightedTotal": 2646650494,
+                "randomCalls": 278519
+              },
+              "durationNs": 30040300,
+              "nsPerOp": 3004.03,
+              "opsPerSecond": 332886.1562634195,
+              "requests": 10000,
+              "workers": 6
+            },
+            {
+              "digest": {
+                "count": 10000,
+                "total": 529368,
+                "weightedTotal": 2646650494,
+                "randomCalls": 278519
+              },
+              "durationNs": 36036700,
+              "nsPerOp": 3603.67,
+              "opsPerSecond": 277494.88715670415,
+              "requests": 10000,
+              "workers": 6
+            },
+            {
+              "digest": {
+                "count": 10000,
+                "total": 529368,
+                "weightedTotal": 2646650494,
+                "randomCalls": 278519
+              },
+              "durationNs": 37448800,
+              "nsPerOp": 3744.88,
+              "opsPerSecond": 267031.25333789067,
+              "requests": 10000,
+              "workers": 6
+            },
+            {
+              "digest": {
+                "count": 10000,
+                "total": 529368,
+                "weightedTotal": 2646650494,
+                "randomCalls": 278519
+              },
+              "durationNs": 37398600,
+              "nsPerOp": 3739.86,
+              "opsPerSecond": 267389.68838405714,
+              "requests": 10000,
+              "workers": 6
+            },
+            {
+              "digest": {
+                "count": 10000,
+                "total": 529368,
+                "weightedTotal": 2646650494,
+                "randomCalls": 278519
+              },
+              "durationNs": 28036300,
+              "nsPerOp": 2803.63,
+              "opsPerSecond": 356680.44642124674,
+              "requests": 10000,
+              "workers": 6
+            }
+          ]
+        },
+        "gomaxprocs": 12,
+        "memory": {
+          "100d6-details": {
+            "afterBatches": [
+              {
+                "available": true,
+                "rssBytes": 19451904,
+                "source": "GetProcessMemoryInfo.WorkingSetSize"
+              },
+              {
+                "available": true,
+                "rssBytes": 19152896,
+                "source": "GetProcessMemoryInfo.WorkingSetSize"
+              },
+              {
+                "available": true,
+                "rssBytes": 18817024,
+                "source": "GetProcessMemoryInfo.WorkingSetSize"
+              },
+              {
+                "available": true,
+                "rssBytes": 20365312,
+                "source": "GetProcessMemoryInfo.WorkingSetSize"
+              },
+              {
+                "available": true,
+                "rssBytes": 17465344,
+                "source": "GetProcessMemoryInfo.WorkingSetSize"
+              }
+            ],
+            "afterWarmup": {
+              "available": true,
+              "rssBytes": 17276928,
+              "source": "GetProcessMemoryInfo.WorkingSetSize"
+            }
+          },
+          "100d6-full": {
+            "afterBatches": [
+              {
+                "available": true,
+                "rssBytes": 17948672,
+                "source": "GetProcessMemoryInfo.WorkingSetSize"
+              },
+              {
+                "available": true,
+                "rssBytes": 19144704,
+                "source": "GetProcessMemoryInfo.WorkingSetSize"
+              },
+              {
+                "available": true,
+                "rssBytes": 19050496,
+                "source": "GetProcessMemoryInfo.WorkingSetSize"
+              },
+              {
+                "available": true,
+                "rssBytes": 17899520,
+                "source": "GetProcessMemoryInfo.WorkingSetSize"
+              },
+              {
+                "available": true,
+                "rssBytes": 19288064,
+                "source": "GetProcessMemoryInfo.WorkingSetSize"
+              }
+            ],
+            "afterWarmup": {
+              "available": true,
+              "rssBytes": 18345984,
+              "source": "GetProcessMemoryInfo.WorkingSetSize"
+            }
+          },
+          "100d6-summary": {
+            "afterBatches": [
+              {
+                "available": true,
+                "rssBytes": 19214336,
+                "source": "GetProcessMemoryInfo.WorkingSetSize"
+              },
+              {
+                "available": true,
+                "rssBytes": 19767296,
+                "source": "GetProcessMemoryInfo.WorkingSetSize"
+              },
+              {
+                "available": true,
+                "rssBytes": 19320832,
+                "source": "GetProcessMemoryInfo.WorkingSetSize"
+              },
+              {
+                "available": true,
+                "rssBytes": 19714048,
+                "source": "GetProcessMemoryInfo.WorkingSetSize"
+              },
+              {
+                "available": true,
+                "rssBytes": 19664896,
+                "source": "GetProcessMemoryInfo.WorkingSetSize"
+              }
+            ],
+            "afterWarmup": {
+              "available": true,
+              "rssBytes": 18956288,
+              "source": "GetProcessMemoryInfo.WorkingSetSize"
+            }
+          },
+          "d20-details": {
+            "afterBatches": [
+              {
+                "available": true,
+                "rssBytes": 18173952,
+                "source": "GetProcessMemoryInfo.WorkingSetSize"
+              },
+              {
+                "available": true,
+                "rssBytes": 18423808,
+                "source": "GetProcessMemoryInfo.WorkingSetSize"
+              },
+              {
+                "available": true,
+                "rssBytes": 18882560,
+                "source": "GetProcessMemoryInfo.WorkingSetSize"
+              },
+              {
+                "available": true,
+                "rssBytes": 19320832,
+                "source": "GetProcessMemoryInfo.WorkingSetSize"
+              },
+              {
+                "available": true,
+                "rssBytes": 17326080,
+                "source": "GetProcessMemoryInfo.WorkingSetSize"
+              }
+            ],
+            "afterWarmup": {
+              "available": true,
+              "rssBytes": 16179200,
+              "source": "GetProcessMemoryInfo.WorkingSetSize"
+            }
+          },
+          "d20-full": {
+            "afterBatches": [
+              {
+                "available": true,
+                "rssBytes": 18243584,
+                "source": "GetProcessMemoryInfo.WorkingSetSize"
+              },
+              {
+                "available": true,
+                "rssBytes": 17133568,
+                "source": "GetProcessMemoryInfo.WorkingSetSize"
+              },
+              {
+                "available": true,
+                "rssBytes": 17920000,
+                "source": "GetProcessMemoryInfo.WorkingSetSize"
+              },
+              {
+                "available": true,
+                "rssBytes": 18747392,
+                "source": "GetProcessMemoryInfo.WorkingSetSize"
+              },
+              {
+                "available": true,
+                "rssBytes": 18464768,
+                "source": "GetProcessMemoryInfo.WorkingSetSize"
+              }
+            ],
+            "afterWarmup": {
+              "available": true,
+              "rssBytes": 17727488,
+              "source": "GetProcessMemoryInfo.WorkingSetSize"
+            }
+          },
+          "d20-summary": {
+            "afterBatches": [
+              {
+                "available": true,
+                "rssBytes": 18706432,
+                "source": "GetProcessMemoryInfo.WorkingSetSize"
+              },
+              {
+                "available": true,
+                "rssBytes": 19886080,
+                "source": "GetProcessMemoryInfo.WorkingSetSize"
+              },
+              {
+                "available": true,
+                "rssBytes": 19836928,
+                "source": "GetProcessMemoryInfo.WorkingSetSize"
+              },
+              {
+                "available": true,
+                "rssBytes": 19861504,
+                "source": "GetProcessMemoryInfo.WorkingSetSize"
+              },
+              {
+                "available": true,
+                "rssBytes": 19296256,
+                "source": "GetProcessMemoryInfo.WorkingSetSize"
+              }
+            ],
+            "afterWarmup": {
+              "available": true,
+              "rssBytes": 19402752,
+              "source": "GetProcessMemoryInfo.WorkingSetSize"
+            }
+          },
+          "pool-details": {
+            "afterBatches": [
+              {
+                "available": true,
+                "rssBytes": 19083264,
+                "source": "GetProcessMemoryInfo.WorkingSetSize"
+              },
+              {
+                "available": true,
+                "rssBytes": 19640320,
+                "source": "GetProcessMemoryInfo.WorkingSetSize"
+              },
+              {
+                "available": true,
+                "rssBytes": 19910656,
+                "source": "GetProcessMemoryInfo.WorkingSetSize"
+              },
+              {
+                "available": true,
+                "rssBytes": 19333120,
+                "source": "GetProcessMemoryInfo.WorkingSetSize"
+              },
+              {
+                "available": true,
+                "rssBytes": 19394560,
+                "source": "GetProcessMemoryInfo.WorkingSetSize"
+              }
+            ],
+            "afterWarmup": {
+              "available": true,
+              "rssBytes": 18358272,
+              "source": "GetProcessMemoryInfo.WorkingSetSize"
+            }
+          },
+          "pool-full": {
+            "afterBatches": [
+              {
+                "available": true,
+                "rssBytes": 18219008,
+                "source": "GetProcessMemoryInfo.WorkingSetSize"
+              },
+              {
+                "available": true,
+                "rssBytes": 18493440,
+                "source": "GetProcessMemoryInfo.WorkingSetSize"
+              },
+              {
+                "available": true,
+                "rssBytes": 19210240,
+                "source": "GetProcessMemoryInfo.WorkingSetSize"
+              },
+              {
+                "available": true,
+                "rssBytes": 19144704,
+                "source": "GetProcessMemoryInfo.WorkingSetSize"
+              },
+              {
+                "available": true,
+                "rssBytes": 18440192,
+                "source": "GetProcessMemoryInfo.WorkingSetSize"
+              }
+            ],
+            "afterWarmup": {
+              "available": true,
+              "rssBytes": 18722816,
+              "source": "GetProcessMemoryInfo.WorkingSetSize"
+            }
+          },
+          "pool-summary": {
+            "afterBatches": [
+              {
+                "available": true,
+                "rssBytes": 20385792,
+                "source": "GetProcessMemoryInfo.WorkingSetSize"
+              },
+              {
+                "available": true,
+                "rssBytes": 20914176,
+                "source": "GetProcessMemoryInfo.WorkingSetSize"
+              },
+              {
+                "available": true,
+                "rssBytes": 19972096,
+                "source": "GetProcessMemoryInfo.WorkingSetSize"
+              },
+              {
+                "available": true,
+                "rssBytes": 20316160,
+                "source": "GetProcessMemoryInfo.WorkingSetSize"
+              },
+              {
+                "available": true,
+                "rssBytes": 20553728,
+                "source": "GetProcessMemoryInfo.WorkingSetSize"
+              }
+            ],
+            "afterWarmup": {
+              "available": true,
+              "rssBytes": 20598784,
+              "source": "GetProcessMemoryInfo.WorkingSetSize"
+            }
+          }
+        },
+        "runtime": "go1.26.2"
+      },
+      "summary": {
+        "d20-full": {
+          "batchMs": 34.5037,
+          "opsPerSecond": 289823.9898909392,
+          "medianRssMiB": 17.3984375,
+          "maximumRssMiB": 17.87890625
+        },
+        "d20-details": {
+          "batchMs": 26.2738,
+          "opsPerSecond": 380607.2970030981,
+          "medianRssMiB": 17.5703125,
+          "maximumRssMiB": 18.42578125
+        },
+        "d20-summary": {
+          "batchMs": 17.3373,
+          "opsPerSecond": 576791.0805027311,
+          "medianRssMiB": 18.91796875,
+          "maximumRssMiB": 18.96484375
+        },
+        "100d6-full": {
+          "batchMs": 333.624,
+          "opsPerSecond": 29973.862791645686,
+          "medianRssMiB": 18.16796875,
+          "maximumRssMiB": 18.39453125
+        },
+        "100d6-details": {
+          "batchMs": 199.644,
+          "opsPerSecond": 50089.15870249044,
+          "medianRssMiB": 18.265625,
+          "maximumRssMiB": 19.421875
+        },
+        "100d6-summary": {
+          "batchMs": 38.8048,
+          "opsPerSecond": 257700.07834082382,
+          "medianRssMiB": 18.75390625,
+          "maximumRssMiB": 18.8515625
+        },
+        "pool-full": {
+          "batchMs": 225.701,
+          "opsPerSecond": 44306.40537702536,
+          "medianRssMiB": 17.63671875,
+          "maximumRssMiB": 18.3203125
+        },
+        "pool-details": {
+          "batchMs": 119.3117,
+          "opsPerSecond": 83814.07690947325,
+          "medianRssMiB": 18.49609375,
+          "maximumRssMiB": 18.98828125
+        },
+        "pool-summary": {
+          "batchMs": 36.0367,
+          "opsPerSecond": 277494.88715670415,
+          "medianRssMiB": 19.44140625,
+          "maximumRssMiB": 19.9453125
+        }
+      }
+    },
+    {
+      "gc": 500,
+      "memoryLimit": "64MiB",
+      "stage": "selection",
+      "output": {
+        "cases": {
+          "100d6-details": [
+            {
+              "digest": {
+                "count": 10000,
+                "total": 3501322,
+                "weightedTotal": 17516749728,
+                "randomCalls": 1000000
+              },
+              "durationNs": 68575200,
+              "nsPerOp": 6857.52,
+              "opsPerSecond": 145825.31294112158,
+              "requests": 10000,
+              "workers": 6
+            },
+            {
+              "digest": {
+                "count": 10000,
+                "total": 3501322,
+                "weightedTotal": 17516749728,
+                "randomCalls": 1000000
+              },
+              "durationNs": 65327900,
+              "nsPerOp": 6532.79,
+              "opsPerSecond": 153073.9546196954,
+              "requests": 10000,
+              "workers": 6
+            },
+            {
+              "digest": {
+                "count": 10000,
+                "total": 3501322,
+                "weightedTotal": 17516749728,
+                "randomCalls": 1000000
+              },
+              "durationNs": 65779200,
+              "nsPerOp": 6577.92,
+              "opsPerSecond": 152023.74002724266,
+              "requests": 10000,
+              "workers": 6
+            },
+            {
+              "digest": {
+                "count": 10000,
+                "total": 3501322,
+                "weightedTotal": 17516749728,
+                "randomCalls": 1000000
+              },
+              "durationNs": 69761800,
+              "nsPerOp": 6976.18,
+              "opsPerSecond": 143344.92515961456,
+              "requests": 10000,
+              "workers": 6
+            },
+            {
+              "digest": {
+                "count": 10000,
+                "total": 3501322,
+                "weightedTotal": 17516749728,
+                "randomCalls": 1000000
+              },
+              "durationNs": 77521800,
+              "nsPerOp": 7752.18,
+              "opsPerSecond": 128995.97274573088,
+              "requests": 10000,
+              "workers": 6
+            }
+          ],
+          "100d6-full": [
+            {
+              "digest": {
+                "count": 10000,
+                "total": 3501322,
+                "weightedTotal": 17516749728,
+                "randomCalls": 1000000
+              },
+              "durationNs": 129754800,
+              "nsPerOp": 12975.48,
+              "opsPerSecond": 77068.4398573309,
+              "requests": 10000,
+              "workers": 6
+            },
+            {
+              "digest": {
+                "count": 10000,
+                "total": 3501322,
+                "weightedTotal": 17516749728,
+                "randomCalls": 1000000
+              },
+              "durationNs": 139601600,
+              "nsPerOp": 13960.16,
+              "opsPerSecond": 71632.41682043759,
+              "requests": 10000,
+              "workers": 6
+            },
+            {
+              "digest": {
+                "count": 10000,
+                "total": 3501322,
+                "weightedTotal": 17516749728,
+                "randomCalls": 1000000
+              },
+              "durationNs": 124416900,
+              "nsPerOp": 12441.69,
+              "opsPerSecond": 80374.93298739962,
+              "requests": 10000,
+              "workers": 6
+            },
+            {
+              "digest": {
+                "count": 10000,
+                "total": 3501322,
+                "weightedTotal": 17516749728,
+                "randomCalls": 1000000
+              },
+              "durationNs": 130101900,
+              "nsPerOp": 13010.19,
+              "opsPerSecond": 76862.82829074748,
+              "requests": 10000,
+              "workers": 6
+            },
+            {
+              "digest": {
+                "count": 10000,
+                "total": 3501322,
+                "weightedTotal": 17516749728,
+                "randomCalls": 1000000
+              },
+              "durationNs": 116814000,
+              "nsPerOp": 11681.4,
+              "opsPerSecond": 85606.17734175698,
+              "requests": 10000,
+              "workers": 6
+            }
+          ],
+          "100d6-summary": [
+            {
+              "digest": {
+                "count": 10000,
+                "total": 3501322,
+                "weightedTotal": 17516749728,
+                "randomCalls": 1000000
+              },
+              "durationNs": 17507100,
+              "nsPerOp": 1750.71,
+              "opsPerSecond": 571196.8287152069,
+              "requests": 10000,
+              "workers": 6
+            },
+            {
+              "digest": {
+                "count": 10000,
+                "total": 3501322,
+                "weightedTotal": 17516749728,
+                "randomCalls": 1000000
+              },
+              "durationNs": 16411300,
+              "nsPerOp": 1641.13,
+              "opsPerSecond": 609336.2500228501,
+              "requests": 10000,
+              "workers": 6
+            },
+            {
+              "digest": {
+                "count": 10000,
+                "total": 3501322,
+                "weightedTotal": 17516749728,
+                "randomCalls": 1000000
+              },
+              "durationNs": 15833200,
+              "nsPerOp": 1583.32,
+              "opsPerSecond": 631584.2659727661,
+              "requests": 10000,
+              "workers": 6
+            },
+            {
+              "digest": {
+                "count": 10000,
+                "total": 3501322,
+                "weightedTotal": 17516749728,
+                "randomCalls": 1000000
+              },
+              "durationNs": 16450600,
+              "nsPerOp": 1645.06,
+              "opsPerSecond": 607880.5636268586,
+              "requests": 10000,
+              "workers": 6
+            },
+            {
+              "digest": {
+                "count": 10000,
+                "total": 3501322,
+                "weightedTotal": 17516749728,
+                "randomCalls": 1000000
+              },
+              "durationNs": 15740200,
+              "nsPerOp": 1574.02,
+              "opsPerSecond": 635315.9426182641,
+              "requests": 10000,
+              "workers": 6
+            }
+          ],
+          "d20-details": [
+            {
+              "digest": {
+                "count": 10000,
+                "total": 155656,
+                "weightedTotal": 775910358,
+                "randomCalls": 10000
+              },
+              "durationNs": 16287900,
+              "nsPerOp": 1628.79,
+              "opsPerSecond": 613952.6888058006,
+              "requests": 10000,
+              "workers": 6
+            },
+            {
+              "digest": {
+                "count": 10000,
+                "total": 155656,
+                "weightedTotal": 775910358,
+                "randomCalls": 10000
+              },
+              "durationNs": 19705200,
+              "nsPerOp": 1970.52,
+              "opsPerSecond": 507480.2590179242,
+              "requests": 10000,
+              "workers": 6
+            },
+            {
+              "digest": {
+                "count": 10000,
+                "total": 155656,
+                "weightedTotal": 775910358,
+                "randomCalls": 10000
+              },
+              "durationNs": 15814800,
+              "nsPerOp": 1581.48,
+              "opsPerSecond": 632319.0935073475,
+              "requests": 10000,
+              "workers": 6
+            },
+            {
+              "digest": {
+                "count": 10000,
+                "total": 155656,
+                "weightedTotal": 775910358,
+                "randomCalls": 10000
+              },
+              "durationNs": 27297200,
+              "nsPerOp": 2729.72,
+              "opsPerSecond": 366337.93942235835,
+              "requests": 10000,
+              "workers": 6
+            },
+            {
+              "digest": {
+                "count": 10000,
+                "total": 155656,
+                "weightedTotal": 775910358,
+                "randomCalls": 10000
+              },
+              "durationNs": 15350500,
+              "nsPerOp": 1535.05,
+              "opsPerSecond": 651444.5783524966,
+              "requests": 10000,
+              "workers": 6
+            }
+          ],
+          "d20-full": [
+            {
+              "digest": {
+                "count": 10000,
+                "total": 155656,
+                "weightedTotal": 775910358,
+                "randomCalls": 10000
+              },
+              "durationNs": 34188400,
+              "nsPerOp": 3418.84,
+              "opsPerSecond": 292496.87028348795,
+              "requests": 10000,
+              "workers": 6
+            },
+            {
+              "digest": {
+                "count": 10000,
+                "total": 155656,
+                "weightedTotal": 775910358,
+                "randomCalls": 10000
+              },
+              "durationNs": 34050100,
+              "nsPerOp": 3405.01,
+              "opsPerSecond": 293684.8937301212,
+              "requests": 10000,
+              "workers": 6
+            },
+            {
+              "digest": {
+                "count": 10000,
+                "total": 155656,
+                "weightedTotal": 775910358,
+                "randomCalls": 10000
+              },
+              "durationNs": 22757000,
+              "nsPerOp": 2275.7,
+              "opsPerSecond": 439425.23179680976,
+              "requests": 10000,
+              "workers": 6
+            },
+            {
+              "digest": {
+                "count": 10000,
+                "total": 155656,
+                "weightedTotal": 775910358,
+                "randomCalls": 10000
+              },
+              "durationNs": 27945600,
+              "nsPerOp": 2794.56,
+              "opsPerSecond": 357838.0854231077,
+              "requests": 10000,
+              "workers": 6
+            },
+            {
+              "digest": {
+                "count": 10000,
+                "total": 155656,
+                "weightedTotal": 775910358,
+                "randomCalls": 10000
+              },
+              "durationNs": 19094000,
+              "nsPerOp": 1909.4,
+              "opsPerSecond": 523724.7302817639,
+              "requests": 10000,
+              "workers": 6
+            }
+          ],
+          "d20-summary": [
+            {
+              "digest": {
+                "count": 10000,
+                "total": 155656,
+                "weightedTotal": 775910358,
+                "randomCalls": 10000
+              },
+              "durationNs": 10104100,
+              "nsPerOp": 1010.41,
+              "opsPerSecond": 989697.2516107323,
+              "requests": 10000,
+              "workers": 6
+            },
+            {
+              "digest": {
+                "count": 10000,
+                "total": 155656,
+                "weightedTotal": 775910358,
+                "randomCalls": 10000
+              },
+              "durationNs": 12807400,
+              "nsPerOp": 1280.74,
+              "opsPerSecond": 780798.6008089073,
+              "requests": 10000,
+              "workers": 6
+            },
+            {
+              "digest": {
+                "count": 10000,
+                "total": 155656,
+                "weightedTotal": 775910358,
+                "randomCalls": 10000
+              },
+              "durationNs": 11772000,
+              "nsPerOp": 1177.2,
+              "opsPerSecond": 849473.3265375467,
+              "requests": 10000,
+              "workers": 6
+            },
+            {
+              "digest": {
+                "count": 10000,
+                "total": 155656,
+                "weightedTotal": 775910358,
+                "randomCalls": 10000
+              },
+              "durationNs": 9511700,
+              "nsPerOp": 951.17,
+              "opsPerSecond": 1051336.7747090426,
+              "requests": 10000,
+              "workers": 6
+            },
+            {
+              "digest": {
+                "count": 10000,
+                "total": 155656,
+                "weightedTotal": 775910358,
+                "randomCalls": 10000
+              },
+              "durationNs": 10881600,
+              "nsPerOp": 1088.16,
+              "opsPerSecond": 918982.502573151,
+              "requests": 10000,
+              "workers": 6
+            }
+          ],
+          "pool-details": [
+            {
+              "digest": {
+                "count": 10000,
+                "total": 529368,
+                "weightedTotal": 2646650494,
+                "randomCalls": 278519
+              },
+              "durationNs": 37170800,
+              "nsPerOp": 3717.08,
+              "opsPerSecond": 269028.3771132179,
+              "requests": 10000,
+              "workers": 6
+            },
+            {
+              "digest": {
+                "count": 10000,
+                "total": 529368,
+                "weightedTotal": 2646650494,
+                "randomCalls": 278519
+              },
+              "durationNs": 41792900,
+              "nsPerOp": 4179.29,
+              "opsPerSecond": 239275.09218072926,
+              "requests": 10000,
+              "workers": 6
+            },
+            {
+              "digest": {
+                "count": 10000,
+                "total": 529368,
+                "weightedTotal": 2646650494,
+                "randomCalls": 278519
+              },
+              "durationNs": 43901800,
+              "nsPerOp": 4390.18,
+              "opsPerSecond": 227781.0932581352,
+              "requests": 10000,
+              "workers": 6
+            },
+            {
+              "digest": {
+                "count": 10000,
+                "total": 529368,
+                "weightedTotal": 2646650494,
+                "randomCalls": 278519
+              },
+              "durationNs": 43102700,
+              "nsPerOp": 4310.27,
+              "opsPerSecond": 232004.02758991896,
+              "requests": 10000,
+              "workers": 6
+            },
+            {
+              "digest": {
+                "count": 10000,
+                "total": 529368,
+                "weightedTotal": 2646650494,
+                "randomCalls": 278519
+              },
+              "durationNs": 41229300,
+              "nsPerOp": 4122.93,
+              "opsPerSecond": 242545.95639508797,
+              "requests": 10000,
+              "workers": 6
+            }
+          ],
+          "pool-full": [
+            {
+              "digest": {
+                "count": 10000,
+                "total": 529368,
+                "weightedTotal": 2646650494,
+                "randomCalls": 278519
+              },
+              "durationNs": 76623700,
+              "nsPerOp": 7662.37,
+              "opsPerSecond": 130507.92378859283,
+              "requests": 10000,
+              "workers": 6
+            },
+            {
+              "digest": {
+                "count": 10000,
+                "total": 529368,
+                "weightedTotal": 2646650494,
+                "randomCalls": 278519
+              },
+              "durationNs": 69119000,
+              "nsPerOp": 6911.9,
+              "opsPerSecond": 144678.01906856292,
+              "requests": 10000,
+              "workers": 6
+            },
+            {
+              "digest": {
+                "count": 10000,
+                "total": 529368,
+                "weightedTotal": 2646650494,
+                "randomCalls": 278519
+              },
+              "durationNs": 86133800,
+              "nsPerOp": 8613.38,
+              "opsPerSecond": 116098.44219110267,
+              "requests": 10000,
+              "workers": 6
+            },
+            {
+              "digest": {
+                "count": 10000,
+                "total": 529368,
+                "weightedTotal": 2646650494,
+                "randomCalls": 278519
+              },
+              "durationNs": 64019500,
+              "nsPerOp": 6401.95,
+              "opsPerSecond": 156202.4070790931,
+              "requests": 10000,
+              "workers": 6
+            },
+            {
+              "digest": {
+                "count": 10000,
+                "total": 529368,
+                "weightedTotal": 2646650494,
+                "randomCalls": 278519
+              },
+              "durationNs": 65580800,
+              "nsPerOp": 6558.08,
+              "opsPerSecond": 152483.65375231774,
+              "requests": 10000,
+              "workers": 6
+            }
+          ],
+          "pool-summary": [
+            {
+              "digest": {
+                "count": 10000,
+                "total": 529368,
+                "weightedTotal": 2646650494,
+                "randomCalls": 278519
+              },
+              "durationNs": 17384000,
+              "nsPerOp": 1738.4,
+              "opsPerSecond": 575241.6014726185,
+              "requests": 10000,
+              "workers": 6
+            },
+            {
+              "digest": {
+                "count": 10000,
+                "total": 529368,
+                "weightedTotal": 2646650494,
+                "randomCalls": 278519
+              },
+              "durationNs": 18923000,
+              "nsPerOp": 1892.3,
+              "opsPerSecond": 528457.4327537917,
+              "requests": 10000,
+              "workers": 6
+            },
+            {
+              "digest": {
+                "count": 10000,
+                "total": 529368,
+                "weightedTotal": 2646650494,
+                "randomCalls": 278519
+              },
+              "durationNs": 17817900,
+              "nsPerOp": 1781.79,
+              "opsPerSecond": 561233.3664461019,
+              "requests": 10000,
+              "workers": 6
+            },
+            {
+              "digest": {
+                "count": 10000,
+                "total": 529368,
+                "weightedTotal": 2646650494,
+                "randomCalls": 278519
+              },
+              "durationNs": 17897300,
+              "nsPerOp": 1789.73,
+              "opsPerSecond": 558743.4976225464,
+              "requests": 10000,
+              "workers": 6
+            },
+            {
+              "digest": {
+                "count": 10000,
+                "total": 529368,
+                "weightedTotal": 2646650494,
+                "randomCalls": 278519
+              },
+              "durationNs": 18091600,
+              "nsPerOp": 1809.16,
+              "opsPerSecond": 552742.709323664,
+              "requests": 10000,
+              "workers": 6
+            }
+          ]
+        },
+        "gomaxprocs": 12,
+        "memory": {
+          "100d6-details": {
+            "afterBatches": [
+              {
+                "available": true,
+                "rssBytes": 39399424,
+                "source": "GetProcessMemoryInfo.WorkingSetSize"
+              },
+              {
+                "available": true,
+                "rssBytes": 42086400,
+                "source": "GetProcessMemoryInfo.WorkingSetSize"
+              },
+              {
+                "available": true,
+                "rssBytes": 42115072,
+                "source": "GetProcessMemoryInfo.WorkingSetSize"
+              },
+              {
+                "available": true,
+                "rssBytes": 49766400,
+                "source": "GetProcessMemoryInfo.WorkingSetSize"
+              },
+              {
+                "available": true,
+                "rssBytes": 52379648,
+                "source": "GetProcessMemoryInfo.WorkingSetSize"
+              }
+            ],
+            "afterWarmup": {
+              "available": true,
+              "rssBytes": 40120320,
+              "source": "GetProcessMemoryInfo.WorkingSetSize"
+            }
+          },
+          "100d6-full": {
+            "afterBatches": [
+              {
+                "available": true,
+                "rssBytes": 42430464,
+                "source": "GetProcessMemoryInfo.WorkingSetSize"
+              },
+              {
+                "available": true,
+                "rssBytes": 48291840,
+                "source": "GetProcessMemoryInfo.WorkingSetSize"
+              },
+              {
+                "available": true,
+                "rssBytes": 48308224,
+                "source": "GetProcessMemoryInfo.WorkingSetSize"
+              },
+              {
+                "available": true,
+                "rssBytes": 47181824,
+                "source": "GetProcessMemoryInfo.WorkingSetSize"
+              },
+              {
+                "available": true,
+                "rssBytes": 46788608,
+                "source": "GetProcessMemoryInfo.WorkingSetSize"
+              }
+            ],
+            "afterWarmup": {
+              "available": true,
+              "rssBytes": 56205312,
+              "source": "GetProcessMemoryInfo.WorkingSetSize"
+            }
+          },
+          "100d6-summary": {
+            "afterBatches": [
+              {
+                "available": true,
+                "rssBytes": 45228032,
+                "source": "GetProcessMemoryInfo.WorkingSetSize"
+              },
+              {
+                "available": true,
+                "rssBytes": 43655168,
+                "source": "GetProcessMemoryInfo.WorkingSetSize"
+              },
+              {
+                "available": true,
+                "rssBytes": 42278912,
+                "source": "GetProcessMemoryInfo.WorkingSetSize"
+              },
+              {
+                "available": true,
+                "rssBytes": 40452096,
+                "source": "GetProcessMemoryInfo.WorkingSetSize"
+              },
+              {
+                "available": true,
+                "rssBytes": 39206912,
+                "source": "GetProcessMemoryInfo.WorkingSetSize"
+              }
+            ],
+            "afterWarmup": {
+              "available": true,
+              "rssBytes": 47583232,
+              "source": "GetProcessMemoryInfo.WorkingSetSize"
+            }
+          },
+          "d20-details": {
+            "afterBatches": [
+              {
+                "available": true,
+                "rssBytes": 46751744,
+                "source": "GetProcessMemoryInfo.WorkingSetSize"
+              },
+              {
+                "available": true,
+                "rssBytes": 44007424,
+                "source": "GetProcessMemoryInfo.WorkingSetSize"
+              },
+              {
+                "available": true,
+                "rssBytes": 41127936,
+                "source": "GetProcessMemoryInfo.WorkingSetSize"
+              },
+              {
+                "available": true,
+                "rssBytes": 37933056,
+                "source": "GetProcessMemoryInfo.WorkingSetSize"
+              },
+              {
+                "available": true,
+                "rssBytes": 36507648,
+                "source": "GetProcessMemoryInfo.WorkingSetSize"
+              }
+            ],
+            "afterWarmup": {
+              "available": true,
+              "rssBytes": 49426432,
+              "source": "GetProcessMemoryInfo.WorkingSetSize"
+            }
+          },
+          "d20-full": {
+            "afterBatches": [
+              {
+                "available": true,
+                "rssBytes": 52375552,
+                "source": "GetProcessMemoryInfo.WorkingSetSize"
+              },
+              {
+                "available": true,
+                "rssBytes": 67805184,
+                "source": "GetProcessMemoryInfo.WorkingSetSize"
+              },
+              {
+                "available": true,
+                "rssBytes": 65892352,
+                "source": "GetProcessMemoryInfo.WorkingSetSize"
+              },
+              {
+                "available": true,
+                "rssBytes": 61898752,
+                "source": "GetProcessMemoryInfo.WorkingSetSize"
+              },
+              {
+                "available": true,
+                "rssBytes": 57995264,
+                "source": "GetProcessMemoryInfo.WorkingSetSize"
+              }
+            ],
+            "afterWarmup": {
+              "available": true,
+              "rssBytes": 46202880,
+              "source": "GetProcessMemoryInfo.WorkingSetSize"
+            }
+          },
+          "d20-summary": {
+            "afterBatches": [
+              {
+                "available": true,
+                "rssBytes": 37163008,
+                "source": "GetProcessMemoryInfo.WorkingSetSize"
+              },
+              {
+                "available": true,
+                "rssBytes": 36274176,
+                "source": "GetProcessMemoryInfo.WorkingSetSize"
+              },
+              {
+                "available": true,
+                "rssBytes": 36356096,
+                "source": "GetProcessMemoryInfo.WorkingSetSize"
+              },
+              {
+                "available": true,
+                "rssBytes": 36540416,
+                "source": "GetProcessMemoryInfo.WorkingSetSize"
+              },
+              {
+                "available": true,
+                "rssBytes": 35205120,
+                "source": "GetProcessMemoryInfo.WorkingSetSize"
+              }
+            ],
+            "afterWarmup": {
+              "available": true,
+              "rssBytes": 32907264,
+              "source": "GetProcessMemoryInfo.WorkingSetSize"
+            }
+          },
+          "pool-details": {
+            "afterBatches": [
+              {
+                "available": true,
+                "rssBytes": 52441088,
+                "source": "GetProcessMemoryInfo.WorkingSetSize"
+              },
+              {
+                "available": true,
+                "rssBytes": 42946560,
+                "source": "GetProcessMemoryInfo.WorkingSetSize"
+              },
+              {
+                "available": true,
+                "rssBytes": 37752832,
+                "source": "GetProcessMemoryInfo.WorkingSetSize"
+              },
+              {
+                "available": true,
+                "rssBytes": 36356096,
+                "source": "GetProcessMemoryInfo.WorkingSetSize"
+              },
+              {
+                "available": true,
+                "rssBytes": 37388288,
+                "source": "GetProcessMemoryInfo.WorkingSetSize"
+              }
+            ],
+            "afterWarmup": {
+              "available": true,
+              "rssBytes": 52736000,
+              "source": "GetProcessMemoryInfo.WorkingSetSize"
+            }
+          },
+          "pool-full": {
+            "afterBatches": [
+              {
+                "available": true,
+                "rssBytes": 43057152,
+                "source": "GetProcessMemoryInfo.WorkingSetSize"
+              },
+              {
+                "available": true,
+                "rssBytes": 49438720,
+                "source": "GetProcessMemoryInfo.WorkingSetSize"
+              },
+              {
+                "available": true,
+                "rssBytes": 51511296,
+                "source": "GetProcessMemoryInfo.WorkingSetSize"
+              },
+              {
+                "available": true,
+                "rssBytes": 39370752,
+                "source": "GetProcessMemoryInfo.WorkingSetSize"
+              },
+              {
+                "available": true,
+                "rssBytes": 41447424,
+                "source": "GetProcessMemoryInfo.WorkingSetSize"
+              }
+            ],
+            "afterWarmup": {
+              "available": true,
+              "rssBytes": 41271296,
+              "source": "GetProcessMemoryInfo.WorkingSetSize"
+            }
+          },
+          "pool-summary": {
+            "afterBatches": [
+              {
+                "available": true,
+                "rssBytes": 38473728,
+                "source": "GetProcessMemoryInfo.WorkingSetSize"
+              },
+              {
+                "available": true,
+                "rssBytes": 38281216,
+                "source": "GetProcessMemoryInfo.WorkingSetSize"
+              },
+              {
+                "available": true,
+                "rssBytes": 38318080,
+                "source": "GetProcessMemoryInfo.WorkingSetSize"
+              },
+              {
+                "available": true,
+                "rssBytes": 37072896,
+                "source": "GetProcessMemoryInfo.WorkingSetSize"
+              },
+              {
+                "available": true,
+                "rssBytes": 36720640,
+                "source": "GetProcessMemoryInfo.WorkingSetSize"
+              }
+            ],
+            "afterWarmup": {
+              "available": true,
+              "rssBytes": 37195776,
+              "source": "GetProcessMemoryInfo.WorkingSetSize"
+            }
+          }
+        },
+        "runtime": "go1.26.2"
+      },
+      "summary": {
+        "d20-full": {
+          "batchMs": 27.9456,
+          "opsPerSecond": 357838.0854231077,
+          "medianRssMiB": 59.03125,
+          "maximumRssMiB": 64.6640625
+        },
+        "d20-details": {
+          "batchMs": 16.2879,
+          "opsPerSecond": 613952.6888058006,
+          "medianRssMiB": 39.22265625,
+          "maximumRssMiB": 44.5859375
+        },
+        "d20-summary": {
+          "batchMs": 10.8816,
+          "opsPerSecond": 918982.502573151,
+          "medianRssMiB": 34.671875,
+          "maximumRssMiB": 35.44140625
+        },
+        "100d6-full": {
+          "batchMs": 129.7548,
+          "opsPerSecond": 77068.4398573309,
+          "medianRssMiB": 44.99609375,
+          "maximumRssMiB": 46.0703125
+        },
+        "100d6-details": {
+          "batchMs": 68.5752,
+          "opsPerSecond": 145825.31294112158,
+          "medianRssMiB": 40.1640625,
+          "maximumRssMiB": 49.953125
+        },
+        "100d6-summary": {
+          "batchMs": 16.4113,
+          "opsPerSecond": 609336.2500228501,
+          "medianRssMiB": 40.3203125,
+          "maximumRssMiB": 43.1328125
+        },
+        "pool-full": {
+          "batchMs": 69.119,
+          "opsPerSecond": 144678.01906856292,
+          "medianRssMiB": 41.0625,
+          "maximumRssMiB": 49.125
+        },
+        "pool-details": {
+          "batchMs": 41.7929,
+          "opsPerSecond": 239275.09218072926,
+          "medianRssMiB": 36.00390625,
+          "maximumRssMiB": 50.01171875
+        },
+        "pool-summary": {
+          "batchMs": 17.8973,
+          "opsPerSecond": 558743.4976225464,
+          "medianRssMiB": 36.5078125,
+          "maximumRssMiB": 36.69140625
+        }
+      }
+    },
+    {
+      "gc": 500,
+      "memoryLimit": "96MiB",
+      "stage": "selection",
+      "output": {
+        "cases": {
+          "100d6-details": [
+            {
+              "digest": {
+                "count": 10000,
+                "total": 3501322,
+                "weightedTotal": 17516749728,
+                "randomCalls": 1000000
+              },
+              "durationNs": 83188600,
+              "nsPerOp": 8318.86,
+              "opsPerSecond": 120208.77860668409,
+              "requests": 10000,
+              "workers": 6
+            },
+            {
+              "digest": {
+                "count": 10000,
+                "total": 3501322,
+                "weightedTotal": 17516749728,
+                "randomCalls": 1000000
+              },
+              "durationNs": 73687300,
+              "nsPerOp": 7368.73,
+              "opsPerSecond": 135708.59564673968,
+              "requests": 10000,
+              "workers": 6
+            },
+            {
+              "digest": {
+                "count": 10000,
+                "total": 3501322,
+                "weightedTotal": 17516749728,
+                "randomCalls": 1000000
+              },
+              "durationNs": 73545900,
+              "nsPerOp": 7354.59,
+              "opsPerSecond": 135969.5101970334,
+              "requests": 10000,
+              "workers": 6
+            },
+            {
+              "digest": {
+                "count": 10000,
+                "total": 3501322,
+                "weightedTotal": 17516749728,
+                "randomCalls": 1000000
+              },
+              "durationNs": 68343100,
+              "nsPerOp": 6834.31,
+              "opsPerSecond": 146320.5502823255,
+              "requests": 10000,
+              "workers": 6
+            },
+            {
+              "digest": {
+                "count": 10000,
+                "total": 3501322,
+                "weightedTotal": 17516749728,
+                "randomCalls": 1000000
+              },
+              "durationNs": 83536300,
+              "nsPerOp": 8353.63,
+              "opsPerSecond": 119708.43812809521,
+              "requests": 10000,
+              "workers": 6
+            }
+          ],
+          "100d6-full": [
+            {
+              "digest": {
+                "count": 10000,
+                "total": 3501322,
+                "weightedTotal": 17516749728,
+                "randomCalls": 1000000
+              },
+              "durationNs": 125196200,
+              "nsPerOp": 12519.62,
+              "opsPerSecond": 79874.62878266274,
+              "requests": 10000,
+              "workers": 6
+            },
+            {
+              "digest": {
+                "count": 10000,
+                "total": 3501322,
+                "weightedTotal": 17516749728,
+                "randomCalls": 1000000
+              },
+              "durationNs": 116207000,
+              "nsPerOp": 11620.7,
+              "opsPerSecond": 86053.33585756453,
+              "requests": 10000,
+              "workers": 6
+            },
+            {
+              "digest": {
+                "count": 10000,
+                "total": 3501322,
+                "weightedTotal": 17516749728,
+                "randomCalls": 1000000
+              },
+              "durationNs": 127078700,
+              "nsPerOp": 12707.87,
+              "opsPerSecond": 78691.39360097326,
+              "requests": 10000,
+              "workers": 6
+            },
+            {
+              "digest": {
+                "count": 10000,
+                "total": 3501322,
+                "weightedTotal": 17516749728,
+                "randomCalls": 1000000
+              },
+              "durationNs": 113539600,
+              "nsPerOp": 11353.96,
+              "opsPerSecond": 88074.99762197507,
+              "requests": 10000,
+              "workers": 6
+            },
+            {
+              "digest": {
+                "count": 10000,
+                "total": 3501322,
+                "weightedTotal": 17516749728,
+                "randomCalls": 1000000
+              },
+              "durationNs": 124297500,
+              "nsPerOp": 12429.75,
+              "opsPerSecond": 80452.14103260323,
+              "requests": 10000,
+              "workers": 6
+            }
+          ],
+          "100d6-summary": [
+            {
+              "digest": {
+                "count": 10000,
+                "total": 3501322,
+                "weightedTotal": 17516749728,
+                "randomCalls": 1000000
+              },
+              "durationNs": 19360200,
+              "nsPerOp": 1936.02,
+              "opsPerSecond": 516523.5896323385,
+              "requests": 10000,
+              "workers": 6
+            },
+            {
+              "digest": {
+                "count": 10000,
+                "total": 3501322,
+                "weightedTotal": 17516749728,
+                "randomCalls": 1000000
+              },
+              "durationNs": 18824100,
+              "nsPerOp": 1882.41,
+              "opsPerSecond": 531233.896972498,
+              "requests": 10000,
+              "workers": 6
+            },
+            {
+              "digest": {
+                "count": 10000,
+                "total": 3501322,
+                "weightedTotal": 17516749728,
+                "randomCalls": 1000000
+              },
+              "durationNs": 20320800,
+              "nsPerOp": 2032.08,
+              "opsPerSecond": 492106.6099759852,
+              "requests": 10000,
+              "workers": 6
+            },
+            {
+              "digest": {
+                "count": 10000,
+                "total": 3501322,
+                "weightedTotal": 17516749728,
+                "randomCalls": 1000000
+              },
+              "durationNs": 17931200,
+              "nsPerOp": 1793.12,
+              "opsPerSecond": 557687.1598108325,
+              "requests": 10000,
+              "workers": 6
+            },
+            {
+              "digest": {
+                "count": 10000,
+                "total": 3501322,
+                "weightedTotal": 17516749728,
+                "randomCalls": 1000000
+              },
+              "durationNs": 19301400,
+              "nsPerOp": 1930.14,
+              "opsPerSecond": 518097.1328504668,
+              "requests": 10000,
+              "workers": 6
+            }
+          ],
+          "d20-details": [
+            {
+              "digest": {
+                "count": 10000,
+                "total": 155656,
+                "weightedTotal": 775910358,
+                "randomCalls": 10000
+              },
+              "durationNs": 17606000,
+              "nsPerOp": 1760.6,
+              "opsPerSecond": 567988.1858457344,
+              "requests": 10000,
+              "workers": 6
+            },
+            {
+              "digest": {
+                "count": 10000,
+                "total": 155656,
+                "weightedTotal": 775910358,
+                "randomCalls": 10000
+              },
+              "durationNs": 13322400,
+              "nsPerOp": 1332.24,
+              "opsPerSecond": 750615.5047138653,
+              "requests": 10000,
+              "workers": 6
+            },
+            {
+              "digest": {
+                "count": 10000,
+                "total": 155656,
+                "weightedTotal": 775910358,
+                "randomCalls": 10000
+              },
+              "durationNs": 18743600,
+              "nsPerOp": 1874.36,
+              "opsPerSecond": 533515.4399368318,
+              "requests": 10000,
+              "workers": 6
+            },
+            {
+              "digest": {
+                "count": 10000,
+                "total": 155656,
+                "weightedTotal": 775910358,
+                "randomCalls": 10000
+              },
+              "durationNs": 21294700,
+              "nsPerOp": 2129.47,
+              "opsPerSecond": 469600.4170051703,
+              "requests": 10000,
+              "workers": 6
+            },
+            {
+              "digest": {
+                "count": 10000,
+                "total": 155656,
+                "weightedTotal": 775910358,
+                "randomCalls": 10000
+              },
+              "durationNs": 14966200,
+              "nsPerOp": 1496.62,
+              "opsPerSecond": 668172.2815410725,
+              "requests": 10000,
+              "workers": 6
+            }
+          ],
+          "d20-full": [
+            {
+              "digest": {
+                "count": 10000,
+                "total": 155656,
+                "weightedTotal": 775910358,
+                "randomCalls": 10000
+              },
+              "durationNs": 20441200,
+              "nsPerOp": 2044.12,
+              "opsPerSecond": 489208.06997632235,
+              "requests": 10000,
+              "workers": 6
+            },
+            {
+              "digest": {
+                "count": 10000,
+                "total": 155656,
+                "weightedTotal": 775910358,
+                "randomCalls": 10000
+              },
+              "durationNs": 32012300,
+              "nsPerOp": 3201.23,
+              "opsPerSecond": 312379.92896480416,
+              "requests": 10000,
+              "workers": 6
+            },
+            {
+              "digest": {
+                "count": 10000,
+                "total": 155656,
+                "weightedTotal": 775910358,
+                "randomCalls": 10000
+              },
+              "durationNs": 20766800,
+              "nsPerOp": 2076.68,
+              "opsPerSecond": 481537.83924340777,
+              "requests": 10000,
+              "workers": 6
+            },
+            {
+              "digest": {
+                "count": 10000,
+                "total": 155656,
+                "weightedTotal": 775910358,
+                "randomCalls": 10000
+              },
+              "durationNs": 17042700,
+              "nsPerOp": 1704.27,
+              "opsPerSecond": 586761.487323018,
+              "requests": 10000,
+              "workers": 6
+            },
+            {
+              "digest": {
+                "count": 10000,
+                "total": 155656,
+                "weightedTotal": 775910358,
+                "randomCalls": 10000
+              },
+              "durationNs": 19724400,
+              "nsPerOp": 1972.44,
+              "opsPerSecond": 506986.2708117864,
+              "requests": 10000,
+              "workers": 6
+            }
+          ],
+          "d20-summary": [
+            {
+              "digest": {
+                "count": 10000,
+                "total": 155656,
+                "weightedTotal": 775910358,
+                "randomCalls": 10000
+              },
+              "durationNs": 11167000,
+              "nsPerOp": 1116.7,
+              "opsPerSecond": 895495.6568460643,
+              "requests": 10000,
+              "workers": 6
+            },
+            {
+              "digest": {
+                "count": 10000,
+                "total": 155656,
+                "weightedTotal": 775910358,
+                "randomCalls": 10000
+              },
+              "durationNs": 11023500,
+              "nsPerOp": 1102.35,
+              "opsPerSecond": 907152.9006213997,
+              "requests": 10000,
+              "workers": 6
+            },
+            {
+              "digest": {
+                "count": 10000,
+                "total": 155656,
+                "weightedTotal": 775910358,
+                "randomCalls": 10000
+              },
+              "durationNs": 11178400,
+              "nsPerOp": 1117.84,
+              "opsPerSecond": 894582.4089315108,
+              "requests": 10000,
+              "workers": 6
+            },
+            {
+              "digest": {
+                "count": 10000,
+                "total": 155656,
+                "weightedTotal": 775910358,
+                "randomCalls": 10000
+              },
+              "durationNs": 11992700,
+              "nsPerOp": 1199.27,
+              "opsPerSecond": 833840.5863567003,
+              "requests": 10000,
+              "workers": 6
+            },
+            {
+              "digest": {
+                "count": 10000,
+                "total": 155656,
+                "weightedTotal": 775910358,
+                "randomCalls": 10000
+              },
+              "durationNs": 11068900,
+              "nsPerOp": 1106.89,
+              "opsPerSecond": 903432.138694902,
+              "requests": 10000,
+              "workers": 6
+            }
+          ],
+          "pool-details": [
+            {
+              "digest": {
+                "count": 10000,
+                "total": 529368,
+                "weightedTotal": 2646650494,
+                "randomCalls": 278519
+              },
+              "durationNs": 45829500,
+              "nsPerOp": 4582.95,
+              "opsPerSecond": 218200.06764202096,
+              "requests": 10000,
+              "workers": 6
+            },
+            {
+              "digest": {
+                "count": 10000,
+                "total": 529368,
+                "weightedTotal": 2646650494,
+                "randomCalls": 278519
+              },
+              "durationNs": 46558700,
+              "nsPerOp": 4655.87,
+              "opsPerSecond": 214782.62924007757,
+              "requests": 10000,
+              "workers": 6
+            },
+            {
+              "digest": {
+                "count": 10000,
+                "total": 529368,
+                "weightedTotal": 2646650494,
+                "randomCalls": 278519
+              },
+              "durationNs": 39238500,
+              "nsPerOp": 3923.85,
+              "opsPerSecond": 254851.74000025485,
+              "requests": 10000,
+              "workers": 6
+            },
+            {
+              "digest": {
+                "count": 10000,
+                "total": 529368,
+                "weightedTotal": 2646650494,
+                "randomCalls": 278519
+              },
+              "durationNs": 46307600,
+              "nsPerOp": 4630.76,
+              "opsPerSecond": 215947.2743135036,
+              "requests": 10000,
+              "workers": 6
+            },
+            {
+              "digest": {
+                "count": 10000,
+                "total": 529368,
+                "weightedTotal": 2646650494,
+                "randomCalls": 278519
+              },
+              "durationNs": 51855100,
+              "nsPerOp": 5185.51,
+              "opsPerSecond": 192845.0624914425,
+              "requests": 10000,
+              "workers": 6
+            }
+          ],
+          "pool-full": [
+            {
+              "digest": {
+                "count": 10000,
+                "total": 529368,
+                "weightedTotal": 2646650494,
+                "randomCalls": 278519
+              },
+              "durationNs": 70645600,
+              "nsPerOp": 7064.56,
+              "opsPerSecond": 141551.63237342454,
+              "requests": 10000,
+              "workers": 6
+            },
+            {
+              "digest": {
+                "count": 10000,
+                "total": 529368,
+                "weightedTotal": 2646650494,
+                "randomCalls": 278519
+              },
+              "durationNs": 78391500,
+              "nsPerOp": 7839.15,
+              "opsPerSecond": 127564.8507810158,
+              "requests": 10000,
+              "workers": 6
+            },
+            {
+              "digest": {
+                "count": 10000,
+                "total": 529368,
+                "weightedTotal": 2646650494,
+                "randomCalls": 278519
+              },
+              "durationNs": 75850200,
+              "nsPerOp": 7585.02,
+              "opsPerSecond": 131838.80859905446,
+              "requests": 10000,
+              "workers": 6
+            },
+            {
+              "digest": {
+                "count": 10000,
+                "total": 529368,
+                "weightedTotal": 2646650494,
+                "randomCalls": 278519
+              },
+              "durationNs": 75222900,
+              "nsPerOp": 7522.29,
+              "opsPerSecond": 132938.2408814337,
+              "requests": 10000,
+              "workers": 6
+            },
+            {
+              "digest": {
+                "count": 10000,
+                "total": 529368,
+                "weightedTotal": 2646650494,
+                "randomCalls": 278519
+              },
+              "durationNs": 71884000,
+              "nsPerOp": 7188.4,
+              "opsPerSecond": 139113.0154137221,
+              "requests": 10000,
+              "workers": 6
+            }
+          ],
+          "pool-summary": [
+            {
+              "digest": {
+                "count": 10000,
+                "total": 529368,
+                "weightedTotal": 2646650494,
+                "randomCalls": 278519
+              },
+              "durationNs": 19908500,
+              "nsPerOp": 1990.85,
+              "opsPerSecond": 502298.01341135695,
+              "requests": 10000,
+              "workers": 6
+            },
+            {
+              "digest": {
+                "count": 10000,
+                "total": 529368,
+                "weightedTotal": 2646650494,
+                "randomCalls": 278519
+              },
+              "durationNs": 18982200,
+              "nsPerOp": 1898.22,
+              "opsPerSecond": 526809.3266323187,
+              "requests": 10000,
+              "workers": 6
+            },
+            {
+              "digest": {
+                "count": 10000,
+                "total": 529368,
+                "weightedTotal": 2646650494,
+                "randomCalls": 278519
+              },
+              "durationNs": 17816300,
+              "nsPerOp": 1781.63,
+              "opsPerSecond": 561283.7682347064,
+              "requests": 10000,
+              "workers": 6
+            },
+            {
+              "digest": {
+                "count": 10000,
+                "total": 529368,
+                "weightedTotal": 2646650494,
+                "randomCalls": 278519
+              },
+              "durationNs": 18941800,
+              "nsPerOp": 1894.18,
+              "opsPerSecond": 527932.9314003949,
+              "requests": 10000,
+              "workers": 6
+            },
+            {
+              "digest": {
+                "count": 10000,
+                "total": 529368,
+                "weightedTotal": 2646650494,
+                "randomCalls": 278519
+              },
+              "durationNs": 23936500,
+              "nsPerOp": 2393.65,
+              "opsPerSecond": 417772.0218076995,
+              "requests": 10000,
+              "workers": 6
+            }
+          ]
+        },
+        "gomaxprocs": 12,
+        "memory": {
+          "100d6-details": {
+            "afterBatches": [
+              {
+                "available": true,
+                "rssBytes": 42655744,
+                "source": "GetProcessMemoryInfo.WorkingSetSize"
+              },
+              {
+                "available": true,
+                "rssBytes": 37703680,
+                "source": "GetProcessMemoryInfo.WorkingSetSize"
+              },
+              {
+                "available": true,
+                "rssBytes": 44732416,
+                "source": "GetProcessMemoryInfo.WorkingSetSize"
+              },
+              {
+                "available": true,
+                "rssBytes": 38068224,
+                "source": "GetProcessMemoryInfo.WorkingSetSize"
+              },
+              {
+                "available": true,
+                "rssBytes": 40411136,
+                "source": "GetProcessMemoryInfo.WorkingSetSize"
+              }
+            ],
+            "afterWarmup": {
+              "available": true,
+              "rssBytes": 52613120,
+              "source": "GetProcessMemoryInfo.WorkingSetSize"
+            }
+          },
+          "100d6-full": {
+            "afterBatches": [
+              {
+                "available": true,
+                "rssBytes": 68431872,
+                "source": "GetProcessMemoryInfo.WorkingSetSize"
+              },
+              {
+                "available": true,
+                "rssBytes": 57671680,
+                "source": "GetProcessMemoryInfo.WorkingSetSize"
+              },
+              {
+                "available": true,
+                "rssBytes": 79400960,
+                "source": "GetProcessMemoryInfo.WorkingSetSize"
+              },
+              {
+                "available": true,
+                "rssBytes": 60813312,
+                "source": "GetProcessMemoryInfo.WorkingSetSize"
+              },
+              {
+                "available": true,
+                "rssBytes": 87883776,
+                "source": "GetProcessMemoryInfo.WorkingSetSize"
+              }
+            ],
+            "afterWarmup": {
+              "available": true,
+              "rssBytes": 47833088,
+              "source": "GetProcessMemoryInfo.WorkingSetSize"
+            }
+          },
+          "100d6-summary": {
+            "afterBatches": [
+              {
+                "available": true,
+                "rssBytes": 36712448,
+                "source": "GetProcessMemoryInfo.WorkingSetSize"
+              },
+              {
+                "available": true,
+                "rssBytes": 39776256,
+                "source": "GetProcessMemoryInfo.WorkingSetSize"
+              },
+              {
+                "available": true,
+                "rssBytes": 39104512,
+                "source": "GetProcessMemoryInfo.WorkingSetSize"
+              },
+              {
+                "available": true,
+                "rssBytes": 37449728,
+                "source": "GetProcessMemoryInfo.WorkingSetSize"
+              },
+              {
+                "available": true,
+                "rssBytes": 37974016,
+                "source": "GetProcessMemoryInfo.WorkingSetSize"
+              }
+            ],
+            "afterWarmup": {
+              "available": true,
+              "rssBytes": 35090432,
+              "source": "GetProcessMemoryInfo.WorkingSetSize"
+            }
+          },
+          "d20-details": {
+            "afterBatches": [
+              {
+                "available": true,
+                "rssBytes": 44376064,
+                "source": "GetProcessMemoryInfo.WorkingSetSize"
+              },
+              {
+                "available": true,
+                "rssBytes": 41697280,
+                "source": "GetProcessMemoryInfo.WorkingSetSize"
+              },
+              {
+                "available": true,
+                "rssBytes": 38694912,
+                "source": "GetProcessMemoryInfo.WorkingSetSize"
+              },
+              {
+                "available": true,
+                "rssBytes": 35561472,
+                "source": "GetProcessMemoryInfo.WorkingSetSize"
+              },
+              {
+                "available": true,
+                "rssBytes": 35139584,
+                "source": "GetProcessMemoryInfo.WorkingSetSize"
+              }
+            ],
+            "afterWarmup": {
+              "available": true,
+              "rssBytes": 46854144,
+              "source": "GetProcessMemoryInfo.WorkingSetSize"
+            }
+          },
+          "d20-full": {
+            "afterBatches": [
+              {
+                "available": true,
+                "rssBytes": 35758080,
+                "source": "GetProcessMemoryInfo.WorkingSetSize"
+              },
+              {
+                "available": true,
+                "rssBytes": 66285568,
+                "source": "GetProcessMemoryInfo.WorkingSetSize"
+              },
+              {
+                "available": true,
+                "rssBytes": 63197184,
+                "source": "GetProcessMemoryInfo.WorkingSetSize"
+              },
+              {
+                "available": true,
+                "rssBytes": 59740160,
+                "source": "GetProcessMemoryInfo.WorkingSetSize"
+              },
+              {
+                "available": true,
+                "rssBytes": 55365632,
+                "source": "GetProcessMemoryInfo.WorkingSetSize"
+              }
+            ],
+            "afterWarmup": {
+              "available": true,
+              "rssBytes": 33660928,
+              "source": "GetProcessMemoryInfo.WorkingSetSize"
+            }
+          },
+          "d20-summary": {
+            "afterBatches": [
+              {
+                "available": true,
+                "rssBytes": 36274176,
+                "source": "GetProcessMemoryInfo.WorkingSetSize"
+              },
+              {
+                "available": true,
+                "rssBytes": 36466688,
+                "source": "GetProcessMemoryInfo.WorkingSetSize"
+              },
+              {
+                "available": true,
+                "rssBytes": 35491840,
+                "source": "GetProcessMemoryInfo.WorkingSetSize"
+              },
+              {
+                "available": true,
+                "rssBytes": 36347904,
+                "source": "GetProcessMemoryInfo.WorkingSetSize"
+              },
+              {
+                "available": true,
+                "rssBytes": 36622336,
+                "source": "GetProcessMemoryInfo.WorkingSetSize"
+              }
+            ],
+            "afterWarmup": {
+              "available": true,
+              "rssBytes": 36294656,
+              "source": "GetProcessMemoryInfo.WorkingSetSize"
+            }
+          },
+          "pool-details": {
+            "afterBatches": [
+              {
+                "available": true,
+                "rssBytes": 47296512,
+                "source": "GetProcessMemoryInfo.WorkingSetSize"
+              },
+              {
+                "available": true,
+                "rssBytes": 39260160,
+                "source": "GetProcessMemoryInfo.WorkingSetSize"
+              },
+              {
+                "available": true,
+                "rssBytes": 36601856,
+                "source": "GetProcessMemoryInfo.WorkingSetSize"
+              },
+              {
+                "available": true,
+                "rssBytes": 34693120,
+                "source": "GetProcessMemoryInfo.WorkingSetSize"
+              },
+              {
+                "available": true,
+                "rssBytes": 43057152,
+                "source": "GetProcessMemoryInfo.WorkingSetSize"
+              }
+            ],
+            "afterWarmup": {
+              "available": true,
+              "rssBytes": 34955264,
+              "source": "GetProcessMemoryInfo.WorkingSetSize"
+            }
+          },
+          "pool-full": {
+            "afterBatches": [
+              {
+                "available": true,
+                "rssBytes": 44695552,
+                "source": "GetProcessMemoryInfo.WorkingSetSize"
+              },
+              {
+                "available": true,
+                "rssBytes": 55271424,
+                "source": "GetProcessMemoryInfo.WorkingSetSize"
+              },
+              {
+                "available": true,
+                "rssBytes": 43761664,
+                "source": "GetProcessMemoryInfo.WorkingSetSize"
+              },
+              {
+                "available": true,
+                "rssBytes": 50266112,
+                "source": "GetProcessMemoryInfo.WorkingSetSize"
+              },
+              {
+                "available": true,
+                "rssBytes": 42979328,
+                "source": "GetProcessMemoryInfo.WorkingSetSize"
+              }
+            ],
+            "afterWarmup": {
+              "available": true,
+              "rssBytes": 59084800,
+              "source": "GetProcessMemoryInfo.WorkingSetSize"
+            }
+          },
+          "pool-summary": {
+            "afterBatches": [
+              {
+                "available": true,
+                "rssBytes": 54501376,
+                "source": "GetProcessMemoryInfo.WorkingSetSize"
+              },
+              {
+                "available": true,
+                "rssBytes": 57233408,
+                "source": "GetProcessMemoryInfo.WorkingSetSize"
+              },
+              {
+                "available": true,
+                "rssBytes": 54874112,
+                "source": "GetProcessMemoryInfo.WorkingSetSize"
+              },
+              {
+                "available": true,
+                "rssBytes": 53043200,
+                "source": "GetProcessMemoryInfo.WorkingSetSize"
+              },
+              {
+                "available": true,
+                "rssBytes": 50487296,
+                "source": "GetProcessMemoryInfo.WorkingSetSize"
+              }
+            ],
+            "afterWarmup": {
+              "available": true,
+              "rssBytes": 43999232,
+              "source": "GetProcessMemoryInfo.WorkingSetSize"
+            }
+          }
+        },
+        "runtime": "go1.26.2"
+      },
+      "summary": {
+        "d20-full": {
+          "batchMs": 20.4412,
+          "opsPerSecond": 489208.06997632235,
+          "medianRssMiB": 56.97265625,
+          "maximumRssMiB": 63.21484375
+        },
+        "d20-details": {
+          "batchMs": 17.606,
+          "opsPerSecond": 567988.1858457344,
+          "medianRssMiB": 36.90234375,
+          "maximumRssMiB": 42.3203125
+        },
+        "d20-summary": {
+          "batchMs": 11.167,
+          "opsPerSecond": 895495.6568460643,
+          "medianRssMiB": 34.6640625,
+          "maximumRssMiB": 34.92578125
+        },
+        "100d6-full": {
+          "batchMs": 124.2975,
+          "opsPerSecond": 80452.14103260323,
+          "medianRssMiB": 65.26171875,
+          "maximumRssMiB": 83.8125
+        },
+        "100d6-details": {
+          "batchMs": 73.6873,
+          "opsPerSecond": 135708.59564673968,
+          "medianRssMiB": 38.5390625,
+          "maximumRssMiB": 42.66015625
+        },
+        "100d6-summary": {
+          "batchMs": 19.3014,
+          "opsPerSecond": 518097.1328504668,
+          "medianRssMiB": 36.21484375,
+          "maximumRssMiB": 37.93359375
+        },
+        "pool-full": {
+          "batchMs": 75.2229,
+          "opsPerSecond": 132938.2408814337,
+          "medianRssMiB": 42.625,
+          "maximumRssMiB": 52.7109375
+        },
+        "pool-details": {
+          "batchMs": 46.3076,
+          "opsPerSecond": 215947.2743135036,
+          "medianRssMiB": 37.44140625,
+          "maximumRssMiB": 45.10546875
+        },
+        "pool-summary": {
+          "batchMs": 18.9822,
+          "opsPerSecond": 526809.3266323187,
+          "medianRssMiB": 51.9765625,
+          "maximumRssMiB": 54.58203125
+        }
+      }
+    },
+    {
+      "gc": 500,
+      "memoryLimit": "96MiB",
+      "stage": "confirmation",
+      "output": {
+        "cases": {
+          "100d6-details": [
+            {
+              "digest": {
+                "count": 10000,
+                "total": 3501322,
+                "weightedTotal": 17516749728,
+                "randomCalls": 1000000
+              },
+              "durationNs": 74391400,
+              "nsPerOp": 7439.14,
+              "opsPerSecond": 134424.14042483404,
+              "requests": 10000,
+              "workers": 6
+            },
+            {
+              "digest": {
+                "count": 10000,
+                "total": 3501322,
+                "weightedTotal": 17516749728,
+                "randomCalls": 1000000
+              },
+              "durationNs": 72972900,
+              "nsPerOp": 7297.29,
+              "opsPerSecond": 137037.1740742111,
+              "requests": 10000,
+              "workers": 6
+            },
+            {
+              "digest": {
+                "count": 10000,
+                "total": 3501322,
+                "weightedTotal": 17516749728,
+                "randomCalls": 1000000
+              },
+              "durationNs": 82785400,
+              "nsPerOp": 8278.54,
+              "opsPerSecond": 120794.24632845889,
+              "requests": 10000,
+              "workers": 6
+            },
+            {
+              "digest": {
+                "count": 10000,
+                "total": 3501322,
+                "weightedTotal": 17516749728,
+                "randomCalls": 1000000
+              },
+              "durationNs": 71916300,
+              "nsPerOp": 7191.63,
+              "opsPerSecond": 139050.53513598448,
+              "requests": 10000,
+              "workers": 6
+            },
+            {
+              "digest": {
+                "count": 10000,
+                "total": 3501322,
+                "weightedTotal": 17516749728,
+                "randomCalls": 1000000
+              },
+              "durationNs": 71340700,
+              "nsPerOp": 7134.07,
+              "opsPerSecond": 140172.44013585514,
+              "requests": 10000,
+              "workers": 6
+            }
+          ],
+          "100d6-full": [
+            {
+              "digest": {
+                "count": 10000,
+                "total": 3501322,
+                "weightedTotal": 17516749728,
+                "randomCalls": 1000000
+              },
+              "durationNs": 135149400,
+              "nsPerOp": 13514.94,
+              "opsPerSecond": 73992.18938448858,
+              "requests": 10000,
+              "workers": 6
+            },
+            {
+              "digest": {
+                "count": 10000,
+                "total": 3501322,
+                "weightedTotal": 17516749728,
+                "randomCalls": 1000000
+              },
+              "durationNs": 135858300,
+              "nsPerOp": 13585.83,
+              "opsPerSecond": 73606.10282919777,
+              "requests": 10000,
+              "workers": 6
+            },
+            {
+              "digest": {
+                "count": 10000,
+                "total": 3501322,
+                "weightedTotal": 17516749728,
+                "randomCalls": 1000000
+              },
+              "durationNs": 116508200,
+              "nsPerOp": 11650.82,
+              "opsPerSecond": 85830.86855689128,
+              "requests": 10000,
+              "workers": 6
+            },
+            {
+              "digest": {
+                "count": 10000,
+                "total": 3501322,
+                "weightedTotal": 17516749728,
+                "randomCalls": 1000000
+              },
+              "durationNs": 144208900,
+              "nsPerOp": 14420.89,
+              "opsPerSecond": 69343.84770981541,
+              "requests": 10000,
+              "workers": 6
+            },
+            {
+              "digest": {
+                "count": 10000,
+                "total": 3501322,
+                "weightedTotal": 17516749728,
+                "randomCalls": 1000000
+              },
+              "durationNs": 140553300,
+              "nsPerOp": 14055.33,
+              "opsPerSecond": 71147.38679205682,
+              "requests": 10000,
+              "workers": 6
+            }
+          ],
+          "100d6-summary": [
+            {
+              "digest": {
+                "count": 10000,
+                "total": 3501322,
+                "weightedTotal": 17516749728,
+                "randomCalls": 1000000
+              },
+              "durationNs": 16340800,
+              "nsPerOp": 1634.08,
+              "opsPerSecond": 611965.1424654851,
+              "requests": 10000,
+              "workers": 6
+            },
+            {
+              "digest": {
+                "count": 10000,
+                "total": 3501322,
+                "weightedTotal": 17516749728,
+                "randomCalls": 1000000
+              },
+              "durationNs": 25964400,
+              "nsPerOp": 2596.44,
+              "opsPerSecond": 385142.7338971823,
+              "requests": 10000,
+              "workers": 6
+            },
+            {
+              "digest": {
+                "count": 10000,
+                "total": 3501322,
+                "weightedTotal": 17516749728,
+                "randomCalls": 1000000
+              },
+              "durationNs": 26130600,
+              "nsPerOp": 2613.06,
+              "opsPerSecond": 382693.0877974482,
+              "requests": 10000,
+              "workers": 6
+            },
+            {
+              "digest": {
+                "count": 10000,
+                "total": 3501322,
+                "weightedTotal": 17516749728,
+                "randomCalls": 1000000
+              },
+              "durationNs": 22483300,
+              "nsPerOp": 2248.33,
+              "opsPerSecond": 444774.5660112172,
+              "requests": 10000,
+              "workers": 6
+            },
+            {
+              "digest": {
+                "count": 10000,
+                "total": 3501322,
+                "weightedTotal": 17516749728,
+                "randomCalls": 1000000
+              },
+              "durationNs": 15957500,
+              "nsPerOp": 1595.75,
+              "opsPerSecond": 626664.5777847407,
+              "requests": 10000,
+              "workers": 6
+            }
+          ],
+          "d20-details": [
+            {
+              "digest": {
+                "count": 10000,
+                "total": 155656,
+                "weightedTotal": 775910358,
+                "randomCalls": 10000
+              },
+              "durationNs": 17299600,
+              "nsPerOp": 1729.96,
+              "opsPerSecond": 578048.0473536961,
+              "requests": 10000,
+              "workers": 6
+            },
+            {
+              "digest": {
+                "count": 10000,
+                "total": 155656,
+                "weightedTotal": 775910358,
+                "randomCalls": 10000
+              },
+              "durationNs": 18333800,
+              "nsPerOp": 1833.38,
+              "opsPerSecond": 545440.6615104342,
+              "requests": 10000,
+              "workers": 6
+            },
+            {
+              "digest": {
+                "count": 10000,
+                "total": 155656,
+                "weightedTotal": 775910358,
+                "randomCalls": 10000
+              },
+              "durationNs": 18190000,
+              "nsPerOp": 1819,
+              "opsPerSecond": 549752.6113249038,
+              "requests": 10000,
+              "workers": 6
+            },
+            {
+              "digest": {
+                "count": 10000,
+                "total": 155656,
+                "weightedTotal": 775910358,
+                "randomCalls": 10000
+              },
+              "durationNs": 19964800,
+              "nsPerOp": 1996.48,
+              "opsPerSecond": 500881.551530694,
+              "requests": 10000,
+              "workers": 6
+            },
+            {
+              "digest": {
+                "count": 10000,
+                "total": 155656,
+                "weightedTotal": 775910358,
+                "randomCalls": 10000
+              },
+              "durationNs": 19515500,
+              "nsPerOp": 1951.55,
+              "opsPerSecond": 512413.21001255413,
+              "requests": 10000,
+              "workers": 6
+            }
+          ],
+          "d20-full": [
+            {
+              "digest": {
+                "count": 10000,
+                "total": 155656,
+                "weightedTotal": 775910358,
+                "randomCalls": 10000
+              },
+              "durationNs": 20003000,
+              "nsPerOp": 2000.3,
+              "opsPerSecond": 499925.0112483128,
+              "requests": 10000,
+              "workers": 6
+            },
+            {
+              "digest": {
+                "count": 10000,
+                "total": 155656,
+                "weightedTotal": 775910358,
+                "randomCalls": 10000
+              },
+              "durationNs": 22160200,
+              "nsPerOp": 2216.02,
+              "opsPerSecond": 451259.46516728186,
+              "requests": 10000,
+              "workers": 6
+            },
+            {
+              "digest": {
+                "count": 10000,
+                "total": 155656,
+                "weightedTotal": 775910358,
+                "randomCalls": 10000
+              },
+              "durationNs": 21862400,
+              "nsPerOp": 2186.24,
+              "opsPerSecond": 457406.3231850117,
+              "requests": 10000,
+              "workers": 6
+            },
+            {
+              "digest": {
+                "count": 10000,
+                "total": 155656,
+                "weightedTotal": 775910358,
+                "randomCalls": 10000
+              },
+              "durationNs": 21586900,
+              "nsPerOp": 2158.69,
+              "opsPerSecond": 463243.91181688895,
+              "requests": 10000,
+              "workers": 6
+            },
+            {
+              "digest": {
+                "count": 10000,
+                "total": 155656,
+                "weightedTotal": 775910358,
+                "randomCalls": 10000
+              },
+              "durationNs": 23110400,
+              "nsPerOp": 2311.04,
+              "opsPerSecond": 432705.6217114373,
+              "requests": 10000,
+              "workers": 6
+            }
+          ],
+          "d20-summary": [
+            {
+              "digest": {
+                "count": 10000,
+                "total": 155656,
+                "weightedTotal": 775910358,
+                "randomCalls": 10000
+              },
+              "durationNs": 12235500,
+              "nsPerOp": 1223.55,
+              "opsPerSecond": 817293.9397654367,
+              "requests": 10000,
+              "workers": 6
+            },
+            {
+              "digest": {
+                "count": 10000,
+                "total": 155656,
+                "weightedTotal": 775910358,
+                "randomCalls": 10000
+              },
+              "durationNs": 12771800,
+              "nsPerOp": 1277.18,
+              "opsPerSecond": 782974.9917787625,
+              "requests": 10000,
+              "workers": 6
+            },
+            {
+              "digest": {
+                "count": 10000,
+                "total": 155656,
+                "weightedTotal": 775910358,
+                "randomCalls": 10000
+              },
+              "durationNs": 11575100,
+              "nsPerOp": 1157.51,
+              "opsPerSecond": 863923.4218278892,
+              "requests": 10000,
+              "workers": 6
+            },
+            {
+              "digest": {
+                "count": 10000,
+                "total": 155656,
+                "weightedTotal": 775910358,
+                "randomCalls": 10000
+              },
+              "durationNs": 12638300,
+              "nsPerOp": 1263.83,
+              "opsPerSecond": 791245.6580394515,
+              "requests": 10000,
+              "workers": 6
+            },
+            {
+              "digest": {
+                "count": 10000,
+                "total": 155656,
+                "weightedTotal": 775910358,
+                "randomCalls": 10000
+              },
+              "durationNs": 11143900,
+              "nsPerOp": 1114.39,
+              "opsPerSecond": 897351.9145003096,
+              "requests": 10000,
+              "workers": 6
+            }
+          ],
+          "pool-details": [
+            {
+              "digest": {
+                "count": 10000,
+                "total": 529368,
+                "weightedTotal": 2646650494,
+                "randomCalls": 278519
+              },
+              "durationNs": 38862800,
+              "nsPerOp": 3886.28,
+              "opsPerSecond": 257315.47906995894,
+              "requests": 10000,
+              "workers": 6
+            },
+            {
+              "digest": {
+                "count": 10000,
+                "total": 529368,
+                "weightedTotal": 2646650494,
+                "randomCalls": 278519
+              },
+              "durationNs": 41877600,
+              "nsPerOp": 4187.76,
+              "opsPerSecond": 238791.14371406194,
+              "requests": 10000,
+              "workers": 6
+            },
+            {
+              "digest": {
+                "count": 10000,
+                "total": 529368,
+                "weightedTotal": 2646650494,
+                "randomCalls": 278519
+              },
+              "durationNs": 43174600,
+              "nsPerOp": 4317.46,
+              "opsPerSecond": 231617.6640895341,
+              "requests": 10000,
+              "workers": 6
+            },
+            {
+              "digest": {
+                "count": 10000,
+                "total": 529368,
+                "weightedTotal": 2646650494,
+                "randomCalls": 278519
+              },
+              "durationNs": 42881300,
+              "nsPerOp": 4288.13,
+              "opsPerSecond": 233201.88520403998,
+              "requests": 10000,
+              "workers": 6
+            },
+            {
+              "digest": {
+                "count": 10000,
+                "total": 529368,
+                "weightedTotal": 2646650494,
+                "randomCalls": 278519
+              },
+              "durationNs": 43397200,
+              "nsPerOp": 4339.72,
+              "opsPerSecond": 230429.61297042205,
+              "requests": 10000,
+              "workers": 6
+            }
+          ],
+          "pool-full": [
+            {
+              "digest": {
+                "count": 10000,
+                "total": 529368,
+                "weightedTotal": 2646650494,
+                "randomCalls": 278519
+              },
+              "durationNs": 69723000,
+              "nsPerOp": 6972.3,
+              "opsPerSecond": 143424.6948639617,
+              "requests": 10000,
+              "workers": 6
+            },
+            {
+              "digest": {
+                "count": 10000,
+                "total": 529368,
+                "weightedTotal": 2646650494,
+                "randomCalls": 278519
+              },
+              "durationNs": 71325100,
+              "nsPerOp": 7132.51,
+              "opsPerSecond": 140203.0982080642,
+              "requests": 10000,
+              "workers": 6
+            },
+            {
+              "digest": {
+                "count": 10000,
+                "total": 529368,
+                "weightedTotal": 2646650494,
+                "randomCalls": 278519
+              },
+              "durationNs": 82679500,
+              "nsPerOp": 8267.95,
+              "opsPerSecond": 120948.96558397185,
+              "requests": 10000,
+              "workers": 6
+            },
+            {
+              "digest": {
+                "count": 10000,
+                "total": 529368,
+                "weightedTotal": 2646650494,
+                "randomCalls": 278519
+              },
+              "durationNs": 67290500,
+              "nsPerOp": 6729.05,
+              "opsPerSecond": 148609.38765501816,
+              "requests": 10000,
+              "workers": 6
+            },
+            {
+              "digest": {
+                "count": 10000,
+                "total": 529368,
+                "weightedTotal": 2646650494,
+                "randomCalls": 278519
+              },
+              "durationNs": 64801100,
+              "nsPerOp": 6480.11,
+              "opsPerSecond": 154318.36805239416,
+              "requests": 10000,
+              "workers": 6
+            }
+          ],
+          "pool-summary": [
+            {
+              "digest": {
+                "count": 10000,
+                "total": 529368,
+                "weightedTotal": 2646650494,
+                "randomCalls": 278519
+              },
+              "durationNs": 18593700,
+              "nsPerOp": 1859.37,
+              "opsPerSecond": 537816.5722798583,
+              "requests": 10000,
+              "workers": 6
+            },
+            {
+              "digest": {
+                "count": 10000,
+                "total": 529368,
+                "weightedTotal": 2646650494,
+                "randomCalls": 278519
+              },
+              "durationNs": 17492600,
+              "nsPerOp": 1749.26,
+              "opsPerSecond": 571670.3063009501,
+              "requests": 10000,
+              "workers": 6
+            },
+            {
+              "digest": {
+                "count": 10000,
+                "total": 529368,
+                "weightedTotal": 2646650494,
+                "randomCalls": 278519
+              },
+              "durationNs": 17735600,
+              "nsPerOp": 1773.56,
+              "opsPerSecond": 563837.7049550058,
+              "requests": 10000,
+              "workers": 6
+            },
+            {
+              "digest": {
+                "count": 10000,
+                "total": 529368,
+                "weightedTotal": 2646650494,
+                "randomCalls": 278519
+              },
+              "durationNs": 19013800,
+              "nsPerOp": 1901.38,
+              "opsPerSecond": 525933.7954538283,
+              "requests": 10000,
+              "workers": 6
+            },
+            {
+              "digest": {
+                "count": 10000,
+                "total": 529368,
+                "weightedTotal": 2646650494,
+                "randomCalls": 278519
+              },
+              "durationNs": 18339200,
+              "nsPerOp": 1833.92,
+              "opsPerSecond": 545280.0558366777,
+              "requests": 10000,
+              "workers": 6
+            }
+          ]
+        },
+        "gomaxprocs": 12,
+        "memory": {
+          "100d6-details": {
+            "afterBatches": [
+              {
+                "available": true,
+                "rssBytes": 40722432,
+                "source": "GetProcessMemoryInfo.WorkingSetSize"
+              },
+              {
+                "available": true,
+                "rssBytes": 47456256,
+                "source": "GetProcessMemoryInfo.WorkingSetSize"
+              },
+              {
+                "available": true,
+                "rssBytes": 77283328,
+                "source": "GetProcessMemoryInfo.WorkingSetSize"
+              },
+              {
+                "available": true,
+                "rssBytes": 82251776,
+                "source": "GetProcessMemoryInfo.WorkingSetSize"
+              },
+              {
+                "available": true,
+                "rssBytes": 64593920,
+                "source": "GetProcessMemoryInfo.WorkingSetSize"
+              }
+            ],
+            "afterWarmup": {
+              "available": true,
+              "rssBytes": 42975232,
+              "source": "GetProcessMemoryInfo.WorkingSetSize"
+            }
+          },
+          "100d6-full": {
+            "afterBatches": [
+              {
+                "available": true,
+                "rssBytes": 46243840,
+                "source": "GetProcessMemoryInfo.WorkingSetSize"
+              },
+              {
+                "available": true,
+                "rssBytes": 53977088,
+                "source": "GetProcessMemoryInfo.WorkingSetSize"
+              },
+              {
+                "available": true,
+                "rssBytes": 41578496,
+                "source": "GetProcessMemoryInfo.WorkingSetSize"
+              },
+              {
+                "available": true,
+                "rssBytes": 74125312,
+                "source": "GetProcessMemoryInfo.WorkingSetSize"
+              },
+              {
+                "available": true,
+                "rssBytes": 78110720,
+                "source": "GetProcessMemoryInfo.WorkingSetSize"
+              }
+            ],
+            "afterWarmup": {
+              "available": true,
+              "rssBytes": 46878720,
+              "source": "GetProcessMemoryInfo.WorkingSetSize"
+            }
+          },
+          "100d6-summary": {
+            "afterBatches": [
+              {
+                "available": true,
+                "rssBytes": 56995840,
+                "source": "GetProcessMemoryInfo.WorkingSetSize"
+              },
+              {
+                "available": true,
+                "rssBytes": 55160832,
+                "source": "GetProcessMemoryInfo.WorkingSetSize"
+              },
+              {
+                "available": true,
+                "rssBytes": 55959552,
+                "source": "GetProcessMemoryInfo.WorkingSetSize"
+              },
+              {
+                "available": true,
+                "rssBytes": 80547840,
+                "source": "GetProcessMemoryInfo.WorkingSetSize"
+              },
+              {
+                "available": true,
+                "rssBytes": 78917632,
+                "source": "GetProcessMemoryInfo.WorkingSetSize"
+              }
+            ],
+            "afterWarmup": {
+              "available": true,
+              "rssBytes": 58695680,
+              "source": "GetProcessMemoryInfo.WorkingSetSize"
+            }
+          },
+          "d20-details": {
+            "afterBatches": [
+              {
+                "available": true,
+                "rssBytes": 81420288,
+                "source": "GetProcessMemoryInfo.WorkingSetSize"
+              },
+              {
+                "available": true,
+                "rssBytes": 79601664,
+                "source": "GetProcessMemoryInfo.WorkingSetSize"
+              },
+              {
+                "available": true,
+                "rssBytes": 77783040,
+                "source": "GetProcessMemoryInfo.WorkingSetSize"
+              },
+              {
+                "available": true,
+                "rssBytes": 75108352,
+                "source": "GetProcessMemoryInfo.WorkingSetSize"
+              },
+              {
+                "available": true,
+                "rssBytes": 72630272,
+                "source": "GetProcessMemoryInfo.WorkingSetSize"
+              }
+            ],
+            "afterWarmup": {
+              "available": true,
+              "rssBytes": 82735104,
+              "source": "GetProcessMemoryInfo.WorkingSetSize"
+            }
+          },
+          "d20-full": {
+            "afterBatches": [
+              {
+                "available": true,
+                "rssBytes": 80498688,
+                "source": "GetProcessMemoryInfo.WorkingSetSize"
+              },
+              {
+                "available": true,
+                "rssBytes": 76464128,
+                "source": "GetProcessMemoryInfo.WorkingSetSize"
+              },
+              {
+                "available": true,
+                "rssBytes": 72835072,
+                "source": "GetProcessMemoryInfo.WorkingSetSize"
+              },
+              {
+                "available": true,
+                "rssBytes": 69050368,
+                "source": "GetProcessMemoryInfo.WorkingSetSize"
+              },
+              {
+                "available": true,
+                "rssBytes": 64724992,
+                "source": "GetProcessMemoryInfo.WorkingSetSize"
+              }
+            ],
+            "afterWarmup": {
+              "available": true,
+              "rssBytes": 83660800,
+              "source": "GetProcessMemoryInfo.WorkingSetSize"
+            }
+          },
+          "d20-summary": {
+            "afterBatches": [
+              {
+                "available": true,
+                "rssBytes": 65880064,
+                "source": "GetProcessMemoryInfo.WorkingSetSize"
+              },
+              {
+                "available": true,
+                "rssBytes": 63528960,
+                "source": "GetProcessMemoryInfo.WorkingSetSize"
+              },
+              {
+                "available": true,
+                "rssBytes": 61890560,
+                "source": "GetProcessMemoryInfo.WorkingSetSize"
+              },
+              {
+                "available": true,
+                "rssBytes": 60055552,
+                "source": "GetProcessMemoryInfo.WorkingSetSize"
+              },
+              {
+                "available": true,
+                "rssBytes": 58228736,
+                "source": "GetProcessMemoryInfo.WorkingSetSize"
+              }
+            ],
+            "afterWarmup": {
+              "available": true,
+              "rssBytes": 67502080,
+              "source": "GetProcessMemoryInfo.WorkingSetSize"
+            }
+          },
+          "pool-details": {
+            "afterBatches": [
+              {
+                "available": true,
+                "rssBytes": 45985792,
+                "source": "GetProcessMemoryInfo.WorkingSetSize"
+              },
+              {
+                "available": true,
+                "rssBytes": 37457920,
+                "source": "GetProcessMemoryInfo.WorkingSetSize"
+              },
+              {
+                "available": true,
+                "rssBytes": 39018496,
+                "source": "GetProcessMemoryInfo.WorkingSetSize"
+              },
+              {
+                "available": true,
+                "rssBytes": 37285888,
+                "source": "GetProcessMemoryInfo.WorkingSetSize"
+              },
+              {
+                "available": true,
+                "rssBytes": 37904384,
+                "source": "GetProcessMemoryInfo.WorkingSetSize"
+              }
+            ],
+            "afterWarmup": {
+              "available": true,
+              "rssBytes": 55099392,
+              "source": "GetProcessMemoryInfo.WorkingSetSize"
+            }
+          },
+          "pool-full": {
+            "afterBatches": [
+              {
+                "available": true,
+                "rssBytes": 46092288,
+                "source": "GetProcessMemoryInfo.WorkingSetSize"
+              },
+              {
+                "available": true,
+                "rssBytes": 44797952,
+                "source": "GetProcessMemoryInfo.WorkingSetSize"
+              },
+              {
+                "available": true,
+                "rssBytes": 53186560,
+                "source": "GetProcessMemoryInfo.WorkingSetSize"
+              },
+              {
+                "available": true,
+                "rssBytes": 42106880,
+                "source": "GetProcessMemoryInfo.WorkingSetSize"
+              },
+              {
+                "available": true,
+                "rssBytes": 41885696,
+                "source": "GetProcessMemoryInfo.WorkingSetSize"
+              }
+            ],
+            "afterWarmup": {
+              "available": true,
+              "rssBytes": 38174720,
+              "source": "GetProcessMemoryInfo.WorkingSetSize"
+            }
+          },
+          "pool-summary": {
+            "afterBatches": [
+              {
+                "available": true,
+                "rssBytes": 38584320,
+                "source": "GetProcessMemoryInfo.WorkingSetSize"
+              },
+              {
+                "available": true,
+                "rssBytes": 38191104,
+                "source": "GetProcessMemoryInfo.WorkingSetSize"
+              },
+              {
+                "available": true,
+                "rssBytes": 39280640,
+                "source": "GetProcessMemoryInfo.WorkingSetSize"
+              },
+              {
+                "available": true,
+                "rssBytes": 37834752,
+                "source": "GetProcessMemoryInfo.WorkingSetSize"
+              },
+              {
+                "available": true,
+                "rssBytes": 38600704,
+                "source": "GetProcessMemoryInfo.WorkingSetSize"
+              }
+            ],
+            "afterWarmup": {
+              "available": true,
+              "rssBytes": 40157184,
+              "source": "GetProcessMemoryInfo.WorkingSetSize"
+            }
+          }
+        },
+        "runtime": "go1.26.2"
+      },
+      "summary": {
+        "d20-full": {
+          "batchMs": 21.8624,
+          "opsPerSecond": 457406.3231850117,
+          "medianRssMiB": 69.4609375,
+          "maximumRssMiB": 76.76953125
+        },
+        "d20-details": {
+          "batchMs": 18.3338,
+          "opsPerSecond": 545440.6615104342,
+          "medianRssMiB": 74.1796875,
+          "maximumRssMiB": 77.6484375
+        },
+        "d20-summary": {
+          "batchMs": 12.2355,
+          "opsPerSecond": 817293.9397654367,
+          "medianRssMiB": 59.0234375,
+          "maximumRssMiB": 62.828125
+        },
+        "100d6-full": {
+          "batchMs": 135.8583,
+          "opsPerSecond": 73606.10282919777,
+          "medianRssMiB": 51.4765625,
+          "maximumRssMiB": 74.4921875
+        },
+        "100d6-details": {
+          "batchMs": 72.9729,
+          "opsPerSecond": 137037.1740742111,
+          "medianRssMiB": 61.6015625,
+          "maximumRssMiB": 78.44140625
+        },
+        "100d6-summary": {
+          "batchMs": 22.4833,
+          "opsPerSecond": 444774.5660112172,
+          "medianRssMiB": 54.35546875,
+          "maximumRssMiB": 76.81640625
+        },
+        "pool-full": {
+          "batchMs": 69.723,
+          "opsPerSecond": 143424.6948639617,
+          "medianRssMiB": 42.72265625,
+          "maximumRssMiB": 50.72265625
+        },
+        "pool-details": {
+          "batchMs": 42.8813,
+          "opsPerSecond": 233201.88520403998,
+          "medianRssMiB": 36.1484375,
+          "maximumRssMiB": 43.85546875
+        },
+        "pool-summary": {
+          "batchMs": 18.3392,
+          "opsPerSecond": 545280.0558366777,
+          "medianRssMiB": 36.796875,
+          "maximumRssMiB": 37.4609375
+        }
+      }
+    },
+    {
+      "gc": 100,
+      "memoryLimit": null,
+      "stage": "confirmation",
+      "output": {
+        "cases": {
+          "100d6-details": [
+            {
+              "digest": {
+                "count": 10000,
+                "total": 3501322,
+                "weightedTotal": 17516749728,
+                "randomCalls": 1000000
+              },
+              "durationNs": 233375300,
+              "nsPerOp": 23337.53,
+              "opsPerSecond": 42849.43607999647,
+              "requests": 10000,
+              "workers": 6
+            },
+            {
+              "digest": {
+                "count": 10000,
+                "total": 3501322,
+                "weightedTotal": 17516749728,
+                "randomCalls": 1000000
+              },
+              "durationNs": 199606800,
+              "nsPerOp": 19960.68,
+              "opsPerSecond": 50098.49363849328,
+              "requests": 10000,
+              "workers": 6
+            },
+            {
+              "digest": {
+                "count": 10000,
+                "total": 3501322,
+                "weightedTotal": 17516749728,
+                "randomCalls": 1000000
+              },
+              "durationNs": 209881500,
+              "nsPerOp": 20988.15,
+              "opsPerSecond": 47645.933538687306,
+              "requests": 10000,
+              "workers": 6
+            },
+            {
+              "digest": {
+                "count": 10000,
+                "total": 3501322,
+                "weightedTotal": 17516749728,
+                "randomCalls": 1000000
+              },
+              "durationNs": 192839200,
+              "nsPerOp": 19283.92,
+              "opsPerSecond": 51856.67644337873,
+              "requests": 10000,
+              "workers": 6
+            },
+            {
+              "digest": {
+                "count": 10000,
+                "total": 3501322,
+                "weightedTotal": 17516749728,
+                "randomCalls": 1000000
+              },
+              "durationNs": 207668800,
+              "nsPerOp": 20766.88,
+              "opsPerSecond": 48153.598422102885,
+              "requests": 10000,
+              "workers": 6
+            }
+          ],
+          "100d6-full": [
+            {
+              "digest": {
+                "count": 10000,
+                "total": 3501322,
+                "weightedTotal": 17516749728,
+                "randomCalls": 1000000
+              },
+              "durationNs": 316830900,
+              "nsPerOp": 31683.09,
+              "opsPerSecond": 31562.57801874754,
+              "requests": 10000,
+              "workers": 6
+            },
+            {
+              "digest": {
+                "count": 10000,
+                "total": 3501322,
+                "weightedTotal": 17516749728,
+                "randomCalls": 1000000
+              },
+              "durationNs": 303000500,
+              "nsPerOp": 30300.05,
+              "opsPerSecond": 33003.245869231236,
+              "requests": 10000,
+              "workers": 6
+            },
+            {
+              "digest": {
+                "count": 10000,
+                "total": 3501322,
+                "weightedTotal": 17516749728,
+                "randomCalls": 1000000
+              },
+              "durationNs": 324349100,
+              "nsPerOp": 32434.91,
+              "opsPerSecond": 30830.97810353104,
+              "requests": 10000,
+              "workers": 6
+            },
+            {
+              "digest": {
+                "count": 10000,
+                "total": 3501322,
+                "weightedTotal": 17516749728,
+                "randomCalls": 1000000
+              },
+              "durationNs": 319275000,
+              "nsPerOp": 31927.5,
+              "opsPerSecond": 31320.961553519694,
+              "requests": 10000,
+              "workers": 6
+            },
+            {
+              "digest": {
+                "count": 10000,
+                "total": 3501322,
+                "weightedTotal": 17516749728,
+                "randomCalls": 1000000
+              },
+              "durationNs": 326932900,
+              "nsPerOp": 32693.29,
+              "opsPerSecond": 30587.316235227474,
+              "requests": 10000,
+              "workers": 6
+            }
+          ],
+          "100d6-summary": [
+            {
+              "digest": {
+                "count": 10000,
+                "total": 3501322,
+                "weightedTotal": 17516749728,
+                "randomCalls": 1000000
+              },
+              "durationNs": 31766600,
+              "nsPerOp": 3176.66,
+              "opsPerSecond": 314796.0436433235,
+              "requests": 10000,
+              "workers": 6
+            },
+            {
+              "digest": {
+                "count": 10000,
+                "total": 3501322,
+                "weightedTotal": 17516749728,
+                "randomCalls": 1000000
+              },
+              "durationNs": 42207000,
+              "nsPerOp": 4220.7,
+              "opsPerSecond": 236927.52387044803,
+              "requests": 10000,
+              "workers": 6
+            },
+            {
+              "digest": {
+                "count": 10000,
+                "total": 3501322,
+                "weightedTotal": 17516749728,
+                "randomCalls": 1000000
+              },
+              "durationNs": 42971600,
+              "nsPerOp": 4297.16,
+              "opsPerSecond": 232711.8375857543,
+              "requests": 10000,
+              "workers": 6
+            },
+            {
+              "digest": {
+                "count": 10000,
+                "total": 3501322,
+                "weightedTotal": 17516749728,
+                "randomCalls": 1000000
+              },
+              "durationNs": 42322500,
+              "nsPerOp": 4232.25,
+              "opsPerSecond": 236280.938035324,
+              "requests": 10000,
+              "workers": 6
+            },
+            {
+              "digest": {
+                "count": 10000,
+                "total": 3501322,
+                "weightedTotal": 17516749728,
+                "randomCalls": 1000000
+              },
+              "durationNs": 33475000,
+              "nsPerOp": 3347.5,
+              "opsPerSecond": 298730.39581777446,
+              "requests": 10000,
+              "workers": 6
+            }
+          ],
+          "d20-details": [
+            {
+              "digest": {
+                "count": 10000,
+                "total": 155656,
+                "weightedTotal": 775910358,
+                "randomCalls": 10000
+              },
+              "durationNs": 28111000,
+              "nsPerOp": 2811.1,
+              "opsPerSecond": 355732.6313542741,
+              "requests": 10000,
+              "workers": 6
+            },
+            {
+              "digest": {
+                "count": 10000,
+                "total": 155656,
+                "weightedTotal": 775910358,
+                "randomCalls": 10000
+              },
+              "durationNs": 29218700,
+              "nsPerOp": 2921.87,
+              "opsPerSecond": 342246.574967401,
+              "requests": 10000,
+              "workers": 6
+            },
+            {
+              "digest": {
+                "count": 10000,
+                "total": 155656,
+                "weightedTotal": 775910358,
+                "randomCalls": 10000
+              },
+              "durationNs": 26114400,
+              "nsPerOp": 2611.44,
+              "opsPerSecond": 382930.49045737216,
+              "requests": 10000,
+              "workers": 6
+            },
+            {
+              "digest": {
+                "count": 10000,
+                "total": 155656,
+                "weightedTotal": 775910358,
+                "randomCalls": 10000
+              },
+              "durationNs": 24994800,
+              "nsPerOp": 2499.48,
+              "opsPerSecond": 400083.2173092003,
+              "requests": 10000,
+              "workers": 6
+            },
+            {
+              "digest": {
+                "count": 10000,
+                "total": 155656,
+                "weightedTotal": 775910358,
+                "randomCalls": 10000
+              },
+              "durationNs": 27280200,
+              "nsPerOp": 2728.02,
+              "opsPerSecond": 366566.2275203261,
+              "requests": 10000,
+              "workers": 6
+            }
+          ],
+          "d20-full": [
+            {
+              "digest": {
+                "count": 10000,
+                "total": 155656,
+                "weightedTotal": 775910358,
+                "randomCalls": 10000
+              },
+              "durationNs": 36236500,
+              "nsPerOp": 3623.65,
+              "opsPerSecond": 275964.8420791191,
+              "requests": 10000,
+              "workers": 6
+            },
+            {
+              "digest": {
+                "count": 10000,
+                "total": 155656,
+                "weightedTotal": 775910358,
+                "randomCalls": 10000
+              },
+              "durationNs": 37151200,
+              "nsPerOp": 3715.12,
+              "opsPerSecond": 269170.30943818775,
+              "requests": 10000,
+              "workers": 6
+            },
+            {
+              "digest": {
+                "count": 10000,
+                "total": 155656,
+                "weightedTotal": 775910358,
+                "randomCalls": 10000
+              },
+              "durationNs": 36708700,
+              "nsPerOp": 3670.87,
+              "opsPerSecond": 272414.98609321495,
+              "requests": 10000,
+              "workers": 6
+            },
+            {
+              "digest": {
+                "count": 10000,
+                "total": 155656,
+                "weightedTotal": 775910358,
+                "randomCalls": 10000
+              },
+              "durationNs": 35591100,
+              "nsPerOp": 3559.11,
+              "opsPerSecond": 280969.1186841654,
+              "requests": 10000,
+              "workers": 6
+            },
+            {
+              "digest": {
+                "count": 10000,
+                "total": 155656,
+                "weightedTotal": 775910358,
+                "randomCalls": 10000
+              },
+              "durationNs": 36335300,
+              "nsPerOp": 3633.53,
+              "opsPerSecond": 275214.4608686319,
+              "requests": 10000,
+              "workers": 6
+            }
+          ],
+          "d20-summary": [
+            {
+              "digest": {
+                "count": 10000,
+                "total": 155656,
+                "weightedTotal": 775910358,
+                "randomCalls": 10000
+              },
+              "durationNs": 30742300,
+              "nsPerOp": 3074.23,
+              "opsPerSecond": 325284.70543843496,
+              "requests": 10000,
+              "workers": 6
+            },
+            {
+              "digest": {
+                "count": 10000,
+                "total": 155656,
+                "weightedTotal": 775910358,
+                "randomCalls": 10000
+              },
+              "durationNs": 18016900,
+              "nsPerOp": 1801.69,
+              "opsPerSecond": 555034.439886995,
+              "requests": 10000,
+              "workers": 6
+            },
+            {
+              "digest": {
+                "count": 10000,
+                "total": 155656,
+                "weightedTotal": 775910358,
+                "randomCalls": 10000
+              },
+              "durationNs": 19456900,
+              "nsPerOp": 1945.69,
+              "opsPerSecond": 513956.4884436884,
+              "requests": 10000,
+              "workers": 6
+            },
+            {
+              "digest": {
+                "count": 10000,
+                "total": 155656,
+                "weightedTotal": 775910358,
+                "randomCalls": 10000
+              },
+              "durationNs": 18556600,
+              "nsPerOp": 1855.66,
+              "opsPerSecond": 538891.82285548,
+              "requests": 10000,
+              "workers": 6
+            },
+            {
+              "digest": {
+                "count": 10000,
+                "total": 155656,
+                "weightedTotal": 775910358,
+                "randomCalls": 10000
+              },
+              "durationNs": 19259200,
+              "nsPerOp": 1925.92,
+              "opsPerSecond": 519232.36686882115,
+              "requests": 10000,
+              "workers": 6
+            }
+          ],
+          "pool-details": [
+            {
+              "digest": {
+                "count": 10000,
+                "total": 529368,
+                "weightedTotal": 2646650494,
+                "randomCalls": 278519
+              },
+              "durationNs": 97423400,
+              "nsPerOp": 9742.34,
+              "opsPerSecond": 102644.74448643754,
+              "requests": 10000,
+              "workers": 6
+            },
+            {
+              "digest": {
+                "count": 10000,
+                "total": 529368,
+                "weightedTotal": 2646650494,
+                "randomCalls": 278519
+              },
+              "durationNs": 96673100,
+              "nsPerOp": 9667.31,
+              "opsPerSecond": 103441.39165910683,
+              "requests": 10000,
+              "workers": 6
+            },
+            {
+              "digest": {
+                "count": 10000,
+                "total": 529368,
+                "weightedTotal": 2646650494,
+                "randomCalls": 278519
+              },
+              "durationNs": 96810500,
+              "nsPerOp": 9681.05,
+              "opsPerSecond": 103294.58064982621,
+              "requests": 10000,
+              "workers": 6
+            },
+            {
+              "digest": {
+                "count": 10000,
+                "total": 529368,
+                "weightedTotal": 2646650494,
+                "randomCalls": 278519
+              },
+              "durationNs": 99927400,
+              "nsPerOp": 9992.74,
+              "opsPerSecond": 100072.65274589352,
+              "requests": 10000,
+              "workers": 6
+            },
+            {
+              "digest": {
+                "count": 10000,
+                "total": 529368,
+                "weightedTotal": 2646650494,
+                "randomCalls": 278519
+              },
+              "durationNs": 112555000,
+              "nsPerOp": 11255.5,
+              "opsPerSecond": 88845.45333392563,
+              "requests": 10000,
+              "workers": 6
+            }
+          ],
+          "pool-full": [
+            {
+              "digest": {
+                "count": 10000,
+                "total": 529368,
+                "weightedTotal": 2646650494,
+                "randomCalls": 278519
+              },
+              "durationNs": 267098700,
+              "nsPerOp": 26709.87,
+              "opsPerSecond": 37439.34358347682,
+              "requests": 10000,
+              "workers": 6
+            },
+            {
+              "digest": {
+                "count": 10000,
+                "total": 529368,
+                "weightedTotal": 2646650494,
+                "randomCalls": 278519
+              },
+              "durationNs": 263267400,
+              "nsPerOp": 26326.74,
+              "opsPerSecond": 37984.19401718557,
+              "requests": 10000,
+              "workers": 6
+            },
+            {
+              "digest": {
+                "count": 10000,
+                "total": 529368,
+                "weightedTotal": 2646650494,
+                "randomCalls": 278519
+              },
+              "durationNs": 243550300,
+              "nsPerOp": 24355.03,
+              "opsPerSecond": 41059.280156912144,
+              "requests": 10000,
+              "workers": 6
+            },
+            {
+              "digest": {
+                "count": 10000,
+                "total": 529368,
+                "weightedTotal": 2646650494,
+                "randomCalls": 278519
+              },
+              "durationNs": 229594100,
+              "nsPerOp": 22959.41,
+              "opsPerSecond": 43555.126198800404,
+              "requests": 10000,
+              "workers": 6
+            },
+            {
+              "digest": {
+                "count": 10000,
+                "total": 529368,
+                "weightedTotal": 2646650494,
+                "randomCalls": 278519
+              },
+              "durationNs": 217303200,
+              "nsPerOp": 21730.32,
+              "opsPerSecond": 46018.650438649776,
+              "requests": 10000,
+              "workers": 6
+            }
+          ],
+          "pool-summary": [
+            {
+              "digest": {
+                "count": 10000,
+                "total": 529368,
+                "weightedTotal": 2646650494,
+                "randomCalls": 278519
+              },
+              "durationNs": 34109200,
+              "nsPerOp": 3410.92,
+              "opsPerSecond": 293176.0346182262,
+              "requests": 10000,
+              "workers": 6
+            },
+            {
+              "digest": {
+                "count": 10000,
+                "total": 529368,
+                "weightedTotal": 2646650494,
+                "randomCalls": 278519
+              },
+              "durationNs": 27350200,
+              "nsPerOp": 2735.02,
+              "opsPerSecond": 365628.03928307653,
+              "requests": 10000,
+              "workers": 6
+            },
+            {
+              "digest": {
+                "count": 10000,
+                "total": 529368,
+                "weightedTotal": 2646650494,
+                "randomCalls": 278519
+              },
+              "durationNs": 34102100,
+              "nsPerOp": 3410.21,
+              "opsPerSecond": 293237.07337671285,
+              "requests": 10000,
+              "workers": 6
+            },
+            {
+              "digest": {
+                "count": 10000,
+                "total": 529368,
+                "weightedTotal": 2646650494,
+                "randomCalls": 278519
+              },
+              "durationNs": 46742500,
+              "nsPerOp": 4674.25,
+              "opsPerSecond": 213938.0649302027,
+              "requests": 10000,
+              "workers": 6
+            },
+            {
+              "digest": {
+                "count": 10000,
+                "total": 529368,
+                "weightedTotal": 2646650494,
+                "randomCalls": 278519
+              },
+              "durationNs": 27329400,
+              "nsPerOp": 2732.94,
+              "opsPerSecond": 365906.3133475305,
+              "requests": 10000,
+              "workers": 6
+            }
+          ]
+        },
+        "gomaxprocs": 12,
+        "memory": {
+          "100d6-details": {
+            "afterBatches": [
+              {
+                "available": true,
+                "rssBytes": 19648512,
+                "source": "GetProcessMemoryInfo.WorkingSetSize"
+              },
+              {
+                "available": true,
+                "rssBytes": 19025920,
+                "source": "GetProcessMemoryInfo.WorkingSetSize"
+              },
+              {
+                "available": true,
+                "rssBytes": 18530304,
+                "source": "GetProcessMemoryInfo.WorkingSetSize"
+              },
+              {
+                "available": true,
+                "rssBytes": 19664896,
+                "source": "GetProcessMemoryInfo.WorkingSetSize"
+              },
+              {
+                "available": true,
+                "rssBytes": 19673088,
+                "source": "GetProcessMemoryInfo.WorkingSetSize"
+              }
+            ],
+            "afterWarmup": {
+              "available": true,
+              "rssBytes": 17981440,
+              "source": "GetProcessMemoryInfo.WorkingSetSize"
+            }
+          },
+          "100d6-full": {
+            "afterBatches": [
+              {
+                "available": true,
+                "rssBytes": 18026496,
+                "source": "GetProcessMemoryInfo.WorkingSetSize"
+              },
+              {
+                "available": true,
+                "rssBytes": 18894848,
+                "source": "GetProcessMemoryInfo.WorkingSetSize"
+              },
+              {
+                "available": true,
+                "rssBytes": 18890752,
+                "source": "GetProcessMemoryInfo.WorkingSetSize"
+              },
+              {
+                "available": true,
+                "rssBytes": 17846272,
+                "source": "GetProcessMemoryInfo.WorkingSetSize"
+              },
+              {
+                "available": true,
+                "rssBytes": 18366464,
+                "source": "GetProcessMemoryInfo.WorkingSetSize"
+              }
+            ],
+            "afterWarmup": {
+              "available": true,
+              "rssBytes": 17788928,
+              "source": "GetProcessMemoryInfo.WorkingSetSize"
+            }
+          },
+          "100d6-summary": {
+            "afterBatches": [
+              {
+                "available": true,
+                "rssBytes": 19382272,
+                "source": "GetProcessMemoryInfo.WorkingSetSize"
+              },
+              {
+                "available": true,
+                "rssBytes": 19693568,
+                "source": "GetProcessMemoryInfo.WorkingSetSize"
+              },
+              {
+                "available": true,
+                "rssBytes": 19132416,
+                "source": "GetProcessMemoryInfo.WorkingSetSize"
+              },
+              {
+                "available": true,
+                "rssBytes": 19394560,
+                "source": "GetProcessMemoryInfo.WorkingSetSize"
+              },
+              {
+                "available": true,
+                "rssBytes": 18997248,
+                "source": "GetProcessMemoryInfo.WorkingSetSize"
+              }
+            ],
+            "afterWarmup": {
+              "available": true,
+              "rssBytes": 17997824,
+              "source": "GetProcessMemoryInfo.WorkingSetSize"
+            }
+          },
+          "d20-details": {
+            "afterBatches": [
+              {
+                "available": true,
+                "rssBytes": 18264064,
+                "source": "GetProcessMemoryInfo.WorkingSetSize"
+              },
+              {
+                "available": true,
+                "rssBytes": 18952192,
+                "source": "GetProcessMemoryInfo.WorkingSetSize"
+              },
+              {
+                "available": true,
+                "rssBytes": 18186240,
+                "source": "GetProcessMemoryInfo.WorkingSetSize"
+              },
+              {
+                "available": true,
+                "rssBytes": 19169280,
+                "source": "GetProcessMemoryInfo.WorkingSetSize"
+              },
+              {
+                "available": true,
+                "rssBytes": 18534400,
+                "source": "GetProcessMemoryInfo.WorkingSetSize"
+              }
+            ],
+            "afterWarmup": {
+              "available": true,
+              "rssBytes": 17842176,
+              "source": "GetProcessMemoryInfo.WorkingSetSize"
+            }
+          },
+          "d20-full": {
+            "afterBatches": [
+              {
+                "available": true,
+                "rssBytes": 17203200,
+                "source": "GetProcessMemoryInfo.WorkingSetSize"
+              },
+              {
+                "available": true,
+                "rssBytes": 18178048,
+                "source": "GetProcessMemoryInfo.WorkingSetSize"
+              },
+              {
+                "available": true,
+                "rssBytes": 18456576,
+                "source": "GetProcessMemoryInfo.WorkingSetSize"
+              },
+              {
+                "available": true,
+                "rssBytes": 18669568,
+                "source": "GetProcessMemoryInfo.WorkingSetSize"
+              },
+              {
+                "available": true,
+                "rssBytes": 17367040,
+                "source": "GetProcessMemoryInfo.WorkingSetSize"
+              }
+            ],
+            "afterWarmup": {
+              "available": true,
+              "rssBytes": 17137664,
+              "source": "GetProcessMemoryInfo.WorkingSetSize"
+            }
+          },
+          "d20-summary": {
+            "afterBatches": [
+              {
+                "available": true,
+                "rssBytes": 20041728,
+                "source": "GetProcessMemoryInfo.WorkingSetSize"
+              },
+              {
+                "available": true,
+                "rssBytes": 19169280,
+                "source": "GetProcessMemoryInfo.WorkingSetSize"
+              },
+              {
+                "available": true,
+                "rssBytes": 19746816,
+                "source": "GetProcessMemoryInfo.WorkingSetSize"
+              },
+              {
+                "available": true,
+                "rssBytes": 20131840,
+                "source": "GetProcessMemoryInfo.WorkingSetSize"
+              },
+              {
+                "available": true,
+                "rssBytes": 21413888,
+                "source": "GetProcessMemoryInfo.WorkingSetSize"
+              }
+            ],
+            "afterWarmup": {
+              "available": true,
+              "rssBytes": 18841600,
+              "source": "GetProcessMemoryInfo.WorkingSetSize"
+            }
+          },
+          "pool-details": {
+            "afterBatches": [
+              {
+                "available": true,
+                "rssBytes": 19574784,
+                "source": "GetProcessMemoryInfo.WorkingSetSize"
+              },
+              {
+                "available": true,
+                "rssBytes": 20058112,
+                "source": "GetProcessMemoryInfo.WorkingSetSize"
+              },
+              {
+                "available": true,
+                "rssBytes": 19689472,
+                "source": "GetProcessMemoryInfo.WorkingSetSize"
+              },
+              {
+                "available": true,
+                "rssBytes": 18857984,
+                "source": "GetProcessMemoryInfo.WorkingSetSize"
+              },
+              {
+                "available": true,
+                "rssBytes": 19267584,
+                "source": "GetProcessMemoryInfo.WorkingSetSize"
+              }
+            ],
+            "afterWarmup": {
+              "available": true,
+              "rssBytes": 18436096,
+              "source": "GetProcessMemoryInfo.WorkingSetSize"
+            }
+          },
+          "pool-full": {
+            "afterBatches": [
+              {
+                "available": true,
+                "rssBytes": 18280448,
+                "source": "GetProcessMemoryInfo.WorkingSetSize"
+              },
+              {
+                "available": true,
+                "rssBytes": 18415616,
+                "source": "GetProcessMemoryInfo.WorkingSetSize"
+              },
+              {
+                "available": true,
+                "rssBytes": 18358272,
+                "source": "GetProcessMemoryInfo.WorkingSetSize"
+              },
+              {
+                "available": true,
+                "rssBytes": 18968576,
+                "source": "GetProcessMemoryInfo.WorkingSetSize"
+              },
+              {
+                "available": true,
+                "rssBytes": 19058688,
+                "source": "GetProcessMemoryInfo.WorkingSetSize"
+              }
+            ],
+            "afterWarmup": {
+              "available": true,
+              "rssBytes": 18395136,
+              "source": "GetProcessMemoryInfo.WorkingSetSize"
+            }
+          },
+          "pool-summary": {
+            "afterBatches": [
+              {
+                "available": true,
+                "rssBytes": 19619840,
+                "source": "GetProcessMemoryInfo.WorkingSetSize"
+              },
+              {
+                "available": true,
+                "rssBytes": 21667840,
+                "source": "GetProcessMemoryInfo.WorkingSetSize"
+              },
+              {
+                "available": true,
+                "rssBytes": 20144128,
+                "source": "GetProcessMemoryInfo.WorkingSetSize"
+              },
+              {
+                "available": true,
+                "rssBytes": 20537344,
+                "source": "GetProcessMemoryInfo.WorkingSetSize"
+              },
+              {
+                "available": true,
+                "rssBytes": 19587072,
+                "source": "GetProcessMemoryInfo.WorkingSetSize"
+              }
+            ],
+            "afterWarmup": {
+              "available": true,
+              "rssBytes": 20729856,
+              "source": "GetProcessMemoryInfo.WorkingSetSize"
+            }
+          }
+        },
+        "runtime": "go1.26.2"
+      },
+      "summary": {
+        "d20-full": {
+          "batchMs": 36.3353,
+          "opsPerSecond": 275214.4608686319,
+          "medianRssMiB": 17.3359375,
+          "maximumRssMiB": 17.8046875
+        },
+        "d20-details": {
+          "batchMs": 27.2802,
+          "opsPerSecond": 366566.2275203261,
+          "medianRssMiB": 17.67578125,
+          "maximumRssMiB": 18.28125
+        },
+        "d20-summary": {
+          "batchMs": 19.2592,
+          "opsPerSecond": 519232.36686882115,
+          "medianRssMiB": 19.11328125,
+          "maximumRssMiB": 20.421875
+        },
+        "100d6-full": {
+          "batchMs": 319.275,
+          "opsPerSecond": 31320.961553519694,
+          "medianRssMiB": 17.515625,
+          "maximumRssMiB": 18.01953125
+        },
+        "100d6-details": {
+          "batchMs": 207.6688,
+          "opsPerSecond": 48153.598422102885,
+          "medianRssMiB": 18.73828125,
+          "maximumRssMiB": 18.76171875
+        },
+        "100d6-summary": {
+          "batchMs": 42.207,
+          "opsPerSecond": 236927.52387044803,
+          "medianRssMiB": 18.484375,
+          "maximumRssMiB": 18.78125
+        },
+        "pool-full": {
+          "batchMs": 243.5503,
+          "opsPerSecond": 41059.280156912144,
+          "medianRssMiB": 17.5625,
+          "maximumRssMiB": 18.17578125
+        },
+        "pool-details": {
+          "batchMs": 97.4234,
+          "opsPerSecond": 102644.74448643754,
+          "medianRssMiB": 18.66796875,
+          "maximumRssMiB": 19.12890625
+        },
+        "pool-summary": {
+          "batchMs": 34.1021,
+          "opsPerSecond": 293237.07337671285,
+          "medianRssMiB": 19.2109375,
+          "maximumRssMiB": 20.6640625
+        }
+      }
+    }
+  ],
+  "selectedGc": 500,
+  "selectedMemoryLimit": "96MiB",
+  "confirmedGc": 500,
+  "confirmedMemoryLimit": "96MiB",
+  "finishedAt": "2026-09-14T02:34:09.994Z",
+  "wallMilliseconds": 26478
+}
