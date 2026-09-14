@@ -1,0 +1,140 @@
+goos: windows
+goarch: amd64
+pkg: github.com/arkanus-app/rpg-dice-roller/go
+cpu: AMD Ryzen 5 5500
+BenchmarkRollJSON/d20/summary 	  150840	       792.2 ns/op	     640 B/op	       1 allocs/op
+BenchmarkRollJSON/d20/details 	  123762	      1066 ns/op	     896 B/op	       1 allocs/op
+BenchmarkRollJSON/d20/full    	   35268	      3357 ns/op	    3072 B/op	       1 allocs/op
+BenchmarkRollJSON/100d6/summary         	  135808	       841.7 ns/op	     640 B/op	       1 allocs/op
+BenchmarkRollJSON/100d6/details         	    6415	     29565 ns/op	   24576 B/op	       1 allocs/op
+BenchmarkRollJSON/100d6/full            	    2373	     46076 ns/op	   57344 B/op	       1 allocs/op
+BenchmarkRollJSON/pool/summary          	  221482	       647.5 ns/op	     640 B/op	       1 allocs/op
+BenchmarkRollJSON/pool/details          	   14498	      8471 ns/op	    8192 B/op	       1 allocs/op
+BenchmarkRollJSON/pool/full             	    7336	     19637 ns/op	   18432 B/op	       1 allocs/op
+PASS
+goos: windows
+goarch: amd64
+pkg: github.com/arkanus-app/rpg-dice-roller/go
+cpu: AMD Ryzen 5 5500
+BenchmarkRollJSON/d20/summary 	  206390	       577.9 ns/op	     640 B/op	       1 allocs/op
+BenchmarkRollJSON/d20/details 	  146677	       832.4 ns/op	     896 B/op	       1 allocs/op
+BenchmarkRollJSON/d20/full    	   41812	      2820 ns/op	    3072 B/op	       1 allocs/op
+BenchmarkRollJSON/100d6/summary         	  201193	       637.2 ns/op	     640 B/op	       1 allocs/op
+BenchmarkRollJSON/100d6/details         	    4921	     24496 ns/op	   24576 B/op	       1 allocs/op
+BenchmarkRollJSON/100d6/full            	    2488	     47743 ns/op	   57344 B/op	       1 allocs/op
+BenchmarkRollJSON/pool/summary          	  198513	       646.1 ns/op	     640 B/op	       1 allocs/op
+BenchmarkRollJSON/pool/details          	   15781	      7560 ns/op	    8192 B/op	       1 allocs/op
+BenchmarkRollJSON/pool/full             	    5578	     19975 ns/op	   18432 B/op	       1 allocs/op
+PASS
+goos: windows
+goarch: amd64
+pkg: github.com/arkanus-app/rpg-dice-roller/go
+cpu: AMD Ryzen 5 5500
+BenchmarkRollJSON/d20/summary 	  167095	       701.0 ns/op	     640 B/op	       1 allocs/op
+BenchmarkRollJSON/d20/details 	  153686	       830.1 ns/op	     896 B/op	       1 allocs/op
+BenchmarkRollJSON/d20/full    	   44206	      2699 ns/op	    3072 B/op	       1 allocs/op
+BenchmarkRollJSON/100d6/summary         	  203238	       699.1 ns/op	     640 B/op	       1 allocs/op
+BenchmarkRollJSON/100d6/details         	    6504	     29675 ns/op	   24576 B/op	       1 allocs/op
+BenchmarkRollJSON/100d6/full            	    2683	     46038 ns/op	   57344 B/op	       1 allocs/op
+BenchmarkRollJSON/pool/summary          	  191232	       623.5 ns/op	     640 B/op	       1 allocs/op
+BenchmarkRollJSON/pool/details          	   10000	     10871 ns/op	    8192 B/op	       1 allocs/op
+BenchmarkRollJSON/pool/full             	    7738	     24518 ns/op	   18432 B/op	       1 allocs/op
+PASS
+goos: windows
+goarch: amd64
+pkg: github.com/arkanus-app/rpg-dice-roller/go
+cpu: AMD Ryzen 5 5500
+BenchmarkRollJSON/d20/summary 	  141086	       847.4 ns/op	     640 B/op	       1 allocs/op
+BenchmarkRollJSON/d20/details 	  118358	      1063 ns/op	     896 B/op	       1 allocs/op
+BenchmarkRollJSON/d20/full    	   33409	      3481 ns/op	    3072 B/op	       1 allocs/op
+BenchmarkRollJSON/100d6/summary         	  154270	       813.3 ns/op	     640 B/op	       1 allocs/op
+BenchmarkRollJSON/100d6/details         	    6508	     29344 ns/op	   24576 B/op	       1 allocs/op
+BenchmarkRollJSON/100d6/full            	    2596	     46082 ns/op	   57344 B/op	       1 allocs/op
+BenchmarkRollJSON/pool/summary          	  206032	       755.3 ns/op	     640 B/op	       1 allocs/op
+BenchmarkRollJSON/pool/details          	   13374	      8819 ns/op	    8192 B/op	       1 allocs/op
+BenchmarkRollJSON/pool/full             	    6727	     18615 ns/op	   18432 B/op	       1 allocs/op
+PASS
+goos: windows
+goarch: amd64
+pkg: github.com/arkanus-app/rpg-dice-roller/go
+cpu: AMD Ryzen 5 5500
+BenchmarkRollJSON/d20/summary 	  205228	       589.9 ns/op	     640 B/op	       1 allocs/op
+BenchmarkRollJSON/d20/details 	  146796	       821.4 ns/op	     896 B/op	       1 allocs/op
+BenchmarkRollJSON/d20/full    	   42718	      3105 ns/op	    3072 B/op	       1 allocs/op
+BenchmarkRollJSON/100d6/summary         	  164703	       726.2 ns/op	     640 B/op	       1 allocs/op
+BenchmarkRollJSON/100d6/details         	    6705	     28438 ns/op	   24576 B/op	       1 allocs/op
+BenchmarkRollJSON/100d6/full            	    2726	     44618 ns/op	   57344 B/op	       1 allocs/op
+BenchmarkRollJSON/pool/summary          	  192187	       596.1 ns/op	     640 B/op	       1 allocs/op
+BenchmarkRollJSON/pool/details          	   16358	      7382 ns/op	    8192 B/op	       1 allocs/op
+BenchmarkRollJSON/pool/full             	    8041	     17835 ns/op	   18432 B/op	       1 allocs/op
+PASS
+goos: windows
+goarch: amd64
+pkg: github.com/arkanus-app/rpg-dice-roller/go
+cpu: AMD Ryzen 5 5500
+BenchmarkRollJSON/d20/summary 	  206194	       576.2 ns/op	     640 B/op	       1 allocs/op
+BenchmarkRollJSON/d20/details 	  139221	       797.5 ns/op	     896 B/op	       1 allocs/op
+BenchmarkRollJSON/d20/full    	   46737	      2659 ns/op	    3072 B/op	       1 allocs/op
+BenchmarkRollJSON/100d6/summary         	  204558	       609.1 ns/op	     640 B/op	       1 allocs/op
+BenchmarkRollJSON/100d6/details         	    5654	     21518 ns/op	   24576 B/op	       1 allocs/op
+BenchmarkRollJSON/100d6/full            	    2755	     42017 ns/op	   57344 B/op	       1 allocs/op
+BenchmarkRollJSON/pool/summary          	  213838	       588.6 ns/op	     640 B/op	       1 allocs/op
+BenchmarkRollJSON/pool/details          	   16759	      7153 ns/op	    8192 B/op	       1 allocs/op
+BenchmarkRollJSON/pool/full             	    7143	     17853 ns/op	   18432 B/op	       1 allocs/op
+PASS
+goos: windows
+goarch: amd64
+pkg: github.com/arkanus-app/rpg-dice-roller/go
+cpu: AMD Ryzen 5 5500
+BenchmarkRollJSON/d20/summary 	  198428	       598.1 ns/op	     640 B/op	       1 allocs/op
+BenchmarkRollJSON/d20/details 	  145512	       809.1 ns/op	     896 B/op	       1 allocs/op
+BenchmarkRollJSON/d20/full    	   44144	      2654 ns/op	    3072 B/op	       1 allocs/op
+BenchmarkRollJSON/100d6/summary         	  188228	       610.4 ns/op	     640 B/op	       1 allocs/op
+BenchmarkRollJSON/100d6/details         	    6039	     21570 ns/op	   24576 B/op	       1 allocs/op
+BenchmarkRollJSON/100d6/full            	    2710	     42455 ns/op	   57344 B/op	       1 allocs/op
+BenchmarkRollJSON/pool/summary          	  175236	       601.4 ns/op	     640 B/op	       1 allocs/op
+BenchmarkRollJSON/pool/details          	   16606	      7190 ns/op	    8192 B/op	       1 allocs/op
+BenchmarkRollJSON/pool/full             	    7934	     17750 ns/op	   18432 B/op	       1 allocs/op
+PASS
+goos: windows
+goarch: amd64
+pkg: github.com/arkanus-app/rpg-dice-roller/go
+cpu: AMD Ryzen 5 5500
+BenchmarkRollJSON/d20/summary 	  144183	       829.8 ns/op	     640 B/op	       1 allocs/op
+BenchmarkRollJSON/d20/details 	  100417	      1108 ns/op	     896 B/op	       1 allocs/op
+BenchmarkRollJSON/d20/full    	   34704	      3488 ns/op	    3072 B/op	       1 allocs/op
+BenchmarkRollJSON/100d6/summary         	  136816	       955.6 ns/op	     640 B/op	       1 allocs/op
+BenchmarkRollJSON/100d6/details         	    6400	     30744 ns/op	   24576 B/op	       1 allocs/op
+BenchmarkRollJSON/100d6/full            	    2398	     51444 ns/op	   57344 B/op	       1 allocs/op
+BenchmarkRollJSON/pool/summary          	  149799	       819.3 ns/op	     640 B/op	       1 allocs/op
+BenchmarkRollJSON/pool/details          	   12358	      9783 ns/op	    8192 B/op	       1 allocs/op
+BenchmarkRollJSON/pool/full             	    7885	     21901 ns/op	   18432 B/op	       1 allocs/op
+PASS
+goos: windows
+goarch: amd64
+pkg: github.com/arkanus-app/rpg-dice-roller/go
+cpu: AMD Ryzen 5 5500
+BenchmarkRollJSON/d20/summary 	  172260	       780.4 ns/op	     640 B/op	       1 allocs/op
+BenchmarkRollJSON/d20/details 	  117174	      1077 ns/op	     896 B/op	       1 allocs/op
+BenchmarkRollJSON/d20/full    	   35875	      3421 ns/op	    3072 B/op	       1 allocs/op
+BenchmarkRollJSON/100d6/summary         	  143601	       830.9 ns/op	     640 B/op	       1 allocs/op
+BenchmarkRollJSON/100d6/details         	    6410	     30007 ns/op	   24576 B/op	       1 allocs/op
+BenchmarkRollJSON/100d6/full            	    2218	     50202 ns/op	   57344 B/op	       1 allocs/op
+BenchmarkRollJSON/pool/summary          	  185115	       693.7 ns/op	     640 B/op	       1 allocs/op
+BenchmarkRollJSON/pool/details          	   15972	      7700 ns/op	    8192 B/op	       1 allocs/op
+BenchmarkRollJSON/pool/full             	    6883	     18409 ns/op	   18432 B/op	       1 allocs/op
+PASS
+goos: windows
+goarch: amd64
+pkg: github.com/arkanus-app/rpg-dice-roller/go
+cpu: AMD Ryzen 5 5500
+BenchmarkRollJSON/d20/summary 	  118502	      1182 ns/op	     640 B/op	       1 allocs/op
+BenchmarkRollJSON/d20/details 	  116875	      1113 ns/op	     896 B/op	       1 allocs/op
+BenchmarkRollJSON/d20/full    	   35518	      3575 ns/op	    3072 B/op	       1 allocs/op
+BenchmarkRollJSON/100d6/summary         	  155882	       813.9 ns/op	     640 B/op	       1 allocs/op
+BenchmarkRollJSON/100d6/details         	    5881	     29100 ns/op	   24576 B/op	       1 allocs/op
+BenchmarkRollJSON/100d6/full            	    2292	     51111 ns/op	   57344 B/op	       1 allocs/op
+BenchmarkRollJSON/pool/summary          	  179248	       726.8 ns/op	     640 B/op	       1 allocs/op
+BenchmarkRollJSON/pool/details          	   12031	      9923 ns/op	    8192 B/op	       1 allocs/op
+BenchmarkRollJSON/pool/full             	    7958	     23276 ns/op	   18432 B/op	       1 allocs/op
+PASS

@@ -188,5 +188,12 @@ verifica expressões adicionais em um ensaio separado.
 O [relatório da quinta rodada](OPTIMIZATION_ROUND5.md) reúne os resultados,
 os custos de memória e a adoção explícita do encoder direto no backend.
 
+A [sexta rodada, focada em Node](OPTIMIZATION_ROUND6.md), melhora a escrita do
+JSON mantendo o contrato e a cobertura exata de 100%. Os ensaios com
+[um worker](NODE_ROUND6_W1.md) e [seis workers](NODE_ROUND6_W6.md) comparam
+rolagem completa + JSON em 11 expressões, com vazão, CPU/op, latência individual
+e RSS apresentados separadamente. Os gráficos distinguem GC padrão e
+configuração explícita do processo.
+
 A [licença do projeto](../licence.txt) e os
 [avisos dos kernels matemáticos](THIRD_PARTY_NOTICES.md) se aplicam a este código.

@@ -1,0 +1,44 @@
+goos: windows
+goarch: amd64
+pkg: github.com/arkanus-app/rpg-dice-roller/go
+cpu: AMD Ryzen 5 5500
+                       │ go/benchmarks/optimization-round6/final-json-before.txt │ go/benchmarks/optimization-round6/final-json-after.txt │
+                       │                         sec/op                          │             sec/op              vs base                │
+RollJSON/d20/summary                                                740.7n ± 22%                     545.8n ± 46%        ~ (p=0.063 n=10)
+RollJSON/d20/details                                                947.7n ± 17%                     687.9n ± 40%  -27.41% (p=0.023 n=10)
+RollJSON/d20/full                                                   3.231µ ± 18%                     2.611µ ± 15%  -19.19% (p=0.019 n=10)
+RollJSON/100d6/summary                                              769.8n ± 21%                     738.0n ± 27%        ~ (p=0.393 n=10)
+RollJSON/100d6/details                                              29.22µ ± 26%                     14.25µ ± 33%  -51.22% (p=0.000 n=10)
+RollJSON/100d6/full                                                 46.08µ ± 11%                     31.05µ ± 12%  -32.62% (p=0.000 n=10)
+RollJSON/pool/summary                                               646.8n ± 17%                     536.3n ±  2%  -17.08% (p=0.000 n=10)
+RollJSON/pool/details                                               8.086µ ± 23%                     4.726µ ±  3%  -41.55% (p=0.000 n=10)
+RollJSON/pool/full                                                  19.13µ ± 22%                     13.74µ ±  9%  -28.18% (p=0.000 n=10)
+geomean                                                             3.952µ                           2.816µ        -28.74%
+
+                       │ go/benchmarks/optimization-round6/final-json-before.txt │ go/benchmarks/optimization-round6/final-json-after.txt │
+                       │                          B/op                           │             B/op               vs base                 │
+RollJSON/d20/summary                                                  640.0 ± 0%                      640.0 ± 0%       ~ (p=1.000 n=10) ¹
+RollJSON/d20/details                                                  896.0 ± 0%                      896.0 ± 0%       ~ (p=1.000 n=10) ¹
+RollJSON/d20/full                                                   3.000Ki ± 0%                    3.000Ki ± 0%       ~ (p=1.000 n=10) ¹
+RollJSON/100d6/summary                                                640.0 ± 0%                      640.0 ± 0%       ~ (p=1.000 n=10) ¹
+RollJSON/100d6/details                                              24.00Ki ± 0%                    24.00Ki ± 0%       ~ (p=1.000 n=10) ¹
+RollJSON/100d6/full                                                 56.00Ki ± 0%                    56.00Ki ± 0%       ~ (p=1.000 n=10) ¹
+RollJSON/pool/summary                                                 640.0 ± 0%                      640.0 ± 0%       ~ (p=1.000 n=10) ¹
+RollJSON/pool/details                                               8.000Ki ± 0%                    8.000Ki ± 0%       ~ (p=1.000 n=10) ¹
+RollJSON/pool/full                                                  18.00Ki ± 0%                    18.00Ki ± 0%       ~ (p=1.000 n=10) ¹
+geomean                                                             3.681Ki                         3.681Ki       +0.00%
+¹ all samples are equal
+
+                       │ go/benchmarks/optimization-round6/final-json-before.txt │ go/benchmarks/optimization-round6/final-json-after.txt │
+                       │                        allocs/op                        │           allocs/op            vs base                 │
+RollJSON/d20/summary                                                  1.000 ± 0%                      1.000 ± 0%       ~ (p=1.000 n=10) ¹
+RollJSON/d20/details                                                  1.000 ± 0%                      1.000 ± 0%       ~ (p=1.000 n=10) ¹
+RollJSON/d20/full                                                     1.000 ± 0%                      1.000 ± 0%       ~ (p=1.000 n=10) ¹
+RollJSON/100d6/summary                                                1.000 ± 0%                      1.000 ± 0%       ~ (p=1.000 n=10) ¹
+RollJSON/100d6/details                                                1.000 ± 0%                      1.000 ± 0%       ~ (p=1.000 n=10) ¹
+RollJSON/100d6/full                                                   1.000 ± 0%                      1.000 ± 0%       ~ (p=1.000 n=10) ¹
+RollJSON/pool/summary                                                 1.000 ± 0%                      1.000 ± 0%       ~ (p=1.000 n=10) ¹
+RollJSON/pool/details                                                 1.000 ± 0%                      1.000 ± 0%       ~ (p=1.000 n=10) ¹
+RollJSON/pool/full                                                    1.000 ± 0%                      1.000 ± 0%       ~ (p=1.000 n=10) ¹
+geomean                                                               1.000                           1.000       +0.00%
+¹ all samples are equal

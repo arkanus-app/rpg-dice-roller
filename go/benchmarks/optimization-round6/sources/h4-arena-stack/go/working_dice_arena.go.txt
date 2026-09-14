@@ -1,0 +1,39 @@
+package dicecore
+
+import "sync/atomic"
+
+// workingDiceArenaCache retains at most one bounded first block per engine.
+// Borrowers own their block exclusively; concurrent misses allocate independently.
+// Only working structs are reused. Their strings, states and parent pointers
+// belong to the finalized result and must never be cleared through those fields.
+type workingDiceArenaCache struct {
+	available atomic.Pointer[workingDiceArena]
+}
+
+type workingDiceArena struct {
+	dice []workingDie
+}
+
+func (cache *workingDiceArenaCache) acquire(capacity int64) *workingDiceArena {
+	capacity = min(capacity, 256)
+	arena := cache.available.Swap(nil)
+	if arena == nil || int64(cap(arena.dice)) < capacity {
+		return &workingDiceArena{dice: make([]workingDie, capacity)}
+	}
+	arena.dice = arena.dice[:capacity]
+	return arena
+}
+
+func (cache *workingDiceArenaCache) release(arena *workingDiceArena) {
+	// Clearing headers drops references without modifying the independently
+	// allocated states, ID strings or parent values retained by a result.
+	clear(arena.dice)
+	cache.available.CompareAndSwap(nil, arena)
+}
+
+func (state *rollState) releaseWorkingArena() {
+	if state.retainedArena != nil {
+		state.arenaCache.release(state.retainedArena)
+		state.retainedArena = nil
+	}
+}

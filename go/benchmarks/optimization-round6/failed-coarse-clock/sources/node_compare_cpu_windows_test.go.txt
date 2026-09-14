@@ -1,0 +1,27 @@
+package dicecore
+
+import (
+	"syscall"
+	"unsafe"
+)
+
+var nodeCompareProcessTimes = syscall.NewLazyDLL("kernel32.dll").NewProc("GetProcessTimes")
+
+func nodeCompareCPU() nodeCompareCPUReading {
+	reading := nodeCompareCPUReading{Source: "GetProcessTimes: user+kernel, process-wide"}
+	process, err := syscall.GetCurrentProcess()
+	if err != nil {
+		reading.Reason = err.Error()
+		return reading
+	}
+	var created, exited, kernel, user syscall.Filetime
+	ok, _, callErr := nodeCompareProcessTimes.Call(uintptr(process), uintptr(unsafe.Pointer(&created)), uintptr(unsafe.Pointer(&exited)), uintptr(unsafe.Pointer(&kernel)), uintptr(unsafe.Pointer(&user)))
+	if ok == 0 {
+		reading.Reason = callErr.Error()
+		return reading
+	}
+	reading.Available = true
+	reading.UserNs = int64(uint64(user.HighDateTime)<<32|uint64(user.LowDateTime)) * 100
+	reading.SystemNs = int64(uint64(kernel.HighDateTime)<<32|uint64(kernel.LowDateTime)) * 100
+	return reading
+}

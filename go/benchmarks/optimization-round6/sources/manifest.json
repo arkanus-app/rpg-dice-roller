@@ -1,0 +1,293 @@
+{
+  "schemaVersion": 1,
+  "archivedAt": "2026-09-14T05:06:15.2442116Z",
+  "base": {
+    "reference": "f107265",
+    "commit": "f1072657da80c837f8e3740c734a89d26619bf50"
+  },
+  "build": {
+    "toolchain": "go1.26.2",
+    "environment": {
+      "CGO_ENABLED": "0",
+      "GOOS": "windows",
+      "GOARCH": "amd64"
+    },
+    "workingDirectory": "go",
+    "arguments": [
+      "test",
+      "-c",
+      "-o",
+      "<output-executable>"
+    ],
+    "provenance": "Toolchain, CGO setting and independent base-plus-overlay builds declared by the round-six measurement coordinator. No builds ran during archival."
+  },
+  "storage": "Exact byte copies with .go.txt suffix; target gives the original path to replace in an isolated checkout. No patch application or newline conversion.",
+  "finalAcceptedComposition": [
+    "h2-strings",
+    "h3-envelope"
+  ],
+  "binaries": {
+    "baseline": {
+      "path": ".artifacts/optimization-round6/baseline.exe",
+      "sha256": "a1d7a56eb7cf300fb0bd722316d6f229d58c0bf4e6a34e008e73d79bc9fc2b7b",
+      "bytes": 8147968
+    },
+    "envelope": {
+      "path": ".artifacts/optimization-round6/envelope.exe",
+      "sha256": "a3f0d648a325e65c8d069151a0662886e4600088c61a2f4359236f85d08e9382",
+      "bytes": 8147456
+    },
+    "strings": {
+      "path": ".artifacts/optimization-round6/strings.exe",
+      "sha256": "8a4b0f26bf6b148f4485d8e388e1965a293eeb091ca9b878b0d089df69c7fe31",
+      "bytes": 8158208
+    },
+    "arena": {
+      "path": ".artifacts/optimization-round6/arena.exe",
+      "sha256": "4c61f2dff070a0ca082d0cdf4e42ebc62097aea7d56270df93a4a26106d2b8a0",
+      "bytes": 8187392
+    },
+    "arena-stack": {
+      "path": ".artifacts/optimization-round6/arena-stack.exe",
+      "sha256": "e5167e08256e53d5b8ed45cf0ab4bbf211683a9ba075846f95f9158ac283f0d3",
+      "bytes": 8190464
+    }
+  },
+  "variants": {
+    "h1-arena": {
+      "baseCommit": "f1072657da80c837f8e3740c734a89d26619bf50",
+      "decision": "rejected",
+      "decisionReason": "Regression on the modifier pool workload",
+      "measurementStatus": "complete",
+      "binary": "arena",
+      "appliesIndependentlyToBase": true,
+      "files": [
+        {
+          "target": "go/engine.go",
+          "archive": "go/benchmarks/optimization-round6/sources/h1-arena/go/engine.go.txt",
+          "original": ".artifacts/optimization-round6/arena-src/go/engine.go",
+          "sha256": "127034ae603f8642c07be787373a7dee66e05d9dc54350254365d9f701891474",
+          "bytes": 13344
+        },
+        {
+          "target": "go/executor.go",
+          "archive": "go/benchmarks/optimization-round6/sources/h1-arena/go/executor.go.txt",
+          "original": ".artifacts/optimization-round6/arena-src/go/executor.go",
+          "sha256": "4f411b6fbb073915315ad142352e958a18f6f0ce055b2023749d16c6571cef6d",
+          "bytes": 34383
+        },
+        {
+          "target": "go/working_dice_arena.go",
+          "archive": "go/benchmarks/optimization-round6/sources/h1-arena/go/working_dice_arena.go.txt",
+          "original": ".artifacts/optimization-round6/arena-src/go/working_dice_arena.go",
+          "sha256": "a8032ce11be7250803787963436991ac5d31ec262fb13ff4201cae618bdadaaa",
+          "bytes": 1264
+        },
+        {
+          "target": "go/working_dice_arena_test.go",
+          "archive": "go/benchmarks/optimization-round6/sources/h1-arena/go/working_dice_arena_test.go.txt",
+          "original": ".artifacts/optimization-round6/arena-src/go/working_dice_arena_test.go",
+          "sha256": "505fdddfb6e838c68ec3169e0eb16cbe44438af53c98015f65266d9296d7d727",
+          "bytes": 8777
+        }
+      ],
+      "measurement": {
+        "path": "go/benchmarks/optimization-round6/h1-arena.json",
+        "sha256": "11bfd3053fd58884f36a1e17a681f544416e55211c550f99b02739fca11e502d",
+        "bytes": 10813
+      },
+      "outputs": {
+        "before": {
+          "path": "go/benchmarks/optimization-round6/h1-arena-before.txt",
+          "sha256": "b339b978e43be9fc0fb3bd8e4858e691a9a978ddb063f62feb4ed9d8637e18ee",
+          "bytes": 12040
+        },
+        "after": {
+          "path": "go/benchmarks/optimization-round6/h1-arena-after.txt",
+          "sha256": "755dd98092416b393ce9d08f48531b6024ca9a94352af54acc8865c4d7e4cebf",
+          "bytes": 12040
+        }
+      },
+      "filter": "^BenchmarkBackendOperation$/././changing=true$",
+      "rounds": 10,
+      "environment": {
+        "GOMAXPROCS": "1",
+        "GOGC": "100",
+        "GOMEMLIMIT": "off",
+        "DICECORE_JSON_ENCODER": "direct"
+      }
+    },
+    "h2-strings": {
+      "baseCommit": "f1072657da80c837f8e3740c734a89d26619bf50",
+      "decision": "accepted",
+      "decisionReason": "Accepted measured string encoding improvement",
+      "measurementStatus": "complete",
+      "binary": "strings",
+      "appliesIndependentlyToBase": true,
+      "files": [
+        {
+          "target": "go/event.go",
+          "archive": "go/benchmarks/optimization-round6/sources/h2-strings/go/event.go.txt",
+          "original": ".artifacts/optimization-round6/strings-src/go/event.go",
+          "sha256": "755803ed41b4b42a7857e46d5fc699133118771a0ae611a799598b3d4a3c7ef6",
+          "bytes": 9100
+        },
+        {
+          "target": "go/event_bench_test.go",
+          "archive": "go/benchmarks/optimization-round6/sources/h2-strings/go/event_bench_test.go.txt",
+          "original": ".artifacts/optimization-round6/strings-src/go/event_bench_test.go",
+          "sha256": "f0f5df1c43539ede70c88e0413d3f154c83ff6b6ab90ef51989013c64a1527b9",
+          "bytes": 1607
+        },
+        {
+          "target": "go/event_strings_test.go",
+          "archive": "go/benchmarks/optimization-round6/sources/h2-strings/go/event_strings_test.go.txt",
+          "original": ".artifacts/optimization-round6/strings-src/go/event_strings_test.go",
+          "sha256": "2d2b6a5ad89f4b15b34a89a0643b222d77814a7be13e6b89d0d4cc5c213c96ca",
+          "bytes": 1311
+        }
+      ],
+      "measurement": {
+        "path": "go/benchmarks/optimization-round6/h2-strings.json",
+        "sha256": "03d220d6421b30a44fc524ba3ab6c5f7527d25c7faba9b07b9d99a1537e7eb66",
+        "bytes": 10204
+      },
+      "outputs": {
+        "before": {
+          "path": "go/benchmarks/optimization-round6/h2-strings-before.txt",
+          "sha256": "72fc60643ab96c044893fa82d7707fa132eec34fe78b04692609ce1ffd6d9959",
+          "bytes": 9790
+        },
+        "after": {
+          "path": "go/benchmarks/optimization-round6/h2-strings-after.txt",
+          "sha256": "b27f4232086d3112935896b063cb5a9bfc52b4861a7cbdee51bd1c38987fab1d",
+          "bytes": 9790
+        }
+      },
+      "filter": "^BenchmarkRollJSON$",
+      "rounds": 10,
+      "environment": {
+        "GOMAXPROCS": "1",
+        "GOGC": "100",
+        "GOMEMLIMIT": "off",
+        "DICECORE_JSON_ENCODER": "direct"
+      }
+    },
+    "h3-envelope": {
+      "baseCommit": "f1072657da80c837f8e3740c734a89d26619bf50",
+      "decision": "accepted",
+      "decisionReason": "Accepted measured JSON envelope improvement",
+      "measurementStatus": "complete",
+      "binary": "envelope",
+      "appliesIndependentlyToBase": true,
+      "files": [
+        {
+          "target": "go/json.go",
+          "archive": "go/benchmarks/optimization-round6/sources/h3-envelope/go/json.go.txt",
+          "original": "go/json.go",
+          "sha256": "cbdd352ce5c0b51e69a27a502272ca9b48c9933a1e47c909c292ff9e4f7caa44",
+          "bytes": 11932
+        }
+      ],
+      "measurement": {
+        "path": "go/benchmarks/optimization-round6/h3-envelope.json",
+        "sha256": "27c3b0d5c694fbfa720b82b02c406a974c40f442ace5544ecb096e2ad6414520",
+        "bytes": 10210
+      },
+      "outputs": {
+        "before": {
+          "path": "go/benchmarks/optimization-round6/h3-envelope-before.txt",
+          "sha256": "aa0ee621c2edf4fe1697456a10f248f7a60c72aebee5e522abaf2e47d792be8d",
+          "bytes": 9788
+        },
+        "after": {
+          "path": "go/benchmarks/optimization-round6/h3-envelope-after.txt",
+          "sha256": "2ce326103df4b45822721da554164f454aa310123cf0838213e2b1a8e6503650",
+          "bytes": 9798
+        }
+      },
+      "filter": "^BenchmarkRollJSON$",
+      "rounds": 10,
+      "environment": {
+        "GOMAXPROCS": "1",
+        "GOGC": "100",
+        "GOMEMLIMIT": "off",
+        "DICECORE_JSON_ENCODER": "direct"
+      }
+    },
+    "h4-arena-stack": {
+      "baseCommit": "f1072657da80c837f8e3740c734a89d26619bf50",
+      "decision": "rejected",
+      "decisionReason": "Regression on the modifier pool workload",
+      "measurementStatus": "complete",
+      "binary": "arena-stack",
+      "appliesIndependentlyToBase": true,
+      "files": [
+        {
+          "target": "go/engine.go",
+          "archive": "go/benchmarks/optimization-round6/sources/h4-arena-stack/go/engine.go.txt",
+          "original": ".artifacts/optimization-round6/arena-stack-src/go/engine.go",
+          "sha256": "127034ae603f8642c07be787373a7dee66e05d9dc54350254365d9f701891474",
+          "bytes": 13344
+        },
+        {
+          "target": "go/executor.go",
+          "archive": "go/benchmarks/optimization-round6/sources/h4-arena-stack/go/executor.go.txt",
+          "original": ".artifacts/optimization-round6/arena-stack-src/go/executor.go",
+          "sha256": "d0395fe6525bdfb41927bf23adcdb3673fe8ad2fc83ffc316505e197b82b2b16",
+          "bytes": 34343
+        },
+        {
+          "target": "go/working_dice_arena.go",
+          "archive": "go/benchmarks/optimization-round6/sources/h4-arena-stack/go/working_dice_arena.go.txt",
+          "original": ".artifacts/optimization-round6/arena-stack-src/go/working_dice_arena.go",
+          "sha256": "a8032ce11be7250803787963436991ac5d31ec262fb13ff4201cae618bdadaaa",
+          "bytes": 1264
+        },
+        {
+          "target": "go/working_dice_arena_test.go",
+          "archive": "go/benchmarks/optimization-round6/sources/h4-arena-stack/go/working_dice_arena_test.go.txt",
+          "original": ".artifacts/optimization-round6/arena-stack-src/go/working_dice_arena_test.go",
+          "sha256": "498972ee524dc7af20e5104f3a86669a584a0305ade2956f7f3fc8ce4449772e",
+          "bytes": 9475
+        }
+      ],
+      "measurement": {
+        "path": "go/benchmarks/optimization-round6/h4-arena-stack.json",
+        "sha256": "3df85c927c1b774020b2f541af6f29be46359ffc19c52907c447c072b262d376",
+        "bytes": 10849
+      },
+      "outputs": {
+        "before": {
+          "path": "go/benchmarks/optimization-round6/h4-arena-stack-before.txt",
+          "sha256": "2c83c546b070e132f4f2f6c317514e051692040ad93e5b279bc0a8813d763df1",
+          "bytes": 12040
+        },
+        "after": {
+          "path": "go/benchmarks/optimization-round6/h4-arena-stack-after.txt",
+          "sha256": "954dc76dcf20ff026a07783cdf124bdbfca9164c477adbb8b7934d092323ae95",
+          "bytes": 12040
+        }
+      },
+      "filter": "^BenchmarkBackendOperation$/././changing=true$",
+      "rounds": 10,
+      "environment": {
+        "GOMAXPROCS": "1",
+        "GOGC": "100",
+        "GOMEMLIMIT": "off",
+        "DICECORE_JSON_ENCODER": "direct"
+      }
+    }
+  },
+  "verification": {
+    "archivedFilesMatchOriginalBytes": true,
+    "allMeasurementsComplete": true,
+    "measuredBinaryHashesMatchLocalExecutables": true,
+    "measuredOutputHashesMatch": true
+  },
+  "limitations": [
+    "Source snapshots and hashes do not independently prove the executable build process.",
+    "Binary hashes can change with build paths and metadata; reproduction does not require byte-identical executables.",
+    "Optional local executable files are not required in another clone."
+  ]
+}

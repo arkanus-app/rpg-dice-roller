@@ -1,0 +1,32 @@
+[
+  {
+    "path": "go/node_compare_bench_test.go",
+    "sha256": "c35157378d72f8feb5da79797a513345539ed5450b535dbd8d309fd3167688bf",
+    "archive": "go/benchmarks/optimization-round6/failed-coarse-clock/sources/node_compare_bench_test.go.txt"
+  },
+  {
+    "path": "go/node_compare_cpu_linux_test.go",
+    "sha256": "1b7434a8b4b840c103c6c3a5c7b76224ee365cb3f2223e87e8a3c643fcdbc2f6",
+    "archive": "go/benchmarks/optimization-round6/failed-coarse-clock/sources/node_compare_cpu_linux_test.go.txt"
+  },
+  {
+    "path": "go/node_compare_cpu_other_test.go",
+    "sha256": "feacc97ed812d7a0c063fbe025a892afbccf48684fbc0706e777749d2b928e7d",
+    "archive": "go/benchmarks/optimization-round6/failed-coarse-clock/sources/node_compare_cpu_other_test.go.txt"
+  },
+  {
+    "path": "go/node_compare_cpu_windows_test.go",
+    "sha256": "d5cb59c360c61f0cb2393d6f3d71845e0025fc943812b447876531faf264c1ce",
+    "archive": "go/benchmarks/optimization-round6/failed-coarse-clock/sources/node_compare_cpu_windows_test.go.txt"
+  },
+  {
+    "path": "scripts/benchmark-node-reference-round6.mjs",
+    "sha256": "aec0abc6e7d66b31bcc08fc7e798b780850c62950d9c0182c279d3d94893f73c",
+    "archive": "go/benchmarks/optimization-round6/failed-coarse-clock/sources/benchmark-node-reference-round6.mjs.txt"
+  },
+  {
+    "path": "scripts/compare-node-round6.mjs",
+    "sha256": "dc6a0beefd09a0f8cbc045c30064e0c9b3a948d5eba6c3e21961066124c7f8b4",
+    "archive": "go/benchmarks/optimization-round6/failed-coarse-clock/sources/compare-node-round6.mjs.txt"
+  }
+]

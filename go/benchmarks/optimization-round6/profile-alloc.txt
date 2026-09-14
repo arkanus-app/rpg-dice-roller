@@ -1,0 +1,28 @@
+File: baseline.exe
+Build ID: D:\Projetos\ERPG\rpg-dice-roller\.artifacts\optimization-round6\baseline.exe2026-09-14 01:29:24.001082 -0300 -03
+Type: alloc_space
+Time: 2026-09-14 01:43:35 -03
+Showing nodes accounting for 11412.06MB, 99.10% of 11515.75MB total
+Dropped 65 nodes (cum <= 57.58MB)
+Showing top 20 nodes out of 23
+      flat  flat%   sum%        cum   cum%
+ 5296.37MB 45.99% 45.99%  5296.37MB 45.99%  slices.Grow[go.shape.[]uint8,go.shape.uint8] (inline)
+ 2748.67MB 23.87% 69.86%  6202.26MB 53.86%  github.com/arkanus-app/rpg-dice-roller/go.executeGeneralPlan
+ 1494.10MB 12.97% 82.84%  1494.10MB 12.97%  github.com/arkanus-app/rpg-dice-roller/go.finalizeWorkingDice
+ 1095.24MB  9.51% 92.35%  1241.43MB 10.78%  github.com/arkanus-app/rpg-dice-roller/go.createWorkingDie
+  247.13MB  2.15% 94.49%   247.13MB  2.15%  github.com/arkanus-app/rpg-dice-roller/go.NewMersenneTwister19937FromWords
+  171.20MB  1.49% 95.98%   171.20MB  1.49%  internal/bytealg.MakeNoZero
+  154.26MB  1.34% 97.32%  1534.77MB 13.33%  github.com/arkanus-app/rpg-dice-roller/go.evaluateWorkingDice
+  149.63MB  1.30% 98.62%   149.63MB  1.30%  github.com/arkanus-app/rpg-dice-roller/go.reserveWorkingDicePointers (inline)
+   28.51MB  0.25% 98.87%   307.14MB  2.67%  github.com/arkanus-app/rpg-dice-roller/go.CreateExecutionContext
+      19MB  0.17% 99.03%   326.15MB  2.83%  github.com/arkanus-app/rpg-dice-roller/go.executorCreateContext
+    3.45MB  0.03% 99.06% 11506.57MB 99.92%  github.com/arkanus-app/rpg-dice-roller/go.TestJSONEncoderBenchmarkWorker.func1
+    2.50MB 0.022% 99.08%   146.19MB  1.27%  github.com/arkanus-app/rpg-dice-roller/go.(*executionIDs).dieID
+       2MB 0.017% 99.10% 11500.62MB 99.87%  github.com/arkanus-app/rpg-dice-roller/go.TestJSONEncoderBenchmarkWorker.func1.2 (inline)
+         0     0% 99.10%  6202.26MB 53.86%  github.com/arkanus-app/rpg-dice-roller/go.(*Engine).Roll
+         0     0% 99.10%   247.13MB  2.15%  github.com/arkanus-app/rpg-dice-roller/go.(*executionRNGCache).newMT
+         0     0% 99.10%  5296.37MB 45.99%  github.com/arkanus-app/rpg-dice-roller/go.AppendJSON
+         0     0% 99.10%  6202.26MB 53.86%  github.com/arkanus-app/rpg-dice-roller/go.ExecuteRollPlan
+         0     0% 99.10%  5296.37MB 45.99%  github.com/arkanus-app/rpg-dice-roller/go.MarshalJSON
+         0     0% 99.10%  1534.77MB 13.33%  github.com/arkanus-app/rpg-dice-roller/go.evaluateWorkingNode
+         0     0% 99.10%   251.63MB  2.19%  github.com/arkanus-app/rpg-dice-roller/go.initializeExecutionContextRandom

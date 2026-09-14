@@ -1,0 +1,93 @@
+{
+  "passed": true,
+  "checks": [
+    {
+      "variant": "baseline",
+      "workers": 1,
+      "id": "100d6",
+      "clock": {
+        "source": "QueryPerformanceCounter",
+        "frequencyHz": 10000000
+      },
+      "minNs": 51500,
+      "sampleCount": 64
+    },
+    {
+      "variant": "baseline",
+      "workers": 1,
+      "id": "d20",
+      "clock": {
+        "source": "QueryPerformanceCounter",
+        "frequencyHz": 10000000
+      },
+      "minNs": 9000,
+      "sampleCount": 64
+    },
+    {
+      "variant": "baseline",
+      "workers": 6,
+      "id": "100d6",
+      "clock": {
+        "source": "QueryPerformanceCounter",
+        "frequencyHz": 10000000
+      },
+      "minNs": 57200,
+      "sampleCount": 64
+    },
+    {
+      "variant": "baseline",
+      "workers": 6,
+      "id": "d20",
+      "clock": {
+        "source": "QueryPerformanceCounter",
+        "frequencyHz": 10000000
+      },
+      "minNs": 8000,
+      "sampleCount": 64
+    },
+    {
+      "variant": "final",
+      "workers": 1,
+      "id": "100d6",
+      "clock": {
+        "source": "QueryPerformanceCounter",
+        "frequencyHz": 10000000
+      },
+      "minNs": 39800,
+      "sampleCount": 64
+    },
+    {
+      "variant": "final",
+      "workers": 1,
+      "id": "d20",
+      "clock": {
+        "source": "QueryPerformanceCounter",
+        "frequencyHz": 10000000
+      },
+      "minNs": 8500,
+      "sampleCount": 64
+    },
+    {
+      "variant": "final",
+      "workers": 6,
+      "id": "100d6",
+      "clock": {
+        "source": "QueryPerformanceCounter",
+        "frequencyHz": 10000000
+      },
+      "minNs": 48600,
+      "sampleCount": 64
+    },
+    {
+      "variant": "final",
+      "workers": 6,
+      "id": "d20",
+      "clock": {
+        "source": "QueryPerformanceCounter",
+        "frequencyHz": 10000000
+      },
+      "minNs": 7600,
+      "sampleCount": 64
+    }
+  ]
+}

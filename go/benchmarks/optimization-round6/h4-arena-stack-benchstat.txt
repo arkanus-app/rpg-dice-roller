@@ -1,0 +1,44 @@
+goos: windows
+goarch: amd64
+pkg: github.com/arkanus-app/rpg-dice-roller/go
+cpu: AMD Ryzen 5 5500
+                                                      │ go/benchmarks/optimization-round6/h4-arena-stack-before.txt │ go/benchmarks/optimization-round6/h4-arena-stack-after.txt │
+                                                      │                           sec/op                            │               sec/op                vs base                │
+BackendOperation/1d20+5/full/changing=true                                                             7.021µ ± 10%                         6.755µ ±  6%   -3.79% (p=0.029 n=10)
+BackendOperation/1d20+5/details/changing=true                                                          6.258µ ±  5%                         5.990µ ±  5%   -4.28% (p=0.003 n=10)
+BackendOperation/1d20+5/summary/changing=true                                                          4.561µ ±  5%                         4.515µ ±  6%        ~ (p=0.436 n=10)
+BackendOperation/100d6/full/changing=true                                                              23.84µ ±  2%                         24.32µ ± 10%        ~ (p=0.739 n=10)
+BackendOperation/100d6/details/changing=true                                                           16.36µ ± 10%                         16.02µ ± 27%        ~ (p=0.247 n=10)
+BackendOperation/100d6/summary/changing=true                                                           6.766µ ±  2%                         6.842µ ± 16%        ~ (p=0.353 n=10)
+BackendOperation/20d6!2ro=1kh10/full/changing=true                                                     16.71µ ± 10%                         18.14µ ± 13%   +8.58% (p=0.015 n=10)
+BackendOperation/20d6!2ro=1kh10/details/changing=true                                                  12.26µ ±  3%                         13.83µ ±  8%  +12.80% (p=0.000 n=10)
+BackendOperation/20d6!2ro=1kh10/summary/changing=true                                                  7.010µ ±  7%                         6.900µ ±  1%   -1.57% (p=0.000 n=10)
+geomean                                                                                                9.699µ                               9.812µ         +1.17%
+
+                                                      │ go/benchmarks/optimization-round6/h4-arena-stack-before.txt │ go/benchmarks/optimization-round6/h4-arena-stack-after.txt │
+                                                      │                            B/op                             │               B/op                vs base                  │
+BackendOperation/1d20+5/full/changing=true                                                             7.007Ki ± 0%                       6.882Ki ± 0%   -1.78% (p=0.000 n=10)
+BackendOperation/1d20+5/details/changing=true                                                          4.999Ki ± 0%                       4.874Ki ± 0%   -2.50% (p=0.000 n=10)
+BackendOperation/1d20+5/summary/changing=true                                                          3.711Ki ± 0%                       3.711Ki ± 0%        ~ (p=1.000 n=10) ¹
+BackendOperation/100d6/full/changing=true                                                              66.14Ki ± 0%                       54.14Ki ± 0%  -18.14% (p=0.000 n=10)
+BackendOperation/100d6/details/changing=true                                                           37.09Ki ± 0%                       25.09Ki ± 0%  -32.35% (p=0.000 n=10)
+BackendOperation/100d6/summary/changing=true                                                           3.711Ki ± 0%                       3.711Ki ± 0%        ~ (p=1.000 n=10) ¹
+BackendOperation/20d6!2ro=1kh10/full/changing=true                                                     36.05Ki ± 0%                       33.42Ki ± 0%   -7.28% (p=0.000 n=10)
+BackendOperation/20d6!2ro=1kh10/details/changing=true                                                  13.67Ki ± 0%                       11.05Ki ± 0%  -19.20% (p=0.000 n=10)
+BackendOperation/20d6!2ro=1kh10/summary/changing=true                                                  3.727Ki ± 0%                       3.727Ki ± 0%        ~ (p=1.000 n=10) ¹
+geomean                                                                                                10.90Ki                            9.838Ki        -9.75%
+¹ all samples are equal
+
+                                                      │ go/benchmarks/optimization-round6/h4-arena-stack-before.txt │ go/benchmarks/optimization-round6/h4-arena-stack-after.txt │
+                                                      │                          allocs/op                          │             allocs/op              vs base                 │
+BackendOperation/1d20+5/full/changing=true                                                               45.00 ± 0%                          44.00 ± 0%  -2.22% (p=0.000 n=10)
+BackendOperation/1d20+5/details/changing=true                                                            36.00 ± 0%                          35.00 ± 0%  -2.78% (p=0.000 n=10)
+BackendOperation/1d20+5/summary/changing=true                                                            11.00 ± 0%                          11.00 ± 0%       ~ (p=1.000 n=10) ¹
+BackendOperation/100d6/full/changing=true                                                                34.00 ± 0%                          33.00 ± 0%  -2.94% (p=0.000 n=10)
+BackendOperation/100d6/details/changing=true                                                             27.00 ± 0%                          26.00 ± 0%  -3.70% (p=0.000 n=10)
+BackendOperation/100d6/summary/changing=true                                                             11.00 ± 0%                          11.00 ± 0%       ~ (p=1.000 n=10) ¹
+BackendOperation/20d6!2ro=1kh10/full/changing=true                                                       116.0 ± 0%                          115.0 ± 0%  -0.86% (p=0.000 n=10)
+BackendOperation/20d6!2ro=1kh10/details/changing=true                                                    87.00 ± 0%                          86.00 ± 0%  -1.15% (p=0.000 n=10)
+BackendOperation/20d6!2ro=1kh10/summary/changing=true                                                    11.00 ± 0%                          11.00 ± 0%       ~ (p=1.000 n=10) ¹
+geomean                                                                                                  30.05                               29.59       -1.53%
+¹ all samples are equal

@@ -1,0 +1,7 @@
+//go:build !windows && !linux
+
+package dicecore
+
+func nodeCompareCPU() nodeCompareCPUReading {
+	return nodeCompareCPUReading{Reason: "Process CPU measurement is implemented for Windows and Linux"}
+}

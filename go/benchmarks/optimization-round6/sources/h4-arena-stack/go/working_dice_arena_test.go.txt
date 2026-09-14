@@ -1,0 +1,265 @@
+package dicecore
+
+import (
+	"bytes"
+	"encoding/json"
+	"fmt"
+	"reflect"
+	"sync"
+	"testing"
+)
+
+func TestWorkingArenaExclusiveOwnershipAndBoundedRetention(t *testing.T) {
+	var cache workingDiceArenaCache
+	first := cache.acquire(100)
+	parent, states := "parent-id", []string{"exploded", "dropped"}
+	first.dice[99] = workingDie{ID: "retained-id", ParentDieID: &parent, States: states, spec: &CompiledDiceSpec{}}
+	retained := first.dice[99]
+	second := cache.acquire(100)
+	if first == second || &first.dice[0] == &second.dice[0] {
+		t.Fatal("simultaneous borrowers share working memory")
+	}
+	cache.release(first)
+	for index := range first.dice {
+		if !reflect.DeepEqual(first.dice[index], workingDie{}) {
+			t.Fatalf("released element %d retains execution references", index)
+		}
+	}
+	if retained.ID != "retained-id" || *retained.ParentDieID != "parent-id" || !reflect.DeepEqual(retained.States, states) {
+		t.Fatal("clearing working structs modified caller-owned values")
+	}
+	cache.release(second)
+	if cache.available.Load() != first {
+		t.Fatal("second return displaced an occupied slot")
+	}
+	large := cache.acquire(1000)
+	if len(large.dice) != 256 || cap(large.dice) != 256 {
+		t.Fatal("arena retained an oversized block")
+	}
+	cache.release(large)
+	small := cache.acquire(1)
+	if small != large || len(small.dice) != 1 {
+		t.Fatal("smaller execution did not reuse the bounded block")
+	}
+	cache.release(small)
+	if cap(cache.available.Load().dice) > 256 {
+		t.Fatal("retained capacity exceeded its bound")
+	}
+}
+
+func TestWorkingArenaPreservesExecutorTypeScriptFixtures(t *testing.T) {
+	var cache workingDiceArenaCache
+	for _, raw := range loadFixtureCases(t, "executor.json") {
+		var fixture struct {
+			Name            string                     `json:"name"`
+			Input           string                     `json:"input"`
+			Seed            any                        `json:"seed"`
+			Algorithm       RandomAlgorithm            `json:"algorithm"`
+			ExecutionLimits DiceLimitOverrides         `json:"executionLimits"`
+			Outcomes        map[string]json.RawMessage `json:"outcomes"`
+		}
+		if err := json.Unmarshal(raw, &fixture); err != nil {
+			t.Fatal(err)
+		}
+		t.Run(fixture.Name, func(t *testing.T) {
+			for _, mode := range []string{"full", "details", "summary"} {
+				t.Run(mode, func(t *testing.T) {
+					plan, err := CompileDicePlan(fixture.Input, DefaultDiceLimits())
+					var result any
+					if err == nil {
+						limits, limitErr := CreateDiceLimits(fixture.ExecutionLimits)
+						if limitErr != nil {
+							t.Fatal(limitErr)
+						}
+						options := ExecuteRollPlanOptions{Limits: limits, Seed: fixture.Seed, RandomAlgorithm: fixture.Algorithm, arenaCache: &cache}
+						switch mode {
+						case "full":
+							result, err = ExecuteRollPlan(plan, options)
+						case "details":
+							result, err = ExecuteRollPlanDetails(plan, options)
+						case "summary":
+							result, err = ExecuteRollPlanSummary(plan, options)
+						}
+					}
+					assertFixtureOutcome(t, fixture.Outcomes[mode], result, err)
+				})
+			}
+		})
+	}
+}
+
+func arenaResultBytes(t *testing.T, result any) []byte {
+	t.Helper()
+	standard, err := json.Marshal(result)
+	if err != nil {
+		t.Fatal(err)
+	}
+	direct, err := MarshalJSON(result)
+	if err != nil || !bytes.Equal(standard, direct) {
+		t.Fatal("direct JSON differs after working arena reuse", err)
+	}
+	return standard
+}
+
+func TestWorkingArenaRetainedResultsReplayAndMultipleRolls(t *testing.T) {
+	engine, err := CreateDiceEngine()
+	if err != nil {
+		t.Fatal(err)
+	}
+	inputs := []string{"1d6", "100d6", "2#{2d1!2,3d1}sa", "2#300d1!1kh1", "2#8d6!!p2ro<2kh5>=5f=1", "{2dF.2,2d%,3d6min2.125max4.875}kh1"}
+	var retained []*DiceRollResult
+	var snapshots [][]byte
+	for _, algorithm := range []RandomAlgorithm{MT19937, Xoshiro128SS} {
+		for _, input := range inputs {
+			result, err := engine.Roll(input, RollOptions{Seed: "arena-retention", RandomAlgorithm: algorithm})
+			if err != nil {
+				t.Fatal(input, err)
+			}
+			original := arenaResultBytes(t, result)
+			plan, err := CompileDicePlan(input, DefaultDiceLimits())
+			if err != nil {
+				t.Fatal(err)
+			}
+			uncached, err := ExecuteRollPlan(plan, ExecuteRollPlanOptions{Limits: DefaultDiceLimits(), Replay: result.Replay})
+			if err != nil || !bytes.Equal(original, arenaResultBytes(t, uncached)) {
+				t.Fatal("arena changed replay versus standalone execution", input, err)
+			}
+			details, err := engine.RollDetails(input, RollOptions{Replay: result.Replay})
+			if err != nil || !reflect.DeepEqual(details.Dice, result.Dice) || details.Stats != result.Stats {
+				t.Fatal("details changed dice, states or budgets", input, err)
+			}
+			summary, err := engine.RollSummary(input, RollOptions{Replay: result.Replay})
+			if err != nil || summary.Total != result.Total || summary.Stats != result.Stats {
+				t.Fatal("summary changed total or budgets", input, err)
+			}
+			for index := range result.Dice {
+				die := &result.Dice[index]
+				if len(die.States) > 0 {
+					die.States[0] = "caller-replaced-state"
+				}
+				die.States = append(die.States, "caller-appended-state")
+				if die.ParentDieID != nil {
+					*die.ParentDieID = "caller-parent"
+				}
+			}
+			for index := range result.Groups {
+				result.Groups[index].States = append(result.Groups[index].States, "caller-group-state")
+				if len(result.Groups[index].ChildIDs) > 0 {
+					result.Groups[index].ChildIDs[0] = "caller-child-id"
+				}
+			}
+			retained = append(retained, result)
+			snapshots = append(snapshots, arenaResultBytes(t, result))
+			again, err := engine.Roll(input, RollOptions{Replay: result.Replay})
+			if err != nil || !bytes.Equal(original, arenaResultBytes(t, again)) {
+				t.Fatal("caller mutation escaped into a later replay", input, err)
+			}
+			for index, previous := range retained {
+				if !bytes.Equal(snapshots[index], arenaResultBytes(t, previous)) {
+					t.Fatalf("later execution changed retained result %d", index)
+				}
+			}
+		}
+	}
+}
+
+func TestWorkingArenaReleasedAfterBudgetErrors(t *testing.T) {
+	plan, err := CompileDicePlan("20d1!1", DefaultDiceLimits())
+	if err != nil {
+		t.Fatal(err)
+	}
+	for _, limit := range []string{"maxInitialDice", "maxGeneratedDice", "maxRandomCalls", "maxEvents", "maxResultItems", "maxOutputLength"} {
+		t.Run(limit, func(t *testing.T) {
+			limits, err := CreateDiceLimits(DiceLimitOverrides{limit: 1})
+			if err != nil {
+				t.Fatal(err)
+			}
+			var cache workingDiceArenaCache
+			options := ExecuteRollPlanOptions{Limits: limits, Seed: "arena-budget"}
+			_, wantedErr := ExecuteRollPlan(plan, options)
+			options.arenaCache = &cache
+			result, actualErr := ExecuteRollPlan(plan, options)
+			if wantedErr == nil || !reflect.DeepEqual(wantedErr, actualErr) || result != nil {
+				t.Fatal("arena changed budget error or returned a partial result", actualErr)
+			}
+			if arena := cache.available.Load(); arena != nil {
+				for index := range arena.dice {
+					if !reflect.DeepEqual(arena.dice[index], workingDie{}) {
+						t.Fatal("failed execution retained working references")
+					}
+				}
+			} else if limit != "maxResultItems" {
+				t.Fatal("budget failure lost the borrowed arena")
+			}
+			options.Limits = DefaultDiceLimits()
+			after, err := ExecuteRollPlan(plan, options)
+			options.arenaCache = nil
+			wanted, expectedErr := ExecuteRollPlan(plan, options)
+			if err != nil || expectedErr != nil || !bytes.Equal(arenaResultBytes(t, wanted), arenaResultBytes(t, after)) {
+				t.Fatal("failed execution contaminated the next result", err, expectedErr)
+			}
+		})
+	}
+}
+
+func TestWorkingArenaCleanupBeforeFirstRoll(t *testing.T) {
+	plan, err := CompileDicePlan("1d6", DefaultDiceLimits())
+	if err != nil {
+		t.Fatal(err)
+	}
+	// A resolved execution budget can reject the roll item before rollState
+	// has been initialized. Its deferred cleanup must preserve that error.
+	limits := DefaultDiceLimits()
+	limits.MaxResultItems = 0
+	var cache workingDiceArenaCache
+	result, err := ExecuteRollPlan(plan, ExecuteRollPlanOptions{Limits: limits, Seed: "arena-before-roll", arenaCache: &cache})
+	requireErrorCode(t, err, "RESULT_LIMIT_EXCEEDED")
+	if result != nil || cache.available.Load() != nil {
+		t.Fatal("rejected first roll returned a result or acquired an arena")
+	}
+}
+
+func TestWorkingArenaConcurrentRollsAndRetainedSerialization(t *testing.T) {
+	engine, err := CreateDiceEngine()
+	if err != nil {
+		t.Fatal(err)
+	}
+	inputs := []string{"100d6", "2#{2d1!2,3d1}sa", "2#300d1!1kh1", "20d6!2ro=1kh10"}
+	results := make([]*DiceRollResult, len(inputs))
+	wanted := make([][]byte, len(inputs))
+	for index, input := range inputs {
+		results[index], err = engine.Roll(input, RollOptions{Seed: "arena-concurrency"})
+		if err != nil {
+			t.Fatal(err)
+		}
+		wanted[index] = arenaResultBytes(t, results[index])
+	}
+	var workers sync.WaitGroup
+	failures := make(chan error, 8)
+	for worker := 0; worker < 8; worker++ {
+		workers.Go(func() {
+			for iteration := 0; iteration < 8; iteration++ {
+				index := (worker + iteration) % len(inputs)
+				result := results[index]
+				if worker%2 == 0 {
+					var err error
+					result, err = engine.Roll(inputs[index], RollOptions{Replay: results[index].Replay})
+					if err != nil {
+						failures <- err
+						return
+					}
+				}
+				encoded, err := MarshalJSON(result)
+				if err != nil || !bytes.Equal(encoded, wanted[index]) {
+					failures <- fmt.Errorf("concurrent roll or retained result changed: %s: %v", inputs[index], err)
+					return
+				}
+			}
+		})
+	}
+	workers.Wait()
+	close(failures)
+	for failure := range failures {
+		t.Error(failure)
+	}
+}

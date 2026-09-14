@@ -1,0 +1,373 @@
+/** Node-only comparison; no production GC changes. Each invocation is bounded to 360 s.
+ * node scripts/compare-node-round6.mjs --workers 1|6 --baseline baseline.exe
+ *   [--candidate candidate.exe] [--baseline-source baseline-worktree] [--go go.exe]
+ * Without --candidate, compiles the current Go test executable before timing.
+ */
+import assert from 'node:assert/strict';
+import { spawnSync } from 'node:child_process';
+import { createHash } from 'node:crypto';
+import { existsSync, mkdirSync, readFileSync, readdirSync, writeFileSync } from 'node:fs';
+import os from 'node:os';
+import path from 'node:path';
+import { fileURLToPath } from 'node:url';
+import { gzipSync, gunzipSync } from 'node:zlib';
+
+const root = fileURLToPath(new URL('../', import.meta.url));
+const args = process.argv.slice(2);
+let workers = 6, go = process.env.GO_BINARY ?? 'go', baseline, candidate, baselineSource;
+for (let index = 0; index < args.length; index++) {
+  const argument = args[index];
+  assert.ok(args[index + 1], `Incomplete argument: ${argument}`);
+  if (argument === '--workers') workers = Number(args[++index]);
+  else if (argument === '--go') go = args[++index];
+  else if (argument === '--baseline') baseline = path.resolve(args[++index]);
+  else if (argument === '--candidate') candidate = path.resolve(args[++index]);
+  else if (argument === '--baseline-source') baselineSource = path.resolve(args[++index]);
+  else throw new Error(`Unknown argument: ${argument}`);
+}
+assert.ok(workers === 1 || workers === 6, '--workers must be 1 or 6');
+assert.ok(baseline, '--baseline is required');
+assert.ok(!process.versions.bun, 'Invoke this Node-only orchestrator with Node');
+const started = Date.now(), deadline = started + 360000;
+const directory = path.join(root, 'go/benchmarks/optimization-round6');
+const binary = candidate ?? path.join(root, `.artifacts/optimization-round6/node-final-w${workers}${process.platform === 'win32' ? '.exe' : ''}`);
+mkdirSync(directory, { recursive: true }); mkdirSync(path.dirname(binary), { recursive: true });
+const runName = `node-round6-w${workers}`, rawPath = path.join(directory, `${runName}.json`);
+const preflightPath = path.join(directory, `${runName}-preflight.json.gz`);
+const baselineRef = 'f107265';
+const workloads = [
+  ['d20', '1d20+5', 'main'], ['100d6', '100d6', 'main'], ['pool', '20d6!2ro=1kh10', 'main'],
+  ['1000d6', '1000d6', 'round5-regression'], ['reroll-selection', '100d6ro=1kh60', 'round5-regression'],
+  ['multi-group', '2#{4d6,3d8+2}kh1', 'round5-regression'], ['unicode-comment', '20d6!2ro=1kh10 # ação 🎲', 'round5-regression'],
+  ['fudge', '100dF.2', 'round5-regression'], ['fractional-bounds', '50d6min2.125max4.875kh25', 'round5-regression'],
+  // Same grammar as parser fixtures 6d10>=7f=1 and {1d4+1,1d6+2}dl1.
+  ['target-pool', '40d10>=7f=1', 'new-holdout'], ['drop-group', '{6d6,4d8}dl1', 'new-holdout'],
+].map(([id, input, category]) => ({ id, input, category, mode: 'full', label: `${input} · full` }));
+const configurations = [
+  { id: 'node', label: 'Node', runtime: 'node', executable: process.execPath, encoder: 'JSON.stringify' },
+  { id: 'go-baseline-default', label: 'Go anterior · GC100', runtime: 'go', executable: baseline, encoder: 'dicecore.MarshalJSON', gc: 100, memoryLimit: null },
+  { id: 'go-final-default', label: 'Go atual · GC100', runtime: 'go', executable: binary, encoder: 'dicecore.MarshalJSON', gc: 100, memoryLimit: null },
+  { id: 'go-baseline-tuned', label: 'Go anterior · GC500/96MiB', runtime: 'go', executable: baseline, encoder: 'dicecore.MarshalJSON', gc: 500, memoryLimit: '96MiB' },
+  { id: 'go-final-tuned', label: 'Go atual · GC500/96MiB', runtime: 'go', executable: binary, encoder: 'dicecore.MarshalJSON', gc: 500, memoryLimit: '96MiB' },
+];
+const configuration = {
+  workers, gomaxprocs: 12, requests: 4096, latencyRequests: 2048, samplesPerProcess: 3, rounds: 2, warmupPerWorker: 256,
+  operation: 'build-and-encode', seedPrefix: 'dicecore-backend/v3.7.1/', randomAlgorithm: 'mt19937',
+  engineMode: 'pool', freezeResults: 'never', cache: 'warm', wallBudgetMs: 360000,
+  validationIndices: [0, 1, 5, 127, 511, 4095],
+  orders: [configurations.map(value => value.id), configurations.map(value => value.id).reverse()],
+  latencyMethod: 'Separate pass after throughput batches, two high-resolution monotonic counter reads per call; Windows Go uses QueryPerformanceCounter with frequency resolved before workers and delta ticks converted to ns, portable Go uses time.Now/time.Since, Node uses process.hrtime.bigint; per-worker closed loops, no queue/HTTP; digest updated after each individual timer.',
+  cpuMethod: 'Whole-process cumulative user+system CPU surrounding each throughput batch, including all worker/runtime/GC threads and measurement-call overhead.',
+};
+const workerFiles = ['go/node_compare_bench_test.go', 'go/node_compare_cpu_windows_test.go', 'go/node_compare_cpu_linux_test.go', 'go/node_compare_cpu_other_test.go',
+  'go/backend_benchmark_test.go', 'go/json_benchmark_test.go', 'go/backend_rss_windows_test.go', 'go/backend_rss_linux_test.go', 'go/backend_rss_other_test.go'];
+const raw = {
+  schemaVersion: 1, status: 'running', startedAt: new Date(started).toISOString(),
+  invocation: { executable: process.execPath, args: ['scripts/compare-node-round6.mjs', ...args] },
+  configuration, configurations, workloads, runs: [], warnings: [],
+};
+const hash = bytes => createHash('sha256').update(bytes).digest('hex');
+const persist = () => writeFileSync(rawPath, JSON.stringify(raw, null, 2) + '\n');
+persist();
+function command(executable, argv, options = {}) {
+  const remaining = deadline - Date.now();
+  assert.ok(remaining > 0, 'Round-six invocation exceeded its 360-second wall budget');
+  const result = spawnSync(executable, argv, { cwd: root, encoding: 'utf8', maxBuffer: 96 * 1024 * 1024, windowsHide: true, ...options, timeout: remaining });
+  if (result.error || result.status !== 0) throw new Error(`${executable} ${argv.join(' ')}: ${result.error?.message ?? [result.stderr, result.stdout].filter(Boolean).join('\n')}`);
+  return result.stdout.trim();
+}
+function sourceSnapshot(sourceRoot = root, full = true) {
+  const files = [];
+  function collect(directory, extension) {
+    for (const entry of readdirSync(path.join(sourceRoot, directory), { withFileTypes: true })) {
+      const file = path.join(directory, entry.name);
+      if (entry.isDirectory()) collect(file, extension);
+      else if (file.endsWith(extension)) files.push(file.replaceAll('\\', '/'));
+    }
+  }
+  for (const name of readdirSync(path.join(sourceRoot, 'go'))) if (name.endsWith('.go') || name === 'go.mod' || name === 'go.sum') files.push(`go/${name}`);
+  if (full) {
+    collect('src', '.ts'); collect('dist', '.js');
+    files.push('scripts/compare-node-round6.mjs', 'scripts/benchmark-node-reference-round6.mjs', 'package.json', 'package-lock.json', 'rollup.config.mjs', 'tsconfig.json', 'tsconfig.build.json');
+  }
+  const manifest = files.sort().map(file => ({ path: file, sha256: hash(readFileSync(path.join(sourceRoot, file))) }));
+  return { sha256: hash(JSON.stringify(manifest)), files: manifest };
+}
+function goEnvironment(gc, memoryLimit) {
+  const env = { ...process.env };
+  for (const key of Object.keys(env)) if (['GOGC', 'GOMEMLIMIT', 'GOMAXPROCS', 'DICECORE_NODE_COMPARE_WORKER'].includes(key.toUpperCase())) delete env[key];
+  env.GOGC = String(gc); env.GOMAXPROCS = '12'; env.DICECORE_NODE_COMPARE_WORKER = '1';
+  if (memoryLimit !== null) env.GOMEMLIMIT = memoryLimit;
+  return env;
+}
+function worker(current, phase, round = null) {
+  const request = {
+    workers, requests: configuration.requests, samples: configuration.samplesPerProcess, warmup: configuration.warmupPerWorker,
+    latencyRequests: configuration.latencyRequests, seedPrefix: configuration.seedPrefix, engineMode: configuration.engineMode,
+    validationIndices: configuration.validationIndices, workloads, phase,
+  };
+  const env = current.runtime === 'go' ? goEnvironment(current.gc, current.memoryLimit) : { ...process.env };
+  const before = Date.now();
+  const output = current.runtime === 'go'
+    ? command(current.executable, ['-test.run=^TestNodeCompareBenchmarkWorker$'], { cwd: path.join(root, 'go'), env, input: JSON.stringify(request) })
+    : command(current.executable, [path.join(root, 'scripts/benchmark-node-reference-round6.mjs')], { env, input: JSON.stringify(request) });
+  const lines = output.split(/\r?\n/).filter(line => line.startsWith('DICECORE_NODE_COMPARE '));
+  assert.equal(lines.length, 1, `Expected one worker response: ${current.id}`);
+  const result = {
+    configuration: current.id, runtime: current.runtime, phase, round, wallMilliseconds: Date.now() - before,
+    environment: Object.fromEntries(['GOGC', 'GOMEMLIMIT', 'GOMAXPROCS', 'NODE_OPTIONS', 'GODEBUG', 'GOEXPERIMENT'].map(key => [key, env[key] ?? null])),
+    request, workerOutputSha256: hash(lines[0]), output: JSON.parse(lines[0].slice('DICECORE_NODE_COMPARE '.length)),
+  };
+  result.outputCanonicalSha256 = hash(JSON.stringify(result.output));
+  assert.equal(result.output.encoder, current.encoder);
+  if (current.runtime === 'go') {
+    assert.equal(result.output.gomaxprocs, 12);
+    const expectedRuntime = /^go version (\S+)/.exec(raw.environment.go)?.[1];
+    assert.ok(expectedRuntime, `Cannot read Go runtime version: ${raw.environment.go}`);
+    assert.equal(result.output.runtime, expectedRuntime, `Go runtime differs from the declared toolchain: ${current.id}`);
+    assert.equal(result.output.clock?.source, process.platform === 'win32' ? 'QueryPerformanceCounter' : 'time.Now/time.Since monotonic');
+    if (process.platform === 'win32') assert.ok(Number.isSafeInteger(result.output.clock.frequencyHz) && result.output.clock.frequencyHz > 0, 'Invalid performance-counter frequency');
+  } else {
+    assert.equal(result.output.runtime, process.version);
+    assert.equal(result.output.clock?.source, 'process.hrtime.bigint');
+  }
+  assert.deepEqual(Object.keys(result.output.cases).sort(), workloads.map(workload => workload.id).sort());
+  return result;
+}
+function quantile(values, fraction) {
+  assert.ok(values.length > 0);
+  const sorted = [...values].sort((a, b) => a - b), position = (sorted.length - 1) * fraction, lower = Math.floor(position);
+  return sorted[lower] + (sorted[Math.ceil(position)] - sorted[lower]) * (position - lower);
+}
+function cpuValue(sample) {
+  const cpu = sample.cpu;
+  if (!cpu.available) return null;
+  assert.ok([cpu.userNs, cpu.systemNs, cpu.totalNs].every(value => Number.isFinite(value) && value >= 0));
+  assert.equal(cpu.totalNs, cpu.userNs + cpu.systemNs);
+  assert.equal(cpu.userNs, cpu.after.userNs - cpu.before.userNs);
+  assert.equal(cpu.systemNs, cpu.after.systemNs - cpu.before.systemNs);
+  assert.equal(cpu.before.source, cpu.after.source);
+  return cpu.totalNs / sample.requests;
+}
+function summarize(current, workload) {
+  const runs = raw.runs.filter(run => run.configuration === current.id);
+  assert.equal(runs.length, 2);
+  const batches = runs.flatMap(run => run.output.cases[workload.id]), durations = batches.map(batch => batch.durationNs);
+  const cpu = batches.map(cpuValue).filter(value => value !== null);
+  const rss = runs.flatMap(run => run.output.memory[workload.id].afterBatches).filter(value => value.available).map(value => value.rssBytes / 2 ** 20);
+  const latency = runs.flatMap(run => run.output.latency[workload.id].samplesByWorkerNs.flat());
+  const cpuTotalNs = cpu.reduce((total, value) => total + value * configuration.requests, 0);
+  assert.equal(durations.length, 6); assert.equal(latency.length, configuration.latencyRequests * 2);
+  return {
+    batchSamplesNs: durations, batchSamplesCount: durations.length,
+    medianBatchMs: quantile(durations, .5) / 1e6, q1BatchMs: quantile(durations, .25) / 1e6, q3BatchMs: quantile(durations, .75) / 1e6,
+    opsPerSecond: configuration.requests * 1e9 / quantile(durations, .5),
+    cpuSamplesNsPerOp: cpu, cpuSamplesCount: cpu.length, medianCpuNsPerOp: cpu.length ? quantile(cpu, .5) : null,
+    cpuMeasuredRequests: cpu.length * configuration.requests,
+    measuredCpuTotalNs: cpuTotalNs,
+    aggregateCpuNsPerOp: cpu.length === batches.length && cpuTotalNs > 0 ? cpuTotalNs / (batches.length * configuration.requests) : null,
+    q1CpuNsPerOp: cpu.length ? quantile(cpu, .25) : null, q3CpuNsPerOp: cpu.length ? quantile(cpu, .75) : null,
+    rssSamplesMiB: rss, medianSnapshotRssMiB: rss.length ? quantile(rss, .5) : null, maximumSnapshotRssMiB: rss.length ? Math.max(...rss) : null,
+    latencySamplesCount: latency.length, p50LatencyNs: quantile(latency, .5), p95LatencyNs: quantile(latency, .95),
+    encodedLengthPerResult: batches[0].digest.encodedLength / batches[0].digest.count,
+    encodedLengthUnit: current.runtime === 'go' ? 'UTF-8 bytes' : 'UTF-16 code units',
+  };
+}
+function buildReport(data) {
+  const nf = value => value === null ? 'indisponível' : new Intl.NumberFormat('pt-BR', { maximumFractionDigits: 2 }).format(value);
+  const table = render => `| Carga | ${configurations.map(current => current.label).join(' | ')} |\n|---|${configurations.map(() => '---:').join('|')}|\n` +
+    data.summary.map(row => `| ${row.input} | ${configurations.map(current => render(row[current.id])).join(' | ')} |`).join('\n') + '\n';
+  const winCount = (id, metric, larger) => data.summary.filter(row => row[id][metric] !== null && row.node[metric] !== null && (larger ? row[id][metric] > row.node[metric] : row[id][metric] < row.node[metric])).length;
+  const counts = ['go-final-default', 'go-final-tuned'].map(id => {
+    const values = ['opsPerSecond', 'aggregateCpuNsPerOp', 'medianSnapshotRssMiB', 'p50LatencyNs', 'p95LatencyNs'].map((metric, index) => winCount(id, metric, index === 0));
+    return `| ${configurations.find(current => current.id === id).label} | ${values.map(value => `${value}/${workloads.length}`).join(' | ')} |`;
+  }).join('\n');
+  const quote = value => `'${String(value).replaceAll("'", "''")}'`;
+  return `# Rodada 6: Node versus Go · ${workers} worker${workers === 1 ? '' : 's'}\n\n` +
+    `Mesma API full seguida de JSON.stringify no Node e dicecore.MarshalJSON no Go. Compara Node com Go anterior (${baselineRef}) e atual, ` +
+    `em GC100 e GC500/96MiB. Todas as séries Go usam GOMAXPROCS=12; cada worker possui uma engine. ` +
+    `Os dois regimes de GC são apresentados separadamente; a biblioteca não muda a política global.\n\n` +
+    `## Comparações observadas com Node\n\n` +
+    `Contagem de cargas em que a série atual teve melhor valor observado. Vazão usa a mediana dos lotes; CPU/op usa soma dos deltas / soma das chamadas; RSS usa mediana; p50/p95 são da passagem individual. ` +
+    `Essas contagens não são testes de significância e não comprovam superioridade em toda carga ou uma capacidade HTTP.\n\n` +
+    `| Série | Vazão maior | CPU/op menor | RSS menor | p50 menor | p95 menor |\n|---|---:|---:|---:|---:|---:|\n${counts}\n\n` +
+    `## Método e escopo\n\n` +
+    `${workers} workers de aplicação, uma engine por worker, MT19937, freezeResults='never', limites padrão e cache aquecido. ` +
+    `O harness cria explicitamente worker_threads no Node e goroutines no Go. A API Node não distribui as chamadas automaticamente: o backend precisa criar e coordenar seus workers. ` +
+    `Os workers não recebem resultados pré-computados ou buffers JSON reutilizáveis. Cada chamada constrói um resultado completo e produz saída própria. ` +
+    `Não há HTTP, rede, persistência ou conversão adicional da string JavaScript para bytes UTF-8. O teste inclui despacho/conclusão dos workers e digest por chamada.\n\n` +
+    `Cada processo aquece 256 chamadas por worker e mede três lotes de 4096 chamadas por expressão. ` +
+    `Duas rodadas em processos novos e ordem invertida produzem seis lotes por série/carga. ` +
+    `Seeds são ${configuration.seedPrefix} + índice, distintas dentro do lote e repetidas nas séries. Setup, options, seeds textuais e aquecimento ficam fora do timer; ` +
+    `validação/hash da seed e inicialização do gerador fazem parte da rolagem cronometrada.\n\n` +
+    `Depois dos três lotes, cada expressão recebe uma passagem separada de 2048 chamadas com timer individual, totalizando 4096 amostras por série/carga. ` +
+    `Os timers de lote e individuais usam duas leituras de contador monotônico: QueryPerformanceCounter no Go/Windows, time.Now/time.Since no Go portátil e process.hrtime.bigint no Node. ` +
+    `A frequência do contador Windows é resolvida antes dos workers; somente a diferença de ticks é convertida para nanossegundos, com multiplicação intermediária de 128 bits. ` +
+    `Cada worker e o coordenador Go possuem um campo de saída QPC próprio, criado antes das medições e reutilizado, sem alocar esse campo por leitura. ` +
+    `Fonte e frequência disponíveis ficam registradas em cada resposta bruta. Durações individuais zero ou negativas continuam sendo rejeitadas, sem arredondá-las artificialmente. ` +
+    `O timer individual cobre rolagem e serialização; atualização do digest ocorre após o timer. ` +
+    `Os timers, armazenamento das amostras e digest perturbam a execução/GC, embora não sejam adicionados aos tempos dos lotes anteriores. ` +
+    `São latências de serviço em loops fechados, sem espera em fila ou transporte; não são p95 de uma API HTTP sob tráfego aberto.\n\n` +
+    `CPU/op soma tempo de usuário e sistema do processo inteiro, incluindo todos os threads de execução, runtime e GC. ` +
+    `GetProcessTimes no Windows/getrusage no Linux e process.cpuUsage no Node são lidos em torno de cada lote, ligeiramente fora do timer de parede. ` +
+    `Custo dos leitores e resolução dos contadores introduzem ruído; GetProcessTimes pode apresentar deltas quantizados em torno de 15,6 ms no Windows, apesar de expressar valores em unidades de 100 ns. ` +
+    `CPU/op principal agrega soma dos deltas / soma das chamadas dos seis lotes. Se alguma leitura faltar ou todos os deltas forem zero, o agregado fica indisponível. ` +
+    `Valores zero isolados em lotes curtos não significam trabalho gratuito. Não são CPU individual nem percentis de CPU. ` +
+    `CPU/op pode exceder o tempo de parede por operação quando threads trabalham simultaneamente.\n\n` +
+    `RSS usa snapshots após os lotes, antes da passagem de latência, com workers e últimos resultados/JSON vivos. ` +
+    `Inclui runtime/harness e memória retida de expressões anteriores; não é pico, teto ou memória isolada por expressão. ` +
+    `GOMEMLIMIT=96MiB é flexível e não limita rigidamente o RSS. GC100 remove GOMEMLIMIT herdado.\n\n` +
+    `Ordem inicial: ${configuration.orders[0].join(' → ')}. Ordem final: ${configuration.orders[1].join(' → ')}. ` +
+    `Ordem das cargas: ${workloads.map(workload => workload.input).join(' → ')}. ` +
+    `As três cargas principais e seis regressões foram preservadas. Os dois últimos casos são holdouts novos, sem uso na seleção das otimizações. ` +
+    `As invocações de 1 e 6 workers são arquivos separados, sem agregar suas amostras.\n\n` +
+    `## Ambiente, fontes e paridade\n\n${data.environment.cpuModel.trim()} · ${data.environment.osVersion} · ${data.environment.logicalCPUs} CPUs lógicas. ` +
+    `Node ${data.environment.node} · ${data.environment.go}. Fontes atuais sobre ${data.git.commit}; manifesto ${data.source.sha256}. ` +
+    `Baseline ${data.baseline.commit}; binário SHA-256 ${data.binaries.baseline.sha256}. Atual SHA-256 ${data.binaries.current.sha256}. ` +
+    `${baselineSource ? 'Workers Go são iguais byte a byte entre o worktree baseline e a raiz; o baseline não possui alterações rastreadas em Go.' : 'O worktree baseline não foi fornecido; sua origem é declarada e o binário identificado por hash, sem prova de construção pelo script.'} ` +
+    `Compilação/origem declaradas, hashes de fontes, workers, binários e build info ficam no JSON bruto. Dist TypeScript existente é usado sem rebuild e possui manifesto.\n\n` +
+    `Preflight: ${data.preflight.uniqueOutputs} resultados completos em cada uma das cinco séries. ` +
+    `Cada Go compara bytes com encoding/json.Marshal; o orquestrador compara todos os bytes entre Go anterior/atual e JSON decodificado integral entre Node/Go. ` +
+    `Todos os lotes e passagens individuais devem ter contagem, totais, soma ponderada e chamadas aleatórias idênticas. ` +
+    `Comprimentos Go são idênticos; Node mede unidades UTF-16, Go bytes UTF-8, portanto o comentário Unicode pode produzir comprimentos distintos. ` +
+    `Os digests não substituem conformidade e testes de propriedade.\n\n` +
+    `## Vazão e tempo dos lotes\n\nCada célula: operações/s / mediana em ms [Q1–Q3].\n\n` +
+    table(value => `${nf(value.opsPerSecond)} / ${nf(value.medianBatchMs)} [${nf(value.q1BatchMs)}–${nf(value.q3BatchMs)}]`) +
+    `\n## CPU por operação\n\nAgregado em µs de CPU/op / mediana dos lotes [Q1–Q3], processo inteiro; menor é melhor. Leituras brutas estão no JSON.\n\n` +
+    table(value => value.aggregateCpuNsPerOp === null ? 'indisponível' : `${nf(value.aggregateCpuNsPerOp / 1000)} / ${nf(value.medianCpuNsPerOp / 1000)} [${nf(value.q1CpuNsPerOp / 1000)}–${nf(value.q3CpuNsPerOp / 1000)}]`) +
+    `\n## Latências individuais\n\nCada célula: p50 / p95 em µs, passagem separada com ${configuration.latencyRequests * 2} amostras; menor é melhor.\n\n` +
+    table(value => `${nf(value.p50LatencyNs / 1000)} / ${nf(value.p95LatencyNs / 1000)}`) +
+    `\n## Memória residente\n\nCada célula: mediana / maior snapshot RSS em MiB.\n\n` +
+    table(value => `${nf(value.medianSnapshotRssMiB)} / ${nf(value.maximumSnapshotRssMiB)}`) +
+    `\n## Reprodução e arquivos\n\n\`\`\`powershell\nnode scripts/compare-node-round6.mjs --workers ${workers} --go ${quote(go)} --baseline ${quote(baseline)}` +
+    `${candidate ? ` --candidate ${quote(candidate)}` : ''}${baselineSource ? ` --baseline-source ${quote(baselineSource)}` : ''}\n\`\`\`\n\n` +
+    `O baseline precisa ser compilado com os mesmos novos arquivos *_test.go listados no manifesto workerSource. ` +
+    `Sem --candidate, o script compila o atual antes dos timers. Limite por invocação: 360 segundos, incluindo preflight e compilação; observado: ${nf(data.wallMilliseconds / 1000)} s. ` +
+    `Apenas um processo de medição por vez; falhas preservam dados parciais. A máquina compartilhada, frequência de CPU, GC e escalonamento afetam as medições.\n\n` +
+    `[Dados brutos e manifestos](benchmarks/optimization-round6/${runName}.json) · [Preflight integral](benchmarks/optimization-round6/${runName}-preflight.json.gz) · ` +
+    `[Orquestrador](../scripts/compare-node-round6.mjs) · [Worker Go](node_compare_bench_test.go) · [Worker Node](../scripts/benchmark-node-reference-round6.mjs).\n`;
+}
+
+try {
+  assert.ok(existsSync(baseline), `Missing baseline executable: ${baseline}`);
+  assert.notEqual(path.resolve(baseline).toLowerCase(), path.resolve(binary).toLowerCase(), 'Baseline and candidate paths must differ');
+  assert.ok(existsSync(path.join(root, 'dist/index.js')), 'Build the TypeScript dist before this comparison');
+  raw.environment = {
+    cpuModel: os.cpus()[0].model, logicalCPUs: os.cpus().length, osVersion: os.version(), osRelease: os.release(), platform: process.platform, arch: process.arch,
+    node: process.version, go: command(go, ['version']),
+    inheritedEnvironment: Object.fromEntries(['NODE_OPTIONS', 'GOGC', 'GOMEMLIMIT', 'GOMAXPROCS', 'GODEBUG', 'GOEXPERIMENT', 'GOFLAGS'].map(key => [key, process.env[key] ?? null])),
+  };
+  raw.git = { commit: command('git', ['rev-parse', 'HEAD']), statusLines: command('git', ['status', '--porcelain=v1']).split(/\r?\n/).filter(Boolean) };
+  raw.baseline = { reference: baselineRef, commit: command('git', ['rev-parse', `${baselineRef}^{commit}`]), sourceRoot: baselineSource ?? null,
+    sourceTree: command('git', ['ls-tree', '-r', '--full-tree', baselineRef, 'go', 'src']).split(/\r?\n/).filter(line => /\t(?:go\/[^/]+\.go|go\/go\.mod|src\/.*\.ts)$/.test(line)) };
+  const workerManifest = [...workerFiles, 'scripts/benchmark-node-reference-round6.mjs'].sort().map(file => ({ path: file, sha256: hash(readFileSync(path.join(root, file))) }));
+  raw.workerSource = { sha256: hash(JSON.stringify(workerManifest)), files: workerManifest };
+  if (baselineSource) {
+    assert.equal(command('git', ['rev-parse', 'HEAD'], { cwd: baselineSource }), raw.baseline.commit, 'Baseline worktree commit');
+    command('git', ['diff', '--exit-code', baselineRef, '--', 'go'], { cwd: baselineSource });
+    const allowedUntrackedGo = new Set([
+      'go/node_compare_bench_test.go', 'go/node_compare_cpu_windows_test.go',
+      'go/node_compare_cpu_linux_test.go', 'go/node_compare_cpu_other_test.go',
+    ]);
+    // Ignored files also enter a Go build. Check every untracked top-level Go
+    // source, allowing only the four explicitly added comparison workers.
+    const untrackedGo = command('git', ['ls-files', '--others', '-z', '--', 'go'], { cwd: baselineSource })
+      .split('\0').filter(file => /^go\/[^/]+\.go$/.test(file)).sort();
+    assert.deepEqual(untrackedGo.filter(file => !allowedUntrackedGo.has(file)), [], 'Baseline contains unexpected untracked Go source');
+    raw.baseline.addedWorkerFiles = untrackedGo;
+    for (const file of workerFiles) assert.equal(hash(readFileSync(path.join(baselineSource, file))), hash(readFileSync(path.join(root, file))), `Baseline worker differs: ${file}`);
+    raw.baseline.source = sourceSnapshot(baselineSource, false);
+  }
+  raw.source = sourceSnapshot();
+  raw.binaries = { baseline: { path: baseline, sha256: hash(readFileSync(baseline)), buildInfo: command(go, ['version', '-m', baseline]) } };
+  raw.commands = [];
+  persist();
+  if (!candidate) {
+    const build = { executable: go, args: ['test', '-c', '-o', binary], cwd: path.join(root, 'go') };
+    raw.commands.push(build); persist();
+    command(go, build.args, { cwd: build.cwd, env: goEnvironment(100, null) });
+  }
+  raw.binaries.current = { path: binary, sha256: hash(readFileSync(binary)), buildInfo: command(go, ['version', '-m', binary]), supplied: Boolean(candidate) };
+  assert.equal(sourceSnapshot().sha256, raw.source.sha256, 'Source changed before preflight'); persist();
+  const preflight = { validationIndices: configuration.validationIndices, runs: [] };
+  let expectedValues, expectedGoBytes;
+  for (const current of configurations) {
+    const run = worker(current, 'preflight'); preflight.runs.push(run);
+    writeFileSync(preflightPath, gzipSync(Buffer.from(JSON.stringify(preflight, null, 2) + '\n'), { level: 1 }));
+    const values = {}, encoded = {};
+    for (const workload of workloads) {
+      const entries = run.output.cases[workload.id];
+      assert.deepEqual(entries.map(entry => entry.index), configuration.validationIndices);
+      values[workload.id] = entries.map(entry => {
+        assert.equal(current.runtime === 'go' ? Buffer.byteLength(entry.json) : entry.json.length, entry.encodedLength);
+        if (current.runtime === 'go') assert.equal(entry.stdlibEqual, true);
+        return { index: entry.index, value: JSON.parse(entry.json) };
+      });
+      encoded[workload.id] = entries.map(entry => ({ index: entry.index, json: entry.json }));
+    }
+    if (expectedValues === undefined) expectedValues = values; else assert.deepStrictEqual(values, expectedValues, `Complete JSON values: ${current.id}`);
+    if (current.runtime === 'go') {
+      if (expectedGoBytes === undefined) expectedGoBytes = encoded; else assert.deepStrictEqual(encoded, expectedGoBytes, `Complete Go bytes: ${current.id}`);
+    }
+  }
+  const preflightBytes = Buffer.from(JSON.stringify(preflight, null, 2) + '\n'), compressed = gzipSync(preflightBytes, { level: 9 });
+  assert.deepEqual(gunzipSync(compressed), preflightBytes); writeFileSync(preflightPath, compressed);
+  raw.preflight = { passed: true, goStdlibByteEquality: true, goBaselineByteEquality: true, completeDecodedValueEquality: true,
+    configurations: 5, uniqueOutputs: workloads.length * configuration.validationIndices.length, file: path.relative(root, preflightPath).replaceAll('\\', '/'),
+    compressedSha256: hash(compressed), uncompressedSha256: hash(preflightBytes), compressedBytes: compressed.length, uncompressedBytes: preflightBytes.length };
+  persist();
+  const expectedDigests = {}, goLengths = {}, seriesLengths = {};
+  function verifyDigest(workload, current, digest, expectedCount) {
+    assert.equal(digest.count, expectedCount);
+    const { encodedLength, ...values } = digest;
+    assert.deepEqual(Object.keys(values).sort(), ['count', 'randomCalls', 'total', 'weightedTotal']);
+    assert.ok(Object.values(values).every(Number.isFinite)); assert.ok(Number.isFinite(encodedLength) && encodedLength > 0);
+    const key = `${workload}/${expectedCount}`;
+    if (expectedDigests[key] === undefined) expectedDigests[key] = values; else assert.deepStrictEqual(values, expectedDigests[key], `Delivery digest: ${workload}/${current.id}`);
+    if (current.runtime === 'go') {
+      if (goLengths[key] === undefined) goLengths[key] = encodedLength; else assert.equal(encodedLength, goLengths[key], `Go byte length: ${workload}`);
+    }
+    const seriesKey = `${current.id}/${key}`;
+    if (seriesLengths[seriesKey] === undefined) seriesLengths[seriesKey] = encodedLength; else assert.equal(encodedLength, seriesLengths[seriesKey], `Stable encoded length: ${seriesKey}`);
+  }
+  for (let round = 0; round < 2; round++) for (const id of configuration.orders[round]) {
+    const current = configurations.find(current => current.id === id);
+    console.log(`Round 6 · ${workers} worker(s) · ${round + 1}/2 · ${id}`);
+    const run = worker(current, 'measure', round + 1); raw.runs.push(run); persist();
+    for (const workload of workloads) {
+      const batches = run.output.cases[workload.id], snapshots = run.output.memory[workload.id].afterBatches;
+      assert.equal(batches.length, 3); assert.equal(snapshots.length, 3);
+      for (const batch of batches) {
+        assert.equal(batch.workers, workers); assert.equal(batch.requests, configuration.requests);
+        assert.ok(Number.isFinite(batch.durationNs) && batch.durationNs > 0);
+        verifyDigest(workload.id, current, batch.digest, configuration.requests);
+        const cpu = cpuValue(batch);
+        if (cpu === null) raw.warnings.push(`CPU unavailable: ${id}/${workload.id}/round${round + 1}`);
+        else if (cpu === 0) raw.warnings.push(`Zero CPU delta at counter resolution: ${id}/${workload.id}/round${round + 1}`);
+      }
+      for (const snapshot of snapshots) if (snapshot.available) assert.ok(Number.isFinite(snapshot.rssBytes) && snapshot.rssBytes > 0);
+      const individual = run.output.latency[workload.id];
+      assert.equal(individual.requests, configuration.latencyRequests); assert.equal(individual.samplesByWorkerNs.length, workers);
+      individual.samplesByWorkerNs.forEach((samples, worker) => {
+        assert.equal(samples.length, Math.floor((configuration.latencyRequests - 1 - worker) / workers) + 1);
+        assert.ok(samples.every(value => Number.isFinite(value) && value > 0), `Individual durations: ${id}/${workload.id}`);
+      });
+      verifyDigest(workload.id, current, individual.digest, configuration.latencyRequests);
+    }
+    persist();
+  }
+  raw.summary = workloads.map(workload => ({ ...workload, workers,
+    ...Object.fromEntries(configurations.map(current => [current.id, summarize(current, workload)])) }));
+  assert.equal(sourceSnapshot().sha256, raw.source.sha256, 'Source changed during comparison');
+  if (baselineSource) assert.equal(sourceSnapshot(baselineSource, false).sha256, raw.baseline.source.sha256, 'Baseline worktree source changed');
+  for (const [label, binary] of Object.entries(raw.binaries)) assert.equal(hash(readFileSync(binary.path)), binary.sha256, `Executable changed: ${label}`);
+  assert.ok(Date.now() <= deadline, 'Round-six invocation exceeded its 360-second wall budget');
+  raw.checks = { currentSourceStable: true, baselineSourceStable: baselineSource ? true : null, executableHashesStable: true,
+    fullPreflightParity: true, deliveryDigests: true, perSeriesEncodedLengthsStable: true, individualSampleCounts: true, batchCounts: true };
+  raw.status = 'complete'; raw.finishedAt = new Date().toISOString(); raw.wallMilliseconds = Date.now() - started; persist();
+  writeFileSync(path.join(root, 'go', `NODE_ROUND6_W${workers}.md`), buildReport(raw));
+  console.log(`Saved ${path.relative(root, rawPath)} in ${(raw.wallMilliseconds / 1000).toFixed(1)} seconds.`);
+} catch (error) {
+  raw.status = 'failed'; raw.error = { message: error.message, stack: error.stack }; raw.finishedAt = new Date().toISOString(); raw.wallMilliseconds = Date.now() - started; persist();
+  console.error(error.stack); process.exitCode = 1;
+}

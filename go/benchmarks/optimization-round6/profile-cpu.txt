@@ -1,0 +1,31 @@
+File: baseline.exe
+Build ID: D:\Projetos\ERPG\rpg-dice-roller\.artifacts\optimization-round6\baseline.exe2026-09-14 01:29:24.001082 -0300 -03
+Type: cpu
+Time: 2026-09-14 01:43:29 -03
+Duration: 5.22s, Total samples = 26590ms (509.07%)
+Showing nodes accounting for 18640ms, 70.10% of 26590ms total
+Dropped 312 nodes (cum <= 132.95ms)
+Showing top 22 nodes out of 147
+      flat  flat%   sum%        cum   cum%
+    3690ms 13.88% 13.88%     3690ms 13.88%  runtime.semasleep
+    1980ms  7.45% 21.32%     2570ms  9.67%  runtime.tryDeferToSpanScan
+    1600ms  6.02% 27.34%     1840ms  6.92%  github.com/arkanus-app/rpg-dice-roller/go.appendEventString
+    1240ms  4.66% 32.00%     1600ms  6.02%  runtime.preemptM
+    1200ms  4.51% 36.52%     1740ms  6.54%  runtime.findObject
+    1060ms  3.99% 40.50%     1060ms  3.99%  runtime.memclrNoHeapPointers
+     840ms  3.16% 43.66%      840ms  3.16%  runtime.memmove
+     730ms  2.75% 46.41%     1300ms  4.89%  runtime.scanObjectsSmall
+     720ms  2.71% 49.12%     2250ms  8.46%  github.com/arkanus-app/rpg-dice-roller/go.(*eventJSON).key (inline)
+     630ms  2.37% 51.49%     2230ms  8.39%  runtime.scanObject
+     630ms  2.37% 53.85%     3720ms 13.99%  runtime.wbBufFlush1
+     540ms  2.03% 55.89%      540ms  2.03%  runtime.lock2.osyield.func1
+     540ms  2.03% 57.92%      710ms  2.67%  runtime.typePointers.next
+     520ms  1.96% 59.87%     2020ms  7.60%  github.com/arkanus-app/rpg-dice-roller/go.(*eventJSON).number
+     390ms  1.47% 61.34%      700ms  2.63%  internal/strconv.AppendUint
+     370ms  1.39% 62.73%     3110ms 11.70%  gcWriteBarrier
+     360ms  1.35% 64.08%      510ms  1.92%  runtime.spanOf (inline)
+     350ms  1.32% 65.40%      350ms  1.32%  runtime.runqgrab.osyield.func1
+     320ms  1.20% 66.60%      320ms  1.20%  runtime.typePointers.nextFast (inline)
+     310ms  1.17% 67.77%     2820ms 10.61%  github.com/arkanus-app/rpg-dice-roller/go.(*eventJSON).events
+     310ms  1.17% 68.94%      410ms  1.54%  runtime.heapArenaOf (inline)
+     310ms  1.17% 70.10%      310ms  1.17%  runtime.procyieldAsm

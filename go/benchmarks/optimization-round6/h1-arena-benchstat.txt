@@ -1,0 +1,44 @@
+goos: windows
+goarch: amd64
+pkg: github.com/arkanus-app/rpg-dice-roller/go
+cpu: AMD Ryzen 5 5500
+                                                      │ go/benchmarks/optimization-round6/h1-arena-before.txt │ go/benchmarks/optimization-round6/h1-arena-after.txt │
+                                                      │                        sec/op                         │            sec/op             vs base                │
+BackendOperation/1d20+5/full/changing=true                                                       7.203µ ± 19%                   7.018µ ± 10%        ~ (p=0.075 n=10)
+BackendOperation/1d20+5/details/changing=true                                                    6.375µ ± 11%                   6.186µ ±  7%        ~ (p=0.089 n=10)
+BackendOperation/1d20+5/summary/changing=true                                                    4.654µ ±  3%                   4.595µ ± 10%        ~ (p=0.393 n=10)
+BackendOperation/100d6/full/changing=true                                                        25.00µ ±  6%                   24.26µ ± 45%        ~ (p=0.631 n=10)
+BackendOperation/100d6/details/changing=true                                                     16.83µ ±  7%                   16.04µ ± 16%        ~ (p=0.165 n=10)
+BackendOperation/100d6/summary/changing=true                                                     6.913µ ±  2%                   6.857µ ±  6%        ~ (p=0.810 n=10)
+BackendOperation/20d6!2ro=1kh10/full/changing=true                                               16.66µ ±  7%                   17.89µ ± 15%        ~ (p=0.052 n=10)
+BackendOperation/20d6!2ro=1kh10/details/changing=true                                            12.42µ ± 16%                   14.06µ ± 25%  +13.20% (p=0.007 n=10)
+BackendOperation/20d6!2ro=1kh10/summary/changing=true                                            7.163µ ±  4%                   7.181µ ±  7%        ~ (p=0.971 n=10)
+geomean                                                                                          9.909µ                         9.956µ         +0.47%
+
+                                                      │ go/benchmarks/optimization-round6/h1-arena-before.txt │ go/benchmarks/optimization-round6/h1-arena-after.txt │
+                                                      │                         B/op                          │            B/op             vs base                  │
+BackendOperation/1d20+5/full/changing=true                                                       7.007Ki ± 0%                 7.085Ki ± 0%   +1.11% (p=0.000 n=10)
+BackendOperation/1d20+5/details/changing=true                                                    4.999Ki ± 0%                 5.077Ki ± 0%   +1.56% (p=0.000 n=10)
+BackendOperation/1d20+5/summary/changing=true                                                    3.711Ki ± 0%                 3.711Ki ± 0%        ~ (p=1.000 n=10) ¹
+BackendOperation/100d6/full/changing=true                                                        66.14Ki ± 0%                 54.34Ki ± 0%  -17.83% (p=0.000 n=10)
+BackendOperation/100d6/details/changing=true                                                     37.09Ki ± 0%                 25.30Ki ± 0%  -31.80% (p=0.000 n=10)
+BackendOperation/100d6/summary/changing=true                                                     3.711Ki ± 0%                 3.711Ki ± 0%        ~ (p=1.000 n=10) ¹
+BackendOperation/20d6!2ro=1kh10/full/changing=true                                               36.05Ki ± 0%                 33.63Ki ± 0%   -6.72% (p=0.000 n=10)
+BackendOperation/20d6!2ro=1kh10/details/changing=true                                            13.67Ki ± 0%                 11.25Ki ± 0%  -17.71% (p=0.000 n=10)
+BackendOperation/20d6!2ro=1kh10/summary/changing=true                                            3.727Ki ± 0%                 3.727Ki ± 0%        ~ (p=1.000 n=10) ¹
+geomean                                                                                          10.90Ki                      9.955Ki        -8.68%
+¹ all samples are equal
+
+                                                      │ go/benchmarks/optimization-round6/h1-arena-before.txt │ go/benchmarks/optimization-round6/h1-arena-after.txt │
+                                                      │                       allocs/op                       │          allocs/op           vs base                 │
+BackendOperation/1d20+5/full/changing=true                                                         45.00 ± 0%                    45.00 ± 0%       ~ (p=1.000 n=10) ¹
+BackendOperation/1d20+5/details/changing=true                                                      36.00 ± 0%                    36.00 ± 0%       ~ (p=1.000 n=10) ¹
+BackendOperation/1d20+5/summary/changing=true                                                      11.00 ± 0%                    11.00 ± 0%       ~ (p=1.000 n=10) ¹
+BackendOperation/100d6/full/changing=true                                                          34.00 ± 0%                    34.00 ± 0%       ~ (p=1.000 n=10) ¹
+BackendOperation/100d6/details/changing=true                                                       27.00 ± 0%                    27.00 ± 0%       ~ (p=1.000 n=10) ¹
+BackendOperation/100d6/summary/changing=true                                                       11.00 ± 0%                    11.00 ± 0%       ~ (p=1.000 n=10) ¹
+BackendOperation/20d6!2ro=1kh10/full/changing=true                                                 116.0 ± 0%                    116.0 ± 0%       ~ (p=1.000 n=10) ¹
+BackendOperation/20d6!2ro=1kh10/details/changing=true                                              87.00 ± 0%                    87.00 ± 0%       ~ (p=1.000 n=10) ¹
+BackendOperation/20d6!2ro=1kh10/summary/changing=true                                              11.00 ± 0%                    11.00 ± 0%       ~ (p=1.000 n=10) ¹
+geomean                                                                                            30.05                         30.05       +0.00%
+¹ all samples are equal
