@@ -30,7 +30,7 @@ ficam fora deste módulo.
 | `rollMixedDice` | `RollMixedDice` |
 | `DiceRollError`, `isDiceRollError`, `isDiceRollErrorData` | `DiceRollError`, `IsDiceRollError`, `IsDiceRollErrorData` |
 | `DiceRollError.fromJSON` | `DiceRollErrorFromJSON` |
-| `DICE_LIMIT_PRESETS` | `DefaultDiceLimits`, `TrustedBatchDiceLimits`, `UntrustedServerDiceLimits` |
+| `DICE_LIMIT_PRESETS` | `DefaultDiceLimits`, `TrustedServerDiceLimits`, `UntrustedServerDiceLimits` |
 
 A engine oferece `Compile`, `Inspect`, `Normalize`, `Verify`, `Roll`,
 `RollDetails`, `RollSummary`, `Limits`, `GetCacheStats` e `ClearCache`.
@@ -56,7 +56,7 @@ os testes matemáticos comparam os bits IEEE 754 do resultado normalizado.
 
 ## Evidências e reprodução
 
-A suíte Go passou com **4.106 de 4.106 statements cobertos (100%)**, com o perfil de todos os
+A suíte Go passou com **4.151 de 4.151 statements cobertos (100%)**, com o perfil de todos os
 pacotes. A cobertura mede a execução do código; as comparações com TypeScript
 verificam seu comportamento de forma independente. Nenhum arquivo de produção é
 removido da medição. Go não oferece nativamente as quatro métricas de cobertura
@@ -82,9 +82,12 @@ regeneração das referências. A geração do corpus matemático fica em Window
 Node **24.18.0**, V8 **13.6.233.17-node.50**, pois `Math.pow` depende da biblioteca
 matemática da plataforma. Os testes Go leem esse corpus congelado sem Node.
 
-O [benchmark comparativo](BENCHMARK.md) apresenta medições locais, metodologia,
-dispersão, comandos e resultados brutos. Não se pressupõe que a troca de
-linguagem acelere todas as operações.
+O [benchmark comparativo](BENCHMARK.md) apresenta Go, Node e Bun com metodologia,
+dispersão, comandos e resultados brutos. O [benchmark de backend](BACKEND_BENCHMARK.md)
+mede lotes de 10.000 chamadas, concorrência e memória residente. O
+[registro de otimização](OPTIMIZATION.md) documenta as mudanças internas,
+comparações com a primeira versão Go e redução de alocações. Não se pressupõe
+que a troca de linguagem acelere todas as operações.
 
 ## Adaptações de linguagem
 

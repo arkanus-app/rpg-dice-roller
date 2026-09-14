@@ -54,6 +54,11 @@ type MersenneTwister19937 struct {
 	budget RandomCallBudget
 }
 
+// init_by_array always starts from this same fixed seed. Copying its immutable
+// initialized state avoids 623 identical recurrence steps for every execution,
+// including fresh user seeds. Each generator still owns its entire mutable state.
+var mtArrayInitialState = NewMersenneTwister19937(19650218, nil).state
+
 // NewMersenneTwister19937 initializes MT using a single raw uint32 seed.
 // User string/numeric seeds go through CreateProvidedSeed and FromWords.
 func NewMersenneTwister19937(seed uint32, budget RandomCallBudget) *MersenneTwister19937 {
@@ -68,7 +73,7 @@ func NewMersenneTwister19937FromWords(words []uint32, budget RandomCallBudget) (
 	if len(words) == 0 {
 		return nil, newDiceError("INVALID_SEED", "MT19937 requires at least one seed word", "", nil)
 	}
-	random := NewMersenneTwister19937(19650218, budget)
+	random := &MersenneTwister19937{state: mtArrayInitialState, index: 624, budget: budget}
 	i, j := 1, 0
 	for remaining := max(624, len(words)); remaining > 0; remaining-- {
 		previous := random.state[i-1]
@@ -106,14 +111,18 @@ func (r *MersenneTwister19937) initialize(seed uint32) {
 }
 
 func (r *MersenneTwister19937) twist() {
-	for i := range r.state {
-		bits := (r.state[i] & 0x80000000) | (r.state[(i+1)%624] & 0x7fffffff)
-		oddMask := uint32(0)
-		if bits&1 != 0 {
-			oddMask = 0x9908b0df
-		}
-		r.state[i] = r.state[(i+397)%624] ^ (bits >> 1) ^ oddMask
+	// Split the wraparound boundaries so every state index is a direct offset.
+	// The second range intentionally reads words already updated by the first.
+	for i := 0; i < 227; i++ {
+		bits := (r.state[i] & 0x80000000) | (r.state[i+1] & 0x7fffffff)
+		r.state[i] = r.state[i+397] ^ (bits >> 1) ^ ((0 - (bits & 1)) & 0x9908b0df)
 	}
+	for i := 227; i < 623; i++ {
+		bits := (r.state[i] & 0x80000000) | (r.state[i+1] & 0x7fffffff)
+		r.state[i] = r.state[i-227] ^ (bits >> 1) ^ ((0 - (bits & 1)) & 0x9908b0df)
+	}
+	bits := (r.state[623] & 0x80000000) | (r.state[0] & 0x7fffffff)
+	r.state[623] = r.state[396] ^ (bits >> 1) ^ ((0 - (bits & 1)) & 0x9908b0df)
 	r.index = 0
 }
 

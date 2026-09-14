@@ -14,7 +14,7 @@ type Engine struct {
 	algorithm    RandomAlgorithm
 	freezeMode   FreezeResultsMode
 	mu           sync.Mutex
-	inputCache   *WeightedLruCache[string, *RollPlan]
+	inputCache   *WeightedLruCache[engineInputKey, *RollPlan]
 	programCache *WeightedLruCache[string, *CompiledDiceProgram]
 }
 
@@ -73,7 +73,7 @@ func CreateDiceEngine(options ...DiceEngineOptions) (*Engine, error) {
 		freeze = "never"
 	}
 	return &Engine{limits: limits, algorithm: algorithm, freezeMode: freeze,
-		inputCache:   NewWeightedLruCache[string, *RollPlan](caps[0], maxSafeInteger),
+		inputCache:   NewWeightedLruCache[engineInputKey, *RollPlan](caps[0], maxSafeInteger),
 		programCache: NewWeightedLruCache[string, *CompiledDiceProgram](caps[1], caps[2])}, nil
 }
 
@@ -100,9 +100,16 @@ func (engine *Engine) GetCacheStats() DiceCacheStats {
 		Hits: input.Hits + program.Hits, Misses: input.Misses + program.Misses, Evictions: input.Evictions + program.Evictions}
 }
 
-func engineLimitsKey(limits DiceLimits) string {
-	return fmt.Sprintf("%d:%d:%d:%d:%d:%d:%d", limits.MaxInputLength, limits.MaxAstDepth, limits.MaxAstNodes,
-		limits.MaxRolls, limits.MaxInitialDice, limits.MaxSides, limits.MaxModifierSteps)
+// A native comparable key avoids formatting seven integers and allocating a
+// concatenated string for every cache hit. The dimensions match the compiler.
+type engineInputKey struct {
+	input  string
+	limits [7]int64
+}
+
+func engineLimitsKey(input string, limits DiceLimits) engineInputKey {
+	return engineInputKey{input, [7]int64{limits.MaxInputLength, limits.MaxAstDepth, limits.MaxAstNodes,
+		limits.MaxRolls, limits.MaxInitialDice, limits.MaxSides, limits.MaxModifierSteps}}
 }
 
 // cloneEnginePlan keeps the cache's canonical plan private while preserving the
@@ -127,7 +134,7 @@ func (engine *Engine) Compile(input string, options ...CompileOptions) (*RollPla
 	if len(options) == 1 {
 		overrides = options[0].Limits
 	}
-	limits, err := ResolveDiceLimits(engine.limits, overrides)
+	limits, err := engine.resolveLimits(overrides)
 	if err != nil {
 		return nil, err
 	}
@@ -138,6 +145,15 @@ func (engine *Engine) Compile(input string, options ...CompileOptions) (*RollPla
 	return cloneEnginePlan(plan), nil
 }
 
+func (engine *Engine) resolveLimits(overrides DiceLimitOverrides) (DiceLimits, error) {
+	// Constructor-owned limits are already validated and immutable. Keep the
+	// full validation path for per-call overrides and an uninitialized Engine.
+	if len(overrides) == 0 && engine.inputCache != nil {
+		return engine.limits, nil
+	}
+	return ResolveDiceLimits(engine.limits, overrides)
+}
+
 func (engine *Engine) compileResolved(input string, limits DiceLimits) (*RollPlan, error) {
 	length := int64(len(syntaxUnits(input)))
 	if length > limits.MaxInputLength {
@@ -146,7 +162,7 @@ func (engine *Engine) compileResolved(input string, limits DiceLimits) (*RollPla
 	}
 	engine.mu.Lock()
 	defer engine.mu.Unlock()
-	key := engineLimitsKey(limits) + "\x00" + input
+	key := engineLimitsKey(input, limits)
 	if cached, ok := engine.inputCache.Get(key); ok {
 		return cached, nil
 	}
@@ -231,7 +247,7 @@ func (engine *Engine) prepareRoll(input any, options []RollOptions) (*RollPlan, 
 	if err != nil {
 		return nil, ExecuteRollPlanOptions{}, err
 	}
-	limits, err := ResolveDiceLimits(engine.limits, option.Limits)
+	limits, err := engine.resolveLimits(option.Limits)
 	if err != nil {
 		return nil, ExecuteRollPlanOptions{}, err
 	}

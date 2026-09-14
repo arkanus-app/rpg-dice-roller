@@ -108,7 +108,12 @@ Node.js é necessário somente para ferramentas de desenvolvimento e comparaçã
 O [relatório da migração](MIGRATION.md) descreve a equivalência funcional e as
 adaptações de linguagem. A [documentação das referências](testdata/README.md)
 explica como reproduzir as comparações TypeScript. O [benchmark](BENCHMARK.md)
-compara as duas implementações com entradas idênticas e mantém os dados brutos.
+compara Go, Node e Bun com entradas idênticas e mantém os dados brutos. O
+[benchmark de backend](BACKEND_BENCHMARK.md) mede lotes de 10.000 chamadas com
+1/2/4/6 workers, engines compartilhadas ou por worker e memória residente.
+O [registro de otimização](OPTIMIZATION.md) explica as mudanças e seus ganhos
+medidos, preservando a API e os resultados. O [experimento de GC](GC_TUNING.md)
+avalia uma configuração opcional do backend e sua troca entre throughput e memória.
 
 A [licença do projeto](../licence.txt) e os
 [avisos dos kernels matemáticos](THIRD_PARTY_NOTICES.md) se aplicam a este código.

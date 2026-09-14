@@ -3,7 +3,7 @@ import { readFileSync } from 'node:fs';
 import * as dicecore from '../dist/index.js';
 
 const request = JSON.parse(readFileSync(0, 'utf8'));
-const output = { runtime: process.version, phase: request.phase, cases: {} };
+const output = { runtime: process.versions.bun ? `Bun ${process.versions.bun}` : process.version, phase: request.phase, cases: {} };
 let sink;
 
 function operation(workload) {

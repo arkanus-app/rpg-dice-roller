@@ -1,0 +1,23 @@
+goos: windows
+goarch: amd64
+pkg: github.com/arkanus-app/rpg-dice-roller/go
+cpu: AMD Ryzen 5 5500
+BenchmarkBackendOperation/1d20+5/full/changing=false-12         	    6886	     19573 ns/op	   11927 B/op	     177 allocs/op
+BenchmarkBackendOperation/1d20+5/full/changing=true-12          	    8329	     18948 ns/op	   11945 B/op	     176 allocs/op
+BenchmarkBackendOperation/1d20+5/details/changing=false-12      	    9928	     14286 ns/op	    8114 B/op	     150 allocs/op
+BenchmarkBackendOperation/1d20+5/details/changing=true-12       	    9367	     15347 ns/op	    8136 B/op	     150 allocs/op
+BenchmarkBackendOperation/1d20+5/summary/changing=false-12      	   10000	     10264 ns/op	    6263 B/op	      97 allocs/op
+BenchmarkBackendOperation/1d20+5/summary/changing=true-12       	   10000	     12076 ns/op	    6286 B/op	      97 allocs/op
+BenchmarkBackendOperation/100d6/full/changing=false-12          	     691	    228095 ns/op	  186288 B/op	    1760 allocs/op
+BenchmarkBackendOperation/100d6/full/changing=true-12           	     711	    194149 ns/op	  186309 B/op	    1760 allocs/op
+BenchmarkBackendOperation/100d6/details/changing=false-12       	    1267	    137090 ns/op	  105300 B/op	    1336 allocs/op
+BenchmarkBackendOperation/100d6/details/changing=true-12        	    1210	    131183 ns/op	  105322 B/op	    1336 allocs/op
+BenchmarkBackendOperation/100d6/summary/changing=false-12       	   10000	     12281 ns/op	    6263 B/op	      97 allocs/op
+BenchmarkBackendOperation/100d6/summary/changing=true-12        	   10000	     12348 ns/op	    6286 B/op	      97 allocs/op
+BenchmarkBackendOperation/20d6!2ro=1kh10/full/changing=false-12 	    1585	    106349 ns/op	   72418 B/op	     792 allocs/op
+BenchmarkBackendOperation/20d6!2ro=1kh10/full/changing=true-12  	    1761	     75330 ns/op	   66814 B/op	     718 allocs/op
+BenchmarkBackendOperation/20d6!2ro=1kh10/details/changing=false-12         	    2503	     52394 ns/op	   41115 B/op	     616 allocs/op
+BenchmarkBackendOperation/20d6!2ro=1kh10/details/changing=true-12          	    2313	     49599 ns/op	   38573 B/op	     559 allocs/op
+BenchmarkBackendOperation/20d6!2ro=1kh10/summary/changing=false-12         	    3085	     43385 ns/op	   26169 B/op	     585 allocs/op
+BenchmarkBackendOperation/20d6!2ro=1kh10/summary/changing=true-12          	    3100	     41467 ns/op	   24022 B/op	     532 allocs/op
+PASS

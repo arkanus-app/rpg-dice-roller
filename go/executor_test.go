@@ -4,8 +4,53 @@ import (
 	"encoding/json"
 	"errors"
 	"reflect"
+	"strconv"
 	"testing"
 )
+
+func TestExecutorKeepsIdentityAcrossArenaChunksAndRolls(t *testing.T) {
+	// Every d1 is deterministically one. Each of 300 roots generates one child,
+	// then keep-highest retains the final tied die, as in the TypeScript oracle.
+	// Multiple chunks and rolls
+	// must preserve the same IDs, parent links, indices and projection accounting.
+	plan, err := CompileDicePlan("2#300d1!1kh1", DefaultDiceLimits())
+	if err != nil {
+		t.Fatal(err)
+	}
+	full, err := ExecuteRollPlan(plan, ExecuteRollPlanOptions{Limits: DefaultDiceLimits(), Seed: "arena-boundaries"})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if full.Total != 2 || len(full.Dice) != 1200 || full.Stats.InitialDice != 600 || full.Stats.GeneratedDice != 600 {
+		t.Fatalf("unexpected deterministic dice result: total=%v dice=%d stats=%+v", full.Total, len(full.Dice), full.Stats)
+	}
+	for index, die := range full.Dice {
+		rollIndex, offset := index/600+1, index%600
+		prefix := "roll-" + strconv.Itoa(rollIndex) + "-die-"
+		if die.ID != prefix+strconv.Itoa(offset+1) || die.RollIndex != int64(rollIndex) || die.RollDieIndex != int64(offset+1) || die.RawValue != 1 || die.Value != 1 || die.Included != (offset == 599) {
+			t.Fatalf("identity/state changed at die %d: %+v", index, die)
+		}
+		if offset < 300 {
+			if die.ParentDieID != nil {
+				t.Fatalf("initial die %d gained a parent", index)
+			}
+		} else if die.ParentDieID == nil || *die.ParentDieID != prefix+strconv.Itoa(offset-299) {
+			t.Fatalf("generated die %d lost its root parent", index)
+		}
+	}
+	options := ExecuteRollPlanOptions{Limits: DefaultDiceLimits(), Replay: full.Replay}
+	details, err := ExecuteRollPlanDetails(plan, options)
+	if err != nil {
+		t.Fatal(err)
+	}
+	summary, err := ExecuteRollPlanSummary(plan, options)
+	if err != nil {
+		t.Fatal(err)
+	}
+	if !reflect.DeepEqual(full.Dice, details.Dice) || full.Total != summary.Total || full.Stats != details.Stats || full.Stats != summary.Stats {
+		t.Fatal("chunk boundaries changed replay or projection accounting")
+	}
+}
 
 func TestExecutorTypeScriptFixtures(t *testing.T) {
 	for _, raw := range loadFixtureCases(t, "executor.json") {

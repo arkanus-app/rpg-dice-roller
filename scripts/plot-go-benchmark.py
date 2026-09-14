@@ -25,6 +25,7 @@ from matplotlib.ticker import FixedLocator, FuncFormatter, NullLocator
 ROOT = Path(__file__).resolve().parent.parent
 GO_COLOR = "#176B91"
 TS_COLOR = "#B95B2A"
+BUN_COLOR = "#7951A8"
 TEXT_COLOR = "#243443"
 MUTED_COLOR = "#586774"
 
@@ -50,7 +51,7 @@ def read_comparison(path: Path, allow_development: bool) -> dict:
         raise ValueError("Summary and measured workloads must contain the same IDs")
     samples = data["configuration"]["samples"]
     for row in rows:
-        for runtime in ("go", "typescript"):
+        for runtime in ("go", "typescript", "bun") if "bun" in row else ("go", "typescript"):
             stats = row[runtime]
             median, q1, q3 = (
                 positive_number(stats[field], f"{row['id']}.{runtime}.{field}")
@@ -61,6 +62,8 @@ def read_comparison(path: Path, allow_development: bool) -> dict:
         ratio = positive_number(row["typescriptOverGo"], f"{row['id']}.typescriptOverGo")
         if ratio != row["typescript"]["medianNsPerOp"] / row["go"]["medianNsPerOp"]:
             raise ValueError(f"Ratio does not match the recorded medians: {row['id']}")
+        if "bun" in row and row["bunOverGo"] != row["bun"]["medianNsPerOp"] / row["go"]["medianNsPerOp"]:
+            raise ValueError(f"Bun ratio does not match recorded medians: {row['id']}")
     return data
 
 
@@ -80,8 +83,9 @@ def workload_label(row: dict) -> str:
 
 def base_figure(data: dict, title: str, subtitle: str):
     rows = data["summary"]
-    fig = plt.figure(figsize=(15, max(10.5, 0.46 * len(rows) + 3.7)), facecolor="white")
-    ax = fig.add_axes((0.345, 0.185, 0.48, 0.67))
+    three = "bun" in rows[0]
+    fig = plt.figure(figsize=(17 if three else 15, max(10.5, 0.46 * len(rows) + 3.7)), facecolor="white")
+    ax = fig.add_axes((0.30, 0.185, 0.41, 0.67) if three else (0.345, 0.185, 0.48, 0.67))
     for index in range(len(rows)):
         if index % 2 == 0:
             ax.axhspan(index - 0.5, index + 0.5, color="#F3F6F8", zorder=0)
@@ -98,6 +102,8 @@ def base_figure(data: dict, title: str, subtitle: str):
     fig.text(0.045, 0.921, subtitle, fontsize=11.5, color=MUTED_COLOR)
     env = data["environment"]
     runtime = f"{env['go'].replace('go version ', '')} · Node {env['node']}"
+    if "bun" in env:
+        runtime += f" · Bun {env['bun']}"
     machine = f"{env['cpuModel'].strip()} · {env['osVersion']} · {env['arch']}"
     fig.text(0.045, 0.055, runtime + "\n" + machine, fontsize=9, color=MUTED_COLOR, linespacing=1.6)
     return fig, ax
@@ -111,10 +117,16 @@ def latency_figure(data: dict, source: Path):
         f"{len(rows)} cargas · {samples} amostras por implementação · mediana menor indica menos tempo",
     )
     all_bounds = []
-    for runtime, color, offset, marker, column in (
+    series = (
         ("go", GO_COLOR, -0.15, "o", 1.095),
         ("typescript", TS_COLOR, 0.15, "s", 1.26),
-    ):
+    )
+    if "bun" in rows[0]:
+        series = (("go", GO_COLOR, -0.23, "o", 1.12),
+                  ("typescript", TS_COLOR, 0, "s", 1.36),
+                  ("bun", BUN_COLOR, 0.23, "^", 1.60))
+    labels = {"go": "Go", "typescript": "Node", "bun": "Bun"}
+    for runtime, color, offset, marker, column in series:
         medians = [row[runtime]["medianNsPerOp"] / 1000 for row in rows]
         lower = [row[runtime]["q1NsPerOp"] / 1000 for row in rows]
         upper = [row[runtime]["q3NsPerOp"] / 1000 for row in rows]
@@ -137,22 +149,27 @@ def latency_figure(data: dict, source: Path):
     ax.xaxis.set_minor_locator(NullLocator())
     ax.set_xlabel("Tempo mediano por operação (µs, escala logarítmica)", labelpad=15, fontsize=11)
     fig.legend(
-        handles=[Line2D([], [], marker="o", color=GO_COLOR, label="Go"),
-                 Line2D([], [], marker="s", color=TS_COLOR, label="TypeScript")],
-        loc="lower left", bbox_to_anchor=(0.339, 0.869), frameon=False, ncol=2, fontsize=10.5,
+        handles=[Line2D([], [], marker=marker, color=color, label=labels[runtime]) for runtime, color, _, marker, _ in series],
+        loc="lower left", bbox_to_anchor=(0.30, 0.869), frameon=False, ncol=len(series), fontsize=10.5,
     )
-    ax.text(1.095, 1.044, "Go (µs)", transform=ax.transAxes, ha="right", fontsize=10.5, color=GO_COLOR, weight="bold")
-    ax.text(1.26, 1.044, "TS (µs)", transform=ax.transAxes, ha="right", fontsize=10.5, color=TS_COLOR, weight="bold")
+    for runtime, color, _, _, column in series:
+        ax.text(column, 1.044, f"{labels[runtime]} (µs)", transform=ax.transAxes, ha="right", fontsize=10.5, color=color, weight="bold")
     fig.text(0.045, 0.113,
              "Pontos: mediana. Barras: intervalo interquartil (Q1–Q3) das médias por lote.\n"
              "As barras descrevem a variação entre amostras, não percentis de operações individuais.",
              fontsize=9.5, color=MUTED_COLOR, linespacing=1.6, va="top")
     fig.text(0.96, 0.025, f"Fonte: {source.name}", fontsize=8.5, color=MUTED_COLOR, ha="right")
+    ax.set_yticks(range(len(rows)))
+    ax.set_yticklabels([workload_label(row) for row in rows])
+    ax.tick_params(axis="y", labelleft=True)
+    fig.canvas.draw()
     return fig
 
 
 def speedup_figure(data: dict, source: Path):
     rows = data["summary"]
+    if "bun" in rows[0]:
+        return three_runtime_speedup(data, source)
     fig, ax = base_figure(
         data, "Razão entre os tempos medianos",
         "TypeScript ÷ Go · 1× indica a mesma mediana · comparação local das mesmas cargas",
@@ -195,6 +212,41 @@ def speedup_figure(data: dict, source: Path):
              "Cinza: faixas Q1–Q3 sobrepostas. Razões calculadas das medianas; a dispersão aparece no gráfico de latência.",
              fontsize=9.5, color=MUTED_COLOR, linespacing=1.6, va="top")
     fig.text(0.96, 0.025, f"Fonte: {source.name}", fontsize=8.5, color=MUTED_COLOR, ha="right")
+    return fig
+
+
+def three_runtime_speedup(data: dict, source: Path):
+    rows = data["summary"]
+    fig, ax = base_figure(data, "Razões Node/Go e Bun/Go",
+                         "Mesmas 17 cargas · 1× indica mesma mediana · cores identificam o runtime JavaScript")
+    all_ratios = [row[key] for row in rows for key in ("typescriptOverGo", "bunOverGo")]
+    extent = max(1, math.ceil(max(abs(math.log2(value)) for value in all_ratios)))
+    limit = 2 ** (extent + 0.18)
+    ax.set_xscale("log", base=2)
+    ax.set_xlim(1 / limit, limit)
+    ax.axvline(1, color=TEXT_COLOR, linestyle="--", linewidth=1.2)
+    for runtime, key, color, marker, offset, column in (
+        ("typescript", "typescriptOverGo", TS_COLOR, "s", -0.15, 1.20),
+        ("bun", "bunOverGo", BUN_COLOR, "^", 0.15, 1.55),
+    ):
+        for index, row in enumerate(rows):
+            ratio = row[key]
+            overlap = row["go"]["q1NsPerOp"] <= row[runtime]["q3NsPerOp"] and row[runtime]["q1NsPerOp"] <= row["go"]["q3NsPerOp"]
+            shade = MUTED_COLOR if overlap else color
+            ax.plot([1, ratio], [index+offset, index+offset], color=shade, linewidth=2.5)
+            ax.plot(ratio, index+offset, marker, color=shade, markersize=6)
+            decimals = 3 if ratio != 1 and round(ratio, 2) == 1 else 2
+            ax.text(column, index, portuguese_number(ratio, decimals)+"×", transform=ax.get_yaxis_transform(), ha="right", va="center", fontsize=10, color=shade)
+        ax.text(column, 1.044, "Node/Go" if runtime == "typescript" else "Bun/Go", transform=ax.transAxes, ha="right", fontsize=10.5, color=color, weight="bold")
+    ax.xaxis.set_major_locator(FixedLocator([2**power for power in range(-extent, extent+1)]))
+    ax.xaxis.set_major_formatter(FuncFormatter(lambda value, _: portuguese_number(value, 2 if value < 1 else 0)+"×"))
+    ax.xaxis.set_minor_locator(NullLocator())
+    ax.set_xlabel("Razão JavaScript/Go (escala logarítmica)", labelpad=15, fontsize=11)
+    ax.text(.23, 1.044, "JavaScript com menor mediana", transform=ax.transAxes, ha="center", fontsize=10, color=MUTED_COLOR)
+    ax.text(.79, 1.044, "Go com menor mediana", transform=ax.transAxes, ha="center", fontsize=10, color=GO_COLOR)
+    fig.legend(handles=[Line2D([], [], marker="s", color=TS_COLOR, label="Node/Go"), Line2D([], [], marker="^", color=BUN_COLOR, label="Bun/Go")], loc="lower left", bbox_to_anchor=(.045,.887), frameon=False, ncol=2)
+    fig.text(.045,.113,"0,5×: JavaScript usa metade do tempo de Go. 2×: Go usa metade do tempo de JavaScript.\nCinza: faixas Q1–Q3 sobrepostas; razões próximas de 1× devem ser lidas junto da dispersão.",fontsize=9.5,color=MUTED_COLOR,linespacing=1.6,va="top")
+    fig.text(.96,.025,f"Fonte: {source.name}",fontsize=8.5,color=MUTED_COLOR,ha="right")
     return fig
 
 

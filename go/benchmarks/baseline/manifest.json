@@ -1,0 +1,61 @@
+{
+  "schemaVersion": 1,
+  "commit": "62de50293b2e22121f8ae3832f303da973e24934",
+  "files": [
+    {
+      "source": "go/BENCHMARK.md",
+      "file": "BENCHMARK.original.md",
+      "sha256": "9efe443706629458eef132f047152e552663dbdf2c7c3e9ab3717785137d553e"
+    },
+    {
+      "source": "go/benchmarks/comparison-final.json",
+      "file": "comparison-final.json",
+      "sha256": "e59cf552685cd48d0716dd3e4c7f5bb9cff03917e282f9e85fbbd56ca2b38480"
+    },
+    {
+      "source": "go/benchmarks/preflight-final.json",
+      "file": "preflight-final.json",
+      "sha256": "8c41fcb9dc2cab9f7ebc930b4cba7d217abfe08ffe978b88e6b5c81d3b74029b"
+    },
+    {
+      "source": "go/benchmarks/latency.png",
+      "file": "latency.png",
+      "sha256": "b983a5f633b31784cf658622e4946e249f15f3a050b8fd4857dc764a0edecfdb"
+    },
+    {
+      "source": "go/benchmarks/latency.svg",
+      "file": "latency.svg",
+      "sha256": "f584b83f009cc46ad650cceec2912c0b3d3072a051484ece79961811e971acd7"
+    },
+    {
+      "source": "go/benchmarks/speedup.png",
+      "file": "speedup.png",
+      "sha256": "5e145c50b02488d7606075f0c66a0ffa622a69320c84d64e9b2bb6de9d608b79"
+    },
+    {
+      "source": "go/benchmarks/speedup.svg",
+      "file": "speedup.svg",
+      "sha256": "7b357bbf8ad92571022faafb36e0ca58836009924c32cc02541e8364680f9169"
+    },
+    {
+      "source": "go/benchmark_test.go",
+      "file": "benchmark_test.go.txt",
+      "sha256": "2dfdb690f6dfddc2151453cd3fba15f4cc944681a9f00870994389c7ef7c70c7"
+    },
+    {
+      "source": "scripts/compare-go-typescript.mjs",
+      "file": "compare-go-typescript.mjs.txt",
+      "sha256": "d275eb675bd5a60b7e236ba196cb1b9bf86e77c7deebe5e87fe5369018b683af"
+    },
+    {
+      "source": "scripts/benchmark-go-reference.mjs",
+      "file": "benchmark-go-reference.mjs.txt",
+      "sha256": "8282b0ae61241e12f353153ff60589902fa81842f1ab6a637cc0cbf8b7257a0a"
+    },
+    {
+      "source": "scripts/plot-go-benchmark.py",
+      "file": "plot-go-benchmark.py.txt",
+      "sha256": "93b5ab9d992c51b38a43b74cfd2d70973ee2c279b59b179a5730ba06022596d2"
+    }
+  ]
+}

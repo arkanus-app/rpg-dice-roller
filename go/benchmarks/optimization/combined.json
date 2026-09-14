@@ -1,0 +1,1816 @@
+{
+  "baselineCommit": "62de50293b2e22121f8ae3832f303da973e24934",
+  "measuredBinarySha256": {
+    "baseline": "a292d575b90cc8eb631e609f5fb1a424da0b663969ff72082a1c8a02d70bff7a",
+    "winner": "d2816cfc996f868cebbe48d3411a0680c72a8dbde6794120a86a7b4ed63dc59e"
+  },
+  "method": "Five alternating pairs: baseline/winner, winner/baseline, baseline/winner, winner/baseline, baseline/winner. Each sample runs the same BenchmarkBackendOperation with -test.benchtime=100ms -test.count=1. Go 1.26.2 windows/amd64; Ryzen 5 5500, default GOMAXPROCS=12. Setup outside timer, public results escape; cache warm; fixed seed or 128 alternating seeds. No competing benchmark processes.",
+  "correctness": {
+    "coveredStatements": 4151,
+    "totalStatements": 4151,
+    "race": "passed",
+    "fixtures": "all six TypeScript fixture generators --check passed"
+  },
+  "summary": [
+    {
+      "name": "1d20+5/full/changing=false",
+      "before": {
+        "medianNs": 18522,
+        "medianBytes": 11927,
+        "medianAllocations": 177,
+        "samples": [
+          {
+            "sample": 1,
+            "iterations": 7312,
+            "ns": 16648,
+            "bytes": 11928,
+            "allocations": 177,
+            "file": "combined-baseline-1.txt"
+          },
+          {
+            "sample": 2,
+            "iterations": 6902,
+            "ns": 16537,
+            "bytes": 11927,
+            "allocations": 177,
+            "file": "combined-baseline-2.txt"
+          },
+          {
+            "sample": 3,
+            "iterations": 7267,
+            "ns": 20786,
+            "bytes": 11926,
+            "allocations": 177,
+            "file": "combined-baseline-3.txt"
+          },
+          {
+            "sample": 4,
+            "iterations": 6886,
+            "ns": 19573,
+            "bytes": 11927,
+            "allocations": 177,
+            "file": "combined-baseline-4.txt"
+          },
+          {
+            "sample": 5,
+            "iterations": 5919,
+            "ns": 18522,
+            "bytes": 11929,
+            "allocations": 177,
+            "file": "combined-baseline-5.txt"
+          }
+        ]
+      },
+      "after": {
+        "medianNs": 9324,
+        "medianBytes": 8056,
+        "medianAllocations": 82,
+        "samples": [
+          {
+            "sample": 1,
+            "iterations": 13603,
+            "ns": 9642,
+            "bytes": 8056,
+            "allocations": 82,
+            "file": "combined-winner-1.txt"
+          },
+          {
+            "sample": 2,
+            "iterations": 13234,
+            "ns": 8837,
+            "bytes": 8056,
+            "allocations": 82,
+            "file": "combined-winner-2.txt"
+          },
+          {
+            "sample": 3,
+            "iterations": 12913,
+            "ns": 9517,
+            "bytes": 8056,
+            "allocations": 82,
+            "file": "combined-winner-3.txt"
+          },
+          {
+            "sample": 4,
+            "iterations": 13494,
+            "ns": 9324,
+            "bytes": 8056,
+            "allocations": 82,
+            "file": "combined-winner-4.txt"
+          },
+          {
+            "sample": 5,
+            "iterations": 13501,
+            "ns": 8924,
+            "bytes": 8056,
+            "allocations": 82,
+            "file": "combined-winner-5.txt"
+          }
+        ]
+      },
+      "speedup": 1.9864864864864864,
+      "timeReductionPercent": 49.65986394557823,
+      "allocatedByteReductionPercent": 32.45577261675191
+    },
+    {
+      "name": "1d20+5/full/changing=true",
+      "before": {
+        "medianNs": 18948,
+        "medianBytes": 11945,
+        "medianAllocations": 176,
+        "samples": [
+          {
+            "sample": 1,
+            "iterations": 7798,
+            "ns": 21873,
+            "bytes": 11945,
+            "allocations": 176,
+            "file": "combined-baseline-1.txt"
+          },
+          {
+            "sample": 2,
+            "iterations": 8413,
+            "ns": 21145,
+            "bytes": 11945,
+            "allocations": 176,
+            "file": "combined-baseline-2.txt"
+          },
+          {
+            "sample": 3,
+            "iterations": 8170,
+            "ns": 16662,
+            "bytes": 11946,
+            "allocations": 176,
+            "file": "combined-baseline-3.txt"
+          },
+          {
+            "sample": 4,
+            "iterations": 8329,
+            "ns": 18948,
+            "bytes": 11945,
+            "allocations": 176,
+            "file": "combined-baseline-4.txt"
+          },
+          {
+            "sample": 5,
+            "iterations": 7112,
+            "ns": 18438,
+            "bytes": 11945,
+            "allocations": 176,
+            "file": "combined-baseline-5.txt"
+          }
+        ]
+      },
+      "after": {
+        "medianNs": 9147,
+        "medianBytes": 8063,
+        "medianAllocations": 82,
+        "samples": [
+          {
+            "sample": 1,
+            "iterations": 10000,
+            "ns": 15901,
+            "bytes": 8063,
+            "allocations": 82,
+            "file": "combined-winner-1.txt"
+          },
+          {
+            "sample": 2,
+            "iterations": 12747,
+            "ns": 8891,
+            "bytes": 8063,
+            "allocations": 82,
+            "file": "combined-winner-2.txt"
+          },
+          {
+            "sample": 3,
+            "iterations": 13208,
+            "ns": 9147,
+            "bytes": 8063,
+            "allocations": 82,
+            "file": "combined-winner-3.txt"
+          },
+          {
+            "sample": 4,
+            "iterations": 13028,
+            "ns": 8923,
+            "bytes": 8063,
+            "allocations": 82,
+            "file": "combined-winner-4.txt"
+          },
+          {
+            "sample": 5,
+            "iterations": 13815,
+            "ns": 10439,
+            "bytes": 8063,
+            "allocations": 82,
+            "file": "combined-winner-5.txt"
+          }
+        ]
+      },
+      "speedup": 2.07149885208265,
+      "timeReductionPercent": 51.725775807473084,
+      "allocatedByteReductionPercent": 32.498953537044784
+    },
+    {
+      "name": "1d20+5/details/changing=false",
+      "before": {
+        "medianNs": 14519,
+        "medianBytes": 8114,
+        "medianAllocations": 150,
+        "samples": [
+          {
+            "sample": 1,
+            "iterations": 8176,
+            "ns": 14860,
+            "bytes": 8114,
+            "allocations": 150,
+            "file": "combined-baseline-1.txt"
+          },
+          {
+            "sample": 2,
+            "iterations": 9393,
+            "ns": 14236,
+            "bytes": 8114,
+            "allocations": 150,
+            "file": "combined-baseline-2.txt"
+          },
+          {
+            "sample": 3,
+            "iterations": 9582,
+            "ns": 15030,
+            "bytes": 8114,
+            "allocations": 150,
+            "file": "combined-baseline-3.txt"
+          },
+          {
+            "sample": 4,
+            "iterations": 9928,
+            "ns": 14286,
+            "bytes": 8114,
+            "allocations": 150,
+            "file": "combined-baseline-4.txt"
+          },
+          {
+            "sample": 5,
+            "iterations": 9688,
+            "ns": 14519,
+            "bytes": 8114,
+            "allocations": 150,
+            "file": "combined-baseline-5.txt"
+          }
+        ]
+      },
+      "after": {
+        "medianNs": 6945,
+        "medianBytes": 5192,
+        "medianAllocations": 43,
+        "samples": [
+          {
+            "sample": 1,
+            "iterations": 14458,
+            "ns": 6945,
+            "bytes": 5192,
+            "allocations": 43,
+            "file": "combined-winner-1.txt"
+          },
+          {
+            "sample": 2,
+            "iterations": 10000,
+            "ns": 11448,
+            "bytes": 5192,
+            "allocations": 43,
+            "file": "combined-winner-2.txt"
+          },
+          {
+            "sample": 3,
+            "iterations": 16998,
+            "ns": 6996,
+            "bytes": 5192,
+            "allocations": 43,
+            "file": "combined-winner-3.txt"
+          },
+          {
+            "sample": 4,
+            "iterations": 16875,
+            "ns": 6478,
+            "bytes": 5192,
+            "allocations": 43,
+            "file": "combined-winner-4.txt"
+          },
+          {
+            "sample": 5,
+            "iterations": 19021,
+            "ns": 6593,
+            "bytes": 5192,
+            "allocations": 43,
+            "file": "combined-winner-5.txt"
+          }
+        ]
+      },
+      "speedup": 2.09056875449964,
+      "timeReductionPercent": 52.16612714374268,
+      "allocatedByteReductionPercent": 36.01183140251417
+    },
+    {
+      "name": "1d20+5/details/changing=true",
+      "before": {
+        "medianNs": 15347,
+        "medianBytes": 8136,
+        "medianAllocations": 150,
+        "samples": [
+          {
+            "sample": 1,
+            "iterations": 10000,
+            "ns": 14548,
+            "bytes": 8136,
+            "allocations": 150,
+            "file": "combined-baseline-1.txt"
+          },
+          {
+            "sample": 2,
+            "iterations": 9534,
+            "ns": 18151,
+            "bytes": 8136,
+            "allocations": 150,
+            "file": "combined-baseline-2.txt"
+          },
+          {
+            "sample": 3,
+            "iterations": 8919,
+            "ns": 15639,
+            "bytes": 8136,
+            "allocations": 150,
+            "file": "combined-baseline-3.txt"
+          },
+          {
+            "sample": 4,
+            "iterations": 9367,
+            "ns": 15347,
+            "bytes": 8136,
+            "allocations": 150,
+            "file": "combined-baseline-4.txt"
+          },
+          {
+            "sample": 5,
+            "iterations": 9910,
+            "ns": 14255,
+            "bytes": 8136,
+            "allocations": 150,
+            "file": "combined-baseline-5.txt"
+          }
+        ]
+      },
+      "after": {
+        "medianNs": 7760,
+        "medianBytes": 5199,
+        "medianAllocations": 43,
+        "samples": [
+          {
+            "sample": 1,
+            "iterations": 14278,
+            "ns": 7760,
+            "bytes": 5199,
+            "allocations": 43,
+            "file": "combined-winner-1.txt"
+          },
+          {
+            "sample": 2,
+            "iterations": 18996,
+            "ns": 6831,
+            "bytes": 5199,
+            "allocations": 43,
+            "file": "combined-winner-2.txt"
+          },
+          {
+            "sample": 3,
+            "iterations": 15427,
+            "ns": 7976,
+            "bytes": 5199,
+            "allocations": 43,
+            "file": "combined-winner-3.txt"
+          },
+          {
+            "sample": 4,
+            "iterations": 18522,
+            "ns": 6791,
+            "bytes": 5199,
+            "allocations": 43,
+            "file": "combined-winner-4.txt"
+          },
+          {
+            "sample": 5,
+            "iterations": 19537,
+            "ns": 9410,
+            "bytes": 5199,
+            "allocations": 43,
+            "file": "combined-winner-5.txt"
+          }
+        ]
+      },
+      "speedup": 1.9777061855670104,
+      "timeReductionPercent": 49.436371929367304,
+      "allocatedByteReductionPercent": 36.09882005899705
+    },
+    {
+      "name": "1d20+5/summary/changing=false",
+      "before": {
+        "medianNs": 10932,
+        "medianBytes": 6263,
+        "medianAllocations": 97,
+        "samples": [
+          {
+            "sample": 1,
+            "iterations": 10000,
+            "ns": 10238,
+            "bytes": 6264,
+            "allocations": 97,
+            "file": "combined-baseline-1.txt"
+          },
+          {
+            "sample": 2,
+            "iterations": 10000,
+            "ns": 12274,
+            "bytes": 6264,
+            "allocations": 97,
+            "file": "combined-baseline-2.txt"
+          },
+          {
+            "sample": 3,
+            "iterations": 10000,
+            "ns": 12204,
+            "bytes": 6263,
+            "allocations": 97,
+            "file": "combined-baseline-3.txt"
+          },
+          {
+            "sample": 4,
+            "iterations": 10000,
+            "ns": 10264,
+            "bytes": 6263,
+            "allocations": 97,
+            "file": "combined-baseline-4.txt"
+          },
+          {
+            "sample": 5,
+            "iterations": 10000,
+            "ns": 10932,
+            "bytes": 6263,
+            "allocations": 97,
+            "file": "combined-baseline-5.txt"
+          }
+        ]
+      },
+      "after": {
+        "medianNs": 6157,
+        "medianBytes": 3792,
+        "medianAllocations": 12,
+        "samples": [
+          {
+            "sample": 1,
+            "iterations": 20358,
+            "ns": 7006,
+            "bytes": 3792,
+            "allocations": 12,
+            "file": "combined-winner-1.txt"
+          },
+          {
+            "sample": 2,
+            "iterations": 26641,
+            "ns": 5267,
+            "bytes": 3792,
+            "allocations": 12,
+            "file": "combined-winner-2.txt"
+          },
+          {
+            "sample": 3,
+            "iterations": 19916,
+            "ns": 5974,
+            "bytes": 3792,
+            "allocations": 12,
+            "file": "combined-winner-3.txt"
+          },
+          {
+            "sample": 4,
+            "iterations": 25057,
+            "ns": 6292,
+            "bytes": 3792,
+            "allocations": 12,
+            "file": "combined-winner-4.txt"
+          },
+          {
+            "sample": 5,
+            "iterations": 21729,
+            "ns": 6157,
+            "bytes": 3792,
+            "allocations": 12,
+            "file": "combined-winner-5.txt"
+          }
+        ]
+      },
+      "speedup": 1.7755400357316875,
+      "timeReductionPercent": 43.67910720819612,
+      "allocatedByteReductionPercent": 39.453935813507904
+    },
+    {
+      "name": "1d20+5/summary/changing=true",
+      "before": {
+        "medianNs": 10166,
+        "medianBytes": 6286,
+        "medianAllocations": 97,
+        "samples": [
+          {
+            "sample": 1,
+            "iterations": 12147,
+            "ns": 11733,
+            "bytes": 6286,
+            "allocations": 97,
+            "file": "combined-baseline-1.txt"
+          },
+          {
+            "sample": 2,
+            "iterations": 10000,
+            "ns": 10137,
+            "bytes": 6285,
+            "allocations": 97,
+            "file": "combined-baseline-2.txt"
+          },
+          {
+            "sample": 3,
+            "iterations": 10000,
+            "ns": 10150,
+            "bytes": 6286,
+            "allocations": 97,
+            "file": "combined-baseline-3.txt"
+          },
+          {
+            "sample": 4,
+            "iterations": 10000,
+            "ns": 12076,
+            "bytes": 6286,
+            "allocations": 97,
+            "file": "combined-baseline-4.txt"
+          },
+          {
+            "sample": 5,
+            "iterations": 10000,
+            "ns": 10166,
+            "bytes": 6286,
+            "allocations": 97,
+            "file": "combined-baseline-5.txt"
+          }
+        ]
+      },
+      "after": {
+        "medianNs": 5255,
+        "medianBytes": 3799,
+        "medianAllocations": 12,
+        "samples": [
+          {
+            "sample": 1,
+            "iterations": 19039,
+            "ns": 5500,
+            "bytes": 3799,
+            "allocations": 12,
+            "file": "combined-winner-1.txt"
+          },
+          {
+            "sample": 2,
+            "iterations": 21722,
+            "ns": 4743,
+            "bytes": 3799,
+            "allocations": 12,
+            "file": "combined-winner-2.txt"
+          },
+          {
+            "sample": 3,
+            "iterations": 17848,
+            "ns": 6681,
+            "bytes": 3799,
+            "allocations": 12,
+            "file": "combined-winner-3.txt"
+          },
+          {
+            "sample": 4,
+            "iterations": 22381,
+            "ns": 4583,
+            "bytes": 3799,
+            "allocations": 12,
+            "file": "combined-winner-4.txt"
+          },
+          {
+            "sample": 5,
+            "iterations": 23155,
+            "ns": 5255,
+            "bytes": 3799,
+            "allocations": 12,
+            "file": "combined-winner-5.txt"
+          }
+        ]
+      },
+      "speedup": 1.9345385347288298,
+      "timeReductionPercent": 48.30808577611647,
+      "allocatedByteReductionPercent": 39.564110722239896
+    },
+    {
+      "name": "100d6/full/changing=false",
+      "before": {
+        "medianNs": 223466,
+        "medianBytes": 186290,
+        "medianAllocations": 1760,
+        "samples": [
+          {
+            "sample": 1,
+            "iterations": 710,
+            "ns": 210310,
+            "bytes": 186290,
+            "allocations": 1760,
+            "file": "combined-baseline-1.txt"
+          },
+          {
+            "sample": 2,
+            "iterations": 604,
+            "ns": 257782,
+            "bytes": 186309,
+            "allocations": 1760,
+            "file": "combined-baseline-2.txt"
+          },
+          {
+            "sample": 3,
+            "iterations": 727,
+            "ns": 223466,
+            "bytes": 186283,
+            "allocations": 1760,
+            "file": "combined-baseline-3.txt"
+          },
+          {
+            "sample": 4,
+            "iterations": 691,
+            "ns": 228095,
+            "bytes": 186288,
+            "allocations": 1760,
+            "file": "combined-baseline-4.txt"
+          },
+          {
+            "sample": 5,
+            "iterations": 679,
+            "ns": 197642,
+            "bytes": 186292,
+            "allocations": 1760,
+            "file": "combined-baseline-5.txt"
+          }
+        ]
+      },
+      "after": {
+        "medianNs": 149239,
+        "medianBytes": 136752,
+        "medianAllocations": 1368,
+        "samples": [
+          {
+            "sample": 1,
+            "iterations": 1036,
+            "ns": 191845,
+            "bytes": 136757,
+            "allocations": 1368,
+            "file": "combined-winner-1.txt"
+          },
+          {
+            "sample": 2,
+            "iterations": 1010,
+            "ns": 103263,
+            "bytes": 136752,
+            "allocations": 1368,
+            "file": "combined-winner-2.txt"
+          },
+          {
+            "sample": 3,
+            "iterations": 1274,
+            "ns": 117183,
+            "bytes": 136752,
+            "allocations": 1368,
+            "file": "combined-winner-3.txt"
+          },
+          {
+            "sample": 4,
+            "iterations": 1237,
+            "ns": 182133,
+            "bytes": 136752,
+            "allocations": 1368,
+            "file": "combined-winner-4.txt"
+          },
+          {
+            "sample": 5,
+            "iterations": 1272,
+            "ns": 149239,
+            "bytes": 136752,
+            "allocations": 1368,
+            "file": "combined-winner-5.txt"
+          }
+        ]
+      },
+      "speedup": 1.4973699904180542,
+      "timeReductionPercent": 33.216238711929336,
+      "allocatedByteReductionPercent": 26.59187288635998
+    },
+    {
+      "name": "100d6/full/changing=true",
+      "before": {
+        "medianNs": 215525,
+        "medianBytes": 186309,
+        "medianAllocations": 1760,
+        "samples": [
+          {
+            "sample": 1,
+            "iterations": 710,
+            "ns": 272723,
+            "bytes": 186316,
+            "allocations": 1760,
+            "file": "combined-baseline-1.txt"
+          },
+          {
+            "sample": 2,
+            "iterations": 708,
+            "ns": 306577,
+            "bytes": 186318,
+            "allocations": 1760,
+            "file": "combined-baseline-2.txt"
+          },
+          {
+            "sample": 3,
+            "iterations": 513,
+            "ns": 215525,
+            "bytes": 186308,
+            "allocations": 1760,
+            "file": "combined-baseline-3.txt"
+          },
+          {
+            "sample": 4,
+            "iterations": 711,
+            "ns": 194149,
+            "bytes": 186309,
+            "allocations": 1760,
+            "file": "combined-baseline-4.txt"
+          },
+          {
+            "sample": 5,
+            "iterations": 676,
+            "ns": 199480,
+            "bytes": 186307,
+            "allocations": 1760,
+            "file": "combined-baseline-5.txt"
+          }
+        ]
+      },
+      "after": {
+        "medianNs": 142623,
+        "medianBytes": 136759,
+        "medianAllocations": 1368,
+        "samples": [
+          {
+            "sample": 1,
+            "iterations": 1226,
+            "ns": 142623,
+            "bytes": 136759,
+            "allocations": 1368,
+            "file": "combined-winner-1.txt"
+          },
+          {
+            "sample": 2,
+            "iterations": 1035,
+            "ns": 144446,
+            "bytes": 136759,
+            "allocations": 1368,
+            "file": "combined-winner-2.txt"
+          },
+          {
+            "sample": 3,
+            "iterations": 1030,
+            "ns": 100151,
+            "bytes": 136765,
+            "allocations": 1368,
+            "file": "combined-winner-3.txt"
+          },
+          {
+            "sample": 4,
+            "iterations": 1161,
+            "ns": 160214,
+            "bytes": 136760,
+            "allocations": 1368,
+            "file": "combined-winner-4.txt"
+          },
+          {
+            "sample": 5,
+            "iterations": 1264,
+            "ns": 111265,
+            "bytes": 136759,
+            "allocations": 1368,
+            "file": "combined-winner-5.txt"
+          }
+        ]
+      },
+      "speedup": 1.5111517777637549,
+      "timeReductionPercent": 33.8253102888296,
+      "allocatedByteReductionPercent": 26.595601930126833
+    },
+    {
+      "name": "100d6/details/changing=false",
+      "before": {
+        "medianNs": 130188,
+        "medianBytes": 105301,
+        "medianAllocations": 1336,
+        "samples": [
+          {
+            "sample": 1,
+            "iterations": 1172,
+            "ns": 128092,
+            "bytes": 105301,
+            "allocations": 1336,
+            "file": "combined-baseline-1.txt"
+          },
+          {
+            "sample": 2,
+            "iterations": 1172,
+            "ns": 130188,
+            "bytes": 105298,
+            "allocations": 1336,
+            "file": "combined-baseline-2.txt"
+          },
+          {
+            "sample": 3,
+            "iterations": 1099,
+            "ns": 129478,
+            "bytes": 105303,
+            "allocations": 1336,
+            "file": "combined-baseline-3.txt"
+          },
+          {
+            "sample": 4,
+            "iterations": 1267,
+            "ns": 137090,
+            "bytes": 105300,
+            "allocations": 1336,
+            "file": "combined-baseline-4.txt"
+          },
+          {
+            "sample": 5,
+            "iterations": 1125,
+            "ns": 144356,
+            "bytes": 105302,
+            "allocations": 1336,
+            "file": "combined-baseline-5.txt"
+          }
+        ]
+      },
+      "after": {
+        "medianNs": 28806,
+        "medianBytes": 44808,
+        "medianAllocations": 142,
+        "samples": [
+          {
+            "sample": 1,
+            "iterations": 5469,
+            "ns": 28503,
+            "bytes": 44808,
+            "allocations": 142,
+            "file": "combined-winner-1.txt"
+          },
+          {
+            "sample": 2,
+            "iterations": 6235,
+            "ns": 33624,
+            "bytes": 44808,
+            "allocations": 142,
+            "file": "combined-winner-2.txt"
+          },
+          {
+            "sample": 3,
+            "iterations": 4897,
+            "ns": 28806,
+            "bytes": 44808,
+            "allocations": 142,
+            "file": "combined-winner-3.txt"
+          },
+          {
+            "sample": 4,
+            "iterations": 5788,
+            "ns": 30491,
+            "bytes": 44808,
+            "allocations": 142,
+            "file": "combined-winner-4.txt"
+          },
+          {
+            "sample": 5,
+            "iterations": 5326,
+            "ns": 24300,
+            "bytes": 44808,
+            "allocations": 142,
+            "file": "combined-winner-5.txt"
+          }
+        ]
+      },
+      "speedup": 4.519475109352218,
+      "timeReductionPercent": 77.87353673149599,
+      "allocatedByteReductionPercent": 57.44769755272979
+    },
+    {
+      "name": "100d6/details/changing=true",
+      "before": {
+        "medianNs": 131183,
+        "medianBytes": 105319,
+        "medianAllocations": 1336,
+        "samples": [
+          {
+            "sample": 1,
+            "iterations": 1191,
+            "ns": 127866,
+            "bytes": 105318,
+            "allocations": 1336,
+            "file": "combined-baseline-1.txt"
+          },
+          {
+            "sample": 2,
+            "iterations": 1150,
+            "ns": 137688,
+            "bytes": 105319,
+            "allocations": 1336,
+            "file": "combined-baseline-2.txt"
+          },
+          {
+            "sample": 3,
+            "iterations": 1176,
+            "ns": 127477,
+            "bytes": 105323,
+            "allocations": 1336,
+            "file": "combined-baseline-3.txt"
+          },
+          {
+            "sample": 4,
+            "iterations": 1210,
+            "ns": 131183,
+            "bytes": 105322,
+            "allocations": 1336,
+            "file": "combined-baseline-4.txt"
+          },
+          {
+            "sample": 5,
+            "iterations": 1147,
+            "ns": 138145,
+            "bytes": 105318,
+            "allocations": 1336,
+            "file": "combined-baseline-5.txt"
+          }
+        ]
+      },
+      "after": {
+        "medianNs": 28359,
+        "medianBytes": 44815,
+        "medianAllocations": 142,
+        "samples": [
+          {
+            "sample": 1,
+            "iterations": 4684,
+            "ns": 28359,
+            "bytes": 44815,
+            "allocations": 142,
+            "file": "combined-winner-1.txt"
+          },
+          {
+            "sample": 2,
+            "iterations": 6531,
+            "ns": 27639,
+            "bytes": 44815,
+            "allocations": 142,
+            "file": "combined-winner-2.txt"
+          },
+          {
+            "sample": 3,
+            "iterations": 4576,
+            "ns": 45497,
+            "bytes": 44815,
+            "allocations": 142,
+            "file": "combined-winner-3.txt"
+          },
+          {
+            "sample": 4,
+            "iterations": 3613,
+            "ns": 36295,
+            "bytes": 44815,
+            "allocations": 142,
+            "file": "combined-winner-4.txt"
+          },
+          {
+            "sample": 5,
+            "iterations": 5786,
+            "ns": 27494,
+            "bytes": 44815,
+            "allocations": 142,
+            "file": "combined-winner-5.txt"
+          }
+        ]
+      },
+      "speedup": 4.625797806692761,
+      "timeReductionPercent": 78.38210743770153,
+      "allocatedByteReductionPercent": 57.44832366429608
+    },
+    {
+      "name": "100d6/summary/changing=false",
+      "before": {
+        "medianNs": 12556,
+        "medianBytes": 6263,
+        "medianAllocations": 97,
+        "samples": [
+          {
+            "sample": 1,
+            "iterations": 10000,
+            "ns": 12519,
+            "bytes": 6263,
+            "allocations": 97,
+            "file": "combined-baseline-1.txt"
+          },
+          {
+            "sample": 2,
+            "iterations": 10000,
+            "ns": 12577,
+            "bytes": 6263,
+            "allocations": 97,
+            "file": "combined-baseline-2.txt"
+          },
+          {
+            "sample": 3,
+            "iterations": 10000,
+            "ns": 12556,
+            "bytes": 6263,
+            "allocations": 97,
+            "file": "combined-baseline-3.txt"
+          },
+          {
+            "sample": 4,
+            "iterations": 10000,
+            "ns": 12281,
+            "bytes": 6263,
+            "allocations": 97,
+            "file": "combined-baseline-4.txt"
+          },
+          {
+            "sample": 5,
+            "iterations": 10000,
+            "ns": 13050,
+            "bytes": 6263,
+            "allocations": 97,
+            "file": "combined-baseline-5.txt"
+          }
+        ]
+      },
+      "after": {
+        "medianNs": 7234,
+        "medianBytes": 3792,
+        "medianAllocations": 12,
+        "samples": [
+          {
+            "sample": 1,
+            "iterations": 17841,
+            "ns": 8271,
+            "bytes": 3792,
+            "allocations": 12,
+            "file": "combined-winner-1.txt"
+          },
+          {
+            "sample": 2,
+            "iterations": 17572,
+            "ns": 7156,
+            "bytes": 3792,
+            "allocations": 12,
+            "file": "combined-winner-2.txt"
+          },
+          {
+            "sample": 3,
+            "iterations": 15240,
+            "ns": 7689,
+            "bytes": 3792,
+            "allocations": 12,
+            "file": "combined-winner-3.txt"
+          },
+          {
+            "sample": 4,
+            "iterations": 17928,
+            "ns": 7234,
+            "bytes": 3792,
+            "allocations": 12,
+            "file": "combined-winner-4.txt"
+          },
+          {
+            "sample": 5,
+            "iterations": 17742,
+            "ns": 6807,
+            "bytes": 3792,
+            "allocations": 12,
+            "file": "combined-winner-5.txt"
+          }
+        ]
+      },
+      "speedup": 1.735692562897429,
+      "timeReductionPercent": 42.38611022618668,
+      "allocatedByteReductionPercent": 39.453935813507904
+    },
+    {
+      "name": "100d6/summary/changing=true",
+      "before": {
+        "medianNs": 12348,
+        "medianBytes": 6286,
+        "medianAllocations": 97,
+        "samples": [
+          {
+            "sample": 1,
+            "iterations": 10000,
+            "ns": 14575,
+            "bytes": 6287,
+            "allocations": 97,
+            "file": "combined-baseline-1.txt"
+          },
+          {
+            "sample": 2,
+            "iterations": 10000,
+            "ns": 12081,
+            "bytes": 6286,
+            "allocations": 97,
+            "file": "combined-baseline-2.txt"
+          },
+          {
+            "sample": 3,
+            "iterations": 10000,
+            "ns": 12451,
+            "bytes": 6287,
+            "allocations": 97,
+            "file": "combined-baseline-3.txt"
+          },
+          {
+            "sample": 4,
+            "iterations": 10000,
+            "ns": 12348,
+            "bytes": 6286,
+            "allocations": 97,
+            "file": "combined-baseline-4.txt"
+          },
+          {
+            "sample": 5,
+            "iterations": 10000,
+            "ns": 12219,
+            "bytes": 6286,
+            "allocations": 97,
+            "file": "combined-baseline-5.txt"
+          }
+        ]
+      },
+      "after": {
+        "medianNs": 7124,
+        "medianBytes": 3799,
+        "medianAllocations": 12,
+        "samples": [
+          {
+            "sample": 1,
+            "iterations": 16311,
+            "ns": 6925,
+            "bytes": 3799,
+            "allocations": 12,
+            "file": "combined-winner-1.txt"
+          },
+          {
+            "sample": 2,
+            "iterations": 17114,
+            "ns": 6774,
+            "bytes": 3799,
+            "allocations": 12,
+            "file": "combined-winner-2.txt"
+          },
+          {
+            "sample": 3,
+            "iterations": 16960,
+            "ns": 7408,
+            "bytes": 3799,
+            "allocations": 12,
+            "file": "combined-winner-3.txt"
+          },
+          {
+            "sample": 4,
+            "iterations": 17416,
+            "ns": 7124,
+            "bytes": 3799,
+            "allocations": 12,
+            "file": "combined-winner-4.txt"
+          },
+          {
+            "sample": 5,
+            "iterations": 17538,
+            "ns": 7288,
+            "bytes": 3799,
+            "allocations": 12,
+            "file": "combined-winner-5.txt"
+          }
+        ]
+      },
+      "speedup": 1.733295901179113,
+      "timeReductionPercent": 42.306446388079046,
+      "allocatedByteReductionPercent": 39.564110722239896
+    },
+    {
+      "name": "20d6!2ro=1kh10/full/changing=false",
+      "before": {
+        "medianNs": 87637,
+        "medianBytes": 72416,
+        "medianAllocations": 792,
+        "samples": [
+          {
+            "sample": 1,
+            "iterations": 1563,
+            "ns": 87637,
+            "bytes": 72417,
+            "allocations": 792,
+            "file": "combined-baseline-1.txt"
+          },
+          {
+            "sample": 2,
+            "iterations": 1060,
+            "ns": 99967,
+            "bytes": 72414,
+            "allocations": 792,
+            "file": "combined-baseline-2.txt"
+          },
+          {
+            "sample": 3,
+            "iterations": 1345,
+            "ns": 87420,
+            "bytes": 72416,
+            "allocations": 792,
+            "file": "combined-baseline-3.txt"
+          },
+          {
+            "sample": 4,
+            "iterations": 1585,
+            "ns": 106349,
+            "bytes": 72418,
+            "allocations": 792,
+            "file": "combined-baseline-4.txt"
+          },
+          {
+            "sample": 5,
+            "iterations": 1411,
+            "ns": 86958,
+            "bytes": 72415,
+            "allocations": 792,
+            "file": "combined-baseline-5.txt"
+          }
+        ]
+      },
+      "after": {
+        "medianNs": 57787,
+        "medianBytes": 51944,
+        "medianAllocations": 598,
+        "samples": [
+          {
+            "sample": 1,
+            "iterations": 2788,
+            "ns": 70566,
+            "bytes": 51944,
+            "allocations": 598,
+            "file": "combined-winner-1.txt"
+          },
+          {
+            "sample": 2,
+            "iterations": 2769,
+            "ns": 54521,
+            "bytes": 51944,
+            "allocations": 598,
+            "file": "combined-winner-2.txt"
+          },
+          {
+            "sample": 3,
+            "iterations": 2719,
+            "ns": 79935,
+            "bytes": 51944,
+            "allocations": 598,
+            "file": "combined-winner-3.txt"
+          },
+          {
+            "sample": 4,
+            "iterations": 2455,
+            "ns": 57787,
+            "bytes": 51944,
+            "allocations": 598,
+            "file": "combined-winner-4.txt"
+          },
+          {
+            "sample": 5,
+            "iterations": 2550,
+            "ns": 47341,
+            "bytes": 51944,
+            "allocations": 598,
+            "file": "combined-winner-5.txt"
+          }
+        ]
+      },
+      "speedup": 1.5165521657120113,
+      "timeReductionPercent": 34.060955988908795,
+      "allocatedByteReductionPercent": 28.26999558108705
+    },
+    {
+      "name": "20d6!2ro=1kh10/full/changing=true",
+      "before": {
+        "medianNs": 84626,
+        "medianBytes": 66802,
+        "medianAllocations": 718,
+        "samples": [
+          {
+            "sample": 1,
+            "iterations": 1656,
+            "ns": 90806,
+            "bytes": 66773,
+            "allocations": 718,
+            "file": "combined-baseline-1.txt"
+          },
+          {
+            "sample": 2,
+            "iterations": 1768,
+            "ns": 84626,
+            "bytes": 66802,
+            "allocations": 718,
+            "file": "combined-baseline-2.txt"
+          },
+          {
+            "sample": 3,
+            "iterations": 1660,
+            "ns": 85502,
+            "bytes": 66771,
+            "allocations": 718,
+            "file": "combined-baseline-3.txt"
+          },
+          {
+            "sample": 4,
+            "iterations": 1761,
+            "ns": 75330,
+            "bytes": 66814,
+            "allocations": 718,
+            "file": "combined-baseline-4.txt"
+          },
+          {
+            "sample": 5,
+            "iterations": 1707,
+            "ns": 82710,
+            "bytes": 66811,
+            "allocations": 718,
+            "file": "combined-baseline-5.txt"
+          }
+        ]
+      },
+      "after": {
+        "medianNs": 49870,
+        "medianBytes": 47527,
+        "medianAllocations": 533,
+        "samples": [
+          {
+            "sample": 1,
+            "iterations": 2709,
+            "ns": 54199,
+            "bytes": 47512,
+            "allocations": 533,
+            "file": "combined-winner-1.txt"
+          },
+          {
+            "sample": 2,
+            "iterations": 2787,
+            "ns": 49870,
+            "bytes": 47532,
+            "allocations": 533,
+            "file": "combined-winner-2.txt"
+          },
+          {
+            "sample": 3,
+            "iterations": 3266,
+            "ns": 62646,
+            "bytes": 47526,
+            "allocations": 533,
+            "file": "combined-winner-3.txt"
+          },
+          {
+            "sample": 4,
+            "iterations": 3045,
+            "ns": 49555,
+            "bytes": 47528,
+            "allocations": 533,
+            "file": "combined-winner-4.txt"
+          },
+          {
+            "sample": 5,
+            "iterations": 2978,
+            "ns": 45060,
+            "bytes": 47527,
+            "allocations": 533,
+            "file": "combined-winner-5.txt"
+          }
+        ]
+      },
+      "speedup": 1.6969320232604772,
+      "timeReductionPercent": 41.07012029399948,
+      "allocatedByteReductionPercent": 28.853926529145834
+    },
+    {
+      "name": "20d6!2ro=1kh10/details/changing=false",
+      "before": {
+        "medianNs": 52265,
+        "medianBytes": 41114,
+        "medianAllocations": 616,
+        "samples": [
+          {
+            "sample": 1,
+            "iterations": 2319,
+            "ns": 55466,
+            "bytes": 41114,
+            "allocations": 616,
+            "file": "combined-baseline-1.txt"
+          },
+          {
+            "sample": 2,
+            "iterations": 2686,
+            "ns": 51947,
+            "bytes": 41114,
+            "allocations": 616,
+            "file": "combined-baseline-2.txt"
+          },
+          {
+            "sample": 3,
+            "iterations": 2379,
+            "ns": 52265,
+            "bytes": 41115,
+            "allocations": 616,
+            "file": "combined-baseline-3.txt"
+          },
+          {
+            "sample": 4,
+            "iterations": 2503,
+            "ns": 52394,
+            "bytes": 41115,
+            "allocations": 616,
+            "file": "combined-baseline-4.txt"
+          },
+          {
+            "sample": 5,
+            "iterations": 2473,
+            "ns": 49251,
+            "bytes": 41114,
+            "allocations": 616,
+            "file": "combined-baseline-5.txt"
+          }
+        ]
+      },
+      "after": {
+        "medianNs": 20145,
+        "medianBytes": 17312,
+        "medianAllocations": 185,
+        "samples": [
+          {
+            "sample": 1,
+            "iterations": 9213,
+            "ns": 18342,
+            "bytes": 17312,
+            "allocations": 185,
+            "file": "combined-winner-1.txt"
+          },
+          {
+            "sample": 2,
+            "iterations": 9084,
+            "ns": 22688,
+            "bytes": 17312,
+            "allocations": 185,
+            "file": "combined-winner-2.txt"
+          },
+          {
+            "sample": 3,
+            "iterations": 8858,
+            "ns": 19732,
+            "bytes": 17312,
+            "allocations": 185,
+            "file": "combined-winner-3.txt"
+          },
+          {
+            "sample": 4,
+            "iterations": 8990,
+            "ns": 20145,
+            "bytes": 17312,
+            "allocations": 185,
+            "file": "combined-winner-4.txt"
+          },
+          {
+            "sample": 5,
+            "iterations": 7464,
+            "ns": 23439,
+            "bytes": 17312,
+            "allocations": 185,
+            "file": "combined-winner-5.txt"
+          }
+        ]
+      },
+      "speedup": 2.5944403077686773,
+      "timeReductionPercent": 61.45604132784847,
+      "allocatedByteReductionPercent": 57.892688621880616
+    },
+    {
+      "name": "20d6!2ro=1kh10/details/changing=true",
+      "before": {
+        "medianNs": 49599,
+        "medianBytes": 38574,
+        "medianAllocations": 559,
+        "samples": [
+          {
+            "sample": 1,
+            "iterations": 2794,
+            "ns": 48567,
+            "bytes": 38570,
+            "allocations": 559,
+            "file": "combined-baseline-1.txt"
+          },
+          {
+            "sample": 2,
+            "iterations": 2509,
+            "ns": 48868,
+            "bytes": 38574,
+            "allocations": 559,
+            "file": "combined-baseline-2.txt"
+          },
+          {
+            "sample": 3,
+            "iterations": 2602,
+            "ns": 52388,
+            "bytes": 38578,
+            "allocations": 559,
+            "file": "combined-baseline-3.txt"
+          },
+          {
+            "sample": 4,
+            "iterations": 2313,
+            "ns": 49599,
+            "bytes": 38573,
+            "allocations": 559,
+            "file": "combined-baseline-4.txt"
+          },
+          {
+            "sample": 5,
+            "iterations": 2640,
+            "ns": 50860,
+            "bytes": 38576,
+            "allocations": 559,
+            "file": "combined-baseline-5.txt"
+          }
+        ]
+      },
+      "after": {
+        "medianNs": 19689,
+        "medianBytes": 16337,
+        "medianAllocations": 161,
+        "samples": [
+          {
+            "sample": 1,
+            "iterations": 9682,
+            "ns": 19365,
+            "bytes": 16337,
+            "allocations": 161,
+            "file": "combined-winner-1.txt"
+          },
+          {
+            "sample": 2,
+            "iterations": 9580,
+            "ns": 19957,
+            "bytes": 16336,
+            "allocations": 161,
+            "file": "combined-winner-2.txt"
+          },
+          {
+            "sample": 3,
+            "iterations": 9006,
+            "ns": 19393,
+            "bytes": 16337,
+            "allocations": 161,
+            "file": "combined-winner-3.txt"
+          },
+          {
+            "sample": 4,
+            "iterations": 8920,
+            "ns": 22886,
+            "bytes": 16337,
+            "allocations": 161,
+            "file": "combined-winner-4.txt"
+          },
+          {
+            "sample": 5,
+            "iterations": 8701,
+            "ns": 19689,
+            "bytes": 16336,
+            "allocations": 161,
+            "file": "combined-winner-5.txt"
+          }
+        ]
+      },
+      "speedup": 2.5191223525826603,
+      "timeReductionPercent": 60.30363515393455,
+      "allocatedByteReductionPercent": 57.64763830559444
+    },
+    {
+      "name": "20d6!2ro=1kh10/summary/changing=false",
+      "before": {
+        "medianNs": 44448,
+        "medianBytes": 26168,
+        "medianAllocations": 585,
+        "samples": [
+          {
+            "sample": 1,
+            "iterations": 3104,
+            "ns": 45590,
+            "bytes": 26168,
+            "allocations": 585,
+            "file": "combined-baseline-1.txt"
+          },
+          {
+            "sample": 2,
+            "iterations": 2796,
+            "ns": 43874,
+            "bytes": 26168,
+            "allocations": 585,
+            "file": "combined-baseline-2.txt"
+          },
+          {
+            "sample": 3,
+            "iterations": 2977,
+            "ns": 44448,
+            "bytes": 26167,
+            "allocations": 585,
+            "file": "combined-baseline-3.txt"
+          },
+          {
+            "sample": 4,
+            "iterations": 3085,
+            "ns": 43385,
+            "bytes": 26169,
+            "allocations": 585,
+            "file": "combined-baseline-4.txt"
+          },
+          {
+            "sample": 5,
+            "iterations": 2907,
+            "ns": 45091,
+            "bytes": 26170,
+            "allocations": 585,
+            "file": "combined-baseline-5.txt"
+          }
+        ]
+      },
+      "after": {
+        "medianNs": 16758,
+        "medianBytes": 12800,
+        "medianAllocations": 160,
+        "samples": [
+          {
+            "sample": 1,
+            "iterations": 6370,
+            "ns": 19479,
+            "bytes": 12800,
+            "allocations": 160,
+            "file": "combined-winner-1.txt"
+          },
+          {
+            "sample": 2,
+            "iterations": 10000,
+            "ns": 15182,
+            "bytes": 12800,
+            "allocations": 160,
+            "file": "combined-winner-2.txt"
+          },
+          {
+            "sample": 3,
+            "iterations": 10000,
+            "ns": 16758,
+            "bytes": 12800,
+            "allocations": 160,
+            "file": "combined-winner-3.txt"
+          },
+          {
+            "sample": 4,
+            "iterations": 10000,
+            "ns": 16035,
+            "bytes": 12800,
+            "allocations": 160,
+            "file": "combined-winner-4.txt"
+          },
+          {
+            "sample": 5,
+            "iterations": 9211,
+            "ns": 16987,
+            "bytes": 12800,
+            "allocations": 160,
+            "file": "combined-winner-5.txt"
+          }
+        ]
+      },
+      "speedup": 2.65234514858575,
+      "timeReductionPercent": 62.29751619870411,
+      "allocatedByteReductionPercent": 51.08529501681443
+    },
+    {
+      "name": "20d6!2ro=1kh10/summary/changing=true",
+      "before": {
+        "medianNs": 41953,
+        "medianBytes": 24027,
+        "medianAllocations": 532,
+        "samples": [
+          {
+            "sample": 1,
+            "iterations": 2596,
+            "ns": 50707,
+            "bytes": 24031,
+            "allocations": 532,
+            "file": "combined-baseline-1.txt"
+          },
+          {
+            "sample": 2,
+            "iterations": 3279,
+            "ns": 41953,
+            "bytes": 24029,
+            "allocations": 532,
+            "file": "combined-baseline-2.txt"
+          },
+          {
+            "sample": 3,
+            "iterations": 3228,
+            "ns": 42651,
+            "bytes": 24022,
+            "allocations": 532,
+            "file": "combined-baseline-3.txt"
+          },
+          {
+            "sample": 4,
+            "iterations": 3100,
+            "ns": 41467,
+            "bytes": 24022,
+            "allocations": 532,
+            "file": "combined-baseline-4.txt"
+          },
+          {
+            "sample": 5,
+            "iterations": 2974,
+            "ns": 41651,
+            "bytes": 24027,
+            "allocations": 532,
+            "file": "combined-baseline-5.txt"
+          }
+        ]
+      },
+      "after": {
+        "medianNs": 16363,
+        "medianBytes": 12228,
+        "medianAllocations": 140,
+        "samples": [
+          {
+            "sample": 1,
+            "iterations": 6987,
+            "ns": 16744,
+            "bytes": 12228,
+            "allocations": 140,
+            "file": "combined-winner-1.txt"
+          },
+          {
+            "sample": 2,
+            "iterations": 10000,
+            "ns": 16260,
+            "bytes": 12228,
+            "allocations": 140,
+            "file": "combined-winner-2.txt"
+          },
+          {
+            "sample": 3,
+            "iterations": 9304,
+            "ns": 14908,
+            "bytes": 12228,
+            "allocations": 140,
+            "file": "combined-winner-3.txt"
+          },
+          {
+            "sample": 4,
+            "iterations": 9992,
+            "ns": 16363,
+            "bytes": 12228,
+            "allocations": 140,
+            "file": "combined-winner-4.txt"
+          },
+          {
+            "sample": 5,
+            "iterations": 10000,
+            "ns": 17724,
+            "bytes": 12228,
+            "allocations": 140,
+            "file": "combined-winner-5.txt"
+          }
+        ]
+      },
+      "speedup": 2.563894151439223,
+      "timeReductionPercent": 60.99682978571258,
+      "allocatedByteReductionPercent": 49.10725433886878
+    }
+  ]
+}

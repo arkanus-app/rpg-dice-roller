@@ -1,0 +1,3118 @@
+{
+  "baseline": {
+    "1d20+5/full/changing=false": {
+      "medianNs": 20267.0,
+      "medianBytes": 11927,
+      "medianAllocations": 177,
+      "samples": [
+        {
+          "ns": 17054.0,
+          "bytes": 11928,
+          "allocations": 177
+        },
+        {
+          "ns": 20151.0,
+          "bytes": 11928,
+          "allocations": 177
+        },
+        {
+          "ns": 25497.0,
+          "bytes": 11927,
+          "allocations": 177
+        },
+        {
+          "ns": 20267.0,
+          "bytes": 11926,
+          "allocations": 177
+        },
+        {
+          "ns": 24718.0,
+          "bytes": 11927,
+          "allocations": 177
+        }
+      ]
+    },
+    "1d20+5/details/changing=false": {
+      "medianNs": 14729.0,
+      "medianBytes": 8114,
+      "medianAllocations": 150,
+      "samples": [
+        {
+          "ns": 14446.0,
+          "bytes": 8114,
+          "allocations": 150
+        },
+        {
+          "ns": 14729.0,
+          "bytes": 8113,
+          "allocations": 150
+        },
+        {
+          "ns": 17000.0,
+          "bytes": 8114,
+          "allocations": 150
+        },
+        {
+          "ns": 15199.0,
+          "bytes": 8114,
+          "allocations": 150
+        },
+        {
+          "ns": 14347.0,
+          "bytes": 8114,
+          "allocations": 150
+        }
+      ]
+    },
+    "1d20+5/summary/changing=false": {
+      "medianNs": 11198.0,
+      "medianBytes": 6263,
+      "medianAllocations": 97,
+      "samples": [
+        {
+          "ns": 11111.0,
+          "bytes": 6263,
+          "allocations": 97
+        },
+        {
+          "ns": 11115.0,
+          "bytes": 6264,
+          "allocations": 97
+        },
+        {
+          "ns": 12901.0,
+          "bytes": 6264,
+          "allocations": 97
+        },
+        {
+          "ns": 11502.0,
+          "bytes": 6263,
+          "allocations": 97
+        },
+        {
+          "ns": 11198.0,
+          "bytes": 6263,
+          "allocations": 97
+        }
+      ]
+    },
+    "100d6/full/changing=false": {
+      "medianNs": 229151.0,
+      "medianBytes": 186292,
+      "medianAllocations": 1760,
+      "samples": [
+        {
+          "ns": 190904.0,
+          "bytes": 186286,
+          "allocations": 1760
+        },
+        {
+          "ns": 299262.0,
+          "bytes": 186306,
+          "allocations": 1760
+        },
+        {
+          "ns": 222680.0,
+          "bytes": 186292,
+          "allocations": 1760
+        },
+        {
+          "ns": 232638.0,
+          "bytes": 186300,
+          "allocations": 1760
+        },
+        {
+          "ns": 229151.0,
+          "bytes": 186283,
+          "allocations": 1760
+        }
+      ]
+    },
+    "100d6/details/changing=false": {
+      "medianNs": 137684.0,
+      "medianBytes": 105302,
+      "medianAllocations": 1336,
+      "samples": [
+        {
+          "ns": 144518.0,
+          "bytes": 105293,
+          "allocations": 1336
+        },
+        {
+          "ns": 154633.0,
+          "bytes": 105297,
+          "allocations": 1336
+        },
+        {
+          "ns": 136723.0,
+          "bytes": 105309,
+          "allocations": 1336
+        },
+        {
+          "ns": 132976.0,
+          "bytes": 105302,
+          "allocations": 1336
+        },
+        {
+          "ns": 137684.0,
+          "bytes": 105306,
+          "allocations": 1336
+        }
+      ]
+    },
+    "100d6/summary/changing=false": {
+      "medianNs": 15780.0,
+      "medianBytes": 6264,
+      "medianAllocations": 97,
+      "samples": [
+        {
+          "ns": 16097.0,
+          "bytes": 6263,
+          "allocations": 97
+        },
+        {
+          "ns": 15770.0,
+          "bytes": 6264,
+          "allocations": 97
+        },
+        {
+          "ns": 17200.0,
+          "bytes": 6263,
+          "allocations": 97
+        },
+        {
+          "ns": 15371.0,
+          "bytes": 6264,
+          "allocations": 97
+        },
+        {
+          "ns": 15780.0,
+          "bytes": 6264,
+          "allocations": 97
+        }
+      ]
+    },
+    "20d6!2ro=1kh10/full/changing=false": {
+      "medianNs": 95281.0,
+      "medianBytes": 72416,
+      "medianAllocations": 792,
+      "samples": [
+        {
+          "ns": 101295.0,
+          "bytes": 72415,
+          "allocations": 792
+        },
+        {
+          "ns": 126773.0,
+          "bytes": 72425,
+          "allocations": 792
+        },
+        {
+          "ns": 93372.0,
+          "bytes": 72410,
+          "allocations": 792
+        },
+        {
+          "ns": 91603.0,
+          "bytes": 72416,
+          "allocations": 792
+        },
+        {
+          "ns": 95281.0,
+          "bytes": 72419,
+          "allocations": 792
+        }
+      ]
+    },
+    "20d6!2ro=1kh10/details/changing=false": {
+      "medianNs": 63118.0,
+      "medianBytes": 41115,
+      "medianAllocations": 616,
+      "samples": [
+        {
+          "ns": 63891.0,
+          "bytes": 41119,
+          "allocations": 616
+        },
+        {
+          "ns": 62523.0,
+          "bytes": 41115,
+          "allocations": 616
+        },
+        {
+          "ns": 63118.0,
+          "bytes": 41115,
+          "allocations": 616
+        },
+        {
+          "ns": 60386.0,
+          "bytes": 41115,
+          "allocations": 616
+        },
+        {
+          "ns": 68878.0,
+          "bytes": 41119,
+          "allocations": 616
+        }
+      ]
+    },
+    "20d6!2ro=1kh10/summary/changing=false": {
+      "medianNs": 57930.0,
+      "medianBytes": 26169,
+      "medianAllocations": 585,
+      "samples": [
+        {
+          "ns": 59789.0,
+          "bytes": 26169,
+          "allocations": 585
+        },
+        {
+          "ns": 57930.0,
+          "bytes": 26171,
+          "allocations": 585
+        },
+        {
+          "ns": 57667.0,
+          "bytes": 26169,
+          "allocations": 585
+        },
+        {
+          "ns": 58335.0,
+          "bytes": 26168,
+          "allocations": 585
+        },
+        {
+          "ns": 54215.0,
+          "bytes": 26167,
+          "allocations": 585
+        }
+      ]
+    }
+  },
+  "final-reverse-baseline": {
+    "1d20+5/full/changing=false": {
+      "medianNs": 18830.0,
+      "medianBytes": 11927,
+      "medianAllocations": 177,
+      "samples": [
+        {
+          "ns": 18830.0,
+          "bytes": 11927,
+          "allocations": 177
+        },
+        {
+          "ns": 18831.0,
+          "bytes": 11927,
+          "allocations": 177
+        },
+        {
+          "ns": 17893.0,
+          "bytes": 11927,
+          "allocations": 177
+        }
+      ]
+    },
+    "1d20+5/full/changing=true": {
+      "medianNs": 20501.0,
+      "medianBytes": 11945,
+      "medianAllocations": 176,
+      "samples": [
+        {
+          "ns": 20626.0,
+          "bytes": 11945,
+          "allocations": 176
+        },
+        {
+          "ns": 20377.0,
+          "bytes": 11945,
+          "allocations": 176
+        },
+        {
+          "ns": 20501.0,
+          "bytes": 11945,
+          "allocations": 176
+        }
+      ]
+    },
+    "1d20+5/details/changing=false": {
+      "medianNs": 14970.0,
+      "medianBytes": 8114,
+      "medianAllocations": 150,
+      "samples": [
+        {
+          "ns": 15065.0,
+          "bytes": 8114,
+          "allocations": 150
+        },
+        {
+          "ns": 14740.0,
+          "bytes": 8114,
+          "allocations": 150
+        },
+        {
+          "ns": 14970.0,
+          "bytes": 8114,
+          "allocations": 150
+        }
+      ]
+    },
+    "1d20+5/details/changing=true": {
+      "medianNs": 15485.0,
+      "medianBytes": 8136,
+      "medianAllocations": 150,
+      "samples": [
+        {
+          "ns": 15789.0,
+          "bytes": 8136,
+          "allocations": 150
+        },
+        {
+          "ns": 15387.0,
+          "bytes": 8136,
+          "allocations": 150
+        },
+        {
+          "ns": 15485.0,
+          "bytes": 8136,
+          "allocations": 150
+        }
+      ]
+    },
+    "1d20+5/summary/changing=false": {
+      "medianNs": 11563.0,
+      "medianBytes": 6264,
+      "medianAllocations": 97,
+      "samples": [
+        {
+          "ns": 11503.0,
+          "bytes": 6264,
+          "allocations": 97
+        },
+        {
+          "ns": 11563.0,
+          "bytes": 6264,
+          "allocations": 97
+        },
+        {
+          "ns": 11566.0,
+          "bytes": 6264,
+          "allocations": 97
+        }
+      ]
+    },
+    "1d20+5/summary/changing=true": {
+      "medianNs": 12145.0,
+      "medianBytes": 6286,
+      "medianAllocations": 97,
+      "samples": [
+        {
+          "ns": 12145.0,
+          "bytes": 6286,
+          "allocations": 97
+        },
+        {
+          "ns": 12082.0,
+          "bytes": 6286,
+          "allocations": 97
+        },
+        {
+          "ns": 12512.0,
+          "bytes": 6286,
+          "allocations": 97
+        }
+      ]
+    },
+    "100d6/full/changing=false": {
+      "medianNs": 225538.0,
+      "medianBytes": 186291,
+      "medianAllocations": 1760,
+      "samples": [
+        {
+          "ns": 235585.0,
+          "bytes": 186297,
+          "allocations": 1760
+        },
+        {
+          "ns": 196059.0,
+          "bytes": 186291,
+          "allocations": 1760
+        },
+        {
+          "ns": 225538.0,
+          "bytes": 186287,
+          "allocations": 1760
+        }
+      ]
+    },
+    "100d6/full/changing=true": {
+      "medianNs": 220797.0,
+      "medianBytes": 186317,
+      "medianAllocations": 1760,
+      "samples": [
+        {
+          "ns": 255907.0,
+          "bytes": 186317,
+          "allocations": 1760
+        },
+        {
+          "ns": 194149.0,
+          "bytes": 186311,
+          "allocations": 1760
+        },
+        {
+          "ns": 220797.0,
+          "bytes": 186322,
+          "allocations": 1760
+        }
+      ]
+    },
+    "100d6/details/changing=false": {
+      "medianNs": 128138.0,
+      "medianBytes": 105302,
+      "medianAllocations": 1336,
+      "samples": [
+        {
+          "ns": 143104.0,
+          "bytes": 105302,
+          "allocations": 1336
+        },
+        {
+          "ns": 127220.0,
+          "bytes": 105303,
+          "allocations": 1336
+        },
+        {
+          "ns": 128138.0,
+          "bytes": 105300,
+          "allocations": 1336
+        }
+      ]
+    },
+    "100d6/details/changing=true": {
+      "medianNs": 134754.0,
+      "medianBytes": 105326,
+      "medianAllocations": 1336,
+      "samples": [
+        {
+          "ns": 134754.0,
+          "bytes": 105322,
+          "allocations": 1336
+        },
+        {
+          "ns": 141419.0,
+          "bytes": 105326,
+          "allocations": 1336
+        },
+        {
+          "ns": 119867.0,
+          "bytes": 105330,
+          "allocations": 1336
+        }
+      ]
+    },
+    "100d6/summary/changing=false": {
+      "medianNs": 14113.0,
+      "medianBytes": 6264,
+      "medianAllocations": 97,
+      "samples": [
+        {
+          "ns": 14113.0,
+          "bytes": 6264,
+          "allocations": 97
+        },
+        {
+          "ns": 15287.0,
+          "bytes": 6264,
+          "allocations": 97
+        },
+        {
+          "ns": 13804.0,
+          "bytes": 6263,
+          "allocations": 97
+        }
+      ]
+    },
+    "100d6/summary/changing=true": {
+      "medianNs": 14272.0,
+      "medianBytes": 6286,
+      "medianAllocations": 97,
+      "samples": [
+        {
+          "ns": 14688.0,
+          "bytes": 6285,
+          "allocations": 97
+        },
+        {
+          "ns": 14272.0,
+          "bytes": 6286,
+          "allocations": 97
+        },
+        {
+          "ns": 13881.0,
+          "bytes": 6286,
+          "allocations": 97
+        }
+      ]
+    },
+    "20d6!2ro=1kh10/full/changing=false": {
+      "medianNs": 83635.0,
+      "medianBytes": 72417,
+      "medianAllocations": 792,
+      "samples": [
+        {
+          "ns": 90744.0,
+          "bytes": 72417,
+          "allocations": 792
+        },
+        {
+          "ns": 83635.0,
+          "bytes": 72419,
+          "allocations": 792
+        },
+        {
+          "ns": 83285.0,
+          "bytes": 72415,
+          "allocations": 792
+        }
+      ]
+    },
+    "20d6!2ro=1kh10/full/changing=true": {
+      "medianNs": 88321.0,
+      "medianBytes": 66794,
+      "medianAllocations": 718,
+      "samples": [
+        {
+          "ns": 80545.0,
+          "bytes": 66810,
+          "allocations": 718
+        },
+        {
+          "ns": 88321.0,
+          "bytes": 66787,
+          "allocations": 718
+        },
+        {
+          "ns": 90957.0,
+          "bytes": 66794,
+          "allocations": 718
+        }
+      ]
+    },
+    "20d6!2ro=1kh10/details/changing=false": {
+      "medianNs": 54624.0,
+      "medianBytes": 41118,
+      "medianAllocations": 616,
+      "samples": [
+        {
+          "ns": 54624.0,
+          "bytes": 41118,
+          "allocations": 616
+        },
+        {
+          "ns": 53469.0,
+          "bytes": 41118,
+          "allocations": 616
+        },
+        {
+          "ns": 58709.0,
+          "bytes": 41118,
+          "allocations": 616
+        }
+      ]
+    },
+    "20d6!2ro=1kh10/details/changing=true": {
+      "medianNs": 54132.0,
+      "medianBytes": 38575,
+      "medianAllocations": 559,
+      "samples": [
+        {
+          "ns": 52507.0,
+          "bytes": 38575,
+          "allocations": 559
+        },
+        {
+          "ns": 54132.0,
+          "bytes": 38573,
+          "allocations": 559
+        },
+        {
+          "ns": 58037.0,
+          "bytes": 38576,
+          "allocations": 559
+        }
+      ]
+    },
+    "20d6!2ro=1kh10/summary/changing=false": {
+      "medianNs": 48201.0,
+      "medianBytes": 26169,
+      "medianAllocations": 585,
+      "samples": [
+        {
+          "ns": 48180.0,
+          "bytes": 26168,
+          "allocations": 585
+        },
+        {
+          "ns": 48201.0,
+          "bytes": 26169,
+          "allocations": 585
+        },
+        {
+          "ns": 49979.0,
+          "bytes": 26169,
+          "allocations": 585
+        }
+      ]
+    },
+    "20d6!2ro=1kh10/summary/changing=true": {
+      "medianNs": 46948.0,
+      "medianBytes": 24027,
+      "medianAllocations": 532,
+      "samples": [
+        {
+          "ns": 46948.0,
+          "bytes": 24029,
+          "allocations": 532
+        },
+        {
+          "ns": 47586.0,
+          "bytes": 24027,
+          "allocations": 532
+        },
+        {
+          "ns": 44229.0,
+          "bytes": 24026,
+          "allocations": 532
+        }
+      ]
+    }
+  },
+  "final-reverse-winner": {
+    "1d20+5/full/changing=false": {
+      "medianNs": 17682.0,
+      "medianBytes": 10517,
+      "medianAllocations": 167,
+      "samples": [
+        {
+          "ns": 17682.0,
+          "bytes": 10518,
+          "allocations": 167
+        },
+        {
+          "ns": 16575.0,
+          "bytes": 10517,
+          "allocations": 167
+        },
+        {
+          "ns": 18684.0,
+          "bytes": 10517,
+          "allocations": 167
+        }
+      ]
+    },
+    "1d20+5/full/changing=true": {
+      "medianNs": 16727.0,
+      "medianBytes": 10539,
+      "medianAllocations": 167,
+      "samples": [
+        {
+          "ns": 16727.0,
+          "bytes": 10539,
+          "allocations": 167
+        },
+        {
+          "ns": 20033.0,
+          "bytes": 10540,
+          "allocations": 167
+        },
+        {
+          "ns": 15418.0,
+          "bytes": 10539,
+          "allocations": 167
+        }
+      ]
+    },
+    "1d20+5/details/changing=false": {
+      "medianNs": 14848.0,
+      "medianBytes": 7665,
+      "medianAllocations": 128,
+      "samples": [
+        {
+          "ns": 12710.0,
+          "bytes": 7665,
+          "allocations": 128
+        },
+        {
+          "ns": 14848.0,
+          "bytes": 7666,
+          "allocations": 128
+        },
+        {
+          "ns": 15679.0,
+          "bytes": 7665,
+          "allocations": 128
+        }
+      ]
+    },
+    "1d20+5/details/changing=true": {
+      "medianNs": 15054.0,
+      "medianBytes": 7687,
+      "medianAllocations": 128,
+      "samples": [
+        {
+          "ns": 14064.0,
+          "bytes": 7687,
+          "allocations": 128
+        },
+        {
+          "ns": 15054.0,
+          "bytes": 7687,
+          "allocations": 128
+        },
+        {
+          "ns": 15194.0,
+          "bytes": 7688,
+          "allocations": 128
+        }
+      ]
+    },
+    "1d20+5/summary/changing=false": {
+      "medianNs": 12089.0,
+      "medianBytes": 6264,
+      "medianAllocations": 97,
+      "samples": [
+        {
+          "ns": 11922.0,
+          "bytes": 6264,
+          "allocations": 97
+        },
+        {
+          "ns": 12202.0,
+          "bytes": 6264,
+          "allocations": 97
+        },
+        {
+          "ns": 12089.0,
+          "bytes": 6264,
+          "allocations": 97
+        }
+      ]
+    },
+    "1d20+5/summary/changing=true": {
+      "medianNs": 11924.0,
+      "medianBytes": 6286,
+      "medianAllocations": 97,
+      "samples": [
+        {
+          "ns": 11918.0,
+          "bytes": 6286,
+          "allocations": 97
+        },
+        {
+          "ns": 11924.0,
+          "bytes": 6286,
+          "allocations": 97
+        },
+        {
+          "ns": 12247.0,
+          "bytes": 6286,
+          "allocations": 97
+        }
+      ]
+    },
+    "100d6/full/changing=false": {
+      "medianNs": 152558.0,
+      "medianBytes": 139405,
+      "medianAllocations": 1453,
+      "samples": [
+        {
+          "ns": 156660.0,
+          "bytes": 139405,
+          "allocations": 1453
+        },
+        {
+          "ns": 152558.0,
+          "bytes": 139402,
+          "allocations": 1453
+        },
+        {
+          "ns": 138463.0,
+          "bytes": 139405,
+          "allocations": 1453
+        }
+      ]
+    },
+    "100d6/full/changing=true": {
+      "medianNs": 159974.0,
+      "medianBytes": 139433,
+      "medianAllocations": 1453,
+      "samples": [
+        {
+          "ns": 159974.0,
+          "bytes": 139435,
+          "allocations": 1453
+        },
+        {
+          "ns": 152281.0,
+          "bytes": 139425,
+          "allocations": 1453
+        },
+        {
+          "ns": 171953.0,
+          "bytes": 139433,
+          "allocations": 1453
+        }
+      ]
+    },
+    "100d6/details/changing=false": {
+      "medianNs": 47654.0,
+      "medianBytes": 47317,
+      "medianAllocations": 227,
+      "samples": [
+        {
+          "ns": 51089.0,
+          "bytes": 47317,
+          "allocations": 227
+        },
+        {
+          "ns": 47654.0,
+          "bytes": 47317,
+          "allocations": 227
+        },
+        {
+          "ns": 44888.0,
+          "bytes": 47318,
+          "allocations": 227
+        }
+      ]
+    },
+    "100d6/details/changing=true": {
+      "medianNs": 44918.0,
+      "medianBytes": 47339,
+      "medianAllocations": 227,
+      "samples": [
+        {
+          "ns": 42582.0,
+          "bytes": 47339,
+          "allocations": 227
+        },
+        {
+          "ns": 44918.0,
+          "bytes": 47339,
+          "allocations": 227
+        },
+        {
+          "ns": 45906.0,
+          "bytes": 47340,
+          "allocations": 227
+        }
+      ]
+    },
+    "100d6/summary/changing=false": {
+      "medianNs": 13480.0,
+      "medianBytes": 6264,
+      "medianAllocations": 97,
+      "samples": [
+        {
+          "ns": 13489.0,
+          "bytes": 6264,
+          "allocations": 97
+        },
+        {
+          "ns": 13028.0,
+          "bytes": 6263,
+          "allocations": 97
+        },
+        {
+          "ns": 13480.0,
+          "bytes": 6264,
+          "allocations": 97
+        }
+      ]
+    },
+    "100d6/summary/changing=true": {
+      "medianNs": 13111.0,
+      "medianBytes": 6286,
+      "medianAllocations": 97,
+      "samples": [
+        {
+          "ns": 13111.0,
+          "bytes": 6286,
+          "allocations": 97
+        },
+        {
+          "ns": 13009.0,
+          "bytes": 6286,
+          "allocations": 97
+        },
+        {
+          "ns": 13495.0,
+          "bytes": 6286,
+          "allocations": 97
+        }
+      ]
+    },
+    "20d6!2ro=1kh10/full/changing=false": {
+      "medianNs": 67304.0,
+      "medianBytes": 54498,
+      "medianAllocations": 683,
+      "samples": [
+        {
+          "ns": 66637.0,
+          "bytes": 54498,
+          "allocations": 683
+        },
+        {
+          "ns": 67304.0,
+          "bytes": 54497,
+          "allocations": 683
+        },
+        {
+          "ns": 69404.0,
+          "bytes": 54498,
+          "allocations": 683
+        }
+      ]
+    },
+    "20d6!2ro=1kh10/full/changing=true": {
+      "medianNs": 62641.0,
+      "medianBytes": 50089,
+      "medianAllocations": 619,
+      "samples": [
+        {
+          "ns": 65296.0,
+          "bytes": 50079,
+          "allocations": 618
+        },
+        {
+          "ns": 62641.0,
+          "bytes": 50093,
+          "allocations": 619
+        },
+        {
+          "ns": 61990.0,
+          "bytes": 50089,
+          "allocations": 619
+        }
+      ]
+    },
+    "20d6!2ro=1kh10/details/changing=false": {
+      "medianNs": 24533.0,
+      "medianBytes": 19817,
+      "medianAllocations": 270,
+      "samples": [
+        {
+          "ns": 25515.0,
+          "bytes": 19817,
+          "allocations": 270
+        },
+        {
+          "ns": 24533.0,
+          "bytes": 19818,
+          "allocations": 270
+        },
+        {
+          "ns": 23519.0,
+          "bytes": 19817,
+          "allocations": 270
+        }
+      ]
+    },
+    "20d6!2ro=1kh10/details/changing=true": {
+      "medianNs": 24085.0,
+      "medianBytes": 18847,
+      "medianAllocations": 246,
+      "samples": [
+        {
+          "ns": 30979.0,
+          "bytes": 18847,
+          "allocations": 246
+        },
+        {
+          "ns": 23245.0,
+          "bytes": 18847,
+          "allocations": 246
+        },
+        {
+          "ns": 24085.0,
+          "bytes": 18848,
+          "allocations": 246
+        }
+      ]
+    },
+    "20d6!2ro=1kh10/summary/changing=false": {
+      "medianNs": 25272.0,
+      "medianBytes": 15300,
+      "medianAllocations": 245,
+      "samples": [
+        {
+          "ns": 24687.0,
+          "bytes": 15300,
+          "allocations": 245
+        },
+        {
+          "ns": 25272.0,
+          "bytes": 15300,
+          "allocations": 245
+        },
+        {
+          "ns": 25756.0,
+          "bytes": 15300,
+          "allocations": 245
+        }
+      ]
+    },
+    "20d6!2ro=1kh10/summary/changing=true": {
+      "medianNs": 23237.0,
+      "medianBytes": 14733,
+      "medianAllocations": 225,
+      "samples": [
+        {
+          "ns": 21903.0,
+          "bytes": 14733,
+          "allocations": 226
+        },
+        {
+          "ns": 23237.0,
+          "bytes": 14734,
+          "allocations": 225
+        },
+        {
+          "ns": 23356.0,
+          "bytes": 14733,
+          "allocations": 225
+        }
+      ]
+    }
+  },
+  "v1-events-suppressed": {
+    "1d20+5/full/changing=false": {
+      "medianNs": 20363.0,
+      "medianBytes": 11927,
+      "medianAllocations": 177,
+      "samples": [
+        {
+          "ns": 17071.0,
+          "bytes": 11928,
+          "allocations": 177
+        },
+        {
+          "ns": 22386.0,
+          "bytes": 11928,
+          "allocations": 177
+        },
+        {
+          "ns": 19211.0,
+          "bytes": 11927,
+          "allocations": 177
+        },
+        {
+          "ns": 20363.0,
+          "bytes": 11927,
+          "allocations": 177
+        },
+        {
+          "ns": 22865.0,
+          "bytes": 11926,
+          "allocations": 177
+        }
+      ]
+    },
+    "1d20+5/details/changing=false": {
+      "medianNs": 14686.0,
+      "medianBytes": 7873,
+      "medianAllocations": 135,
+      "samples": [
+        {
+          "ns": 15003.0,
+          "bytes": 7875,
+          "allocations": 135
+        },
+        {
+          "ns": 14349.0,
+          "bytes": 7873,
+          "allocations": 135
+        },
+        {
+          "ns": 14686.0,
+          "bytes": 7874,
+          "allocations": 135
+        },
+        {
+          "ns": 14840.0,
+          "bytes": 7873,
+          "allocations": 135
+        },
+        {
+          "ns": 14611.0,
+          "bytes": 7873,
+          "allocations": 135
+        }
+      ]
+    },
+    "1d20+5/summary/changing=false": {
+      "medianNs": 11259.0,
+      "medianBytes": 6263,
+      "medianAllocations": 97,
+      "samples": [
+        {
+          "ns": 10461.0,
+          "bytes": 6264,
+          "allocations": 97
+        },
+        {
+          "ns": 11259.0,
+          "bytes": 6263,
+          "allocations": 97
+        },
+        {
+          "ns": 11767.0,
+          "bytes": 6263,
+          "allocations": 97
+        },
+        {
+          "ns": 11078.0,
+          "bytes": 6263,
+          "allocations": 97
+        },
+        {
+          "ns": 11913.0,
+          "bytes": 6264,
+          "allocations": 97
+        }
+      ]
+    },
+    "100d6/full/changing=false": {
+      "medianNs": 249488.0,
+      "medianBytes": 186294,
+      "medianAllocations": 1760,
+      "samples": [
+        {
+          "ns": 249488.0,
+          "bytes": 186288,
+          "allocations": 1760
+        },
+        {
+          "ns": 243971.0,
+          "bytes": 186297,
+          "allocations": 1760
+        },
+        {
+          "ns": 264739.0,
+          "bytes": 186291,
+          "allocations": 1760
+        },
+        {
+          "ns": 226054.0,
+          "bytes": 186296,
+          "allocations": 1760
+        },
+        {
+          "ns": 253975.0,
+          "bytes": 186294,
+          "allocations": 1760
+        }
+      ]
+    },
+    "100d6/details/changing=false": {
+      "medianNs": 99220.0,
+      "medianBytes": 95642,
+      "medianAllocations": 733,
+      "samples": [
+        {
+          "ns": 104230.0,
+          "bytes": 95642,
+          "allocations": 733
+        },
+        {
+          "ns": 99220.0,
+          "bytes": 95641,
+          "allocations": 733
+        },
+        {
+          "ns": 102567.0,
+          "bytes": 95647,
+          "allocations": 733
+        },
+        {
+          "ns": 87818.0,
+          "bytes": 95640,
+          "allocations": 733
+        },
+        {
+          "ns": 78946.0,
+          "bytes": 95642,
+          "allocations": 733
+        }
+      ]
+    },
+    "100d6/summary/changing=false": {
+      "medianNs": 13159.0,
+      "medianBytes": 6264,
+      "medianAllocations": 97,
+      "samples": [
+        {
+          "ns": 18891.0,
+          "bytes": 6264,
+          "allocations": 97
+        },
+        {
+          "ns": 14880.0,
+          "bytes": 6263,
+          "allocations": 97
+        },
+        {
+          "ns": 13159.0,
+          "bytes": 6265,
+          "allocations": 97
+        },
+        {
+          "ns": 12521.0,
+          "bytes": 6264,
+          "allocations": 97
+        },
+        {
+          "ns": 12334.0,
+          "bytes": 6263,
+          "allocations": 97
+        }
+      ]
+    },
+    "20d6!2ro=1kh10/full/changing=false": {
+      "medianNs": 84461.0,
+      "medianBytes": 72418,
+      "medianAllocations": 792,
+      "samples": [
+        {
+          "ns": 82972.0,
+          "bytes": 72419,
+          "allocations": 792
+        },
+        {
+          "ns": 81666.0,
+          "bytes": 72415,
+          "allocations": 792
+        },
+        {
+          "ns": 93216.0,
+          "bytes": 72415,
+          "allocations": 792
+        },
+        {
+          "ns": 84461.0,
+          "bytes": 72419,
+          "allocations": 792
+        },
+        {
+          "ns": 87569.0,
+          "bytes": 72418,
+          "allocations": 792
+        }
+      ]
+    },
+    "20d6!2ro=1kh10/details/changing=false": {
+      "medianNs": 33768.0,
+      "medianBytes": 31697,
+      "medianAllocations": 383,
+      "samples": [
+        {
+          "ns": 33768.0,
+          "bytes": 31696,
+          "allocations": 383
+        },
+        {
+          "ns": 35215.0,
+          "bytes": 31697,
+          "allocations": 383
+        },
+        {
+          "ns": 32593.0,
+          "bytes": 31695,
+          "allocations": 383
+        },
+        {
+          "ns": 39704.0,
+          "bytes": 31697,
+          "allocations": 383
+        },
+        {
+          "ns": 32784.0,
+          "bytes": 31698,
+          "allocations": 383
+        }
+      ]
+    },
+    "20d6!2ro=1kh10/summary/changing=false": {
+      "medianNs": 25953.0,
+      "medianBytes": 16749,
+      "medianAllocations": 352,
+      "samples": [
+        {
+          "ns": 28242.0,
+          "bytes": 16748,
+          "allocations": 352
+        },
+        {
+          "ns": 26732.0,
+          "bytes": 16749,
+          "allocations": 352
+        },
+        {
+          "ns": 25953.0,
+          "bytes": 16749,
+          "allocations": 352
+        },
+        {
+          "ns": 25886.0,
+          "bytes": 16749,
+          "allocations": 352
+        },
+        {
+          "ns": 25793.0,
+          "bytes": 16749,
+          "allocations": 352
+        }
+      ]
+    }
+  },
+  "v1b-event-fields": {
+    "1d20+5/full/changing=false": {
+      "medianNs": 16650.0,
+      "medianBytes": 10597,
+      "medianAllocations": 173,
+      "samples": [
+        {
+          "ns": 15592.0,
+          "bytes": 10598,
+          "allocations": 173
+        },
+        {
+          "ns": 16650.0,
+          "bytes": 10597,
+          "allocations": 173
+        },
+        {
+          "ns": 16248.0,
+          "bytes": 10597,
+          "allocations": 173
+        },
+        {
+          "ns": 20537.0,
+          "bytes": 10597,
+          "allocations": 173
+        },
+        {
+          "ns": 17578.0,
+          "bytes": 10597,
+          "allocations": 173
+        }
+      ]
+    },
+    "1d20+5/details/changing=false": {
+      "medianNs": 13894.0,
+      "medianBytes": 7729,
+      "medianAllocations": 132,
+      "samples": [
+        {
+          "ns": 14644.0,
+          "bytes": 7729,
+          "allocations": 132
+        },
+        {
+          "ns": 14984.0,
+          "bytes": 7730,
+          "allocations": 132
+        },
+        {
+          "ns": 13894.0,
+          "bytes": 7730,
+          "allocations": 132
+        },
+        {
+          "ns": 12174.0,
+          "bytes": 7729,
+          "allocations": 132
+        },
+        {
+          "ns": 13333.0,
+          "bytes": 7729,
+          "allocations": 132
+        }
+      ]
+    },
+    "1d20+5/summary/changing=false": {
+      "medianNs": 10744.0,
+      "medianBytes": 6263,
+      "medianAllocations": 97,
+      "samples": [
+        {
+          "ns": 10744.0,
+          "bytes": 6264,
+          "allocations": 97
+        },
+        {
+          "ns": 11847.0,
+          "bytes": 6263,
+          "allocations": 97
+        },
+        {
+          "ns": 11696.0,
+          "bytes": 6263,
+          "allocations": 97
+        },
+        {
+          "ns": 10568.0,
+          "bytes": 6264,
+          "allocations": 97
+        },
+        {
+          "ns": 10278.0,
+          "bytes": 6263,
+          "allocations": 97
+        }
+      ]
+    },
+    "100d6/full/changing=false": {
+      "medianNs": 174020.0,
+      "medianBytes": 143402,
+      "medianAllocations": 1652,
+      "samples": [
+        {
+          "ns": 178482.0,
+          "bytes": 143405,
+          "allocations": 1652
+        },
+        {
+          "ns": 180414.0,
+          "bytes": 143400,
+          "allocations": 1652
+        },
+        {
+          "ns": 171050.0,
+          "bytes": 143402,
+          "allocations": 1652
+        },
+        {
+          "ns": 159289.0,
+          "bytes": 143398,
+          "allocations": 1652
+        },
+        {
+          "ns": 174020.0,
+          "bytes": 143403,
+          "allocations": 1652
+        }
+      ]
+    },
+    "100d6/details/changing=false": {
+      "medianNs": 63912.0,
+      "medianBytes": 51309,
+      "medianAllocations": 426,
+      "samples": [
+        {
+          "ns": 63912.0,
+          "bytes": 51308,
+          "allocations": 426
+        },
+        {
+          "ns": 71740.0,
+          "bytes": 51310,
+          "allocations": 426
+        },
+        {
+          "ns": 73725.0,
+          "bytes": 51309,
+          "allocations": 426
+        },
+        {
+          "ns": 60049.0,
+          "bytes": 51309,
+          "allocations": 426
+        },
+        {
+          "ns": 54720.0,
+          "bytes": 51311,
+          "allocations": 426
+        }
+      ]
+    },
+    "100d6/summary/changing=false": {
+      "medianNs": 12925.0,
+      "medianBytes": 6264,
+      "medianAllocations": 97,
+      "samples": [
+        {
+          "ns": 12916.0,
+          "bytes": 6264,
+          "allocations": 97
+        },
+        {
+          "ns": 13482.0,
+          "bytes": 6263,
+          "allocations": 97
+        },
+        {
+          "ns": 12925.0,
+          "bytes": 6263,
+          "allocations": 97
+        },
+        {
+          "ns": 12841.0,
+          "bytes": 6264,
+          "allocations": 97
+        },
+        {
+          "ns": 16528.0,
+          "bytes": 6264,
+          "allocations": 97
+        }
+      ]
+    },
+    "20d6!2ro=1kh10/full/changing=false": {
+      "medianNs": 68740.0,
+      "medianBytes": 55531,
+      "medianAllocations": 736,
+      "samples": [
+        {
+          "ns": 75495.0,
+          "bytes": 55531,
+          "allocations": 736
+        },
+        {
+          "ns": 73094.0,
+          "bytes": 55531,
+          "allocations": 736
+        },
+        {
+          "ns": 66954.0,
+          "bytes": 55530,
+          "allocations": 736
+        },
+        {
+          "ns": 66342.0,
+          "bytes": 55532,
+          "allocations": 736
+        },
+        {
+          "ns": 68740.0,
+          "bytes": 55538,
+          "allocations": 736
+        }
+      ]
+    },
+    "20d6!2ro=1kh10/details/changing=false": {
+      "medianNs": 29016.0,
+      "medianBytes": 20851,
+      "medianAllocations": 322,
+      "samples": [
+        {
+          "ns": 29016.0,
+          "bytes": 20851,
+          "allocations": 322
+        },
+        {
+          "ns": 28942.0,
+          "bytes": 20852,
+          "allocations": 322
+        },
+        {
+          "ns": 32045.0,
+          "bytes": 20851,
+          "allocations": 322
+        },
+        {
+          "ns": 28607.0,
+          "bytes": 20851,
+          "allocations": 322
+        },
+        {
+          "ns": 29312.0,
+          "bytes": 20850,
+          "allocations": 322
+        }
+      ]
+    },
+    "20d6!2ro=1kh10/summary/changing=false": {
+      "medianNs": 26763.0,
+      "medianBytes": 16332,
+      "medianAllocations": 297,
+      "samples": [
+        {
+          "ns": 26256.0,
+          "bytes": 16333,
+          "allocations": 297
+        },
+        {
+          "ns": 32379.0,
+          "bytes": 16335,
+          "allocations": 297
+        },
+        {
+          "ns": 36190.0,
+          "bytes": 16332,
+          "allocations": 297
+        },
+        {
+          "ns": 26154.0,
+          "bytes": 16332,
+          "allocations": 297
+        },
+        {
+          "ns": 26763.0,
+          "bytes": 16332,
+          "allocations": 297
+        }
+      ]
+    }
+  },
+  "v2-materialization": {
+    "1d20+5/full/changing=false": {
+      "medianNs": 18976.0,
+      "medianBytes": 10597,
+      "medianAllocations": 173,
+      "samples": [
+        {
+          "ns": 17334.0,
+          "bytes": 10598,
+          "allocations": 173
+        },
+        {
+          "ns": 18360.0,
+          "bytes": 10597,
+          "allocations": 173
+        },
+        {
+          "ns": 19645.0,
+          "bytes": 10597,
+          "allocations": 173
+        },
+        {
+          "ns": 18976.0,
+          "bytes": 10599,
+          "allocations": 173
+        },
+        {
+          "ns": 21979.0,
+          "bytes": 10597,
+          "allocations": 173
+        }
+      ]
+    },
+    "1d20+5/details/changing=false": {
+      "medianNs": 13489.0,
+      "medianBytes": 7729,
+      "medianAllocations": 134,
+      "samples": [
+        {
+          "ns": 13495.0,
+          "bytes": 7729,
+          "allocations": 134
+        },
+        {
+          "ns": 13386.0,
+          "bytes": 7729,
+          "allocations": 134
+        },
+        {
+          "ns": 13489.0,
+          "bytes": 7730,
+          "allocations": 134
+        },
+        {
+          "ns": 15190.0,
+          "bytes": 7729,
+          "allocations": 134
+        },
+        {
+          "ns": 12716.0,
+          "bytes": 7729,
+          "allocations": 134
+        }
+      ]
+    },
+    "1d20+5/summary/changing=false": {
+      "medianNs": 11269.0,
+      "medianBytes": 6263,
+      "medianAllocations": 97,
+      "samples": [
+        {
+          "ns": 10438.0,
+          "bytes": 6263,
+          "allocations": 97
+        },
+        {
+          "ns": 11269.0,
+          "bytes": 6264,
+          "allocations": 97
+        },
+        {
+          "ns": 11209.0,
+          "bytes": 6263,
+          "allocations": 97
+        },
+        {
+          "ns": 11500.0,
+          "bytes": 6263,
+          "allocations": 97
+        },
+        {
+          "ns": 17071.0,
+          "bytes": 6265,
+          "allocations": 97
+        }
+      ]
+    },
+    "100d6/full/changing=false": {
+      "medianNs": 237604.0,
+      "medianBytes": 143012,
+      "medianAllocations": 1751,
+      "samples": [
+        {
+          "ns": 207630.0,
+          "bytes": 143012,
+          "allocations": 1751
+        },
+        {
+          "ns": 439531.0,
+          "bytes": 143044,
+          "allocations": 1751
+        },
+        {
+          "ns": 465117.0,
+          "bytes": 143041,
+          "allocations": 1751
+        },
+        {
+          "ns": 237604.0,
+          "bytes": 143011,
+          "allocations": 1751
+        },
+        {
+          "ns": 219579.0,
+          "bytes": 143011,
+          "allocations": 1751
+        }
+      ]
+    },
+    "100d6/details/changing=false": {
+      "medianNs": 70804.0,
+      "medianBytes": 52529,
+      "medianAllocations": 725,
+      "samples": [
+        {
+          "ns": 70902.0,
+          "bytes": 52529,
+          "allocations": 725
+        },
+        {
+          "ns": 75258.0,
+          "bytes": 52527,
+          "allocations": 725
+        },
+        {
+          "ns": 68367.0,
+          "bytes": 52534,
+          "allocations": 725
+        },
+        {
+          "ns": 61902.0,
+          "bytes": 52528,
+          "allocations": 725
+        },
+        {
+          "ns": 70804.0,
+          "bytes": 52532,
+          "allocations": 725
+        }
+      ]
+    },
+    "100d6/summary/changing=false": {
+      "medianNs": 13629.0,
+      "medianBytes": 6264,
+      "medianAllocations": 97,
+      "samples": [
+        {
+          "ns": 13629.0,
+          "bytes": 6263,
+          "allocations": 97
+        },
+        {
+          "ns": 14041.0,
+          "bytes": 6264,
+          "allocations": 97
+        },
+        {
+          "ns": 13685.0,
+          "bytes": 6264,
+          "allocations": 97
+        },
+        {
+          "ns": 13126.0,
+          "bytes": 6263,
+          "allocations": 97
+        },
+        {
+          "ns": 13203.0,
+          "bytes": 6264,
+          "allocations": 97
+        }
+      ]
+    },
+    "20d6!2ro=1kh10/full/changing=false": {
+      "medianNs": 86857.0,
+      "medianBytes": 61827,
+      "medianAllocations": 785,
+      "samples": [
+        {
+          "ns": 83131.0,
+          "bytes": 61827,
+          "allocations": 785
+        },
+        {
+          "ns": 83711.0,
+          "bytes": 61829,
+          "allocations": 785
+        },
+        {
+          "ns": 87097.0,
+          "bytes": 61835,
+          "allocations": 785
+        },
+        {
+          "ns": 91545.0,
+          "bytes": 61827,
+          "allocations": 785
+        },
+        {
+          "ns": 86857.0,
+          "bytes": 61823,
+          "allocations": 785
+        }
+      ]
+    },
+    "20d6!2ro=1kh10/details/changing=false": {
+      "medianNs": 32101.0,
+      "medianBytes": 21267,
+      "medianAllocations": 377,
+      "samples": [
+        {
+          "ns": 51563.0,
+          "bytes": 21269,
+          "allocations": 377
+        },
+        {
+          "ns": 30908.0,
+          "bytes": 21268,
+          "allocations": 377
+        },
+        {
+          "ns": 32954.0,
+          "bytes": 21267,
+          "allocations": 377
+        },
+        {
+          "ns": 30362.0,
+          "bytes": 21267,
+          "allocations": 377
+        },
+        {
+          "ns": 32101.0,
+          "bytes": 21266,
+          "allocations": 377
+        }
+      ]
+    },
+    "20d6!2ro=1kh10/summary/changing=false": {
+      "medianNs": 29923.0,
+      "medianBytes": 16749,
+      "medianAllocations": 352,
+      "samples": [
+        {
+          "ns": 31926.0,
+          "bytes": 16750,
+          "allocations": 352
+        },
+        {
+          "ns": 35458.0,
+          "bytes": 16749,
+          "allocations": 352
+        },
+        {
+          "ns": 28146.0,
+          "bytes": 16749,
+          "allocations": 352
+        },
+        {
+          "ns": 28396.0,
+          "bytes": 16749,
+          "allocations": 352
+        },
+        {
+          "ns": 29923.0,
+          "bytes": 16749,
+          "allocations": 352
+        }
+      ]
+    }
+  },
+  "v3-owned-events": {
+    "1d20+5/full/changing=false": {
+      "medianNs": 18119.0,
+      "medianBytes": 10597,
+      "medianAllocations": 173,
+      "samples": [
+        {
+          "ns": 18119.0,
+          "bytes": 10599,
+          "allocations": 173
+        },
+        {
+          "ns": 16616.0,
+          "bytes": 10597,
+          "allocations": 173
+        },
+        {
+          "ns": 17958.0,
+          "bytes": 10597,
+          "allocations": 173
+        },
+        {
+          "ns": 19354.0,
+          "bytes": 10597,
+          "allocations": 173
+        },
+        {
+          "ns": 18955.0,
+          "bytes": 10597,
+          "allocations": 173
+        }
+      ]
+    },
+    "1d20+5/details/changing=false": {
+      "medianNs": 13423.0,
+      "medianBytes": 7729,
+      "medianAllocations": 134,
+      "samples": [
+        {
+          "ns": 16114.0,
+          "bytes": 7730,
+          "allocations": 134
+        },
+        {
+          "ns": 14622.0,
+          "bytes": 7729,
+          "allocations": 134
+        },
+        {
+          "ns": 13160.0,
+          "bytes": 7729,
+          "allocations": 134
+        },
+        {
+          "ns": 13228.0,
+          "bytes": 7729,
+          "allocations": 134
+        },
+        {
+          "ns": 13423.0,
+          "bytes": 7729,
+          "allocations": 134
+        }
+      ]
+    },
+    "1d20+5/summary/changing=false": {
+      "medianNs": 10950.0,
+      "medianBytes": 6264,
+      "medianAllocations": 97,
+      "samples": [
+        {
+          "ns": 10821.0,
+          "bytes": 6264,
+          "allocations": 97
+        },
+        {
+          "ns": 11657.0,
+          "bytes": 6264,
+          "allocations": 97
+        },
+        {
+          "ns": 11056.0,
+          "bytes": 6263,
+          "allocations": 97
+        },
+        {
+          "ns": 10950.0,
+          "bytes": 6264,
+          "allocations": 97
+        },
+        {
+          "ns": 10587.0,
+          "bytes": 6264,
+          "allocations": 97
+        }
+      ]
+    },
+    "100d6/full/changing=false": {
+      "medianNs": 174492.0,
+      "medianBytes": 143022,
+      "medianAllocations": 1751,
+      "samples": [
+        {
+          "ns": 181381.0,
+          "bytes": 143022,
+          "allocations": 1751
+        },
+        {
+          "ns": 153033.0,
+          "bytes": 143017,
+          "allocations": 1751
+        },
+        {
+          "ns": 224549.0,
+          "bytes": 143030,
+          "allocations": 1751
+        },
+        {
+          "ns": 145726.0,
+          "bytes": 143011,
+          "allocations": 1751
+        },
+        {
+          "ns": 174492.0,
+          "bytes": 143027,
+          "allocations": 1751
+        }
+      ]
+    },
+    "100d6/details/changing=false": {
+      "medianNs": 77253.0,
+      "medianBytes": 52532,
+      "medianAllocations": 725,
+      "samples": [
+        {
+          "ns": 77253.0,
+          "bytes": 52529,
+          "allocations": 725
+        },
+        {
+          "ns": 89582.0,
+          "bytes": 52532,
+          "allocations": 725
+        },
+        {
+          "ns": 78158.0,
+          "bytes": 52532,
+          "allocations": 725
+        },
+        {
+          "ns": 61829.0,
+          "bytes": 52532,
+          "allocations": 725
+        },
+        {
+          "ns": 65551.0,
+          "bytes": 52529,
+          "allocations": 725
+        }
+      ]
+    },
+    "100d6/summary/changing=false": {
+      "medianNs": 13181.0,
+      "medianBytes": 6263,
+      "medianAllocations": 97,
+      "samples": [
+        {
+          "ns": 12699.0,
+          "bytes": 6264,
+          "allocations": 97
+        },
+        {
+          "ns": 13239.0,
+          "bytes": 6263,
+          "allocations": 97
+        },
+        {
+          "ns": 13181.0,
+          "bytes": 6263,
+          "allocations": 97
+        },
+        {
+          "ns": 13186.0,
+          "bytes": 6264,
+          "allocations": 97
+        },
+        {
+          "ns": 13118.0,
+          "bytes": 6263,
+          "allocations": 97
+        }
+      ]
+    },
+    "20d6!2ro=1kh10/full/changing=false": {
+      "medianNs": 72985.0,
+      "medianBytes": 55661,
+      "medianAllocations": 755,
+      "samples": [
+        {
+          "ns": 79043.0,
+          "bytes": 55659,
+          "allocations": 755
+        },
+        {
+          "ns": 72985.0,
+          "bytes": 55658,
+          "allocations": 755
+        },
+        {
+          "ns": 67600.0,
+          "bytes": 55661,
+          "allocations": 755
+        },
+        {
+          "ns": 72827.0,
+          "bytes": 55666,
+          "allocations": 755
+        },
+        {
+          "ns": 76651.0,
+          "bytes": 55666,
+          "allocations": 755
+        }
+      ]
+    },
+    "20d6!2ro=1kh10/details/changing=false": {
+      "medianNs": 31005.0,
+      "medianBytes": 21267,
+      "medianAllocations": 377,
+      "samples": [
+        {
+          "ns": 30807.0,
+          "bytes": 21266,
+          "allocations": 377
+        },
+        {
+          "ns": 34550.0,
+          "bytes": 21267,
+          "allocations": 377
+        },
+        {
+          "ns": 32031.0,
+          "bytes": 21267,
+          "allocations": 377
+        },
+        {
+          "ns": 30940.0,
+          "bytes": 21267,
+          "allocations": 377
+        },
+        {
+          "ns": 31005.0,
+          "bytes": 21266,
+          "allocations": 377
+        }
+      ]
+    },
+    "20d6!2ro=1kh10/summary/changing=false": {
+      "medianNs": 28732.0,
+      "medianBytes": 16749,
+      "medianAllocations": 352,
+      "samples": [
+        {
+          "ns": 27635.0,
+          "bytes": 16748,
+          "allocations": 352
+        },
+        {
+          "ns": 28785.0,
+          "bytes": 16748,
+          "allocations": 352
+        },
+        {
+          "ns": 29315.0,
+          "bytes": 16749,
+          "allocations": 352
+        },
+        {
+          "ns": 28732.0,
+          "bytes": 16749,
+          "allocations": 352
+        },
+        {
+          "ns": 27878.0,
+          "bytes": 16749,
+          "allocations": 352
+        }
+      ]
+    }
+  },
+  "v4-dice-arena": {
+    "1d20+5/full/changing=false": {
+      "medianNs": 17892.0,
+      "medianBytes": 10597,
+      "medianAllocations": 173,
+      "samples": [
+        {
+          "ns": 17932.0,
+          "bytes": 10597,
+          "allocations": 173
+        },
+        {
+          "ns": 17892.0,
+          "bytes": 10597,
+          "allocations": 173
+        },
+        {
+          "ns": 22645.0,
+          "bytes": 10597,
+          "allocations": 173
+        },
+        {
+          "ns": 17889.0,
+          "bytes": 10598,
+          "allocations": 173
+        },
+        {
+          "ns": 16668.0,
+          "bytes": 10597,
+          "allocations": 173
+        }
+      ]
+    },
+    "1d20+5/details/changing=false": {
+      "medianNs": 13334.0,
+      "medianBytes": 7729,
+      "medianAllocations": 134,
+      "samples": [
+        {
+          "ns": 15186.0,
+          "bytes": 7729,
+          "allocations": 134
+        },
+        {
+          "ns": 12901.0,
+          "bytes": 7729,
+          "allocations": 134
+        },
+        {
+          "ns": 14330.0,
+          "bytes": 7730,
+          "allocations": 134
+        },
+        {
+          "ns": 13334.0,
+          "bytes": 7730,
+          "allocations": 134
+        },
+        {
+          "ns": 12773.0,
+          "bytes": 7729,
+          "allocations": 134
+        }
+      ]
+    },
+    "1d20+5/summary/changing=false": {
+      "medianNs": 10671.0,
+      "medianBytes": 6263,
+      "medianAllocations": 97,
+      "samples": [
+        {
+          "ns": 10487.0,
+          "bytes": 6264,
+          "allocations": 97
+        },
+        {
+          "ns": 11929.0,
+          "bytes": 6263,
+          "allocations": 97
+        },
+        {
+          "ns": 10977.0,
+          "bytes": 6264,
+          "allocations": 97
+        },
+        {
+          "ns": 10221.0,
+          "bytes": 6263,
+          "allocations": 97
+        },
+        {
+          "ns": 10671.0,
+          "bytes": 6263,
+          "allocations": 97
+        }
+      ]
+    },
+    "100d6/full/changing=false": {
+      "medianNs": 160118.0,
+      "medianBytes": 143395,
+      "medianAllocations": 1652,
+      "samples": [
+        {
+          "ns": 159095.0,
+          "bytes": 143390,
+          "allocations": 1652
+        },
+        {
+          "ns": 186467.0,
+          "bytes": 143395,
+          "allocations": 1652
+        },
+        {
+          "ns": 176342.0,
+          "bytes": 143394,
+          "allocations": 1652
+        },
+        {
+          "ns": 160118.0,
+          "bytes": 143406,
+          "allocations": 1652
+        },
+        {
+          "ns": 143926.0,
+          "bytes": 143398,
+          "allocations": 1652
+        }
+      ]
+    },
+    "100d6/details/changing=false": {
+      "medianNs": 70844.0,
+      "medianBytes": 52913,
+      "medianAllocations": 626,
+      "samples": [
+        {
+          "ns": 82104.0,
+          "bytes": 52913,
+          "allocations": 626
+        },
+        {
+          "ns": 69983.0,
+          "bytes": 52909,
+          "allocations": 626
+        },
+        {
+          "ns": 71403.0,
+          "bytes": 52911,
+          "allocations": 626
+        },
+        {
+          "ns": 65217.0,
+          "bytes": 52913,
+          "allocations": 626
+        },
+        {
+          "ns": 70844.0,
+          "bytes": 52914,
+          "allocations": 626
+        }
+      ]
+    },
+    "100d6/summary/changing=false": {
+      "medianNs": 13675.0,
+      "medianBytes": 6264,
+      "medianAllocations": 97,
+      "samples": [
+        {
+          "ns": 14507.0,
+          "bytes": 6265,
+          "allocations": 97
+        },
+        {
+          "ns": 12976.0,
+          "bytes": 6264,
+          "allocations": 97
+        },
+        {
+          "ns": 13665.0,
+          "bytes": 6264,
+          "allocations": 97
+        },
+        {
+          "ns": 13786.0,
+          "bytes": 6263,
+          "allocations": 97
+        },
+        {
+          "ns": 13675.0,
+          "bytes": 6264,
+          "allocations": 97
+        }
+      ]
+    },
+    "20d6!2ro=1kh10/full/changing=false": {
+      "medianNs": 74883.0,
+      "medianBytes": 57643,
+      "medianAllocations": 731,
+      "samples": [
+        {
+          "ns": 74720.0,
+          "bytes": 57642,
+          "allocations": 731
+        },
+        {
+          "ns": 66326.0,
+          "bytes": 57642,
+          "allocations": 731
+        },
+        {
+          "ns": 74883.0,
+          "bytes": 57647,
+          "allocations": 731
+        },
+        {
+          "ns": 83347.0,
+          "bytes": 57643,
+          "allocations": 731
+        },
+        {
+          "ns": 77730.0,
+          "bytes": 57649,
+          "allocations": 731
+        }
+      ]
+    },
+    "20d6!2ro=1kh10/details/changing=false": {
+      "medianNs": 32448.0,
+      "medianBytes": 23254,
+      "medianAllocations": 353,
+      "samples": [
+        {
+          "ns": 38029.0,
+          "bytes": 23256,
+          "allocations": 353
+        },
+        {
+          "ns": 32448.0,
+          "bytes": 23254,
+          "allocations": 353
+        },
+        {
+          "ns": 33550.0,
+          "bytes": 23254,
+          "allocations": 353
+        },
+        {
+          "ns": 30875.0,
+          "bytes": 23252,
+          "allocations": 353
+        },
+        {
+          "ns": 31742.0,
+          "bytes": 23254,
+          "allocations": 353
+        }
+      ]
+    },
+    "20d6!2ro=1kh10/summary/changing=false": {
+      "medianNs": 31423.0,
+      "medianBytes": 18737,
+      "medianAllocations": 328,
+      "samples": [
+        {
+          "ns": 32450.0,
+          "bytes": 18737,
+          "allocations": 328
+        },
+        {
+          "ns": 31423.0,
+          "bytes": 18737,
+          "allocations": 328
+        },
+        {
+          "ns": 29820.0,
+          "bytes": 18735,
+          "allocations": 328
+        },
+        {
+          "ns": 34184.0,
+          "bytes": 18736,
+          "allocations": 328
+        },
+        {
+          "ns": 31094.0,
+          "bytes": 18737,
+          "allocations": 328
+        }
+      ]
+    }
+  },
+  "v4b-initial-dice-arena": {
+    "1d20+5/full/changing=false": {
+      "medianNs": 18454.0,
+      "medianBytes": 10598,
+      "medianAllocations": 173,
+      "samples": [
+        {
+          "ns": 22507.0,
+          "bytes": 10600,
+          "allocations": 173
+        },
+        {
+          "ns": 18454.0,
+          "bytes": 10598,
+          "allocations": 173
+        },
+        {
+          "ns": 18483.0,
+          "bytes": 10598,
+          "allocations": 173
+        },
+        {
+          "ns": 17132.0,
+          "bytes": 10597,
+          "allocations": 173
+        },
+        {
+          "ns": 17614.0,
+          "bytes": 10598,
+          "allocations": 173
+        }
+      ]
+    },
+    "1d20+5/details/changing=false": {
+      "medianNs": 14508.0,
+      "medianBytes": 7729,
+      "medianAllocations": 134,
+      "samples": [
+        {
+          "ns": 13214.0,
+          "bytes": 7729,
+          "allocations": 134
+        },
+        {
+          "ns": 14508.0,
+          "bytes": 7729,
+          "allocations": 134
+        },
+        {
+          "ns": 14704.0,
+          "bytes": 7729,
+          "allocations": 134
+        },
+        {
+          "ns": 15706.0,
+          "bytes": 7729,
+          "allocations": 134
+        },
+        {
+          "ns": 14090.0,
+          "bytes": 7729,
+          "allocations": 134
+        }
+      ]
+    },
+    "1d20+5/summary/changing=false": {
+      "medianNs": 10642.0,
+      "medianBytes": 6263,
+      "medianAllocations": 97,
+      "samples": [
+        {
+          "ns": 11604.0,
+          "bytes": 6263,
+          "allocations": 97
+        },
+        {
+          "ns": 9835.0,
+          "bytes": 6263,
+          "allocations": 97
+        },
+        {
+          "ns": 10642.0,
+          "bytes": 6263,
+          "allocations": 97
+        },
+        {
+          "ns": 10400.0,
+          "bytes": 6263,
+          "allocations": 97
+        },
+        {
+          "ns": 10743.0,
+          "bytes": 6264,
+          "allocations": 97
+        }
+      ]
+    },
+    "100d6/full/changing=false": {
+      "medianNs": 178383.0,
+      "medianBytes": 143399,
+      "medianAllocations": 1652,
+      "samples": [
+        {
+          "ns": 163214.0,
+          "bytes": 143401,
+          "allocations": 1652
+        },
+        {
+          "ns": 178383.0,
+          "bytes": 143400,
+          "allocations": 1652
+        },
+        {
+          "ns": 162756.0,
+          "bytes": 143399,
+          "allocations": 1652
+        },
+        {
+          "ns": 186954.0,
+          "bytes": 143397,
+          "allocations": 1652
+        },
+        {
+          "ns": 180368.0,
+          "bytes": 143399,
+          "allocations": 1652
+        }
+      ]
+    },
+    "100d6/details/changing=false": {
+      "medianNs": 73945.0,
+      "medianBytes": 52913,
+      "medianAllocations": 626,
+      "samples": [
+        {
+          "ns": 73945.0,
+          "bytes": 52909,
+          "allocations": 626
+        },
+        {
+          "ns": 77385.0,
+          "bytes": 52918,
+          "allocations": 626
+        },
+        {
+          "ns": 70352.0,
+          "bytes": 52913,
+          "allocations": 626
+        },
+        {
+          "ns": 67823.0,
+          "bytes": 52917,
+          "allocations": 626
+        },
+        {
+          "ns": 74300.0,
+          "bytes": 52913,
+          "allocations": 626
+        }
+      ]
+    },
+    "100d6/summary/changing=false": {
+      "medianNs": 13580.0,
+      "medianBytes": 6264,
+      "medianAllocations": 97,
+      "samples": [
+        {
+          "ns": 13613.0,
+          "bytes": 6264,
+          "allocations": 97
+        },
+        {
+          "ns": 13580.0,
+          "bytes": 6264,
+          "allocations": 97
+        },
+        {
+          "ns": 13219.0,
+          "bytes": 6263,
+          "allocations": 97
+        },
+        {
+          "ns": 13420.0,
+          "bytes": 6264,
+          "allocations": 97
+        },
+        {
+          "ns": 17660.0,
+          "bytes": 6263,
+          "allocations": 97
+        }
+      ]
+    },
+    "20d6!2ro=1kh10/full/changing=false": {
+      "medianNs": 72869.0,
+      "medianBytes": 55531,
+      "medianAllocations": 736,
+      "samples": [
+        {
+          "ns": 75382.0,
+          "bytes": 55533,
+          "allocations": 736
+        },
+        {
+          "ns": 72552.0,
+          "bytes": 55530,
+          "allocations": 736
+        },
+        {
+          "ns": 75155.0,
+          "bytes": 55533,
+          "allocations": 736
+        },
+        {
+          "ns": 72869.0,
+          "bytes": 55531,
+          "allocations": 736
+        },
+        {
+          "ns": 70130.0,
+          "bytes": 55529,
+          "allocations": 736
+        }
+      ]
+    },
+    "20d6!2ro=1kh10/details/changing=false": {
+      "medianNs": 31332.0,
+      "medianBytes": 21139,
+      "medianAllocations": 358,
+      "samples": [
+        {
+          "ns": 32335.0,
+          "bytes": 21140,
+          "allocations": 358
+        },
+        {
+          "ns": 31538.0,
+          "bytes": 21139,
+          "allocations": 358
+        },
+        {
+          "ns": 29960.0,
+          "bytes": 21139,
+          "allocations": 358
+        },
+        {
+          "ns": 31332.0,
+          "bytes": 21139,
+          "allocations": 358
+        },
+        {
+          "ns": 30108.0,
+          "bytes": 21139,
+          "allocations": 358
+        }
+      ]
+    },
+    "20d6!2ro=1kh10/summary/changing=false": {
+      "medianNs": 28008.0,
+      "medianBytes": 16620,
+      "medianAllocations": 333,
+      "samples": [
+        {
+          "ns": 27899.0,
+          "bytes": 16620,
+          "allocations": 333
+        },
+        {
+          "ns": 27741.0,
+          "bytes": 16620,
+          "allocations": 333
+        },
+        {
+          "ns": 28008.0,
+          "bytes": 16622,
+          "allocations": 333
+        },
+        {
+          "ns": 29628.0,
+          "bytes": 16622,
+          "allocations": 333
+        },
+        {
+          "ns": 28274.0,
+          "bytes": 16620,
+          "allocations": 333
+        }
+      ]
+    }
+  },
+  "v5-integer-text": {
+    "1d20+5/full/changing=false": {
+      "medianNs": 16938.0,
+      "medianBytes": 10517,
+      "medianAllocations": 167,
+      "samples": [
+        {
+          "ns": 16938.0,
+          "bytes": 10517,
+          "allocations": 167
+        },
+        {
+          "ns": 17153.0,
+          "bytes": 10517,
+          "allocations": 167
+        },
+        {
+          "ns": 15767.0,
+          "bytes": 10517,
+          "allocations": 167
+        },
+        {
+          "ns": 19450.0,
+          "bytes": 10517,
+          "allocations": 167
+        },
+        {
+          "ns": 16026.0,
+          "bytes": 10517,
+          "allocations": 167
+        }
+      ]
+    },
+    "1d20+5/details/changing=false": {
+      "medianNs": 14171.0,
+      "medianBytes": 7666,
+      "medianAllocations": 128,
+      "samples": [
+        {
+          "ns": 15649.0,
+          "bytes": 7665,
+          "allocations": 128
+        },
+        {
+          "ns": 14840.0,
+          "bytes": 7666,
+          "allocations": 128
+        },
+        {
+          "ns": 14171.0,
+          "bytes": 7666,
+          "allocations": 128
+        },
+        {
+          "ns": 14065.0,
+          "bytes": 7666,
+          "allocations": 128
+        },
+        {
+          "ns": 13358.0,
+          "bytes": 7665,
+          "allocations": 128
+        }
+      ]
+    },
+    "1d20+5/summary/changing=false": {
+      "medianNs": 11600.0,
+      "medianBytes": 6263,
+      "medianAllocations": 97,
+      "samples": [
+        {
+          "ns": 12427.0,
+          "bytes": 6264,
+          "allocations": 97
+        },
+        {
+          "ns": 12183.0,
+          "bytes": 6263,
+          "allocations": 97
+        },
+        {
+          "ns": 11341.0,
+          "bytes": 6263,
+          "allocations": 97
+        },
+        {
+          "ns": 10523.0,
+          "bytes": 6263,
+          "allocations": 97
+        },
+        {
+          "ns": 11600.0,
+          "bytes": 6264,
+          "allocations": 97
+        }
+      ]
+    },
+    "100d6/full/changing=false": {
+      "medianNs": 152053.0,
+      "medianBytes": 139402,
+      "medianAllocations": 1453,
+      "samples": [
+        {
+          "ns": 152053.0,
+          "bytes": 139398,
+          "allocations": 1453
+        },
+        {
+          "ns": 144157.0,
+          "bytes": 139402,
+          "allocations": 1453
+        },
+        {
+          "ns": 135109.0,
+          "bytes": 139400,
+          "allocations": 1453
+        },
+        {
+          "ns": 175428.0,
+          "bytes": 139406,
+          "allocations": 1453
+        },
+        {
+          "ns": 185442.0,
+          "bytes": 139405,
+          "allocations": 1453
+        }
+      ]
+    },
+    "100d6/details/changing=false": {
+      "medianNs": 41281.0,
+      "medianBytes": 47316,
+      "medianAllocations": 227,
+      "samples": [
+        {
+          "ns": 41281.0,
+          "bytes": 47316,
+          "allocations": 227
+        },
+        {
+          "ns": 49658.0,
+          "bytes": 47317,
+          "allocations": 227
+        },
+        {
+          "ns": 40670.0,
+          "bytes": 47317,
+          "allocations": 227
+        },
+        {
+          "ns": 41975.0,
+          "bytes": 47316,
+          "allocations": 227
+        },
+        {
+          "ns": 39880.0,
+          "bytes": 47316,
+          "allocations": 227
+        }
+      ]
+    },
+    "100d6/summary/changing=false": {
+      "medianNs": 12990.0,
+      "medianBytes": 6264,
+      "medianAllocations": 97,
+      "samples": [
+        {
+          "ns": 13001.0,
+          "bytes": 6264,
+          "allocations": 97
+        },
+        {
+          "ns": 12990.0,
+          "bytes": 6264,
+          "allocations": 97
+        },
+        {
+          "ns": 12871.0,
+          "bytes": 6264,
+          "allocations": 97
+        },
+        {
+          "ns": 14158.0,
+          "bytes": 6265,
+          "allocations": 97
+        },
+        {
+          "ns": 12855.0,
+          "bytes": 6264,
+          "allocations": 97
+        }
+      ]
+    },
+    "20d6!2ro=1kh10/full/changing=false": {
+      "medianNs": 63982.0,
+      "medianBytes": 54497,
+      "medianAllocations": 683,
+      "samples": [
+        {
+          "ns": 65179.0,
+          "bytes": 54494,
+          "allocations": 683
+        },
+        {
+          "ns": 80543.0,
+          "bytes": 54500,
+          "allocations": 683
+        },
+        {
+          "ns": 56301.0,
+          "bytes": 54497,
+          "allocations": 683
+        },
+        {
+          "ns": 63296.0,
+          "bytes": 54497,
+          "allocations": 683
+        },
+        {
+          "ns": 63982.0,
+          "bytes": 54499,
+          "allocations": 683
+        }
+      ]
+    },
+    "20d6!2ro=1kh10/details/changing=false": {
+      "medianNs": 27239.0,
+      "medianBytes": 19817,
+      "medianAllocations": 270,
+      "samples": [
+        {
+          "ns": 26533.0,
+          "bytes": 19817,
+          "allocations": 270
+        },
+        {
+          "ns": 29314.0,
+          "bytes": 19818,
+          "allocations": 270
+        },
+        {
+          "ns": 30575.0,
+          "bytes": 19817,
+          "allocations": 270
+        },
+        {
+          "ns": 27239.0,
+          "bytes": 19818,
+          "allocations": 270
+        },
+        {
+          "ns": 23328.0,
+          "bytes": 19817,
+          "allocations": 270
+        }
+      ]
+    },
+    "20d6!2ro=1kh10/summary/changing=false": {
+      "medianNs": 23046.0,
+      "medianBytes": 15299,
+      "medianAllocations": 245,
+      "samples": [
+        {
+          "ns": 21477.0,
+          "bytes": 15299,
+          "allocations": 245
+        },
+        {
+          "ns": 24344.0,
+          "bytes": 15300,
+          "allocations": 245
+        },
+        {
+          "ns": 21191.0,
+          "bytes": 15299,
+          "allocations": 245
+        },
+        {
+          "ns": 23046.0,
+          "bytes": 15299,
+          "allocations": 245
+        },
+        {
+          "ns": 24695.0,
+          "bytes": 15300,
+          "allocations": 245
+        }
+      ]
+    }
+  }
+}

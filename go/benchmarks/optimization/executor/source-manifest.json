@@ -1,0 +1,274 @@
+[
+  {
+    "Path": "D:\\Projetos\\ERPG\\rpg-dice-roller\\.artifacts\\optimization\\executor\\workspace\\benchmark_test.go",
+    "Hash": "2DFDB690F6DFDDC2151453CD3FBA15F4CC944681A9F00870994389C7EF7C70C7"
+  },
+  {
+    "Path": "D:\\Projetos\\ERPG\\rpg-dice-roller\\.artifacts\\optimization\\executor\\workspace\\budget.go",
+    "Hash": "ECE1D18D5E46A472EF1C544DD0B4D425EBF79631AFEC330C53376ED896EC0609"
+  },
+  {
+    "Path": "D:\\Projetos\\ERPG\\rpg-dice-roller\\.artifacts\\optimization\\executor\\workspace\\cache_test.go",
+    "Hash": "7DF1881E33A0C17735914AA467DD12F861CC8DE3671DC5B292E9F61FCDB6906A"
+  },
+  {
+    "Path": "D:\\Projetos\\ERPG\\rpg-dice-roller\\.artifacts\\optimization\\executor\\workspace\\cache.go",
+    "Hash": "BC72FEDCB0E1FC928D2BED11161B578B3F1B828530148EEFCDA00B7D7422832A"
+  },
+  {
+    "Path": "D:\\Projetos\\ERPG\\rpg-dice-roller\\.artifacts\\optimization\\executor\\workspace\\compiler_boundaries_test.go",
+    "Hash": "512564E90A2903F6A394917C1D91942875C2CCB9164FA0646F4FCE6F6F0F68CD"
+  },
+  {
+    "Path": "D:\\Projetos\\ERPG\\rpg-dice-roller\\.artifacts\\optimization\\executor\\workspace\\compiler_plan.go",
+    "Hash": "CDCDA478D75BC41996867063D693F452E45B78F597A54A9A19CF24880561667F"
+  },
+  {
+    "Path": "D:\\Projetos\\ERPG\\rpg-dice-roller\\.artifacts\\optimization\\executor\\workspace\\compiler_semantics.go",
+    "Hash": "C46547890F3113E7A32B7729A10D93F541390441F4E4BDAEA20197D65AEC512A"
+  },
+  {
+    "Path": "D:\\Projetos\\ERPG\\rpg-dice-roller\\.artifacts\\optimization\\executor\\workspace\\compiler_snapshot_test.go",
+    "Hash": "D8DE4168668BD17E8BB54F691E8BF82C6AC23558AA77AFB847608E61437B2C04"
+  },
+  {
+    "Path": "D:\\Projetos\\ERPG\\rpg-dice-roller\\.artifacts\\optimization\\executor\\workspace\\compiler_test.go",
+    "Hash": "F35A5A73E427C20FFF5448BF38FF945D9DA7030424E1C8B2D422E07C08A5DF72"
+  },
+  {
+    "Path": "D:\\Projetos\\ERPG\\rpg-dice-roller\\.artifacts\\optimization\\executor\\workspace\\compiler_types.go",
+    "Hash": "578D0A4D5A09DBA9E294EFA14B2D51382A817126121645C9CAF8018B7A5846E9"
+  },
+  {
+    "Path": "D:\\Projetos\\ERPG\\rpg-dice-roller\\.artifacts\\optimization\\executor\\workspace\\compiler.go",
+    "Hash": "D88FFE71296ACDD06942B899896F691C50F4382DFB4A9B6C27528019687862C3"
+  },
+  {
+    "Path": "D:\\Projetos\\ERPG\\rpg-dice-roller\\.artifacts\\optimization\\executor\\workspace\\context_test.go",
+    "Hash": "42E57B0D4A37CF9B5737A9155073DD7BBBAE077205E55C9ECB23788BE648AEE5"
+  },
+  {
+    "Path": "D:\\Projetos\\ERPG\\rpg-dice-roller\\.artifacts\\optimization\\executor\\workspace\\context.go",
+    "Hash": "65255BCB084C5CC9C0151F6DF6B9886D53932639070435BF5FC19A92C2101EC1"
+  },
+  {
+    "Path": "D:\\Projetos\\ERPG\\rpg-dice-roller\\.artifacts\\optimization\\executor\\workspace\\doc.go",
+    "Hash": "656BD408BDCD739BC21DF7DD5C96CD5301D6C4498C601C4CB0D0F2C0A7403E3E"
+  },
+  {
+    "Path": "D:\\Projetos\\ERPG\\rpg-dice-roller\\.artifacts\\optimization\\executor\\workspace\\engine_fixtures_test.go",
+    "Hash": "F7B0A380EB2D98C2BC432CF8BE77C1CCCEE0D606B19CC9E6DE5E7655CABCB01F"
+  },
+  {
+    "Path": "D:\\Projetos\\ERPG\\rpg-dice-roller\\.artifacts\\optimization\\executor\\workspace\\engine_test.go",
+    "Hash": "CC54F819115444E5B3A934DA98F2262937E8D621EB13989A216AB88F1DFB4375"
+  },
+  {
+    "Path": "D:\\Projetos\\ERPG\\rpg-dice-roller\\.artifacts\\optimization\\executor\\workspace\\engine.go",
+    "Hash": "20537F02ABC29FF4B88CD2BCE90306F6FEA1E435AE6A4C0583985B39AC369EFE"
+  },
+  {
+    "Path": "D:\\Projetos\\ERPG\\rpg-dice-roller\\.artifacts\\optimization\\executor\\workspace\\error_utf16_test.go",
+    "Hash": "C48D5DDB77FCF6646ACBC3012195878ACC01E37082BD178A457983635866CE7A"
+  },
+  {
+    "Path": "D:\\Projetos\\ERPG\\rpg-dice-roller\\.artifacts\\optimization\\executor\\workspace\\error_utf16.go",
+    "Hash": "CEB096DEA18374DCADDC61FDF12FCB548BBCEF3277B94EB997665A8BD312F6BD"
+  },
+  {
+    "Path": "D:\\Projetos\\ERPG\\rpg-dice-roller\\.artifacts\\optimization\\executor\\workspace\\errors_test.go",
+    "Hash": "A6F635E4C98CD58A6AD177F92D9989365160F8FC40997796904802E0776E2098"
+  },
+  {
+    "Path": "D:\\Projetos\\ERPG\\rpg-dice-roller\\.artifacts\\optimization\\executor\\workspace\\errors.go",
+    "Hash": "A7F1DB56A341F7B5618F0A77B57D1C8DC878C9034E32E7CD1236A121A81A3A37"
+  },
+  {
+    "Path": "D:\\Projetos\\ERPG\\rpg-dice-roller\\.artifacts\\optimization\\executor\\workspace\\example_test.go",
+    "Hash": "7BDC25AB6EB33B276DE1AAF03FCF698E189AB8013815D98CBDADC4175193ACAC"
+  },
+  {
+    "Path": "D:\\Projetos\\ERPG\\rpg-dice-roller\\.artifacts\\optimization\\executor\\workspace\\executor_summary.go",
+    "Hash": "1F9586A613D7B7BB91B7932AD094F447B9B33C8E21922D938379387B50E6A6DF"
+  },
+  {
+    "Path": "D:\\Projetos\\ERPG\\rpg-dice-roller\\.artifacts\\optimization\\executor\\workspace\\executor_test.go",
+    "Hash": "1BD48BD6C00E92385EAEE148A1DDCC68042DE2CE162702D5A65A49F18D654C61"
+  },
+  {
+    "Path": "D:\\Projetos\\ERPG\\rpg-dice-roller\\.artifacts\\optimization\\executor\\workspace\\executor.go",
+    "Hash": "758EB084D77CE411753373E332A75C0A8E62B051FAF8A08A254279663FE8122D"
+  },
+  {
+    "Path": "D:\\Projetos\\ERPG\\rpg-dice-roller\\.artifacts\\optimization\\executor\\workspace\\fixtures_test.go",
+    "Hash": "FD572E6605C433F5B436C069F07985D762D5F1F3870253C0A784244ED8A80C53"
+  },
+  {
+    "Path": "D:\\Projetos\\ERPG\\rpg-dice-roller\\.artifacts\\optimization\\executor\\workspace\\foundations_fixtures_test.go",
+    "Hash": "C08431E68DEC3409FAAC4A223A820956D4A781C88D4AA3DCA29E09DD1FC3FE82"
+  },
+  {
+    "Path": "D:\\Projetos\\ERPG\\rpg-dice-roller\\.artifacts\\optimization\\executor\\workspace\\go.mod",
+    "Hash": "6176F43CC3C8805DD71B9819687EFBE2AC4240BB2284F64E466FD47EC13A6C1B"
+  },
+  {
+    "Path": "D:\\Projetos\\ERPG\\rpg-dice-roller\\.artifacts\\optimization\\executor\\workspace\\journal_test.go",
+    "Hash": "794903332E2C60D6AB5FFDCDE7B5905655E0339979E272EF08323BBA02123C68"
+  },
+  {
+    "Path": "D:\\Projetos\\ERPG\\rpg-dice-roller\\.artifacts\\optimization\\executor\\workspace\\journal.go",
+    "Hash": "9DDD3256E966A1F6AC8915A06A58E417E17C0633D0D6CA140F6D7C111908EE97"
+  },
+  {
+    "Path": "D:\\Projetos\\ERPG\\rpg-dice-roller\\.artifacts\\optimization\\executor\\workspace\\legacy_fixtures_test.go",
+    "Hash": "64E5673947368626C64F7FD73D9522A59FB65BAA93F7124386F2FDFEAC12FFB8"
+  },
+  {
+    "Path": "D:\\Projetos\\ERPG\\rpg-dice-roller\\.artifacts\\optimization\\executor\\workspace\\limits_test.go",
+    "Hash": "ACC825FEEDC97B69FA648AD2264BED05BA029FD80476782DA80BFEDC379C1192"
+  },
+  {
+    "Path": "D:\\Projetos\\ERPG\\rpg-dice-roller\\.artifacts\\optimization\\executor\\workspace\\limits.go",
+    "Hash": "25141B044A5106A0744708DECD23D6F71AA12FBCF37DA9B1DC82C83C2CD1AD80"
+  },
+  {
+    "Path": "D:\\Projetos\\ERPG\\rpg-dice-roller\\.artifacts\\optimization\\executor\\workspace\\math_conformance_test.go",
+    "Hash": "C1AF5A7C1EBE8057948D8E6C84C6DCA3D94C10B1DC76FD8867641177587B6183"
+  },
+  {
+    "Path": "D:\\Projetos\\ERPG\\rpg-dice-roller\\.artifacts\\optimization\\executor\\workspace\\math_kernels_test.go",
+    "Hash": "9D37575D88EE397E89EE98BE05A88B2F9382ECC46C980A20670276BABB6D509C"
+  },
+  {
+    "Path": "D:\\Projetos\\ERPG\\rpg-dice-roller\\.artifacts\\optimization\\executor\\workspace\\math_pow_refine.go",
+    "Hash": "0DECF4B3AC5498C878E81C862DAD841C140174F5204630D4EB48E0ADEB4BD312"
+  },
+  {
+    "Path": "D:\\Projetos\\ERPG\\rpg-dice-roller\\.artifacts\\optimization\\executor\\workspace\\math_pow.go",
+    "Hash": "07A43032A8BC17D7B1C8ED1ABC42F87FD07DDFB33D5AA1FE53ACED3A8EB776B0"
+  },
+  {
+    "Path": "D:\\Projetos\\ERPG\\rpg-dice-roller\\.artifacts\\optimization\\executor\\workspace\\math_test.go",
+    "Hash": "DA116D9E1EB2350077BFFCC7A29AB48416D1C50CB10E7B5BBD1C3BBBFF1DCFB3"
+  },
+  {
+    "Path": "D:\\Projetos\\ERPG\\rpg-dice-roller\\.artifacts\\optimization\\executor\\workspace\\math_transcendental.go",
+    "Hash": "6FBAB20A6EDFF34AC71DD614AF40F4CA47FA394CF52D9CF4CBA85991DDF2798A"
+  },
+  {
+    "Path": "D:\\Projetos\\ERPG\\rpg-dice-roller\\.artifacts\\optimization\\executor\\workspace\\math_trig.go",
+    "Hash": "D13187A24CB08C989513BF0B5B1EABF51E65F8D9D0FC85093280DFBBCB87F010"
+  },
+  {
+    "Path": "D:\\Projetos\\ERPG\\rpg-dice-roller\\.artifacts\\optimization\\executor\\workspace\\math.go",
+    "Hash": "7295F94D78EE4AC0181F51C204A8DF2834B10F9EFB0AA66BEE06C78355BE5F4D"
+  },
+  {
+    "Path": "D:\\Projetos\\ERPG\\rpg-dice-roller\\.artifacts\\optimization\\executor\\workspace\\normalization_test.go",
+    "Hash": "B43AB73597D05988B6B3C95BC4995B49B067A66447F62CED47A0518E8937039E"
+  },
+  {
+    "Path": "D:\\Projetos\\ERPG\\rpg-dice-roller\\.artifacts\\optimization\\executor\\workspace\\normalization.go",
+    "Hash": "1524E4931A632058687DCF1BC906F7E37A68DC6D970FF9B71FDA326B1489A406"
+  },
+  {
+    "Path": "D:\\Projetos\\ERPG\\rpg-dice-roller\\.artifacts\\optimization\\executor\\workspace\\parser_test.go",
+    "Hash": "BA390D714FDC81B51F64DA95463C062ADDC297696A24F0B738A400A64EE5C68A"
+  },
+  {
+    "Path": "D:\\Projetos\\ERPG\\rpg-dice-roller\\.artifacts\\optimization\\executor\\workspace\\parser.go",
+    "Hash": "D70A3EBE5DDC7C756C1A8299B25D4D618CDEC70D0302DFC8C22A2708E0768DAD"
+  },
+  {
+    "Path": "D:\\Projetos\\ERPG\\rpg-dice-roller\\.artifacts\\optimization\\executor\\workspace\\performance_test.go",
+    "Hash": "AF3E60D5780029256BF8D9A6130779379A7020715981A5BCA0DBAD3BA9AB3F0F"
+  },
+  {
+    "Path": "D:\\Projetos\\ERPG\\rpg-dice-roller\\.artifacts\\optimization\\executor\\workspace\\random_fixtures_test.go",
+    "Hash": "CC77E9C4FEB3B4BE5F8D2C007004C857BAB1BF69C7A6D4FC346846717CF61463"
+  },
+  {
+    "Path": "D:\\Projetos\\ERPG\\rpg-dice-roller\\.artifacts\\optimization\\executor\\workspace\\random_test.go",
+    "Hash": "A538EC83E89CAF1D4873B60CA49A5AC61F3A69518DEFEF645C8EDE54F4A2AFFD"
+  },
+  {
+    "Path": "D:\\Projetos\\ERPG\\rpg-dice-roller\\.artifacts\\optimization\\executor\\workspace\\random.go",
+    "Hash": "493B2A20626A87CF751E8BB78C5A35D5A48BFDF96F1213C9CDA837272CA0FEB6"
+  },
+  {
+    "Path": "D:\\Projetos\\ERPG\\rpg-dice-roller\\.artifacts\\optimization\\executor\\workspace\\replay_fixtures_test.go",
+    "Hash": "F9E311208F68F4E3509961723DCF30F4E5118368BBD9251146543110417BAC54"
+  },
+  {
+    "Path": "D:\\Projetos\\ERPG\\rpg-dice-roller\\.artifacts\\optimization\\executor\\workspace\\replay_test.go",
+    "Hash": "3AD2E424A1C582EC76419FDE05400580E681186FA0028AD24552322BF2B771BF"
+  },
+  {
+    "Path": "D:\\Projetos\\ERPG\\rpg-dice-roller\\.artifacts\\optimization\\executor\\workspace\\replay.go",
+    "Hash": "24BF583748534472F6E484269976BD33CC34CC4A0DB7EF2EB24638EE05C78229"
+  },
+  {
+    "Path": "D:\\Projetos\\ERPG\\rpg-dice-roller\\.artifacts\\optimization\\executor\\workspace\\roll_count_test.go",
+    "Hash": "642F9F712B6F36CA3E1AF51FD74B09E277BCB12DE95DCEE4254FD920BB96CABD"
+  },
+  {
+    "Path": "D:\\Projetos\\ERPG\\rpg-dice-roller\\.artifacts\\optimization\\executor\\workspace\\roll_count.go",
+    "Hash": "07E2B5DC1FF3A685701D99AC65F5810077014A1D6FF38C4CCD93914349D4B75C"
+  },
+  {
+    "Path": "D:\\Projetos\\ERPG\\rpg-dice-roller\\.artifacts\\optimization\\executor\\workspace\\scanner_test.go",
+    "Hash": "13B928AB69847A7B0E2ABB8CC9B041669F79DCE541F4729D98D80ACF11D893B9"
+  },
+  {
+    "Path": "D:\\Projetos\\ERPG\\rpg-dice-roller\\.artifacts\\optimization\\executor\\workspace\\scanner_unicode_test.go",
+    "Hash": "6828D3A00545CEAACCAA97AFF626DFE2F0E71D4BDCBC150618049B6D109CDEA6"
+  },
+  {
+    "Path": "D:\\Projetos\\ERPG\\rpg-dice-roller\\.artifacts\\optimization\\executor\\workspace\\scanner.go",
+    "Hash": "F02B97A565F6E9C9F44BB4A57CFEC66FB54FE684D080AFE11453C2EC040C7DD5"
+  },
+  {
+    "Path": "D:\\Projetos\\ERPG\\rpg-dice-roller\\.artifacts\\optimization\\executor\\workspace\\seed_fixtures_test.go",
+    "Hash": "334261A98A39FD9FDD244793333D334CDC421EA52C82A9EBBAA4B3890FD6367C"
+  },
+  {
+    "Path": "D:\\Projetos\\ERPG\\rpg-dice-roller\\.artifacts\\optimization\\executor\\workspace\\seed_replay_coverage_test.go",
+    "Hash": "A55C17A2E4603D83C461F4756AC6B780C5BC379C985CD24A350EFF710036EEB2"
+  },
+  {
+    "Path": "D:\\Projetos\\ERPG\\rpg-dice-roller\\.artifacts\\optimization\\executor\\workspace\\seed_test.go",
+    "Hash": "B407C2BBF217F3CA1EA9DE1D0E756AB13A006FA80A1B3745D7BD5FD0367D2890"
+  },
+  {
+    "Path": "D:\\Projetos\\ERPG\\rpg-dice-roller\\.artifacts\\optimization\\executor\\workspace\\seed.go",
+    "Hash": "AF8806500A842F165FCFC5393E93EEE9C8919887DE401B471D8AD25D764959FE"
+  },
+  {
+    "Path": "D:\\Projetos\\ERPG\\rpg-dice-roller\\.artifacts\\optimization\\executor\\workspace\\syntax.go",
+    "Hash": "B8C46647FA19B01A482E907A0D25DA525DC637D9D19315E291703156B1C1EC74"
+  },
+  {
+    "Path": "D:\\Projetos\\ERPG\\rpg-dice-roller\\.artifacts\\optimization\\executor\\workspace\\system_unicode.go",
+    "Hash": "6B9B527AB4F5A67938087D361D85A175DFC7F52C425C4905413E9ED3C7529E0E"
+  },
+  {
+    "Path": "D:\\Projetos\\ERPG\\rpg-dice-roller\\.artifacts\\optimization\\executor\\workspace\\systems_fixtures_test.go",
+    "Hash": "EDB71594D7451C52F959DB553B2229CA8BF3E342E82B415CE4116A0DAE6176B6"
+  },
+  {
+    "Path": "D:\\Projetos\\ERPG\\rpg-dice-roller\\.artifacts\\optimization\\executor\\workspace\\systems_mixed.go",
+    "Hash": "8BB490F3B50E5E9F92CD8DE6EA50D652FE57628D05313D639F6AFC01829943CA"
+  },
+  {
+    "Path": "D:\\Projetos\\ERPG\\rpg-dice-roller\\.artifacts\\optimization\\executor\\workspace\\systems_test.go",
+    "Hash": "08D5407A3E859CF27AE5680EFE06CDC240515F81D455DDF226BEE03C5EB19360"
+  },
+  {
+    "Path": "D:\\Projetos\\ERPG\\rpg-dice-roller\\.artifacts\\optimization\\executor\\workspace\\systems.go",
+    "Hash": "D26DD5065E964426869AA5C9D2770F120593BDE3BA11C3A8E67A901AD46EC4C9"
+  },
+  {
+    "Path": "D:\\Projetos\\ERPG\\rpg-dice-roller\\.artifacts\\optimization\\executor\\workspace\\types.go",
+    "Hash": "2FCCF0BAD096BC4A10708C751E9CB76063F5A7904AE9BA61E8DA980ACF68B39C"
+  }
+]

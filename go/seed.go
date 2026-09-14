@@ -42,27 +42,32 @@ type SeedMaterial struct {
 // the semantics of a larger JS Number must pass its float64 representation.
 // The optional text limit defaults to the TypeScript engine's 1024 UTF-16 units.
 func CanonicalizeSeed(seed any, maxSeedLength ...int64) (string, error) {
-	canonical, _, _, err := canonicalSeedUnits(seed, maxSeedLength)
-	return canonical, err
+	canonical, err := canonicalSeedData(seed, maxSeedLength)
+	return canonical.text, err
 }
 
-func canonicalSeedUnits(seed any, limits []int64) (string, []uint16, SeedOrigin, error) {
+type canonicalSeed struct {
+	text          string
+	length        int
+	origin        SeedOrigin
+	explicitUnits UTF16Seed
+}
+
+func canonicalSeedData(seed any, limits []int64) (canonicalSeed, error) {
 	limit := int64(1024)
 	if len(limits) > 1 {
-		return "", nil, "", newDiceError("INVALID_LIMIT", "Only one maxSeedLength may be provided", "", nil)
+		return canonicalSeed{}, newDiceError("INVALID_LIMIT", "Only one maxSeedLength may be provided", "", nil)
 	}
 	if len(limits) == 1 {
 		limit = limits[0]
 	}
 	if limit < 1 || limit > randomMaxSafeInteger {
-		return "", nil, "", newDiceError("INVALID_LIMIT", "maxSeedLength must be a positive safe integer", "", map[string]any{"maxSeedLength": limit})
+		return canonicalSeed{}, newDiceError("INVALID_LIMIT", "maxSeedLength must be a positive safe integer", "", map[string]any{"maxSeedLength": limit})
 	}
-	var units []uint16
-	var canonical string
 	switch value := seed.(type) {
 	case string:
 		if !utf8.ValidString(value) {
-			return "", nil, "", newDiceError("INVALID_SEED", "Text seeds must be valid UTF-8; use UTF16Seed for JS code units", "", nil)
+			return canonicalSeed{}, newDiceError("INVALID_SEED", "Text seeds must be valid UTF-8; use UTF16Seed for JS code units", "", nil)
 		}
 		length := int64(0)
 		for _, char := range value {
@@ -72,20 +77,19 @@ func canonicalSeedUnits(seed any, limits []int64) (string, []uint16, SeedOrigin,
 			}
 		}
 		if length > limit {
-			return "", nil, "", newDiceError("INVALID_SEED", "Text seed exceeds the maximum length", "", map[string]any{"seedLength": length, "maxSeedLength": limit})
+			return canonicalSeed{}, newDiceError("INVALID_SEED", "Text seed exceeds the maximum length", "", map[string]any{"seedLength": length, "maxSeedLength": limit})
 		}
-		units = utf16.Encode([]rune(value))
-		canonical = "string:" + value
+		return canonicalSeed{text: "string:" + value, length: int(length) + 7, origin: SeedProvidedString}, nil
 	case UTF16Seed:
 		if int64(len(value)) > limit {
-			return "", nil, "", newDiceError("INVALID_SEED", "Text seed exceeds the maximum length", "", map[string]any{"seedLength": len(value), "maxSeedLength": limit})
+			return canonicalSeed{}, newDiceError("INVALID_SEED", "Text seed exceeds the maximum length", "", map[string]any{"seedLength": len(value), "maxSeedLength": limit})
 		}
-		units = value
-		canonical = "string:" + string(utf16.Decode(value))
+		return canonicalSeed{text: "string:" + string(utf16.Decode(value)), length: len(value) + 7,
+			origin: SeedProvidedString, explicitUnits: value}, nil
 	default:
 		number, ok := seedNumber(seed)
 		if !ok {
-			return "", nil, "", newDiceError("INVALID_SEED", "Seeds must be finite numbers or strings", "", nil)
+			return canonicalSeed{}, newDiceError("INVALID_SEED", "Seeds must be finite numbers or strings", "", nil)
 		}
 		if math.IsNaN(number) || math.IsInf(number, 0) {
 			value := "NaN"
@@ -94,15 +98,11 @@ func canonicalSeedUnits(seed any, limits []int64) (string, []uint16, SeedOrigin,
 			} else if math.IsInf(number, -1) {
 				value = "-Infinity"
 			}
-			return "", nil, "", newDiceError("INVALID_SEED", "Numeric seeds must be finite", "", map[string]any{"seed": value})
+			return canonicalSeed{}, newDiceError("INVALID_SEED", "Numeric seeds must be finite", "", map[string]any{"seed": value})
 		}
-		canonical = "number:" + seedNumberString(number)
-		return canonical, utf16.Encode([]rune(canonical)), SeedProvidedNumber, nil
+		canonical := "number:" + seedNumberString(number)
+		return canonicalSeed{text: canonical, length: len(canonical), origin: SeedProvidedNumber}, nil
 	}
-	all := make([]uint16, 0, 7+len(units))
-	all = append(all, 's', 't', 'r', 'i', 'n', 'g', ':')
-	all = append(all, units...)
-	return canonical, all, SeedProvidedString, nil
 }
 
 func seedNumber(value any) (float64, bool) {
@@ -153,11 +153,25 @@ func seedNumberString(value float64) string {
 	return parts[0] + "e" + fmt.Sprintf("%+d", exponent)
 }
 
-func hashSeedUnits(units []uint16) [4]uint32 {
-	hash := uint32(1779033703) ^ uint32(len(units))
-	for _, unit := range units {
-		hash = (hash ^ uint32(unit)) * 3432918353
-		hash = rotateRandomLeft(hash, 13)
+// Hash the canonical UTF-16 stream directly, without allocating rune or code-unit
+// slices for ordinary UTF-8 strings. Explicit JS code units retain lone surrogates.
+func hashCanonicalSeed(seed canonicalSeed) [4]uint32 {
+	hash := uint32(1779033703) ^ uint32(seed.length)
+	text := seed.text
+	if seed.explicitUnits != nil {
+		text = "string:"
+	}
+	for _, char := range text {
+		if char > 0xffff {
+			high, low := utf16.EncodeRune(char)
+			hash = mixSeedUnit(hash, uint16(high))
+			hash = mixSeedUnit(hash, uint16(low))
+		} else {
+			hash = mixSeedUnit(hash, uint16(char))
+		}
+	}
+	for _, unit := range seed.explicitUnits {
+		hash = mixSeedUnit(hash, unit)
 	}
 	var words [4]uint32
 	for i := range words {
@@ -169,6 +183,10 @@ func hashSeedUnits(units []uint16) [4]uint32 {
 	return words
 }
 
+func mixSeedUnit(hash uint32, unit uint16) uint32 {
+	return rotateRandomLeft((hash^uint32(unit))*3432918353, 13)
+}
+
 func seedWordsHex(words [4]uint32) string {
 	var bytes [16]byte
 	for i, word := range words {
@@ -178,12 +196,12 @@ func seedWordsHex(words [4]uint32) string {
 }
 
 func CreateProvidedSeed(seed any, maxSeedLength ...int64) (SeedMaterial, error) {
-	canonical, units, origin, err := canonicalSeedUnits(seed, maxSeedLength)
+	canonical, err := canonicalSeedData(seed, maxSeedLength)
 	if err != nil {
 		return SeedMaterial{}, err
 	}
-	words := hashSeedUnits(units)
-	return SeedMaterial{CanonicalSeed: canonical, SeedMaterial: seedWordsHex(words), Origin: origin, Words: words}, nil
+	words := hashCanonicalSeed(canonical)
+	return SeedMaterial{CanonicalSeed: canonical.text, SeedMaterial: seedWordsHex(words), Origin: canonical.origin, Words: words}, nil
 }
 
 // CreateAutomaticSeed draws 128 bits from crypto/rand.Reader by default.

@@ -22,6 +22,12 @@ func NewExecutionJournal(budget EventBudget, materialize ...bool) *ExecutionJour
 }
 func (j *ExecutionJournal) Length() int64 { return j.eventCount }
 func (j *ExecutionJournal) Record(input DiceEvent) (DiceEvent, error) {
+	return j.record(input, false)
+}
+
+// record can take ownership only of maps freshly constructed by the executor.
+// Public Record keeps copying its caller's map before retaining it.
+func (j *ExecutionJournal) record(input DiceEvent, owned bool) (DiceEvent, error) {
 	if j.budget != nil {
 		if err := j.budget.ConsumeEvents(1); err != nil {
 			return nil, err
@@ -34,9 +40,14 @@ func (j *ExecutionJournal) Record(input DiceEvent) (DiceEvent, error) {
 	if !j.materialize {
 		return nil, nil
 	}
-	event := DiceEvent{"sequence": j.eventCount}
-	for key, value := range input {
-		event[key] = value
+	event := input
+	if owned {
+		event["sequence"] = j.eventCount
+	} else {
+		event = DiceEvent{"sequence": j.eventCount}
+		for key, value := range input {
+			event[key] = value
+		}
 	}
 	j.events = append(j.events, event)
 	return event, nil

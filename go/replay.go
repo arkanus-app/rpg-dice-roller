@@ -178,7 +178,8 @@ func CreateReplayState(value any, expectedPlanFingerprint ...string) (ReplayStat
 	if err != nil {
 		return ReplayState{}, err
 	}
-	material, _ := hex.DecodeString(replay.SeedMaterial) // validated lowercase hex
+	var material [16]byte
+	_, _ = hex.Decode(material[:], []byte(replay.SeedMaterial)) // validated lowercase hex
 	var words [4]uint32
 	for i := range words {
 		words[i] = binary.BigEndian.Uint32(material[i*4:])

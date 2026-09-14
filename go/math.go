@@ -199,5 +199,10 @@ func RoundResult(value float64) (float64, error) {
 	if err != nil {
 		return 0, err
 	}
+	// A finite integral binary64 is already unchanged by decimal toFixed(2).
+	// Most dice totals take this path; fractional totals retain exact rounding.
+	if math.Trunc(normalized) == normalized {
+		return normalized, nil
+	}
 	return ensureFiniteMath(decimalRound(normalized, 2), "")
 }

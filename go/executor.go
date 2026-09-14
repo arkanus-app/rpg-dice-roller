@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"runtime"
 	"slices"
+	"strconv"
 	"strings"
 )
 
@@ -40,6 +41,9 @@ type rollState struct {
 	groupByID    map[string]*workingGroup
 	renderOutput bool
 	nextDieIndex int64
+	dieArena     []workingDie
+	dieArenaUsed int
+	initialDice  int64
 }
 
 func executorCheck(err error) {
@@ -62,7 +66,7 @@ func recoverExecutor[T any](value **T, err *error) {
 	}
 }
 func resolvedGroupID(node *ExpressionNode, rollIndex int64) string {
-	return fmt.Sprintf("roll-%d:group:%s", rollIndex, node.ID)
+	return "roll-" + strconv.FormatInt(rollIndex, 10) + ":group:" + node.ID
 }
 func executorNotation(state *rollState, node *ExpressionNode) string {
 	units := syntaxUnits(state.plan.Notation)
@@ -102,7 +106,7 @@ func executorRollFace(node *ExpressionNode, spec *CompiledDiceSpec, context *Exe
 		return 0
 	}
 }
-func createWorkingDie(node *ExpressionNode, spec *CompiledDiceSpec, state *rollState, parent *string, generated bool) *workingDie {
+func createWorkingDie(node *ExpressionNode, spec *CompiledDiceSpec, state *rollState, groupID string, parent *string, generated bool) *workingDie {
 	if generated {
 		executorCheck(state.context.Budget.ConsumeGeneratedDice(1))
 	} else {
@@ -111,12 +115,39 @@ func createWorkingDie(node *ExpressionNode, spec *CompiledDiceSpec, state *rollS
 	executorCheck(state.context.Budget.ConsumeResultItems(1))
 	state.nextDieIndex++
 	value := executorRollFace(node, spec, state.context)
-	die := &workingDie{ResolvedDie: ResolvedDie{ID: fmt.Sprintf("roll-%d-die-%d", state.rollIndex, state.nextDieIndex), SourceNodeID: node.ID, ParentDieID: parent, RollIndex: state.rollIndex, GroupID: resolvedGroupID(node, state.rollIndex), Sides: spec.Sides, RawValue: value, Value: value, Contribution: value, Included: true, States: []string{}}, active: true}
+	var die *workingDie
+	if generated {
+		die = &workingDie{}
+	} else {
+		if state.dieArenaUsed == len(state.dieArena) {
+			budget := state.context.Budget
+			capacity := min(max(int64(1), state.program.StaticDice-state.initialDice), 256,
+				budget.limits.MaxInitialDice-budget.snapshot.InitialDice+1,
+				budget.limits.MaxResultItems-budget.snapshot.ResultItems+1)
+			// Chunks keep retained pointers stable and reserve only known initial
+			// dice. Generated dice allocate individually instead of reserving an
+			// uncertain explosion tail. Both budgets already accepted this draw.
+			state.dieArena = make([]workingDie, capacity)
+			state.dieArenaUsed = 0
+		}
+		die = &state.dieArena[state.dieArenaUsed]
+		state.dieArenaUsed++
+		state.initialDice++
+	}
+	*die = workingDie{ResolvedDie: ResolvedDie{ID: "roll-" + strconv.FormatInt(state.rollIndex, 10) + "-die-" + strconv.FormatInt(state.nextDieIndex, 10), SourceNodeID: node.ID, ParentDieID: parent, RollIndex: state.rollIndex, GroupID: groupID, Sides: spec.Sides, RawValue: value, Value: value, Contribution: value, Included: true, States: []string{}}, active: true}
 	state.dice = append(state.dice, die)
-	recordDieEvent(state, die, "roll", DiceEvent{"value": value})
+	if state.context.Journal.materialize {
+		recordDieEvent(state, die, "roll", DiceEvent{"value": value})
+	} else {
+		executorValue(state.context.Journal.Record(nil))
+	}
 	return die
 }
 func recordDieEvent(state *rollState, die *workingDie, kind string, fields DiceEvent) {
+	if !state.context.Journal.materialize {
+		executorValue(state.context.Journal.Record(nil))
+		return
+	}
 	var parentID any
 	if die.ParentDieID != nil {
 		parentID = *die.ParentDieID
@@ -125,14 +156,18 @@ func recordDieEvent(state *rollState, die *workingDie, kind string, fields DiceE
 	for key, value := range fields {
 		event[key] = value
 	}
-	executorValue(state.context.Journal.Record(event))
+	executorValue(state.context.Journal.record(event, true))
 }
 func recordGroupEvent(state *rollState, group *workingGroup, kind string, fields DiceEvent) {
+	if !state.context.Journal.materialize {
+		executorValue(state.context.Journal.Record(nil))
+		return
+	}
 	event := DiceEvent{"type": kind, "subject": "group", "groupId": group.ID, "rollIndex": state.rollIndex, "sourceNodeId": group.SourceNodeID}
 	for key, value := range fields {
 		event[key] = value
 	}
-	executorValue(state.context.Journal.Record(event))
+	executorValue(state.context.Journal.record(event, true))
 }
 func applyDieBound(dice []*workingDie, bound float64, minimum bool, state *rollState) {
 	for _, die := range dice {
@@ -182,7 +217,7 @@ func applyDieExplode(dice *[]*workingDie, modifier *ModifierNode, node *Expressi
 				appendDieState(current, "penetrated")
 			}
 			parent := current.ID
-			child := createWorkingDie(node, spec, state, &parent, true)
+			child := createWorkingDie(node, spec, state, current.GroupID, &parent, true)
 			compareValue = child.Value
 			if modifier.Penetrate {
 				from := child.Value
@@ -419,9 +454,10 @@ func evaluateWorkingDice(node *ExpressionNode, state *rollState) rollEvaluation 
 		executorMissingSpec(node, state.plan.Input, "Compiled dice specification is missing")
 	}
 	start := int64(len(state.dice))
+	groupID := resolvedGroupID(node, state.rollIndex)
 	dice := []*workingDie{}
 	for index := int64(0); index < spec.Quantity; index++ {
-		dice = append(dice, createWorkingDie(node, spec, state, nil, false))
+		dice = append(dice, createWorkingDie(node, spec, state, groupID, nil, false))
 	}
 	ordered := applyWorkingDiceModifiers(&dice, spec.Modifiers, node, spec, state)
 	total := float64(0)
@@ -433,7 +469,7 @@ func evaluateWorkingDice(node *ExpressionNode, state *rollState) rollEvaluation 
 	for i, die := range ordered {
 		childIDs[i] = die.ID
 	}
-	groupID := addWorkingGroup(node, state, value, childIDs, nil)
+	groupID = addWorkingGroup(node, state, value, childIDs, nil)
 	rendered := ""
 	if state.renderOutput {
 		values := make([]string, len(ordered))
@@ -621,30 +657,40 @@ func evaluateWorkingNode(node *ExpressionNode, state *rollState) rollEvaluation 
 
 func finalizeWorkingDice(state *rollState, materialize bool) []ResolvedDie {
 	resolved := []ResolvedDie{}
+	if materialize {
+		resolved = make([]ResolvedDie, len(state.dice))
+	}
 	for index, die := range state.dice {
 		if die.active && die.Included {
-			recordDieEvent(state, die, "include", DiceEvent{"contribution": die.Contribution})
+			if state.context.Journal.materialize {
+				recordDieEvent(state, die, "include", DiceEvent{"contribution": die.Contribution})
+			} else {
+				executorValue(state.context.Journal.Record(nil))
+			}
 		}
 		if materialize {
 			copy := die.ResolvedDie
 			copy.RollDieIndex = int64(index + 1)
 			copy.Included = die.Included && die.active
 			copy.States = append([]string{}, die.States...)
-			resolved = append(resolved, copy)
+			resolved[index] = copy
 		}
 	}
 	return resolved
 }
 func finalizeWorkingGroups(state *rollState, materialize bool) []ResolvedGroup {
 	resolved := []ResolvedGroup{}
-	for _, group := range state.groups {
+	if materialize {
+		resolved = make([]ResolvedGroup, len(state.groups))
+	}
+	for index, group := range state.groups {
 		if group.Included {
 			recordGroupEvent(state, group, "include", DiceEvent{"value": group.Value, "contribution": group.Contribution})
 		}
 		if materialize {
 			copy := group.ResolvedGroup
 			copy.States = append([]string{}, group.States...)
-			resolved = append(resolved, copy)
+			resolved[index] = copy
 		}
 	}
 	return resolved
@@ -689,6 +735,9 @@ func executorNumberString(value float64) string {
 	if value == 0 {
 		return "0"
 	}
+	if value >= -float64(maxSafeInteger) && value <= float64(maxSafeInteger) && float64(int64(value)) == value {
+		return strconv.FormatInt(int64(value), 10)
+	}
 	return seedNumberString(value)
 }
 func formatExecutionOutput(outputs []string, total float64, context *ExecutionContext) string {
@@ -699,12 +748,12 @@ func formatExecutionOutput(outputs []string, total float64, context *ExecutionCo
 	line := "Total: " + executorNumberString(total)
 	length := len(syntaxUnits(line))
 	for i, output := range outputs {
-		length += len(fmt.Sprint(i+1)) + 2 + len(syntaxUnits(output)) + 1
+		length += len(strconv.Itoa(i+1)) + 2 + len(syntaxUnits(output)) + 1
 	}
 	executorCheck(context.Budget.AssertOutputLength(int64(length)))
 	lines := make([]string, 0, len(outputs)+1)
 	for i, output := range outputs {
-		lines = append(lines, fmt.Sprintf("%d. %s", i+1, output))
+		lines = append(lines, strconv.Itoa(i+1)+". "+output)
 	}
 	return strings.Join(append(lines, line), "\n")
 }
@@ -740,11 +789,19 @@ func executeGeneralPlan(plan *RollPlan, program *CompiledDiceProgram, options Ex
 		resolvedGroups := finalizeWorkingGroups(state, full)
 		pool := buildWorkingPool(state.dice)
 		if materializeDice {
-			dice = append(dice, resolvedDice...)
+			if len(dice) == 0 {
+				dice = resolvedDice
+			} else {
+				dice = append(dice, resolvedDice...)
+			}
 		}
 		summaries = append(summaries, ResolvedRollSummary{Index: rollIndex, Total: total, Pool: pool})
 		if full {
-			groups = append(groups, resolvedGroups...)
+			if len(groups) == 0 {
+				groups = resolvedGroups
+			} else {
+				groups = append(groups, resolvedGroups...)
+			}
 			rollOutput := plan.Notation + ": " + evaluation.rendered + " = " + executorNumberString(total)
 			executorCheck(context.Budget.AssertOutputLength(int64(len(syntaxUnits(rollOutput)))))
 			outputs = append(outputs, rollOutput)
